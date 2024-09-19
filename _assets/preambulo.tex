@@ -272,3 +272,18 @@
 \setlength{\parindent}{0pt} % quitar la sangría
 
 \setlist[itemize, 1]{label=\textbullet \textbf{)}}  % Cambiar las viñetas a círculos
+
+\def\endsquare{%
+  \begin{flushright}
+      \small{$\blacksquare$}
+  \end{flushright}
+}
+
+\newcommand{\apuntar}[1]{%
+  \hyperlink{#1}{\textbf{(#1)}}%p
+}
+
+\newcommand{\objetivo}[1]{%
+  \textbf{(\hypertarget{#1}{#1})}
+}
+

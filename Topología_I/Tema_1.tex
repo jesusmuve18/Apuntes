@@ -44,17 +44,28 @@
     \end{observacion}
 
     \begin{ejercicio}
-        Determinar todas las topologías en un conjunto con 2 elementos.
-
+        Determinar todas las topologías en un conjunto con 2 elementos.\\
         % Hay 4: trivial, discreta y punto incluido con cada elemento
+
+        Consideramos $X=\{a,b\}$. Las topologías posibles son:
+        \begin{itemize}
+            \item Trivial: $\cc{T}_t=\{\emptyset, X\}$
+            \item Discreta: $\cc{T}_{disc}=\cc{P}(X)$
+            \item Punto incluido (a): $\cc{T}_a = \{\emptyset, \{a\}, X\}$
+            \item Punto incluido (b): $\cc{T}_b = \{\emptyset, \{b\}, X\}$
+        \end{itemize}
+        \endsquare
     \end{ejercicio}
 
     \begin{ejercicio}
         Sea $(X, \cc{T})$ e.t. Demostrar que $\cc{T}=\cc{T}_{disc} \sii \{x\}\in \cc{T}\ \  \forall x \in X$. 
         % Implicación derecha es trivial
+        \begin{itemize}
+            \item[$\Rightarrow$)] Si $\cc{T} = \cc{T}_{disc}$, como $\{x\}\in \cc{P}(X) \ \ \forall x \in X$, se tiene que $\{x\}\in \cc{T}_{disc} = \cc{T}$.
+            \item[$\Leftarrow$)] Tenemos $\{x\} \in \cc{T} \ \ \forall x \in X$. Consideramos $U \in \cc{P}(X)$ un subconjunto cualquiera de $X$. Podemos expresar $U=\bigcup\limits_{i\in I} \{x_i\}$, donde $\{x_i\} \in X \ \ \forall i \in I$. Por la propiedad \apuntar{A2} tenemos $U \in \cc{T}$. Como $U$ era un subconjunto arbitrario de $X$, tenemos $\cc{T}=\cc{T}_{disc}$.
+        \end{itemize}
+        \endsquare
     \end{ejercicio}
-
-    \vspace*{0.5cm}
 
     \section{Topología métrica. La topología usual de $\bb{R}^n$}
 
@@ -71,7 +82,20 @@
     A la aplicación $d$ la llamaremos \textbf{distancia}.
 
     \begin{ejercicio}
-        (D2) + (D3) + 2ª parte de (D1) se deduce 1ª parte de (D1) luego $d:X \times X \rightarrow [0, \infty)$
+        % (D2) + (D3) + 2ª parte de (D1) se deduce 1ª parte de (D1) luego $d:X \times X \rightarrow [0, \infty)$
+        Demostrar que a partir de las propiedades \hyperlink{D2}{\textbf{(D2)}}, \hyperlink{D3}{\textbf{(D3)}} y la segunda parte de \hyperlink{D1}{\textbf{(D1)}} se puede deducir la primera parte de \hyperlink{D1}{\textbf{(D1)}}, y como consecuencia se tiene $d:X \times X \rightarrow [0, \infty)$.\\
+
+        Para cualesquiera $x,y \in X$, tenemos:
+        \begin{gather*}
+            0 \overset{\apuntar{D1}{(2)}}{=} d(x,x) \overset{\apuntar{D3}}{\leq} d(x,y) + d(y,x) \overset{\apuntar{D2}}{=} d(x,y) + d(x,y) = 2 d(x,y)
+        \end{gather*}
+        De donde podemos deducir
+        \begin{gather*}
+            d(x,y) \geq 0 \Rightarrow d:X \times X \rightarrow [0, \infty)
+        \end{gather*}
+
+        \endsquare
+         
     \end{ejercicio}
 
    \begin{definicion}
@@ -217,6 +241,8 @@
             \right.
         \end{align*}
     \end{ejemplo}
+
+    Tu escribes aq normal y te va saliendo.
 
 \end{ejemplo}
 
