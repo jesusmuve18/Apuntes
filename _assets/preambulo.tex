@@ -272,3 +272,16 @@
 \setlength{\parindent}{0pt}
 
 \setlist[itemize, 1]{label=\textbullet \textbf{)}}  % Cambiar las viñetas a círculos
+
+\usepackage{titlesec} % Para quitar el número de los chapters
+
+\titleformat{\chapter}[display]% Quitar el número de chapter en el título
+  {\Huge\bfseries}
+  {}
+  {0pt}
+  {}
+
+\titlespacing*{\chapter}{0pt}{-10pt}{60pt}
+
+\renewcommand{\chaptermark}[1]{ % Quitar el número de chapter en el encabezado
+  \markboth{#1}{}}

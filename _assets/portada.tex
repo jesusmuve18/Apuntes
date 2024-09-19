@@ -13,6 +13,10 @@
 \define@key{portada}{año}{\def\año{#1}}
 
 \newcommand*{\portada}[1][]{%
+  % Encabezado
+  \fancyhead[L]{\helv \titulo}
+  \fancyhead[R]{\helv \nouppercase{\leftmark}}
+
     % Definimos las claves y sus valores por defecto
   \setkeys{portada}{%
     titulo=Sin Título,%
