@@ -7,9 +7,9 @@ then
     commit_msg=$1
 fi
 
-echo "git add ./*"
+echo "\$ git add ./*"
 git add ./*
-echo "git commit -m \"$commit_msg\""
+echo "\$ git commit -m \"$commit_msg\""
 git commit -m "$commit_msg"
-echo "git push"
+echo "\$ git push"
 git push
