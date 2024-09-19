@@ -1,0 +1,27 @@
+% 18-09-2024
+
+\chapter{Tema 1: Espacios Topológicos}
+
+Un \textbf{espacio topológico} es una par $(X, \cc{T})$, donde $X \neq \emptyset$ es un conjunto y $\cc{T}\subset\cc{P}(X)$ es una familia de subconjuntos de $X$.
+
+\begin{enumerate}
+    \item[\textbf{(\hypertarget{A1}{A1})}] $\emptyset, X \in \cc{T}$.
+    \item[\textbf{(\hypertarget{A2}{A2})}] Si $\{U_i\}_{i\in I} \subset \cc{T}$, entonces $\bigcup\limits_{i\in I} U_i \in \cc{T}$.
+    \item[\textbf{(\hypertarget{A3}{A3})}] Si $U_1, U_2 \in \cc{T}$, entonces $U_1 \cap U_2 \in \cc{T}$.
+\end{enumerate}
+
+A la familia $\cc{T}$ se le llama \textbf{topología} en el conjunto $X$. A los elementos de $\cc{T}$ se les llama \textbf{abiertos} en el espacio topológico $(X, \cc{T})$.
+
+\vspace*{0.5cm}
+
+\begin{observacion}
+    De \hyperlink{A1}{\textbf{(A1)}} podemos concretar que si $U_1, \dots, U_k \in \cc{T}$, entonces \smash{$\bigcap\limits_{i=1}^{\infty}U_i \in \cc{T}$}.
+    En general, si $\{U_i\}_{i=1}^{\infty}\in \cc{T}$, entonces $\bigcap\limits_{i=1}^{\infty}$ no tiene por qué ser abierto.
+\end{observacion}
+
+\begin{ejemplo}\ 
+    \begin{itemize}
+        \item \textbf{Topología trivial:} Sea $X \neq \emptyset$, $\cc{T}_t = \{\emptyset, X\} \Rightarrow (X, \cc{T}_t)$ es un e.t\footnote{A partir de ahora notaremos así a un espacio topológico}.
+        \item \textbf{Topología discreta:} Sea $X \neq \emptyset$, $\cc{T}_{disc}= \cc{T}_{D} = \cc{P}(X) \Rightarrow (X, \cc{T}_D)$ es un e.t.
+    \end{itemize}
+\end{ejemplo}
