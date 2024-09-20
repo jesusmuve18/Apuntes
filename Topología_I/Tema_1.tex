@@ -261,24 +261,25 @@ Algunas propiedades que se deducen de la definición anterior son:
         \cc{T}_d=\{U \subset X : U \text{ es un abierto métrico en }(X,d)\} \subset \cc{P}(X)
     \end{gather*}
     es una topología en $X$ que llamamos la \textbf{topología métrica} en $(X,d)$.
+
+    \begin{proof}\
+        \begin{enumerate}[label=(A\arabic*)]
+            \item $\emptyset$, $X\in \cc{T}_d$ trivialmente.
+            \item Sea $\{U_i\}_{i\in I}\subset \cc{T}_d$. ¿$\bigcup\limits_{i\in I}U_i \in \cc{T}_d$?
+            
+            Si $\bigcup\limits_{i\in I}U_i = \emptyset \Rightarrow \bigcup\limits_{i\in I}U_i \in \cc{T}_d$.
+
+            Supongamos $\bigcup\limits_{i\in I}U_i \neq \emptyset$. Sea $x \in \bigcup\limits_{i\in I}U_i \Rightarrow \exists i \in I : x \in U_i \in \cc{T}_d \Rightarrow \exists r>0 : B(x,r) \subset U_i \subset \bigcup\limits_{i\in I}U_i \Rightarrow \bigcup\limits_{i\in I}U_i\in \cc{T}$.
+
+            \item Sean $U_1, U_2 \in \cc{T}_d$. ¿$U_1 \cap U_2 \in \cc{T}_d$?
+            
+            Si $U_1 \cap U_2 = \emptyset$ se verifica.
+
+            Supongamos $U_1 \cap U_2 \neq \emptyset$. Entonces puedo considerar $x\in U_1 \cap U_2 \Rightarrow \exists r_1,r_2>0: B(x,r_1)\subset U_1$ y $B(x,r_2)\subset U_2 \Rightarrow B(x, \min\{r_1, r_2\}) \subset U_1 \cap U_2$
+        \end{enumerate}
+    \end{proof}
+
 \end{prop}
-
-\begin{proof}\
-    \begin{enumerate}[label=(A\arabic*)]
-        \item $\emptyset$, $X\in \cc{T}_d$ trivialmente.
-        \item Sea $\{U_i\}_{i\in I}\subset \cc{T}_d$. ¿$\bigcup\limits_{i\in I}U_i \in \cc{T}_d$?
-        
-        Si $\bigcup\limits_{i\in I}U_i = \emptyset \Rightarrow \bigcup\limits_{i\in I}U_i \in \cc{T}_d$.
-
-        Supongamos $\bigcup\limits_{i\in I}U_i \neq \emptyset$. Sea $x \in \bigcup\limits_{i\in I}U_i \Rightarrow \exists i \in I : x \in U_i \in \cc{T}_d \Rightarrow \exists r>0 : B(x,r) \subset U_i \subset \bigcup\limits_{i\in I}U_i \Rightarrow \bigcup\limits_{i\in I}U_i\in \cc{T}$.
-
-        \item Sean $U_1, U_2 \in \cc{T}_d$. ¿$U_1 \cap U_2 \in \cc{T}_d$?
-        
-        Si $U_1 \cap U_2 = \emptyset$ se verifica.
-
-        Supongamos $U_1 \cap U_2 \neq \emptyset$. Entonces puedo considerar $x\in U_1 \cap U_2 \Rightarrow \exists r_1,r_2>0: B(x,r_1)\subset U_1$ y $B(x,r_2)\subset U_2 \Rightarrow B(x, \min\{r_1, r_2\}) \subset U_1 \cap U_2$
-    \end{enumerate}
-\end{proof}
 
 \begin{definicion}
     Se llama \textbf{topología usual de $\bb{R}^n$}, $\cc{T}_u$, a la topología métrica en $\bb{R}^n$ con la distancia usual, es decir,
@@ -291,43 +292,44 @@ Algunas propiedades que se deducen de la definición anterior son:
         \item[(i)] Las bolas abiertas en $(X,d)$ son abiertos.
         \item[(ii)] Todo abierto no vacío en $(X,d)$ se puede escribir como unión de bolas abiertas y como unión de bolas cerradas.
     \end{enumerate}
+
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] Sea $x\in X$, $r>0$, ¿$B(x, r)\in \cc{T}_d$?
+            
+            Sea $y \in B(x,r) \Rightarrow d(x,y)<r \Rightarrow \exists \veps>0 : d(x,y) + \veps <r \Rightarrow B(y, \veps)\subset B(x,r)$. Para ver esta última implicación tenemos que si tomamos un $z \in B(y, \veps)\Rightarrow d(x,z) \leq d(x,y) + d(y,z) < d(x,y) + \veps < r \Rightarrow z \in B(x,r)$. %TODO: añadir dibujo de la demostración
+
+            \begin{center}
+                \begin{tikzpicture}
+                    \centering
+        
+                    \def\radius{1.75}
+                    \def\incolor{gray!20}
+                    \def\angulo{45}
+        
+                    % Desactiva los caracteres conflictivos
+                    \shorthandoff{>} % Para poner puntas de flecha
+        
+                    \filldraw[dashed, fill=\incolor, thick] (0,0) circle (\radius);
+                    \filldraw (0,0) circle (1.5pt)  node[below] {$x$};
+                    \draw[thick, ->] (0,0) -> ({sin(\angulo)*\radius}, {cos(\angulo)*\radius}) node[midway, below] {$r$};
+                    \def\angulo{120}
+                    \draw[thick, dashed] (0,0) -- ({sin(\angulo)*\radius}, {cos(\angulo)*\radius});
+
+                    \filldraw ({sin(\angulo)*1}, {cos(\angulo)*1}) circle (1.5pt)  node[below] {$y$};
+
+                    \def\radius{0.5}
+                    \draw[dashed, thick] ({sin(\angulo)*1}, {cos(\angulo)*1}) circle (\radius);
+        
+                \end{tikzpicture}
+            \end{center}
+            
+            \item[(ii)] Sea $U \in \cc{T}_d \Rightarrow \forall x \in U \ \ \exists r_x >0$ tal que $B(x,r_x)\subset U \Rightarrow U = \bigcup\limits_{x\in U}B(x, r_x) = \bigcup\limits_{x\in U}\overline{B}\left(x, \frac{r_x}{2}\right)$.
+            
+        \end{enumerate}
+    \end{proof}
 \end{prop}
-
-\begin{proof}\
-    \begin{enumerate}
-        \item[(i)] Sea $x\in X$, $r>0$, ¿$B(x, r)\in \cc{T}_d$?
-         
-        Sea $y \in B(x,r) \Rightarrow d(x,y)<r \Rightarrow \exists \veps>0 : d(x,y) + \veps <r \Rightarrow B(y, \veps)\subset B(x,r)$. Para ver esta última implicación tenemos que si tomamos un $z \in B(y, \veps)\Rightarrow d(x,z) \leq d(x,y) + d(y,z) < d(x,y) + \veps < r \Rightarrow z \in B(x,r)$. %TODO: añadir dibujo de la demostración
-
-        \begin{center}
-            \begin{tikzpicture}
-                \centering
-    
-                \def\radius{1.75}
-                \def\incolor{gray!20}
-                \def\angulo{45}
-    
-                % Desactiva los caracteres conflictivos
-                \shorthandoff{>} % Para poner puntas de flecha
-    
-                \filldraw[dashed, fill=\incolor, thick] (0,0) circle (\radius);
-                \filldraw (0,0) circle (1.5pt)  node[below] {$x$};
-                \draw[thick, ->] (0,0) -> ({sin(\angulo)*\radius}, {cos(\angulo)*\radius}) node[midway, below] {$r$};
-                \def\angulo{120}
-                \draw[thick, dashed] (0,0) -- ({sin(\angulo)*\radius}, {cos(\angulo)*\radius});
-
-                \filldraw ({sin(\angulo)*1}, {cos(\angulo)*1}) circle (1.5pt)  node[below] {$y$};
-
-                \def\radius{0.5}
-                \draw[dashed, thick] ({sin(\angulo)*1}, {cos(\angulo)*1}) circle (\radius);
-    
-            \end{tikzpicture}
-        \end{center}
-        
-        \item[(ii)] Sea $U \in \cc{T}_d \Rightarrow \forall x \in U \ \ \exists r_x >0$ tal que $B(x,r_x)\subset U \Rightarrow U = \bigcup\limits_{x\in U}B(x, r_x) = \bigcup\limits_{x\in U}\overline{B}\left(x, \frac{r_x}{2}\right)$.
-        
-    \end{enumerate}
-\end{proof}
 
 \begin{coro}
     En $(X,d)$ tenemos 
@@ -355,13 +357,15 @@ Algunas propiedades que se deducen de la definición anterior son:
 
 \begin{prop}
     Si $d_1, d_2$ son distancias en $X \neq \emptyset$ y existe $a>0$ tal que $a \cdot d_1(x,y) \leq d_2(x,y) \ \ \ \forall x,y \in X$, entonces $\cc{T}_{d_1} \subset \cc{T}_{d_2}$. En particular, si $d_1$ y $d_2$ son equivalentes, entonces $\cc{T}_{d_1} = \cc{T}_{d_2}$.
+
+
+    \begin{proof}
+        Sea $U\in \cc{T}_{d_1}$, $U \neq \emptyset$, ¿$U\in \cc{T}_{d_2}$?
+
+        Sea $x \in U \in \cc{T}_{d_1} \Rightarrow \exists r>0: B_{d_1}(x,r)\subset U$. Como $a \cdot d_1 \leq d_2 \Rightarrow B_{d_2}(x,a\cdot r)\subset B_{d_1}(x,r)$. Para verlo sea $y\in B_{d_2}(x,a\cdot r) \Rightarrow d_2(x,y)<a\cdot r \Rightarrow a \cdot d_1(x,y)<r \Rightarrow y \in B_{d_1}(x,r)$. Por tanto $B_{d_1}(x,r)\subset U \Rightarrow U \in \cc{T}_{d_2}\Rightarrow T_{d_1}\subset \cc{T}_{d_2}$.
+        
+    \end{proof}
 \end{prop}
-
-\begin{proof}
-    Sea $U\in \cc{T}_{d_1}$, $U \neq \emptyset$, ¿$U\in \cc{T}_{d_2}$?
-
-    Sea $x \in U \in \cc{T}_{d_1} \Rightarrow \exists r>0: B_{d_1}(x,r)\subset U$. Como $a \cdot d_1 \leq d_2 \Rightarrow B_{d_2}(x,a\cdot r)\subset B_{d_1}(x,r)$. Para verlo sea $y\in B_{d_2}(x,a\cdot r) \Rightarrow d_2(x,y)<a\cdot r \Rightarrow a \cdot d_1(x,y)<r \Rightarrow y \in B_{d_1}(x,r)$. Por tanto $B_{d_1}(x,r)\subset U \Rightarrow U \in \cc{T}_{d_2}\Rightarrow T_{d_1}\subset \cc{T}_{d_2}$.
-\end{proof}
 
 \begin{definicion}
     Un e.t. $(X,\cc{T})$ se dice \textbf{metrizable} si existe una distancia $d$ en $X$ tal que $\cc{T}= \cc{T}_d$.

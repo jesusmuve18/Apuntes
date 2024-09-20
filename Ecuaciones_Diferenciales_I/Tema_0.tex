@@ -138,3 +138,112 @@ Típicamente estudiaremos ecuaciones diferenciales de primer orden en \textbf{fo
     x'(t) = f(t, x(t))
 \end{gather*}
 Esto es una subfamilia de las ecuaciones previamente descritas.
+
+\begin{ejemplo}\ 
+    \begin{enumerate}[label=\alph*)]
+        \item $x'(t)=7x(t)$
+        \begin{align*}
+            \Phi(t,x,y)&=y-7x \\
+            f(t,x) &= 7x
+        \end{align*}
+        Algunas de las soluciones son $x(t)=0$ (trivial), $x(t)=e^{7t}$ y $x(t)=c \cdot e^{7t},\ \ c, t\in \bb{R}$
+
+        \item $x`(t)=7t$
+        \begin{align*}
+            \Phi(t,x,y)&=y-7t \\
+            f(t,x) &= 7t
+        \end{align*}
+        Algunas de las soluciones son de la forma $x(t)=\frac{7t^2}{2} + c$, $c, t \in \bb{R}$ (realmente es una integral).
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{ejemplo}\
+    \begin{enumerate}[label=\alph*)]
+        \item $x`(t)=\sen(t)$. Sus soluciones son de la forma $x(t)=\cos(t)+c$, $c,t\in \bb{R}$
+        \item $x`(t)=\sen(x(t))$. No es tan simple calcular las soluciones (aunque $x(t)=0$, $t\in \bb{R}$ es solución).
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{definicion}
+    Una función diferencial va a venir dada por un 
+    \begin{align*}
+        \Phi : D \subset \bb{R}^3 &\to \bb{R}\\
+        (t,x,y) &\mapsto \Phi(t,x,y) \text{ (continua)}
+    \end{align*}
+    donde el conjunto $D$ es un abierto de $\bb{R}^3$ conexo llamado \textbf{dominio}.
+
+    Una \textbf{solución} de una ecuación diferencial, $\Phi(t,x(t),x`(t))=0$ será una función de la forma 
+    \begin{align*}
+        x: I &\to \bb{R}\\
+        t & \mapsto x(t)
+    \end{align*}
+    donde $I$ es un intervalo abierto y $x$ tiene las siguientes propiedades:
+    \begin{enumerate}
+        \item[(i)] $x(t)$ es derivable en $I$.
+        \item[(ii)] $(t,x(t), x'(t))\in D$\ \ \ $\forall t \in I$
+        \item[(iii)] $\Phi(t, x(t), x'(t))=0$\ \ \ $\forall t \in I$
+    \end{enumerate}
+\end{definicion}
+
+\begin{ejemplo}
+    \begin{gather*}
+        x(t)=\sqrt{2t - 38}, 
+        \hspace{2cm} 
+        x'(t)=\frac{1}{x(t)}
+    \end{gather*}
+    ¿Es $t(x)$ una solución de la ecuación dada?
+    \begin{gather*}
+        \Phi(t,x,y)=y - \frac{1}{x}
+        \hspace{2cm} 
+        D=\bb{R}\times ]0,\infty[ \times \bb{R}
+        \hspace{2cm} 
+        I=]19, \infty[
+    \end{gather*}
+
+    Tomamos así $D$ porque hay que quitar la discontinuidad que se produce en el plano $\{(t,x,y)\in \bb{R}^3 : x=0\}$ y además tiene que ser conexo ($\bb{R}^3$ sin un plano no es conexo).
+
+    $I$ es el mayor intervalo abierto de $\bb{R}$ en el que $x(t)$ es derivable.
+
+    Además, se verifica que $(t,x(t),x'(t))\in D$\ \ \ $\forall t \in I$ y 
+    \begin{gather*}
+        x'(t)=\frac{1}{\sqrt{2t-38}}=\frac{1}{x(t)}
+    \end{gather*}
+    Por lo que se verifica que es solución
+
+\end{ejemplo}
+
+A partir de ahora la notación que utilizaremos para expresar ecuaciones diferenciales será
+\begin{gather*}
+    \Phi(t,x,x') = 0 \text{ en lugar de } \Phi(x, x(t), x'(t))
+\end{gather*}
+
+\begin{ejemplo}
+    \begin{align*}
+        x&'=3x \hspace{1cm} (\sii x'(t)=3x(t))\\
+        x(t)&=c \cdot e^{3t}
+    \end{align*}
+
+    En general, tenemos que
+    \begin{align*}
+        &x = \lambda x  \ \ \text{ tiene por solución }\ \  x(t)=c \cdot e ^{\lambda t}\\
+        &x'=\lambda t\ \  \text{ tiene por solución }\ \  x(t)=\frac{\lambda t^2}{2} +c
+    \end{align*}
+
+\end{ejemplo}
+
+\begin{prop}
+    Dada $x(t)$ solución de $x'=\lambda x$ definida en un intervalo abierto $I$, existe $c\in \bb{R}$ de forma que $x(t)=c \cdot e^{\lambda t}$,\ \ $\forall t \in I$.
+
+    \begin{proof}
+        Sea $x(t)$ una solución. Consideramos la aplicación $e^{-\lambda t} \cdot x(t)$ que es derivable por ser producto de funciones derivables y tenemos
+        \begin{gather*}
+            \frac{d}{dt}\left( e^{-\lambda t} x(t)\right) = -\lambda e^{-\lambda t} x(t) + e^{-\lambda t}x`(t) \overset{(*)}{=}-\lambda e^{-\lambda t} x(t) + e^{-\lambda t}\cdot \lambda x(t) = 0
+        \end{gather*}
+        donde en $(*)$ he aplicado que $x'=\lambda x$ por ser solución. Al anularse la derivada de una función de clase $C^1(I)$, necesariamente tenemos que $\exists c \in \bb{R}$ tal que $e^{-\lambda t}x(t)=c$\ \ $\forall t \in I$.
+
+        Con esta expresión, dado que la exponencial no se anula para ningún valor del dominio podemos dividir entre ella y obtenemos
+        \begin{gather*}
+            x(t)=c\cdot e^{\lambda t}
+        \end{gather*}
+    \end{proof}
+\end{prop}
