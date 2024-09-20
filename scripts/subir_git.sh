@@ -9,7 +9,8 @@ then
 fi
 
 echo "\$ git add ./*"
-git add ./*
+pwd
+git add .
 echo "\$ git commit -m \"$commit_msg\""
 git commit -m "$commit_msg"
 echo "\$ git push"
