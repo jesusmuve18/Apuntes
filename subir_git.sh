@@ -1,6 +1,7 @@
 #!/bin/bash
 
-commit_msg="actualización"
+fecha=`date +"%d.%m.%Y %H:%M"`
+commit_msg="Actualizado $fecha"
 
 if [[ $# -eq 1 ]] 
 then
