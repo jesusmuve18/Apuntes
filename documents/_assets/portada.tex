@@ -1,0 +1,47 @@
+\usepackage{xkeyval} % Para el paso de argumentos
+
+\usepackage{graphicx}
+
+% Definir la carpeta de las imágenes
+\graphicspath{{../_assets}{../../_assets}}
+
+% Definir el comando \portada
+\makeatletter
+\define@key{portada}{titulo}{\def\titulo{#1}}
+\define@key{portada}{subtitulo}{\def\subtitulo{#1}}
+\define@key{portada}{autor}{\def\autor{#1}}
+\define@key{portada}{año}{\def\año{#1}}
+\define@key{portada}{color página}{\def\colorpagina{#1}}
+
+\newcommand*{\portada}[1][]{%
+  % Encabezado
+  \fancyhead[L]{\helv \titulo}
+  \fancyhead[R]{\helv \nouppercase{\leftmark}}
+
+    % Definimos las claves y sus valores por defecto
+  \setkeys{portada}{%
+    titulo=Sin Título,%
+    subtitulo=Sin Subtítulo,%
+    autor=Autor Desconocido,%
+    año=Sin Año,%
+    color página=white, #1}%
+    \begin{titlepage}
+        \centering
+        \pagecolor{\colorpagina} % Cambia el color de fondo de la portada
+        {\includegraphics[width=0.2\textwidth]{Logo-UGR-Black.png}\par}
+        \vspace{1cm}
+        {\bfseries\LARGE Universidad de Granada \par}
+        \vspace{1cm}
+        {\scshape\Large Doble Grado en Ingeniería Informática y Matemáticas \par}
+        \vspace{3cm}
+        {\scshape\Huge \titulo \par}
+        \vspace{3cm}
+        {\itshape\Large \subtitulo \par}
+        \vfill
+        {\Large Autor: \par}
+        {\Large \autor \par}
+        \vfill
+        {\Large \año \par}
+    \end{titlepage}%
+    \pagecolor{white}
+}
