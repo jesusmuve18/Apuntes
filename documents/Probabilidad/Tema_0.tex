@@ -1,0 +1,167 @@
+\chapter{Trabajos de clase}
+
+\section{Trabajo de clase del lunes 23 de Septiembre de 2024}
+
+\begin{ejercicio} Sea el experimento de lanzar un dado perfecto de 6 caras. Obtener:
+    \begin{enumerate}[label=\alph*)]
+        \item La función masa de probabilidad.
+        
+        La función masa de probabilidad es la que asocia cada posible suceso con su probabilidad. En este caso, al ser el dado perfecto podemos interpretar que es la siguiente, definiendo el espacio muestral como $R_X=\{1,2,3,4,5,6\}$, y notando $x_i=i$, $\forall i \in 1,\dots, 6$
+        \begin{gather*}
+            p_i=P(x=x_i) = \frac{1}{6}\ \ \forall i\in 1,\dots,6
+        \end{gather*}
+        En otro caso, $p_i=P(x=x_i)=0$ donde $i\notin 1,\dots,6$
+        \item La función de distribución.
+        \begin{gather*}
+            F(x)=\left\{
+            \begin{array}{ccc}
+                0 & \text{si} & x<1 \\
+                \frac{x_i}{6} & \text{si} & 1 \leq x_i \leq 6\\
+                1 &  \text{si} & x \geq 6\\
+            \end{array}
+            \right.
+        \end{gather*}
+        \item Función generatriz de momentos.
+
+        \begin{gather*}
+            M(t)=E[e^{tx}]=\frac{1}{6} \cdot \sum\limits_{x=1}^6e^{tx},\ \ t \in \bb{R}
+        \end{gather*}
+
+        \item Valor esperado.
+        
+        \begin{gather*}
+            E[x] = \frac{1}{6} \cdot \sum\limits_{x=1}^6 x = 3.5\\
+        \end{gather*}
+        Otra forma de calcularlo sería:
+        \begin{gather*}
+            M'(t)= \frac{1}{6} \sum\limits_{x= 1}^6 e^{tx}\\
+            E[x] = M'(0) =\frac{1}{6} \sum\limits_{x=1}^6 x = 3.5
+        \end{gather*}
+        \item Varianza.
+         \begin{gather*}
+            Var[x]=E[x^2]-E[x]^2 = \frac{1}{6} \cdot \sum\limits_{x=1}^6 x^2 - (3.5)^2 = 2.9167
+         \end{gather*}
+        \item La distribución de probabilidad que sigue el experimento.
+        
+        Es una distribución uniforme.
+    \end{enumerate} 
+\end{ejercicio}
+
+\begin{ejercicio} Consideramos la variable aleatoria del resultado de número de caras menos número de cruces al lanzar 3 monedas. Calcular:
+    
+    \begin{enumerate}
+        \item Función masa de probabilidad.
+        
+        Para este experimento tenemos el espacio muestral $\Omega=\{ccc, xcc, cxc, ccx, cxx, xcx, xxc, xxx\}$ y la variable aleatoria puede tomar los valores  $\{-3, -1, 1, 3\}$. La probabilidad asociada a cada uno será:
+        \begin{gather*}
+            P(x=-3) = P(x=3) = \frac{1}{8}\\
+            P(x=-1) = P(x=1) = \frac{3}{8}
+        \end{gather*}
+
+        \item Esperanza.
+        
+        \begin{gather*}
+            E[x] = (-3+3) \cdot \frac{1}{8} + (-1+1) \cdot \frac{3}{8} = 0
+        \end{gather*}
+
+        \item Varianza.
+
+        \begin{gather*}
+            Var[x] = E[x^2]-E[x]^2 = E[x^2] = ((-3)^2 + 3^2) \frac{1}{8} + ((-1)^2+1^2) \frac{3}{8} = 18 \cdot \frac{1}{8} + 2 \cdot \frac{3}{8} = 3
+        \end{gather*}
+
+        \item Función de distribución.
+        \begin{gather*}
+            F(x)=\left\{
+            \begin{array}{ccc}
+                0 & \text{si} & x<-3\\
+                \nicefrac{1}{8}& \text{si} & -3 \leq x < -1 \\
+                \nicefrac{1}{2}& \text{si} & -1 \leq x < 1 \\
+                \nicefrac{7}{8}& \text{si} & 1 \leq x < 3 \\
+                1& \text{si} & x \geq 3
+            \end{array}
+            \right.
+        \end{gather*}
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[ puntos]
+    Dada $x$ una variable aleatoria con la siguiente función de densidad:
+    \begin{gather*}
+        f(x) = \left\{
+        \begin{array}{ccc}
+            \dfrac{k}{x^2} & \text{si} & 1 \leq x \leq 8\\
+            0 &&\\
+        \end{array}
+        \right.
+    \end{gather*}
+
+    Calcular $k$, obtener la función de distribución, la esperanza y la varianza.\\
+
+    Dado que $f$ es una función de densidad debe verificar la saegunda propiedad por lo que:
+    \begin{gather*}
+        \int\limits_{-\infty}^{\infty} f(x) dx = 1 \sii \int\limits_{1}^{8} \frac{k}{x^2} dx = 1 \sii k \left[ \dfrac{-1}{x}\right]_ 1^8 \sii k \left(1 - \dfrac{1}{8}\right) \sii k = \dfrac{8}{7}
+    \end{gather*}
+
+    Para la función de distribución tenemos:
+    \begin{gather*}
+        F(x) = \left\{
+            \begin{array}{ccc}
+                0 & \text{si} & 1 \leq x < 1\\
+                \int\limits_1^x \dfrac{\frac{8}{7}}{t^2} = \dfrac{8}{7} \left(1 - \dfrac{1}{x}\right) & \text{si}& x \in [1,8[]\\
+            \end{array}
+            \right.
+    \end{gather*}
+
+    Pasamos al calcular la esperanza:
+    \begin{gather*}
+        E[x] = \int\limits_{-\infty}^{\infty} xf(x) dx = \int\limits_1^8 x\dfrac{k}{x^2} = \dfrac{8}{7}(\ln|x|)_1^8 = \dfrac{8}{7}\ln(8)
+    \end{gather*}
+
+    Por último para la varianza:
+    \begin{gather*}
+        Var[x] = E[x^2]- E[x]^2 = 8 - \left(\dfrac{8}{7}\ln(8)\right)^2 = 2.352
+    \end{gather*}
+
+    Donde hemos calculado $E[x^2]$ como
+    \begin{gather*}
+        E[x^2] = \int\limits_{-\infty}^{\infty} x^2 f(x) dx = \int\limits_1^8 \cancel{x^2} \frac{k}{\cancel{x^2}} dx = \frac{8}{7}[x]_1^8 = \frac{64}{7} - \frac{8}{7} = 8
+    \end{gather*}
+\end{ejercicio}
+
+\begin{ejercicio} Una gasolinera vende una cantidad $x$ cada día de litros de gasolina. Supongamos que $x$ (medida en miles de litros) tiene la siguiente función de densidad:
+    \begin{gather*}
+        f(x)=\left\{
+        \begin{array}{ccc}
+            \nicefrac{3}{8} & \text{si} & 0 \leq x \leq 2\\
+            0 & \text{si} & x > 2
+        \end{array}
+        \right.
+    \end{gather*}
+    Las ganancias de la gasolinera son 100€ cada 1000 litros vendidos si la cantidad que venden es menor o igual a 1000 litros y 40€ extras si vende por encima de esa cantidad. Calcule la ganancia esperada.\\
+
+    Definimos la función ganancia como:
+    \begin{gather*}
+        g(x)=\left\{
+        \begin{array}{ccc}
+            100x & \text{si} & 0 < x \leq 1\\
+            140x & \text{si} & 1 < x \leq 2\\
+        \end{array}
+        \right.
+    \end{gather*}
+    Aplicando las propiedades de la esperanza matemática tenemos:
+    \begin{gather*}
+        E[Y] = \int\limits_{-\infty}^{\infty} g(x)f(x) = \frac{3}{8} \cdot \left(\int\limits_{0}^1 100x \cdot x^2 dx + \int\limits_1^2 140x \cdot x^2 dx \right) =\\
+        = \frac{3}{8} \cdot \left(\left[\frac{100}{4}x^4\right]_0^1 + \left[\frac{140}{4}x^4\right]_1^2\right) = \frac{3}{8} (25 + 525) = 206.25
+    \end{gather*}
+
+    Por lo que se espera obtener $206.25$€
+\end{ejercicio}
+
+\newpage
+
+\textbf{Desarrollo teórico:} Demostrar que $E[X^n] = M_X^{n)}(t=0)$
+\begin{gather*}
+    M_X^{n)}(t=0) = \dfrac{d^n}{dt^n} E\left[e^{tx}\right]_{|_0} = E\left[\frac{d^n}{dt^n} e^{tx}\right]_{|_0} = E\left[ x^n e^{tx}\right]_{|_0} = E\left[X^n\right]
+\end{gather*}
+
