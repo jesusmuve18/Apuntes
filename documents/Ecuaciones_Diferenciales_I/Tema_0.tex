@@ -247,3 +247,142 @@ A partir de ahora la notación que utilizaremos para expresar ecuaciones diferen
         \end{gather*}
     \end{proof}
 \end{prop}
+
+\section{Interpretación geométrica de una ecuación diferencial}
+Sea $x'=f(x,t)$ con $f:\bb{R}^2 \to \bb{R}$, $(t,x)\mapsto f(t,x)$ una función continua. Podemos interpretar este valor $f(t,x)$ como la pendiente de una recta que pasa por $(t,x)$. A partir de esta función podemos construir los que se conoce como un \textbf{campo de direcciones} que es una regla que a cada punto del plano le asigna una dirección. Tenmos que $x'(t)=f(t,x(t))$ por lo que esta es la pendiente del campo de direcciones y por la interpretación geométrica de la derivada tenemos que este valor es la pendiente de la recta tangente en $(t,x(t))$ a la curva $x=x(t)$. Las soluciones de la ecuación diferencial son curvas que se mueven de forma tangente al campo de direcciones (se podría decir que lo "peinan").
+
+\begin{ejemplo}\ 
+    \begin{enumerate}
+        \item $x'=0$. Las soluciones de esta ecuación diferencial son las de la familia uniparamétrica $x(t)=c$, $c\in \bb{R}$.
+        \begin{center}
+            \begin{tikzpicture}
+                \draw[thick] (2,0) -- (-2,0);
+                \draw[thick] (0,2) -- (0,-2);
+
+                \def\radius{2pt}
+
+                \def\coorx{0.5}
+                \def\coory{1}
+                \draw[orange, thick] (\coorx-0.3, \coory) -- (\coorx+0.3, \coory);
+                \fill (\coorx, \coory) circle (\radius);
+
+                \def\coorx{1}
+                \def\coory{1.25}
+                \draw[orange, thick] (\coorx-0.3, \coory) -- (\coorx+0.3, \coory);
+                \fill (\coorx, \coory) circle (\radius);
+
+                \def\coorx{0.5}
+                \def\coory{-1}
+                \draw[orange, thick] (\coorx-0.3, \coory) -- (\coorx+0.3, \coory);
+                \fill (\coorx, \coory) circle (\radius);
+
+                \def\coorx{-1.5}
+                \def\coory{1}
+                \draw[orange, thick] (\coorx-0.3, \coory) -- (\coorx+0.3, \coory);
+                \fill (\coorx, \coory) circle (\radius);
+
+                \def\coorx{-0.5}
+                \def\coory{-1}
+                \draw[orange, thick] (\coorx-0.3, \coory) -- (\coorx+0.3, \coory);
+                \fill (\coorx, \coory) circle (\radius);
+
+            \end{tikzpicture}
+        \end{center}
+        
+        \item $x'=1$. Las soluciones serán de la forma $x(t)=t+c$, $t,c\in \bb{R}$. Ahora $f(t,x)=1$.
+        \begin{center}
+            \begin{tikzpicture}
+                \draw[thick] (2,0) -- (-2,0);
+                \draw[thick] (0,2) -- (0,-2);
+
+                \def\radius{2pt}
+
+                \def\coorx{0.5}
+                \def\coory{1}
+                \draw[orange, thick] (\coorx-0.2, \coory-0.2) -- (\coorx+0.2, \coory+0.2);
+                \fill (\coorx, \coory) circle (\radius);
+
+                \def\coorx{1}
+                \def\coory{1.25}
+                \draw[orange, thick] (\coorx-0.2, \coory-0.2) -- (\coorx+0.2, \coory+0.2);
+                \fill (\coorx, \coory) circle (\radius);
+
+                \def\coorx{0.5}
+                \def\coory{-1}
+                \draw[orange, thick] (\coorx-0.2, \coory-0.2) -- (\coorx+0.2, \coory+0.2);
+                \fill (\coorx, \coory) circle (\radius);
+
+                \def\coorx{-1.5}
+                \def\coory{1}
+                \draw[orange, thick] (\coorx-0.2, \coory-0.2) -- (\coorx+0.2, \coory+0.2);
+                \fill (\coorx, \coory) circle (\radius);
+
+                \def\coorx{-0.5}
+                \def\coory{-1}
+                \draw[orange, thick] (\coorx-0.2, \coory-0.2) -- (\coorx+0.2, \coory+0.2);
+                \fill (\coorx, \coory) circle (\radius);
+
+            \end{tikzpicture}
+        \end{center}
+        \item $x'=x$. En general, $x(t)=c e^t$, $c,t\in \bb{R}$ %TODO: hacer dibujo
+        \item $x'=t^2+x^2$. Con las funciones elementales básicas no vamos a encontrar una solución, sin embargo el campo de direcciones nos permite hacernos una idea de como son estas funciones (no elementales)(No podemos definir el movimiento mediante una fórmula sino con la ley que lo describe). %TODO: hacer dibujo
+
+        % \input{graficos/campo_1.tex}
+    \end{enumerate}
+    \endsquare
+\end{ejemplo}
+
+\begin{teo}\textbf{Teorema de la función implícita:}
+
+    Sea $F:G\subset \bb{R}^2 \to \bb{R}$ una función, donde $G$ es abierto y $F\in C^1(G)$. Si existe un punto $(t_0, x_o)\in G$ con $F(t_0,x_0) = 0$ y $\frac{\partial F}{\partial x}(t_0, x_0)\neq 0$, entonces existe una función $x$ definida en un cierto intervalo abierto $I$, $x: I \to \bb{R}$
+    tal que $t_0\in I$, $x(t_0)=x_0$, $x\in C ^1(I)$ de manera que $(x,x(t))\in G$ \ \ $\forall t \in I$ y tal que $F(t,x(t)) = 0$\ \ $\forall t \in I$.
+    \endsquare
+\end{teo}
+
+\textbf{Regla de derivación:}
+\begin{gather*}
+    \frac{d}{ds} [F(t(s), x(s))] = \frac{\partial F }{\partial t}(t(s), x(s))t'(s) + \frac{\partial F}{\partial x} (t(s), x(s))x'(s)
+\end{gather*}
+
+Aplicando esto tenemos que si $F(t,x(t))=0$, $t\in I$, entonces su derivada implícita será:
+\begin{gather*}
+    \frac{\partial F}{\partial t}(t,x(t))+ \frac{\partial F}{\partial x}(t,x(t))x'(t)=0
+\end{gather*}
+Esto es una ecuación diferencial de primer orden pero no está en forma normal. Por el teorema de la función implícita sé que $\frac{\partial F}{\partial x}(t,x(t))\neq 0$ y por tanto se puede expresar en forma normal (despejando $x'(t)$).
+
+\newpage
+
+\section{Construcción de una Ecuación Diferencial (de primer orden) a partir de una familia uniparamétrica de funciones}
+
+Los candidatos a solución serían $F(t,x,c)=0$ donde $c$ es un parámetro y $x$ es una función dependiente de $t$. Aplicando derivación implícita tenemos:
+\begin{gather*}
+    % \frac{d}{dt}[F(t,x(t),c)] = 
+    \frac{\partial F}{\partial t}(t,x(t), c)+ \frac{\partial F}{\partial x}(t,x(t),c)x'(t)=0
+\end{gather*}
+
+Eliminando el parámetro $c$ obtengo $\Phi(t,x,x')=0$.
+
+\begin{ejemplo}
+    $\frac{1}{c}e^{cx}-x^2-sen(t)=c$
+    \begin{gather*}
+        F(t,x,c) =\frac{1}{c} e^{cx}-x^2-sen(t)-c
+    \end{gather*}
+    Derivando esta función (calculando la derivada implícita) obtenemos
+    \begin{gather*}
+        e^{cx}x'-2x'x-\cos(t)=0
+    \end{gather*}
+    Eliminamos ahora el parámetro $c$:
+    \begin{gather*}
+        e^{cx} = \frac{2xx'+\cos(t)}{x'}\\
+        \frac{x}{\ln\left(\frac{2xx'+cos(t)}{x'}\right)}\cdot{\frac{2xx'+\cos(t)}{x'}-x^2-\sen(t)-\frac{1}{x}\ln\left(\frac{2xx'+\cos(t)}{x'}\right)}=0
+    \end{gather*}
+    \endsquare
+\end{ejemplo}
+
+\begin{ejemplo}
+    $x^2+t^2 = 0$.
+    \begin{gather*}
+        2xx'+2t=0
+    \end{gather*}
+    y obtenemos la ecuación $x'=\frac{-t}{x}$
+\end{ejemplo}

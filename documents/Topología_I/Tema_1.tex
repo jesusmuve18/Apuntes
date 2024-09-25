@@ -397,4 +397,92 @@ Algunas propiedades que se deducen de la definición anterior son:
     \end{itemize}
 \end{ejemplo}
 
+\section{Comparación de Topologías}
+\begin{definicion}
+    Sean $X\neq \emptyset$ un conjunto y $\cc{T}_1$, $\cc{T}_2$ dos topologías en $X$. Diremos que $\cc{T}_2$ es \textbf{más fina} que $\cc{T}_1$ o que $\cc{T}_1$ es \textbf{menos fina} que $\cc{T}_2$ si $\cc{T}_1\subseteq \cc{T}_2$ y lo notamos como $\cc{T}_1 \leq \cc{T}_2$.
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $X \neq \emptyset$,\ $\cc{T}_{CF}\leq \cc{T}_{CN}$.
+        \item $(X,\cc{T})$ e.t, entonces $\cc{T}_t \leq \cc{T} \leq \cc{T}_{disc}$ 
+        % (ya que todas las topologías contienen a la trivial)
+        \item Si $\cc{T}_1 \leq \cc{T}_2$ y $\cc{T}_2\leq \cc{T}_1$, entonces $\cc{T}_1= \cc{T}_2$ (por doble inclusión).
+        \item En general si tenemos dos topologías en $X$, no siempre son comparables. Por ejemplo la topología del punto incluida en dos puntos distintos: 
+        \begin{gather*}
+            0,1\in \bb{R}\ \ \ (\bb{R}, \cc{T}_0), (\bb{R},\cc{T}_1)
+        \end{gather*}
+        Veamos que $\cc{T}_0 \nleq \cc{T}_1$, ya que $\{0\}\notin \cc{T}_1$, y por el mismo motivo (pero con el 1) tenemos $\cc{T}_1\nleq \cc{T}_0$.
+
+        Otro ejemplo sería $(\bb{R}, \cc{T}_u)$, $(\bb{R},\cc{T}_{x_0})$ ya que $\{x_0\}\in \cc{T}_{x_0}$, $\{x_0\}\notin \cc{T}_u\Rightarrow \cc{T}_{x_0\nleq \cc{T}_u}$
+        Igualmente $(x_0+1,x_0+2)\in \cc{T}_u$ y $(x_0+1,x_0+2)\in \cc{T}_{x_0} \Rightarrow \cc{T}_u \nleq topoº_{x_0}$
+        \item En $\bb{R}$, $\cc{T}_u\leq \cc{T}_{Sorgenfrey}$.
+        \item $(X,d)$, $(X,d')$, $d \leq d' \Rightarrow \cc{T}_d \leq \cc{T}_{d'}$.
+    \end{itemize}
+\end{ejemplo}
+
+\section{Cerrados}
+
+\begin{definicion}
+    Sea $(X,\cc{T})$ un e.t. Diremos que un conjunto $F\subset X$ es \textbf{cerrado} en $(X,\cc{T})$ si $X\subset F \in \cc{T}$. Denotamos por $\cc{C}_{\cc{T}}$ a la familia de todos los cerrados en $(X,\cc{T})$.
+\end{definicion}
+
+Algunas propiedades son 
+\begin{enumerate}
+    \item[\objetivo{C1}] $\emptyset, X \in \cc{C}_{\cc{T}}$.
+    \item[\objetivo{C2}] Si $\{F_i\}_{i\in I}\subset \cc{C}_{\cc{T}}$, entonces $\bigcap\limits_{i\in I}F_i \in \cc{C}_{\cc{T}}$.
+    \item[\objetivo{C3}] Si $F_1, F_2" \in \cc{C}_{\cc{T}}$, entonces $F_1 \cup F_2 \in \cc{C}_{\cc{T}}$
+\end{enumerate}
+Por inducción, de \apuntar{C3} tenemos que la unión finita de cerrados es cerrada.\\
+
+Algunas observaciones que podemos extraer de esta definición son:
+\begin{itemize}
+    \item $U\in \cc{T}\sii X \setminus U \in \cc{C}_{\cc{T}}$, $F\in \cc{C}_{\cc{T}} \sii X\setminus F \in \cc{T}$.
+    \item $\cc{T}_1 \leq \cc{T}_2\sii \cc{C}_{\cc{T}_1}\subseteq \cc{C}_{\cc{T}_2}$. Esto además implica que $\cc{T}_1=\cc{T}_2 \sii \cc{C}_{\cc{T}_1} = \cc{C}_{\cc{T}_2}$. Esto nos dice que para conocer una topología basta con conocer la familia de sus cerrados.
+    \item En general, puede haber conjntos que no sean ni abiertos ni cerrados. Por ejemplo, en $(\bb{R}, \cc{T}_u)$, tenemos que $[0,1)\notin \cc{T}_u\cup \cc{C}_{\cc{T}_u}$.
+    \item En $(X, \cc{T}_{x_0})$ tenemos que $\cc{T}_{x_0}\cup \cc{C}_{\cc{T}_{x_0}} = \cc{P}(X)$ y además $\cc{T}_{x_0}\cap \cc{C}_{\cc{T}_{x_0}}=\{\emptyset, X\}$.
+    \item En general, la unión arbitraria de cerrados no es cerrado. Por ejemplo, $(\bb{R}, \cc{T}_u)$, tomamos $\bigcup\limits_{n\in \bb{N}}\left[-\frac{1}{n}, 3-\frac{1}{n}\right] = (0,3)$. Otro ejemplo sería $(\bb{R}, \cc{T}_{CF})$ considerando $\bigcup\limits_{n\in \bb{N}}\{n\}=\bb{N}$ que no es cerrado.
+\end{itemize}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Topología trivial: $\cc{T}_t=\{\emptyset, X\} \Rightarrow \cc{C}_{\cc{T}_t} = \cc{C}_t = \{\emptyset, X\}$.
+        \item Topología discreta: $\cc{T}_{disc} = \cc{P}(X) \Rightarrow \cc{C}_{\cc{T}_{disc}} = \cc{C}_{disc} = \cc{P}(X)$.
+        \item Topología del punto incluido: $x_o \in X$, $\cc{T}_{x_0}=\{\emptyset\} \cup \{U\subset X : x_0 \in U\} \Rightarrow \cc{C}_{\cc{T}_{x_0}} = \cc{C}_{x_0} = \{X\}\cup \{F \subset X : x_0 \notin F\}$
+        \item Topología cofinita: $\cc{T}_{CF} = \{\emptyset\}\cup \{U\subset X : X \setminus U \text{ finito }\} \Rightarrow \cc{C}_{\cc{T}_{CF}}=\cc{C}_{CF}=\{X\}\cup \{F\subset X : F \text{ finito}\}$
+        \item En ocasiones no es fácil describir $\cc{C}_{\cc{T}}$. Por ejemplo en $\cc{T}_u$ o $\cc{T}_{Sorgenfrey}$.
+    \end{itemize}
+\end{ejemplo}
+
+\begin{ejemplo} En un espacio métrico $(X, \cc{T}_d)$, las bolas cerradas y las esferas son cerrados.
+    \begin{proof}\
+        \begin{itemize}
+            \item Sea $x\in X$, $r>0$, ¿$\overline{B}(x,r)\in \cc{C}_d$? Esto es equivalente a preguntarse ¿$X\setminus \overline{B}(x,r) \in \cc{T}_d$?
+            
+            Sea $y \in X\setminus\overline{B}(x,r) \Rightarrow d(x,y>r)$. Entonces $\exists \veps >0 : r+\veps < d(x,y)\Rightarrow B(y,\veps)\cap \overline{B}(x,r)=\emptyset \Rightarrow B(y,\veps)\subset X\setminus \overline{B}(x,r)\in \cc{T}_d \Rightarrow X\setminus \overline{B}(x,r)\in \cc{C}_{\cc{T}}$
+
+            % \begin{tikzpicture}
+            %     \centering
+    
+            %     \def\radius{1}
+            %     \def\incolor{gray!20}
+            %     \def\angulo{45}
+    
+            %     % Desactiva los caracteres conflictivos
+            %     \shorthandoff{>} % Para poner puntas de flecha
+    
+            %     \filldraw[fill=\incolor, thick] (0,0) circle (\radius);
+            %     \filldraw (0,0) circle (1.5pt)  node[below] {$x$};
+            %     \draw[thick, ->] (0,0) -> ({sin(\angulo)*\radius}, {cos(\angulo)*\radius}) node[midway, below] {$r$};
+    
+            % \end{tikzpicture}
+
+            \item Sea $x\in X$, $r>0, $¿$S(x,r)\in \cc{C}_d$? Dado que $X\setminus S(x,r)=B(x,r)\cup (X\setminus \overline{B}(x,r))\in \cc{T}_d$ (por ser unión de abiertos).
+        \end{itemize}
+    \end{proof}
+\end{ejemplo}
+
+\begin{ejercicio}
+    En $(\bb{R},\cc{T}_u)$ los únicos intervalos cerrados son los de la forma $]-\infty, a]$, $[b, +\infty[$, $\bb{R}=]-\infty, +\infty[$ y $[a,b]$ con $a<b$.
+\end{ejercicio}
 
