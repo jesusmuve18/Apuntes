@@ -100,7 +100,7 @@ A la aplicación $d$ la llamaremos \textbf{distancia}.
 \end{ejercicio}
 
 \begin{definicion}
-    $(X,d)$ e.m. $x \in X$, $r >0$, se definen:
+    $(X,d)$ e.m.\footnote{espacio métrico} $x \in X$, $r >0$, se definen:
 
     \begin{itemize}
         \item La \textbf{bola (abierta)} de centro $x$ y radio $r$ como 
@@ -435,15 +435,15 @@ Algunas propiedades son
 \end{enumerate}
 Por inducción, de \apuntar{C3} tenemos que la unión finita de cerrados es cerrada.\\
 
-Algunas observaciones que podemos extraer de esta definición son:
-\begin{itemize}
-    \item $U\in \cc{T}\sii X \setminus U \in \cc{C}_{\cc{T}}$, $F\in \cc{C}_{\cc{T}} \sii X\setminus F \in \cc{T}$.
-    \item $\cc{T}_1 \leq \cc{T}_2\sii \cc{C}_{\cc{T}_1}\subseteq \cc{C}_{\cc{T}_2}$. Esto además implica que $\cc{T}_1=\cc{T}_2 \sii \cc{C}_{\cc{T}_1} = \cc{C}_{\cc{T}_2}$. Esto nos dice que para conocer una topología basta con conocer la familia de sus cerrados.
-    \item En general, puede haber conjntos que no sean ni abiertos ni cerrados. Por ejemplo, en $(\bb{R}, \cc{T}_u)$, tenemos que $[0,1)\notin \cc{T}_u\cup \cc{C}_{\cc{T}_u}$.
-    \item En $(X, \cc{T}_{x_0})$ tenemos que $\cc{T}_{x_0}\cup \cc{C}_{\cc{T}_{x_0}} = \cc{P}(X)$ y además $\cc{T}_{x_0}\cap \cc{C}_{\cc{T}_{x_0}}=\{\emptyset, X\}$.
-    \item En general, la unión arbitraria de cerrados no es cerrado. Por ejemplo, $(\bb{R}, \cc{T}_u)$, tomamos $\bigcup\limits_{n\in \bb{N}}\left[-\frac{1}{n}, 3-\frac{1}{n}\right] = (0,3)$. Otro ejemplo sería $(\bb{R}, \cc{T}_{CF})$ considerando $\bigcup\limits_{n\in \bb{N}}\{n\}=\bb{N}$ que no es cerrado.
-\end{itemize}
-
+\begin{observacion}\
+    \begin{itemize}
+        \item $U\in \cc{T}\sii X \setminus U \in \cc{C}_{\cc{T}}$, $F\in \cc{C}_{\cc{T}} \sii X\setminus F \in \cc{T}$.
+        \item $\cc{T}_1 \leq \cc{T}_2\sii \cc{C}_{\cc{T}_1}\subseteq \cc{C}_{\cc{T}_2}$. Esto además implica que $\cc{T}_1=\cc{T}_2 \sii \cc{C}_{\cc{T}_1} = \cc{C}_{\cc{T}_2}$. Esto nos dice que para conocer una topología basta con conocer la familia de sus cerrados.
+        \item En general, puede haber conjntos que no sean ni abiertos ni cerrados. Por ejemplo, en $(\bb{R}, \cc{T}_u)$, tenemos que $[0,1)\notin \cc{T}_u\cup \cc{C}_{\cc{T}_u}$.
+        \item En $(X, \cc{T}_{x_0})$ tenemos que $\cc{T}_{x_0}\cup \cc{C}_{\cc{T}_{x_0}} = \cc{P}(X)$ y además $\cc{T}_{x_0}\cap \cc{C}_{\cc{T}_{x_0}}=\{\emptyset, X\}$.
+        \item En general, la unión arbitraria de cerrados no es cerrado. Por ejemplo, $(\bb{R}, \cc{T}_u)$, tomamos $\bigcup\limits_{n\in \bb{N}}\left[-\frac{1}{n}, 3-\frac{1}{n}\right] = (0,3)$. Otro ejemplo sería $(\bb{R}, \cc{T}_{CF})$ considerando $\bigcup\limits_{n\in \bb{N}}\{n\}=\bb{N}$ que no es cerrado.
+    \end{itemize}
+\end{observacion}
 \begin{ejemplo}\
     \begin{itemize}
         \item Topología trivial: $\cc{T}_t=\{\emptyset, X\} \Rightarrow \cc{C}_{\cc{T}_t} = \cc{C}_t = \{\emptyset, X\}$.
@@ -486,3 +486,86 @@ Algunas observaciones que podemos extraer de esta definición son:
     En $(\bb{R},\cc{T}_u)$ los únicos intervalos cerrados son los de la forma $]-\infty, a]$, $[b, +\infty[$, $\bb{R}=]-\infty, +\infty[$ y $[a,b]$ con $a<b$.
 \end{ejercicio}
 
+\begin{teo}
+    Sea $X\neq \emptyset$ y $\cc{C}\subset \cc{P}(X)$ cumpliendo
+    \begin{enumerate}
+        \item[\apuntar{C1}] $\emptyset, X \in \cc{C}$.
+        \item[\apuntar{C2}] Si $\{F_i\}_{i\in I}\subset \cc{C}$, entonces $\bigcap\limits_{i\in I}F_i \in \cc{C}$.
+        \item[\apuntar{C3}] Si $F_1, F_2" \in \cc{C}$, entonces $F_1 \cup F_2 \in \cc{C}$
+    \end{enumerate}
+
+    Entonces existe una única topología $\cc{T}$ en $X$ tal que $\cc{C}_{\cc{T}}=\cc{C}$.
+
+    \begin{proof}
+        La existencia queda probada definiendo $\cc{T}=\{U\subset X : X \setminus U \in \cc{C}\}$.
+        La unicidad es inmediata ya que si $\cc{C}_{\cc{T'}}=\cc{C}_{\cc{T}}\Rightarrow \cc{T}=\cc{T}'$.\\
+    \end{proof}
+\end{teo}
+
+\section{Bases de topología}
+
+\begin{definicion}
+    Sea $(X,\cc{T})$ un e.t. Una familia de abiertos $\cc{B}\subset \cc{T}$ es una \textbf{base} de la topología $\cc{T}$ si $\forall U \in \cc{T}$\ \ \ $\exists \{B_i\}\subset \cc{B}$ tal que $U=\bigcup\limits_{i\in I}B_i$.
+
+    A los elementos de $\cc{B}$ se les llama \textbf{abiertos básicos}.
+\end{definicion}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item Ni $\cc{B}$ ni la familia $\{B_i\}_{i\in I}$ tienen que ser finitas o numerables
+        \item La forma de escribir $U=\bigcup\limits_{i\in I} B_i$ puede no ser única.
+        \item $\cc{T}$ es base de $\cc{T}$ (trivialmente).
+        \item Si $\cc{B}\subset \cc{B}'\subset \cc{T}$ con $\cc{B}$, entonces $\cc{B}'$ es base de $\cc{T}$.
+    \end{itemize}
+\end{observacion}
+
+\begin{prop}
+    Sea $(X,\cc{T})$ un e.t y $\cc{B}\subset \cc{T}$ una familia de abiertos. Son equivalentes:
+    \begin{enumerate}
+        \item[(i)] $\cc{B}$ es base de $\cc{T}$.
+        \item[(ii)] $\forall U \in \cc{T}$,\ \ $U \neq \emptyset$\ \ $\forall x\in U$\ \ $\exists B \in \cc{B}$ tal que $x\in B \subset U$. 
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{itemize}
+            \item[(i)$\Rightarrow$(ii)] Sea $U\in \cc{T}$, $U\neq \emptyset$. Sea $x \in U \Rightarrow  U = \bigcup\limits_{i\in I}B_i$ con $B_i \in \cc{B}\Rightarrow \exists i\in I$ tal que $x\in B_i=B_x\subset U$
+            \item[(ii)$\Rightarrow$(i)] Sea $U\in \cc{T}$.
+            \begin{itemize}[label=-]
+                \item Si $U=\emptyset\Rightarrow U=\bigcup\limits_{i\in \emptyset}B_i=\emptyset$
+                \item Si $U \neq \emptyset \Rightarrow \forall x \in U$\ \ $\exists B_x\in \cc{B}$ tal que $x\in B_x \subset U\Rightarrow U = \bigcup\limits_{x\in U}B_x$
+            \end{itemize}
+        \end{itemize} 
+    \end{proof}
+\end{prop}
+
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Sea $(X,\cc{T}_d)$ un e.m. La familia $base=\{B(x,r):x\in X, r>0\}$ de todas las bolas abiertas es una base de $\cc{T}_d$.
+        \item En $(\bb{R},\cc{T}_u)$, $\cc{B}_u=\{(a,b):a<b\}$ es base de $\cc{T}_u$ y se le llama \textbf{base usual}.
+        \item En $(\bb{R},T_u)$, $\cc{B}=\{(a,b): a,b\in \bb{Q},\ a<b\}$ es base de $\cc{T}_u$ (por la densidad de $\bb{Q}$ en $\bb{R}$).
+        \item En $(\bb{R}^n, \cc{T}_u)$, $\cc{B}_u=\{B(x,r): x\in \bb{R}^n, r>0\}$ es la base usual. $(\bb{R}^n, \cc{T}_u)$, $\cc{B}_u=\{B(x,r): x\in \bb{R}^n, r\in \bb{Q}, r>0\}$ también es base de $\cc{T}_u$ (numerable).
+        \item En $(X,\cc{T}_t)$, $\cc{B}=\{X\}$ es base (la única que no contiene al vacío).
+        \item $(X,\cc{T}_d)$, $\cc{B}=\{\{x\}: x\in X\}\subset \cc{T}$ es base de $\cc{T}_{disc}$. Es la más económica ya que si $\cc{B}'$ es base, entonces $\cc{B}\subset \cc{B}'$.
+        \begin{proof}
+            Sea $\{x\}\in \cc{T}_{disc}$, como $\cc{B}'$ es base podemos considerar $x\in \{x\}$ y entonces $\exists B \in \cc{B}'$ tal que $x\in B \subset \{x\}$ y entonces $B=\{x\}\subset \cc{B}'$ $\forall x \in X\Rightarrow \cc{B}\subset \cc{B}'$
+        \end{proof}
+        \item $(X, \cc{T}_{x_0})$, $x_0 \in X \neq \emptyset$, $\cc{B}=\{\{x,x_0\}: x\in X\}$ es una base. Esta es la base más económica.
+        \item $(\bb{R}, \cc{T}_{Sorgenfrey})$ (recordemos que $U \in \cc{T}_S \sii \forall x \in U,\ \ \exists \veps : [x, x+\veps)\subset U$). $\cc{B}=\{[x,x+\veps): x\in \bb{R}, \veps>0\}$ es base. $\cc{B}'=\{[x,x+\veps): x\in \bb{Q}, \veps\in \bb{Q}, \veps>0\}$ no lo es (ya que tomando un intervalo de la forma $[x,x+\veps)$ con $x\in \bb{Q}$ entonces no existe ningún elemento de $\cc{B}'$ que contenga a $x$ y quede enmedio).
+    \end{itemize}
+\end{ejemplo}
+
+\begin{teo}
+    Sea $(X,\cc{T})$ un espacio topológico con base $\cc{B}$. Entonces:
+    \begin{enumerate}
+        \item[\objetivo{B1}] $X=\bigcup\limits_{B\in \cc{B}}B$
+        \item[] Si $B_1,B_2\in \cc{B}$,\ $x\in B_1\cap B_2$, entonces $\exists B_3 \in \cc{B}$ con $x\in B_3 \subset B_1 \cap B_2$
+    \end{enumerate}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item Trivial
+            \item Trivial. $x\in B_1\cap B_2\in \cc{T}$ entonces, como $\cc{B}$ es base $\exists B_3=B_x \in \cc{B}$ con $x\in B_3 \subset B_1 \cap B_2$.
+        \end{enumerate}
+    \end{proof}
+\end{teo}
