@@ -95,6 +95,7 @@
 
 \newtheorem*{notacion}{Notación}
 \newtheorem*{ejemplo}{Ejemplo}
+\newtheorem*{propiedades}{Propiedades}
 \newtheorem*{ejercicio*}{Ejercicio}             % No numerado
 \newtheorem{ejercicio}{Ejercicio} [section]     % Se resetea en cada section
 
@@ -109,7 +110,7 @@
 }
 
 
-\renewcommand\qedsymbol{\small{$\blacksquare$}}         % Cambiar símbolo QED
+\renewcommand\qedsymbol{\small{$\square$}}         % Cambiar símbolo QED
 %------------------------------------------------------------------------
 
 % Paquetes para encabezados
@@ -276,9 +277,9 @@
 \setlist[itemize, 1]{label=\textbullet \textbf{)}}  % Cambiar las viñetas a círculos
 
 \def\endsquare{%
-  \begin{flushright}
-      \small{$\blacksquare$}
-  \end{flushright}
+  \begin{flushright}%
+      \small{$\square$}%
+  \end{flushright}%
 }
 
 \newcommand{\apuntar}[1]{%
@@ -288,4 +289,9 @@
 \newcommand{\objetivo}[1]{%
   \textbf{(\hypertarget{#1}{#1})}
 }
+
+\usepackage{stackrel}
+
+\newcommand{\captext}[1]{\stackbin [#1]{}{\cap}}
+\newcommand{\cuptext}[1]{\stackbin [#1]{}{\cup}}
 
