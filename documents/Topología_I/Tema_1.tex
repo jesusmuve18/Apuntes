@@ -598,3 +598,87 @@
         \end{enumerate}
     \end{proof}
 \end{teo}
+
+\begin{teo}
+    Sean $X\neq \emptyset$ un conjunto y $\cc{B}\subset \cc{P}(X)$ cumpliendo:
+    \begin{enumerate}
+        \item[\apuntar{B1}] $X=\bigcup\limits_{B\in \cc{B}}B$
+        \item[\apuntar{B2}] Si $B_1,B_2\in \cc{B}$,\ $x\in B_1\cap B_2$, entonces $\exists B_3 \in \cc{B}$ con $x\in B_3 \subset B_1 \cap B_2$
+    \end{enumerate}
+    Entonces existe una única topología $\cc{T}(\cc{B})$ en $X$ tal que $\cc{B}$ es base de $\cc{T}(\cc{B})$. Además,
+    \begin{align*}
+        \cc{T}(\cc{B})&=\{\emptyset\}\cup\{U\subset X : \exists \{B_i\}_{i\in I}\subset \cc{B} \text{ con } U = \bigcup\limits_{i\in I}B_i\}\\
+        &=\{\emptyset\}\cup \{U\in X:\forall x\in U\ \ \exists B=B_x\in \cc{B} \text{ con } x\in B\subset U \}
+    \end{align*}
+    Además, $\cc{T}(\cc{B})$ es la topología menos fina conteniendo a $\cc{B}$, es decir, si $(X,\cc{T}')$ es un e.t y $\cc{B}\subset \cc{T}'$, entonces $\cc{T}(\cc{B})\leq \cc{T}'$. A esta topología se le llama la \textbf{topología generada} por $\cc{B}$.
+
+    \begin{proof}
+        Empezaremos por probar la existencia. Para ello tendremos que ver que $\cc{T}(\cc{B})$ es una topología, probando que verifica las propiedades de las topologías:
+        \begin{enumerate}[label=(A\arabic*)]
+            \item $\emptyset\in \cc{T}(\cc{B})$ por la definición de $\cc{T}(\cc{B})$. Por \apuntar{B1}, tenemos también que $X\in \cc{T}(\cc{B})$.
+            \item Sea $\{U_i\}_{i\in I}\subset \cc{T}(\cc{B})$ y sea $x\in \bigcup\limits_{i\in I}U_i\Rightarrow \exists i \in I : x\in U_i\in \cc{T}(\cc{B})$ por lo que $\exists B_x\in \cc{B}$ tal que $x \in B_x \subset U_i\subset \bigcup_{i\in I}U_i\Rightarrow \bigcup\limits_{i\in I}U_i \in \cc{T}(\cc{B})$.
+            \item Sean $U_1, U_2 \in \cc{T}(\cc{B})$ (si la intersección es vacía es trivial). Consideramos $x\in U_1\cap U_2\Rightarrow \exists B_1, B_2 \in \cc{B}$ con $x \in B_1 \subset U$ y $x_\in B_2\subset U_2$ por tanto $x\in B_1 \cap B_2 \subset U_1 \cap U_2$. Por \apuntar{B2}, existe un $B_2\in \cc{B}$ tal que $x\in B_3 \subset B_1\cap B_2 \subset U_1 \cap U_2$ por lo que $U_1\cap U_2\in \cc{T}(\cc{B})$.
+        \end{enumerate}
+        Con esto queda probado que es una topología. Tendremos que ver ahora que $\cc{B}$ es base de $\cc{T}(\cc{B})$. Para ello empiezo viendo que $\cc{B}\subset \cc{T}$. Por la segunda defición de $\cc{T}(\cc{B})$, esto es evidente. Como verifica las hipótesis del Teorema 1.7, es base de $\cc{T}(\cc{B})$.\\
+
+        Veamos ahora la unicidad. Sea $(X, \cc{T}')$ un e.t. con $\cc{B}$ base de $\cc{T}'$. Tendré que ver que $\cc{T}'=\cc{T}$. Sea $\emptyset\neq U\subset X \Rightarrow U\in \cc{T}'\sii \forall x \in U\ \ \exists B\in \cc{B}$ con $x\in \cc{B}\subset U \sii U\in \cc{T}(\cc{B})$ ya que $\cc{B}$ es base de $\cc{T}'$.\\
+
+        Nos queda ver que es la menos fina conteniendo a $\cc{B}$. Para ello, sea $(X,\cc{T}')$ un e.t. tal que $\cc{B}\subset \cc{T}'$, entonces por \apuntar{A2} tenemos que $\cc{T}(\cc{B})\subset \cc{T}'$, lo cual es equivalente a decir que $\cc{T}(\cc{B})\leq \cc{T}'$.\\
+    \end{proof}
+\end{teo}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Si $X=\{a,b\}$ y $\cc{B}=\{\{a\}\}$ no es base de ninguna topología en $X$ (ya que no cumple \apuntar{B1}).
+        \item Si $X=\{a,b,c\}$ y $\cc{B}=\{\{a,b\},\{b,c\}\}$. Esta base verifica \apuntar{B1} pero no \apuntar{B2} (tomando $x=b$ se ve facilmente). %TODO 
+        \item Si $X=\bb{R}$ y $\cc{B}=\{[a,b]:a<b\}$. Si tomamos dos intervalos $[0,1]\cap [1,2]$, su intersección es $\{1\}$ y por tanto no verifica \apuntar{B2} (tomando $x=1$).
+        \item Si $X=\bb{R}$ y $\cc{B}=\{[a,b]:a\leq b\}$ es base de una topología, $\cc{T}(\cc{B})$ en $\bb{R}$. Además, $\cc{T}(\cc{B})=\cc{T}_{disc}$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}
+    Sean $X\neq \emptyset$ y $\cc{T}_1, \cc{T}_2$ topologías en $X$ con bases $\cc{B}_1$ y $\cc{B}_2$ respectivamente. Equivalen:
+    \begin{enumerate}
+        \item[(i)] $\cc{T}_1\leq \cc{T}_2$.
+        \item[(ii)] $\forall B_1 \in \cc{B}_1,\ \ x \in B_1,\ \ \exists B_2 \in \cc{B}_2$ con $x\in B_2 \subset B_1$.
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)$\Rightarrow$(ii)] Sea $B \in \cc{B}_1$. Por (i), $\cc{B}_1 \subset \cc{T}_1 \subset \cc{T}_2$ y como $\cc{B}_2$ es base de $\cc{T}_2$, aplicando la definición de base tengo que $\exists B_2 \in \cc{B}_2$ con $x\in B_2 \subset B_1$.
+            \item[(ii)$\Rightarrow (i)$] Por (ii) tenemos que $\cc{B}_1\subset \cc{T}_2\Rightarrow \cc{T}(\cc{B}_1)\leq \cc{T}_2$ (por el Teorema 1.7) %TODO
+             y entonces $\cc{T}_1=\cc{T}(\cc{B}_1)\leq \cc{T}_2$.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item En $\bb{R}$, $\cc{T}_u \leq \cc{T}_{Sorgenfrey}$.
+        \item Ejercicios 1 y 2 de la relación.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}
+    Sean $X\neq \emptyset$ y $S\subset \cc{P}(X)$, $S\neq \emptyset$, Entonces, 
+    \begin{gather*}
+        \cc{B}(S)=\left\{\bigcap\limits_{i\in I}: I \text{ finito, }S_i \in S\ \ \forall i \in I\right\}
+    \end{gather*}
+    Es base de una única topología $\cc{T}(S)=\cc{T}(\cc{B}(S))$ en $X$. A esta topología la llamaremos la \textbf{topología generada} por $S$ y es la topología menos fina que contiene a $S$, es decir, si $(X,\cc{T}')$ es un e.t. y $S\subset \cc{T}'$, entonces $\cc{T}(S)\leq \cc{T}'$.\\
+
+    Decimos que $S$ es una \textbf{subbase} de $\cc{T}(S)$.
+
+    \begin{proof}
+        Tendremos que comprobar \apuntar{B1} y \apuntar{B2} y que es la menos fina.
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Toda base $(X,\cc{T})$ es subbase de $(X,\cc{T})$.
+        \item $S=\{X\}$ es subbase de $\cc{T}_t$.
+        \item En $\bb{R}$, $S=\{(a,+\infty):a\in \bb{R}\}\cup \{(-\infty,b): b\in \bb{R}\}$ es subbase de $\cc{T}_u$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
