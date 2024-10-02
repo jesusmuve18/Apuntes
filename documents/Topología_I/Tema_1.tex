@@ -682,3 +682,87 @@
     \end{itemize}
     \endsquare
 \end{ejemplo}
+
+\section{Entornos}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t y $x\in X$. Diremos que un conjunto $N\subset X$ es un \textbf{entorno} de $x$ si $\exists U \in \cc{T}$ con $x\in U \subset N$.\\
+
+    Denotamos $\cc{N}_x = \{N\subset X : N \text{ es entorno de }x\}$ y lo llamamos \textbf{sistema de entornos} del punto $x$ en $(X,\cc{T})$.
+    \endsquare 
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item En $(\bb{R}, \cc{T}_u)$, $[0,1)\in \cc{N}_x$ para todo $x\in (0,1)$, pero no es entorno de $0$ ni de $1$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item $X\in \cc{N}_x$\ \ $\forall x \in X\Rightarrow \cc{N}_x\neq \emptyset$\ \ $\forall x\in X$.
+        \item Si $x\in U \in \cc{T}\Rightarrow U\in \cc{N}_x$
+        \item Puede ocurrir que exista $N\subset \cc{N}_x$ con $N\notin \cc{T}$.
+    \end{itemize}
+    \endsquare
+\end{observacion}
+
+\begin{prop}
+    Sea $(X,\cc{T})$ un e.t., $U\subset X$. Equivalen:
+    \begin{enumerate}
+        \item[(i)] $U\in \cc{T}$.
+        \item[(ii)] $U\in \cc{N}_x$\ \ $\forall x \in U$.
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)$\Rightarrow$ (ii)] Si $U\in \cc{T}$, entonces $U\in \cc{N}_x$\ \ $\forall x\in U$
+            \item[(ii)$\Rightarrow$ (i)] $\forall x \in U $\ \ $\exists U_x \in \cc{T}$ con $x\in U_x\subset U \Rightarrow U = \bigcup\limits_{x\in U}U_x \in \cc{T}$.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}   
+        \item $(X,\cc{T}_t)$, $\cc{N}_x=\{X\}$\ \ $\forall x \in X$.
+        \item $(X,\cc{T}_{disc})$, $\cc{N}_x=\{N\subset X : x\in N\}$
+        \item $(X,\cc{T}_{x_0})$, $\cc{N}_x = \{N \subset X : x_0,x\in N\}$
+        \item $(X,d)$, $\cc{N}_x = \{N\subset X : \exists \veps > 0 \text{ con } B(x,r)\subset N\}$. En particular, $\overline{B}(x,r)\in \cc{N}_x$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}
+    Sea $(X,\cc{T})$ e.t., $x\in X$. Entonces:
+    \begin{enumerate}
+        \item[\objetivo{N1}] $\cc{N}_x \neq \emptyset$\ \ $\forall x \in X$.
+        \item[\objetivo{N2}] Si $N \in \cc{N}_x$, entonces $x\in N$.
+        \item[\objetivo{N3}] Si $N \in \cc{N}_x$ y $N\subset N'$, entonces $N'\in \cc{N}_x$.
+        \item[\objetivo{N4}] Si $N,N'\in \cc{N}_x$, entonces $N\cap N' \in \cc{N}_x$.
+        \item[\objetivo{N5}] Si $N\in \cc{N}_x$, entonces $\exists N'\in \cc{N}_x$ con $N'\subset N$ y $N\in \cc{N}_y$\ \ $\forall y \in N'$.  
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item[\apuntar{N5}] $N\in \cc{N}_x\Rightarrow \exists U \in \cc{T}$ con $x\in U\subset N$. Tomamos $U=N'$ y se verifica que $x\in U \in \cc{N}_x$. Además $U\subset N$ y tendré que ver que $N\in \cc{N}_y$\ \ $\forall y \in U$. Como $U\in \cc{T}\Rightarrow U\in \cc{N}_y$\ \ $\forall y \in U \overset{\apuntar{N3}}{\Rightarrow} N\in \cc{N}_y$\ \ $\forall y \in U$.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{prop}
+    (Hausdorff, 1914) Sean $X\neq \emptyset$ un conjunto y supongamos que tenemos $\forall x \in X$ una familida $\cc{M}_x\subset \cc{P}(X)$ cumpliendo \apuntar{N1},\dots,\apuntar{N5}. Entonces existe una única topología $\cc{T}$ en $X$ cuyos sustemas de entornos $\cc{N}_x$ coinciden con $\cc{M}_x$\ \ $\forall x \in X$ (es decir, $\cc{N}_x = \cc{M}_x\ \ \forall x \in X$).\\
+
+    Además, $\cc{T} = \{U\subset X : U \in \cc{M}_x\ \ \forall x \in U\}\cup\{\emptyset\}$.
+
+    \begin{proof}
+        Veamos en primer lugar que $\cc{T}$ es una topología, comprobando que verifica \apuntar{A1}, \apuntar{A2}, \apuntar{A3}. Esto se deja planteado como ejercicio para el lector.\\
+
+        Veamos que esa topología es única. Para ello supongamos que $\exists \cc{T}'$ con $\cc{N}_x'=\cc{M}_x(=\cc{N}_x)$. Tenemos que $U\in \cc{T}' \sii U\in \cc{N}_x'=\cc{N}_x$\ \ $\forall x \in U \sii U \in \cc{T}$.\\
+
+        Nos queda probar que $\cc{N}_x = \cc{M}_x$\ \ $\forall x \in X$. Sea $x\in X$. Veamos la doble inclusión:
+        \begin{itemize}
+            \item[$\subseteq)$] $N\in \cc{N}_x \Rightarrow \exists U \in \cc{T}$ con $x\in U\subset N$. Por la definición de $\cc{T}$, $U\in \cc{M}_x$.
+            \item[$\supseteq)$] Sea $N\in \cc{M}_x$. Tendremos que comprobar que $N \in \cc{N}_x$. Esto ocurrirá si $\exists U\in \cc{T}$ tal que $x\in U \subset N$. Definimos $U=\{y\in N : N\in \cc{M}_y\}$. Veamos que este conjunto verifica lo que buscamos. Comencemos viendo que $x\in U$. Es claro que $N\in \cc{M}_x$ (por hipótesis) y además, por \apuntar{N2} tenemos que $x\in N$, luego $x\in U$. Veamos ahora que $U\subset N$, lo cual es claro por la definición de $U$. Por último tendré que ver que $U\in \cc{T}$ lo cual equivale a ver que $U\in \cc{M}_y$\ \ $\forall y \in U$. Para ello tomo $y\in U$. Tendremos que ver que $U\in \cc{M}_y$. Como $y\in U \Rightarrow y\in N\in \cc{M}_y \overset{\apuntar{N5}}{\Rightarrow} \exists N'\in \cc{M}_y$ con $N'\subset N$ y $N\in \cc{M}_z$\ \  $\forall z \in N' \overset{\apuntar{N2}}{\Rightarrow} y \in N' \subset U \overset{\apuntar{N3}}{\Rightarrow} U \in \cc{M}_y $.
+        \end{itemize}
+    \end{proof}
+\end{prop}
