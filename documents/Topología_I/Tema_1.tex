@@ -766,3 +766,124 @@
         \end{itemize}
     \end{proof}
 \end{prop}
+
+\subsection{Bases de Entornos}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ e.t. y $x\in X $,. Entonces una \textbf{base de entornos} de $x$ en $\cc{T}$ es una familia de entornos, $\cc{B}_x\subset \cc{N}_x$ tal que $\forall N \in \cc{N}_x$\ \ $\exists V \in \cc{B}_x$ con $x \in V \subset N$.\\
+
+    A los elementos de $\cc{B}_x$ se les llama \textbf{entornos básicos}.
+    \endsquare
+\end{definicion}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item Si $\cc{B}_x$ es b.d.e\footnote{Notaremos así a las bases de entornos}. entonces $\cc{N}_x=\{N\subset X : \exists V \in \cc{B}_x \text{ con } V \subset N\}$.
+
+        \item $\cc{B}_x\neq \emptyset$.
+
+        \item $\cc{N}_x$ es una b.d.e. de $x$.
+
+        \item $\cc{B}_x = \cc{N}_x \cap \cc{T}=\{U\subset \cc{T}: x\in U\}$ es también una b.d.e. de $x$.
+
+        \item Si $\cc{B}$ es base de $\cc{T}$, entonces $\cc{B}\cap \cc{N}_x = B \in \cc{B} : x \in B$ es una b.d.e. de $x$
+        \begin{proof}
+            Sea $N \in \cc{N}_x \Rightarrow \exists U \in \cc{T}$ con $x \in U \subset N$. Como $\cc{B}$ es base de $\cc{T}$, entonces $\exists B \in \cc{B}$ con $x\in B \subset U\subset N$. 
+        \end{proof}
+
+        \item En general, no todo entoorno de un punto es unión de entornos básico. Por ejemplo, $(\bb{R}, \cc{T}_u)$, $x=0$, $\cc{B}_x = \{(a,b) : a<x<b\}$ es una b.d.e. de $x$. Tomamos $[-1,1) \in \cc{N}_x$ (es entorno de $x=0$) pero no es unión de elementos de $\cc{B}_x$.
+    \end{itemize}
+    \endsquare
+\end{observacion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(X, \cc{T}_u)$, $x\in X\Rightarrow \cc{B}_x=\{X\}$ es la única b.d.e de $x$ posible.
+        \item $(X, \cc{T}_{disc})$, $x \in X \Rightarrow \cc{B}_x=\{\{x\}\}$ es una b.d.e de $x$ (la más ``económica'').
+        \item $(X, \cc{T}_{x_0})$, $x \in X \Rightarrow \cc{B}_x = \{\{x,x_0\}\}$ es b.d.e de $x$ (la más ``económica'').
+        \item $(\bb{R}^n, \cc{T}_u)$, $x \in X\Rightarrow \cc{B}_x = \{B(x, \veps): \veps > 0\}$ es una b.d.e de $x$. $\cc{B}_x = \{B(x, \veps):\veps > 0 , \veps \in \bb{Q}\}$, $\cc{B}_x = \{B(x, \veps):\veps =\frac{1}{k}, k\in \bb{N}\}$, $\cc{B}_x = \{B(x, \veps):\veps =\frac{1}{k}, k\in \bb{N}, k\text{ par}\}$ también son bases de entornos de $x$ (cada una más económica que la anterior).
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}
+    Sea $(X,\cc{T})$ un e.t., $\cc{B}_x$ una b.d.e. de $x$\ \ $\forall x \in X$ y $U\subset X$. Equivalen:
+    \begin{enumerate}
+        \item[(i)] $U\in \cc{T}$.
+        \item[(ii)] $\forall x \in U$\ \ $\exists V = V_x\in \cc{B}_x$ con $V_x\subset U$. 
+    \end{enumerate}
+
+    \begin{proof}\ 
+        \begin{itemize}
+            \item[(i) $\Rightarrow$ (ii)] Como $U\in \cc{T}$, entonces $U\in \cc{N}_x$\ \ $\forall x \in U$. Por tanto, $\forall x \in U,$\ \ $\exists V_x\in \cc{B}_x$ con $V_x\subset U$.
+            \item[(ii) $\Rightarrow$ (i)] Por la hipótesis tenemos que $U\in \cc{N}_x$\ \ $\forall x \in U$ por lo que $U\in \cc{T}$ (por la Proposición 1.11) %TODO 
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{prop}
+    Sea $(X,\cc{T})$ un e.t. y $\cc{B}_x$ una b.d.e de $x$\ \ $\forall x \in X$. Entonces:
+    \begin{enumerate}
+        \item[\objetivo{V1}] $\cc{B}_x\neq \emptyset$.
+        \item[\objetivo{V2}] Si $V\in \cc{B}_x$, entonces $x\in V$. %(por \apuntar{N2})
+        \item[\objetivo{V3}] Si $V_1, V_2\in \cc{B}_x$, entonces $\exists V_3 \in \cc{B}_x$ con $V_3 \subset V_1 \cap V_2$. (En general, la intersección de dos abiertos básicos no tiene por qué ser abierto básico pero sí contener a uno).
+        \item[\objetivo{V4}] Si $V\in \cc{B}_x$, entonces $\exists V'\in \cc{B}_x$ con $V'\subset V$ tal que $\forall y\in V'$\ \ $\exists V_y\in \cc{B}_y$ con $V_y\subset V$.
+    \end{enumerate}
+
+    \begin{center}
+        \begin{tikzpicture}
+            \centering
+            
+            \def\radius{1.75}
+            \def\incolor{gray!20}
+    
+            % Desactiva los caracteres conflictivos
+            \shorthandoff{>} % Para poner puntas de flecha
+    
+            \filldraw[dashed, fill=\incolor, thick] (0,0) circle (\radius) node[above, yshift=\radius cm, xshift=0.6cm] {$V$};
+            % \filldraw (0,0) circle (1.5pt)  node[below] {$x$};
+
+            \def\radius{0.4}
+            \draw[dashed, thick] (-0.6,0.6) circle (\radius);
+            \filldraw (-0.6,0.6) circle (1.5pt)  node[below] {$x'$};
+
+            \def\radius{1.1}
+            \draw[dashed, thick] (-0.3,-0.3) circle (\radius) node[above, yshift=\radius cm, xshift=0.6cm] {$V'$};
+            \filldraw (-0.3,-0.3) circle (1.5pt)  node[below] {$x$};
+
+        \end{tikzpicture}
+    \end{center}
+    
+    \begin{proof}\
+        \begin{enumerate}
+            \item[\apuntar{V4}] $V\in \cc{B}_x\subset \cc{N}_x$, entonces, por \apuntar{N5} $\exists N'\in \cc{N}_x$ con $N'\subset V$ tal que $V \in \cc{N}_y$\ \ $\forall y \in N'$. Como $\cc{B}_x$ es b.d.e, $\exists V'\in \cc{B}_x$ con $V'\subset N'\subset V$.\\
+            
+            Sea $y\in V'\subset N'\Rightarrow V\in \cc{N}_y$. Como $\cc{B}_y$ es b.d.e, $\exists V_y \in \cc{B}_y$ con $V_y \subset V$.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{prop}
+    Sea $X \neq \emptyset$ un conjunto y supongamos que $\forall x \in X$ tenemos una familia $\cc{B}_x \subset \cc{P}(X)$ cumpliendo \apuntar{V1}, \dots, \apuntar{V4}. Entonces existe una única topología $\cc{T}$ en $X$ tal que $\cc{B}_x$ es b.d.e de $x$ en $(X,\cc{T})$\ \ $\forall x \in X$.\\
+
+    Además, $\cc{T}$ es la única topología con $\cc{N}_x=\{N\subset X : \exists V=V_x \in \cc{B}_x\text{ con }V_x\subset N\}$\ \ $\forall x \in X$.
+
+    \begin{proof}
+        Tengo que comprobar que $\cc{N}_x$ cumplen \apuntar{N1},\dots, \apuntar{N5} usando que $\cc{B}_x$ cumplen \apuntar{V1}, \dots, \apuntar{V4}. La demostración se deja propuesta como ejercicio para el lector. % TODO
+    \end{proof}
+\end{prop}
+
+\begin{ejercicio}
+    Sean $(X, \cc{T})$ y $(X, \cc{T}')$ espacios topológicos y $\cc{B}_x$ b.d.e de $x$ en $(X,\cc{T})$\ \ $\forall x \in X$. Si $V$ es entorno de $x$ en $\cc{T}'$\ \ $\forall V \in \cc{B}_x$, entonces $\cc{T} \leq \cc{T}'$.ç
+    \endsquare
+\end{ejercicio}
+
+\section{Puntos adherentes. Clausura}
+
+\begin{definicion}
+    Sean $(X, \cc{T})$ un e.t., $A\subset X$, $x\in X$. Diremos que $x$ es \textbf{adherente} de $A$ si $A\cap N\neq\emptyset$\ \ $\forall N \in \cc{N}_x$, es decir, si cada entorno del punto interseca al conjunto. Esto no implica que $x\in A$. Podemos distinguir dos tipos:
+    \begin{itemize}
+        \item Decimos que un punto adherente $x$ es de \textbf{acumulación} de $A$ si $A\cap(N\setminus\{x\})\neq \emptyset$\ \ $\forall N \in \cc{N}_x$ (Esto no implica que $x\in A$).
+        \item Decimos que un punto adherente $x$ es \textbf{aislado} de $A$ si existe un entorno $N\in \cc{N}_x$ tal que $A\cap N=\{x\}$ (Esto sí implica que $x\in A$).
+    \end{itemize}
+\end{definicion}
