@@ -886,4 +886,148 @@
         \item Decimos que un punto adherente $x$ es de \textbf{acumulación} de $A$ si $A\cap(N\setminus\{x\})\neq \emptyset$\ \ $\forall N \in \cc{N}_x$ (Esto no implica que $x\in A$).
         \item Decimos que un punto adherente $x$ es \textbf{aislado} de $A$ si existe un entorno $N\in \cc{N}_x$ tal que $A\cap N=\{x\}$ (Esto sí implica que $x\in A$).
     \end{itemize}
+    \endsquare
 \end{definicion}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t., $A\subset X, x \in X$. Equivalen:
+    \begin{enumerate}
+        \item[(i)] $x$ es adherente a $A$.
+        \item[(ii)] $A\cap U \neq \emptyset$\ \ $f\forall U \in \cc{T}$ con $x\in U$.
+        \item[(iii)] $\forall B \in \cc{B}$ con $x\in B$, donde $\cc{B}$ es base de $\cc{T}$.
+        \item[(iv)] $A\cap V \neq \emptyset$\ \ $\forall V \in \cc{B}_x$ con $\cc{B}_x$ base de entornos de $x$.  
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{itemize}
+            \item[(iii) $\Rightarrow$ (iv)] Sea $V\in \cc{B}_x\Rightarrow \exists U \in \cc{T}$ con $x\in U \subset V$. Como $\cc{B}$ es base de $\cc{T}$, entonces $\exists B\in \cc{B}$ con $x\in B\subset U \subset V$. Por hipótesis, $B\cap A \neq \emptyset$, por lo que $V\cap A \neq \emptyset$
+            \item[(iv)$\Rightarrow$(i)] Sea $N \in \cc{N}_x$. Como $\cc{B}_x$ es base de entornos de $x$, entonces $\exists V \in \cc{B}_x$ con $V\subset N$. Por hipótesis, $A\cap V\neq \emptyset \Rightarrow A\cap N \neq \emptyset$ por lo que $x$ es adherente a A.
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{observacion}
+    Los puntos de acumulación y los puntos aislados admiten una caracterización análoga. %TODO
+    \endsquare
+\end{observacion}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$, $A\subset X$. Se define la \textbf{adherencia} ( \textbf{clausura} o \textbf{cierre}) de $A$ como $\overline{A}=cl(A)=\{x\in X : x \text{ es adherente de } A\}$.
+    \endsquare
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $\overline{\emptyset} = \emptyset$.
+        \item $A\subset \overline{A}$. Para verlo puedo tomar $x\in A, N  \in \cc{N}_x$, entonces $x\in N\Rightarrow x \in N\cap A \neq \emptyset$ por lo que $x\in \overline{A}$.
+        \item $\overline{X} = X$.
+        \item Sea $(X,d)$ e.m. y tomamos $A\subset X, x \in X$. Entonces $x\in \overline{A}$ si $B(x,\veps)\cap A \neq \emptyset$\ \ $\forall \veps >0$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{ejemplo} En $(\bb{R}, \cc{T}_u)$
+    \begin{itemize}
+        \item $A=(0,1)\Rightarrow \overline{A}=[0,1]$ y todos los puntos son de acumulación.
+        \item $A=(0,1)\cup \{2\}\Rightarrow [0,1]\cup\{2\}$. Además $x$ es de acumulación $\forall x \in [0,1]$ y $x=2$ es aislado (ya que puedo considerar $N=\left(\frac{3}{2}, \frac{5}{2}\right)\in \cc{N}_2$ y $N\cap A =\{2\}$).
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t y $A\subset X$. Entonces:
+    \begin{enumerate}
+        \item[(i)] $\overline{A}\in \cc{C}_{\cc{T}}$.
+        \item[(ii)] Si $C\in \cc{C}_{\cc{T}}$ y $A\subset C$, entonces $\overline{A}\subset C$, es decir, la adherencia es el cerrado más pequeño que contiene a $A$. 
+        \item[(iii)] $A=\overline{A}\sii A \in \cc{C}_{\cc{T}}$ .
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] Supongamos que $\overline{A}=X$. Entonces $\overline{A}\in \cc{C}_{\cc{T}}$. Supongamos ahora el caso $\overline{A}\neq X\Rightarrow X\setminus \overline{A} \neq \emptyset$. Tendré que ver si $X\setminus \overline{A}\in \cc{T}$. Para ello tomo $x \in X\setminus \overline{A}$ y como $x\notin \overline{A}$, entonces $\exists U \in \cc{T}$ con $x\in U$, $U\cap A=\emptyset$, luego $U\cap \overline{A}=\emptyset$. Esto quiere decir que $x \in U\in X\setminus \overline{A}$ y entonces $X\setminus \overline{A} \in \cc{N}_x$\ \ $\forall x \in X\setminus \overline{A}$ por lo que $X\setminus \overline{A}\in \cc{T}$
+            \item[(ii)] (Por reducción al absurdo) Supongamos $\overline{A}\cap (X\setminus C) \neq \emptyset$ y considero $x \in \overline{A}\cap (X\setminus C)$, entonces, como $(X\setminus C) \in \cc{T}$ tengo $x\in (X\setminus C) \in \cc{T}$ y como $x\in \overline{A}$, entonces $(X\setminus C)\cap A \neq \emptyset$, pero como teníamos que $A\subset C$ llegamos a contradicción
+            \item[(iii)]
+            \begin{itemize}
+                \item[$\Rightarrow$)] $A=\overline{A} \overset{(i)}{\Rightarrow} A\in \cc{C}_{\cc{T}}$.
+                \item[$\Leftarrow$)] Tengo que $A\in \cc{C}_{\cc{T}}$ y $A\subset A$ (trivialmente) $\overset{(ii)}{\Rightarrow} \overline{A}\subset A$ y como $A\subset \overline{A}$ (por lo visto anteriormente), se da la doble inclusión y tenemos que $A=\overline{A}$.
+            \end{itemize} 
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}(Ejercicio 23 de la Relación 1)
+    \begin{enumerate}[label=\alph*)]
+        \item $(X, \cc{T}_t)$, $A\subset X$, $\#A \geq 2 \Rightarrow \overline{A} = X$ ya que $X\cap A = A \neq \emptyset$\ \ $\forall x \in X$.
+        \item $(X, \cc{T}_{disc})$, $A\subset X \Rightarrow \overline{A} = A$ ya que $A\in \cc{C}_{\cc{T}}$\ \ $\forall A \subset X$. Además, todos los puntos son aislados ya que $\forall x \in \overline{A}$\ \ $\exists \{x\}\in \cc{N}_x$, $A\cap \{x\} = \{x\}$.
+        \item $(X, \cc{T}_{CF})$, $A\subset X$ infinito, entonces $\overline{A} = A$ (ya que al ser $A$ finito es cerrado). Además, todos los puntos serán aislados, ya que $\forall a \in A $ puedo considerar $U=(X\setminus A)\cup \{a\}\in \cc{N}_a$ y $U\cap A = \{a\}$.
+        \item $(\bb{R}, \cc{T}_S)$ (una base de $\cc{T}_S$ es $\{[x, x+\veps ) : x \in \bb{R}, \veps>0\}$).
+        
+        $A=(0,1] \Rightarrow \overline{A} = [0,1]$. Además $x$ es de acumulación $\forall x \in[0,1)$ y $x=1$ es aislado.
+
+        $A=(0,1) \Rightarrow \overline{A} = [0,1)$ (ya que puedo considerar $N=[1,2)\in \cc{N}_1$ y $N\cap A = \emptyset$ luego $1\notin \overline{A}$).
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(\bb{R}^n , \cc{T}_u)$, $\overline{B(x,r)} = \overline{B}(x,r)$. Esto no es cierto en todo espacio métrico.
+        \item $(\bb{R}, \cc{T}_u)$, $\overline{(a,b)} = [a,b] = \overline{(a,b]} = \overline{[a,b)}$. $\overline{\bb{Q}} = \bb{R} = \overline{\bb{R}\setminus \bb{Q}}$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t., $A\subset X$, $A$ se dice \textbf{denso} si $\overline{A} = X$. El espacio $(X,\cc{T})$ se dice \textbf{separable} si $\exists A \subset X$ denso y numerable.
+    \endsquare
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(\bb{R}^n, \cc{T}_u)$ es separable $\overline{\bb{Q}}=\bb{R}^n$.
+        \item $A\subset X$ denso $\sii A\cap B\neq \emptyset$\ \ $\forall B \in \cc{B}$ con $\cc{B}$ base de $\cc{T}$.
+    \end{itemize}
+\end{ejemplo}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t., $A,B\subset X$. Entonces:
+    \begin{enumerate}
+        \item[(i)] $\overline{\overline{A}} = \overline{A}$.
+        \item[(ii)] Si $A\subset B$, entonces $\overline{A}\subset \overline{B}$.
+        \item[(iii)] $\overline{A\cup B} = \overline{A}\cup \overline{B}$.
+        \item[(iv)] $\overline{A\cap B} \subset \overline{A}\cap \overline{B}$ (la otra inclusión no se verifica en general, por ejemplo, en $(\bb{R}, \cc{T}_u)$, los conjuntos $A=(0,1)$, $B=(1,2)$) 
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] $\overline{A}\in \cc{C}_{\cc{T}}$ luego $\overline{\overline{A}} = \overline{A}$.
+            \item[(ii)] $A\subset B \subset \overline{B}\in \cc{C}_{\cc{T}}\Rightarrow \overline{A}\subset \overline{B}$.
+            \item[(iii)] 
+            \begin{itemize}
+                \item[$\subset$)] $A\cup B \subset \overline{A}\cup \overline{B}\in \cc{C}_{\cc{T}}\Rightarrow \overline{A\cup B}\subset \overline{A}\cup \overline{B}$.
+                \item[$\supset$)]\ \\
+                \vspace{-2cm}
+                
+                \begin{gather*}
+                    \left.
+                    \begin{array}{c}
+                        A\subset A\cup B \subset \overline{A\cup B}\in \cc{C}_{\cc{T}} \Rightarrow \overline{A}\subset\overline{A\cup B} \\
+                        B\subset A\cup B \subset \overline{A\cup B}\in \cc{C}_{\cc{T}} \Rightarrow \overline{B}\subset\overline{A\cup B}
+                    \end{array}\right\} \Rightarrow \overline{A}\cup \overline{B}\subset \overline{A\cup B} \hspace*{5cm}
+                \end{gather*}
+
+            \end{itemize}
+            \item[(iv)]\ \\
+            \vspace{-2cm}
+
+            \begin{gather*}
+                \left.
+                \begin{array}{c}
+                    A\cap B \subset A \subset \overline{A}\in \cc{C}_{\cc{T}}\Rightarrow \overline{A\cap B}\subset \overline{A} \\
+                    A\cap B \subset B \subset \overline{B}\in \cc{C}_{\cc{T}}\Rightarrow \overline{A\cap B}\subset \overline{B}
+                \end{array}\right\} \Rightarrow \overline{A\cap B}\subset \overline{A}\cap \overline{B} \hspace*{5cm}
+            \end{gather*}
+
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
