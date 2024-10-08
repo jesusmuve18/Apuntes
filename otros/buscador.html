@@ -1,50 +1,107 @@
-<head>
-    <title>Google Homepage</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-  </head>
-  
-  <body>
-    <header>
-      <nav>
-        <ul id="nav_bar">
-          <li class="nav-links" id="gmail"><a href="#">Gmail</a></li>
-          <li class="nav-links"><a href="#">Images</a></li>
-          <li id="sign_in"><a href="#">Sign In</a></li>
-        </ul>  
-      </nav>  
-    </header>  
-    
-    <!-- GOOGLE IMG -->  
-    <div class="google">
-      <a href="#" id="google_logo"><img src="http://i1381.photobucket.com/albums/ah215/mzartdesigns/google-logo_zpspkcztsjo.png" alt=" photo google-logo_zpspkcztsjo.png"/></a>
-    </div>
-    
-    <!-- FORM SEARCH -->  
-    <div class="form">  
-      <form>
-        <label for="form-search"></label>
-        <input type="text" id="form-search" placeholder="Search Google or type URL">
-      </form>
-    </div>  
-    
-    <!-- BUTTONS -->
-    <div class= "buttons">  
-      <input type="submit" value="Google Search" id="google_search">
-      <input type="submit" value="I'm Feeling Lucky" id="im_feeling_lucky">
-    </div>
-      
-    <!-- FOOTER -->
-    <footer>
-        <ul class="footer-left">
-          <li><a href="#">Advertising</a></li>
-          <li><a href="#">Business</a></li>
-          <li><a href="#">About</a></li> 
-        </ul>
-        <ul class="footer-right">    
-          <li><a href="#">Privacy</a></li>
-          <li><a href="#">Terms</a></li>
-          <li><a href="#">Settings</a></li>
-        </ul>       
-    </footer>      
-  </body>
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="shortcut icon" type="image/png" href="favicon.ico"/>
+		<title>Nueva pestaña</title>
+		<link rel="icon" href="icons/chrome_icon.svg">
+
+		<!-- <script>
+			// Vaciar la URL sin recargar la página
+			window.onload = function() {
+				window.history.replaceState({}, document.title, "/");
+			};
+		</script> -->
+		
+	</head>
+	<body>
+		<div class="escritorio">
+			<div class="izquierda">
+				<a class="icon" href="https://jesusmuve18.github.io/SF_songs/">
+					<div class="img_frame">
+						<img src="icons/sf_icon.png" alt="sf_songs">
+					</div>
+					<div class="icon_text">
+						SF_songs
+					</div>
+				</a>
+				<a class="icon" href="https://docs.google.com/spreadsheets/d/19C_Xu4IuN7eEp-TqS56sPB708VplRoJHj9Iz_A8efvk/edit?gid=919121201#gid=919121201">
+					<div class="img_frame">
+						<img src="icons/google_sheets_icon.svg" alt="google classroom">
+					</div>
+					<div class="icon_text">
+						Revisión Cantoral	
+					</div>
+				</a>
+				<ul class="icon" href="">
+					<li>
+						<div class="img_frame">
+							<img src="icons/google_sheets_icon.svg" alt="google classroom">
+						</div>
+						<div class="icon_text">
+							Carpeta	
+						</div>
+					</li>
+					<ul>
+						<li><a href="">Submenu1</a></li>
+						<li><a href="">Submenu2</a></li>
+						<li><a href="">Submenu3</a></li>
+						<li><a href="">Submenu4</a></li>
+					</ul>
+				</ul>
+			</div>
+			<div class="derecha">
+				<a class="icon" href="https://classroom.google.com">
+					<div class="img_frame">
+						<img src="icons/classroom_icon.svg" alt="google classroom">
+					</div>
+					<div class="icon_text">
+						Enlace 1
+					</div>
+				</a>
+				<a class="icon" href="https://classroom.google.com">
+					<div class="img_frame">
+						<img src="icons/classroom_icon.svg" alt="google classroom">
+					</div>
+					<div class="icon_text">
+						Enlace 2
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div class="centro">
+			<img class="google_svg" src="icons/google_icon.svg"/>
+
+			<form action="https://www.google.com/search" method="GET">
+				<div class="barra_busqueda">
+					<img class="search_svg" src="icons/search_icon.svg"/>
+					<input type="text" name="q" class="search" placeholder="Buscar en Google o escribir una URL"><br>
+					<img class="micro_svg" src="icons/micro_icon.svg"/> 
+					<img class="camera_svg" src="icons/camera_icon.svg"/>
+				</div>
+			</form>
+
+			<div class="iconos_centro">
+				<a class="icon" href="https://drive.google.com">
+					<div class="img_frame">
+						<img src="icons/drive_icon.svg" alt="google_drive">
+					</div>
+					<div class="icon_text">
+						Google Drive
+					</div>
+				</a>
+			
+				<a class="icon" href="https://classroom.google.com">
+					<div class="img_frame">
+						<img src="icons/classroom_icon.svg" alt="google classroom">
+					</div>
+					<div class="icon_text">
+						Google Classroom
+					</div>
+				</a>
+			</div>
+		</div>
+	</body>
+</html>
