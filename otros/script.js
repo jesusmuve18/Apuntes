@@ -15,6 +15,6 @@ window.onload = function() {
         }
     }
 
-    window.history.replaceState({}, document.title, "/");
+    window.history.replaceState({}, document.title, "");
 };
 
