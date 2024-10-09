@@ -1026,8 +1026,125 @@
                     A\cap B \subset B \subset \overline{B}\in \cc{C}_{\cc{T}}\Rightarrow \overline{A\cap B}\subset \overline{B}
                 \end{array}\right\} \Rightarrow \overline{A\cap B}\subset \overline{A}\cap \overline{B} \hspace*{5cm}
             \end{gather*}
-
         \end{enumerate}
     \end{proof}
 \end{prop}
 
+\section{Interior}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un r.t, $A\subset X$, $x\in X$ se dice \textbf{interior} de $A$ si $A\in \cc{N}_x$. Denotamos $\overset{\circ}{A}=int(A)=\{x\in A : x \text{ es interior de }A\}$ y lo llamamos \textbf{interior} de $A$.
+    \endsquare 
+\end{definicion}
+
+\begin{ejemplo}
+    \begin{itemize}
+        \item $\overset{\circ}{X} = X$, $\overset{\circ}{\emptyset} = \emptyset$.
+        \item $(X, \cc{T}_d)$, $x \in \overset{\circ}{A} \sii \exists \veps >0 $ tal que $B(x, \veps)\subset A$.
+        \item $(\bb{R}, \cc{T}_u)$, $A=(0,1)$, $B=[0,1)\cup \{2\} \Rightarrow \overset{\circ}{A}=A$, $\overset{\circ}{B}=A$
+    \end{itemize}
+\end{ejemplo}
+
+\begin{propiedades}$(X, \cc{T})$ un e.t, $A\subset X$. Entonces:
+    \begin{enumerate}
+        \item[(i)] $\overset{\circ}{A} \subset A$ y $\overset{\circ}{A} \in \cc{T}$.
+        \item[(ii)] Si $U \subset \cc{T}$ y $U \subset A$, entonces $U \subset \overset{\circ}{A}$ ($\overset{\circ}{A}$ es el mayor abierto contenido en $A$).
+        \item[(iii)] $A\in \cc{T} \sii A = \overset{\circ}{A}$. 
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{itemize}
+            \item[(i)] $\overset{\circ}{A}\subset A$ trivial porque $A \in \cc{N}_x$\ \ $\forall x \in A^\circ$. $x\in A^\circ$, tendremos que ver que $A^\circ\in \cc{N}_x$. Sabemos que $A\in \cc{N}_x \Rightarrow \exists U \in \cc{T}$ con $x\in U$, $U\subset A$. TEndremos que ver entonces si $U\subset A^\circ$. Como $U\in \cc{T}$, entonces $U\in \cc{N}_y$\ \ $\forall y \in U$ y como $U\subset A$, entonces $A\in \cc{N}_y$\ \ $\forall y \in U$ luego tenemos que $U \in A^\circ$
+            \item[(ii)] $U \in \cc{T}$, $U\subset A$ y podemos comprobar que $U\subset \interior{A}$ (Igual que antes).
+            \item[(iii)] \begin{itemize}
+                \item[$\Rightarrow$)] $A\in \cc{T}$, $A\subset A$, luego por (ii) $A\subset \interior{A}$ y por (i) $A=\interior{A}$.
+                \item[$\Leftarrow$)] Por (i), $A=\interior{A}\in \cc{T}$. 
+            \end{itemize}  
+        \end{itemize}
+    \end{proof}
+    
+\end{propiedades}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(X, \cc{T}_t)$, $A\subset X$, $A\neq X\Rightarrow \interior{A}=\emptyset$.
+        \item $(X, \cc{T}_{disc})$, $A\subset X\Rightarrow \interior{A}=A$.
+        \item $(X, \cc{T}_{x_0})$, $A\subset X \Rightarrow A^\circ = \left\{\begin{array}{ccc}
+            A & \text{si} & x_0 \in A\\
+            \emptyset & \text{si} & x_0 \notin A
+        \end{array}\right.$
+
+        \item $(\bb{R}^n, \cc{T}_u)$, $(\overline{B}(x,r))^\circ = B(x,r)$\ \ $\forall x \in \bb{R}^n$, $r>0$. Esto no es cierto en cualquier espacio métrico.
+        \item $(\bb{R}, \cc{T}_u)$, $[a,b]^\circ = (a,b) = [a,b)^\circ = (a,b]^\circ = (a,b)^\circ$.
+        \item $(\bb{R}, \cc{T}_u)$, $\bb{Q}^\circ = \emptyset = (\bb{R}\setminus \bb{Q})^\circ$.
+        \item $(\bb{R}, \cc{T}_{Sorgenfrey})$, $[0,1)^\circ = [0,1) = [0,1]^\circ$, $(0,1]^\circ = (0,1)$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop} 
+    Sea $(X, \cc{T})$, $A\subset X$. Se tienen:
+    \begin{enumerate}
+        \item[(i)] $X\setminus \overline{A} = (X\setminus A)^\circ$.
+        \item[(ii)] $X\setminus A^\circ = \overline{X\setminus A}$. 
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] \begin{itemize}
+                \item[$\subset$)] $A\subset \overline{A}\Rightarrow X \setminus \overline{A} \subset X \setminus A\Rightarrow X \setminus \overline{A}\subset (X\setminus A)^\circ$.
+                \item[$\supset$)]  Sabemos que $(X\setminus A)^\circ \subset X\setminus A \Rightarrow A \subset X \setminus (X\setminus A)^\circ$ y como $X \setminus (X\setminus A)^\circ\in \cc{C}_{\cc{T}}\Rightarrow \overline{A}\subset X\setminus (X\setminus A)^\circ \Rightarrow (X\setminus A)^\circ \subset X\setminus \overline{A}$.
+            \end{itemize}
+            \item[(ii)] $A=X\setminus A \Rightarrow X \setminus \overline{(X\setminus A)}= A^\circ \Rightarrow \overline{A\setminus A}=X\setminus A^\circ$.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$, $A\subset X$, se llama \textbf{exterior} de $A$ al conjunto $A^e = ext(A) = (X\setminus A)^\circ = X \setminus \overline{A}$.
+    \endsquare
+\end{definicion}
+
+\section{Frontera}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t., $A\subset X$, $x\in X$. Se dice que $x$ es \textbf{frontera} de $A$ si $x\in \overline{A}\cap \overline{X\setminus A}$. Se denomina \textbf{frontera} de A al conjunto $\partial A = fr(A) =\overline{A}\cap \overline{X\setminus A} = \{x\in X : x\text{ es frontera de }A\}$.
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t, $A\subset X$. Se tienen:
+    \begin{enumerate}
+        \item[(i)] $\partial A = \overline{A}\setminus A^\circ$. Esto se ve sabiendo que $\partial A = \overline{A}\cap (\overline{X\setminus A}) = \overline{A}\setminus (X\setminus A^\circ) = \overline{A}\setminus A^\circ$.
+        \item[(ii)] $\partial A \in \cc{C}_{\cc{T}}$ (ya que es intersección de 2 conjuntos cerrados).
+        \item[(iii)] $\partial A = \partial (X\setminus A)$. Esto es porque $\partial (X\setminus A) = \overline{X\setminus A}\cap \overline{A}$.
+        \item[(iv)] $\overline{A} = A^\circ \sqcup \partial A$ (unión disjunta). Esto es porque $\overline{A} = A^\circ\sqcup (\overline{A}\setminus A^\circ)$.
+        \item[(v)] $A^\circ = A \setminus \partial A$.
+        \item[(vi)] $X 0 A^\circ\sqcup \partial A \sqcup A^e$.
+        \item[(vii)] $A \in \cc{C}_{\cc{T}} \sii \partial A \subset A$. (trivial con definiciones) %TODO
+        \item[(viii)] $A \in \cc{T} \sii \partial A = \emptyset$.
+        \item[(ix)] $A\in (\cc{T}\cap \cc{C}_{\cc{T}}) \sii \partial A = \emptyset$.
+        \item[(x)] $\partial (A\cup B) \subset (\partial A \cup \partial B)$
+    \end{enumerate}
+    \endsquare
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(X, \cc{T}_t)$, $A\subset X \Rightarrow \partial A = \left\{
+        \begin{array}{ccc}
+            \emptyset & \text{ si } & A \in \{X, \emptyset\}\\
+            X & \text{si} & A\notin \{X, \emptyset\}
+        \end{array}
+        \right.$
+        \item $(X, \cc{T}_{disc})$, $A\subset X \Rightarrow \partial A = \emptyset$.
+        \item $(X, \cc{T}_{x_0})$, $A\subset X \Rightarrow \partial A = \left\{
+        \begin{array}{ccc}
+            X\setminus A & \text{ si } & x_0\in A\\
+            A & \text{si} & x_0 \notin A
+        \end{array}
+        \right.$
+        \item $(\bb{R}^n, \cc{T}_u)$, $\partial B(x, r) = \partial \overline{B}(x,r) = S(x,r)$.
+        \item $(\bb{R}, \cc{T}_u)$, $\partial [a,b] = \{a,b\} = \partial (a,b) = \partial [a,b) = \partial (a,b]$, $\partial \bb{Q} = \bb{R} = \partial(\bb{R}\setminus \bb{Q})$.
+    \end{itemize}
+\end{ejemplo}
