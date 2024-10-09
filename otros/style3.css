@@ -1,0 +1,84 @@
+/* Estilo básico del menú */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+}
+
+nav {
+    background-color: #333;
+    padding: 10px;
+}
+
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu > li {
+    margin-right: 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #444;
+    padding: 10px 20px;
+    display: block;
+    border-radius: 5px;
+}
+
+.menu a:hover {
+    background-color: #555;
+}
+
+/* Submenú */
+.submenu {
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    display: none;
+    background-color: #444;
+    border-radius: 5px;
+}
+
+.submenu li {
+    position: relative;
+}
+
+.submenu li a {
+    white-space: nowrap;
+    padding: 10px 20px;
+}
+
+.menu li:hover > .submenu {
+    display: block;
+}
+
+.submenu .submenu {
+    left: 100%;
+    top: 0;
+}
+
+.submenu a:hover {
+    background-color: #555;
+}
+
+/* Iconos en el menú */
+.menu a:before {
+    content: "\1F4C1"; /* Icono de carpeta */
+    margin-right: 10px;
+}
+
+.submenu a:before {
+    content: "\1F4D6"; /* Icono de libro */
+    margin-right: 10px;
+}

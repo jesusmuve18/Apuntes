@@ -19,7 +19,7 @@ body {
 }
 
 .centro {
-	display:block;
+	display:none; /*block*/
 	margin: auto;
 	text-align:center;
 	justify-content: center;
@@ -187,77 +187,6 @@ body {
 	justify-content: right;
 	padding: 10px;
 }
-	
-
-
-/*MENU DESPLEGABLE*/
-
-ul, ol {
-	list-style:none;
-}
-
-/*Primer nivel*/
-ul.icon  li {
-	float:left;
-	position: relative;
-}
-
-ul.icon li a {
-	background-color:rgb(78, 78, 78);
-	border: 0.2px solid #434343;
-	color:#fff;
-	text-decoration:none;
-	text-align: left;
-	padding:10px 12px;
-	padding-left: 40px;
-	padding-right: 40px;
-	display:block;
-	margin: 0;
-	/* z-index: 2000; */
-}
-
-ul.icon li {
-	width: 170px;
-	position: relative;
-	z-index: 1000;
-}
-
-/* ul.icon li ul {
-	display: none;
-	position:absolute;
-	padding: 0;
-	top: 0%;
-	left: 100%;
-} */
-
-ul.icon > li {
-	display: none;
-	position: relative;
-	left: 100%;
-	top: -100%;
-}
-
-ul.icon:hover > li {
-	display: block; /*Mostrar la primera capa*/
-}
-
-ul li a:hover{
-	background-color:#434343;
-	display: block;
-	visibility: visible;
-}
-
-/* ul.icon li:hover > ul{
-	display: block;
-} */
-
-ul:hover > li{
-	display: block;
-}
-
-ul.icon a:hover{
-	display: block;
-}
 
 /* Estilo iconos menú*/
 a > .icon-left{
@@ -277,38 +206,75 @@ a > .icon-right {
     transform: translateY(-50%); /* Ajusta el centrado vertical */
 }
 
-a {
-	z-index: 3000;
-}
-/***/
-ul.icon li ul {
-	/* visibility: hidden; */
-	opacity: 0;
-	transition: opacity 0.3s ease;
-	position: absolute;
-	top: 0%;
-	left: 100%;
+/* DESPLEGABLE */
+
+/* Estilos generales */
+ul, ol {
+	list-style: none;
+	margin: 0;
 	padding: 0;
 }
 
-ul.icon li ul {
-    display: none;
-    position: absolute;
-    padding: 0;
-    top: 0%;
-    left: 100%;
-    transition: visibility 1s, opacity 0.2s linear;
-    opacity: 0;
-    visibility: hidden;
+#carpetas a {
+	background-color:rgb(78, 78, 78);
+	border: 0.2px solid #434343;
+	color:#fff;
+	text-decoration:none;
+	text-align: left;
+	padding:10px 12px;
+	padding-left: 40px;
+	padding-right: 40px;
+	display:block;
+	margin: 0;
+	width: 170px;
 }
 
-ul.icon li:hover > ul {
-    display: block;
-	transition: visibility 1s, opacity 0.2s linear;
-    opacity: 1;
-    visibility: visible;
-}
-
-ul.icon a:hover {
+#carpetas a:hover{
+	background-color:#434343;
 	display: block;
+	visibility: visible;
+}
+
+/* Primer nivel */
+
+div.icon {
+	position: relative;
+}
+
+#carpetas {
+	position: absolute;
+	left: 100%;
+	top: 0%;
+}
+
+#carpetas > li {
+	position: relative;
+	width: 250px;
+}
+
+.icon:hover #carpetas > ul {
+	display: block;
+}
+
+/* Resto de niveles */
+#carpetas ul > li {
+	position: relative;
+	left: 100%;
+	top: -37px;
+}
+
+li ul {
+	display: none;
+}
+
+li:hover ul {
+	display: block;
+}
+
+ul:hover li {
+	display: block;
+}
+
+#carpetas ul {
+	position: absolute;
 }
