@@ -14,5 +14,7 @@ window.onload = function() {
             + bloques[i].innerHTML;
         }
     }
+
+    window.history.replaceState({}, document.title, "/");
 };
 
