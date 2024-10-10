@@ -114,7 +114,7 @@ body {
 	display: block;
 	border-radius: 5px;
 	width: 112px;
-	height: 110px;
+	height: 112px;
 	border: var(--borders);
 	align-items: center;
 	text-decoration: none;
@@ -122,14 +122,12 @@ body {
 	padding: 3px;
 }
 
-a.icon:hover, .icon:hover {
+.icon:hover {
 	background-color: rgba(255, 255, 255, 0.1);
 }
 
 .icon .img_frame {
 	display: block;
-	position: absolute;
-	transform: translate(31px, 0);
 	margin: auto;
 	border: var(--borders);
 	border-radius: 50%;
@@ -138,7 +136,6 @@ a.icon:hover, .icon:hover {
 	width: 50px;
 	align-content: center;
 	background-color: rgb(78, 78, 78);
-	z-index: -1;
 }
 
 .img_frame img{
@@ -146,15 +143,12 @@ a.icon:hover, .icon:hover {
 	max-height: 30px; /* Tamaño máximo de alto */
 	width: auto; /* Mantiene la proporción */
 	height: auto; /* Mantiene la proporción */
-	z-index: -1;
 }
 
 .icon_text {
 	display: block;
 	margin-top: 12px;
 	color: white;
-	transform: translate(0, 65px);
-	z-index: -1;
 }
 
 .escritorio {
@@ -172,20 +166,15 @@ a.icon:hover, .icon:hover {
 	background-color: rgba(0, 0, 0, 0.219);
 	padding: 5px;
 	border-radius: 5px;
-	/* font-weight: 600; */
+	font-weight: 600;
 }
 
 .escritorio .izquierda {
 	width: 50%;
 	left: 0;
 	padding: 10px;
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
+	display: block;
 	flex-wrap: wrap;
-	height: 90%;
-	align-content: flex-start;
-	overflow: hidden;
 }
 
 .escritorio .derecha {
@@ -207,17 +196,13 @@ ul, ol {
 	list-style:none;
 }
 
-.icon {
-	margin: 0;
-}
-
 /*Primer nivel*/
-.icon  li {
+ul.icon  li {
 	float:left;
 	position: relative;
 }
 
-.icon li a {
+ul.icon li a {
 	background-color:rgb(78, 78, 78);
 	border: 0.2px solid #434343;
 	color:#fff;
@@ -228,16 +213,16 @@ ul, ol {
 	padding-right: 40px;
 	display:block;
 	margin: 0;
-	z-index: 2000;
+	/* z-index: 2000; */
 }
 
-.icon li {
+ul.icon li {
 	width: 170px;
 	position: relative;
 	z-index: 1000;
 }
 
-/* .icon li ul {
+/* ul.icon li ul {
 	display: none;
 	position:absolute;
 	padding: 0;
@@ -245,14 +230,14 @@ ul, ol {
 	left: 100%;
 } */
 
-.icon > li {
+ul.icon > li {
 	display: none;
 	position: relative;
 	left: 100%;
-	top: -30%;
+	top: -100%;
 }
 
-.icon:hover > li {
+ul.icon:hover > li {
 	display: block; /*Mostrar la primera capa*/
 }
 
@@ -262,7 +247,7 @@ ul li a:hover{
 	visibility: visible;
 }
 
-/* .icon li:hover > ul{
+/* ul.icon li:hover > ul{
 	display: block;
 } */
 
@@ -270,14 +255,13 @@ ul:hover > li{
 	display: block;
 }
 
-.icon a:hover{
+ul.icon a:hover{
 	display: block;
 }
 
 /* Estilo iconos menú*/
 a > .icon-left{
-	max-width: 20px;
-	max-height: 20px;
+	width: 20px;
 	padding-right: 10px;
 	position: absolute;
     left: 10px; /* Se pega al borde derecho del contenedor <a> */
@@ -294,10 +278,10 @@ a > .icon-right {
 }
 
 a {
-	z-index: 500;
+	z-index: 3000;
 }
 /***/
-.icon li ul {
+ul.icon li ul {
 	/* visibility: hidden; */
 	opacity: 0;
 	transition: opacity 0.3s ease;
@@ -307,7 +291,7 @@ a {
 	padding: 0;
 }
 
-.icon li ul {
+ul.icon li ul {
     display: none;
     position: absolute;
     padding: 0;
@@ -318,33 +302,13 @@ a {
     visibility: hidden;
 }
 
-.icon li:hover > ul {
+ul.icon li:hover > ul {
     display: block;
 	transition: visibility 1s, opacity 0.2s linear;
     opacity: 1;
     visibility: visible;
 }
 
-.icon a:hover {
+ul.icon a:hover {
 	display: block;
-}
-
-.endcolumn {
-	height: 100%;
-	position: relative;
-	width: 112px;
-	background-color: white;
-}
-
-.icon:hover{
-	cursor: pointer;
-}
-
-div.icon:hover {
-	background-color: #00000000;
-	cursor: default;
-}
-
-div.icon {
-	visibility: hidden;
 }

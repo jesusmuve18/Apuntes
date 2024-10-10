@@ -19,6 +19,9 @@ using namespace scd ; // permite usar 'Semaphore' en lugar de 'scd::Semaphore'
 // constantes y variables globales (compartidas)
 const int num_iter = 10000 ;   // numero de iteraciones
 int       valor_compartido ;   // valor para escribir o leer
+
+
+
 // semáforos
 Semaphore puede_escribir = 1 , // 1 si no hay valor pendiente de leer
           puede_leer     = 0 ; // 1 si hay valor pendiente de leer

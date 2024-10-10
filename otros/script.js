@@ -4,17 +4,48 @@ window.onload = function() {
     for(let i=0; i<bloques.length; i++){
 
         if(bloques[i].getAttribute("href")==""){
-            bloques[i].innerHTML = 
-            "<img class=\"icon-left\" src=\"icons/folder_icon.svg\" alt=\"Carpeta\">"
-            + bloques[i].innerHTML +
-            "<img class=\"icon-right\" src=\"icons/arrow_icon.svg\" alt=\"flecha\"></img>";
+
+          var icon = bloques[i].getAttribute('image');
+
+          if(!icon) {
+            icon="icons/folder_icon.svg";
+          }
+
+          bloques[i].innerHTML = 
+          "<img class=\"icon-left\" src=\""+icon+"\" alt=\"Carpeta\">"
+          + bloques[i].innerHTML +
+          "<img class=\"icon-right\" src=\"icons/arrow_icon.svg\" alt=\"flecha\"></img>";
+          
+            
         } else {
-            bloques[i].innerHTML = 
-            "<img class=\"icon-left\" src=\"icons/link_icon.svg\" alt=\"Enlace\">"
-            + bloques[i].innerHTML;
+
+          var icon = bloques[i].getAttribute('image');
+
+          if(!icon) {
+            icon="icons/link_icon.svg";
+          }
+          bloques[i].innerHTML = 
+          "<img class=\"icon-left\" src=\""+icon+"\" alt=\"Enlace\">"
+          + bloques[i].innerHTML;
+          
         }
     }
-
-    window.history.replaceState({}, document.title, "");
 };
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Selecciona todos los elementos <ul> con la clase "icon"
+    const iconLists = document.querySelectorAll('ul.icon');
+
+    // Recorre cada uno de los elementos y añade un eventListener
+    iconLists.forEach(function(icon) {
+      icon.addEventListener('click', function(event) {
+        // Evitar que los enlaces internos (<a>) dentro del <ul> activen el evento
+        const url = this.getAttribute('href');
+        if (url) {
+        window.location.href = url;
+        }
+        
+      });
+    });
+  });
 

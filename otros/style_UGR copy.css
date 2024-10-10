@@ -122,7 +122,7 @@ body {
 	padding: 3px;
 }
 
-a.icon:hover, .icon:hover {
+a.icon:hover, ul.icon:hover {
 	background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -172,7 +172,7 @@ a.icon:hover, .icon:hover {
 	background-color: rgba(0, 0, 0, 0.219);
 	padding: 5px;
 	border-radius: 5px;
-	/* font-weight: 600; */
+	font-weight: 600;
 }
 
 .escritorio .izquierda {
@@ -207,17 +207,17 @@ ul, ol {
 	list-style:none;
 }
 
-.icon {
+ul.icon {
 	margin: 0;
 }
 
 /*Primer nivel*/
-.icon  li {
+ul.icon  li {
 	float:left;
 	position: relative;
 }
 
-.icon li a {
+ul.icon li a {
 	background-color:rgb(78, 78, 78);
 	border: 0.2px solid #434343;
 	color:#fff;
@@ -231,13 +231,13 @@ ul, ol {
 	z-index: 2000;
 }
 
-.icon li {
+ul.icon li {
 	width: 170px;
 	position: relative;
 	z-index: 1000;
 }
 
-/* .icon li ul {
+/* ul.icon li ul {
 	display: none;
 	position:absolute;
 	padding: 0;
@@ -245,14 +245,14 @@ ul, ol {
 	left: 100%;
 } */
 
-.icon > li {
+ul.icon > li {
 	display: none;
 	position: relative;
 	left: 100%;
 	top: -30%;
 }
 
-.icon:hover > li {
+ul.icon:hover > li {
 	display: block; /*Mostrar la primera capa*/
 }
 
@@ -262,7 +262,7 @@ ul li a:hover{
 	visibility: visible;
 }
 
-/* .icon li:hover > ul{
+/* ul.icon li:hover > ul{
 	display: block;
 } */
 
@@ -270,14 +270,13 @@ ul:hover > li{
 	display: block;
 }
 
-.icon a:hover{
+ul.icon a:hover{
 	display: block;
 }
 
 /* Estilo iconos menú*/
 a > .icon-left{
-	max-width: 20px;
-	max-height: 20px;
+	width: 20px;
 	padding-right: 10px;
 	position: absolute;
     left: 10px; /* Se pega al borde derecho del contenedor <a> */
@@ -297,7 +296,7 @@ a {
 	z-index: 500;
 }
 /***/
-.icon li ul {
+ul.icon li ul {
 	/* visibility: hidden; */
 	opacity: 0;
 	transition: opacity 0.3s ease;
@@ -307,7 +306,7 @@ a {
 	padding: 0;
 }
 
-.icon li ul {
+ul.icon li ul {
     display: none;
     position: absolute;
     padding: 0;
@@ -318,14 +317,14 @@ a {
     visibility: hidden;
 }
 
-.icon li:hover > ul {
+ul.icon li:hover > ul {
     display: block;
 	transition: visibility 1s, opacity 0.2s linear;
     opacity: 1;
     visibility: visible;
 }
 
-.icon a:hover {
+ul.icon a:hover {
 	display: block;
 }
 
@@ -334,17 +333,4 @@ a {
 	position: relative;
 	width: 112px;
 	background-color: white;
-}
-
-.icon:hover{
-	cursor: pointer;
-}
-
-div.icon:hover {
-	background-color: #00000000;
-	cursor: default;
-}
-
-div.icon {
-	visibility: hidden;
 }
