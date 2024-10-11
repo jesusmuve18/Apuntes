@@ -599,7 +599,7 @@
     \end{proof}
 \end{teo}
 
-\begin{teo}
+\begin{teo}\label{teorema1_7}
     Sean $X\neq \emptyset$ un conjunto y $\cc{B}\subset \cc{P}(X)$ cumpliendo:
     \begin{enumerate}
         \item[\apuntar{B1}] $X=\bigcup\limits_{B\in \cc{B}}B$
@@ -646,7 +646,7 @@
     \begin{proof}\
         \begin{enumerate}
             \item[(i)$\Rightarrow$(ii)] Sea $B \in \cc{B}_1$. Por (i), $\cc{B}_1 \subset \cc{T}_1 \subset \cc{T}_2$ y como $\cc{B}_2$ es base de $\cc{T}_2$, aplicando la definición de base tengo que $\exists B_2 \in \cc{B}_2$ con $x\in B_2 \subset B_1$.
-            \item[(ii)$\Rightarrow (i)$] Por (ii) tenemos que $\cc{B}_1\subset \cc{T}_2\Rightarrow \cc{T}(\cc{B}_1)\leq \cc{T}_2$ (por el Teorema 1.7) %TODO
+            \item[(ii)$\Rightarrow (i)$] Por (ii) tenemos que $\cc{B}_1\subset \cc{T}_2\Rightarrow \cc{T}(\cc{B}_1)\leq \cc{T}_2$ (por el Teorema \ref{teorema1_7})
              y entonces $\cc{T}_1=\cc{T}(\cc{B}_1)\leq \cc{T}_2$.
         \end{enumerate}
     \end{proof}
@@ -733,7 +733,7 @@
     \endsquare
 \end{ejemplo}
 
-\begin{prop}
+\begin{prop}\label{proposicion1_11}
     Sea $(X,\cc{T})$ e.t., $x\in X$. Entonces:
     \begin{enumerate}
         \item[\objetivo{N1}] $\cc{N}_x \neq \emptyset$\ \ $\forall x \in X$.
@@ -816,7 +816,7 @@
     \begin{proof}\ 
         \begin{itemize}
             \item[(i) $\Rightarrow$ (ii)] Como $U\in \cc{T}$, entonces $U\in \cc{N}_x$\ \ $\forall x \in U$. Por tanto, $\forall x \in U,$\ \ $\exists V_x\in \cc{B}_x$ con $V_x\subset U$.
-            \item[(ii) $\Rightarrow$ (i)] Por la hipótesis tenemos que $U\in \cc{N}_x$\ \ $\forall x \in U$ por lo que $U\in \cc{T}$ (por la Proposición 1.11) %TODO 
+            \item[(ii) $\Rightarrow$ (i)] Por la hipótesis tenemos que $U\in \cc{N}_x$\ \ $\forall x \in U$ por lo que $U\in \cc{T}$ (por la Proposición \ref{proposicion1_11})
         \end{itemize}
     \end{proof}
 \end{prop}
@@ -1033,28 +1033,28 @@
 \section{Interior}
 
 \begin{definicion}
-    Sea $(X, \cc{T})$ un r.t, $A\subset X$, $x\in X$ se dice \textbf{interior} de $A$ si $A\in \cc{N}_x$. Denotamos $\overset{\circ}{A}=int(A)=\{x\in A : x \text{ es interior de }A\}$ y lo llamamos \textbf{interior} de $A$.
+    Sea $(X, \cc{T})$ un r.t, $A\subset X$, $x\in X$ se dice \textbf{interior} de $A$ si $A\in \cc{N}_x$. Denotamos $A^\circ=int(A)=\{x\in A : x \text{ es interior de }A\}$ y lo llamamos \textbf{interior} de $A$.
     \endsquare 
 \end{definicion}
 
-\begin{ejemplo}
+\begin{ejemplo}\
     \begin{itemize}
-        \item $\overset{\circ}{X} = X$, $\overset{\circ}{\emptyset} = \emptyset$.
-        \item $(X, \cc{T}_d)$, $x \in \overset{\circ}{A} \sii \exists \veps >0 $ tal que $B(x, \veps)\subset A$.
-        \item $(\bb{R}, \cc{T}_u)$, $A=(0,1)$, $B=[0,1)\cup \{2\} \Rightarrow \overset{\circ}{A}=A$, $\overset{\circ}{B}=A$
+        \item $X^\circ = X$, $\emptyset^\circ = \emptyset$.
+        \item $(X, \cc{T}_d)$, $x \in A^\circ \sii \exists \veps >0 $ tal que $B(x, \veps)\subset A$.
+        \item $(\bb{R}, \cc{T}_u)$, $A=(0,1)$, $B=[0,1)\cup \{2\} \Rightarrow A^\circ=A$, $B^\circ=A$
     \end{itemize}
 \end{ejemplo}
 
 \begin{propiedades}$(X, \cc{T})$ un e.t, $A\subset X$. Entonces:
     \begin{enumerate}
-        \item[(i)] $\overset{\circ}{A} \subset A$ y $\overset{\circ}{A} \in \cc{T}$.
-        \item[(ii)] Si $U \subset \cc{T}$ y $U \subset A$, entonces $U \subset \overset{\circ}{A}$ ($\overset{\circ}{A}$ es el mayor abierto contenido en $A$).
-        \item[(iii)] $A\in \cc{T} \sii A = \overset{\circ}{A}$. 
+        \item[(i)] $A^\circ \subset A$ y $A^\circ \in \cc{T}$.
+        \item[(ii)] Si $U \subset \cc{T}$ y $U \subset A$, entonces $U \subset A^\circ$ ($A^\circ$ es el mayor abierto contenido en $A$).
+        \item[(iii)] $A\in \cc{T} \sii A = A^\circ$. 
     \end{enumerate}
 
     \begin{proof}\
         \begin{itemize}
-            \item[(i)] $\overset{\circ}{A}\subset A$ trivial porque $A \in \cc{N}_x$\ \ $\forall x \in A^\circ$. $x\in A^\circ$, tendremos que ver que $A^\circ\in \cc{N}_x$. Sabemos que $A\in \cc{N}_x \Rightarrow \exists U \in \cc{T}$ con $x\in U$, $U\subset A$. TEndremos que ver entonces si $U\subset A^\circ$. Como $U\in \cc{T}$, entonces $U\in \cc{N}_y$\ \ $\forall y \in U$ y como $U\subset A$, entonces $A\in \cc{N}_y$\ \ $\forall y \in U$ luego tenemos que $U \in A^\circ$
+            \item[(i)] $A^\circ\subset A$ trivial porque $A \in \cc{N}_x$\ \ $\forall x \in A^\circ$. $x\in A^\circ$, tendremos que ver que $A^\circ\in \cc{N}_x$. Sabemos que $A\in \cc{N}_x \Rightarrow \exists U \in \cc{T}$ con $x\in U$, $U\subset A$. TEndremos que ver entonces si $U\subset A^\circ$. Como $U\in \cc{T}$, entonces $U\in \cc{N}_y$\ \ $\forall y \in U$ y como $U\subset A$, entonces $A\in \cc{N}_y$\ \ $\forall y \in U$ luego tenemos que $U \in A^\circ$
             \item[(ii)] $U \in \cc{T}$, $U\subset A$ y podemos comprobar que $U\subset \interior{A}$ (Igual que antes).
             \item[(iii)] \begin{itemize}
                 \item[$\Rightarrow$)] $A\in \cc{T}$, $A\subset A$, luego por (ii) $A\subset \interior{A}$ y por (i) $A=\interior{A}$.
@@ -1147,6 +1147,7 @@
         \item $(\bb{R}^n, \cc{T}_u)$, $\partial B(x, r) = \partial \overline{B}(x,r) = S(x,r)$.
         \item $(\bb{R}, \cc{T}_u)$, $\partial [a,b] = \{a,b\} = \partial (a,b) = \partial [a,b) = \partial (a,b]$, $\partial \bb{Q} = \bb{R} = \partial(\bb{R}\setminus \bb{Q})$.
     \end{itemize}
+    \endsquare
 \end{ejemplo}
 
 \section{Topología inducida. Subespacio topológico}
@@ -1264,10 +1265,56 @@
 \begin{definicion}
     Un e.t. $(X, \cc{T})$ se dice:
     \begin{itemize}
-        \item \textbf{T1} (o de \textbf{Fréchet}, o que satisface el \textbf{primer axioma de separación}) si $\forall x,y \in X$ con $x\neq y$, $\exists V \in \cc{N}_x$, $W\in \cc{N}_y$ con $y\notin V$, $x\notin W$. %TODO dibujo
+        \item \textbf{T1} (o de \textbf{Fréchet}, o que satisface el \textbf{primer axioma de separación}) si $\forall x,y \in X$ con $x\neq y$, $\exists V \in \cc{N}_x$, $W\in \cc{N}_y$ con $y\notin V$, $x\notin W$.
+        
+        \begin{center}
+            \begin{tikzpicture}
+                \centering
+    
+                \def\radius{1}
+                \def\incolor{gray!20}
+    
+                % Desactiva los caracteres conflictivos
+                \shorthandoff{>} % Para poner puntas de flecha
+    
+                % Background
+                \fill[fill=\incolor] (-1,0) circle (\radius);
+                \fill[fill=\incolor] (0.5,0) circle (\radius);
+    
+                \draw[dashed, thick] (-1,0) circle (\radius);
+                \filldraw (-1,0) circle (1.5pt)  node[below] {$x$};
+                \draw[dashed, thick] (0.5,0) circle (\radius);
+                \filldraw (0.5,0) circle (1.5pt)  node[below] {$y$};
+    
+            \end{tikzpicture}
+        \end{center}
+
         Esta definición se podría hacer análogamente con abiertos, abiertos básicos o entornos básicos.
 
-        \item \textbf{T2} (o de \textbf{Haussforff}, o que satisface el \textbf{segundo axioma de separación}) si $\forall x,y \in X$ con $x\neq y$, $\exists V \in \cc{N}_x$, $W\in \cc{N}_y$ tal que $V\cap W = \emptyset$. %TODO dibujo
+        \item \textbf{T2} (o de \textbf{Haussforff}, o que satisface el \textbf{segundo axioma de separación}) si $\forall x,y \in X$ con $x\neq y$, $\exists V \in \cc{N}_x$, $W\in \cc{N}_y$ tal que $V\cap W = \emptyset$.
+        
+        \begin{center}
+            \begin{tikzpicture}
+                \centering
+    
+                \def\radius{1}
+                \def\incolor{gray!20}
+    
+                % Desactiva los caracteres conflictivos
+                \shorthandoff{>} % Para poner puntas de flecha
+    
+                % Background
+                \fill[fill=\incolor] (-1,0) circle (\radius);
+                \fill[fill=\incolor] (1.5,0) circle (\radius);
+    
+                \draw[dashed, thick] (-1,0) circle (\radius);
+                \filldraw (-1,0) circle (1.5pt)  node[below] {$x$};
+                \draw[dashed, thick] (1.5,0) circle (\radius);
+                \filldraw (1.5,0) circle (1.5pt)  node[below] {$y$};
+    
+            \end{tikzpicture}
+        \end{center}
+
         De nuevo esta definición se podría hacer con abiertos, abiertos básicos o entornos básicos.
     \end{itemize}
     \endsquare
@@ -1275,19 +1322,19 @@
 
 \begin{observacion}\
     \begin{itemize}
-        \item T2 $\Rightarrow$ T1.
+        \item T2 $\Rightarrow$ T1. Esto es claro ya que si un e.t $(X, \cc{T})$ es T2, entonces para $x,y\in X$, $x\neq y$ podemos encontrar $V \in \cc{N}_x$, $W\in \cc{N}_y$ tal que $V\cap W = \emptyset$. En particular tenemos que $y\notin V$ y $x\notin W$ y por tanto es T1. El recíproco no es cierto (T2 es una propiedad más restrictiva que T1).
     \end{itemize}
     \endsquare
 \end{observacion}
 
 \begin{prop}
     T1 y T2 son propiedades hereditarias.
-    \begin{proof}
-        Ambas demostraciones son análogas por lo que haremos solo la demostración para T2. 
-
-        Supongamos $(X, \cc{T})$ un e.t. T2 y $\emptyset \neq A \subset X$. Tendré que ver que $(S, \cc{T}_A)$ es T2. Sean $a,a'\in A$ con $a\neq a'$. Como $(X, \cc{T})$ es T2 tenemos que $\exists V \in \cc{N}_a$, $W\in \cc{N}_{a'}$, con $V\cap W = \emptyset$. Defino $V'=V\cap A \in \cc{N}_a^A$ y $W'=W\cap A \in \cc{N}_{a'}^A$ y tengo que $V'\cap W' = (V\cap W)\cap A = \emptyset$
-
-        La demostración para T1 se deja como ejercicio (a pesar de ser análoga).
+    \begin{proof}\
+        \begin{enumerate}
+            \item[T1)] Supongamos $(X, \cc{T})$ un e.t. T1 y $\emptyset \neq A \subset X$. Tendré que ver que $(X, \cc{T}_A)$ es T1. Sean $a,a'\in A$ con $a\neq a'$. Como $(X, \cc{T})$ es T1 tenemos que $\exists V \in \cc{N}_a$, $W\in \cc{N}_{a'}$, con $a \notin W$ y $a' \notin V$. Defino $V'=V\cap A \in \cc{N}_a^A$ y $W'=W\cap A \in \cc{N}_{a'}^A$ y tengo que $a \notin W'$ y $a' \notin V'$ por lo que $(X, \cc{T}_A)$ es T1.
+            
+            \item[T2)]  Supongamos $(X, \cc{T})$ un e.t. T2 y $\emptyset \neq A \subset X$. Tendré que ver que $(X, \cc{T}_A)$ es T2. Sean $a,a'\in A$ con $a\neq a'$. Como $(X, \cc{T})$ es T2 tenemos que $\exists V \in \cc{N}_a$, $W\in \cc{N}_{a'}$, con $V\cap W = \emptyset$. Defino $V'=V\cap A \in \cc{N}_a^A$ y $W'=W\cap A \in \cc{N}_{a'}^A$ y tengo que $V'\cap W' = (V\cap W)\cap A = \emptyset$ y tenemos lo buscado.
+        \end{enumerate}
     \end{proof}
 \end{prop}
 
@@ -1295,7 +1342,7 @@
     \begin{itemize}
         \item $(X, \cc{T}_t)$, con $\#X>2$, no es T1 (ya que el único entorno de cualquier punto es $X$). (por ser no es ni T0, aunque este concepto no se va a trabajar en esta asignatura).
         \item $(X, \cc{T}_{disc})$ es T2 (y por tanto T1). Para verlo puedo tomar $x\neq y$ y tengo $\{x\}\in \cc{N}_x$, $\{y\}\in \cc{N}_y$ y $\{x\}\cap \{y\}= \emptyset$.
-        \item $(X, \cc{T})$ es T2 (ya se vio anteriormente) y por tanto T1.
+        \item $(X, \cc{T}_u)$ es T2 (ya se vio anteriormente) y por tanto T1.
         \item Si $X$ es un conjunto infinito, entonces $(X, \cc{T}_{CF})$ es T1, pero no T2. Comprobémoslo:
         \begin{enumerate}
             \item[T1)] $x\neq y$, $x,y\in X$. Cojo $V=X \setminus \{y\}\in \cc{T}_{CF}$ y además $V\in \cc{N}_x$ con $y\notin V$. Repetimos el proceso para $x$ y llegamos a lo mismo.
