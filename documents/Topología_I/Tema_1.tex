@@ -1148,3 +1148,81 @@
         \item $(\bb{R}, \cc{T}_u)$, $\partial [a,b] = \{a,b\} = \partial (a,b) = \partial [a,b) = \partial (a,b]$, $\partial \bb{Q} = \bb{R} = \partial(\bb{R}\setminus \bb{Q})$.
     \end{itemize}
 \end{ejemplo}
+
+\section{Topología inducida. Subespacio topológico}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t. y sea $A\subset X$, $A\neq \emptyset$ un conjunto. Entonces el conjunto
+    \begin{gather*}
+        \cc{T}_A = \cc{T}_{|A}=\{U\cap A : U \in \cc{T}\}\subset \cc{P}(A)
+    \end{gather*}
+    es una topología en $A$ por lo que $(A, \cc{T}_A)$ es un e.t.
+
+    \begin{proof}
+        Para demostrarlo tendremos que ver que $\cc{T}_A$ es una topología, es decir que verifica las propiedades:
+        \begin{enumerate}
+            \item[\apuntar{A1}] Sabemos que $\emptyset\in \cc{T}$ y como $\emptyset\cap A = \emptyset$ entonces $\emptyset \in \cc{T}_A$. Análogamente, $X\in \cc{T}$ y $X\cap A=A$ por lo que $A\in \cc{T}_A$.
+            \item[\apuntar{A2}] Sea $\{O_i\}_{i\in I}\subset \cc{T}_A$. Tendremos que comprobar que $\bigcup\limits_{i\in I}O_i \in \cc{T}_A$. Para ello sabemos que para cada $i\in I$ se verifica que $O_i = U_i\cap A$ donde $U_i \in \cc{T}$. Tenemos entonces 
+            \begin{gather*}
+                \bigcup\limits_{i\in I}O_i = \bigcup\limits_{i\in I} (U_i \cap A) = (\overbrace{\bigcup\limits_{i\in I} U_i}^{\in \cc{T}}) \cap A \in \cc{T}_A 
+            \end{gather*}
+            \item[\apuntar{A3}] Sean $O_1, O_2 \in \cc{T}_A$, tendremos que ver que $O_1 \cap O_2 \in \cc{T}_A$. Para ello sabemos que 
+            \begin{gather*}
+                O_1 = U_1 \cap A \hspace{2cm} O_2 = U_2 \cap A \hspace{2cm} U_1, U_2 \in \cc{T}
+            \end{gather*} 
+            Por tanto, $O_1 \cap O_2 = (U_1 \cap A) \cap (U_2 \cap A) = (U_1 \cap U_2)\in A \in \cc{T}_A$ ya que $(U_1\cap U_2)\in \cc{T}$.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{definicion}
+    Diremos que $\cc{T}_A$ es la \textbf{topología inducida} por $\cc{T}$ sobre $A$, y que $(A, \cc{T}_A)$ es un \textbf{subespacio topológico} de $(X, \cc{T})$. De un conjunto $O\in \cc{T}_A$ diremos que es \textbf{abierto} en $A$.
+    \endsquare
+\end{definicion}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item Sea $O\subset A$, entonces $O \in \cc{T}A \sii \exists U \in \cc{T}$ con $O=U\cap A$.
+        \item Sea $O \subset A$, entonces $O\in \cc{T} \Rightarrow O \in \cc{T}_A$ (ya que $O=O\cap A$). El recíproco no es cierto ya que no todo abierto de un subespacio tiene que ser abierto en el espacio. Por ejemplo, en $(\bb{R}, \cc{T}_u)$ consideramos $A=[0,3)$, entonces $[0,1)\in \cc{T}_A$ pero $[0,1)\notin \cc{T}_u$ (podemos considerar $[0,1) = (-1,1)\cap A$).
+    \end{itemize}
+    \endsquare
+\end{observacion}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t., $\emptyset \neq A \subset X$, $a\in A$. Se tienen:
+    \begin{enumerate}
+        \item[(i)] $C\subset A$ es cerrado en $A$ ($C\in \cc{C}_{\cc{T}_A}$) $\sii \exists C' \in \cc{C}_{\cc{T}}$ con $C=C'\cap A$.
+        \item[(ii)]  $N\subset A$ es entorno de $a$ en $A$ ($N \in \cc{N}_a^{\cc{T}_A}$) $\sii \exists N' \in \cc{N}_a^{\cc{T}}$ con $N=N'\cap A$.
+        \item[(iii)] Si $\cc{B}$ es base de $\cc{T}$, entonces $\cc{B}_A = \{B\cap A : B \in \cc{B}\}$ es base de $\cc{T}_A$.
+        \item[(iv)] Si $\cc{B}_a$ es b.d.e. de $a$ en $(X, \cc{T})$, entonces $(\cc{B}_A)_a = \{V\cap A : V\in \cc{B}_a\}$ es b.d.e. de $a$ en $(A, \cc{T}_A)$.
+        \item[(v)] $E\subset A \Rightarrow \overline{E}^A = \overline{E}\cap A$.
+        \item[(vi)] $E\subset A \Rightarrow E^{\circ A} \supset E^\circ \cap A$. La otra inclusión no es cierta en general. Por ejemplo, en $(\bb{R}, \cc{T}_u)$ consideramos $A=[0,2)$ y $E=[0,1)$. Entonces tenemos que $E^{\circ A} = E$ pero $E^\circ \cap A = (0,1)$.
+        \item[(vii)] $E\subset A \Rightarrow fr_A(E)\subset fr(E)\cap A$.  
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] 
+            \begin{itemize}
+                \item[$\Rightarrow$)] $C\subset A$ cerrado en $A \Rightarrow A\setminus C \in \cc{T}_A \Rightarrow \exists U\in \cc{T}$ con $A\setminus C = U\cap A \Rightarrow C = A \setminus (A \cap A) = A\cap (X\setminus U)$, donde $X \setminus U$ es cerrado por lo que puedo tomar $C'=X\setminus U\in \cc{C}_{\cc{T}}$ y se tiene lo buscado.
+                \item[$\Leftarrow$)] Sea $C' \in \cc{C}_{\cc{T}}$. Tendremos que ver que $C=C'\cap A$ es cerrado en $A$, lo cual equivale a ver que $A\setminus C\in \cc{T}_A$. Tenemos que $A\setminus C = A\setminus (C'\cap A) = A \cap (X\setminus C')\in \cc{T}_A$, ya que $X\setminus C'$ es abierto en $\cc{T}$.
+            \end{itemize}
+            \item[(ii)]
+            \begin{itemize}
+                \item[$\Rightarrow$)] Sea $N$ un entorno de $a$ en $A$. Entonces existe un $U\in \cc{T}_A$ con $a\in U\subset N$ lo cual implica que $\exists U'\in \cc{T}$ con $U=U'\cap A$. Tomamos $N'=U'\cup N \in \cc{N}_a$. Tenemos que $N'\cap A = (U'\cup N)\cap A = (U'\cap A) \cup (N\cap A) = U$.
+            \end{itemize}
+            \item[(iii)] Para ver que se verifica tendremos que probar la doble inclusión: 
+            \begin{itemize}
+                \item[$\supset$)] $\cc{B}_A = \{B\cap A : B\in \cc{B}\}\subset \cc{T}_A$ y se verifica.
+                \item[$\subset$)] Sea $O\in \cc{T}A$, $x\in O$. Entonces $\exists U \in \cc{T}$ con $x\in O = U\cap A$. Como $\cc{B}$ es base de $\cc{T}$, $\exists B \in \cc{B}$ tal que $x\in B \subset U \Rightarrow x \in (B\cap A)\subset (U\cap A)=O$.
+            \end{itemize}
+            \item[(iv)] Análogo a (iii). %TODO
+            \item[(v)] De nuevo tendremos que ver la doble inclusión:
+            \begin{itemize}
+                \item[$\subset$)] $E\subset (\overline{E}\cap A) \in \cc{C}_{\cc{T}_A} \Rightarrow \overline{E}^A \subset (\overline{E}\cap A)$, ya que $\overline{E}\in \cc{C}_{\cc{T}}$.
+                \item[$\supset$)] Sea $a \in \overline{E}\cap A$ y $N$ un entorno de $a$ en $A$. Tendremos que ver si $N\cap N = \emptyset$. Para ello sabemos que $\exists N \in \cc{N}_a$ con $N=N'\cap A$ por lo que $N\cap E = N'\cap A \cap E = N' \cap E \neq \emptyset\Rightarrow a \in \overline{E}^A$.
+            \end{itemize} 
+            %TODO (vi) Y (vii)
+        \end{enumerate}
+    \end{proof}
+\end{prop}
