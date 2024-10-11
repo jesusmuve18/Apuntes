@@ -1226,3 +1226,96 @@
         \end{enumerate}
     \end{proof}
 \end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(X, \cc{T}_t)$, $\emptyset \neq A \subset X$, $\cc{T}_{t_A} = \{\emptyset, A\} = \cc{T}_t$.
+        \item $(X, \cc{T}_{disc})$, $A\subset X$, $\cc{T}_{disc_A}=\cc{T}_{disc}$.
+        \item $(\bb{R}, \cc{T}_u)$, $\cc{T}_{u_\bb{Z}} = \cc{T}_{disc}$, $\{p\} = (p-\frac{1}{2}, p+\frac{1}{2})\cap \bb{Z}$.
+        $\cc{T}_{u_\bb{N}} = \cc{T}_{disc}$.
+        \item Ejercicio $\emptyset \neq A' \subset A \subset X$, $(\cc{T}_A)_{A'} = \cc{T}_{A'}$.
+        \item $(X, \cc{T}_d)$, $\emptyset\neq A \subset X \Rightarrow d_A: A\times A \to [0,+\infty)$ tal que $(x,y)\mapsto d_A(x,y) = d(x,y)$.
+        Entonces $d_A$ es una distancia en $A$ y $(A, \cc{T}_{d_A})$ es un espacio topológico y $\cc{T}_{d_A} = (\cc{T}_d)_A$. Todo subespacio de un e.t. metrizable es metrizable.
+        \item $(X, \cc{T}_d)$, $\emptyset \neq A \subset X$ finito $\Rightarrow (\cc{T}_d)_A = \cc{T}_{disc}$ (ya que $\exists \veps >0 : d(x,y)>\veps$\ \ $\forall x \neq y$ y tomando $B(x, \veps)\cap A =\{x\}$ se verifica).
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t., $A\subset X$ con $A\neq \emptyset$, decimos que $A$ es \textbf{discreto} si $\cc{T}_A$ es la topología discreta en $A$.
+    \endsquare
+\end{definicion}
+
+\begin{definicion}
+    Una propiedad topológica se dice \textbf{hereditaria} si al cumplirla un e.t $(X, \cc{T})$ también la cumplen todos su subespacios, es decir, si $(X, \cc{T})$ cumple $P \Rightarrow (A, \cc{T}_A)$ cumple $P$\ \ $\forall A \subset X, A\neq \emptyset$.
+    \endsquare
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item "Ser metrizable" es una propiedad hereditaria.
+        \item "Tener la topología discreta" es hereditario (trivialmente).
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\section{Axiomas de separación}
+
+\begin{definicion}
+    Un e.t. $(X, \cc{T})$ se dice:
+    \begin{itemize}
+        \item \textbf{T1} (o de \textbf{Fréchet}, o que satisface el \textbf{primer axioma de separación}) si $\forall x,y \in X$ con $x\neq y$, $\exists V \in \cc{N}_x$, $W\in \cc{N}_y$ con $y\notin V$, $x\notin W$. %TODO dibujo
+        Esta definición se podría hacer análogamente con abiertos, abiertos básicos o entornos básicos.
+
+        \item \textbf{T2} (o de \textbf{Haussforff}, o que satisface el \textbf{segundo axioma de separación}) si $\forall x,y \in X$ con $x\neq y$, $\exists V \in \cc{N}_x$, $W\in \cc{N}_y$ tal que $V\cap W = \emptyset$. %TODO dibujo
+        De nuevo esta definición se podría hacer con abiertos, abiertos básicos o entornos básicos.
+    \end{itemize}
+    \endsquare
+\end{definicion}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item T2 $\Rightarrow$ T1.
+    \end{itemize}
+    \endsquare
+\end{observacion}
+
+\begin{prop}
+    T1 y T2 son propiedades hereditarias.
+    \begin{proof}
+        Ambas demostraciones son análogas por lo que haremos solo la demostración para T2. 
+
+        Supongamos $(X, \cc{T})$ un e.t. T2 y $\emptyset \neq A \subset X$. Tendré que ver que $(S, \cc{T}_A)$ es T2. Sean $a,a'\in A$ con $a\neq a'$. Como $(X, \cc{T})$ es T2 tenemos que $\exists V \in \cc{N}_a$, $W\in \cc{N}_{a'}$, con $V\cap W = \emptyset$. Defino $V'=V\cap A \in \cc{N}_a^A$ y $W'=W\cap A \in \cc{N}_{a'}^A$ y tengo que $V'\cap W' = (V\cap W)\cap A = \emptyset$
+
+        La demostración para T1 se deja como ejercicio (a pesar de ser análoga).
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(X, \cc{T}_t)$, con $\#X>2$, no es T1 (ya que el único entorno de cualquier punto es $X$). (por ser no es ni T0, aunque este concepto no se va a trabajar en esta asignatura).
+        \item $(X, \cc{T}_{disc})$ es T2 (y por tanto T1). Para verlo puedo tomar $x\neq y$ y tengo $\{x\}\in \cc{N}_x$, $\{y\}\in \cc{N}_y$ y $\{x\}\cap \{y\}= \emptyset$.
+        \item $(X, \cc{T})$ es T2 (ya se vio anteriormente) y por tanto T1.
+        \item Si $X$ es un conjunto infinito, entonces $(X, \cc{T}_{CF})$ es T1, pero no T2. Comprobémoslo:
+        \begin{enumerate}
+            \item[T1)] $x\neq y$, $x,y\in X$. Cojo $V=X \setminus \{y\}\in \cc{T}_{CF}$ y además $V\in \cc{N}_x$ con $y\notin V$. Repetimos el proceso para $x$ y llegamos a lo mismo.
+            \item[T2)] (por reducción al absurdo) Supongamos $x\neq y$ y que existen $V\in \cc{N}_x$, $W\in \cc{N}_y$ con $V\cap W=\emptyset$. Entonces $X\setminus(V\cap W) = X=(X\setminus V)\cup (X\setminus W)$ que es finito por ser unión de conjuntos finitos, pero $X$ es infinito por lo que llegamos a contradicción. 
+        \end{enumerate}
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}(Caracterización de T1)
+    Un e.t. $(X, \cc{T})$ es T1 $\sii \{x\}\in \cc{C}_{\cc{T}}$\ \ $\forall x \in X$.
+
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$)] Supongamos $(X, \cc{T})$ un e.t. T1, $x \in X$, tendré que ver que $\overline{\{x\}} = \{x\}$. Veámoslo por reducción al absurdo. Para ello, supongamos que $\exists y \in X$, $y\in \overline{\{x\}}$ y $y \neq x \Rightarrow x \in N$\ \ $\forall N \in \cc{N}_y$. Esto contradice que $(X, \cc{T})$ sea T1.
+            \item[$\Leftarrow$)] Sean $x,y\in X$ con $x\neq y$ y tomo $V=X\setminus\{y\}\in \cc{T}$ (por hipótesis, al ser complementario de cerrado). Además como $x \in V$, tenemos $V\in \cc{N}_x$ y además $y\notin V$. Repetimos este razonamiento para $y$ y tenemos que $(S, \cc{T})$ es T1. 
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{ejercicio}
+    Sea $(X, \cc{T})$ un e.t. T2 y $\{y_n\}_{n\in \bb{N}}\subset X$ una sucesión convergente, entonces tiene un único límite.
+\end{ejercicio}
