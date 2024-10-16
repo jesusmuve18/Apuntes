@@ -8,6 +8,7 @@
 using namespace std ;
 using namespace scd ;
 
+// g++ -std=c++11 -pthread -o prodcons_lifo prodcons-plantilla_lifo.cpp scd.cpp
 //**********************************************************************
 // Variables globales
 

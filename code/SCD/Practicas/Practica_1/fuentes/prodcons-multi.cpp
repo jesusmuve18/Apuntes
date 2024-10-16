@@ -33,7 +33,9 @@ mutex
 int vec[tam_vec];
 int primera_libre=0;
 
-
+const int 
+   np=2, 
+   nc=4;
 
 //**********************************************************************
 // funciones comunes a las dos soluciones (fifo y lifo)
@@ -42,8 +44,7 @@ int primera_libre=0;
 unsigned producir_dato(unsigned num_hebra, unsigned iter_local)
 {
    this_thread::sleep_for( chrono::milliseconds( aleatorio<20,100>() ));
-   const unsigned dato_producido = siguiente_dato ;
-   siguiente_dato++ ;
+   const unsigned dato_producido = num_hebra*num_items/np+iter_local ;
    cont_prod[dato_producido] ++ ;
    cout << "producido: " << dato_producido << endl << flush ;
    return dato_producido ;
@@ -83,16 +84,16 @@ void test_contadores()
 
 //----------------------------------------------------------------------
 
-void  funcion_hebra_productora(  )
+void  funcion_hebra_productora( int num_hebra  )
 {
    for( unsigned i = 0 ; i < num_items ; i++ )
    {
-      // int dato = producir_dato() ;
+      int dato = producir_dato(num_hebra, i) ;
       
       sem_wait(espera_productor);
       //Escritura
-      // vec[primera_libre++]=dato;
       escritura.lock();
+      vec[primera_libre++]=dato;
       // cout<<"Escritura produce dato "<<dato<<endl;
       escritura.unlock();
       sem_signal(espera_consumidor);

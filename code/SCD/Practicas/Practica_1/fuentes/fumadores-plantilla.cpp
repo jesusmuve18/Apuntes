@@ -3,7 +3,8 @@
 #include <thread>
 #include <mutex>
 #include <random> // dispositivos, generadores y distribuciones aleatorias
-#include <chrono> // duraciones (duration), unidades de tiempo
+#include <chrono> // duraciones (duration), unidades de tiempoç
+#include <vector>
 #include "scd.h"
 
 using namespace std ;
@@ -11,7 +12,15 @@ using namespace scd ;
 
 // numero de fumadores 
 
-const int num_fumadores = 3 ;
+const int 
+   num_fumadores = 3,
+   num_iter = 10;
+
+Semaphore
+   espera_estanquero=1;
+
+vector<Semaphore> espera_cliente;
+bool fin;
 
 //-------------------------------------------------------------------------
 // Función que simula la acción de producir un ingrediente, como un retardo
@@ -39,9 +48,23 @@ int producir_ingrediente()
 //----------------------------------------------------------------------
 // función que ejecuta la hebra del estanquero
 
-void funcion_hebra_estanquero(  )
+void funcion_hebra_estanquero()
 {
+   int i;
 
+   for(int it=0; it<num_iter; it++) {
+      i=producir_ingrediente();
+      espera_estanquero.sem_wait(); // mostrador libre
+      cout << "puesto ingrediente "<<i<<endl;
+      espera_cliente[i].sem_signal(); // ingrediente puesto
+   }
+
+   espera_estanquero.sem_wait(); // mostrador libre
+
+   fin=true;
+   for(int i=0; i<num_fumadores; i++){
+      espera_cliente[i].sem_signal();
+   }
 }
 
 //-------------------------------------------------------------------------
@@ -71,9 +94,18 @@ void fumar( int num_fumador )
 // función que ejecuta la hebra del fumador
 void  funcion_hebra_fumador( int num_fumador )
 {
-   while( true )
+   while( !fin )
    {
+      espera_cliente[num_fumador].sem_wait();
 
+      if(!fin) {
+         cout << "retirado ingrediente "<<num_fumador<<endl<<flush;
+
+         espera_estanquero.sem_signal();
+
+         fumar(num_fumador);
+      }
+      
    }
 }
 
@@ -81,6 +113,25 @@ void  funcion_hebra_fumador( int num_fumador )
 
 int main()
 {
-   // declarar hebras y ponerlas en marcha
-   // ......
+
+   for(int i=0; i<num_fumadores; i++) {
+      espera_cliente.push_back(Semaphore(0));
+   }
+   
+   thread 
+      hebras_fumador[num_fumadores], 
+      hebra_estanquero(funcion_hebra_estanquero);
+
+
+   for(int i=0; i<num_fumadores; i++) {
+      hebras_fumador[i] = thread(funcion_hebra_fumador, i);
+   }
+
+
+   hebra_estanquero.join();
+
+   for(int i=0; i<num_fumadores; i++) {
+      hebras_fumador[i].join();
+   }
+
 }
