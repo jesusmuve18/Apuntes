@@ -127,7 +127,6 @@ int main()
       hebras_fumador[i] = thread(funcion_hebra_fumador, i);
    }
 
-
    hebra_estanquero.join();
 
    for(int i=0; i<num_fumadores; i++) {
