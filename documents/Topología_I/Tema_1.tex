@@ -1365,4 +1365,72 @@
 
 \begin{ejercicio}
     Sea $(X, \cc{T})$ un e.t. T2 y $\{y_n\}_{n\in \bb{N}}\subset X$ una sucesión convergente, entonces tiene un único límite.
+    \endsquare
 \end{ejercicio}
+
+\section{Axiomas de numerabilidad}
+
+\begin{definicion}
+    Diremos que un e.t $(X, \cc{T})$ es 
+    \begin{itemize}
+        \item \textbf{1AN} (o que cumple el \textbf{primer axioma de numerabilidad}) si todo punto de $x$ tiene una base de entornos numerable.
+        \item \textbf{2AN} (o que cumple el \textbf{segundo axioma de numerabilidad}) si existe una base de $\cc{T}$ numerable.
+    \end{itemize}
+    \endsquare
+\end{definicion}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item $2AN \Rightarrow 1AN$ ya que si $\cc{B}$ es base numerable y $x\in X$ entonces $\cc{B}_x=\{B\in \cc{B} : x\in B\}$ es una b.d.e de $x$ numerable.
+        \item Si $\{V_n\}_{n\in \bb{N}}$ es una b.d.e de $x\in X$, entonces definiendo $W_n=\bigcap\limits_{k=1}^n V_k$, tenemos que $\{W_n : n\in \bb{N}\}$ es b.d.e de $x$ y $W_1 \supset W_2 \supset W_3 \supset \dots$. Es decir, para todo espacio 1AN podemos encontrar una base de entornos numerable y encajada.
+        \item Las propiedades 1AN y 2AN son propiedades hereditarias.
+        \begin{proof}\
+            \begin{itemize}
+                \item[2AN)] Supongamos $(X, \cc{T})$ 2AN y sea $(A, \cc{T}_A)$ con $\emptyset \neq A \subset X$. Sabemos que existe $\cc{B}$ base de $\cc{T}$ numerable $\Rightarrow \cc{B}_A = \{B\cap A : B \in \cc{B}\}$ es base de $\cc{T}_A$ y numerable.
+                \item[1AN)] %TODO     
+            \end{itemize}
+        \end{proof}
+    \end{itemize}
+\end{observacion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Si $8X, \cc{T}$ es un e.t. y $\cc{T}$ es numerable, entonces $(X, \cc{T})$ es 2AN. En particular, $(X, \cc{T})$ es 2AN.
+        \item $(X, \cc{T}_{disc})$ es 1AN ya que $\{\{x\}\}$ es b.d.e de $x$ en $\cc{T}$. Si además $X$ es numerable, entonces tengo que $\cc{B}=\{\{x\}:x\in X\}$ es base de $\cc{T}$ por lo que es 2AN. (es una condición suficiente y necesaria ya que dicha base es la más fina).
+        \item $(X, \cc{T}_{CF})$, si $X$ es numerable entonces tiene una cantidad numerable de subconjuntos finitos por lo que con esta condición, $\cc{T}_{CF}$ es numerable y por tanto 2AN (luego también 1AN). Si $X$ no es nuerable, entonces no es 1AN (luego tampoco 2AN).
+        
+        \begin{proof}
+            Veamos que si $X$ no es numerable entonces no es 1AN. Hagámoslo por reducción al absurdo. Supongamos $x \in X$, $\cc{B}_x=\{V_n\}_{n\in \bb{N}}$ b.d.e. de $x$. Entonces podemos escribir $V_n = X \setminus C_n$ con $C_n$ finito. Entonces $C=\bigcup\limits_{n\in \bb{N}}C_n$ es numerable y además $C\subset X$. Por tanto, $X\setminus C$ no es vacío y además tiene infinitos elementos por lo que puedo tomar un $y\in X\setminus C$ con $y\neq x$ y consideramos $X\setminus\{y\}$ que es abierto en $\cc{T}_{CF}$. Como $\{V_n\}_{n\in \bb{N}}$ es b.d.e. de $x$, entonces existe un $n\in \bb{N}$ con $x\in V_n\subset X\setminus \{y\}\Rightarrow \{y\}\subset C_n$ y llegammos a contradicción (ya que $V_n = X\setminus C_n$).
+        \end{proof}
+        \item si $X$ no es numerable, entonces $(X, \cc{T}_{CF})$ no es 1AN (misma demostración que el apartado anterior pero con finito en lugar de numerable) y por tanto tampoco es 2AN.
+        
+        \item $(\bb{R}^n, \cc{T}_u)$ es 2AN (y 1AN). Esto es porque $\cc{B}\{B\left(x, \frac{1}{n}\right) : n\in \bb{N}, x \in \bb{Q}^n\}$ es base de $\cc{T}_u$ y es numerable.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{ejemplo}
+    $(\bb{R}, \cc{T}_S)$ la topología de Sorgenfrey
+    \begin{itemize}
+        \item Es 1AN: $x\in \bb{R}$, $\cc{B}_x = \{[x, x+\frac{1}{n}): n\in \bb{N}\}$ es b.d.e. de $x$.
+        \item No es 2AN: para verlo tomo $\cc{B}$ base de $\cc{T}_S$. $\forall x \in \bb{R}$, $[x, x+1)\in \cc{T}_S$ y $x\in [x, x+1)$. Como $\cc{B}$ es base, entonces $\exists B_x \in \cc{B}$ con $x \in B_x \subset [x, x+1)$ y entonces $x$ es el mínimo de $\cc{B}_x$. Esto quiere decir que $B_x\neq B_y$ para todo $x\neq y$. Entonces la familia $\{B_x : x\in \bb{R}\}\subset \cc{B}$ no es numerable por lo que $\cc{B}$ no es numerable.
+    \end{itemize}
+\end{ejemplo}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t. 2AN y $\cc{B}$ una base de $\cc{T}$, entonces existe una base $\cc{B}'$ de $\cc{T}$ con $\cc{B}'\subset \cc{B}$ con $\cc{B}'$ numerable. Es decir, de toda base puedo extraer una base numerable.\\
+
+    Esta proposición se usa para probar que un e.t. no es 2AN (utilizando el contrarrecíproco):
+    \begin{itemize}
+        \item $(\bb{R}, \cc{T}_S)$ no es 2AN. $\cc{B}=\{[a,b):a<b\}$ es base de $\cc{T}_S$. Hagámoslo por reducción al absurdo. Si $(\bb{R}, \cc{T}_S)$ es 2AN, entonces $\exists \cc{B}'=\{[a_n, b_n): n \in \bb{N}\}$ base de $\cc{T}_S$. Entonces el conjunto $A=\{a_n : n\in \bb{N}\}$ es numerable $\Rightarrow \bb{R}\setminus A \neq \emptyset$. Sea $x \in \bb{R}\setminus A $, $x\in [x, x+1)\in \cc{T}_S \Rightarrow \exists n \in \bb{N}: x\in [a_n, b_n)\subset [x, x+1)\Rightarrow a_n=x$ y llegamos a contradicción.
+    \end{itemize}
+    \endsquare
+\end{prop}
+
+\begin{prop}
+    Si $(X, \cc{T})$ es 2AN, entonces de todo recubrimiento\footnote{Un recubimiento de un conjunto $X$ es una familia $\{U_i\}_{i\in I}$ tal que $\bigcup\limits_{i\in I}U_i = X$, es decir, es como una partición de $X$ pero cuyos elementos no tienen por qué ser disjuntos 2 a 2.} por abiertos\footnote{Un recubrimiento por abiertos de un e.t. $(X, \cc{T})$ es un recubrimiento cuyos elementos son abiertos en la topología, es decir, una familia $\{U_i\}_{i\in I}$ tal que $U_i\in \cc{T}\ \ \forall i \in I$ y $\bigcup\limits_{i\in I}U_i = X$} de $X$ se puede extraer un subrecubrimiento numerable, es decir,
+    \begin{gather*}
+        \text{si } X=\bigcup\limits_{i\in I} U_i \text{ con } U_i \in \cc{T}\ \ \forall i \in I \Rightarrow \exists J\subset I \text{ numerable tal que } X=\bigcup\limits_{j\in J}U_j.
+    \end{gather*}
+    \endsquare
+\end{prop}
