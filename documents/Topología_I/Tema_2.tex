@@ -3,6 +3,39 @@
 \begin{definicion}
     Dados $(X, \cc{T})$, $(Y, \cc{T}')$ dos e.t., diremos que $f : (X, \cc{T}) \to (Y, \cc{T}')$ (que notaremos como $f:X \to Y$ cuando estén claros los e.t.) es \textbf{continua} en un punto $x_0\in X$ si $\forall N'\in \cc{N}_{f(x_0)}'$\ \ $\exists N \in \cc{N}_{x_0}$ con $f(N)\subset N'$. %TODO: dibujo
 
+    \begin{center}
+        \begin{tikzpicture}
+            \def\incolor{gray!20}
+
+            \filldraw[rounded corners=10pt, dashed, thick, fill=\incolor] (0,0) rectangle (3,-3);
+
+            \node at (1.5, -3.5) {$(X, \cc{T})$};
+            \node at (4, -1.5) {$\to$};
+
+            \filldraw[rounded corners=10pt, dashed, thick, fill=\incolor] (5,0) rectangle (8,-3);
+
+            \node at (6.5, -3.5) {$(Y, \cc{T}')$};
+
+            \filldraw[dashed, draw=red, fill=red!20] (1.5, -1.5) circle (25pt);
+
+            \node at (1.5, -2.7) {\textcolor{red}{$N$}};
+
+            \filldraw[dashed, draw=blue, fill=blue!20] (6.5, -1.5) circle (30pt);
+
+            \filldraw[dashed, draw=red, fill=red!20] (6.5, -1.8) circle (18pt);
+
+            \node at (7.4, -2.7) {\textcolor{red}{$f(N)$}};
+
+            \node at (7.5, -0.5) {\textcolor{blue}{$N'$}};
+
+            \filldraw (1.5, -1.5) circle (1.5pt)  node[below] {$x_0$};
+
+            \filldraw (6.5, -1.5) circle (1.5pt)  node[below] {$f(x_0)$};
+
+            
+        \end{tikzpicture}
+    \end{center}
+
     Equivalentemente, $\forall N'\in \cc{N}_{f(x)}'$  $f^{-1}(N')\in \cc{N}_{x_0}$. Es decir, la imagen inversa por f de todo entorno de $f(x)$ en el espacio topológico $\cc{T}'$ es entorno de $x$ en el espacio topológico $\cc{T}$.
     \endsquare
 \end{definicion}
