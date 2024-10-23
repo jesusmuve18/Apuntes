@@ -221,3 +221,108 @@
         \end{itemize}
     \end{proof}
 \end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Una aplicación $f: (X, \cc{T}) \to (Y, \cc{T}')$ es más fácil que sea abierta y/o cerrada cuanto menos abiertos haya en $\cc{T}$ y más en $\cc{T}'$ (no es riguroso pero es una buena intuición). Por ejemplo, $f(X, \cc{T})\to (Y, \cc{T}_{disc})$ es abierta y cerrada.
+        La aplicación $f:(X, \cc{T}_t) \to (Y, \cc{T})$ es abierta si y solo si $f(X)\in \cc{T}'$ y es cerrada si y solo si $f(X)\in \cc{C}_{\cc{T}'}$.
+        \item $Id_X :  (X, \cc{T})\to (X, \cc{T}')$ es abierta si y solo si $T \leq \cc{T}'$ y es cerrada si y solo si $\cc{C}_{\cc{T}}\subset \cc{C}_{\cc{T}'}$ (lo cual es equivalente a que sea abierta).
+        \item Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es constante, con $f(x)=y_0\in Y$\ \ $\forall x \in X$, entonces $f$ es abierta si y solo si $\{y_0\}\in \cc{T}'$ y es cerrada si y solo si $\{y_0\}\in \cc{C}_{\cc{T}'}$. En particular, $f:(X, \cc{T})\to (\bb{R}, \cc{T}_u)$ constante es continua, cerrada pero no es abierta.
+        \item Sean $f:(X, \cc{T})\to (Y,\cc{T}')$ y $g:(Y,\cc{T}')\to (Z, \cc{T}'')$, entonces si $f $ y $ g$ son abiertas, entonces $g\circ f:(X, \cc{T})\to (Z, \cc{T}'')$ es abierta ya que $(g\circ f)(U)=g(f(U))\in \cc{T}''$. Análogamente, si $f$ y $g$ son cerradas, entonces la composición $g\circ f:(X, \cc{T})\to (Z, \cc{T}'')$ es cerrada.
+        \item Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es abierta y $\emptyset \neq A \subset X$, entonces si $A$ es abierto se tiene que $f_{|A}:(A, \cc{T}_A)\to (Y, \cc{T}')$ es abierta. Análogamente, si $A$ es cerrado se tiene que $f_{|A}:(A, \cc{T}_A)\to (Y, \cc{T}')$ es cerrada.
+        \begin{proof}
+            Supongamos que $f$ es abierta y $A\in \cc{T}$ y tendremos que ver ue $f_{|A}$ es abierta. Sea $O\in \cc{T}_A$ tendremos que ver que $f_{|A}(O)\in \cc{T}'$. Como $O\in \cc{T}_A$ tenemos que $O\in \cc{T} \Rightarrow f(O)\in \cc{T}'$. Como $f(O)=f_{|A}(O)$ tenemos que $f_{|A}(O)\in \cc{T}'$ y lo tenemos. 
+
+            La demostración para cerrado es análoga y se deja como ejercicio para el lector.
+        \end{proof}
+
+        \item Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es abierta y $\emptyset \neq A' \subset Y $ con $f(X)\subset A'$, entonces $f^{A'}:(X, \cc{T})\to (A', \cc{T}_{A'}')$ es abierta. Igualmente si $f:(X, \cc{T})\to (Y, \cc{T}')$ es cerrada y $\emptyset \neq A' \subset Y $ con $f(X)\subset A'$, entonces $f^{A'}:(X, \cc{T})\to (A', \cc{T}_{A'}')$ es cerrada.
+        \begin{proof}
+            Sea $U\in \cc{T} \Rightarrow f^{A'}(U)=f(U)\in \cc{T}$ y $f(U)=f(U)\cap A'\in \cc{T}_{A'}'$ por lo que lleva abiertos en abiertos y tenemos lo buscado.
+
+            La demostración para cerrados es análoga y se deja como ejercicio para el lector.
+        \end{proof}
+    \end{itemize}
+\end{ejemplo}
+
+\begin{observacion}
+    Si $f:(X, \cc{T})\to(Y, \cc{T}')$ es una aplicación biyectiva, entonces equivalen:
+    \begin{enumerate}
+        \item[(i)] $f^{-1}:(Y, \cc{T}')\to (X, \cc{T})$ es continua.
+        \item[(ii)] $f$ es abierta.
+        \item[(iii)] $f$ es cerrada. 
+    \end{enumerate}
+    \begin{proof}
+        Sea $A\subset X$, entonces su imagen, $f(A)=(f^{-1})^{-1}(A)$ y $(f^{-1})^{-1}=f$.
+        %TODO
+
+        % Para probarlo tomo A un abierto y como f^{-1} es continua y A es abierto, su preimagen será abierto tb y tenemos (i)\Rightarrow (ii).
+
+        % Tendremos que hacer (i) \sii (ii) y (i) \sii (iii) (es lo más fácil)
+    \end{proof}
+\end{observacion}
+
+\section{Homeomorfismos}
+
+\begin{definicion}
+    Una aplicación $f:(X, \cc{T})\to (Y, \cc{T}')$ diremos que es un \textbf{homeomorfismo} si es biyectiva, continua y su inversa, $f^{-1}$ es continua.
+
+    Si existe un homeomorfismo entre dos e.t. $(X, \cc{T})\to (Y, \cc{T}')$ diremos que $(X, \cc{T})$ y $(Y, \cc{T}')$ son \textbf{homeomorfos} y escribiremos $(X, \cc{T}) \cong (Y, \cc{T}')$.
+    \endsquare
+\end{definicion}
+
+\begin{teo}
+    Sea $f:(X, \cc{T})\to (Y, \cc{T}')$ una aplicación. Equivalen:
+    \begin{enumerate}
+        \item[(i)] $f$ es un homeomorfismo.
+        \item[(ii)] $f$ es biyectiva, continua y abierta.
+        \item[(iii)] $f$ es biyectiva, continua y cerrada.  
+    \end{enumerate}
+    \begin{proof}
+        Es trivial utilizando la observación anterior.
+    \end{proof}
+\end{teo}
+
+\begin{observacion}
+    $f$ es continua y cerrada $\sii \overline{f(A)}=f(\overline{A})$\ \ $\forall A \subset X$. (Esto a veces puede servir para ver que una aplicación $f$ es ub homeomorfismo).
+    \endsquare
+\end{observacion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $Id_X : (X, \cc{T})\to (X, \cc{T}')$ es un homeomorfismo $\sii T=T'$.
+        \item Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es un homeomorfismo, entonces $f^{-1}:(Y, \cc{T}')\to (X, \cc{T})$ (por su definición). Es una doble implicación pero no la podemos escribir rigurosamente ya que no podemos escribir $f^{-1}$ sin suponer que es biyectiva.
+        \item $f:(X, \cc{T})\to (Y, \cc{T}')$, $g:(Y, \cc{T}')\to (Z, \cc{T}'')$ es un homeomorfismo, entonces $g\circ f:(X, \cc{T})\to (Z, \cc{T}'')$ es un homeomorfismo (ya que la composición de biyecciones es biyectiva, la composición de abiertas es abierta y la composición de cerradas es cerrada).
+        \item Sea $f:(X, \cc{T}) \to (Y, \cc{T}')$ un homeomorfismo, $\emptyset\neq A \subset X$, $A'=f(A)\neq \emptyset$, $f(A)\subset Y$. Entonces $f_{|A}^{A'}:(A, \cc{T}_A)\to (A', \cc{T}_{A'}')$ es un homeomorfismo. La demostración se basa en que $(f_{|A}^{A'})^{-1} = f_{|A'}^A$ y que $f_{|A}^{A'}$ es biyectiva y continua y que $f_{|A'}^A$ es continua.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{observacion}
+    En el conjunto de todos los espacios topológicos, ``ser homeomorfo'' es una relación de equivalencia (ya que en los ejemplos anteriores hemos visto que verifica las propiedades reflexiva, simétrica y transitiva).
+    \endsquare
+\end{observacion}
+
+\begin{ejemplo}(Clásicos)
+    \begin{itemize}
+        \item Cualesquiera dos intervalos abiertos en $(\bb{R}, \cc{T}_u)$ son homeomorfos con la topología inducida.
+        \begin{proof}
+            Veamos en primer lugar que $(a,b) \cong (0,1)$, con $a<b$. Definimos $f(x)=\dfrac{x-a}{b-a}$. Esta aplicación es biyectiva ya que tiene inversa (habría que calcularla). Además es continua y su inversa (que pronto tendremos calculada) también lo es.
+
+            Veamos también que $(0,1)\cong (1, +\infty)$. Para ello definimos $f(x)=\frac{1}{x}$ que es claramente biyectiva, continua y su inversa es continua.
+
+            Además, $(1, +\infty)\cong (0,+\infty)$ con $f(x)=x-1$ claramente un homeomorfismo.
+
+            Tenemos lo siguiente:
+            \begin{gather*}
+                (0,+\infty)\cong \left\{
+                \begin{array}{lcl}
+                    (a, +\infty) & \text{ con } & f(x)=x+a\\
+                    (-\infty, b) & \text{ con } & f(x) = -x +b\\
+                    \bb{R}=(-\infty, +\infty) & \text{ con } & f(x)=\ln(x)\\
+                \end{array}
+                \right.
+            \end{gather*}
+        \end{proof}
+    \end{itemize}
+\end{ejemplo}
