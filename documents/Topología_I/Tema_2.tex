@@ -324,5 +324,99 @@
                 \right.
             \end{gather*}
         \end{proof}
+
+        \item En $(\bb{R}, \cc{T}_u)$, $[a,b]\cong [0,1]$\ \ $\forall a<b$ pero $[a,b]\ncong [c, +\infty)$ (lo demostraremos en el Tema 3).
+        
+        \item \textbf{Proyección estereográfica:} Esta proyección (para $n=3$) prueba que una esfera a la que se le quita un punto es homeomorfa a un plano. Para ello podemos trazar la recta que va desde el polo norte de la esfera (el punto que le falta a la esfera) hacia cualquier punto $p$ y hayar la intersección de dicha recta con el plano que resulta de poner la última coordenada a 0. Dicha intersección será $\Phi(p)$ y repitiendo esto con todos los puntos obtengo el plano con última coordenada 0. Veámoslo analíticamente:
+        
+        Sea $\bb{S}^{n}=\{x_1, \dots, x_n, x_n+1 : x_1^2 + \dots + x_n^2 + x_{n+1}^2 = 1\} = S((0,\dots,0,0), 1)\subset \bb{R}^{n+1}$. Sea $N=(0,\dots,0,1)\in \bb{S}^n$ el polo norte. Podemos definir la aplicación 
+        \begin{align*}
+            \Phi : \bb{S}^n\setminus \{N\} &\to \bb{R}^n\\
+            (x_1, \dots, x_n, x_{n+1}) &\mapsto \frac{1}{1-x_{n+1}}(x_1, \dots, x_n)\in \bb{R}.
+        \end{align*}
+
+        %TODO: dibujo
+
+        Su inversa es 
+        \begin{align*}
+            \Phi^{-1}: \bb{R}^n &\to \bb{S}^n \setminus \{N\}\subset \bb{R}^{n+1}\\
+            (y_1, \dots, y_n) & \mapsto \frac{1}{\|y\|^2+1}(2y_1, \dots, 2y_n, \|y\|^2-1)
+        \end{align*}
+
+        Tenemos que la aplicación 
+        \begin{align*}
+            \Phi:(\bb{S}^n\setminus \{N\}, \cc{T}_{|\bb{S}^n\setminus \{S\}}) \to (\bb{R}^n, \cc{T}_u)
+        \end{align*}
+        es un homeomorfismo ya que, como estamos en la topología usual podemos usar la intuición del análisis y ver que tanto $\Phi$ como $\Phi^-1$ son continuas y es fácil ver que $\Phi \circ \Phi^{-1} = Id_{\bb{S}^n\setminus \{N\}}$.
+
+        Esta proyección se usa para hacer mapas de la Tierra, y por eso se producen deformaciones en la representación del mapa mundi. Hay mejores proyecciones para esto. Veamos la que viene a continuación:
+
+        \item \textbf{Proyección de Mercator:} Esta proyección prueba que si se retiran 2 puntos de la esfera, el norte y el sur, la figura resultante es homeomorfa a un cilindro. Para ello se toma el punto central de la circunferencia y se proyecta una recta sobre los puntos $p$ de la esfera sin los polos. La intersección de dicha recta con el cilindro que tiene el radio de la esfera será $\varphi(p)$ y repitiendo esto en todos los puntos de la esfera obtenemos el cilindro de radio 1.
+        
+        %TODO: dibujo
+        
+        
+        Sea $\bb{S}^n \subset \bb{R}^{n+1}$ la misma esfera definida en el apartado anterior y $S=(0,\dots, 0,-1)$ el polo sur. Podemos definir la siguiente aplicación:
+        \begin{align*}
+            \varphi : \bb{S}^n\setminus \{N, S\} &\to \bb{S}^{n-1}\times \bb{R}\\
+            (x_1, \dots, x_n, x_{n+1}) &\mapsto \frac{1}{\|x\|} (x_1, \dots, x_n, x_{n+1})
+        \end{align*}
+
+        Esta aplicación es biyectiva y su inversa es
+        \begin{align*}
+            \varphi^{-1} : \bb{S}^{n-1}\times \bb{R} &\to \bb{S}^n \setminus \{N,S\}\\
+            y=(y_1, \dots, y_n, y_{n+1}) &\mapsto \frac{y}{\|y\|}
+        \end{align*}
+
+        Es fácil ver que al componer ambas aplicaciones obtenemos la identidad. Con esta aplicación tenemos
+        \begin{gather*}
+            \varphi : (\bb{S}^n\setminus \{N,S\}, \cc{T}_{u_{|\bb{S}^n\setminus \{N,S\}}}) \to (\bb{S}^{n-1}\times \bb{R}, \cc{T}_{u_{|\bb{S}^{n-1}\times \bb{R}}})
+        \end{gather*}
+        es un homeomorfismo.
     \end{itemize}
+    \endsquare
 \end{ejemplo}
+
+\begin{prop}
+    Sea $f:(X, \cc{T})\to (Y, \cc{T}')$ un homeomorfismo. Entonces:
+    \begin{enumerate}
+        \item[(i)] Si $U\subset X$, entonces $U\in \cc{T}\sii f(U)\in \cc{T}'$.
+        \item[(ii)] Si $C\subset X$, entonces $C\subset \cc{C}_{\cc{T}} \sii f(C)\in \cc{C}_{\cc{T}'}$.
+        \item[(iii)] Si $\cc{B}\subset\cc{P}(X)$, entonces $\cc{B}$ es base de $\cc{T} \sii $ $\cc{B}'=f(B)=\{f(B):B\in \cc{B}\}$ es base de $\cc{T}'$.
+        \item[(iv)] Si $x\in X$, y $N\in X$, entonces $N\in \cc{N}_x \sii f(N)\in \cc{N}_{f(x)}'$.
+        \item[(v)] Si $x\in X$, $\cc{B}_x\subset \cc{P}(X)$, entonces $\cc{B}_x$ es b.d.e. de $x$ en $\cc{T} \sii \cc{B}_{f(x)}'=f(\cc{B}_x)=\{f(V):V\in \cc{B}_x\}$ es b.d.e. de $f(y)$ en $\cc{T}'$.     
+    \end{enumerate}
+
+    \begin{proof}
+        Para las demostraciones veremos solo las implicaciones hacia la derecha ya que al ser un homeomorfismo, la implicación hacia la izquierda se basa en aplicar que $f^{-1}$ es también un homeomorfismo.
+
+        \begin{enumerate}
+            \item[(i)] Como $f$ es abierta se verifica.
+            \item[(ii)] Como $f$ es cerrada se verifica.
+            \item[(iii)] Tengo que comprobar varias cosas:
+            \begin{itemize}
+                \item $f(B)\in \cc{T}'$\ \ $\forall B \in base$. Esto es cierto ya que $B\in \cc{T}$ y $f$ es abierta.
+                \item Sea $U'\in \cc{T}'$, $y\in U'$ tendré que ver que existe un abierto básico entremedias. Para ello tomo $f^{-1}(y)\subset f^{-1}(U')$ y como $f$ es continua tenemos que $f^{-1}(U')\in \cc{T}$. Como $\cc{B}$ es base tenemos que $\exists B \in \cc{B}$ con $f^{-1}(y)\in \cc{B}\subset f^{-1}(U')$ y como $f$ es biyectiva, $y\in f(B)\subset U'$ con $f(B)\in \cc{B}'$.
+                %TODO: dibujo
+            \end{itemize}
+            \item[(iv)] Sea $x\in X$, $N\in \cc{N}_x$. Como $\cc{N}_x$ es entorno, $\exists U\in \cc{T}$ con $x\in U\subset N' \Rightarrow f(x)\in f(U)\subset f(N)$ y como $f$ es abierta tengo que $f(U)\in \cc{T}'$ por lo que $f(N)\in \cc{N}_{f(x)}'$
+            \item[(v)] Sea $N'\in \cc{N}_{f(x)}'$. Por (iv) (la implicación hacia la izquierda) tenemos que $f^{-1}(N')\in \cc{N}_x$. Como tenemos una b.d.e tenemos que $\exists V \in \cc{B}_x$ con $v\subset f^{-1}(N') \Rightarrow f(V)\subset N'$ y de nuevo por (iv) tenemos que $f(V)\in \cc{N}_{f(x)}'$ y tenemos lo que queríamos.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{definicion}
+    Una propiedad $P$ que pueda o no tener un e.t. $(X, \cc{T})$ se dice \textbf{topológica} o que es un \textbf{invariante topológico} si al cumplirlo $(X, \cc{T})$, también la cumplen todos los espacios topológicos homeomorfos a él, es decir:
+    \begin{gather*}
+        (X, \cc{T}) \text{ cumple }P \sii (Y, \cc{T}') \text{ cumple } P\ \ \forall (Y, \cc{T}')\cong (X, \cc{T})
+    \end{gather*}
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    Las propiedades \apuntar{T1}, \apuntar{T2}, \apuntar{1AN}, \apuntar{2AN} son invariantes topológicas.
+    \begin{proof}
+        Se deja como ejercicio para el lector %TODO: utilizar la proposición anterior (como la f es biyectiva son disjuntos)
+    \end{proof}
+\end{prop}
+
