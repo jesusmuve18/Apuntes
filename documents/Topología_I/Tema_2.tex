@@ -420,3 +420,105 @@
     \end{proof}
 \end{prop}
 
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(\bb{R}, \cc{T}_u)\ncong (\bb{R}, \cc{T}_S)$ ya que $(\bb{R}, \cc{T}_u)$ es 2AN y $(\bb{R}, \cc{T}_S)$ no lo es.
+        \item $(\bb{R}, \cc{T}_u)\ncong (\bb{R}, \cc{T}_{CF})\ncong (\bb{R}, \cc{T}_S)$ ya que $(\bb{R}, \cc{T}_u), (\bb{R}, \cc{T}_S)$ son T2 pero $(\bb{R}, \cc{T}_{CF})$ no lo es.
+        \item $(\bb{R}, \cc{T}_u)\ncong (\bb{R}, \cc{T}_{disc})$ ya que $(\bb{R}, \cc{T}_{disc})$ no es 2AN.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{definicion}
+    Diremos que $f:(X, \cc{T})\to (Y, \cc{T}')$ es un \textbf{embebimiento} si $f^{f(X)}:(X, \cc{T})\to (f(X), \cc{T}_{f(X)}')$ es un homeomorfismo.
+    En ese caso, $(X, \cc{T})\cong(f(X), \cc{T}_{f(X)}')$
+    \endsquare
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $f$ homeomorfismo $\Rightarrow$ $f$ embebimiento. El recíproco no es cierto.
+        \item Si $n, k \in \bb{N}$,
+        \begin{align*}
+            f:(\bb{R}^n, \cc{T}_u)&\to (\bb{R}^{n+k}, \cc{T}_u)\\
+            x &\mapsto f(x)=(x,0)
+        \end{align*}
+        es un embebimiento con $f(\bb{R}^n)=\{\bb{R}^n \times \{0\}\}$.
+
+        Para verlo tendremos que tomar la aplicación 
+        \begin{align*}
+            f^{\bb{R}^n\times \{0\}}:(\bb{R}^n, \cc{T}_u)&\to (\bb{R}^n\times \{0\}, \cc{T}_{u_{|\bb{R}^n\times \{0\}}})\\
+            x &\mapsto (x,0)
+        \end{align*}
+        y tenemos además
+        \begin{align*}
+            (f^{\bb{R}^n\times \{0\}})^{-1}:(\bb{R}^n\times \{0\}, \cc{T}_{u_{|\bb{R}^n\times \{0\}}})&\to (\bb{R}^n, \cc{T}_u)\\
+            (x,0) &\mapsto x
+        \end{align*}
+        y es fácil ver que $(f^{\bb{R}^n\times \{0\}})$ es un homeomorfismo y por tanto $f$ un embebimiento.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\section{Topología Producto}
+En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc{T}')$ podemos buscar una topología en el espacio $X\times Y$ a partir de $\cc{T}$ y $\cc{T}'$. Para ello, teniendo $X\times Y=\{(x,y):x\in X, y \in Y\}$ podemos tomar el conjunto $\{U\times U' : U\in \cc{T}, U'\in \cc{T}'\}$ pero vemos que no cumple la propiedad \apuntar{A2}. Sin embargo, sí podemos considerar que dicho conjunto sea una base de la topología producto.
+
+\begin{prop}
+    $\cc{B}_{\cc{T}\times \cc{T}'}=\{U\times U' : U\in \cc{T}, U'\in \cc{T}'\}$ es base de una única topología en $X\times Y$ que se denota $\cc{T}\times \cc{T}'$ y se llama \textbf{topología producto} de $\cc{T}$ y $\cc{T}'$. 
+
+    Al e.t. $(X\times Y, \cc{T}\times \cc{T}')$ lo llamaremos \textbf{espacio topológico producto} de $(X, \cc{T})$ y $(Y, \cc{T}')$.
+
+    \begin{proof} Para ver que esto es cierto tendremos que comprobar que cumple las condiciones de la Proposición %TODO 
+        \begin{enumerate}
+            \item[\apuntar{B1}] $X\times Y \in \cc{B}_{\cc{T}\times \cc{T}'}\Rightarrow \bigcup\limits_{B\in \cc{B}_{\cc{T}\times \cc{T}'}}=X\times Y$.
+            \item[\apuntar{B2}] $U_1\times U_1', U_2\times U_2'\in \cc{B}_{\cc{T}\times \cc{T}'}$. Tenemos uqe $(U_1\times U_1')\cap (U_2\times U_2') = (U_1\cap U_2)\times (U_1'\times U_2')\in \cc{B}_{\cc{T}\times \cc{T}'}$. ya que $(U_1\times U_2)\in \cc{T}$ y $(U_1'\times U_2')\in \cc{T}'$.
+        \end{enumerate}
+        y ya lo tenemos probado.
+
+    \end{proof}
+\end{prop}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item Si $W\subset X\times Y$, $W\in \cc{T}\times \cc{T}'\sii \forall (x,y)\in W$\ \ $\exists U\in \cc{T}, U\in \cc{T}'$ con $(x,y)\in U\times U'\subset W \sii \forall (x,y)\in W\ \ \exists U\in \cc{T}, U'\in \cc{T}'$ con $x\in , y \in U', U\times U'\subset W \sii W=\bigcup\limits_{i\in I}U_i\times U_i'$ con $U_i\in \cc{T}, U_i'\in \cc{T}'\ \ \forall i\in I$.
+        \item En $(X\times Y, \cc{T}\times \cc{T}')$, todo producto de abiertos es abierto (básico) pero el recíproco no es cierto ya que hay abiertos en el producto que no son procducto de abiertos. Es decir, que la topología $\cc{T}\times \cc{T}'$ hay más abiertos en general que los básicos, es decir, $\cc{T}\times \cc{T}'\setminus \cc{B}_{\cc{T}\times \cc{T}'}\neq \emptyset$.
+    \end{itemize}
+\end{observacion}
+
+\begin{prop}
+    Sean $(X, \cc{T}), (Y, \cc{T}')$ dos e.t. Entonces:
+    \begin{enumerate}
+        \item[(i)] Si $\cc{B}$ es base de $\cc{T}$ y $\cc{B}'$ es base de $\cc{T}'$, entonces $\tilde{\cc{B}}=\cc{B}\times \cc{B}'=\{B\times B': B\in \cc{B}, B'\in \cc{B}'\}$ es base de $\cc{T}\times \cc{T}'$.
+        \item[(ii)] Si $x\in X$, $\cc{B}_x$ b.d.e. de $x$ en $(X, \cc{T})$ y $y\in Y$, $\cc{B}_y'$ b.d.e. de $y$ en $(Y, \cc{T}')$, entonces
+        \begin{gather*}
+            \tilde{\cc{B}}_{(x,y)}=\cc{B}_x\times \cc{B}_y' =\{V\times V': V\in \cc{B}_x, V'\in \cc{B}_y'\}
+        \end{gather*}
+        es b.d.e. de $(x,y)$ en $(X\times Y, \cc{T}\times \cc{T}')$.
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] $\tilde{\cc{B}}=\cc{B}\times \cc{B}'\subset \cc{T}\times \cc{T}'$. Sea $W\in \cc{T}\times \cc{T}'$ y $(x,y)\in W$. Tendremos que ver que existe un elemento $B\times B'\in \tilde{\cc{B}}$ con $(x,y)\in B\times B'\subset W$. Como $\cc{B}_{\cc{T}\times \cc{T}'}$ es base de $\cc{T}\times \cc{T}'$, entonces $\exists U\in \cc{T}, U'\in \cc{T}'$ con $(x,y)\in U\times U'\subset W$. Como además $\cc{B}, \cc{B}'$ con bases tenemos que $\exists B\in \cc{B}, B'\in \cc{B}'$ con $x\in \cc{B}\subset U, y \in N'\subset U\Rightarrow (x,y)\in B\times B'\subset U\times U'\subset W$ y lo tenemos.
+            \item[(ii)] La demostración es análoga a la anterior y se deja planteada como ejercicio para el lector.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{coro}
+    $(X, \cc{T})$, $(Y, \cc{T})$ e.t.
+    \begin{enumerate}
+        \item[(i)] Si $(X, \cc{T})$ y $(Y, \cc{T}')$ son 1AN, entonces $(X\times Y, \cc{T}\times \cc{T}')$ es 1AN.
+        \item[(ii)] Si $(X, \cc{T})$ y $(Y, \cc{T}')$ son 2AN, entonces $(X\times Y, \cc{T}\times \cc{T}')$ es 2AN.
+    \end{enumerate}
+    \endsquare
+\end{coro}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $\emptyset\neq A\subset X$, $\emptyset\neq A'\subset Y$ tenemos que $(\cc{T}, \cc{T}')_{|A\times A'}=\cc{T}_A \times \cc{T}_{A'}'$ (es fácil de comprobar).
+        \item $\cc{T}_t\times \cc{T}_t = \cc{T}_t$.
+        \item $\cc{T}_{disc}\times \cc{T}_{disc}=\cc{T}_{disc}$.
+        \item $(\bb{R}^n\times \bb{R}^m, \cc{T}_u^n\times \cc{T}_u^m) = (\bb{R}^{n+m}, \cc{T}_u^{n+m})$.
+        
+        $B_{\infty}^n(x, \veps)\times B_{\infty}^m(y, \veps) = B_{\infty}^{n+m}((x,y), \veps)$.
+    \end{itemize}
+\end{ejemplo}
