@@ -1,7 +1,7 @@
 \chapter{Aplicaciones entre Espacios Topológicos}
 
 \begin{definicion}
-    Dados $(X, \cc{T})$, $(Y, \cc{T}')$ dos e.t., diremos que $f : (X, \cc{T}) \to (Y, \cc{T}')$ (que notaremos como $f:X \to Y$ cuando estén claros los e.t.) es \textbf{continua} en un punto $x_0\in X$ si $\forall N'\in \cc{N}_{f(x_0)}'$\ \ $\exists N \in \cc{N}_{x_0}$ con $f(N)\subset N'$. %TODO: dibujo
+    Dados $(X, \cc{T})$, $(Y, \cc{T}')$ dos e.t., diremos que $f : (X, \cc{T}) \to (Y, \cc{T}')$ (que notaremos como $f:X \to Y$ cuando estén claros los e.t.) es \textbf{continua} en un punto $x_0\in X$ si $\forall N'\in \cc{N}_{f(x_0)}'$\ \ $\exists N \in \cc{N}_{x_0}$ con $f(N)\subset N'$. 
 
     \begin{center}
         \begin{tikzpicture}
@@ -337,6 +337,25 @@
 
         %TODO: dibujo
 
+        % \begin{center}
+        %     \begin{tikzpicture}
+
+        %         \filldraw[line width=0.1pt, fill=gray!20] (0,0) circle (2cm);
+        %         \filldraw[fill=red!20, draw=red] (-3.5,-1.5) -- (2,-1.5) -- (4, 1) -- (-1.5, 1) --cycle; 
+                
+        %         \draw[thick, dashed] (0,-2) -- (0,2);
+        %         \draw[thick] (0,2) -- (0,3);
+        %         \draw[thick] (0,-2) -- (0,-3);
+
+        %         \draw[thick, dashed] (-2,0) -- (2,0);
+        %         \draw[thick] (2,0) -- (3,0);
+        %         \draw[thick] (-2,0) -- (-3,0);
+
+        %         \draw[thick, dashed] (-2,-2) -- (2,2);
+
+        %     \end{tikzpicture}
+        % \end{center}
+
         Su inversa es 
         \begin{align*}
             \Phi^{-1}: \bb{R}^n &\to \bb{S}^n \setminus \{N\}\subset \bb{R}^{n+1}\\
@@ -399,8 +418,82 @@
                 \item Sea $U'\in \cc{T}'$, $y\in U'$ tendré que ver que existe un abierto básico entremedias. Para ello tomo $f^{-1}(y)\subset f^{-1}(U')$ y como $f$ es continua tenemos que $f^{-1}(U')\in \cc{T}$. Como $\cc{B}$ es base tenemos que $\exists B \in \cc{B}$ con $f^{-1}(y)\in \cc{B}\subset f^{-1}(U')$ y como $f$ es biyectiva, $y\in f(B)\subset U'$ con $f(B)\in \cc{B}'$.
                 %TODO: dibujo
             \end{itemize}
+            \begin{center}
+                \begin{tikzpicture}
+                    \def\incolor{gray!20}
+        
+                    \filldraw[rounded corners=10pt, dashed, thick, fill=\incolor] (0,0) rectangle (3,-3);
+        
+                    \node at (1.5, -3.5) {$X$};
+                    \node at (4, -1.1) {$f$};
+                    \node at (4, -1.5) {$\longrightarrow$};
+        
+                    \filldraw[rounded corners=10pt, dashed, thick, fill=\incolor] (5,0) rectangle (8,-3);
+        
+                    \node at (6.5, -3.5) {$Y$};
+                    
+                    \filldraw[dashed, draw=blue, fill=blue!20] (1.5, -1.3) circle (32pt);
+
+                    \node at (2.2, -2.65) {\textcolor{blue}{$f^{-1}(U')$}};
+
+                    \filldraw[dashed, draw=red, fill=red!20] (1.5, -1.5) circle (25pt);
+        
+                    \node at (1, -2.6) {\textcolor{red}{$B$}};
+        
+                    \filldraw[dashed, draw=blue, fill=blue!20] (6.5, -1.5) circle (30pt);
+        
+                    \filldraw[dashed, draw=red, fill=red!20] (6.5, -1.8) circle (18pt);
+        
+                    \node at (7.4, -2.7) {\textcolor{red}{$f(B)$}};
+        
+                    \node at (7.5, -0.5) {\textcolor{blue}{$U'$}};
+        
+                    \filldraw (1.5, -1.5) circle (1.5pt)  node[below] {$f^{-1}(y)$};
+        
+                    \filldraw (6.5, -1.5) circle (1.5pt)  node[below] {$y$};
+        
+                    
+                \end{tikzpicture}
+            \end{center}
             \item[(iv)] Sea $x\in X$, $N\in \cc{N}_x$. Como $\cc{N}_x$ es entorno, $\exists U\in \cc{T}$ con $x\in U\subset N' \Rightarrow f(x)\in f(U)\subset f(N)$ y como $f$ es abierta tengo que $f(U)\in \cc{T}'$ por lo que $f(N)\in \cc{N}_{f(x)}'$
-            \item[(v)] Sea $N'\in \cc{N}_{f(x)}'$. Por (iv) (la implicación hacia la izquierda) tenemos que $f^{-1}(N')\in \cc{N}_x$. Como tenemos una b.d.e tenemos que $\exists V \in \cc{B}_x$ con $v\subset f^{-1}(N') \Rightarrow f(V)\subset N'$ y de nuevo por (iv) tenemos que $f(V)\in \cc{N}_{f(x)}'$ y tenemos lo que queríamos.
+            \item[(v)] Sea $N'\in \cc{N}_{f(x)}'$. Por (iv) (la implicación hacia la izquierda) tenemos que $f^{-1}(N')\in \cc{N}_x$. Como tenemos una b.d.e tenemos que $\exists V \in \cc{B}_x$ con $V\subset f^{-1}(N') \Rightarrow f(V)\subset N'$ y de nuevo por (iv) tenemos que $f(V)\in \cc{N}_{f(x)}'$ y tenemos lo que queríamos.
+            \begin{center}
+                \begin{tikzpicture}
+                    \def\incolor{gray!20}
+        
+                    \filldraw[rounded corners=10pt, dashed, thick, fill=\incolor] (0,0) rectangle (3,-3);
+        
+                    \node at (1.5, -3.5) {$X$};
+                    \node at (4, -1.1) {$f$};
+                    \node at (4, -1.5) {$\longrightarrow$};
+        
+                    \filldraw[rounded corners=10pt, dashed, thick, fill=\incolor] (5,0) rectangle (8,-3);
+        
+                    \node at (6.5, -3.5) {$Y$};
+                    
+                    \filldraw[dashed, draw=blue, fill=blue!20] (1.5, -1.3) circle (32pt);
+
+                    \node at (2.2, -2.65) {\textcolor{blue}{$f^{-1}(N')$}};
+
+                    \filldraw[dashed, draw=red, fill=red!20] (1.5, -1.5) circle (25pt);
+        
+                    \node at (1, -2.6) {\textcolor{red}{$V$}};
+        
+                    \filldraw[dashed, draw=blue, fill=blue!20] (6.5, -1.5) circle (30pt);
+        
+                    \filldraw[dashed, draw=red, fill=red!20] (6.5, -1.8) circle (18pt);
+        
+                    \node at (7.4, -2.7) {\textcolor{red}{$f(V)$}};
+        
+                    \node at (7.5, -0.5) {\textcolor{blue}{$N'$}};
+        
+                    \filldraw (1.5, -1.5) circle (1.5pt)  node[below] {$x$};
+        
+                    \filldraw (6.5, -1.5) circle (1.5pt)  node[below] {$f(x)$};
+        
+                    
+                \end{tikzpicture}
+            \end{center}
         \end{enumerate}
     \end{proof}
 \end{prop}
