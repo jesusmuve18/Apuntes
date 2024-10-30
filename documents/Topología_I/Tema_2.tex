@@ -655,3 +655,125 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
         $B_{\infty}^n(x, \veps)\times B_{\infty}^m(y, \veps) = B_{\infty}^{n+m}((x,y), \veps)$.
     \end{itemize}
 \end{ejemplo}
+
+\begin{observacion}
+    Sean $(X, \cc{T})$, $(Y, \cc{T}')$ dos e.t., $C\in \cc{C}_{\cc{T}}$, $C'\in \cc{C}_{\cc{T}'}\Rightarrow C\times C'\in \cc{C}_{\cc{T}\times \cc{T}'}$.
+
+
+    En efecto, 
+    \begin{gather*}
+        (X\times Y)\setminus (C\times C')=\{(x,y)\in X\times Y : (x,y\notin C\times C')\} = ((X\setminus C \times Y)) \cup (X\times (T\setminus C'))
+    \end{gather*}
+    y como $((X\setminus C \times Y)), (X\times (T\setminus C')) \in \cc{T}\times \cc{T}'$, entonces la unión de abiertos en la topología producto es abierto. 
+
+    Cabe destacar que el recíproco no es cierto, es decir, no todo cerrado en $\cc{T}\times \cc{T}'$ es producto de cerrados. Por ejemplo, en $(\bb{R}^2, \cc{T}_u)$, $([0,1]\times [0,1])\cup ([1,2] \times [1,2])$.
+
+    \endsquare
+\end{observacion}
+
+\begin{definicion}
+    Sean $X$, $Y$ dos conjuntos no vacíos, se definen las \textbf{proyecciones}
+    \begin{align*}
+        \pi_X:X\times Y &\to X \vspace*{1cm} &\pi_Y:X\times Y &\to Y\\
+        (x,y) &\mapsto x  \vspace{1cm} (x,y) &\mapsto y
+    \end{align*}
+    Son sobreyectivas
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    Sean $(X, \cc{T})$, $(Y, \cc{T}')$ e.t., entonces $\pi_X:(X\times Y, \cc{T}\times \cc{T}')\to (X, \cc{T})$ y $\pi_Y:(X\times Y, \cc{T}\times \cc{T}')\to (Y, \cc{T}')$ son continuas y abiertas.
+    \begin{proof}
+        Veamos en primer lugar que $\pi_X$ es continua. Sea $U\in \cc{T}$ tendré que ver que $\pi_X^{-1}(U)\in \cc{T}\times \cc{T}'$. Tenemos que $\pi_X^{-1}(U) = \{(x,y\in X\times Y : x\in U)\} = U\times Y \in \cc{T}\times \cc{T}'$.\\
+
+        Veamos ahora que es abierta. Para ello consideramos $\cc{B}_{\cc{T}\times \cc{T}'}=\{U\times U' : U \in \cc{T}, U'\in \cc{T}'\}$ base de $\cc{T}\times \cc{T}'$. Sea $U\times U'\in \cc{B}_{\cc{T}\times \cc{T}'}$, entonces $\pi_X(U\times U')=U\in \cc{T}$.
+
+    \end{proof}
+\end{prop}
+
+\begin{ejercicio}
+    En general, las proyecciones no son cerradas.
+    \endsquare
+\end{ejercicio}
+
+\begin{prop}
+    Sean $(X, \cc{T})$, $(Y, \cc{T}')$ dos e.t., entonces $\cc{T}\times \cc{T}'$ es la topología menos fina en $X\times Y$ que hace que las proyecciones sean continuas. Es decir, si $\tilde{\cc{T}}$ es una topología en $X\times Y$ tal que $\pi_X:(X\times Y, \tilde{\cc{T}})\to (X, \cc{T})$ y $\pi_Y:(X\times Y, \tilde{\cc{T}})\to (Y, \cc{T}')$ son continuas, entonces $\cc{T}\times \cc{T}'\leq \tilde{\cc{T}}$.
+    \begin{proof}
+        Supongamos $\tilde{\cc{T}}$ y sea $U\times U'\in \cc{B}_{\cc{T}\times \cc{T}'}\Rightarrow U\in \cc{T}, U'\in \cc{T}'$. Tendremos que comprobar que $U\times U'\in \tilde{\cc{T}}$. Tenemos que
+        \begin{align*}
+            U\times U' &= \{(x,y)\in X\times Y : x\in U, y \in U'\} \\
+            &= \{(x,y)\in X\times Y : x\in U\} \cap \{(x,y)\in X\times Y :y\in U'\} \\
+            &= (U \times Y) \cap (X\times U') = \pi_X^{-1}(U) \cap \pi_Y^{-1}(U')
+        \end{align*}
+        Como $\pi_X$ y $\pi_Y$ son continuas, tenemos que $\pi_X^{-1}(U)\in \tilde{\cc{T}}$ y $\pi_Y^{-1}(U')\in \tilde{\cc{T}}$ por lo que su intersección también está en $\tilde{\cc{T}}$ y por tanto $U\times U'\in \tilde{\cc{T}}$.
+
+    \end{proof}
+\end{prop}
+
+\begin{prop}(Placas del producto)\ 
+
+    Sean $(X, \cc{T})$, $(Y, \cc{T}')$ dos e.t., $x_0\in X$, $y_0\in Y$, entonces
+    \begin{align*}
+        (X\times \{y_0\}, (\cc{T}\times \cc{T}')_{X\times\{y_0\}})\cong (X, \cc{T})\\
+        (\{x_0\}\times Y, (\cc{T}\times \cc{T}')_{\{x_0\}\times Y})\cong (Y, \cc{T}')
+    \end{align*}
+
+    \begin{proof}
+        Sea $\pi_{X_{|_{X\times \{y_0\}}}}$ y tenemos
+        \begin{align*}
+            (X\times \{y_0\}, (\cc{T}\times \cc{T}')_{X\times \{y_0\}}) &\to (X, \cc{T})\\
+            (x,y_0) &\mapsto x
+        \end{align*}
+        Para ver que es un homeomorfismo tendremos que ver que es biyectiva (que es claro ya que su inversa sería la aplicación que lleva $x$ al par $(x,y_0)$), continua (que es claro por ser la restricción de una aplicación continua) y abierta. Veamos entonces que es abierta.
+
+        Sea $\cc{B}_{\cc{T}\times \cc{T}'}=\{U\times U': U\in \cc{T}, U'\in \cc{T}'\}$ base de $\cc{T}\times \cc{T}'$. Consideramos $\cc{B}=\{(U\times U')\cap (X\times \{y_0\}): U\in \cc{T}, U'\in \cc{T}'\}$ que es base del subespacio. Tenemos entonces:
+        
+        \begin{align*}
+            A=(U\times U')\cap (x\times \{y_0\}) = \left\{
+            \begin{array}{lcc}
+                \emptyset & \text{ si } & y_0\notin U'\\
+                U\times \{y_0\} & \text{ si } & y_0\in U'\\
+            \end{array}
+            \right.
+        \end{align*}
+        Tenemos que
+        \begin{align*}
+            \pi_{X_{|_{X\times\{y_0\}}}} (A) = \pi_X(A) = \left\{
+                \begin{array}{lcc}
+                    \emptyset & \text{ si } & y_0\notin U'\\
+                    U & \text{ si } & y_0\in U'\\
+                \end{array}
+                \right.
+        \end{align*}
+        Por lo que $\pi_{X_{|_{X\times\{y_0\}}}} (A)\in \cc{T}$ y ya tenemos que es abierta y por tanto un homeomorfismo.
+    \end{proof}
+\end{prop}
+
+\begin{prop}
+    Sean $(X, \cc{T})$, $(Y, \cc{T}')$ dos e.t., entonces
+    \begin{enumerate}
+        \item[(i)] $(X\times Y, \cc{T}\times \cc{T}')$ es 1AN $\sii (X, \cc{T})$ y $(Y, \cc{T}')$ son 1AN.
+        \item[(ii)] $(X\times Y, \cc{T}\times \cc{T}')$ es 2AN $\sii (X, \cc{T})$ y $(Y, \cc{T}')$ son 2AN.
+        \item[(iii)] $(X\times Y, \cc{T}\times \cc{T}')$ es T1 $\sii (X, \cc{T})$ y $(Y, \cc{T}')$ son T1. 
+        \item[(iv)] $(X\times Y, \cc{T}\times \cc{T}')$ es T2 $\sii (X, \cc{T})$ y $(Y, \cc{T}')$ son T2.
+        \item[(v)] $(X\times Y, \cc{T}\times \cc{T}')$ es metrizable $\sii (X, \cc{T})$ y $(Y, \cc{T}')$ son metrizables.
+    \end{enumerate}
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow)$] Supongamos que $(X\times Y, \cc{T}\times \cc{T}')$ cumple $P$, entonces $(X\times\{y_0\}, (\cc{T}\times \cc{T}')_{X\times\{x_0\}})$ cumple $P$ y como $P$ es un invariante topológico, entonces $(X, \cc{T})$ que es homeomorfo a dicho espacio también la cumple. Análogamente obtengo que $(Y, \cc{T}')$ también verifica $P$ (considerando el subespacio $(\{x_0\}\times Y, (\cc{T}\times \cc{T}')_{\{x_0\}\times Y})$).
+            \item[$\Leftarrow)$] 
+            \begin{itemize}
+                \item[(i)] Hecho en clase.
+                \item[(ii)] Hecho en clase
+                \item[(iii)] Es análoga que (iv)
+                \item[(iv)] Sean $(x,y), (x', y')\in X\times Y$ con $(x,y)\neq (x',y')$ y supongamos que $x\neq x'$ (esto no quita generalidad ya que en caso de que $x=x'$, entonces necesariamente $y\neq y'$ y se razonaría de forma simétrica). Como $X$ es T2, entonces existen $U_1, U_2\in \cc{T}$ con $x\in U_1$, $x'\in U_2$ y $U_1 \cap U_2 = \emptyset \Rightarrow (x,y)\in U_1 \times Y \in \cc{T}\times \cc{T}'$ y $(x',y')\in U_2 \times Y\in \cc{T}\times \cc{T}'$ por lo que tenemos que $(U_1\times Y)\cap (U_2\times Y) = (U_1 \cap U_2)\times Y = \emptyset \times Y = \emptyset$ y lo tenemos.
+                \item[(v)] Es un ejercicio de análisis I. Se hace de la siguiente forma. Supongamos que $\cc{T}=\cc{T}_d$ y $\cc{T}'=\cc{T}_{d'}$ y podemos definir
+                \begin{align*}
+                    \tilde{d} :(X\times Y) &\to [0,+\infty]\\
+                    ((x,y),(x',y')) & \mapsto d(x,x') + d'(y,y')
+                \end{align*}
+                Solo quedaría comprobar que $\tilde{d}$ es una distancia en $X\times Y$ (que no es materia de esta asignatura) y comprobar que $\cc{T}_{\tilde{d}} = \cc{T}\times \cc{T}'$.
+            \end{itemize}
+        \end{itemize}
+    \end{proof}
+\end{prop}
