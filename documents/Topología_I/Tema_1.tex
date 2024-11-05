@@ -431,7 +431,7 @@
         \item $(X,\cc{T})$ e.t, entonces $\cc{T}_t \leq \cc{T} \leq \cc{T}_{disc}$ 
         % (ya que todas las topologías contienen a la trivial)
         \item Si $\cc{T}_1 \leq \cc{T}_2$ y $\cc{T}_2\leq \cc{T}_1$, entonces $\cc{T}_1= \cc{T}_2$ (por doble inclusión).
-        \item En general si tenemos dos topologías en $X$, no siempre son comparables. Por ejemplo la topología del punto incluida en dos puntos distintos: 
+        \item En general si tenemos dos topologías en $X$, no siempre son comparables. Por ejemplo la topología del punto incluido en dos puntos distintos: 
         \begin{gather*}
             0,1\in \bb{R}\ \ \ (\bb{R}, \cc{T}_0), (\bb{R},\cc{T}_1)
         \end{gather*}
@@ -448,7 +448,7 @@
 \section{Cerrados}
 
 \begin{definicion}
-    Sea $(X,\cc{T})$ un e.t. Diremos que un conjunto $F\subset X$ es \textbf{cerrado} en $(X,\cc{T})$ si $X\subset F \in \cc{T}$. Denotamos por $\cc{C}_{\cc{T}}$ a la familia de todos los cerrados en $(X,\cc{T})$.
+    Sea $(X,\cc{T})$ un e.t. Diremos que un conjunto $F\subset X$ es \textbf{cerrado} en $(X,\cc{T})$ si $X\setminus F \in \cc{T}$. Denotamos por $\cc{C}_{\cc{T}}$ a la familia de todos los cerrados en $(X,\cc{T})$.
     \endsquare
 \end{definicion}
 
@@ -456,7 +456,7 @@
     \begin{enumerate}
         \item[\objetivo{C1}] $\emptyset, X \in \cc{C}_{\cc{T}}$.
         \item[\objetivo{C2}] Si $\{F_i\}_{i\in I}\subset \cc{C}_{\cc{T}}$, entonces $\bigcap\limits_{i\in I}F_i \in \cc{C}_{\cc{T}}$.
-        \item[\objetivo{C3}] Si $F_1, F_2" \in \cc{C}_{\cc{T}}$, entonces $F_1 \cup F_2 \in \cc{C}_{\cc{T}}$
+        \item[\objetivo{C3}] Si $F_1, F_2 \in \cc{C}_{\cc{T}}$, entonces $F_1 \cup F_2 \in \cc{C}_{\cc{T}}$
     \end{enumerate}
     Por inducción, de \apuntar{C3} tenemos que la unión finita de cerrados es cerrada.\\
 \end{propiedades}
@@ -517,7 +517,7 @@
     \begin{enumerate}
         \item[\apuntar{C1}] $\emptyset, X \in \cc{C}$.
         \item[\apuntar{C2}] Si $\{F_i\}_{i\in I}\subset \cc{C}$, entonces $\bigcap\limits_{i\in I}F_i \in \cc{C}$.
-        \item[\apuntar{C3}] Si $F_1, F_2" \in \cc{C}$, entonces $F_1 \cup F_2 \in \cc{C}$
+        \item[\apuntar{C3}] Si $F_1, F_2 \in \cc{C}$, entonces $F_1 \cup F_2 \in \cc{C}$
     \end{enumerate}
 
     Entonces existe una única topología $\cc{T}$ en $X$ tal que $\cc{C}_{\cc{T}}=\cc{C}$.
