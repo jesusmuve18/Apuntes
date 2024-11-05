@@ -1,0 +1,16 @@
+\section{Trabajo de clase del martes 5 de Noviembre de 2024}
+ 
+\begin{ejercicio}
+    Probar la propiedad reproductiva de una distribución normal:
+    \begin{align*}
+        M_{X_i}(t)=e^{\mu_it + \frac{\sigma_i^2 t^2}{2}}\ \ \ \forall i =1,\dots,n
+    \end{align*}
+    Entonces
+    \begin{gather*}
+        M_{\sum\limits_{i=1}^n X_i}(t) = \prod\limits_{i=1}^n M_{X_i}(t)= \prod\limits_{i=1}^n e^{\mu_it + \frac{\sigma_i^2 t^2}{2}} = e^{\sum\limits_{i=1}^n (\mu_i)t + \sum\limits_{i=1}^n \frac{(\sigma_i^2)t^2}{2}}
+    \end{gather*}
+    Y llegamos a que 
+    \begin{gather*}
+        \sum\limits_{i=1}^n X_i \sim N\left(\sum_{i=1}^n \mu_i , \sum_{i=1}^n \sigma_i^2\right)
+    \end{gather*}
+\end{ejercicio}
