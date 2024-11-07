@@ -1,0 +1,123 @@
+\documentclass[12pt]{article}
+
+\input{../_assets/preambulo.tex}
+\input{../_assets/portada.tex}
+
+\begin{document}
+
+\portada[%
+        titulo=Fundamentos de Bases de Datos,
+        subtitulo=Ejercicio 21b del Seminario 2,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2024-2025]
+
+\setcounter{ejercicio}{21}
+
+\begin{ejercicio}
+    Ponga un ejemplo original de restricciones semánticas y elabore el correspondiente esquema E/R para cada una de las siguientes situaciones:
+
+    \begin{enumerate}
+        \item[b)] Una jerarquía con obligatoriedad y exclusividad.
+        \endsquare
+        En clase el diagrama que quedó finalmente en este apartado fue el siguiente:
+        \begin{center}
+            \begin{tikzpicture}
+                \draw (-1.5,0) rectangle (1.5,1);
+                \node at (0,0.5) {Animal};
+
+                \draw (0.05,0) -- (0.05,-1);
+                \draw (-0.05,0) -- (-0.05,-1);
+
+                \node at (1,-0.5) {Disjunta};
+
+                \draw (-2,-2.5) -- (-2,-1.5) -- (2,-1.5) -- (2,-2.5);
+
+                \filldraw[fill=white] (-1,-1) -- (1,-1) -- (0,-2) -- cycle;
+                \node at (0,-1.25) {Es un};
+
+                \draw (-3.5,-2.5) rectangle (-0.5,-3.5);
+                \node at (-2,-3) {Vertebrado};
+
+                \draw (3.5,-2.5) rectangle (0.5,-3.5);
+                \node at (2,-3) {Invertebrado};
+
+            \end{tikzpicture}
+        \end{center}
+
+        Para poder crear las tablas del modelo relacional necesitamos añadir algún atributo a este diagrama. Podríamos plantearlo así:
+
+        \begin{center}
+            \begin{tikzpicture}
+
+                % Entidad Animal
+                \draw (-1.5,0) rectangle (1.5,1);
+                \node at (0,0.5) {Animal};
+
+                % Atributos Animal
+                \draw (1.5, 0.25) -- (2, 0.25);
+                \filldraw[fill=white] (2,0.25) circle (2pt) node[right] {Atr\_Animal};
+
+                \draw (1.5, 0.75) -- (2, 0.75);
+                \filldraw (2,0.75) circle (2pt) node[right] {Cod\_Especie};
+
+                % Línea obligatoria
+                \draw (0.05,0) -- (0.05,-1);
+                \draw (-0.05,0) -- (-0.05,-1);
+                \node at (1,-0.5) {Disjunta};
+
+                % Líneas jerarquía
+                \draw (-2,-2.5) -- (-2,-1.5) -- (2,-1.5) -- (2,-2.5);
+
+                % Triángulo jerarquía
+                \filldraw[fill=white] (-1,-1) -- (1,-1) -- (0,-2) -- cycle;
+                \node at (0,-1.25) {Es un};
+
+                % Entidad Vertebrado
+                \draw (-3.5,-2.5) rectangle (-0.5,-3.5);
+                \node at (-2,-3) {Vertebrado};
+
+                % Atributos Vertebrado
+                \draw (-2,-3.5) -- (-2,-4);
+                \filldraw[fill=white] (-2,-4) circle (2pt) node[below] {Atr\_Vertebrado};
+
+                % Entidad Invertebrado
+                \draw (3.5,-2.5) rectangle (0.5,-3.5);
+                \node at (2,-3) {Invertebrado};
+
+                % Atributos Invertebrado
+                \draw (2,-3.5) -- (2,-4);
+                \filldraw[fill=white] (2,-4) circle (2pt) node[below] {Atr\_Invertebrado};
+
+            \end{tikzpicture}
+        \end{center}
+        Con este diagrama nos quedarían las siguientes tablas:
+
+        \begin{center}
+            \begin{tikzpicture}
+                % Desactiva los caracteres conflictivos
+                \shorthandoff{>} % Para poner puntas de flecha
+
+                \node at (0,0) {Animal(\underline{Cod\_Especie}, Atr\_Animal)};
+                \node at (-0.5,-0.5) {CP};
+
+                \node at (-3,-2) {Vertebrado({\underline{Cod\_Especie}}, Atr\_Vertebrado)};
+                \node at (-3.5,-2.5) {CP};
+
+                \draw (-4.5,-1.6) -- (-2.5, -1.6);
+                \node at (-3.5,-1.4) {CE};
+
+                \node at (3,-4) {Invertebrado(\underline{Cod\_Especie}, Atr\_Invertebrado)};
+                \node at (2.5,-4.5) {CP};
+
+                \draw (3.5,-3.6) -- (1.5,-3.6);
+                \node at (2.5,-3.4) {CE};
+
+                \draw[->] (-3,-1.25) -- (-0.9,-0.5);
+                \draw[->] (2.25,-3) -- (-0.1,-0.5);
+            \end{tikzpicture}
+        \end{center}
+        Estas tablas no admiten fusión por tratarse de una jerarquía.
+    \end{enumerate}
+\end{ejercicio}
+
+\end{document}
