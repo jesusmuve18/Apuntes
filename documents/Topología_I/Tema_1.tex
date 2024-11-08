@@ -38,8 +38,8 @@
         \end{align*}
         \item \textbf{Topología conumerable:} (o topología de los complementos numerables) Sea $X \neq \emptyset$, $\cc{T}_{CF} = \{\emptyset\}\cup\{U\subset X : X \setminus U \text{ es numerable}\} \Rightarrow (X, \cc{T}_{CF})$ es un e.t.
         \item $\bb{R}$, $ \cc{T}=\{\emptyset, \bb{R}, \bb{Q}, \bb{R}\setminus \bb{Q}\}, \Rightarrow (\bb{R}, \cc{T})$ es un e.t. 
-        \item \textbf{Topología de Sierpinski:} $X=\{a,b\}$, $\cc{T}=\{\emptyset, \{a\}, X\} \Rightarrow (X, \cc{T})$ es un e.t.
-        \item \textbf{Topología de Sorgenfrey:} $X=\bb{R}$, $\cc{T}_S$, $U\in \cc{T}_S \sii \forall x \in U \ \  \exists \veps > 0 \text{ tal que } [x, x+\veps) \subset U$. (es un caso particular del punto incluido, $\cc{T}_a$).
+        \item \textbf{Topología de Sierpinski:} $X=\{a,b\}$, $\cc{T}=\{\emptyset, \{a\}, X\} \Rightarrow (X, \cc{T})$ es un e.t. (es un caso particular del punto incluido, $\cc{T}_a$).
+        \item \textbf{Topología de Sorgenfrey:} $X=\bb{R}$, $\cc{T}_S$, $U\in \cc{T}_S \sii \forall x \in U \ \  \exists \veps > 0 \text{ tal que } [x, x+\veps) \subset U$. 
     \end{itemize}
     \endsquare
 \end{ejemplo}
@@ -129,7 +129,7 @@
     \begin{itemize}
         \item $\overline{B}(x, r) = B(x,r) \cup S(x,r)$
         \item $S(x,r) = \overline{B}(x, r) \setminus B(x,r)$
-        \item Si $s<r$, entonces $\overline{B}(x, x) \subset B(x,r)$
+        \item Si $s<r$, entonces $\overline{B}(x, s) \subset B(x,r)$
     \end{itemize}
     \endsquare
 \end{propiedades}
@@ -258,7 +258,7 @@
 \begin{ejemplo}\
     \begin{itemize}
         \item Si $d$ es una distancia en $X$ y $\lambda > 0$, entonces $\lambda \cdot d : X \times X \rightarrow [0,\infty)$ también es una distancia y $B_{\lambda d}(x,r) = B_d\left(x, \dfrac{r}{\lambda}\right)$.
-        \item Sean $d$ y $\tilde{d}$ distancias en $X$ y $d \leq \tilde{d}$, entonces $B_d(x,r) \geq B_{\tilde{d}}(x,r)$.
+        \item Sean $d$ y $\tilde{d}$ distancias en $X$ y $d \leq \tilde{d}$, entonces $B_d(x,r) \supseteq B_{\tilde{d}}(x,r)$ \ $\forall r \in \bb{R}^+,\ x\in X$.
     \end{itemize}
     \endsquare
 \end{ejemplo}
@@ -465,7 +465,7 @@
     \begin{itemize}
         \item $U\in \cc{T}\sii X \setminus U \in \cc{C}_{\cc{T}}$, $F\in \cc{C}_{\cc{T}} \sii X\setminus F \in \cc{T}$.
         \item $\cc{T}_1 \leq \cc{T}_2\sii \cc{C}_{\cc{T}_1}\subseteq \cc{C}_{\cc{T}_2}$. Esto además implica que $\cc{T}_1=\cc{T}_2 \sii \cc{C}_{\cc{T}_1} = \cc{C}_{\cc{T}_2}$. Esto nos dice que para conocer una topología basta con conocer la familia de sus cerrados.
-        \item En general, puede haber conjntos que no sean ni abiertos ni cerrados. Por ejemplo, en $(\bb{R}, \cc{T}_u)$, tenemos que $[0,1)\notin \cc{T}_u\cup \cc{C}_{\cc{T}_u}$.
+        \item En general, puede haber conjuntos que no sean ni abiertos ni cerrados. Por ejemplo, en $(\bb{R}, \cc{T}_u)$, tenemos que $[0,1)\notin (\cc{T}_u\cup \cc{C}_{\cc{T}_u})$.
         \item En $(X, \cc{T}_{x_0})$ tenemos que $\cc{T}_{x_0}\cup \cc{C}_{\cc{T}_{x_0}} = \cc{P}(X)$ y además $\cc{T}_{x_0}\cap \cc{C}_{\cc{T}_{x_0}}=\{\emptyset, X\}$.
         \item En general, la unión arbitraria de cerrados no es cerrado. Por ejemplo, $(\bb{R}, \cc{T}_u)$, tomamos $\bigcup\limits_{n\in \bb{N}}\left[-\frac{1}{n}, 3-\frac{1}{n}\right] = (0,3)$. Otro ejemplo sería $(\bb{R}, \cc{T}_{CF})$ considerando $\bigcup\limits_{n\in \bb{N}}\{n\}=\bb{N}$ que no es cerrado.
     \end{itemize}
@@ -507,7 +507,7 @@
 
     Finalmente $\bb{R}\setminus [a,b]=(-\infty,a)\cup(b,+\infty)\in \cc{T}_u$ por ser unión de abiertos luego $[a,b]\in \cc{C}_{\cc{T}_u}$.
 
-    Dado que ya han aparecido todos los tipos posibles de intervalos en $\bb{R}$, no habrá más intervalos cerrados que los ya mencionados (ya que cualquier otro tipo de intervalo es abierto).
+    Dado que ya se han estudiado todos los complementarios de los intervalos abiertos (los abiertos en la topología) no habrá más tipos de intervalos cerrados (recordemos $U\in \cc{T}\sii X\setminus U \in \cc{C}_{\cc{T}}$)
 
     \endsquare
 \end{ejercicio}
@@ -571,7 +571,7 @@
     \begin{itemize}
         \item Sea $(X,\cc{T}_d)$ un e.m. La familia $\cc{B} =\{B(x,r):x\in X, r>0\}$ de todas las bolas abiertas es una base de $\cc{T}_d$.
         \item En $(\bb{R},\cc{T}_u)$, $\cc{B}_u=\{(a,b):a<b\}$ es base de $\cc{T}_u$ y se le llama \textbf{base usual}.
-        \item En $(\bb{R},T_u)$, $\cc{B}=\{(a,b): a,b\in \bb{Q},\ a<b\}$ es base de $\cc{T}_u$ (por la densidad de $\bb{Q}$ en $\bb{R}$).
+        \item En $(\bb{R},\cc{T}_u)$, $\cc{B}=\{(a,b): a,b\in \bb{Q},\ a<b\}$ es base de $\cc{T}_u$ (por la densidad de $\bb{Q}$ en $\bb{R}$).
         \item En $(\bb{R}^n, \cc{T}_u)$, $\cc{B}_u=\{B(x,r): x\in \bb{R}^n, r>0\}$ es la base usual. $(\bb{R}^n, \cc{T}_u)$, $\cc{B}_u=\{B(x,r): x\in \bb{R}^n, r\in \bb{Q}, r>0\}$ también es base de $\cc{T}_u$ (numerable).
         \item En $(X,\cc{T}_t)$, $\cc{B}=\{X\}$ es base (la única que no contiene al vacío).
         \item $(X,\cc{T}_d)$, $\cc{B}=\{\{x\}: x\in X\}\subset \cc{T}$ es base de $\cc{T}_{disc}$. Es la más económica ya que si $\cc{B}'$ es base, entonces $\cc{B}\subset \cc{B}'$.
@@ -750,7 +750,7 @@
 \end{prop}
 
 \begin{prop}
-    (Hausdorff, 1914) Sean $X\neq \emptyset$ un conjunto y supongamos que tenemos $\forall x \in X$ una familida $\cc{M}_x\subset \cc{P}(X)$ cumpliendo \apuntar{N1},\dots,\apuntar{N5}. Entonces existe una única topología $\cc{T}$ en $X$ cuyos sistemas de entornos $\cc{N}_x$ coinciden con $\cc{M}_x$\ \ $\forall x \in X$ (es decir, $\cc{N}_x = \cc{M}_x\ \ \forall x \in X$).\\
+    (Hausdorff, 1914) Sean $X\neq \emptyset$ un conjunto y supongamos que tenemos $\forall x \in X$ una familia $\cc{M}_x\subset \cc{P}(X)$ cumpliendo \apuntar{N1},\dots,\apuntar{N5}. Entonces existe una única topología $\cc{T}$ en $X$ cuyos sistemas de entornos $\cc{N}_x$ coinciden con $\cc{M}_x$\ \ $\forall x \in X$ (es decir, $\cc{N}_x = \cc{M}_x\ \ \forall x \in X$).\\
 
     Además, $\cc{T} = \{U\subset X : U \in \cc{M}_x\ \ \forall x \in U\}\cup\{\emptyset\}$.
 
@@ -786,7 +786,7 @@
 
         \item $\cc{B}_x = \cc{N}_x \cap \cc{T}=\{U\subset \cc{T}: x\in U\}$ es también una b.d.e. de $x$.
 
-        \item Si $\cc{B}$ es base de $\cc{T}$, entonces $\cc{B}\cap \cc{N}_x = B \in \cc{B} : x \in B$ es una b.d.e. de $x$
+        \item Si $\cc{B}$ es base de $\cc{T}$, entonces $\cc{B}\cap \cc{N}_x = \{B \in \cc{B} : x \in B$\} es una b.d.e. de $x$
         \begin{proof}
             Sea $N \in \cc{N}_x \Rightarrow \exists U \in \cc{T}$ con $x \in U \subset N$. Como $\cc{B}$ es base de $\cc{T}$, entonces $\exists B \in \cc{B}$ con $x\in B \subset U\subset N$. 
         \end{proof}
@@ -844,8 +844,8 @@
             % \filldraw (0,0) circle (1.5pt)  node[below] {$x$};
 
             \def\radius{0.4}
-            \draw[dashed, thick] (-0.6,0.6) circle (\radius);
-            \filldraw (-0.6,0.6) circle (1.5pt)  node[below] {$x'$};
+            \draw[dashed, thick] (-0.6,0.6) circle (\radius) node[above, yshift=0.3cm]{$V_y$};
+            \filldraw (-0.6,0.6) circle (1.5pt)  node[below] {$y$};
 
             \def\radius{1.1}
             \draw[dashed, thick] (-0.3,-0.3) circle (\radius) node[above, yshift=\radius cm, xshift=0.6cm] {$V'$};
@@ -874,7 +874,7 @@
 \end{prop}
 
 \begin{ejercicio}
-    Sean $(X, \cc{T})$ y $(X, \cc{T}')$ espacios topológicos y $\cc{B}_x$ b.d.e de $x$ en $(X,\cc{T})$\ \ $\forall x \in X$. Si $V$ es entorno de $x$ en $\cc{T}'$\ \ $\forall V \in \cc{B}_x$, entonces $\cc{T} \leq \cc{T}'$.ç
+    Sean $(X, \cc{T})$ y $(X, \cc{T}')$ espacios topológicos y $\cc{B}_x$ b.d.e de $x$ en $(X,\cc{T})$\ \ $\forall x \in X$. Si $V$ es entorno de $x$ en $\cc{T}'$\ \ $\forall V \in \cc{B}_x$, entonces $\cc{T} \leq \cc{T}'$.
     \endsquare
 \end{ejercicio}
 
@@ -893,8 +893,8 @@
     Sea $(X, \cc{T})$ un e.t., $A\subset X, x \in X$. Equivalen:
     \begin{enumerate}
         \item[(i)] $x$ es adherente a $A$.
-        \item[(ii)] $A\cap U \neq \emptyset$\ \ $f\forall U \in \cc{T}$ con $x\in U$.
-        \item[(iii)] $\forall B \in \cc{B}$ con $x\in B$, donde $\cc{B}$ es base de $\cc{T}$.
+        \item[(ii)] $A\cap U \neq \emptyset$\ \ $\forall U \in \cc{T}$ con $x\in U$.
+        \item[(iii)] $A \cap B \neq \emptyset \ \ \forall B \in \cc{B}$ con $x\in B$, donde $\cc{B}$ es base de $\cc{T}$.
         \item[(iv)] $A\cap V \neq \emptyset$\ \ $\forall V \in \cc{B}_x$ con $\cc{B}_x$ base de entornos de $x$.  
     \end{enumerate}
 
@@ -986,6 +986,7 @@
         \item $(\bb{R}^n, \cc{T}_u)$ es separable $\overline{\bb{Q}}=\bb{R}^n$.
         \item $A\subset X$ denso $\sii A\cap B\neq \emptyset$\ \ $\forall B \in \cc{B}$ con $\cc{B}$ base de $\cc{T}$.
     \end{itemize}
+    \endsquare
 \end{ejemplo}
 
 \begin{prop}
@@ -1033,7 +1034,7 @@
 \section{Interior}
 
 \begin{definicion}
-    Sea $(X, \cc{T})$ un r.t, $A\subset X$, $x\in X$ se dice \textbf{interior} de $A$ si $A\in \cc{N}_x$. Denotamos $A^\circ=int(A)=\{x\in A : x \text{ es interior de }A\}$ y lo llamamos \textbf{interior} de $A$.
+    Sea $(X, \cc{T})$ un e.t, $A\subset X$, $x\in X$ se dice \textbf{interior} de $A$ si $A\in \cc{N}_x$. Denotamos $A^\circ=int(A)=\{x\in A : x \text{ es interior de }A\}$ y lo llamamos \textbf{interior} de $A$.
     \endsquare 
 \end{definicion}
 
@@ -1120,7 +1121,7 @@
         \item[(iii)] $\partial A = \partial (X\setminus A)$. Esto es porque $\partial (X\setminus A) = \overline{X\setminus A}\cap \overline{A}$.
         \item[(iv)] $\overline{A} = A^\circ \sqcup \partial A$ (unión disjunta). Esto es porque $\overline{A} = A^\circ\sqcup (\overline{A}\setminus A^\circ)$.
         \item[(v)] $A^\circ = A \setminus \partial A$.
-        \item[(vi)] $X 0 A^\circ\sqcup \partial A \sqcup A^e$.
+        \item[(vi)] $X = A^\circ\sqcup \partial A \sqcup A^e$.
         \item[(vii)] $A \in \cc{C}_{\cc{T}} \sii \partial A \subset A$. (trivial con definiciones) %TODO
         \item[(viii)] $A \in \cc{T} \sii \partial A = \emptyset$.
         \item[(ix)] $A\in (\cc{T}\cap \cc{C}_{\cc{T}}) \sii \partial A = \emptyset$.
@@ -1254,8 +1255,8 @@
 
 \begin{ejemplo}\
     \begin{itemize}
-        \item "Ser metrizable" es una propiedad hereditaria.
-        \item "Tener la topología discreta" es hereditario (trivialmente).
+        \item ``Ser metrizable'' es una propiedad hereditaria.
+        \item ``Tener la topología discreta'' es hereditario (trivialmente).
     \end{itemize}
     \endsquare
 \end{ejemplo}
@@ -1395,7 +1396,7 @@
 
 \begin{ejemplo}\
     \begin{itemize}
-        \item Si $8X, \cc{T}$ es un e.t. y $\cc{T}$ es numerable, entonces $(X, \cc{T})$ es 2AN. En particular, $(X, \cc{T})$ es 2AN.
+        \item Si $(X, \cc{T})$ es un e.t. y $\cc{T}$ es numerable, entonces $(X, \cc{T})$ es 2AN. En particular, $(X, \cc{T})$ es 2AN.
         \item $(X, \cc{T}_{disc})$ es 1AN ya que $\{\{x\}\}$ es b.d.e de $x$ en $\cc{T}$. Si además $X$ es numerable, entonces tengo que $\cc{B}=\{\{x\}:x\in X\}$ es base de $\cc{T}$ por lo que es 2AN. (es una condición suficiente y necesaria ya que dicha base es la más fina).
         \item $(X, \cc{T}_{CF})$, si $X$ es numerable entonces tiene una cantidad numerable de subconjuntos finitos por lo que con esta condición, $\cc{T}_{CF}$ es numerable y por tanto 2AN (luego también 1AN). Si $X$ no es nuerable, entonces no es 1AN (luego tampoco 2AN).
         
