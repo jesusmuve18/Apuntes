@@ -1,0 +1,129 @@
+\section{Trabajo de clase del lunes 11 de Noviembre de 2024}
+ 
+\begin{ejercicio}
+    Se extraen sucesivamente sin reemplazamiento dos bolas de una urna que contiene tres bolas blancas y tres negras En relación a este experimento se definen las siguientes variables:
+
+    \begin{align*}
+        X= \left\{
+        \begin{array}{cl}
+            0 & \text{ si la primera bola es blanca}\\
+            1 & \text{ si la primera bola es negra}
+        \end{array}
+        \right.\\\\
+        Y= \left\{
+        \begin{array}{cl}
+            0 & \text{ si la segunda bola es blanca}\\
+            1 & \text{ si la segunda bola es negra}
+        \end{array}
+        \right.\\
+    \end{align*}
+
+    Calcular $E[X/Y]$ y $E[Y/X]$
+    \endsquare
+
+    Rellenamos la siguiente tabla de probabilidad condicionada:
+    \begin{center}
+        \begin{tabular}{c | c c | c}
+            $X\backslash Y$ & 0 & 1 & $P[X=x_i]$\\
+            \hline
+            0 & $\nicefrac{3}{5} \cdot \nicefrac{1}{2} = \nicefrac{3}{10}$ & $\nicefrac{3}{5}\cdot \nicefrac{1}{2} = \nicefrac{3}{10}$ & $\nicefrac{3}{5}$\\
+            1 & $\nicefrac{2}{5}\cdot \nicefrac{3}{4} = \nicefrac{3}{10}$ & $\nicefrac{2}{5}\cdot \nicefrac{1}{4} = \nicefrac{1}{10}$ & $\nicefrac{2}{5}$\\
+            \hline
+            $P[Y=y_i]$ & $\nicefrac{3}{5}$ & $\nicefrac{2}{5}$ & \\
+        \end{tabular}
+    \end{center}
+    \begin{align*}
+        E[X/Y=0] &= 0 \cdot p[X=0 / Y=0] + 1 \cdot P[X=1 | Y=0] = \frac{P[X=1, Y=0]}{P[Y=0]} = \frac{\nicefrac{3}{10}}{\nicefrac{3}{5}} = \nicefrac{1}{2} \\
+        E[X/Y=1] &= 0 \cdot p[X=0 / Y=1] + 1 \cdot P[X=1 | Y=1] = \frac{P[X=1, Y=1]}{P[Y=1]} = \frac{\nicefrac{1}{10}}{\nicefrac{2}{5}} = \nicefrac{1}{4} \\
+    \end{align*}
+    Podemos ya escribir 
+    \begin{gather*}
+        E[X/Y] = \left\{
+        \begin{array}{ccc}
+            \nicefrac{1}{2} & \text{ si } & Y=0\\
+            \nicefrac{1}{4} & \text{ si } & Y=1
+        \end{array}
+        \right.\\\\
+        E[Y/X] = \left\{
+        \begin{array}{ccc}
+            \nicefrac{1}{2} & \text{ si } & X=0\\
+            \nicefrac{1}{4} & \text{ si } & X=1
+        \end{array}
+        \right.
+    \end{gather*}
+\end{ejercicio}
+
+\begin{ejercicio}
+    Sea $(X,Y)$ un vector aleatorio con función de densidad conjunta $f_X(x,y)=2$ para $0<x<y<1$. Calcular $E[X/Y]$ y $E[Y/X]$.
+    \endsquare
+    Comencemos calculando $E[X/Y]$.
+    \begin{gather*}
+        f_Y(y) = \int_0^y f_X(x,y) dx = \int_0^y 2 dx = 2y \ \ 0<y<1\\
+        f(x/y) = \frac{f(x,y)}{f_Y(y)} = \frac{2}{2y} = \frac{1}{y} \ \ 0<x<y<1
+    \end{gather*}
+    Tenemos entonces
+    \begin{gather*}
+        E[X/Y] = \int_0^y x \cdot f(x/y) dx = \int_0^y x \cdot \frac{1}{y} dx = \frac{y}{2} \Rightarrow E[X/Y] = \frac{Y}{2} \ \ 0<Y<1
+    \end{gather*}
+    Repitamos el mismo proceso para calcular $E[Y/X]$:
+
+    \begin{gather*}
+        f_X(x) = \int_x^1 f_X(x,y)dy = \int_x^1 2 dy = 2(x-1) \ \ 0<x<1\\
+        f(y/x) = \frac{f(x,y)}{f_X(x)} = \frac{2}{2(x-1)} = \frac{1}{x-1} \ \ 0<x<1\\
+        E[Y/X] = \int_x^1 y \cdot f(y/x) dy =  \int_x^1 y \cdot \frac{1}{x-1} dy= \frac{1}{x} \cdot \frac{1-x^2}{2} = \frac{1+x}{2} \Rightarrow \frac{1+X}{2}\ \ 0<X<1 
+    \end{gather*}
+\end{ejercicio}ç
+
+\begin{ejercicio} Del lanzamiento de 3 monedas se consideran las variables:
+    \begin{align*}
+        X &\equiv \text{nº de caras}\\
+        Y &\equiv \text{diferencia en valor absoluto entre el nº de caras y de cruces}\\
+    \end{align*}
+    Calcular $E[X^2/Y]$
+    \endsquare
+    \begin{center}
+        \begin{tabular}{c|cc|c}
+            $X\backslash Y$ & 1 & 3 & $P[X=x_i]$\\
+            \hline
+            0 & 0 & $\nicefrac{1}{8}$ & $\nicefrac{1}{8}$\\
+            1 & $\nicefrac{3}{8}$ & 0 & $\nicefrac{3}{8}$\\
+            2 & $\nicefrac{3}{8}$ & 0 & $\nicefrac{3}{8}$\\
+            3 & 0 & $\nicefrac{1}{8}$ & $\nicefrac{1}{8}$\\
+            \hline
+            $P[Y=y_i]$ & $\nicefrac{6}{8}$& $\nicefrac{2}{8}$ & \\
+        \end{tabular}
+    \end{center}
+    \begin{align*}
+        E[X^2/Y=1] &= 1^2 \cdot P[X=1/Y=1] + 2^2 \cdot P[X=2 / Y=1] \\&= \frac{P[X=1, Y=1]}{P[Y=1]} + 4 \cdot \frac{P[X=2, Y=1]}{P[Y=1]} =
+         \frac{\nicefrac{3}{8}}{\nicefrac{6}{8}} + 4 \cdot \frac{\nicefrac{3}{8}}{\nicefrac{6}{8}} = \frac{5}{2}\\
+        E[X^2/Y=3] &= 3^2 \cdot P[X=3/Y=3] = 3^2 \cdot \frac{P[X=3, Y=3]}{P[Y=3]} = 9 \cdot \frac{\nicefrac{1}{8}}{\nicefrac{2}{8}} = \frac{9}{2}
+    \end{align*}
+\end{ejercicio}
+
+\begin{ejercicio}
+    Sea $(X, Y)$ el vector aleatorio con función de densidad $f_{X,Y}(x,y) = 2\ \  0<x<y<1$. Obtener la esperanza de $E[X^3 / Y]$.
+    \endsquare
+    
+    Tenemos que $f_Y(y) =2y$ y $f(x/y)=\frac{1}{y}$.
+
+    Por tanto
+    \begin{gather*}
+        E[X^3 / Y] = \int_0^3 x^3 \cdot \frac{1}{y} dx = \frac{y^3}{4},\ \ y \in (0,1)
+    \end{gather*}
+\end{ejercicio}
+
+\begin{ejercicio}
+    Demostrar la propiedad 7 de las propiedades de la esperanza condicionada. 
+    \endsquare
+    Veamos en primer lugar el caso discreto
+    \begin{align*}
+        E[g(x)/y] &= \sum_{x \in E_x}g(x) P[X=x \ Y=y_0]\\
+        E[E[g(x)/y]] &= \sum_{y\in E_y} E[g(x)/Y=y] \cdot P [Y=y] = \sum_{y\in E_y} \sum_{x\in E_x} g(x) P[X=x / Y=y] P[Y=y]\\
+        &= \sum_{y\in E_y} \sum_{x\in E_x} g(x) P[X=x, Y=y] = \sum_{x\in E_x} g(x) P[X=x]  = E[g(x)]\\
+    \end{align*}
+    Estudiemos ahora el caso continuo
+    \begin{align*}
+        E[E[g(x)/Y]] &= \int_{-\infty}^{+\infty} E[g(X)/Y] f(y) dy = \int_{-\infty}^{+\infty} f(y) \int_{-\infty}^{+\infty} g(x) f(x/y) dxdy \\
+        &= \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} g(x)f(x,y)dxdy = E[g(X)]
+    \end{align*}
+\end{ejercicio}
