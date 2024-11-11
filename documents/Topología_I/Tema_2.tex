@@ -780,3 +780,135 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
 
 % TODO: Copiar lo dado en clase los días 31 de obtubre y 6 de noviembre (pedir a Quique)
 
+\begin{definicion}
+    Sea $f:Z \to X \times Y$ una aplicación, escribimos $f=(f_X, f_Y)$ donde
+    \begin{align*}
+        f_X=\pi_X \circ f: Z \to X\\
+        f_Y=\pi_Y \circ f: Z \to Y
+    \end{align*}
+    A estas aplicaciones las llamaremos \textbf{aplicaciones componentes} de $f$. Tenemos entonces $f(z)=(f_X(z), f_Y(z))\in (X \times Y)$.
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    Sean $(X, \cc{T})$, $(Y, \cc{T}')$ y $(Z, \cc{T}'')$ e.t. Si $f:(Z, \cc{T}'')\to (X\times Y, \cc{T}\times \cc{T}')$ es una aplicación, entonces:
+    \begin{align*}
+        f \text{ es continua } \sii 
+        \begin{array}{c}
+            f_X=\pi_X \circ f : (Z, \cc{T}'')\to (X, \cc{T})\\
+            f_Y=\pi_Y \circ f : (Z, \cc{T}'')\to (Y, \cc{T}')\\
+        \end{array}
+        \text{ son continuas}
+    \end{align*}
+    Es decir, la función $f$ es continua si y solo si lo es en cada una de sus componentes.
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Leftarrow$)] Trivial por ser composición de aplicaciones continuas.
+            \item[$\Rightarrow$)] Sea $U\times U'\in \cc{B}_{\cc{T}\times \cc{T}'}\subset \cc{T}\times \cc{T}'$. Tendremos que ver que $f^{-1}(U\times U')\in \cc{T}''$. Veamos cuál es la imagen inversa. Tenemos que
+            \begin{align*}
+                f^{-1}(U\times U') &= \{z\in Z : f(z)\in (U\times U')\} = \{z \in Z : f_X(z)\in U, f_Y(z)\in U'\}=\\
+                &= f_X^{-1}(U)\cap f_Y^{-1}(U')\in \cc{T}''
+            \end{align*}
+            por ser intersección de abiertos en $\cc{T}''$.
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{definicion}
+    Sean $X_1, X_2, Y_1, Y_2\neq \emptyset$, $f_1:X_1 \to Y_1$, $f_2:X_2 \to Y_2$ aplicaciones, se define la \textbf{aplicación producto} de $f_1$ y $f_2$ como
+    \begin{align*}
+        f_1 \times f_2 : X_1 \times X_2 &\to Y_1 \times Y_2\\
+        (x_1, x_2) &\mapsto (f_1 \times f_2)(x_1, x_2) = (f_1(x_1), f_2(x_2))
+    \end{align*}
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    Sean $(X_i, \cc{T}_i)$, $(Y_i, T_i')$ e.t. para $i=1,2$ y $f_i(X_i, \cc{T}_i)\to (Y_i, \cc{T}_i')$ funciones entre e.t. para $i=1,2$. Consideramos la aplicación producto $f_1\times f_2:(X_1 \times X_2, \cc{T}_1 \times \cc{T}_2)\to (Y_1 \times Y_2, \cc{T}_1' \times \cc{T}_2')$. Entonces 
+    \begin{enumerate}
+        \item[(i)] $f_1 \times f_2$ es continua $\sii$ $f_1$ y $f_2$ son continuas.
+        \item[(ii)] $f_1 \times f_2$ es abierta $\sii$ $f_1$ y $f_2$ son abiertas.
+        \item[(iii)] $f_1 \times f_2$ es homeomorfismo $\sii$ $f_1$ y $f_2$ son homeomorfismos.
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] Sea $ U_1'\times U_2 '\in \cc{B}_{\cc{T}_1'\times \cc{T}_2'} \Rightarrow (f_1 \times f_2)^{-1}(U_1'\times U_2')=f_1^{-1}(U_1')\times f_2^{-1}(U_2')$
+            \begin{itemize}
+                \item[$\Rightarrow$)] $f_1^{-1}(U_1') \times f_2^{-1}(U_2')\in \cc{T}_1 \times \cc{T}_2$. Como la proyección $\pi_{X_1}$ es abierta, $\pi_{X_1}(f_1^{-1}(U_1') \times f_2^{-1}(U_2'))=f_1^{-1}(U_1')$ 
+                \item[$\Leftarrow$)] Trivial 
+            \end{itemize}
+            \item[(ii)] $(f_1 \times f_2)(U_1\times U_2)=f_1(U_1)\times f_2(U_2)$.
+            \item[(iii)] $(f_1\times f_2)^{-1}=f_1^{-1}\times f_2^{-1}$ 
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{coro}
+    Si $(X_i, \cc{T}_i) \cong (Y_i, \cc{T}_i')$ con $i=1,2$, entonces:
+    \begin{align*}
+        (X_1 \times X_2, \cc{T}_1 \times \cc{T}_2) \cong (Y_1 \times T_2, \cc{T}_1'\times \cc{T}_2')
+    \end{align*}
+    \endsquare
+\end{coro}
+
+\begin{definicion}
+    (Productos finitos) Sean $(X_i, \cc{T}_i)$ e.t. para $i=1,\dots,n$ con $n\in \bb{N}$, definimos:
+    \begin{align*}
+        \cc{B}_{\cc{T}_1 \times \dots \times \cc{T}_n}= \{U_1 \times U_2 \times \dots \times U_n : U_i \in \cc{T}_i\ \ \forall i \in\{1,\dots,n\} \} \subset \cc{P}(X_1 \times \dots \times X_n)
+    \end{align*}
+    Entonces $\cc{B}_{\cc{T}_1 \times \dots \times \cc{T}_n}$ es base de una única topología $\cc{T}_1, \dots, \cc{T}_n$ en $X_1, \dots, X_n$. Al espacio topológico $(X_1\times \dots \times X_n, \cc{T}_1 \times \dots \times \cc{T}_n)$ lo llamaremos \textbf{espacio topológico producto} de $(X_i, \cc{T}_i)$
+    \endsquare
+\end{definicion}
+
+\begin{observacion}
+    Todos los resultados vistos para $n=2$ son ciertos para cualquier $n\geq 2$.
+    \endsquare
+\end{observacion}
+
+\begin{definicion}
+    (Topología inicial) Sean $X\neq \emptyset$ un conjunto, $\{(X_i, \cc{T}_i)\}_{i\in I}$ una familia de e.t. y $\cc{F}=\{f_i:X \to X_i\}_{i\in I}$ una familia de aplicaciones. Se llama \textbf{topología inicial} en $X$ para la familia $\cc{F}$ a la única topología $\cc{T}_{\cc{F}}$ que tiene por subbase a 
+    \begin{gather*}
+        \emptyset \neq S = \{f^{-1}(U_i) : U_i \in X_i, i\in I\} \subset \cc{P}(X)
+    \end{gather*}
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    Con esta notación:
+    \begin{enumerate}
+        \item[(i)] $f_i:(X, \cc{T}_{\cc{F}}) \to (X_i, \cc{T}_i)$ es continua $\forall i \in I$.
+        \item[(ii)] Si $\cc{T}$ es una topología en $X$ y $f_i:(X, \cc{T})\to (Y_i, \cc{T}_i)$ es continua $\forall i\in I$, entonces $\cc{T}_{\cc{F}}\leq \cc{T}$
+        \item[(iii)] Si $f:(Z, \cc{T}')\to (X, \cc{T}_{\cc{F}})$, entonces $f$ es continua $\sii (f_i\circ f)(Z, \cc{T}') \to (X_i, \cc{T}_i)$ es continua $\forall i \in I$
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] Trivial
+            \item[(ii)] Trivial
+            \item[(iii)] Se deja planteada como ejercicio para el lector %TODO  
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Si $(X, \cc{T})$, $Y, \cc{T}'$ son e.t. y $\cc{F}=\{\pi_X: X\times Y \to X, \pi_Y:X\times Y \to Y\}$, entonces $(X\times Y, \cc{T}_{\cc{F}}) = (X\times Y, \cc{T}\times \cc{T}')$
+        \item Si $(X, \cc{T})$ e.t., $\emptyset \neq A \subset X$, $\cc{F}=\{i_A: A\to X\}$ (donde $i_A$ es la aplicación inclusión de $A$), entonces $(A, \cc{T}_{\cc{F}})=(A, \cc{T}_A)$ (ya que $i_A^{-1}(U)=U \cap A$).
+    \end{itemize}
+\end{ejemplo}
+
+\section{Identificaciones y topología cociente}
+
+\begin{teo}
+    Sea $(X, \cc{T})$ un e.t., $Y\neq \emptyset$ un conjunto y la aplicación $f:(X, \cc{T})\to Y$, entonces la familia
+    \begin{gather*}
+        \cc{T}_f = \{U'\subset Y : f^{-1}(U')\in \cc{T}\}\subset \cc{P}(Y)
+    \end{gather*}
+    es una topología en $Y$ que llamamos \textbf{topología final} para la aplicación $f$. Además,
+    \begin{enumerate}
+        \item[(i)] $f:(X, \cc{T})\to (Y, \cc{T}_f)$ es continua.
+        \item[(ii)] Si $\cc{T}'$ es una topología en $Y$ con $f:(X, \cc{T})\to (Y, \cc{T}')$ es continua, entonces $\cc{T}'\leq \cc{T}_f$
+    \end{enumerate}
+    \begin{proof}
+        Veamos en primer lugar que efectivamente $\cc{T}_f$ es una topología en $X$:
+    \end{proof}
+\end{teo}
