@@ -909,6 +909,139 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
         \item[(ii)] Si $\cc{T}'$ es una topología en $Y$ con $f:(X, \cc{T})\to (Y, \cc{T}')$ es continua, entonces $\cc{T}'\leq \cc{T}_f$
     \end{enumerate}
     \begin{proof}
-        Veamos en primer lugar que efectivamente $\cc{T}_f$ es una topología en $X$:
+        Veamos en primer lugar que efectivamente $\cc{T}_f$ es una topología en $X$
+        \begin{enumerate}
+            \item[\apuntar{A1}] $f^{-1}(\emptyset)=\emptyset \in \cc{T} \Rightarrow \emptyset\in \cc{T}_f$. $f^{-1}(Y)=X\in \cc{T}\Rightarrow Y \in \cc{T}_f$
+            \item[\apuntar{A2}] Sea $\{U_i'\}_{i\in I}\subset \cc{T}_f$. Queremos ver que $\bigcup\limits_{i\in I}U_i'\in \cc{T}_f$.
+            \begin{gather*}
+                f^{-1}\left(\bigcup\limits_{i\in I}U_i'\right) = \bigcup\limits_{i\in I} f^{-1}(U_i')\in \cc{T} \Rightarrow \bigcup\limits_{i\in I}U_i'\in \cc{T}_f
+            \end{gather*}
+            \item[\apuntar{A3}] Sean $U_1', U_2'\in \cc{T}_f$ tendremos que ver que $U_1'\cap U_2'\in \cc{T}_f$.
+            \begin{gather*}
+                f^{-1}(U_1'\cap U_2)=f^{-1}(U_1')\cap f^{-1}(U_2')\in \cc{T}
+            \end{gather*}
+            por ser intersección de abiertos en $\cc{T}$.
+        \end{enumerate}
+        Veamos ahora que verifica las 2 propiedades que menciona el teorema:
+        \begin{enumerate}
+            \item[(i)] Trivial (por la definición de $\cc{T}_f$)
+            \item[(ii)] Sea $U'\in \cc{T}$ veamos que entonces $U'\in \cc{T}_f$. Por ser $f$ continua tenemos que $f^{-1}(U')\in \cc{T}\Rightarrow U'\in \cc{T}_f$ y lo tenemos probado.
+        \end{enumerate}
     \end{proof}
 \end{teo}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $Id_X:(X, \cc{T})\to X$. $\cc{T}_{Id_X}=\{U\in X : Id_X^{-1}(U) \in \cc{T}\}=\{U\in X : U \in \cc{T}\}$
+        \item $f:(X, \cc{T})\to Y$ constante, es decir, $f(x)=y_0\in Y\ \ \forall x \in X$. Entonces tenemos que $\cc{T}_f=\cc{T}_{disc}$ ya que
+        \begin{align*}
+            \cc{T}_f=\{U'\subset Y : f^{-1}(U')\in \cc{T}\}=\cc{P}(Y)
+        \end{align*}
+        Esto se debe a que
+        \begin{align*}
+            f^{-1}(U')=\left\{
+            \begin{array}{ccc}
+                X & \text{ si } & y_0\in U'\\
+                \emptyset & \text{ si } & y_0\notin U'
+            \end{array}
+            \right.
+        \end{align*} 
+        \item Consideramos la siguiente función
+        \begin{align*}
+            f:([0,1], \cc{T}_u|_{[0,1]})&\to Y=\{0,1\}\\
+            x &\mapsto \left\{
+            \begin{array}{ccc}
+                1 & \text{ si } & x \in [0,\nicefrac{1}{2}]\\
+                0 & \text{ si } & x \in (\nicefrac{1}{2}, 1]
+            \end{array}
+            \right.
+        \end{align*}
+        Entonces tenemos que
+        \begin{align*}
+            \cc{T}_f=\{U'\subset \{0,1\} : f^{-1}(U')\in \cc{T}_u|_{[0,1]}\}=\{\emptyset, \{0,1\}, \{0\}\}
+        \end{align*}
+        Veamos por qué $\{0\}\in \cc{T}_f$ pero $\{1\}\notin \cc{T}_f$
+        \begin{align*}
+            f^{-1}(\{0\})=(\nicefrac{1}{2},1] \in \cc{T}_u|_{[0,1]}\Rightarrow \{0\}\in \cc{T}_f\\
+            f^{-1}(\{1\})=[0,\nicefrac{1}{2}] \notin \cc{T}_u|_{[0,1]}\Rightarrow \{1\}\notin \cc{T}_f\\
+        \end{align*}
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}
+    Sea $f:(X,Y)\to Y$ una aplicación. Entonces:
+    \begin{enumerate}
+        \item[(i)] Una aplicación $g:(Y, \cc{T}_f)\to (Z, \cc{T}'')$ es continua si y solo si $g\circ f:(X, \cc{T})\to (Z, \cc{T}'')$ es continua.
+        \begin{center}
+            \begin{tikzpicture}
+                % Desactiva los caracteres conflictivos
+                \shorthandoff{>} % Para poner puntas de flecha
+
+                \node at (0,0) {$(X, \cc{T})$};
+                \node at (0,-1.5) {$(Y, \cc{T}')$};
+                \node at (3,-1.5) {$(Z, \cc{T}'')$};
+
+                \draw[->] (0.6,-0.3) -- (2.4,-1.2);
+                \draw[->] (0,-0.3) -- (0,-1.2);
+                \draw[->] (0.7,-1.5) -- (2.3,-1.5);
+
+                \node at (2,-0.5) {$g\circ f$};
+                \node at (-0.25, -0.75) {$f$};
+                \node at (1.5, -1.75) {$g$};
+            \end{tikzpicture}
+        \end{center}
+        \item $\cc{C}_{\cc{T}_f}=\{C'\subset Y : f^{-1}(C')\in \cc{C}_{\cc{T}}\}$
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] 
+            \begin{itemize}
+                \item[$\Rightarrow$)] Por ser $g\circ f$ composición de continuas.
+                \item[$\Leftarrow$)] Sea $U''\in \cc{T}''$, tendremos que ver que $g^{-1}(U'')\in \cc{T}_f$.
+                \begin{align*}
+                    f^{-1}(g^{-1}(U'')) \overset{\ast}{=} (g\circ f)^{-1}(U'')\in \cc{T}\Rightarrow g^{-1}(U'')\in \cc{T}_f
+                \end{align*}
+                Donde en $\ast$ hemos tenido en cuenta que $g\circ f$ es continua. Por tanto tenemos que $g$ es continua.
+            \end{itemize}
+            \item[(ii)] Sea $C'\subset Y$, $C'\in \cc{C}_{\cc{T}_f}\sii Y\setminus C' \in \cc{T}_f \sii f^{-1}(Y\setminus C')\in \cc{T} \sii f^{-1}(C')\in \cc{C}_{\cc{T}}$
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{definicion}
+    Una aplicación $p:(X, \cc{T})\to (Y, \cc{T}')$ es una \textbf{identificación} si $p$ es sobreyeciva y $\cc{T}'=\cc{T}_p$.
+    \endsquare
+\end{definicion}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item Toda identificación es continua.
+        \item Si $p:(X, \cc{T})\to (Y, \cc{T}')$ es una identificación y $g:(Y, \cc{T}')\to(Z, \cc{T}'')$ es otra aplicación con $\cc{T}'=\cc{T}_p$, entonces $g$ es continua $\sii g\circ p: (X, \cc{T})\to (Z, \cc{T}'')$ es continua.
+    \end{itemize}
+\end{observacion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $Id_X:(X, \cc{T})\to (X, \cc{T}')$ es identificación $\sii \cc{T}=\cc{T}'$.
+        \item $p: \cc{X}_{[0,\nicefrac{1}{2})}:([0,1], \cc{T}_u|_{[0,1]})\to (\{0,1\}, \cc{T}_f=\{\emptyset, \{0,1\}, \{0\}\})$ es identificación pero no es abierta ni cerrada.
+        \begin{align*}
+            p([0,\nicefrac{1}{4})) = \{1\}\notin \cc{T}_f \text{ pero } [0,\nicefrac{1}{4})\in \cc{T}_u|_{[0,1]}\\
+            p([\nicefrac{3}{4}, 1])=\{0\}\notin \cc{C}_{\cc{T}_p} \text{ pero } [\nicefrac{3}{4}, 1] \in \cc{C}_{\cc{T}_u\_{[0,1]}}
+        \end{align*}
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}
+    Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es continua, sobreyectiva y abierta, o continua, sobreyectiva y cerrada, entonces $f$ es una identificación.
+    \begin{proof}
+        Por hipótesis tenemos que $f$ es sobreyecriva y queremos ver que $\cc{T}'=\cc{T}_f$. Como $f$ es continua tenemos que $\cc{T}'\leq \cc{T}_f$. Supongamos que $f$ es abierta y querremos ver la otra inclusión. Sea $U'\in \cc{T}_f$, entonces tenemos que $f^{-1}(U)\in \cc{T}$. Por ser $f$ abierta tenemos que $f(f^{-1}(U))\in \cc{T}'$ y ya tenemos probada la doble inclusión.\\
+
+    \end{proof}
+\end{prop}
+
+\begin{observacion}
+    Una identificación puede no ser abierta ni cerrada.
+    \endsquare
+\end{observacion}
