@@ -1,0 +1,74 @@
+\section{Trabajo de clase del martes 19 de Noviembre de 2024}
+
+\begin{ejercicio}
+    Al finalizar un ejercicio obtenemos el siguiente resultado: $\eta_{X/Y}^2= \nicefrac{2}{3}$.
+    La conclusión que podríamos extraer de esto sería la siguiente:
+
+    La función ajustada explica el 66,66\% de la variabilidad de $X$ a partir de $Y$
+\end{ejercicio}
+
+\begin{ejercicio}
+    Sea $(X,Y)$ un vector aleatorio con función de densidad $f(x,y)=1$ con $(x,y)\in T$, siendo $T$ el triángulo con vértices $(0,0),(2,0)$ y $(1,1)$. Obtener la función de regresión óptima de la variable $Y$ a partir de $X$, su error cuadrático medio y decir si el ajusto es fiable.
+    \endsquare
+    Nos están pidiendo calcular $E[Y/X]$. Para ello necesito $f(y/x)$ y sabemos que $f(y/x)=\frac{f(x,y)}{f_X(x)}$. 
+    \begin{align*}
+        f_X(x)=\left\{
+        \begin{array}{lcl}
+            \int_0^x 1 dy = x & \text{ si } & 0<x<1\\\\
+            \int_0^{2-x} 1 dy = 2-x & \text{ si } & 1<x<2
+        \end{array}
+        \right.
+    \end{align*}
+    Con esto tengo que 
+    \begin{align*}
+        f(y/x)=\left\{
+        \begin{array}{ccll}
+            \frac{1}{x} & \text{ si } & 0<y<x &(0<x<1)\\\\
+            \frac{1}{2-x} & \text{ si } & 0<y<2-x & (1<x<2)
+        \end{array}
+        \right.
+    \end{align*}
+    Y puedo escribir
+    \begin{align*}
+        E[Y/X]= \int_R Y f(y/x) = \left\{
+        \begin{array}{ccll}
+            \int_0^x \frac{y}{x} dy = \frac{x}{2} & \text{ si } & 0<x<1\\\\
+            \int_0^{2-x} \frac{y}{2-x} dy = \frac{2-x}{2} & \text{ si } &  1<x<2
+        \end{array}
+        \right.
+    \end{align*}
+    Y ya tenemos la función de regresión óptima de la variable $Y$ a partir de $X$:
+    \begin{align*}
+        E[Y/X]= \left\{
+        \begin{array}{ccll}
+            \frac{X}{2} & \text{ si } & 0<X<1\\\\
+            \frac{2-X}{2} & \text{ si } &  1<X<2
+        \end{array}
+        \right.
+    \end{align*}
+    Calculemos el error cuadrático medio, es decir, $E[Var(Y/X)]$. Comencemos por calcular $Var(Y/X)$.
+    \begin{align*}
+        E[Y^2/X] &=\left\{
+        \begin{array}{ccll}
+            \int_0^x y^2 \cdot \frac{1}{x} dy = \frac{x^2}{3}& \text{ si } & 0<x<1\\\\
+            \int_0^{2-x} y^2 \cdot \frac{1}{2-x} dy = \frac{(2-x)^2}{3} & \text{ si } &  1<x<2
+        \end{array}
+        \right.\\
+        Var(Y/X) = E[Y^2/X] - E[Y/X]^2 &= \left\{
+            \begin{array}{ccll}
+                \frac{x^2}{3} - \left(\frac{x}{2}\right)^2 = \frac{x^2}{12}& \text{ si } & 0<x<1\\\\
+                \frac{(2-x)^2}{3} - \left(\frac{2-x}{2}\right)^2 = \frac{(2-x)^2}{12} & \text{ si } &  1<x<2
+            \end{array}
+            \right.
+    \end{align*}
+    Finalmente calculamos el E.C.M calculando la esperanza del resultado recién obtenido:
+    \begin{align*}
+        E[Var(Y/X)] &= \int_R Var(y/x) f_X(x) dx =\\ &= \int_0^1 \frac{x^2}{12} \cdot x dx + \int_1^2 \frac{(2-x)^2}{12} \cdot (2-x) dx
+        = \frac{1}{24}
+    \end{align*}
+    Para interpretar la fiabilidad del ajuste calcularemos la razón de correlación de $Y$ sobre $X$.
+    \begin{align*}
+        \eta_{Y/X}^2 = 1- \frac{E.C.M}{Var(Y)} = 1- \frac{\nicefrac{1}{24}}{\nicefrac{1}{18}} = \frac{1}{4}
+    \end{align*}
+    Donde nos han dado ya calculada la varianza de $Y$ (aunque en un ejercicio deberíamos de calcularla nosotros).
+\end{ejercicio}
