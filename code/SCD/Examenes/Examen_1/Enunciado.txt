@@ -1,0 +1,31 @@
+NORMAS DEL CONTROL:
+- Si hay copia entre trabajos entregados se anularán ambos trabajos implicados.
+- Dispone de una hora y cuarenta minutos para completar la prueba.
+- Se exige que los cambios que se piden se realicen partiendo del código existente en os archivos que se proporionan, intentando reutilizar aquellos elementos y nombres de variables ya existentes que se puedan adaptar fácilmente a los nuevos requisitos.
+
+Entrar a la plataforma PRADO y descargar los archivos "fumadores-sem.cpp" y "lec-esc-SU.cpp". El primer archivo incluye una solución simple basada en un monitor SU (en lugar de semáforos) del problema de los lectores escritores de la práctica 2 con 4 lectores y 2 escritores.
+
+1. Copiar el archivo fumadores-sem.cpp en un archivo denominado "fumadores.1.cpp" y realizar modificaciones en este último archivo (usando semáforos y/o objetos mutex) tal como se muestra a continuación:
+
+a)[2.5] Después de que un fumador fume las dos primeras veces, en su tercera iteración (y solo en esa) decide no fumar y prefiere echarse a dormir. Para ello:
+- Cuando dicho fumador deba returar su ingrediente en esa tercera iteración, se asegura primero que el estanquero ha puesto su ingrediente en el mostrador y lo "retira" para permitir que el estanquero ponga más ingredientes. A continuación, en lugar de fumar, se echa a dormir esperando que el estanquero lo despierte.
+- Cuando el estanquero vaya a colocar el cuarto ingrediente de un fumador concreto (lógicamente el estanquero debe tener registro de los ingredientes que lleva proporcionados a cada fumador), debe antes avisar a dicho fumador para que se despierte de su dulce sueño.
+- Una vez el fumador es despertado, podrá entrar en su modo de funcionamiento normal, avanzando hacia la siguiente iteración para recoger su cuarto ingrediente del mostrador.
+
+b)[1.5] Adicionalmente, se creará una nueva hebra informadora12 que solo se encarga de esperar a que terminen de domrir (en su tercera iteración) las hebras fumadoras 1 y 2 (no debe esperar a la fumadora 0) para imprimir el siguiente mensaje por pantalla y finalizar su ejecución a continuación:
+"************* LAS FUMADORAS 1 Y 2 YA HAN DESCANSADO ***************".
+
+2. Copiar el archivo lec-esc-SU.cpp en un archivo denominado "lec-esc-2.cpp" y realizar modificaciones en este último archivo (basadas en monitores SU) tal y como se muestra a continuación [6]:
+
+a) Cuando un escritor accede para escribir, escribe su número de hebra escritora (0 o 1) en un array compartido con capacidad con tres celdas enteras para comunicarse con una nueva hebra "Impresora".
+
+La hebra Impresora realizará un bucle infinito y, en cada iteración del bucle, extraerá uno de los números enteros almacenados en el array global (X) y lo imprimirá por pantalla con un mensaje del tipo:
+"......... ESCRIBIÓ EL ESCRITOR X. HAY N ELEMENTOS EN EL BUFFER ........."
+
+b) Para conseguir este esquema de comunicación usando monitores SU se ha de implementar una nueva clase monitor SU, llamada Buffer, para permitir la comunicación entre los escritores y la hebra impresora de tal forma que una instancia de esta clase será compartida por dichas hebras. Esta clase, tendrá los siguientes métodos, además del constructor de la clase:
+- void Escribir (int numero_escritor): Este método lo llamará la hebra escritora, justo después de invocar ini_escritura, para escribir en el array compartido su número de hebra escritora.
+- void Extraer(int &N): Este método lo llamará la hebra Impresora en cada iteración cuando necesite obtener un nuevo valor del array compartido, justo antes de sacar el mensaje por pantalla. Este método devolverá el elemento entero extraído del array y el argumento N, pasado por referencia, almacenará al finalizar el método el número de valores (sin extraer que quedan en el array compartido después de la extracción. La extracción de un elemento del array implica eliminar ese valor del almacen compartido que representa el array).
+
+c) Los métodos de la clase Buffer deben impedir que se pueda escribir en el array compartido cuando se mantenga tenga tres elementos insertados que no han sido extraídos y también debe impedir que se pueda extraer si el array no tiene nuevos elementos insertados (sin extraer). Además, este objeto debe garantizar que el orden en que se extraen los datos del array compartido coincidirá con el orden en que han sido previamente escritos.
+
+ENTREGA: Los archivos fumadores-1.cpp y lec-esc-2.cpp deben ser subidos a través de esta tarea PRADO: "Control de Evaluación Prácticas 1 y 2. Grupo A2".
