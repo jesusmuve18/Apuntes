@@ -1045,3 +1045,134 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
     Una identificación puede no ser abierta ni cerrada.
     \endsquare
 \end{observacion}
+
+%TODO: Lo último es descripción de los abiertos en la topología cociente
+
+\begin{definicion}
+    Si $f:X \to Y$ es una aplicación y $R$ es una relación de equivalencia en $X$ con proyección $p:X \to X/R$.
+    % TODO: dibujo
+    %      f
+    %   X ---> Y
+    % P |   / (discontinua y flecha hacia arriba)
+    %   v  /  \tilde{f}
+    %   X/R
+    Se dice que $f$ es \textbf{compatible} con $R$ si $f(x)=f(x')$\ \ $\forall x, x' \in X$ con $xRx'$. En este caso, la aplicación $f$ \textbf{baja al cociente} como una aplicación bien definida, es decir, que hace que el diagrama sea conmutativo. Se le suele notar por $\tilde{f}:X/R \to Y$ tal que $\tilde{f}([x]_R)=f(x)$ con $\tilde{f}\circ p = f$.
+    \endsquare
+\end{definicion}
+
+\begin{coro}
+    Con topologías $(X, \cc{T})$, $(Y, \cc{T}')$ y $(X/R, \cc{T}/R)$, entonces 
+    \begin{enumerate}
+        \item[(i)] $\tilde{f}$ es continua $\sii$ $f$ es continua.
+        \item[(ii)] $\tilde{f}$ es una identificación $\sii$ $f$ es una identificación.
+    \end{enumerate}
+    \endsquare
+\end{coro}
+
+\begin{definicion}
+    Si $f:X \to Y$ es una aplicación y $R$ es una relación de equivalencia en $X$ con proyección $p:X \to X/R$ y $S$ una relación de equivalencia en $Y$ con proyección $q:Y \to Y/S$.
+    % TODO: dibujo
+    %      f
+    %   X ---> Y
+    % P |   _  |           _
+    %   v   f  v     donde f denota a \tilde{f} (todas las flechas son continuas)
+    %   X/R --> Y/S
+    Se dice que $f$ es \textbf{compatible} con $R$ y $S$ si $f(x)Sf(x')$\ \ $\forall x, x' \in X$ con $xRx'$. En este caso, la aplicación $f$ \textbf{baja a los cocientes} como una aplicación bien definida Se nota por $\tilde{f}:X/R \to Y/S$ tal que $\tilde{f}([x]_R)=[f(x)]_S$ con $\tilde{f}\circ p = q \circ f$.
+    \endsquare
+\end{definicion}
+
+\begin{coro}
+    Con topologías $(X, \cc{T})$, $(Y, \cc{T}')$ y $(X/R, \cc{T}/R)$ y $(Y/S, \cc{T}'/S)$, entonces 
+    \begin{enumerate}
+        \item[(i)] $f$ es continua $\Rightarrow$ $\tilde{f}$ es continua.
+        \item[(ii)] $f$ es una identificación $\Rightarrow$ $\tilde{f}$ es una identificación.
+    \end{enumerate}
+    \endsquare
+\end{coro}
+
+\begin{definicion}
+    Si $f:X\to Y$ una aplicación, se induce una relación de equivalencia $R_f$ en $X$ dada por 
+    \begin{align*}
+        xR_fx' \sii f(x)=f(x')
+    \end{align*}
+    Además, $f$ baja al cociente como una aplicación inyectiva
+    \begin{align*}
+        \tilde{f}: X/R_f &\to Y\\
+        \tilde{f}([x]_{R_f}) & \mapsto f(x)
+    \end{align*}
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    La aplicación $f:(X,\cc{T}) \to (Y, \cc{T}')$ es una identificación si y solo si $\tilde{f}:(X/R_f, \cc{T}/R_f)\to (Y, \cc{T}')$ es un homeomorfismo.
+    % TODO: dibujo
+    %      f (identificacion)
+    %     X ---> Y
+    % P_f |   / (discontinua y flecha hacia arriba)
+    %     v  /  \tilde{f} (homeomorfismo)
+    %     X/R
+    En este caso, $(X/R_f, \cc{T}/R_f)\cong (Y, \cc{T}')$.
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Leftarrow$)] $\tilde{f}$ homeomorfismo $\Rightarrow \tilde{f}$ identificación y como además $p_f$ es identificación, tenemos que $f=\tilde{f}\circ p_f$ es una identificación y lo tenemos.
+            \item[$\Rightarrow$)] $f$ y $p_f$ son identificaciones por lo que $f=\tilde{f}\circ p_f$ es identificación y como además $\tilde{f}$ es inyectiva tenemos que $\tilde{f}$ es un homeomorfismo.
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item Salvo homeomorfismo, toda identificación es una proyección al cociente.
+        \item Para encontrar un homeomorfismo $(X/R, \cc{T}/R)\to (Y, \cc{T}')$ ``basta''\footnote{no siempre es fácil} encontrar una identificación $f:(X,\cc{T})\to (Y, \cc{T}')$ con $R_f=R$.
+    \end{itemize}
+    \endsquare
+\end{observacion}
+
+\begin{ejemplo}(Cociente por un subconjunto)
+    Sean $(X, \cc{T})$ un e.t. y un subespacio $\emptyset \neq A \subset X$. Se define la relación de equivalencia $R_A$ en $X$ como 
+    \begin{align*}
+        xR_A x' \sii \left\{
+        \begin{array}{c}
+            x=x'\\
+            o\\
+            \{x,x'\}\subseteq A\\
+        \end{array}
+        \right.
+    \end{align*}
+    Se denota $(X/A, \cc{T}/A)\equiv (X/R_A, \cc{T}/R_A)$.\\
+
+    Si el conjunto $A$ es abierto, entonces la proyección $p_A:(X, \cc{T})\to (X/A, \cc{T}/A)$ es abierta. Si $A$ es cerrado, entonces la proyección $p_A:(X, \cc{T})\to (X/A, \cc{T}/A)$ es cerrada. Veamos por qué esto es cierto:\\
+
+    Para ello tomo $B\subset X$. Sabemos que \begin{align*}
+        p_A^{-1}(p_A(B)) = \left\{
+            \begin{array}{ccc}
+                B & \text{ si } & B\cap A = \emptyset\\
+                B\cup A & \text{ si } & B\cap A \neq \emptyset\\
+            \end{array}
+            \right.
+    \end{align*}
+    Si $A$ es abierta entonces tenemos que $p_A^{-1}(p_A(B))\in \cc{T}$\ \ $\forall B \in \cc{T}$ . Si $A$ es cerrada entonces tenemos que $p_A^{-1}(p_A(B))\in \cc{C}_{\cc{T}}$\ \ $\forall B \in \cc{C}_{\cc{T}}$ . 
+    \endsquare
+\end{ejemplo}
+
+\begin{ejemplo}
+    Consideramos la topología $([0,1], \cc{T}_u)$ y el conjunto $A=\{0,1\}$ que induce la relación $R_A$. Podemos ver intuitivamente que esta relación identifica el $0$ con el $1$ y al resto de puntos los deja igual. Podemos considerar $([0,1]/\{0,1\}, \cc{T}_u|_{[0,1]}/\{0,1\})$. De nuevo intuitivamente podemos considerar que cogemos el intervalo $[0,1]$ y lo unimos por los extremos creando una circunferencia. Podemos intuir que  $([0,1]/\{0,1\}, \cc{T}_u|_{[0,1]}/\{0,1\}) \cong (\bb{S}^1, \cc{T}_u)$ (en la próxima sesión se verá la formalización de este homeomorfismo).
+    \endsquare
+\end{ejemplo}
+
+\begin{ejemplo}
+    Consideramos en $\bb{R}^2$ la bola unidad cerrada $(\overline{\bb{B}}(0,1), \cc{T}_u)$ y considero $A=\bb{S}^1$. Tenemos entonces $(\overline{\bb{B}}(0,1)/\bb{S}^1), \cc{T}_u|_{\overline{\bb{B}}(0,1)/\bb{S}^1}\cong (\bb{S}^2, \cc{T}_u)$.
+    \endsquare
+\end{ejemplo}
+
+\begin{ejemplo}
+    Consideramos $([0,1]\times \bb{R}, \cc{T}_u)$. Definimos la relación de equivalencia $R$ como 
+    \begin{align*}
+        (x,y)R(x',y') \sii (x,y)=(x',y') o \left\{
+        \begin{array}{c}
+            y=y'\\
+            \{x,x'\}=\{0,1\}
+        \end{array}
+        \right.
+    \end{align*}
+\end{ejemplo}
