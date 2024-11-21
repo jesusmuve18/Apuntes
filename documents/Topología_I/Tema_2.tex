@@ -1284,7 +1284,7 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
     \endsquare
  \end{ejemplo}
 
- \begin{ejemplo}
+ \begin{ejercicio}
     (El cilindro $\bb{S}^1\times \bb{R}$ como cociente de $\bb{R}=\bb{R}\times \bb{R}$)
 
     Consideramos la siguiente relación de equivalencia:
@@ -1296,5 +1296,64 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
                 y=y', x-x'\in \bb{Z}
             \end{array}
         \right.
+    \end{align*}
+    Se deja planteado como ejercicio (está muy relacionado con los ejemplos anteriores).
+    \endsquare
+ \end{ejercicio}
+
+ \begin{ejercicio}
+    (El cilindro acotado como cociente de $[0,1]\times [0,1]$)
+
+    Podemos escribir el cilindro como $\{(x,y,z)\in \bb{R}^3: x^2+y^2=1, 0\leq z\leq 1\}$
+    \endsquare
+ \end{ejercicio}
+
+ \begin{ejemplo}
+    (La cinta de Möbius)
+
+    Se define la cinta de Möbius finita como el cociente de $([0,1]\times [0,1], \cc{T}_u)$ con la relación de equivalencia $R$ dada por
+    \begin{align*}
+        (x,y)R(x',y') \sii \left\{
+        \begin{array}{c}
+            (x,y)=(x',y')\\
+            o\\
+            \{x,x'\}=\{0,1\}, y=1-y'
+        \end{array}
+        \right.
+    \end{align*}
+
+    La cinta de Möbius infinita se define como el cociente $([0,1]\times \bb{R}/R, \cc{T}_u)$ donde $R$ está dada por
+    \begin{align*}
+        (x,y)R(x',y') \sii \left\{
+        \begin{array}{c}
+            (x,y)=(x',y')\\
+            o\\
+            \{x,x'\}=\{0,1\}, y=-y'
+        \end{array}
+        \right.
+    \end{align*}
+    \endsquare
+ \end{ejemplo}
+
+ \begin{ejemplo}(Toro)
+
+    Se define el toro como $([0,1]\times [0,1]/R, \cc{T}_u/R)$ donde $R$ viene dada por 
+    \begin{align*}
+        (x,y)R(x',y') \sii \left\{
+        \begin{array}{c}
+            (x,y)=(x',y')\\
+            o\\
+            \{x,x'\}=\{0,1\}, y=y'\\
+            o\\
+            x=x', \{y,y'\}=\{0,1\}\\
+            o\\
+            (x,y),(x',y')\subset\{(0,0),(0,1),(1,0),(1,1)\}
+        \end{array}
+        \right.
+    \end{align*}
+    Notaremos el toro como $\bb{T}\cong (\bb{S}^1\times \bb{S}^1, \cc{T}_u\times \cc{T}_u)$. Considero 
+    \begin{align*}
+        g:[0,1]\times [0,1] &\to \bb{S}^1\times \bb{S}^1\\
+        (x,y) &\mapsto (\cos(2\pi x), \sen(2\pi x), cos(2\pi y), \sen(2\pi y))
     \end{align*}
  \end{ejemplo}
