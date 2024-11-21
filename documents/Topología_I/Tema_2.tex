@@ -1175,4 +1175,126 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
         \end{array}
         \right.
     \end{align*}
+    \endsquare
 \end{ejemplo}
+
+\begin{ejemplo}
+    Consideramos $(X, \cc{T}), (Y, \cc{T}')$ e.t y la proyección $\pi_X:(X\times Y, \cc{T}\times \cc{T}')\to (X, \cc{T})$ que es una identificación (ya visto en clase). Consideramos también $R_{\pi_X}: (X\times Y, \cc{T}\times \cc{T}') \to (X\times Y / R_{\pi_X}, \cc{T}\times \cc{T}'/R_{\pi_X})$ dada por 
+    \begin{align*}
+        (x,y)R_{\pi_X}(x',y') \sii x=x'
+    \end{align*}
+    Esto identifica todas las rectas verticales de un plano en un punto por lo que tenemos que $(X\times Y / R_{\pi_X}, \cc{T}\times \cc{T}'/R_{\pi_X})\cong (X, \cc{T})$.
+    \endsquare
+\end{ejemplo}
+
+\begin{lema}
+    Si $A\subset \bb{R}^n$ cerrado en $\cc{T}_u$ y acotado y una aplicación $f:(A, \cc{T}_u|_A)\to (\bb{R}^m, \cc{T}_u)$ continua, entonces $f$ es cerrada.
+    \endsquare
+\end{lema}
+
+\begin{ejemplo}
+    Consideramos el intervalo $[0,1]$ y la relación $R_{\{0,1\}}$ dada por 
+    \begin{align*}
+        xR_{\{0,1\}} y \sii \left\{
+        \begin{array}{c}
+            x=y\\
+            o\\
+            \{x,y\}=\{0,1\}
+        \end{array}
+        \right.
+    \end{align*}
+    Tengo que encontrar una idenrificación $f:([0,1], \cc{T}_u)\to (\bb{S}^1, \cc{T}_u)$ y tal que $R_f=R_{\{0,1\}}$.\\
+
+    Podemos definir
+    \begin{align*}
+        f:[0,1]&\to \bb{S}^1\\
+        t &\mapsto (\cos(2\pi t), \sen (2\pi t))
+    \end{align*}
+    Esta función tiene las siguientes propiedades:
+    \begin{itemize}
+        \item $f$ es continua.
+        \item $f$ es sobreyectiva.
+        \item $f$ es cerrada (por el lema anterior).
+    \end{itemize}
+    Por tanto es una identificación y además tenemos que $\tilde{f}:([0,1]/R_f, \cc{T}_u/R_f)\to (\bb{S}^1, \cc{T}_u)$. Nos queda comprobar que $R_f=R_{\{0,1\}}$. Para ello sabemos que $xR_fx' \sii f(x)=f(x')\sii x=x$ o $\{x,x'\}=\{0,1\}$ y tenemos la igualdad buscada (ya que coinciden en su definición). 
+    % Finalmente tenemos que $[0,1]\cong \bb{S}^1$.
+
+    Este ejemplo se llama circunferencia como cociente del $[0,1]$.
+    \endsquare
+\end{ejemplo}
+
+ \begin{ejemplo}($\bb{S}^1$ como cociente de $\bb{R}$)
+    Considermaos la aplicación
+    \begin{align*}
+        f:(\bb{R}, \cc{T}_u)&\to (\bb{S}^1, \cc{T}_u)\\
+        f(t) & \mapsto (\cos(2\pi t), \sen (2\pi t))
+    \end{align*}
+    Intuitivamente podemos ver que $f$ enrolla $[a,a+1)$ en $\bb{S}^1$.
+    Esta aplicación tiene las siguientes propiedades:
+    \begin{itemize}
+        \item $f$ es continua.
+        \item $f$ es sobreyectiva.
+        \item $f$ es abierta. Para verlo consideramos $\cc{B}=\{(a,b); a<b, b-a \leq \nicefrac{1}{2}\}$ base de $\cc{T}_u$. Tengo que ver si $f((a,b))\subset \bb{S}^1$ es abierto en $\cc{T}_u$. Sabemos por la restricción que se ha dado entre la distancia entre $a$ y $b$ que el ángulo entre $f(a)$ y $f(b)$ es menor que $\pi$ y además $f(a,b)$ será el arco de la circunferencia que quede entre $f(a)$ y $f(b)$. Entonces tengo que $f((a,b)) = U\cap \bb{S}^1$ con $U$ el cono abierto en $\bb{R}^2$ con vértice $(0,0)$ y lado las rectas que pasan por $f(a)$ y $f(b)$ respectivamente.
+    \end{itemize}
+
+    Por tanto $f$ es una identificación y tengo que $\tilde{f}$ es un homeomorfismo. Tenemos 
+    \begin{align*}
+        xR_fx' \sii f(x)=f(x') \sii \left\{
+        \begin{array}{c}
+            \cos(2\pi x) = \cos(2\pi x')\\
+            \sen(2\pi x) = \sen(2\pi x')
+        \end{array}
+        \right. \sii x-x'\in \bb{Z}
+    \end{align*}
+    \endsquare
+ \end{ejemplo}
+
+ \begin{ejemplo}(El cilindro $\bb{S}^1\times \bb{R}$ como cociente de $[0,1]\times \bb{R}$)
+    Este ejemplo es el desarrollo de un ejemplo de la sesión anterior y teníamos
+    \begin{align*}
+        (x,y)R(x',y') \sii \left\{
+        \begin{array}{c}
+            (x,y)=(x',y')\\
+            o\\
+            y=y', \{x,x'\}=\{0,1\}
+        \end{array}
+        \right.
+    \end{align*}
+    Queremos ver que $([0,1]\times \bb{R}/R, \cc{T}_u/R) \cong (\bb{S}^1\times \bb{R}, \cc{T}_u)$.\\
+
+    En primer lugar sabemos que $\bb{S}^1\times \bb{R}=\{(x,y,z)\in \bb{R}^3: x^2 + y^2 = 1\}$.\\
+
+    Buscamos una identificación $g:([0,1]\times \bb{R}/R, \cc{T}_u/R) \to (\bb{S}^1\times \bb{R}, \cc{T}_u)$ con $R_f=R$.
+    \begin{align*}
+        g(x,y)=(\cos(2\pi x ), \sen(2\pi x),y)
+    \end{align*}
+    Y tenemos que $g=f\times Id_{\bb{R}}$, donde $f$ es la identificación del ejemplo anterior y como es un producto de identificaciones es una identificación.\\
+
+    Nos queda ver que $R_g=R$. Por definición sabemos que 
+    \begin{align*}
+        (x,y)R_g(x',y') \sii g(x,y)=g(x',y') \sii \left\{
+            \begin{array}{c}
+                (x,y)=(x',y')\\
+                o\\
+                y=y', \{x,x'\}=\{0,1\}
+            \end{array}
+        \right.
+    \end{align*}
+    Y tenemos lo buscado y por tanto $([0,1]\times \bb{R}/R_g, \cc{T}_u/R_g) \cong (\bb{S}^1\times \bb{R}, \cc{T}_u)$.
+    \endsquare
+ \end{ejemplo}
+
+ \begin{ejemplo}
+    (El cilindro $\bb{S}^1\times \bb{R}$ como cociente de $\bb{R}=\bb{R}\times \bb{R}$)
+
+    Consideramos la siguiente relación de equivalencia:
+    \begin{align*}
+        (x,y)R(x',y') \sii\left\{
+            \begin{array}{c}
+                (x,y)=(x',y')\\
+                o\\
+                y=y', x-x'\in \bb{Z}
+            \end{array}
+        \right.
+    \end{align*}
+ \end{ejemplo}
