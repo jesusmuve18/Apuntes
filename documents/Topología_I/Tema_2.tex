@@ -335,8 +335,6 @@
             (x_1, \dots, x_n, x_{n+1}) &\mapsto \frac{1}{1-x_{n+1}}(x_1, \dots, x_n)\in \bb{R}^n.
         \end{align*}
 
-        % TODO: dibujo
-
         \begin{center}
             \begin{tikzpicture}
 
@@ -456,7 +454,6 @@
             \begin{itemize}
                 \item $f(B)\in \cc{T}'$\ \ $\forall B \in base$. Esto es cierto ya que $B\in \cc{T}$ y $f$ es abierta.
                 \item Sea $U'\in \cc{T}'$, $y\in U'$ tendré que ver que existe un abierto básico entremedias. Para ello tomo $f^{-1}(y)\subset f^{-1}(U')$ y como $f$ es continua tenemos que $f^{-1}(U')\in \cc{T}$. Como $\cc{B}$ es base tenemos que $\exists B \in \cc{B}$ con $f^{-1}(y)\in \cc{B}\subset f^{-1}(U')$ y como $f$ es biyectiva, $y\in f(B)\subset U'$ con $f(B)\in \cc{B}'$.
-                %TODO: dibujo
             \end{itemize}
             \begin{center}
                 \begin{tikzpicture}
@@ -778,8 +775,6 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
     \end{proof}
 \end{prop}
 
-% TODO: Copiar lo dado en clase los días 31 de obtubre y 6 de noviembre (pedir a Quique)
-
 \begin{definicion}
     Sea $f:Z \to X \times Y$ una aplicación, escribimos $f=(f_X, f_Y)$ donde
     \begin{align*}
@@ -1050,12 +1045,23 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
 
 \begin{definicion}
     Si $f:X \to Y$ es una aplicación y $R$ es una relación de equivalencia en $X$ con proyección $p:X \to X/R$.
-    % TODO: dibujo
     %      f
     %   X ---> Y
     % P |   / (discontinua y flecha hacia arriba)
     %   v  /  \tilde{f}
     %   X/R
+
+    \begin{figure}[H]
+        \centering
+        \shorthandoff{""}
+        \begin{tikzcd}
+            X \arrow[d, "p"'] \arrow[r, "f"]    & Y \\
+            X/R \arrow[ru, "\tilde{f}", dashed] &  
+        \end{tikzcd}
+        \shorthandon{""}
+    \end{figure}
+    
+
     Se dice que $f$ es \textbf{compatible} con $R$ si $f(x)=f(x')$\ \ $\forall x, x' \in X$ con $xRx'$. En este caso, la aplicación $f$ \textbf{baja al cociente} como una aplicación bien definida, es decir, que hace que el diagrama sea conmutativo. Se le suele notar por $\tilde{f}:X/R \to Y$ tal que $\tilde{f}([x]_R)=f(x)$ con $\tilde{f}\circ p = f$.
     \endsquare
 \end{definicion}
@@ -1071,12 +1077,22 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
 
 \begin{definicion}
     Si $f:X \to Y$ es una aplicación y $R$ es una relación de equivalencia en $X$ con proyección $p:X \to X/R$ y $S$ una relación de equivalencia en $Y$ con proyección $q:Y \to Y/S$.
-    % TODO: dibujo
     %      f
     %   X ---> Y
     % P |   _  |           _
     %   v   f  v     donde f denota a \tilde{f} (todas las flechas son continuas)
     %   X/R --> Y/S
+
+    \begin{figure}[H]
+        \centering
+        \shorthandoff{""}
+        \begin{tikzcd}
+            X \arrow[d, "p_R"'] \arrow[r, "f"] & Y \arrow[d, "p_S"] \\
+            X/R \arrow[r, "\tilde{f}", dashed] & Y/S               
+        \end{tikzcd}
+        \shorthandon{""}
+    \end{figure}
+
     Se dice que $f$ es \textbf{compatible} con $R$ y $S$ si $f(x)Sf(x')$\ \ $\forall x, x' \in X$ con $xRx'$. En este caso, la aplicación $f$ \textbf{baja a los cocientes} como una aplicación bien definida Se nota por $\tilde{f}:X/R \to Y/S$ tal que $\tilde{f}([x]_R)=[f(x)]_S$ con $\tilde{f}\circ p = q \circ f$.
     \endsquare
 \end{definicion}
@@ -1111,6 +1127,17 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
     % P_f |   / (discontinua y flecha hacia arriba)
     %     v  /  \tilde{f} (homeomorfismo)
     %     X/R
+
+    \begin{figure}[H]
+        \centering
+        \shorthandoff{""}
+        \begin{tikzcd}
+            X \arrow[d, "p_f"'] \arrow[r, "f"]    & Y \\
+            X/R \arrow[ru, "\tilde{f}", dashed] &  
+        \end{tikzcd}
+        \shorthandon{""}
+    \end{figure}
+
     En este caso, $(X/R_f, \cc{T}/R_f)\cong (Y, \cc{T}')$.
     \begin{proof}\
         \begin{itemize}
@@ -1392,6 +1419,17 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
         % P_R |   _  |           _
         %   v   f  v     donde f denota a \tilde{f} (todas las flechas son continuas)
         %   X/R --> Y/S
+
+        \begin{figure}[H]
+            \centering
+            \shorthandoff{""}
+            \begin{tikzcd}
+                \bb{R}^{n+1} \arrow[d, "p_R"'] \arrow[r, "f"] & \bb{S}^n \arrow[d, "p_S"] \\
+                \bb{R}^{n+1}/R \arrow[r, "\tilde{f}", dashed] & \bb{S}^n/S               
+            \end{tikzcd}
+            \shorthandon{""}
+        \end{figure}
+
         Para ello podemos definir la siguiente aplicación
         \begin{align*}
             g:\bb{R}^{n+1} \setminus \{0\} &\to \bb{S}^n\\
@@ -1503,7 +1541,8 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
                 \end{array}
                 \right.
         \end{align*}
-        \endsquare
+        
     \end{itemize}
-    
+    La demostración de estos ejemplos se deja como ejercicio
+    \endsquare
  \end{ejemplo}
