@@ -1356,4 +1356,154 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
         g:[0,1]\times [0,1] &\to \bb{S}^1\times \bb{S}^1\\
         (x,y) &\mapsto (\cos(2\pi x), \sen(2\pi x), cos(2\pi y), \sen(2\pi y))
     \end{align*}
+
+    Geométricamente se define el toro como 
+    \begin{align*}
+        X=\{(x,y,z)\in \bb{R}^3 : (\sqrt{x^2+y^2}-2)^2 + z^2 = 1\}
+    \end{align*}
+    Podemos definir
+    \begin{align*}
+        h:[0,1]\times [0,1] &\to X\\
+        (t,s) & \mapsto (\cos(2\pi t (cos(2\pi s) +2)), -sen(2\pi) (cos(2\pi s)+2), \sen(2\pi s))
+    \end{align*}
+    \endsquare
+ \end{ejemplo}
+
+ \begin{ejemplo}
+    (El espacio proyectivo (real))
+
+    Se define el \textbf{espacio proyectivo} de dimensión $n\geq 1$ como el espacio cociente
+    \begin{align*}
+        \bb{R}\bb{P}^n = (\bb{R}^{n+1}\setminus \{0\}/R, \cc{T}_u/R)
+    \end{align*}
+    donde $R$ es la relación de equivalencia dada por 
+    \begin{align*}
+        xRy \sii \exists \lambda \in \bb{R}\setminus \{0\} \text{ con } \lambda x = y \text{ donde } x,y\in \bb{R}^{n+1}\setminus \{0\}
+    \end{align*}
+
+    Veamos algunas consecuencias de esta definición:
+
+    \begin{itemize}
+        \item $\bb{R}\bb{P}^n \cong (\bb{S}^n/S, \cc{T}_u/S)$ con $xSx' \sii x=\pm x'$
+    
+        % TODO: dibujo
+        %      f
+        %   R^n+1 ---> S^n
+        % P_R |   _  |           _
+        %   v   f  v     donde f denota a \tilde{f} (todas las flechas son continuas)
+        %   X/R --> Y/S
+        Para ello podemos definir la siguiente aplicación
+        \begin{align*}
+            g:\bb{R}^{n+1} \setminus \{0\} &\to \bb{S}^n\\
+            x &\mapsto \frac{x}{\|x\|}
+        \end{align*}
+        A partir de aquí tenemos 2 formas de comprobar si estos espacios son homeomorfos.
+        \begin{itemize}
+            \item La que se trabajó en los ejemplos anteriores
+            \item Comprobando que $g$ es compatible con $R$ y $S$ y viendo que $\tilde{g}$ es un homeomorfismo. 
+        \end{itemize}
+        Veamos esta segunda forma de hacerlo:
+
+        Supongamos $x,y\in \bb{R}^{n+1}\setminus \{0\}$. Entonces tenemos
+        \begin{align*}
+            xRy \sii \exists \lambda \in \bb{R}\setminus \{0\} \text{ con } x=\lambda y
+        \end{align*}
+        Veamos que entonces $g(x)Sg(y)$
+        \begin{align*}
+            g(x)=\frac{x}{\|x\|} = \frac{\lambda y}{\|\lambda y\|} = \frac{\lambda}{|\lambda|} \cdot \frac{y}{\|y\|} = {\lambda}{|\lambda|} \cdot g(y) = \pm g(y) <\sii g(x)Sg(y)
+        \end{align*}
+        Y tenemos entonces que $\exists \tilde{g}:\bb{R}\bb{P}^n \to \bb{S}^n/S$ continua y con $g \circ p_R=p_S \circ g$. Me queda ver que $\tilde{g}$ es un homeomorfismo.\\
+        Para ello buscaremos una inversa de $\tilde{g}$ que sea continua. Consideremos la aplicación inclusión dada por
+        \begin{align*}
+            i:\bb{S}^n & \to \bb{R}^{n+1}\setminus \{0\}\\
+            x & \mapsto x
+        \end{align*}
+        Esta aplicación es claramente continua. Veamos que $\tilde{i}$ es inversa de $\tilde{g}$ y que es compatible con $R$ y $S$. Tenemos lo siguiente para $x,x'\in \bb{S}^n$
+        \begin{align*}
+            xSx' \sii x'=\pm x \sii xRx'
+        \end{align*}
+        por lo que $\exists \tilde{i}:\bb{S}^n/S \to \bb{R}^{n+1}\setminus \{0\}/R$ continua. Veamos que efectivamente es inversa de $\tilde{g}$.
+
+        Sea $[x]_R\in \bb{R}\bb{P}^n$. Entonces
+        \begin{align*}
+            \tilde{i}(\tilde{g}([x]_R)) = \tilde{i}([g(x)]_S) = \tilde{i}\left(\left[\frac{x}{\|x\|}\right]_S\right) = \left[\frac{x}{\|x\|}\right]_R = [x]_R
+        \end{align*}
+
+        Consideramos ahora $[x]_S\in \bb{S}^n/S$. Ahora tenemos
+        \begin{align*}
+            \tilde{g}(\tilde{i}([x]_S)) = \tilde{g}([i(x)]_R) = \tilde{g}([x]_R) = \left[g(x)\right]_S= \left[\frac{x}{\|x\|}\right]_S \overset{\ast}{=}[x]_S
+        \end{align*}
+        Donde en $\ast$ hemos aplicado que $[x]_S \in \bb{S}^n/S$ y por tanto $\|x\|=1$.\\
+        Finalmente tenemos que $\tilde{g}$ es un homeomorfismo y por tanto 
+        $\bb{R}\bb{P}^n \cong (\bb{S}^n/S, \cc{T}_u/S)$.
+
+        \item $\bb{R}\bb{P}^n \cong (\overline{B}^n/R', \cc{T}_u/R')$ con $R'$ dada por 
+        \begin{align*}
+            xR'y \sii \left\{
+            \begin{array}{c}
+                x=y\\
+                o\\
+                x=y, \|x\|=1
+            \end{array}
+            \right.
+        \end{align*}
+        Sabemos que  $\bb{R}\bb{P}^n \cong (\bb{S}^n/S, \cc{T}_u/S)$ con $S$ dada por 
+        \begin{align*}
+            xSx' \sii x= \pm x'
+        \end{align*}
+        Veamos que efectivamente se da el homemorfismo $\bb{R}\bb{P}^n \cong (\overline{B}^n/R', \cc{T}_u/R')$. 
+
+        Para verlo podemos considerar la aplicación $f(x)=(x, \sqrt{1-\|x\|})$ que es claramente continua, cerrada (por el lema ya que $\bb{B}^n$ es cerrado y acotado).\\
+
+        Queremos ver ahora que $p_S \circ f:\bb{B}^n \to \bb{S}^n/S$ es una identificación. Sabemos que es continua y sobreyectiva. Veamos que es también cerrada. \\
+
+        Para ello tomamos $C\subset \bb{S}^n$ cerrado. Tenemos que $p_S^{-1}(p_S(C)) = C \cup (-C) \in \cc{C}_{\cc{T}_u|_{\bb{S}^n}}$ donde $(-C)=\{x\in \bb{S}^n : -x \in C\}$.\\
+
+        Por tanto tenemos que $\exists \tilde{f}:(\bb{B}^n/R_{p_s\circ f}, \cc{T}_u/R_{p_s \circ f}) \to (\bb{S}^n/S, \cc{T}_u/S)\cong \bb{R}\bb{P}^n$.\\
+
+        Solo nos queda ver que $R_{p_S \circ f}=R'$. Para ello tomamos $x,y\in \overline{B}^n$ y tenemos 
+        \begin{gather*}
+            xR_{p_S\circ f}y \sii (p_S \circ f)(x) = (p_S \circ f)(y) \sii [(x, \sqrt{1-\|x\|})]_S =  [(y, \sqrt{1-\|y\|})]_S \sii\\
+            \sii \left\{
+            \begin{array}{c}
+                x=y\\
+                o\\
+                x=-y, \|x\|=1
+            \end{array}
+            \right. \sii xR'y
+        \end{gather*}
+        Y ya lo tenemos.
+    \end{itemize}
+    \endsquare
+ \end{ejemplo}
+
+ \begin{ejemplo}(La esfera $\bb{S}^2$ como cociente)
+    
+    \begin{itemize}
+        \item $(\bb{S}^2, \cc{T}_u)\cong (\overline{\bb{B}^2}/R, \cc{T}_u/R)$ donde $R$ es la relación dada por 
+        \begin{align*}
+            (x,y)R(x',y') \sii \left\{
+                \begin{array}{c}
+                    (x,y)=(x',y')
+                    o\\
+                    (x,y)=(x',-y')\in \bb{S}^1
+                \end{array}
+                \right.
+        \end{align*}
+
+        \item  $(\bb{S}^2, \cc{T}_u)\cong ([0,1]\times [0,1] /R, \cc{T}_u/R)$ donde $R$ es la relación dada por 
+        \begin{align*}
+            (x,y)R(x',y') \sii \left\{
+                \begin{array}{c}
+                    (x,y)=(x',y')
+                    o\\
+                    \{(x,y),(x',y')\}=\{(t,0),(0,t)\}\ \ t\in [0,1]\\
+                    o\\
+                    \{(x,y),(x',y')\}=\{(t,1),(1,t)\}\ \ t\in [0,1]\\
+                \end{array}
+                \right.
+        \end{align*}
+        \endsquare
+    \end{itemize}
+    
  \end{ejemplo}
