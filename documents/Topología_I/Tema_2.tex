@@ -986,7 +986,7 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
                 \node at (1.5, -1.75) {$g$};
             \end{tikzpicture}
         \end{center}
-        \item $\cc{C}_{\cc{T}_f}=\{C'\subset Y : f^{-1}(C')\in \cc{C}_{\cc{T}}\}$
+        \item[(ii)] $\cc{C}_{\cc{T}_f}=\{C'\subset Y : f^{-1}(C')\in \cc{C}_{\cc{T}}\}$
     \end{enumerate}
     \begin{proof}\
         \begin{enumerate}
@@ -1005,7 +1005,7 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
 \end{prop}
 
 \begin{definicion}
-    Una aplicación $p:(X, \cc{T})\to (Y, \cc{T}')$ es una \textbf{identificación} si $p$ es sobreyeciva y $\cc{T}'=\cc{T}_p$.
+    Una aplicación $p:(X, \cc{T})\to (Y, \cc{T}')$ es una \textbf{identificación} si $p$ es sobreyectiva y $\cc{T}'=\cc{T}_p$.
     \endsquare
 \end{definicion}
 
@@ -1031,7 +1031,7 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
 \begin{prop}
     Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es continua, sobreyectiva y abierta, o continua, sobreyectiva y cerrada, entonces $f$ es una identificación.
     \begin{proof}
-        Por hipótesis tenemos que $f$ es sobreyecriva y queremos ver que $\cc{T}'=\cc{T}_f$. Como $f$ es continua tenemos que $\cc{T}'\leq \cc{T}_f$. Supongamos que $f$ es abierta y querremos ver la otra inclusión. Sea $U'\in \cc{T}_f$, entonces tenemos que $f^{-1}(U)\in \cc{T}$. Por ser $f$ abierta tenemos que $f(f^{-1}(U))\in \cc{T}'$ y ya tenemos probada la doble inclusión.\\
+        Por hipótesis tenemos que $f$ es sobreyectiva y queremos ver que $\cc{T}'=\cc{T}_f$. Como $f$ es continua tenemos que $\cc{T}'\leq \cc{T}_f$. Supongamos que $f$ es abierta y querremos ver la otra inclusión. Sea $U'\in \cc{T}_f$, entonces tenemos que $f^{-1}(U)\in \cc{T}$. Por ser $f$ abierta tenemos que $f(f^{-1}(U))\in \cc{T}'$ y ya tenemos probada la doble inclusión.\\
 
     \end{proof}
 \end{prop}
@@ -1042,6 +1042,97 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
 \end{observacion}
 
 %TODO: Lo último es descripción de los abiertos en la topología cociente
+
+\begin{ejemplo}\
+    $\pi_X(X\times Y, \cc{T}\times \cc{T}')\to (X, \cc{T})$ es una identificación
+    \endsquare
+\end{ejemplo}
+
+\begin{coro}
+    Sea $f:(X, \cc{T})\to (T, \cc{T})$ una aplicación. Entonces $f$ es un homeomorfismo si y solo si $f$ es una identificación inyectiva.
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$)] Si $f$ es un homeomorfismo entonces por definición es inyectiva, sobreyectiva, continua y abierta por lo que es una identificación inyectiva.
+            \item[$\Leftarrow$)] Si $f$ es una identificación inyectiva entonces, por definición es biyectiva, continua y $\cc{T}=\cc{T}_f$. Veamos que además es abierta. Para ello consideramos $U\in \cc{T}$ y tenemos que $f(U)\in \cc{T}_f \sii f^{-1}(f(U))\in \cc{T}$ lo cual se verifica por ser sobreyectiva. Como $f(U)\in \cc{T}_f$, entonces $f$ es abierta y por tanto es un homeomorfismo.
+        \end{itemize}
+    \end{proof}
+\end{coro}
+
+\begin{definicion}
+    Si $p:X\to Y$ es una aplicación y $A\subset X$, diremos que $A$ es \textbf{p-saturado} si $p^{-1}(p(A))=A$, esto es, $p^{-1}(p(A))\subset A$ (la otra inclusión siempre se da).
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t., $Y$ un conjunto y $p:X\to Y$ una aplicación sobreyectiva. Entonces
+    \begin{enumerate}
+        \item[(i)] $\cc{T}_p=\{p(U):U\in \cc{T} \text{ con } U \text{ p-saturado}\}$
+        \item[(ii)]  $\cc{C}_{\cc{T}_p}=\{p(C):C\in \cc{C}_{\cc{T}} \text{ con } C \text{ p-saturado}\}$
+    \end{enumerate}
+    \begin{proof}\
+        \begin{itemize}
+            \item[(i)] Veámoslo por doble inclusión:
+            \begin{itemize}
+                \item[$\subseteq$)] Sea $U'\in \cc{T}_p$, entonces $p^{-1}(U')\in \cc{T}$. Si tomo $U=p^{-1}(U')$ tendremos que ver que $U$ es p-saturado. Tenemos que $p^{-1}(p(U))=p^{-1}(p(p^{-1}(U')))=p^{-1}(U')=U$ y lo tenemos.
+                \item[$\supseteq$)] Sea $U\in \cc{T}$ con $p^{-1}(p(U))=U$ tendremos que ver que $p(U)\in \cc{T}_p$. Por ser $U$ p-saturado tenemos que $p^{-1}(p(U))=U\in \cc{T}\in \cc{T}$.
+            \end{itemize}
+            \item[(ii)] Se deja planteada como ejercicio para el lector.
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{coro}
+    Si $p:(X, \cc{T})\to (Y, \cc{T}')$ es una aplicación sobreyectiva, entonces equivalen:
+    \begin{enumerate}
+        \item[(i)] $p$ es una identificación.
+        \item[(ii)] $\cc{T}'=\cc{T}_p=\{p(U):U\in \cc{T} \text{ p-saturado}\}$.
+        \item[(iii)] $\cc{C}_{\cc{T}'}=\cc{C}_{\cc{T}_p}=\{p(C):C\in \cc{C}_{\cc{T}} \text{ p-saturado}\}$. 
+    \end{enumerate}
+    \endsquare
+\end{coro}
+
+\begin{prop}
+    Sean $p:(X, \cc{T}) \to (Y, \cc{T}')$ y $p':(Y, \cc{T}') \to (Z, \cc{T}'')$ aplicaciones y consideramos su composición $p'\circ p:(X, \cc{T})\to (Z, \cc{T}'')$. Entonces:
+    \begin{enumerate}
+        \item[(i)] $p,p'$ identificaciones $\Rightarrow$ $p'\circ p$ identificación.
+        \item[(i)] $p,p'$ continuas y $p'\circ p$ identificación $\Rightarrow p'$ identificación.
+        \item[(iii)] $p$ identificación $\Rightarrow$ ($p'$ identificación $ \sii p'\circ p$ identificación). 
+    \end{enumerate}
+    \begin{proof}\ 
+        La demostración se deja planteada como ejercicio para el lector.
+
+    \end{proof}
+\end{prop}
+
+\begin{coro}
+    Si $p:(X, \cc{T})\to (Y, \cc{T}')$ continua y admite una inversa continua por la derecha, es decir, $\exists f:(Y, \cc{T}')\to (X, \cc{T})$ continua y tal que $p\circ f=Id_Y$, entonces $p$ es una identificación.
+    \begin{proof}
+        Como $p\circ f=Id_Y$ es un homeomorfismo, en particular es una identificación y como $f$ y $p$ son continuas, por la proposición anterior sabemos que $p$ es una identificación. 
+
+    \end{proof}
+\end{coro}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t. y sea $R$ una relación de equivalencia en $X$ con la proyección dada por
+    \begin{align*}
+        p:X&\to X/R\\
+        x &\mapsto [x] = \{x'\in X : xRx'\}
+    \end{align*}
+    Llamaremos \textbf{topología cociente} y la notaremos por $T/R$ a la topología final en $X/R$ asociada a $p$, esto es $T/R=T_p$. Al espacio topológico $(X/R, \cc{T}/R)$ se le llama \textbf{espacio topológico cociente} de $(X, \cc{T})$ por la relación de equivalencia $R$.
+    \endsquare
+\end{definicion}
+
+\begin{propiedades}
+    En esta situación, $p:(X, \cc{T})\to (X/R, \cc{T}/R)$ es una identifiación, luego:
+    \begin{enumerate}
+        \item[(i)] $p$ es continua y $T/R$ es la topología más fina que hace a $p$ continua.
+        \item[(ii)] $f:(X/R, \cc{T}/R)\to (Y, \cc{T}')$ continua $\sii f\circ p:(X, \cc{T})\to (Y, \cc{T}')$ continua.
+        \item[(iii)] $\cc{T}/R=\{\tilde{U}\subset X/R : p^{-1}(\tilde{U})\in \cc{T}\} = \{p(U) : U\in \cc{T} \text{ p-saturado}\}$.
+        \item[(iv)] $\cc{C}_{\cc{T}/R} = \{\tilde{C}\subset X/R : p^{-1}(\tilde{C})\in \cc{C}_{\cc{T}}\} = \{p(C) : C\in \cc{C}_{\cc{T}} \text{ p-saturado}\}$.
+        \item[(v)] $A\subset X$ es p-saturado $\sii p^{-1}(p(A))=A \sii p(a)=[a]\subset A\ \ \forall a \in A \sii x\in A\ \ \forall x\in X$ tal que $\exists a \in A$ con $xRa$.
+    \end{enumerate}
+    \endsquare
+\end{propiedades}
 
 \begin{definicion}
     Si $f:X \to Y$ es una aplicación y $R$ es una relación de equivalencia en $X$ con proyección $p:X \to X/R$.
@@ -1413,7 +1504,6 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
     \begin{itemize}
         \item $\bb{R}\bb{P}^n \cong (\bb{S}^n/S, \cc{T}_u/S)$ con $xSx' \sii x=\pm x'$
     
-        % TODO: dibujo
         %      f
         %   R^n+1 ---> S^n
         % P_R |   _  |           _
