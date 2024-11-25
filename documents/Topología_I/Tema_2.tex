@@ -1514,9 +1514,9 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
             \centering
             \shorthandoff{""}
             \begin{tikzcd}
-                \bb{R}^{n+1} \arrow[d, "p_R"'] \arrow[r, "f"] & \bb{S}^n \arrow[d, "p_S"] \\
-                \bb{R}^{n+1}/R \arrow[r, "\tilde{f}", dashed] & \bb{S}^n/S               
-            \end{tikzcd}
+                \bb{R}^{n+1} \arrow[r, "g"] \arrow[d, "p_{R}"'] \arrow[rd, "g \circ p_S"] & \bb{S}^n \arrow[d, "p_S"] \\
+                \bb{R}\bb{P}^n=\bb{R}^{n+1}/R \arrow[r, "\tilde{g}"', dashed]                            & \bb{S}^n/S               
+                \end{tikzcd}
             \shorthandon{""}
         \end{figure}
 
@@ -1546,6 +1546,16 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
             i:\bb{S}^n & \to \bb{R}^{n+1}\setminus \{0\}\\
             x & \mapsto x
         \end{align*}
+        Que verifica el siguiente diagrama
+        \begin{figure}[H]
+            \centering
+            \shorthandoff{""}
+            \begin{tikzcd}
+                \bb{S}^n \arrow[r, "i"] \arrow[d, "p_S"'] & \bb{R}^{n+1}\setminus\{0\} \arrow[d, "p_R"] \\
+                \bb{S}^n/S \arrow[r, "\tilde{i}"', dashed] & \bb{R}^{n+1}/R = \bb{R}\bb{P}^n               
+                \end{tikzcd}
+            \shorthandon{""}
+        \end{figure}
         Esta aplicación es claramente continua. Veamos que $\tilde{i}$ es inversa de $\tilde{g}$ y que es compatible con $R$ y $S$. Tenemos lo siguiente para $x,x'\in \bb{S}^n$
         \begin{align*}
             xSx' \sii x'=\pm x \sii xRx'
@@ -1565,7 +1575,7 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
         Finalmente tenemos que $\tilde{g}$ es un homeomorfismo y por tanto 
         $\bb{R}\bb{P}^n \cong (\bb{S}^n/S, \cc{T}_u/S)$.
 
-        \item $\bb{R}\bb{P}^n \cong (\overline{B}^n/R', \cc{T}_u/R')$ con $R'$ dada por 
+        \item $\bb{R}\bb{P}^n \cong (\overline{\bb{B}}^n/R', \cc{T}_u/R')$ con $R'$ dada por 
         \begin{align*}
             xR'y \sii \left\{
             \begin{array}{c}
@@ -1581,7 +1591,17 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
         \end{align*}
         Veamos que efectivamente se da el homemorfismo $\bb{R}\bb{P}^n \cong (\overline{B}^n/R', \cc{T}_u/R')$. 
 
-        Para verlo podemos considerar la aplicación $f(x)=(x, \sqrt{1-\|x\|})$ que es claramente continua, cerrada (por el lema ya que $\bb{B}^n$ es cerrado y acotado).\\
+        Para verlo podemos considerar la aplicación $f(x)=(x, \sqrt{1-\|x\|})$ que es claramente continua, cerrada (por el lema ya que $\bb{B}^n$ es cerrado y acotado).
+
+        \begin{figure}[H]
+            \centering
+            \shorthandoff{""}
+            \begin{tikzcd}
+                \bb{B}^n \arrow[r, "f"] \arrow[d, "p_{R'}"'] \arrow[rd, "p_S \circ f"] & \bb{S}^n \arrow[d, "p_S"] \\
+                \bb{B}^n/R' \arrow[r, "\tilde{f}"', dashed]                            & \bb{S}^n/S               
+                \end{tikzcd}
+            \shorthandon{""}
+        \end{figure}
 
         Queremos ver ahora que $p_S \circ f:\bb{B}^n \to \bb{S}^n/S$ es una identificación. Sabemos que es continua y sobreyectiva. Veamos que es también cerrada. \\
 
