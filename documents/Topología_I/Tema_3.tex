@@ -1,0 +1,127 @@
+\chapter{Conexión y Compacidad}
+
+\section{Conexión}
+Una primera intuición nos puede decir que un conjunto es conexo si todos sus puntos están conectados. Por ejemplo el e.t. $(\bb{R}, \cc{T}_u)$ parece que es conexo mientras que otro espacio como el $([0,1]\cup\{2\}, \cc{T}_u)$ está hecho de varios ``trozos'' y por tanto no parece ser conexo. Incluso cambiando la topología puede ser que este segundo espacio fuese conexo (es por esto que no nos tenemos que dejar llevar siempre por la intuición).
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t.
+    \begin{itemize}
+        \item Una \textbf{separación} de $(X, \cc{T})$ es una pareja de abiertos $\{U,V\}\subset \cc{T}$ que verifican $U\cup V = X$ y $U\cap V = \emptyset$.
+        
+        Se llama \textbf{separación trivial} a $\{X, \emptyset\}$.
+        \item $(X, \cc{T})$ es \textbf{conexo} si su única separación es la trivial, es decir si $U,V\in \cc{T}$ con $U\cup V = X$ y $U\cap V = \emptyset$, entonces $U=\emptyset$ o $V=\emptyset$.
+        \item $(X, \cc{T})$ es \textbf{disconexo} si no es conexo, es decir, si existen $U,V\in \cc{T}$ con $U\neq \emptyset$ y $V\neq \emptyset$ de forma que $U\cup V = X$ y $U\cap V = \emptyset$.
+        \item Un subconjunto $A\subset X$ no vacío se dice \textbf{conexo} en $(X, \cc{T})$ si $(A, \cc{T}_A)$ es conexo y \textbf{disconexo} en caso contrario.
+    \end{itemize}
+    \endsquare
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(X, \cc{T}_t)$ es conexo siempre.
+        \item Si $\#X=1$ y consideramos $(X, \cc{T})$, entonces es conexo.
+        \item Si $\#X\geq 2 \Rightarrow (X, \cc{T}_{disc})$ es disconexo. Para verlo podemos tomar $U\in \cc{T}_{disc}$ con $U\notin \{\emptyset, X\}$ y entonces tenemos $X\setminus U\in \cc{T}_{disc}$ y además $X\setminus U\neq \notin \{X, \emptyset\}$ y tenemos que $U\cap (X\setminus U) = \emptyset$ y $U\cup (X\setminus U) = X$.
+        \item $(X, \cc{T}_{x_0})$ es conexo (si $U,V\in \cc{T}_{s_0}$ no vacíos, entonces $x\in (U\cap V) \neq \emptyset$).
+        \item Si $\#=\infty \Rightarrow (X, \cc{T}_{CF})$ es conexo. Para verlo supongamos que existen $U,V\in \cc{T}_{CF}\setminus \{\emptyset\}$ con $U\cup V =X$ y $U\cap V = \emptyset$. Entonces $X\setminus U$, $X\setminus V$ son finitos y entonces $(U\setminus U)\cup (X\setminus V)$ es finito pero $(U\setminus U)\cup (X\setminus V) = X \setminus (U\cap V) = X$ que no es finito y por tanto llegamos a contradición.
+        \item $(\{0,1\}, \cc{T}_u|_{[0,1]})$ es disconexo ya que $\{\{0\}, \{1\}\}$ es una separación.
+        \item $(\{0,1\}, \cc{T})$ con $\cc{T}=\{\emptyset, \{0,1\}, \{0\}\}$ es conexo.
+        \item $X=(\{0\}\times \bb{R})\cup (\{1\}\times \bb{R})\subset \bb{R}^2$ es disconexo en $\bb{R}^2$ en $(\bb{R}^2, \cc{T}_u)$.
+        \item $[0,1]\cup \{2\}\subset \bb{R}$ es disconexo en $(\bb{R}, \cc{T}_u)$ 
+        \item $\bb{Q}\subset \bb{R}$ es disconexo en $(\bb{R}, \cc{T}_u)$.
+        \item $\bb{Z}$ es disconexo en $(\bb{R}, \cc{T}_u)$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{teo}
+    Si $(X, \cc{T})$ es un e.t, entonces equivalem:
+    \begin{enumerate}
+        \item[(i)] $(X, \cc{T})$ es conexo.
+        \item[(ii)] Si $A\in (\cc{T}\cap \cc{C}_{\cc{T}})$, entonces $A\in\{\emptyset, X\}$.
+        \item[(iii)] $(X, \cc{T})$ cumple la \textbf{propiedad de los valores intermedios}\footnote{A partir de ahora lo notaremos por PVI}, es decir, si $f:(X, \cc{T})\to (\bb{R}, \cc{T}_u)$ continua y $a<b\in f(X)$, entonces $[a,b]\in f(X)$.
+        \item[(iv)] Si $g:(X, \cc{T})\to (\{0,1\}, \cc{T}_{disc})$ es continua, entonces $g$ es constante 
+    \end{enumerate}
+    \begin{proof}\
+        \begin{itemize}
+            \item[(i)$\Rightarrow$(ii) )] $A\in \cc{T}\cap \cc{C}_{\cc{T}} \Rightarrow (X\setminus A) \in \cc{T} \Rightarrow \{A, X\setminus A\}$ es una separación de $(X, \cc{T})$. Por (i) tenemos que $\{A, X\setminus A\}=\{X, \emptyset\}$ por lo que $A\in \{\emptyset, X\}$.
+            \item[(ii)$\Rightarrow$(iii) )] Sea $f:(X, \cc{T})\to (\bb{R}, \cc{T}_u)$ continua. Veamos que verifica la propiedad de los valores intermedios. Hagamos una distinción de casos:
+            \begin{itemize}
+                \item[$\bullet)$] Si $f$ es constante, entonces cumple trivialmente PVI.
+                \item[$\bullet)$] Si $f$ no es constante podemos considerar $a<b\in f(X)$ y tendremos que ver que $[a,b]\subset f(X)$. Supongamos que no, es decir, que $\exists c\in (a,b)$ con $c\notin f(X)$. Definimos $A=f^{-1}((-\infty, c)) = f^{-1}((-\infty, c])$ y como $f$ es continua tenemos que $A\in (\cc{T}\cap \cc{C}_{\cc{T}})$ por lo que por (ii) sabemos que $A\in \{\emptyset, X\}$. Sin embargo, sabemos que $a\in f(X)$ y $a<c$ por lo que $A\neq \emptyset$. Además, $b\in f(X)$ pero $f^{-1}(b)\notin A$ por lo que $A\neq X$ y llegamos a contradicción.
+            \end{itemize}
+            \item[(iii)$\Rightarrow $(iv) )] Sea $g:(X, \cc{T}) \to (\{0,1\}, \cc{T}_{disc})$ continua. Sabemos que $\cc{T}_{disc}|_{\{0,1\}} = \cc{T}_u|_{\{0,1\}}$ y entonces podemos considerar la composición con la inclusión $i\circ g:(X, \cc{T})\to (\bb{R}, \cc{T}_u)$ es continua. Por (iii) sabemos que $(i\circ g)(X)\subset \bb{R}$ es un intervalo. Además, $(i\circ g)(X) = g(X)\subset \{0,1\}$ y es un intervalo (con la observación que viene a continuación). Esto implica que $g(X)=\{0\}$ o $g(X)=\{1\}$ lo cual implica que $g$ es constante.
+            \item[(iv)$\Rightarrow$(i) )] Sea $\{U,V\}$ una separación de $(X, \cc{T})$. Veamos que $\{U,V\}=\{X, \emptyset\}$. Para ello considero la aplicación $g:(X, \cc{T})\to (\{0,1\}, \cc{T}_{disc})$ dada por 
+            \begin{align*}
+                g(x)=\left\{
+                    \begin{array}{ccc}
+                        0 & \text{ si } x\in U\\
+                        1 & \text{ si } x \in V
+                    \end{array}
+                \right.
+            \end{align*}
+            Y tenemos que es continua ya que $g^{-1}(\{0\})=U\in \cc{T}$ y $g^{-1}(\{1\})=V\in \cc{T}$. Por (iv) tenemos que $g=cte$ y por tanto, $U =\emptyset$ o $V=\emptyset$ y como es una separación tenemos que $\{U,V\}=\{\emptyset, X\}$ y tenemos que $(X, \cc{T})$ es conexo.
+        \end{itemize}
+    \end{proof}
+\end{teo}
+
+\begin{observacion}
+    A veces $[a,a]=\{a\}$ y lo llamaremos intervalo (a pesar de no ser estrictamente un intervalo según su definición formal). Con esto podríamos traducir el apartado (iii) del teorema anterior en que $f(X)$ sea un intervalo.
+    \endsquare
+\end{observacion}
+
+\begin{coro}
+    (Teorema de Bolzano)
+    
+    Si $(X, \cc{T})$ es conexo, $f:(X, \cc{T})\to (\bb{R}, \cc{T}_u)$ es continua y $\exists x,y\in X$ con $f(x)<0<f(y)$, entonces $\exists z \in X$ con $f(z)=0$. Esto es por cumplir la PVI.
+    \endsquare
+\end{coro}
+
+\begin{coro}
+    Si $(X, \cc{T})$ conexo y $f:(X, \cc{T})\to (\bb{R}, \cc{T}_u)$ continua con $f(x)\neq 0\ \ \forall x \in X$, entonces $f>0$ o $f<0$ en todo $X$.
+    \endsquare
+\end{coro}
+
+\begin{coro}
+    Si $\emptyset\neq A \subset \bb{R}$, entonces $A$ es conexo en $(\bb{R}, \cc{T}_u)\sii A$ es unitario o $A$ es un intervalo.
+
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Leftarrow$)] Si $A$ es unitario es conexo. Si $A$ es un intervalo, entonces $(A, \cc{T}_u|_A)$ cumple la PVI\footnote{la estudiada en la asignatura de Cálculo I} y por el teorema tenemos que $A$ es conexo en $(\bb{R}, \cc{T}_u)$.
+            \item[$\Rightarrow$)] Supongamos que $A$ es conexo y que no es ni unitario ni un intervalo. Por tanto existen $a<c<b$ tales que $a,b\in A$ pero $c\notin A$. Consideramos $U=(-\infty, c)\cap A$, $V=(c, +\infty)\cap A$ y tenemos que $\{U,V\}$ es una separación de $(A, \cc{T}_u|_A)$ que no es trivial ya que $a\in U$ y $b\in V$ por lo que $(A, \cc{T}_u|_A)$ es disconexo y llegamos a contradicción.
+        \end{itemize}
+    \end{proof}
+\end{coro}
+
+\begin{observacion}
+    La conexión no es una propiedad hereditaria.
+    \endsquare
+\end{observacion}
+
+\begin{coro}
+    Si $(X, \cc{T})$ es conexo y $f:(X, \cc{T})\to (Y, \cc{T}')$ es continua, entonces $f(X)$ es conexo en $(Y, \cc{T}')$. \\
+    
+    Si $f$ es además sobreyectiva, entonces $(Y, \cc{T}')$ es conexo.
+    \begin{proof}
+        Tenemos que comprobar que $(f(X), \cc{T}'|_{f(X)})$ es conexo. Para ello consideramos $g:(f(X), \cc{T}'|_{f(X)})\to (\{0,1\}, \cc{T}_{disc})$ continua y tendremos que ver que $g=cte$. Tomamos $g\circ f^{f(X)}:(X, \cc{T})\to (\{0,1\}, \cc{T}_{disc})$ que es continua (por ser composición de continuas) y además, por hipótesis tenemos que $(X, \cc{T})$ es conexo por lo que $g\circ f^{f(X)}$ es constante y por tanto $g$ es constante y por el teorema anterior tenemos lo buscado.
+    \end{proof}
+\end{coro}
+
+\begin{coro}
+    \begin{enumerate}
+        \item[(i)] La conexión es un invariante topológico.
+        \item[(ii)] Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es una identificación y $(X, \cc{T})$ es conexo, entonces $(Y, \cc{T}')$ es conexo.
+        \item[(iii)] Si $(X, \cc{T})$ es conexo y $R$ es una relación de equivalencia en $X$, entonces $(X/R, \cc{T}/R)$ es conexo.
+        \item[(iv)] $(\bb{S}^1, \cc{T}_u|_{\bb{S}^1})$ es conexo.
+        \item[(v)] $[a,b], [a,b), (a,b]$ y $(a,b)$ no son homeomorfos en $(\bb{R}, \cc{T}_u)$ 
+        \item[(vi)] $(\bb{R}\setminus \{x\}, \cc{T}_u)$ no es homeomorfo a $(\bb{R}, \cc{T}_u)$.
+        \item[(vi)] $(\bb{R}, \cc{T}_u)$ no es homeomorfo a $(\bb{S}^1, \cc{T}_u|_{\bb{S}^1})$.  
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i),(ii),(iii)] Triviales.
+            \item[(iv)] Sabemos que $([0,1], \cc{T}_u|_{[0,1]})$ es conexo y tenemos que existe una función $f:([0,1], \cc{T}_u|_{[0,1]})\to (\bb{S}^1, \cc{T}_u)$ es continua y sobreyectiva, por ejemplo, $f(t)=(\cos(2\pi t), \sen(2\pi t))$.
+            \item[(v)] Supongamos que $[a,b)\cong(a,b)$. Entonces tenemos que existe un homeomorfismo $f:([a,b), \cc{T}_u)\to ((a,b), \cc{T}_u)$. Pero entonces $f|_{[a,b]}:([a,b), \cc{T}_u)\to ((a,b)\setminus \{f(a)\}, \cc{T}_u)$ sería un homeomorfismo pero llegaríamos a contradicción ya que la conexión es un invariante topológico.
+            \item[(vi),(vii)] Se dejan planteadas como ejercicios para el lector.  
+        \end{enumerate}
+    \end{proof}
+\end{coro}
