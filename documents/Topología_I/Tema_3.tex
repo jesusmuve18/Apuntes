@@ -272,3 +272,68 @@ Una primera intuición nos puede decir que un conjunto es conexo si todos sus pu
     \end{itemize}
     \endsquare
 \end{ejemplo}
+
+\section{Componentes conexas}
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t., $x\in X$, se define la \textbf{componente conexa} (c.c.) de $x$ en $(X, \cc{T})$ como la unión de todos los conjuntos conexos de $X$ que contienen a $x$. Se le denota por $\cc{C}(x)$.
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t, $x\in X$. Entonces
+    \begin{enumerate}
+        \item[(i)] $\cc{C}(x)$ es el mayor conexo en $X$ que contiene a $x$.
+        \item[(ii)] Las c.c. de $(X, \cc{T})$ determinan una partición de $X$, es decir que $\bigcup\limits_{x\in X}\bb{C}(x)=X$ y $\forall x,y\in X$ se tiene que o bien $\bb{C}(x)=\bb{C}(y)$ o bien $\bb{C}(x)\cap \bb{C}(y)=\emptyset$.
+        \item[(iii)] $(X, \cc{T})$ es conexo si y solo sí tiene una única c.c., es decir, $\bb{C}(x)=X$\ \ $\forall x \in X$.
+        \item[(iv)] Las c.c. de $(X, \cc{T})$ son cerrados en $(X, \cc{T})$ (en general no serán abiertos).
+        \item[(v)] Si $\emptyset \neq A \subset X$ es abierto cerrado y conexo, es decir, $A\in (\cc{T}\cap \cc{C}_{\cc{T}})$ y conexo, entonces $A$ es una c.c. de $(X, \cc{T})$ (la otra implicación no es cierta en general, en concreto que $A$ sea abierto). 
+        \item[(vi)] Si $\{A_i\}_{i\in I}\subset \cc{T}$, $A_i$ conexo $\forall i \in I$, es una partición de $X$ , es decir, $\bigcup\limits_{i\in I}A_i=X$ y $A_i\cap A_j=\emptyset$\ \ $\forall i \neq j$, entonces $\{A_i\}_{i\in I}$ con las c.c. de $(X, \cc{T})$ (de nuevo la otra implicación no es cierta ya que no siempre la partición tiene que ser por abiertos).
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] Trivial, porque la unión de conexos con intersección no vacía es conexa.
+            \item[(ii)] Como $x\in \bb{C}(x) \Rightarrow \bigcup\limits_{x\in X}\bb{C}(x)=X$. Veamos ahora la segunda parte. Para ello supongamos que tenemos dos componentes conexas de forma que $C(x)\cap C(y)\neq \emptyset $, tendré que ver que entonces $\bb{C}(x)=\bb(C)(y)$. Como la intersección es no vacía tengo que $x,y,\in C(x)\cup C(y)$ y es conexo por lo que $\bb{C}(x)\cup \bb{C}(y)\subset \bb{C}(x)$ y también $\bb{C}(x)\cup \bb{C}(y)\subset \bb{C}(y)$ por lo que $\bb{C}(x)\cup \bb{C}(y)\subset \bb{C}(x)\cap \bb{C}(y)$ y por tanto $\bb{C}(x)=\bb{C}(y)$.
+            \item[(iii)] Trivial.
+            \item[(iv)] Sea $x\in X$ y queremos ver que $\bb{C}$ es cerrado, es decir, que coincide con su adherencia. Para ello sabemos que $\overline{\bb{C}(x)}$ es conexo y además $x\in \overline{\bb{C}(x)}$ por lo que $\overline{\bb{C}(x)}\subset \bb{C}(x)$ y como la otra inclusión se da siempre ya lo tenemos probado.
+            \item[(v)] Sea $x\in A$, tendremos que ver que $A=\bb{C}(x)$. Sea $B\subset X$ conexo con $A\subset B$. Si esto implica que $A=B$ entonces tendré que $A$ es una componente conexa (ya que no hay ningún conexo más grande). Para ello tenemos que 
+            \begin{align*}
+                \left.
+                \begin{array}{ccc}
+                    A\in \cc{T}, A\subset B & \Rightarrow & A \in \cc{T}|_B \\
+                    A \in \cc{C}_{\cc{T}}, A\subset B & \Rightarrow & A\in \cc{C}_{\cc{T}|_B}\\
+                \end{array}
+                \right\} \overset{B \text{ conexo}}{\Rightarrow} A =\emptyset \text{ o } A=B
+            \end{align*}
+            Como $A\neq \emptyset$ tenemos lo buscado.
+            \item[(vi)] Su demostración se deja como ejercicio para el lector.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item La relación en $R$ dada por $xRy \sii\exists A\subset X$ conexo con $\{x,y\}\subset A$ es de equivalencia. Las clases de equivalencia de $R$ son las c.c. de $(X, \cc{T})$.
+        \item Si $(X, \cc{T})$ tiene una cantidad finita de c.c, $A_1,\dots, A_n$, entonces $A_k\in \cc{T}\ \ \forall k\in 1,\dots n$ ya que tenemos 
+        \begin{align*}
+            A_i=X\setminus \left( \bigcup\limits_{j\neq i}^n A_j\right)
+        \end{align*}
+        Y como $A_j\in \cc{C}_{\cc{T}}$ y la unión finita de cerrados es cerrada, tendríamos que $A_i\in \cc{T}$.
+    \end{itemize}
+    \endsquare
+\end{observacion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(X, \cc{T}_{disc})$ las c.c. son $\{\{x\}:x\in X\}$ (abierto, cerrado, conexo y no vacío).
+        \item Si $x_1<x_2<\dots<x_n \in \bb{R}$, las c.c. de $(\bb{R}\setminus \{x_1,x_2,\dots,x_n, \cc{T}_u\})$ son 
+        \begin{align*}
+        \{(-\infty, x_1), (x_n, +\infty)\}\cup\{(x_i, x_i+1):i=1,2,\dots,n-1\}
+        \end{align*}
+        En particular, las c.c. de $\bb{R}\setminus \{0\}$ son $\{(-\infty,0),(0,+\infty)\}$. 
+        \item Las c.c. de $(\bb{R}\setminus \bb{Z}, \cc{T}_u)$ son $\{(m,m+1):m\in \bb{Z}\}$.
+        \item Las c.c. de $(\bb{R}\setminus \{\nicefrac{1}{n}:n\in \bb{N}\}, \cc{T}_u)$ son $\{(-\infty, 0], (1, +\infty)\}\cup \{\left(\frac{1}{n+1}, \frac{1}{n}\right):n\in \bb{N}\}$ y $(-\infty,0] \notin \cc{T}_u$ (ejemplo de que puede haber componentes conexas no abiertas).
+        \item Las c.c. de $(\bb{Q}, \cc{T}_u)$ son $\{\{q\}:q\in \bb{Q}\}$ y ninguna es abierta.
+        \item En $(\bb{R}^2, \cc{T}_u)$ y consideramos $X=\bigcup\limits_{n\in \bb{N}}\left\{(0,0), \left(1, \frac{1}{n}\right)\right\}$. $X$ es conexo por ser unión de conexos y cuya intersección es el punto $(0,0)$ por lo que no es vacía. Además, $\overline{X}=X\cup [(0,0),(1,0)]\Rightarrow Y = X \cup \{1,0\}$ es conexo por estar en la adherencia y contener a $X$. Sin embargo, si consideramos $Y\setminus \{(0,0)\}$ no es conexo y sus c.c. son $\left\{ \left.\left((0,0), \left(1, \frac{1}{n}\right)\right.\right] : n\in \bb{N} \right\}\cup \{1,0\}$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
