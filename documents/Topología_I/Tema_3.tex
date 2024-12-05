@@ -337,3 +337,82 @@ Una primera intuición nos puede decir que un conjunto es conexo si todos sus pu
     \end{itemize}
     \endsquare
 \end{ejemplo}
+
+\begin{teo}
+    Sea $f:(X, \cc{T})\to (Y, \cc{T}')$ una aplicación continua, $x\in X$ y sea $\cc{C}(x)$ la c.c. de $X$ que continene a $x$ y $\cc{C}'(f(x))$ a la c.c. de $Y$ que contiene a $f(x)$. Entonces $f(\cc{C}(x))\subset \cc{C}'(f(x))$. 
+    
+    Si además $f$ es un homeomorfismo, entonces $f$ define una biyección entre las c.c. de $(X, \cc{T})$ y $(Y, \cc{T}')$ y $f|_{\cc{C}(x)}:(\cc{C}(x), \cc{T}|_{\cc{C}(x)})\to (\cc{C}'(f(x)), \cc{T}'|_{\cc{C}'(f(x))})$ es un homeomorfismo.
+
+    \begin{proof}
+        Empecemos probando que $f(\cc{C}(x))\subset \cc{C}'(f(x))$. Sabemos que $f$ es continua y $\cc{C}(x)$ es conexo luego $f(\cc{C}(x))$ es conexo y además $f(x)\in f(\cc{C}(x))$ por lo que tenemos que $f(\cc{C}(x))\subset \cc{C}'(f(x))$.
+
+        Veamos la segunda parte. Como sabemos que $f$ es un homeomorfismo sabemos que $f^{-1}$ es continua y por tanto $f^{-1}(C'(f(x)))\subset \cc{C}(x)$. Si ahora aplicamos $f$ obtenemos $\cc{C}'(f(x))\subset f(\cc{C}(x)) \Rightarrow f(\cc{C}(x))=\cc{C}'(f(x))$ por lo que 
+        \begin{align*}
+            f|_{\cc{C}(x)}: \cc{C}(x)\to \cc{C}'(f(x))\text{ es un homeomorfismo } \ \ \forall x \in X
+        \end{align*}
+    \end{proof}
+\end{teo}
+
+\begin{coro}
+    El número de c.c. de un e.t. es un invariante topológico.
+    \endsquare
+\end{coro}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $[0,1]\times \{0,1\} \ncong [0,1]\times \{0,1,2\}$ (ya que tienen distinto número de c.c., el primero tiene 2 y el segundo tiene 3).
+        \item $[0,1]\cup\{2\} \ncong [0,1]\cup [2,3]$ (ya que si fuesen homeomorfos, al restringir a una componente conexa tendría que tener un homeomorfismo sobre las componentes conexas y al restringir la c.c. a $\{2\}$ tendría que ser homeomorfo a alguna de las c.c. pero como solo tiene un punto no se da).
+        \item $(\bb{R}\times \{0\})\cup (\{0\}\times \bb{R}) \ncong (\bb{R}\times \{0\})\cup (\{0\}\times \bb{R}_0^+)$ (ya que si lo fueran le podría quitar el origen al primer espacio y me quedarían 4 c.c. pero de ninguna forma quitandole un punto al segundo espacio se pueden obtener 4 c.c).
+    \end{itemize}
+\end{ejemplo}
+
+\begin{prop}
+    Sean $(X, \cc{T})$, $(Y, \cc{T}')$ e.t., $x\in X$, $y\in Y$, entonces $\cc{C}((x,y))=\cc{C}(x)\times \cc{C}(y)$.
+    \begin{proof}
+        Veámoslo por doble inclusión:
+        \begin{itemize}
+            \item[$\subset$ )] Sabemos que la proyección $p_X:X\times Y \to X$ es continua por lo que por el teorema anterior sabemos que $p_X(\cc{C}((x,y)))\subset \cc{C}(x)$. Si lo repetimos para $p_Y$ obtenemos que $p_Y(\cc{C}((x,y)))\subset \cc{C}'(y)$ y por tanto $\cc{C}((x,y))\subset\cc{C}(x)\times \cc{C}(y)$.
+            \item[$\supset$ )] Como $\cc{C}(x)$ y $\cc{C}(y)$ son conexos tenemos que $\cc{C}(x)\times \cc{C}(y)$ es conexo luego $\cc{C}(x)\times \cc{C}(y)\subset \cc{C}((x,y))$.
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\section{Conexión por arcos}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t. 
+    \begin{itemize}
+        \item Un \textbf{camino} o \textbf{arco} en $(X, \cc{T})$ es una aplicación continua 
+        \begin{align*}
+            \alpha: ([0,1], \cc{T}_u|_{[0,1]})\to (X, \cc{T})
+        \end{align*}
+        A los puntos $\alpha(0)$ y $\alpha(1)$ se les llama \textbf{extremo inicial} y \textbf{extremo final} respectivamente y decimos que $\alpha$ \textbf{conecta} $\alpha(0)$ y $\alpha(1)$. 
+
+        \item Se dice que $(X, \cc{T})$ es \textbf{conexo por arcos}, \textbf{conexo por caminos} o \textbf{arcoconexo} (a.c.) si $\forall x,y\in X$, existe un arco $\alpha$ en $X$ que conecta $x$ e $y$.
+
+        \item Sea $A\subset X$ un subconjunto, se dice que es \textbf{conexo por arcos} o \textbf{arcoconexo} (a.c.) si $(A, \cc{T}|_A)$ es a.c.
+     \end{itemize}
+\end{definicion}
+
+Intuitivamente podemos entender la arcoconexión como que existe una línea (camino o arco) que une cualesquiera dos puntos de un conjunto y que no se sale del conjunto.
+
+\begin{prop}\
+    \begin{itemize}
+        \item $(X, \cc{T})$ a.c. $\Rightarrow (X, \cc{T})$ conexo.
+        \item Si $f:(X, \cc{T})\to (Y, \cc{T}')$ continua y $(X, \cc{T})$ a.c. $\Rightarrow (f(X), \cc{T}'|_{f(X)})$ es a.c.
+        \item La arcoconexión es un invariante topológico.
+        \item La unión de a.c. que intersecan a uno dado es a.c. (lema del peine para arcoconexión).
+        \item $(X\times Y, \cc{T}\times \cc{T}')$ a.c. $\sii (X, \cc{T}), (Y, \cc{T}')$ son a.c.
+    \end{itemize}
+    \begin{proof}
+        La demostración de esta proposición no se dará en el temario por falta de tiempo. Igualmente la demostración es muy parecida a las vistas en conexión.
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $\bb{R}^n$, $\bb{R}^n\setminus \{x_1,\dots,x_k\}$ si $n\geq 2$, $\bb{S}^n$, $\bb{S}^n\setminus \{x_1,\dots,x_k\}$ si $k\geq 2$ y los conjuntos estrellados en $\bb{R}^n$ son a.c.
+        \item $Y=\{(0,y):y\in [-1,1]\}\cup \left\{\left(x,\sen\left(\frac{1}{x}\right)\right): x\in (0,1]\right\}$ es conexo pero no es a.c.
+    \end{itemize}
+\end{ejemplo}
+
