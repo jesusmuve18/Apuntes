@@ -3,7 +3,7 @@
 // Sistemas concurrentes y Distribuidos.
 // Práctica 3. Implementación de algoritmos distribuidos con MPI
 //
-// Archivo: filosofos-plantilla.cpp
+// Archivo: filosofos-sin-interbloqueo.cpp
 // Implementación del problema de los filósofos (sin camarero).
 // Plantilla para completar.
 //
