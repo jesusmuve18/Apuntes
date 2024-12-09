@@ -1186,7 +1186,7 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
         p:X&\to X/R\\
         x &\mapsto [x] = \{x'\in X : xRx'\}
     \end{align*}
-    Llamaremos \textbf{topología cociente} y la notaremos por $T/R$ a la topología final en $X/R$ asociada a $p$, esto es $T/R=T_p$. Al espacio topológico $(X/R, \cc{T}/R)$ se le llama \textbf{espacio topológico cociente} de $(X, \cc{T})$ por la relación de equivalencia $R$.
+    Llamaremos \textbf{topología cociente} y la notaremos por $\cc{T}/R$ a la topología final en $X/R$ asociada a $p$, esto es $\cc{T}/R=\cc{T}_p$. Al espacio topológico $(X/R, \cc{T}/R)$ se le llama \textbf{espacio topológico cociente} de $(X, \cc{T})$ por la relación de equivalencia $R$.
     \endsquare
 \end{definicion}
 
@@ -1342,12 +1342,16 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
 \end{ejemplo}
 
 \begin{ejemplo}
-    Consideramos la topología $([0,1], \cc{T}_u)$ y el conjunto $A=\{0,1\}$ que induce la relación $R_A$. Podemos ver intuitivamente que esta relación identifica el $0$ con el $1$ y al resto de puntos los deja igual. Podemos considerar $([0,1]/\{0,1\}, \cc{T}_u|_{[0,1]}/\{0,1\})$. De nuevo intuitivamente podemos considerar que cogemos el intervalo $[0,1]$ y lo unimos por los extremos creando una circunferencia. Podemos intuir que  $([0,1]/\{0,1\}, \cc{T}_u|_{[0,1]}/\{0,1\}) \cong (\bb{S}^1, \cc{T}_u)$ (en la próxima sesión se verá la formalización de este homeomorfismo).
+    Consideramos la topología $([0,1], \cc{T}_u)$ y el conjunto $A=\{0,1\}$ que induce la relación $R_A$. Podemos ver intuitivamente que esta relación identifica el $0$ con el $1$ y al resto de puntos los deja igual. Podemos considerar $([0,1]/\{0,1\}, \cc{T}_u|_{[0,1]}/\{0,1\})$. De nuevo intuitivamente podemos considerar que cogemos el intervalo $[0,1]$ y lo unimos por los extremos creando una circunferencia. Podemos intuir que
+    \begin{align*}
+        ([0,1]/\{0,1\}, \cc{T}_u|_{[0,1]}/\{0,1\}) \cong (\bb{S}^1, \cc{T}_u)
+    \end{align*}
+    (en la próxima sesión se verá la formalización de este homeomorfismo).
     \endsquare
 \end{ejemplo}
 
 \begin{ejemplo}
-    Consideramos en $\bb{R}^2$ la bola unidad cerrada $(\overline{\bb{B}}(0,1), \cc{T}_u)$ y considero $A=\bb{S}^1$. Tenemos entonces $(\overline{\bb{B}}(0,1)/\bb{S}^1), \cc{T}_u|_{\overline{\bb{B}}(0,1)/\bb{S}^1}\cong (\bb{S}^2, \cc{T}_u)$.
+    Consideramos en $\bb{R}^2$ la bola unidad cerrada $(\overline{\bb{B}}(0,1), \cc{T}_u)$ y considero $A=\bb{S}^1$. Tenemos entonces $(\overline{\bb{B}}(0,1)/\bb{S}^1, \cc{T}_u|_{\overline{\bb{B}}(0,1)/\bb{S}^1})\cong (\bb{S}^2, \cc{T}_u)$.
     \endsquare
 \end{ejemplo}
 
@@ -1389,7 +1393,7 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
         \end{array}
         \right.
     \end{align*}
-    Tengo que encontrar una idenrificación $f:([0,1], \cc{T}_u)\to (\bb{S}^1, \cc{T}_u)$ y tal que $R_f=R_{\{0,1\}}$.\\
+    Tenemos que encontrar una identificación $f:([0,1], \cc{T}_u)\to (\bb{S}^1, \cc{T}_u)$ y tal que $R_f=R_{\{0,1\}}$.\\
 
     Podemos definir
     \begin{align*}
@@ -1410,12 +1414,12 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
 \end{ejemplo}
 
  \begin{ejemplo}($\bb{S}^1$ como cociente de $\bb{R}$)
-    Considermaos la aplicación
+    Consideramos la aplicación
     \begin{align*}
         f:(\bb{R}, \cc{T}_u)&\to (\bb{S}^1, \cc{T}_u)\\
         f(t) & \mapsto (\cos(2\pi t), \sen (2\pi t))
     \end{align*}
-    Intuitivamente podemos ver que $f$ enrolla $[a,a+1)$ en $\bb{S}^1$.
+    Intuitivamente podemos ver que $f$ ``enrolla'' $[a,a+1)$ en $\bb{S}^1$.
     Esta aplicación tiene las siguientes propiedades:
     \begin{itemize}
         \item $f$ es continua.
