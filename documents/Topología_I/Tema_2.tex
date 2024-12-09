@@ -1,7 +1,7 @@
 \chapter{Aplicaciones entre Espacios Topológicos}
 
 \begin{definicion}
-    Dados $(X, \cc{T})$, $(Y, \cc{T}')$ dos e.t., diremos que $f : (X, \cc{T}) \to (Y, \cc{T}')$ (que notaremos como $f:X \to Y$ cuando estén claros los e.t.) es \textbf{continua} en un punto $x_0\in X$ si $\forall N'\in \cc{N}_{f(x_0)}'$\ \ $\exists N \in \cc{N}_{x_0}$ con $f(N)\subset N'$. 
+    Dados $(X, \cc{T})$, $(Y, \cc{T}')$ dos e.t., diremos que $f : (X, \cc{T}) \to (Y, \cc{T}')$ (que notaremos como $f:X \to Y$ cuando estén claros los e.t.) es \textbf{continua} en un punto $x_0\in X$ si $\forall N'\in \cc{N}_{f(x_0)}'$ existe un entorno $ N \in \cc{N}_{x_0}$ con $f(N)\subset N'$. 
 
     \begin{center}
         \begin{tikzpicture}
@@ -37,7 +37,7 @@
         \end{tikzpicture}
     \end{center}
 
-    Equivalentemente, $\forall N'\in \cc{N}_{f(x)}'$  $f^{-1}(N')\in \cc{N}_{x_0}$. Es decir, la imagen inversa por f de todo entorno de $f(x)$ en el espacio topológico $\cc{T}'$ es entorno de $x$ en el espacio topológico $\cc{T}$.
+    Equivalentemente, $\forall N'\in \cc{N}_{f(x)}'$ se tiene que  $f^{-1}(N')\in \cc{N}_{x_0}$. Es decir, la imagen inversa por f de todo entorno de $f(x)$ en el espacio topológico $\cc{T}'$ es entorno de $x$ en el espacio topológico $\cc{T}$.
     \endsquare
 \end{definicion}
 
@@ -63,18 +63,18 @@
 
     \begin{proof}\
         \begin{enumerate}
-            \item[(i)$\Rightarrow$(ii)] Supongamos que $f$ es continua. Tomamos $U' \in \cc{T}'$ y tendremos que verificar que $f^{-1}(U')\in \cc{T}$. Sea $x \in f^{-1}(U')$, entonces tendré que ver que $f^{-1}(U')\in \cc{N}_x$. Sabemos que $f(x)\in U' \subset \cc{N}_{f(x)}$. Como $f$ es continua, entonces $\exists U\in \cc{T} $, $x\in U$, $f(U)\subset U' \Rightarrow x \in U \subset f^{-1}(U')$. Como $U\in \cc{T}$, tenemos que $f^{-1}(U')\in \cc{N}_x$. Como esto sucede para un $x$ arbitrario tendremos que se verifica.
-            \item[(ii)$\Rightarrow$(iii)] Esta implicación es trivial ya que todo abierto básico es en particular abierto en la topología.
-            \item[(iii)$\Rightarrow$(iv)] Sea $C' \in \cc{C}_{\cc{T}'}$, $C'\subset Y$. Tendré que ver que $f^{-1}(C')\in \cc{C}_{\cc{T}}$, lo cual es equivalente a ver que $X \setminus f^{-1}(C')\in \cc{T}$. Sabemos que $X\setminus f^{-1}(C') = f^{-1}(Y\setminus C')$ y $Y\setminus C'\in \cc{T}$. Como $\cc{B}'$ es base de $\cc{T}'$, tenemos que $Y\setminus C'=\bigcup\limits_{i\in I} B_i'$ con $B_i'\in \cc{B}'$\ \ $\forall i \in I$. Entonces tenemos que $f^{-1}(Y\setminus C') = f^{-1}\left(\bigcup\limits_{i\in I}B_i'\right) = \bigcup\limits_{i\in I}f^{-1}(B_i')\in \cc{T}$ por ser unión de abiertos.
-            \item[(iv)$\Rightarrow$(v)] Sea $\emptyset \neq A \subset X$, como $\overline{f(A)}\in \cc{C}_{\cc{T}'}$, por (iv) tenemos que $f^{-1}(\overline{f(A)})\in \cc{C}_{\cc{T}}$. Además, $A \subset f^{-1}(f(A))\subset f^{-1}(\overline{f(A)})\in \cc{C}_{\cc{T}}$. Entonces $\overline{A}\subset f^{-1}(\overline{f(A)})$. Al aplicar $f$ tenemos que $f(\overline{A})\subset f(f^{-1}(\overline{f(A)}))=\overline{f(A)}$.
-            \item[(v)$\Rightarrow$(iv)] Sea $C' \in \cc{C}_{\cc{T}'}$ y tendremos que ver que $f^{-1}(C')\in \cc{C}_{\cc{T}}$. Para ello veré que coincide con su adherencia, es decir, que $\overline{f^{-1}(C')} = f^{-1}(C')$. Como la inclusión $\overline{f^{-1}(C')} \supset f^{-1}(C')$ es clara tendré que ver solo la otra incusión. Sea $A=f^{-1}(C')$, por (v) tenemos que $f(\overline{f^{-1}(C')})\subset \overline{f(f^{-1}(C'))} \subset \overline{C'}=C'$. Aplicando $f^{-1}$ tenemos que $f^{-1}(f(\overline{f^{-1}(C')}))\subset f^{-1}(C')$ y como $f^{-1}(f(\overline{f^{-1}(C')})) = \overline{f^{-1}(C')}$ tenemos lo buscado.
-            \item[(iv)$\Rightarrow$(i)] Sea $x\in X$ arbitrario. Tendré que ver que $f$ es continua en $x$. Sea $U'\in \cc{T}'$ con $f(x)\in U'$. Tendré que ver que existe un $U\in \cc{T}$ con $x\in U$ y $f(U)\subset U'$. Tomo $Y\setminus(U')\in \cc{C}_{\cc{T}'}$ y por (iv) tenemos que $f^{-1}(Y\setminus U')\in \cc{C}_{\cc{T}}$ y $f^{-1}(Y\setminus U') = X \setminus f^{-1}(U')$ por lo que $x\in f^{-1}(U')\in \cc{T}$. Como $f(f^{-1}(U'))\subset U'$ puedo denotar $U = f^{-1}(U')$ y tenemos de nuevo lo buscado. 
+            \item[(i)$\Rightarrow$(ii) )] Supongamos que $f$ es continua. Tomamos $U' \in \cc{T}'$ y tendremos que verificar que $f^{-1}(U')\in \cc{T}$. Sea $x \in f^{-1}(U')$, entonces tendré que ver que $f^{-1}(U')\in \cc{N}_x$. Sabemos que $f(x)\in U' \subset \cc{N}_{f(x)}$. Como $f$ es continua, entonces $\exists U\in \cc{T} $, $x\in U$, $f(U)\subset U' \Rightarrow x \in U \subset f^{-1}(U')$. Como $U\in \cc{T}$, tenemos que $f^{-1}(U')\in \cc{N}_x$. Como esto sucede para un $x$ arbitrario tendremos que se verifica.
+            \item[(ii)$\Rightarrow$(iii) )] Esta implicación es trivial ya que todo abierto básico es en particular abierto en la topología.
+            \item[(iii)$\Rightarrow$(iv) )] Sea $C' \in \cc{C}_{\cc{T}'}$, $C'\subset Y$. Tendré que ver que $f^{-1}(C')\in \cc{C}_{\cc{T}}$, lo cual es equivalente a ver que $X \setminus f^{-1}(C')\in \cc{T}$. Sabemos que $X\setminus f^{-1}(C') = f^{-1}(Y\setminus C')$ y $Y\setminus C'\in \cc{T}$. Como $\cc{B}'$ es base de $\cc{T}'$, tenemos que $Y\setminus C'=\bigcup\limits_{i\in I} B_i'$ con $B_i'\in \cc{B}'$\ \ $\forall i \in I$. Entonces tenemos que $f^{-1}(Y\setminus C') = f^{-1}\left(\bigcup\limits_{i\in I}B_i'\right) = \bigcup\limits_{i\in I}f^{-1}(B_i')\in \cc{T}$ por ser unión de abiertos.
+            \item[(iv)$\Rightarrow$(v) )] Sea $\emptyset \neq A \subset X$, como $\overline{f(A)}\in \cc{C}_{\cc{T}'}$, por (iv) tenemos que $f^{-1}(\overline{f(A)})\in \cc{C}_{\cc{T}}$. Además, $A \subset f^{-1}(f(A))\subset f^{-1}(\overline{f(A)})\in \cc{C}_{\cc{T}}$. Entonces $\overline{A}\subset f^{-1}(\overline{f(A)})$. Al aplicar $f$ tenemos que $f(\overline{A})\subset f(f^{-1}(\overline{f(A)}))=\overline{f(A)}$.
+            \item[(v)$\Rightarrow$(iv) )] Sea $C' \in \cc{C}_{\cc{T}'}$ y tendremos que ver que $f^{-1}(C')\in \cc{C}_{\cc{T}}$. Para ello veré que coincide con su adherencia, es decir, que $\overline{f^{-1}(C')} = f^{-1}(C')$. Como la inclusión $\overline{f^{-1}(C')} \supset f^{-1}(C')$ es clara tendré que ver solo la otra incusión. Sea $A=f^{-1}(C')$, por (v) tenemos que $f(\overline{f^{-1}(C')})\subset \overline{f(f^{-1}(C'))} \subset \overline{C'}=C'$. Aplicando $f^{-1}$ tenemos que $f^{-1}(f(\overline{f^{-1}(C')}))\subset f^{-1}(C')$ y como $f^{-1}(f(\overline{f^{-1}(C')})) = \overline{f^{-1}(C')}$ tenemos lo buscado.
+            \item[(iv)$\Rightarrow$(i) )] Sea $x\in X$ arbitrario. Tendré que ver que $f$ es continua en $x$. Sea $U'\in \cc{T}'$ con $f(x)\in U'$. Tendré que ver que existe un $U\in \cc{T}$ con $x\in U$ y $f(U)\subset U'$. Tomo $Y\setminus(U')\in \cc{C}_{\cc{T}'}$ y por (iv) tenemos que $f^{-1}(Y\setminus U')\in \cc{C}_{\cc{T}}$ y $f^{-1}(Y\setminus U') = X \setminus f^{-1}(U')$ por lo que $x\in f^{-1}(U')\in \cc{T}$. Como $f(f^{-1}(U'))\subset U'$ puedo denotar $U = f^{-1}(U')$ y tenemos de nuevo lo buscado. 
         \end{enumerate}
     \end{proof}
 \end{prop}
 
 \begin{observacion}
-    Si $f: (X, \cc{T}) \to (Y, \cc{T}')$ es una aplicación continua, entonces 
+    Si $f: (X, \cc{T}) \to (\bb{R}, \cc{T}_u)$ es una aplicación continua, entonces 
     \begin{gather*}
         f^{-1}((a,b)), f^{-1}((-\infty, b)), f^{-1}((a, +\infty))\in \cc{T}
     \end{gather*}
@@ -94,52 +94,69 @@
             \sii &\forall \veps >0 \ \ \exists \delta >0 \text{ tal que } f(B(x_0, \delta))\subset B'(f(x_0), \veps).
         \end{align*}
     \end{itemize}
+    \endsquare
 \end{ejemplo}
 
 \begin{observacion}\
     \begin{itemize}
-        \item Cuanto más abiertos hay en $\cc{T}$ y menos en $\cc{T}'$ más fácil es que $f$ sea continua. Por ejemplo, las aplicaciones  
+        \item Cuanto más abiertos hay en $\cc{T}$ y menos en $\cc{T}'$ se puede decir que es ``más fácil'' que $f$ sea continua. Por ejemplo, las aplicaciones  
         \begin{align*}
             f:&(X, \cc{T})\to (Y, \cc{T}_t)\\
             f:&(X, \cc{T}_{disc})\to (Y, \cc{T}')
         \end{align*}
-        son continuas.
+        son continuas siempre.
 
-        \item Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es constante, $f(x)=y_0\in Y$\ \ $\forall x \in X$, Sea $U'\in \cc{T}$, entonces
+        \item Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es constante, es decir, $f(x)=y_0\in Y$\ \ $\forall x \in X$, entonces para todo $U'\in \cc{T}$ se tiene 
         \begin{gather*}
-            f^{-1}=\left\{
+            f^{-1}(U')=\left\{
             \begin{array}{ccc}
                 X & \text{ si }& y_0\in U'\\
                 \emptyset & \text{ si } & y_0\notin U
             \end{array}
             \right.
         \end{gather*}
+        y por tanto $f$ es continua ya que $X, \emptyset \in \cc{T}$.
 
-        \item $Id_X : (X, \cc{T}) \to (X, \cc{T}')$ es continua $\sii \cc{T}' \leq \cc{T}$. Por ejemplo, $Id_{\bb{R}}:(\bb{R}, \cc{T}_u)\to (\bb{R}, \cc{T}_S)$ no es continua pero $Id_{\bb{R}}:(\bb{R}, \cc{T}_S) \to (\bb{R}, \cc{T}_u)$ sí lo es.
+        \item $Id_X : (X, \cc{T}) \to (X, \cc{T}')$ es continua $\sii \cc{T}' \leq \cc{T}$. Por ejemplo, 
+        \begin{align*}
+            Id_{\bb{R}}:(\bb{R}, \cc{T}_u)\to (\bb{R}, \cc{T}_S)
+        \end{align*}
+        no es continua pero
+        \begin{align*}
+            Id_{\bb{R}}:(\bb{R}, \cc{T}_S) \to (\bb{R}, \cc{T}_u)
+        \end{align*} 
+        sí lo es.
         \item Si $f:(X, \cc{T})\to (Y, \cc{T}')$ y $g:(Y, \cc{T}')\to (Z, \cc{T}'')$ son aplicaciones continuas, entonces $g\circ f : (X, \cc{T})\to (Z, \cc{T}'')$ es continua.
         \begin{proof}
             Sea $U''\in \cc{T}''$, $(g\circ f)^{-1}(U'') = f^{-1}(g^{-1}(U''))\in \cc{T}$.
         \end{proof}
-        \item $f:(X, \cc{T})\to (Y,\cc{T}')$ continua y $\emptyset\neq a  \subset X$, entonces
+        \item $f:(X, \cc{T})\to (Y,\cc{T}')$ continua y $\emptyset\neq A  \subset X$, entonces
         \begin{align*}
-            f_{|A}:(A, \cc{T}_A) &\to (Y, \cc{T}') \text{ es continua}\\
+            f|_{A}:(A, \cc{T}_A) &\to (Y, \cc{T}') \text{ es continua}\\
             x & \mapsto f(x)
         \end{align*}
+        es decir, la restricción en el dominio de una función continua sigue siendo continua.
         \begin{proof}
-            Sea $U'\in \cc{T}'$, $(f_{|A})^{-1}(U') = \{x \in A : f(x)\in U\} = f^{-1}(U') \cap A\in \cc{T}_A$ ya que $f^{-1}(U')\in \cc{T}$.
+            Sea $U'\in \cc{T}'$, entonces 
+            \begin{align*}
+                (f|_{A})^{-1}(U') = \{x \in A : f(x)\in U\} = f^{-1}(U') \cap A\in \cc{T}_A
+            \end{align*}
+            ya que $f^{-1}(U')\in \cc{T}$.
         \end{proof}
         \item Si $f:(X, \cc{T})\to (Y, \cc{T}')$ continua, $\emptyset \neq A' \subset Y$ con $f(X)\subset A'$, entonces 
         \begin{align*}
             f^{A'}:(X, \cc{T}) &\to (A', \cc{T}_{A'}') \text{ es continua}\\
             x &\mapsto f(x)
         \end{align*}
+        es decir, la restricción en el codominio de una función continua sigue siendo continua.
         \begin{proof}
-            Sea $O'\in \cc{T}_{A'}'$, entonces $\exists U'\in \cc{T}'$ con $O'=U'\cap A \Rightarrow (f^{A'})^{-1}(O') = (f^{A'})^{-1}(U'\cap A') = f^{-1}(U')\in \cc{T}$ ya que $f$ es continua y $U'$ es abierto en $\cc{T}'$.
+            Sea $O'\in \cc{T}_{A'}'$, entonces $\exists U'\in \cc{T}'$ tal que  $O'=U'\cap A \Rightarrow (f^{A'})^{-1}(O') = (f^{A'})^{-1}(U'\cap A') = f^{-1}(U')\in \cc{T}$ ya que $f$ es continua y $U'$ es abierto en $\cc{T}'$.
+
         \end{proof}
     \end{itemize}
 \end{observacion}
 
-\begin{lema} (de pegado) Sean $(X, \cc{T})$, $(Y, \cc{T}')$ dos e.t. y sea $\{A_i\}_{i\in I}\subset X$ una familia de subconjuntos no vacío de $X$ y $\{f_i:A_i \to Y\}_{i\in I}$ una familia de aplicaciones tales que 
+\begin{lema} (Lema de pegado) Sean $(X, \cc{T})$, $(Y, \cc{T}')$ dos e.t. y sea $\{A_i\}_{i\in I}\subset X$ una familia de subconjuntos no vacía de $X$ y $\{f_i:A_i \to Y\}_{i\in I}$ una familia de aplicaciones tales que 
     \begin{enumerate}
         \item[(i)] $\bigcup\limits_{i\in I} A_i =X$.
         \item[(ii)] $f_i=f_j$ en $A_i\cap A_j$\ \ $\forall i,j\in I$ con $A_i\cap A_j \neq \emptyset$. 
@@ -153,7 +170,6 @@
     \end{align*}
     está bien definida y es continua.
     \begin{proof}\
-
         Es claro que la aplicación $f$ está bien definida por las condiciones (i) y (ii). Tendremos que ver su continuidad. Tendremos que distinguir dos casos. Demostraremos uno y el otro será análogo y se deja propuesto como ejercicio para el lector:\\
 
         Supongamos $I$ es finito y $A_i\in \cc{C}_{\cc{T}}$\ \ $\forall i \in I$. Sea $C'\in \cc{C}_{\cc{T}'}$, tendremos que ver que $f^{-1}(C')\in \cc{C}_{\cc{T}}$. Tenemos que $f^{-1}(C') = X\cap f^{-1}(C')\overset{(i)}{=}\left(\bigcup\limits_{i\in I}A_i\right)\cap f^{-1}(C') = \bigcup\limits_{i\in I}(A_i\cap f^{-1}(C')) = \bigcup\limits_{i\in I}\{x\in A : f_i(x)\in C'\} = \bigcup\limits_{i\in I} f_i^{-1}(C')$. Como $f_i^{-1}(C')\in \cc{C}_{\cc{T}_{A_i}}$ y además $A_i\in \cc{C}_{\cc{T}}\Rightarrow f_i^{-1}(C')\in \cc{C}_{\cc{T}}$, entonces por (iv) tenemos que $\bigcup\limits_{i\in I} f_i^{-1}(C')\in \cc{C}_{\cc{T}}$.\\
@@ -180,14 +196,20 @@
 \begin{definicion}
     Una aplicación $f:(X, \cc{T})\to (Y, \cc{T}')$ diremos que es
     \begin{itemize}
-        \item \textbf{abierta} si lleva abiertos de $\cc{T}$ en abiertos de $\cc{T}'$, es decir, $f(U)\in \cc{T}'$\ \ $\forall U \in \cc{T}$.
-        \item \textbf{cerrada} si lleva cerrados de $\cc{T}$ en cerrados de $\cc{T}'$, es decir, $f(C)\in \cc{C}_{\cc{T}'}$\ \ $\forall C f\in \cc{C}_{\cc{T}}$.
+        \item \textbf{abierta} si lleva abiertos de $\cc{T}$ en abiertos de $\cc{T}'$, es decir,
+        \begin{align*}
+            f(U)\in \cc{T}',\ \ \forall U \in \cc{T}
+        \end{align*}
+        \item \textbf{cerrada} si lleva cerrados de $\cc{T}$ en cerrados de $\cc{T}'$, es decir,
+        \begin{align*}
+            f(C)\in \cc{C}_{\cc{T}'},\ \ \forall C \in \cc{C}_{\cc{T}}
+        \end{align*}
     \end{itemize}
     \endsquare
 \end{definicion}
 
 \begin{observacion}
-    Ser continua, abierta y cerrada son propiedades independientes.
+    Ser continua, abierta y cerrada son propiedades independientes (se puede ser una sin ser ninguna de las otras dos).
     \endsquare
 \end{observacion}
 
@@ -201,9 +223,10 @@
     \end{enumerate}
     \begin{proof}\
         \begin{itemize}
-            \item[(i)$\Rightarrow$(ii)$\Rightarrow$(iii)] Trivial.
-            \item[(iii)$\Rightarrow$(iv)] Sea $x\in A^\circ$, tendremos que ver que $f(x)\in (f(A))^\circ$. Como $x\in A^\circ$, entonces $A\in \cc{N}_x$ y por (iii) tenemos que $f(A)\in \cc{N}_{f(x)}'$ por lo que $f(x)\in (f(A))^\circ$.
-            \item[(iv)$\Rightarrow$(i)] $U\in \cc{T}$ por lo que $U=U^\circ$. Entonces $f(U) = f(U^\circ)$ y por (iv) tenemos que $f(U^\circ)\subset (f(U))^\circ$  y como la otra inclusión se da siempre tenemos que $f(U)=(f(U))^\circ\in \cc{T}$.
+            \item[(i)$\Rightarrow$(ii) )] Trivial.
+            \item[(ii)$\Rightarrow$(iii) )] Trivial.
+            \item[(iii)$\Rightarrow$(iv) )] Sea $x\in A^\circ$, tendremos que ver que $f(x)\in (f(A))^\circ$. Como $x\in A^\circ$, entonces $A\in \cc{N}_x$ y por (iii) tenemos que $f(A)\in \cc{N}_{f(x)}'$ por lo que $f(x)\in (f(A))^\circ$.
+            \item[(iv)$\Rightarrow$(i) )] $U\in \cc{T}$ por lo que $U=U^\circ$. Entonces $f(U) = f(U^\circ)$ y por (iv) tenemos que $f(U^\circ)\subset (f(U))^\circ$  y como la otra inclusión se da siempre tenemos que $f(U)=(f(U))^\circ\in \cc{T}$.
         \end{itemize}
     \end{proof}
 \end{prop}
@@ -216,24 +239,28 @@
     \end{enumerate}
     \begin{proof}\
         \begin{itemize}
-            \item[(i)$\Rightarrow$(ii)] $\overline{A}\in \cc{C}_{\cc{T}} \Rightarrow f(A)\subset f(\overline{A}) \Rightarrow \overline{f(A)}\subset \overline{f(\overline{A})}$ y como $f$ es cerrada, tenemos que $\overline{f(\overline{A})} = f(\overline{A})$ y por tanto $\overline{f(A)}\subset f(\overline{A})$.
+            \item[(i)$\Rightarrow$(ii) )] $\overline{A}\in \cc{C}_{\cc{T}} \Rightarrow f(A)\subset f(\overline{A}) \Rightarrow \overline{f(A)}\subset \overline{f(\overline{A})}$ y como $f$ es cerrada, tenemos que $\overline{f(\overline{A})} = f(\overline{A})$ y por tanto $\overline{f(A)}\subset f(\overline{A})$.
             
 
-            \item[(ii)$\Rightarrow$(i)] $\overline{C}=C\in \cc{C}_{\cc{T}}$, por (ii) tenemos que $\overline{f(C)}\subset f(\overline{C})= f(C) \in \cc{C}_{\cc{T}'}$. 
+            \item[(ii)$\Rightarrow$(i) )] $\overline{C}=C\in \cc{C}_{\cc{T}}$, por (ii) tenemos que $\overline{f(C)}\subset f(\overline{C})= f(C) \in \cc{C}_{\cc{T}'}$. 
         \end{itemize}
     \end{proof}
 \end{prop}
 
 \begin{ejemplo}\
     \begin{itemize}
-        \item Una aplicación $f: (X, \cc{T}) \to (Y, \cc{T}')$ es más fácil que sea abierta y/o cerrada cuanto menos abiertos haya en $\cc{T}$ y más en $\cc{T}'$ (no es riguroso pero es una buena intuición). Por ejemplo, $f(X, \cc{T})\to (Y, \cc{T}_{disc})$ es abierta y cerrada.
+        \item Una aplicación $f: (X, \cc{T}) \to (Y, \cc{T}')$ es ``más fácil'' que sea abierta y/o cerrada cuanto menos abiertos haya en $\cc{T}$ y más en $\cc{T}'$ (no es riguroso pero es una buena intuición). Por ejemplo, $f(X, \cc{T})\to (Y, \cc{T}_{disc})$ es abierta y cerrada.
         La aplicación $f:(X, \cc{T}_t) \to (Y, \cc{T})$ es abierta si y solo si $f(X)\in \cc{T}'$ y es cerrada si y solo si $f(X)\in \cc{C}_{\cc{T}'}$.
+
         \item $Id_X :  (X, \cc{T})\to (X, \cc{T}')$ es abierta si y solo si $T \leq \cc{T}'$ y es cerrada si y solo si $\cc{C}_{\cc{T}}\subset \cc{C}_{\cc{T}'}$ (lo cual es equivalente a que sea abierta).
+
         \item Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es constante, con $f(x)=y_0\in Y$\ \ $\forall x \in X$, entonces $f$ es abierta si y solo si $\{y_0\}\in \cc{T}'$ y es cerrada si y solo si $\{y_0\}\in \cc{C}_{\cc{T}'}$. En particular, $f:(X, \cc{T})\to (\bb{R}, \cc{T}_u)$ constante es continua, cerrada pero no es abierta.
+
         \item Sean $f:(X, \cc{T})\to (Y,\cc{T}')$ y $g:(Y,\cc{T}')\to (Z, \cc{T}'')$, entonces si $f $ y $ g$ son abiertas, entonces $g\circ f:(X, \cc{T})\to (Z, \cc{T}'')$ es abierta ya que $(g\circ f)(U)=g(f(U))\in \cc{T}''$. Análogamente, si $f$ y $g$ son cerradas, entonces la composición $g\circ f:(X, \cc{T})\to (Z, \cc{T}'')$ es cerrada.
-        \item Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es abierta y $\emptyset \neq A \subset X$, entonces si $A$ es abierto se tiene que $f_{|A}:(A, \cc{T}_A)\to (Y, \cc{T}')$ es abierta. Análogamente, si $A$ es cerrado se tiene que $f_{|A}:(A, \cc{T}_A)\to (Y, \cc{T}')$ es cerrada.
+
+        \item Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es abierta y $\emptyset \neq A \subset X$, entonces si $A$ es abierto se tiene que $f|_{A}:(A, \cc{T}_A)\to (Y, \cc{T}')$ es abierta. Análogamente, si $A$ es cerrado se tiene que $f|_{A}:(A, \cc{T}_A)\to (Y, \cc{T}')$ es cerrada.
         \begin{proof}
-            Supongamos que $f$ es abierta y $A\in \cc{T}$ y tendremos que ver ue $f_{|A}$ es abierta. Sea $O\in \cc{T}_A$ tendremos que ver que $f_{|A}(O)\in \cc{T}'$. Como $O\in \cc{T}_A$ tenemos que $O\in \cc{T} \Rightarrow f(O)\in \cc{T}'$. Como $f(O)=f_{|A}(O)$ tenemos que $f_{|A}(O)\in \cc{T}'$ y lo tenemos. 
+            Supongamos que $f$ es abierta y $A\in \cc{T}$ y tendremos que ver que $f|_{A}$ es abierta. Sea $O\in \cc{T}_A$ tendremos que ver que $f|_{A}(O)\in \cc{T}'$. Como $O\in \cc{T}_A$ tenemos que $O\in \cc{T} \Rightarrow f(O)\in \cc{T}'$. Como $f(O)=f|_{A}(O)$ tenemos que $f|_{A}(O)\in \cc{T}'$ y lo tenemos. 
 
             La demostración para cerrado es análoga y se deja como ejercicio para el lector.
         \end{proof}
@@ -243,6 +270,7 @@
             Sea $U\in \cc{T} \Rightarrow f^{A'}(U)=f(U)\in \cc{T}$ y $f(U)=f(U)\cap A'\in \cc{T}_{A'}'$ por lo que lleva abiertos en abiertos y tenemos lo buscado.
 
             La demostración para cerrados es análoga y se deja como ejercicio para el lector.
+
         \end{proof}
     \end{itemize}
 \end{ejemplo}
@@ -254,14 +282,18 @@
         \item[(ii)] $f$ es abierta.
         \item[(iii)] $f$ es cerrada. 
     \end{enumerate}
-    \begin{proof}
-        Sea $A\subset X$, entonces su imagen, $f(A)=(f^{-1})^{-1}(A)$ y $(f^{-1})^{-1}=f$.
-        %TODO
+    % \begin{proof}\
+    %     % Sea $A\subset X$, entonces su imagen, $f(A)=(f^{-1})^{-1}(A)$ y $(f^{-1})^{-1}=f$.
+    %     \begin{itemize}
+    %         \item[(i)$\Rightarrow$(ii) )] Como $f^{-1}$ es continua tenemos que $f^{-1}(U')\in \cc{T}$\ \ $\forall U'\in \cc{T}'$. Al aplicar $f$ obtenemos $f(f^{-1}(U'))=U'\in \cc{T}'$.
+    %         \item[(ii)$\Rightarrow $(i) )] Como $f$ es abierta tenemos que $f(U)\in \cc{T}'$\ \ $\forall U\in \cc{T}$. Al aplicar $f^{-1}$ obtenemos $f^{-1}(f(U))=U\in \cc{T}$ y por tanto $f^{-1}$ es continua.
+    %     \end{itemize}
+    %     %TODO
 
-        % Para probarlo tomo A un abierto y como f^{-1} es continua y A es abierto, su preimagen será abierto tb y tenemos (i)\Rightarrow (ii).
+    %     % Para probarlo tomo A un abierto y como f^{-1} es continua y A es abierto, su preimagen será abierto tb y tenemos (i)\Rightarrow (ii).
 
-        % Tendremos que hacer (i) \sii (ii) y (i) \sii (iii) (es lo más fácil)
-    \end{proof}
+    %     % Tendremos que hacer (i) \sii (ii) y (i) \sii (iii) (es lo más fácil)
+    % \end{proof}
 \end{observacion}
 
 \section{Homeomorfismos}
@@ -282,11 +314,12 @@
     \end{enumerate}
     \begin{proof}
         Es trivial utilizando la observación anterior.
+
     \end{proof}
 \end{teo}
 
 \begin{observacion}
-    $f$ es continua y cerrada $\sii \overline{f(A)}=f(\overline{A})$\ \ $\forall A \subset X$. (Esto a veces puede servir para ver que una aplicación $f$ es ub homeomorfismo).
+    $f$ es continua y cerrada $\sii \overline{f(A)}=f(\overline{A})$\ \ $\forall A \subset X$. (Esto a veces puede servir para ver que una aplicación $f$ es un homeomorfismo).
     \endsquare
 \end{observacion}
 
@@ -309,13 +342,29 @@
     \begin{itemize}
         \item Cualesquiera dos intervalos abiertos en $(\bb{R}, \cc{T}_u)$ son homeomorfos con la topología inducida.
         \begin{proof}
-            Veamos en primer lugar que $(a,b) \cong (0,1)$, con $a<b$. Definimos $f(x)=\dfrac{x-a}{b-a}$. Esta aplicación es biyectiva ya que tiene inversa (habría que calcularla). Además es continua y su inversa (que pronto tendremos calculada) también lo es.
+            Veamos en primer lugar que $(a,b) \cong (0,1)$, con $a<b$. Definimos
+            \begin{align*}
+                f:(a,b) & \to (0,1)\\
+                x&\mapsto f(x)=\dfrac{x-a}{b-a}
+            \end{align*}
+            Esta aplicación es biyectiva ya que tiene inversa:
+            \begin{align*}
+                f^{-1}(x)=x(b-a)+a
+            \end{align*}
+            Se puede ver que es su inversa ya que 
+            \begin{align*}
+                (f^{-1}\circ f)(x)&=f^{-1}(f(x))=f^{-1}\left(\frac{x-a}{b-a}\right) =
+                \left(\frac{x-a}{b-a}\right)(b-a)+a \\&= x - a + a = x\\
+                (f\circ f^{-1})(x)&=f(f^{-1}(x))=f(x(b-a)+a)=\frac{x(b-a)+a - a}{b-a} = \frac{x(b-a)}{b-a}=x
+            \end{align*}
 
-            Veamos también que $(0,1)\cong (1, +\infty)$. Para ello definimos $f(x)=\frac{1}{x}$ que es claramente biyectiva, continua y su inversa es continua.
+            Además, tanto $f$ como $f^{-1}$ son continuas (podemos usar la intuición del análisis ya que estamos en $(\bb{R}, \cc{T}_u)$) por lo que tenemos que $f$ es un homeomorfismo.\\
 
-            Además, $(1, +\infty)\cong (0,+\infty)$ con $f(x)=x-1$ claramente un homeomorfismo.
+            Veamos también que $(0,1)\cong (1, +\infty)$. Para ello definimos $f(x)=\frac{1}{x}$ que es claramente biyectiva, continua y su inversa (que es la propia $f$) es continua.\\
 
-            Tenemos lo siguiente:
+            Además, $(1, +\infty)\cong (0,+\infty)$ con $f(x)=x-1$ claramente un homeomorfismo.\\
+
+            Finalmente llegamos a lo siguiente:
             \begin{gather*}
                 (0,+\infty)\cong \left\{
                 \begin{array}{lcl}
@@ -596,14 +645,18 @@
 En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc{T}')$ podemos buscar una topología en el espacio $X\times Y$ a partir de $\cc{T}$ y $\cc{T}'$. Para ello, teniendo $X\times Y=\{(x,y):x\in X, y \in Y\}$ podemos tomar el conjunto $\{U\times U' : U\in \cc{T}, U'\in \cc{T}'\}$ pero vemos que no cumple la propiedad \apuntar{A2}. Sin embargo, sí podemos considerar que dicho conjunto sea una base de la topología producto.
 
 \begin{prop}
-    $\cc{B}_{\cc{T}\times \cc{T}'}=\{U\times U' : U\in \cc{T}, U'\in \cc{T}'\}$ es base de una única topología en $X\times Y$ que se denota $\cc{T}\times \cc{T}'$ y se llama \textbf{topología producto} de $\cc{T}$ y $\cc{T}'$. 
+    El conjunto 
+    \begin{align*}
+        \cc{B}_{\cc{T}\times \cc{T}'}=\{U\times U' : U\in \cc{T}, U'\in \cc{T}'\}
+    \end{align*} 
+    es base de una única topología en $X\times Y$ que se denota $\cc{T}\times \cc{T}'$ y se llama \textbf{topología producto} de $\cc{T}$ y $\cc{T}'$. 
 
     Al e.t. $(X\times Y, \cc{T}\times \cc{T}')$ lo llamaremos \textbf{espacio topológico producto} de $(X, \cc{T})$ y $(Y, \cc{T}')$.
 
-    \begin{proof} Para ver que esto es cierto tendremos que comprobar que cumple las condiciones de la Proposición %TODO 
+    \begin{proof} Para ver que esto es cierto tendremos que comprobar que cumple las condiciones del Teorema \ref{teorema1_6}:
         \begin{enumerate}
-            \item[\apuntar{B1}] $X\times Y \in \cc{B}_{\cc{T}\times \cc{T}'}\Rightarrow \bigcup\limits_{B\in \cc{B}_{\cc{T}\times \cc{T}'}}=X\times Y$.
-            \item[\apuntar{B2}] $U_1\times U_1', U_2\times U_2'\in \cc{B}_{\cc{T}\times \cc{T}'}$. Tenemos uqe $(U_1\times U_1')\cap (U_2\times U_2') = (U_1\cap U_2)\times (U_1'\times U_2')\in \cc{B}_{\cc{T}\times \cc{T}'}$. ya que $(U_1\times U_2)\in \cc{T}$ y $(U_1'\times U_2')\in \cc{T}'$.
+            \item[\apuntar{B1}] $X\times Y \in \cc{B}_{\cc{T}\times \cc{T}'}\Rightarrow \bigcup\limits_{B\in \cc{B}_{\cc{T}\times \cc{T}'}}B=X\times Y$.
+            \item[\apuntar{B2}] $U_1\times U_1', U_2\times U_2'\in \cc{B}_{\cc{T}\times \cc{T}'}$. Tenemos que $(U_1\times U_1')\cap (U_2\times U_2') = (U_1\cap U_2)\times (U_1'\times U_2')\in \cc{B}_{\cc{T}\times \cc{T}'}$. ya que $(U_1\cap U_2)\in \cc{T}$ y $(U_1'\cap U_2')\in \cc{T}'$.
         \end{enumerate}
         y ya lo tenemos probado.
 
@@ -612,7 +665,13 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
 
 \begin{observacion}\
     \begin{itemize}
-        \item Si $W\subset X\times Y$, $W\in \cc{T}\times \cc{T}'\sii \forall (x,y)\in W$\ \ $\exists U\in \cc{T}, U\in \cc{T}'$ con $(x,y)\in U\times U'\subset W \sii \forall (x,y)\in W\ \ \exists U\in \cc{T}, U'\in \cc{T}'$ con $x\in , y \in U', U\times U'\subset W \sii W=\bigcup\limits_{i\in I}U_i\times U_i'$ con $U_i\in \cc{T}, U_i'\in \cc{T}'\ \ \forall i\in I$.
+        \item Si $W\subset X\times Y$, entonces son equivalentes:
+        \begin{enumerate}
+            \item[(i)] $W\in \cc{T}\times \cc{T}'$.
+            \item[(ii)] $\forall (x,y)\in W$\ \ $\exists U\in \cc{T}, U'\in \cc{T}'$ con $(x,y)\in U\times U'\subset W$.
+            \item[(iii)] $\forall (x,y)\in W\ \ \exists U\in \cc{T}, U'\in \cc{T}'$ con $x\in U, y \in U', U\times U'\subset W$.
+            \item[(iv)] $W=\bigcup\limits_{i\in I}(U_i\times U_i')$ con $U_i\in \cc{T}, U_i'\in \cc{T}'\ \ \forall i\in I$.
+        \end{enumerate}
         \item En $(X\times Y, \cc{T}\times \cc{T}')$, todo producto de abiertos es abierto (básico) pero el recíproco no es cierto ya que hay abiertos en el producto que no son procducto de abiertos. Es decir, que la topología $\cc{T}\times \cc{T}'$ hay más abiertos en general que los básicos, es decir, $\cc{T}\times \cc{T}'\setminus \cc{B}_{\cc{T}\times \cc{T}'}\neq \emptyset$.
     \end{itemize}
 \end{observacion}
@@ -620,7 +679,11 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
 \begin{prop}
     Sean $(X, \cc{T}), (Y, \cc{T}')$ dos e.t. Entonces:
     \begin{enumerate}
-        \item[(i)] Si $\cc{B}$ es base de $\cc{T}$ y $\cc{B}'$ es base de $\cc{T}'$, entonces $\tilde{\cc{B}}=\cc{B}\times \cc{B}'=\{B\times B': B\in \cc{B}, B'\in \cc{B}'\}$ es base de $\cc{T}\times \cc{T}'$.
+        \item[(i)] Si $\cc{B}$ es base de $\cc{T}$ y $\cc{B}'$ es base de $\cc{T}'$, entonces 
+        \begin{align*}
+            \tilde{\cc{B}}=\cc{B}\times \cc{B}'=\{B\times B': B\in \cc{B}, B'\in \cc{B}'\}
+        \end{align*}
+        es base de $\cc{T}\times \cc{T}'$.
         \item[(ii)] Si $x\in X$, $\cc{B}_x$ b.d.e. de $x$ en $(X, \cc{T})$ y $y\in Y$, $\cc{B}_y'$ b.d.e. de $y$ en $(Y, \cc{T}')$, entonces
         \begin{gather*}
             \tilde{\cc{B}}_{(x,y)}=\cc{B}_x\times \cc{B}_y' =\{V\times V': V\in \cc{B}_x, V'\in \cc{B}_y'\}
@@ -653,17 +716,20 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
         
         $B_{\infty}^n(x, \veps)\times B_{\infty}^m(y, \veps) = B_{\infty}^{n+m}((x,y), \veps)$.
     \end{itemize}
+    \endsquare
 \end{ejemplo}
 
 \begin{observacion}
     Sean $(X, \cc{T})$, $(Y, \cc{T}')$ dos e.t., $C\in \cc{C}_{\cc{T}}$, $C'\in \cc{C}_{\cc{T}'}\Rightarrow C\times C'\in \cc{C}_{\cc{T}\times \cc{T}'}$.
 
-
+    \begin{proof}
     En efecto, 
     \begin{gather*}
         (X\times Y)\setminus (C\times C')=\{(x,y)\in X\times Y : (x,y\notin C\times C')\} = ((X\setminus C \times Y)) \cup (X\times (T\setminus C'))
     \end{gather*}
     y como $((X\setminus C \times Y)), (X\times (T\setminus C')) \in \cc{T}\times \cc{T}'$, entonces la unión de abiertos en la topología producto es abierto. 
+    
+    \end{proof}
 
     Cabe destacar que el recíproco no es cierto, es decir, no todo cerrado en $\cc{T}\times \cc{T}'$ es producto de cerrados. Por ejemplo, en $(\bb{R}^2, \cc{T}_u)$, $([0,1]\times [0,1])\cup ([1,2] \times [1,2])$.
 
@@ -673,8 +739,8 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
 \begin{definicion}
     Sean $X$, $Y$ dos conjuntos no vacíos, se definen las \textbf{proyecciones}
     \begin{align*}
-        \pi_X:X\times Y &\to X \vspace*{1cm} &\pi_Y:X\times Y &\to Y\\
-        (x,y) &\mapsto x  \vspace{1cm} (x,y) &\mapsto y
+        \pi_X:X\times Y &\to X \hspace*{1cm} &\pi_Y:X\times Y &\to Y\\
+        (x,y) &\mapsto x  \hspace{1cm} &(x,y) &\mapsto y
     \end{align*}
     Son sobreyectivas
     \endsquare
@@ -713,8 +779,8 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
 
     Sean $(X, \cc{T})$, $(Y, \cc{T}')$ dos e.t., $x_0\in X$, $y_0\in Y$, entonces
     \begin{align*}
-        (X\times \{y_0\}, (\cc{T}\times \cc{T}')_{X\times\{y_0\}})\cong (X, \cc{T})\\
-        (\{x_0\}\times Y, (\cc{T}\times \cc{T}')_{\{x_0\}\times Y})\cong (Y, \cc{T}')
+        (X\times \{y_0\}, (\cc{T}\times \cc{T}')|_{X\times\{y_0\}})\cong (X, \cc{T})\\
+        (\{x_0\}\times Y, (\cc{T}\times \cc{T}')|_{\{x_0\}\times Y})\cong (Y, \cc{T}')
     \end{align*}
 
     \begin{proof}
