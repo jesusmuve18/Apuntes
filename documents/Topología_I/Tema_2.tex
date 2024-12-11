@@ -37,7 +37,7 @@
         \end{tikzpicture}
     \end{center}
 
-    Equivalentemente, $\forall N'\in \cc{N}_{f(x)}'$ se tiene que  $f^{-1}(N')\in \cc{N}_{x_0}$. Es decir, la imagen inversa por f de todo entorno de $f(x)$ en el espacio topológico $\cc{T}'$ es entorno de $x$ en el espacio topológico $\cc{T}$.
+    Equivalentemente, $\forall N'\in \cc{N}_{f(x_0)}'$ se tiene que  $f^{-1}(N')\in \cc{N}_{x_0}$. Es decir, la imagen inversa por $f$ de todo entorno de $f(x_0)$ en el espacio topológico $\cc{T}'$ es entorno de $x_0$ en el espacio topológico $\cc{T}$.
     \endsquare
 \end{definicion}
 
@@ -47,7 +47,7 @@
 \end{observacion}
 
 \begin{definicion}
-    Dados $(X, \cc{T})$, $(Y, \cc{T}')$ dos e.t., $\emptyset \neq A\subset X$. Diremos que $f:X\to Y$ es \textbf{continua en $A$} si es continua en $x$\ \ $\forall x \in A$. Diremos que $f$ es \textbf{continua} si es continua en $X$.
+    Dados $(X, \cc{T})$, $(Y, \cc{T}')$ dos e.t., $\emptyset \neq A\subset X$. Diremos que $f:X\to Y$ es \textbf{continua en $A$} si es continua en $x$,\ \ $\forall x \in A$. Diremos que $f$ es \textbf{continua} si es continua en $X$.
     \endsquare
 \end{definicion}
 
@@ -325,9 +325,9 @@
 
 \begin{ejemplo}\
     \begin{itemize}
-        \item $Id_X : (X, \cc{T})\to (X, \cc{T}')$ es un homeomorfismo $\sii T=T'$.
-        \item Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es un homeomorfismo, entonces $f^{-1}:(Y, \cc{T}')\to (X, \cc{T})$ (por su definición). Es una doble implicación pero no la podemos escribir rigurosamente ya que no podemos escribir $f^{-1}$ sin suponer que es biyectiva.
-        \item $f:(X, \cc{T})\to (Y, \cc{T}')$, $g:(Y, \cc{T}')\to (Z, \cc{T}'')$ es un homeomorfismo, entonces $g\circ f:(X, \cc{T})\to (Z, \cc{T}'')$ es un homeomorfismo (ya que la composición de biyecciones es biyectiva, la composición de abiertas es abierta y la composición de cerradas es cerrada).
+        \item $Id_X : (X, \cc{T})\to (X, \cc{T}')$ es un homeomorfismo $\sii \cc{T}=\cc{T}'$.
+        \item Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es un homeomorfismo, entonces $f^{-1}:(Y, \cc{T}')\to (X, \cc{T})$ también lo será (por su definición). Es una doble implicación pero no la podemos escribir rigurosamente ya que no podemos escribir $f^{-1}$ sin suponer que es biyectiva.
+        \item $f:(X, \cc{T})\to (Y, \cc{T}')$, $g:(Y, \cc{T}')\to (Z, \cc{T}'')$ son homeomorfismos, entonces $g\circ f:(X, \cc{T})\to (Z, \cc{T}'')$ es un homeomorfismo (ya que la composición de biyecciones es biyectiva, la composición de abiertas es abierta y la composición de continuas es continua).
         \item Sea $f:(X, \cc{T}) \to (Y, \cc{T}')$ un homeomorfismo, $\emptyset\neq A \subset X$, $A'=f(A)\neq \emptyset$, $f(A)\subset Y$. Entonces $f_{|A}^{A'}:(A, \cc{T}_A)\to (A', \cc{T}_{A'}')$ es un homeomorfismo. La demostración se basa en que $(f_{|A}^{A'})^{-1} = f_{|A'}^A$ y que $f_{|A}^{A'}$ es biyectiva y continua y que $f_{|A'}^A$ es continua.
     \end{itemize}
     \endsquare
@@ -490,8 +490,8 @@
     \begin{enumerate}
         \item[(i)] Si $U\subset X$, entonces $U\in \cc{T}\sii f(U)\in \cc{T}'$.
         \item[(ii)] Si $C\subset X$, entonces $C\subset \cc{C}_{\cc{T}} \sii f(C)\in \cc{C}_{\cc{T}'}$.
-        \item[(iii)] Si $\cc{B}\subset\cc{P}(X)$, entonces $\cc{B}$ es base de $\cc{T} \sii $ $\cc{B}'=f(B)=\{f(B):B\in \cc{B}\}$ es base de $\cc{T}'$.
-        \item[(iv)] Si $x\in X$, y $N\in X$, entonces $N\in \cc{N}_x \sii f(N)\in \cc{N}_{f(x)}'$.
+        \item[(iii)] Si $\cc{B}\subset\cc{P}(X)$, entonces $\cc{B}$ es base de $\cc{T} \sii $ $\cc{B}'=f(\cc{B})=\{f(B):B\in \cc{B}\}$ es base de $\cc{T}'$.
+        \item[(iv)] Si $x\in X$, y $N\subset X$, entonces $N\in \cc{N}_x \sii f(N)\in \cc{N}_{f(x)}'$.
         \item[(v)] Si $x\in X$, $\cc{B}_x\subset \cc{P}(X)$, entonces $\cc{B}_x$ es b.d.e. de $x$ en $\cc{T} \sii \cc{B}_{f(x)}'=f(\cc{B}_x)=\{f(V):V\in \cc{B}_x\}$ es b.d.e. de $f(y)$ en $\cc{T}'$.     
     \end{enumerate}
 
@@ -619,7 +619,7 @@
 \begin{ejemplo}\
     \begin{itemize}
         \item $f$ homeomorfismo $\Rightarrow$ $f$ embebimiento. El recíproco no es cierto.
-        \item Si $n, k \in \bb{N}$,
+        \item Si $n, k \in \bb{N}$, entonces la aplicación 
         \begin{align*}
             f:(\bb{R}^n, \cc{T}_u)&\to (\bb{R}^{n+k}, \cc{T}_u)\\
             x &\mapsto f(x)=(x,0)
@@ -642,7 +642,7 @@
 \end{ejemplo}
 
 \section{Topología Producto}
-En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc{T}')$ podemos buscar una topología en el espacio $X\times Y$ a partir de $\cc{T}$ y $\cc{T}'$. Para ello, teniendo $X\times Y=\{(x,y):x\in X, y \in Y\}$ podemos tomar el conjunto $\{U\times U' : U\in \cc{T}, U'\in \cc{T}'\}$ pero vemos que no cumple la propiedad \apuntar{A2}. Sin embargo, sí podemos considerar que dicho conjunto sea una base de la topología producto.
+En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc{T}')$ podemos buscar una topología en el espacio $X\times Y$ a partir de $\cc{T}$ y $\cc{T}'$. Para ello, teniendo $X\times Y=\{(x,y):x\in X, y \in Y\}$ podemos tomar el conjunto $\{U\times U' : U\in \cc{T}, U'\in \cc{T}'\}$ pero vemos que no cumple la propiedad \apuntar{A2} por lo que no podremos construir así una topología. Sin embargo, sí podemos considerar que dicho conjunto sea una base de la topología producto.
 
 \begin{prop}
     El conjunto 
@@ -672,7 +672,7 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
             \item[(iii)] $\forall (x,y)\in W\ \ \exists U\in \cc{T}, U'\in \cc{T}'$ con $x\in U, y \in U', U\times U'\subset W$.
             \item[(iv)] $W=\bigcup\limits_{i\in I}(U_i\times U_i')$ con $U_i\in \cc{T}, U_i'\in \cc{T}'\ \ \forall i\in I$.
         \end{enumerate}
-        \item En $(X\times Y, \cc{T}\times \cc{T}')$, todo producto de abiertos es abierto (básico) pero el recíproco no es cierto ya que hay abiertos en el producto que no son procducto de abiertos. Es decir, que la topología $\cc{T}\times \cc{T}'$ hay más abiertos en general que los básicos, es decir, $\cc{T}\times \cc{T}'\setminus \cc{B}_{\cc{T}\times \cc{T}'}\neq \emptyset$.
+        \item En $(X\times Y, \cc{T}\times \cc{T}')$, todo producto de abiertos es abierto (básico) pero el recíproco no es cierto ya que hay abiertos en el producto que no son producto de abiertos. Es decir, que la topología $\cc{T}\times \cc{T}'$ hay más abiertos en general que los básicos, o equivalentemente, $\cc{T}\times \cc{T}'\setminus \cc{B}_{\cc{T}\times \cc{T}'}\neq \emptyset$.
     \end{itemize}
 \end{observacion}
 
