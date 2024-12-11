@@ -414,5 +414,102 @@ Intuitivamente podemos entender la arcoconexión como que existe una línea (cam
         \item $\bb{R}^n$, $\bb{R}^n\setminus \{x_1,\dots,x_k\}$ si $n\geq 2$, $\bb{S}^n$, $\bb{S}^n\setminus \{x_1,\dots,x_k\}$ si $k\geq 2$ y los conjuntos estrellados en $\bb{R}^n$ son a.c.
         \item $Y=\{(0,y):y\in [-1,1]\}\cup \left\{\left(x,\sen\left(\frac{1}{x}\right)\right): x\in (0,1]\right\}$ es conexo pero no es a.c.
     \end{itemize}
+    \endsquare
 \end{ejemplo}
 
+\section{Compacidad}
+
+\begin{definicion}
+    Seann $X\neq \emptyset$ un conjunto y $S\subset X$ un subconjunto. Se llama \textbf{recubrimiento} de $S$ es una familia $\cc{A}=\{U_i\}_{i\in I}$ de subconjuntos de $X$ tal que $S\subset \bigcup\limits_{i\in I}U_i$.
+
+    Un \textbf{subrecubrimiento} $\cc{A}'$ de $\cc{A}$ es un recubrimiento de $S$ con $\cc{A}'\subset\cc{A}$.
+    \endsquare
+\end{definicion}
+
+\begin{observacion}
+    Un recubrimiento de $X$ cumple que $X=\bigcup\limits_{i\in I}U_i$.
+    \endsquare
+\end{observacion}
+
+\begin{definicion}
+    Un e.t. $(X, \cc{T})$ es \textbf{compacto} si todo recubrimiento de $X$ por abiertos admite un subrecubrimiento finito, es decir,
+    \begin{gather*}
+        \text{si } \cc{A}=\{U_i\}_{i\in I} \text{ con } U_i\in \cc{T},\ \ \forall i \in I \text{ y } \bigcup\limits_{i\in I} U_i=X\\
+        \text{ entonces } \exists i_1,\dots,i_n \in I \text{ con } X=U_{i_1}\cup \dots\cup U_{i_n}=\bigcup\limits_{j=1}^{n}U_{ij}
+    \end{gather*}
+    \endsquare
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Si $(X, \cc{T})$ es un e.t. y $\cc{T}$ es finito, entonces es compacto. Por ejemplo, $(X, \cc{T}_t)$ es compacto.
+        \item $(X, \cc{T}_{disc})$ es compacto $\sii X$ es finito. 
+        \begin{proof}\
+            \begin{itemize}
+                \item[$\Rightarrow$ )] Supongamos que $X$ es infinito. Entonces puedo considerar $\cc{A}=\{\{x\}:x\in X\}$ recubrimiento de abiertos de $X$ que no admite un subrecubrimiento finito.
+                \item[$\Leftarrow$ )] Es un caso particular del ejemplo anterior. 
+            \end{itemize}
+        \end{proof}
+        \item $(X, \cc{T}_{CF})$ es compacto. 
+        \begin{proof}
+            Sea $\{U_i\}_{i\in I}$ recubrimiento por abiertos de $X \Rightarrow U_i\in \cc{T}_{CF}\ \ \forall i \in I$ y $\bigcup\limits_{i\in I}U_i=X$. Sea $i_0\in I$ con $U_{i_0}\neq \emptyset \Rightarrow X\setminus U_{i_0}=\{x_1, \dots,x_n\} \Rightarrow \exists i_1,\dots,i_n\in I$ con $x_j\in U_{i_j}\ \ \forall j =1,\dots,n \Rightarrow \bigcup\limits_{j=0}^{n} U_{i_j}=U_{i_0}\cup U_{i_1}\cup \dots\cup U_{i_n} = X$. 
+
+        \end{proof}
+        \item $(\bb{R}, \cc{T}_u)$ no es compacto.
+        \begin{proof}
+            $\bb{R}=\bigcup\limits_{n\in \bb{N}}(-n,n)$ que es un recubrimiento por abiertos que no admite un subrecubrimiento finito.
+
+        \end{proof}
+    \end{itemize}
+\end{ejemplo}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t. y $S\subset X$. DEcimos que $S$ es \textbf{compacto} en $(X, \cc{T})$ si $(S, \cc{T}|_S)$ es compacto.
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t. y $S\subset X$. Equivalen:
+    \begin{enumerate}
+        \item[(i)] $S$ es compacto.
+        \item[(ii)] Todo recubrimiento de $S$ por abiertos de $(X, \cc{T})$ admite un subrecubrimiento finito. 
+    \end{enumerate}
+    \begin{proof}\
+        \begin{itemize}
+            \item[(i)$\Rightarrow$(ii) )] Sea $\{U_i\}_{i\in I}$ un recubrimiento de $S$ por abiertos de $(X, \cc{T})$, es decir, $U_i\in \cc{T}\ \ \forall i \in I$, $S\subset \bigcup\limits_{i\in I}U_i \Rightarrow \{U_i\cap S\}_{i\in I}$ con $U_i\cap S\in \cc{T}|_S\ \ \forall i \in I$. Como $S\subset \bigcup\limits_{i\in I}U_i$ este conjunto será $S$ y por tanto será un recubrimiento de $S$ por abiertos de $\cc{T}|_S$. Como $S$ es compacto, entonces $\exists i_1,\dots,i_n\in I$ con $\bigcup\limits_{j=1}^{n}(U_{i_j}\cap S)=S \Rightarrow \bigcup\limits_{j=1}^{n}U_{i_j}\supset S \Rightarrow \{U_{i_j}\}_{j=1,\dots,n}$ es un recubrimiento de $S$ por abiertos de $(X, \cc{T})$.
+            \item[(ii)$\Rightarrow$(i) )] Sea $\{U_i'\}_{i\in I}$ un recubrimiento de $S$ por abiertos de $\cc{T}|_S$. Como $U_i'\in \cc{T}|_S\Rightarrow U_i'=U_i\cap S$ con $U_i\in \cc{T}$. Entonces $\{U_i\}_{i\in I}$ es un recubrimiento de $S$ por abiertos de $\cc{T}$. Por (ii) tengo que $\exists i_1,\dots,i_n\in I$ con $S\subset \bigcup\limits_{j=1}^{n}U_{i_j} \Rightarrow S = \bigcup\limits_{j=1}^{n}(U_{i_j}\cap S) = \bigcup\limits_{j=1}^{n}U_{i_j}'$.
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Si $(X, \cc{T})$ e.t., $\{x_n\}_{n\in \bb{N}}\subset X$ con $\{x_n\}\to x$. Entonces $S=\{x_n:n\in \bb{N}\}\cup\{x\}$ es compacto.
+        \begin{proof}
+            Sea $\{U_i\}_{i\in I}$ recubrimiento de $S$ por abiertos de $\cc{T}$. Sabemos que $S\subset \bigcup_{i\in I}U_i$, $U_i\in \cc{T}$. Sea $i_0\in I$ con $x\in U_{i_0}$ entonces, como la sucesión es convergente tenemos que $\exists n_0\in \bb{N}$ con $x_n\in U_{i_0}\ \ \forall n>n_0$. Ahora, para cada $n=1,\dots,n_0$ consideramos $i_n\in I$ con $x_n\in U_{i_n}$ y entonces $S\subset \bigcup_{n=0}^{n_0}U_{i_n}$.
+
+        \end{proof}
+        \item $(0,1)\subset (\bb{R}, \cc{T}_u)$ no es compacto ya que puedo escribir
+        \begin{align*}
+            (0,1)=\bigcup\limits_{n\in \bb{N}}\left(\frac{1}{2n}, 1 - \frac{1}{2n}\right) = \bigcup\limits_{n\in \bb{N}} \left(\frac{1}{n}, 1\right)
+        \end{align*}
+        que son recubrimientos abiertos que no admiten un subrecubrimiento finito.
+        \item $\bb{Q}\subset (\bb{R}, \cc{T}_u)$ no es compacto ya que 
+        \begin{align*}
+            \bb{Q}\subset \bigcup\limits_{n\in \bb{N}}(-n,n)
+        \end{align*}
+    \end{itemize}
+\end{ejemplo}
+
+\begin{prop}\
+    \begin{enumerate}
+        \item[(i)] Si $(X, \cc{T})$ es compacto y $S\subset X$ es cerrado, entonces $S$ es compacto.
+        \item[(ii)] Si $(X, \cc{T})$ es \apuntar{T2} y $S\subset X$ es compacto, entonces $S$ es cerrado.
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] Sea $S\in \cc{C}_{\cc{T}}$. Sea $\{U_i\}_{i\in I}$ un recubrimiento de $S$ por abiertos de $\cc{T}$, es decir, $U_i\in \cc{T}\ \ \forall i \in I$ y $S\subset \bigcup\limits_{i\in I}U_i$. Como $X\setminus S\in \cc{T}$, entonces $\{X\setminus S\}\cup\{U_i\}_{i\in I}$ es un recubrimiento de $X$ por abiertos de $\cc{T}$. Como $(X, \cc{T})$ es compacto, entonces existen $i_1,\dots,i_n\in I$ con $\left(\bigcup\limits_{j=1}^{n}U_{i_j}\right)\cup (X\setminus S)=S$. Entonces $S\subset \bigcup\limits_{j=1}^{n}U_{i_j}$ por lo que $S$ es compacto.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
