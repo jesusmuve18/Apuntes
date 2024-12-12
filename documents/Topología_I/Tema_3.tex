@@ -510,6 +510,64 @@ Intuitivamente podemos entender la arcoconexión como que existe una línea (cam
     \begin{proof}\
         \begin{enumerate}
             \item[(i)] Sea $S\in \cc{C}_{\cc{T}}$. Sea $\{U_i\}_{i\in I}$ un recubrimiento de $S$ por abiertos de $\cc{T}$, es decir, $U_i\in \cc{T}\ \ \forall i \in I$ y $S\subset \bigcup\limits_{i\in I}U_i$. Como $X\setminus S\in \cc{T}$, entonces $\{X\setminus S\}\cup\{U_i\}_{i\in I}$ es un recubrimiento de $X$ por abiertos de $\cc{T}$. Como $(X, \cc{T})$ es compacto, entonces existen $i_1,\dots,i_n\in I$ con $\left(\bigcup\limits_{j=1}^{n}U_{i_j}\right)\cup (X\setminus S)=S$. Entonces $S\subset \bigcup\limits_{j=1}^{n}U_{i_j}$ por lo que $S$ es compacto.
+            \item[(ii)] Si $S\in \{\emptyset, X\}$, entonces $S\in \cc{C}_{\cc{T}}$ y lo tenemos. Supongamos entonces que $S\notin \{\emptyset, X\}$ y queremos ver que $X\setminus S\in \cc{T}$. Sea $x\in X\setminus S$ y veamos que $x\in \interior{(X\setminus S)}$. Si $y\in S$, como $(X, \cc{T})$ es T2, entonces $x\neq y$ y por tanto $\exists U_y\in \cc{T}$ con $y\in U_y$ y $x\in \interior{(X\setminus U_y)}$. Es claro que $S\subset \bigcup\limits_{y\in S}U_y$ y como $S$ es compacto puedo extraer un subrecubrimiento finito, es decir, $\exists y_1, \dots, y_n\in S$ con $S\subset \bigcup\limits_{j=1}^{n}U_{y_j}$. Sea $U=\bigcup\limits_{j=1}^{n}\interior{(X\setminus U_{y_j})}$, sabemos que $x\in U$ y además $\interior{(X\setminus U_{y_j})}\in \cc{T}\ \ \forall j\in 1,\dots,n$. Podemos escribir $U=\bigcap\limits_{j=1}^{n}(X\setminus \overline{U_{y_j}})=X\setminus \bigcup\limits_{j=1}^n \overline{U_{y_j}}\subset X\setminus \bigcup\limits_{j=1}^n U_{y_j} \subset X\setminus S$.
         \end{enumerate}
     \end{proof}
 \end{prop}
+
+\begin{coro}
+    Si $(X, \cc{T})$ es metrizable, entonces todo compacto en $(X, \cc{T})$ es cerrado y acotado.
+    \begin{proof}
+        Supongamos que $d$ es la distancia en $X$ con $\cc{T}=\cc{T}_d$ y sea $S\subset X$ compacto. 
+
+        Empecemos viendo que $S$ está acotado. Sea $p\in X \Rightarrow S\subset \bigcup\limits_{n\in \bb{N}}B(p,n)=X$ y además $B(p,n)\in \cc{T}$ para todo $n\in \bb{N}$. Como $S$ es compacto $\exists n_1,\dots,n_k\in \bb{N}$ con $S\subset \bigcup\limits_{j=1}^n B(p,n_j) = B(p,\max\{n_1,\dots,n_k\})$ y por tanto el compacto está en una bola y entonces $S$ acotado.
+
+        Como $(X, \cc{T})$ es metrizable, en particular es T2 y como $S$ es compacto, entonces $S$ cerrado.
+
+    \end{proof}
+\end{coro}
+
+\begin{teo}
+    (Teorema de Heine-Borel) Todo intervalo cerrado y acotado en $(\bb{R}, \cc{T}_u)$ es compacto.
+
+    \begin{proof}
+        Sea $[a,b]$ con $a<b$ y queremos ver que es compacto. Consideramos $\{U_i\}_{i\in I}$ un recubrimiento de $[a,b]$ por abiertos de $\cc{T}_u$. Tendremos que ver que dicho recubrimiento admite un subrecubrimiento finito. 
+
+        Consideramos el siguiente conjunto: 
+        \begin{align*}
+            L=\{x\in [a,b] : \exists n\in \bb{N}, \exists i_1,\dots,i_n \text{ tal que } [a,x]\subset \bigcup\limits_{j=1}^n U_{i_j}\}
+        \end{align*}
+
+        Tendremos que ver que $b\in L$ ya que al probarlo tendremos que existe una cantidad finita tal que el intervalo $[a,b]$ está contenido en el recubrimiento finito. 
+
+        Si $x\in L\Rightarrow [a,x]\subset L$ por tanto probar que $[a,b]\in L$ será equivalente a ver que $b\in L$. Utilizaremos un argumento de conexión. Si conseguimos probar lo siguiente:
+        \begin{enumerate}
+            \item[(i)] $L\neq \emptyset$.
+            \item[(ii)] $L\in \cc{T}_u|_{[a,b]}$.
+            \item[(iii)] $L\in \cc{C}_{\cc{T}_u|_{[a,b]}}$
+        \end{enumerate}
+        Entonces, como $[a.b]$ es conexo, tendremos que $L=[a,b]$. Veámoslo:
+
+        \begin{enumerate}
+            \item[(i)] Como $a\in L$ tenemos que $L\neq \emptyset$.
+            \item[(ii)] Veamos que $L$ es abierto en $[a,b]$. Para ello consideramos $x\in L$ y veremos que hay un entorno de dicho punto que sigue dentro de $L$, es decir, que $x$ es interior de $L$. Como $x\in L$ sabemos que $\exists i_1,\dots,i_n$ con $[a,x]\subset \bigcup\limits_{j=1}^n U_{i_j}\in \cc{T}_u$ y por tanto es entorno de todos sus puntos. En particular será entorno de $x$ y entonces $\exists \veps >0$ con $(x-\veps,x+\veps)\subset \bigcup\limits_{j=1}^n U_{i_j}\Rightarrow \left[a,x+\frac{\veps}{2}\right]\subset \bigcup\limits_{j=1}^n U_{i_j}$ y entonces tenemos $\left[x-\frac{\veps}{2}, x+\frac{\veps}{2}\right]\subset L$ y entonces $x\in \interior{L}$ en $[a,b]$ y ya lo tenemos probado.
+            \item[(iii)] Veamos que $L$ es cerrado en $[a,b]$. Sea $x\in \overline{L}^{[a,b]} = \overline{L}$ y queremos ver que $x\in L$ para ver que $L$ coincide con su adherencia y por tanto es cerrado. Como $[a,b]$ es 2AN, entonces $\exists \{x_n\}_{n\in \bb{N}}\subset L $ con $\{x_n\}\to x$. 
+            
+            Sabemos que $x\in [a,b]\subset \bigcup\limits_{i\in I}U_i$ por lo que $\exists i_0\in I$ con $x\in U_{i_0}\in \cc{T}_u \Rightarrow \exists \veps >0$ tal que $(x-\veps, x+\veps)\subset U_{i_0}$. Como $\{x_n\}\to x$ tenemos que $\exists n_0\in \bb{N}$ con $x_n\in (x-\veps, x+\veps)\subset U_{i_0}\ \ \forall n\geq n_0$. Además, como $n_0\in L$, entonces $\exists n_1,\dots,n_k\in I$ con $[a,x_{n_0}]\subset \bigcup\limits_{j=1}^k U_{n_j}$. Entonces puedo escribir $[a,x]=[a,x_{n_0}]\cup[x_{n_0}, x]\subset \bigcup\limits_{j=0}^k U_{n_j}$ y además $[x_{n_0},x]\subset U_{i_0}$, $[a,x_{n_0}]\subset \bigcup\limits_{j=1}^k U_{n_j}$ por tanto $x\in L$.
+
+        \end{enumerate}
+        Aplicando lo sabido para conexión tenemos que $L=[a,b]$.
+
+    \end{proof}
+\end{teo}
+
+\begin{coro}
+    En $(\bb{R}, \cc{T}_u)$, un subconjunto $S\subset \bb{R}$ es compacto si y solo si es cerrado y acotado.
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$ )] Esto es cierto para todo espacio métrico.
+            \item[$\Leftarrow$ )] Supongamos que $S\subset \bb{R}$ es cerrado y acotado. Como $S$ es acotado, $\exists a<b$ con $S\subset [a,b]$ y por el Teorema de Heine-Borel $[a,b]$ es compacto. Como $S$ es cerrado y está dentro de un compacto, $S$ es compacto. 
+        \end{itemize}
+    \end{proof}
+\end{coro}
+
