@@ -161,7 +161,12 @@
         \item[(i)] $\bigcup\limits_{i\in I} A_i =X$.
         \item[(ii)] $f_i=f_j$ en $A_i\cap A_j$\ \ $\forall i,j\in I$ con $A_i\cap A_j \neq \emptyset$. 
         \item[(iii)] $f_i:(A_i, \cc{T}_{A_i})\to (Y, \cc{T}')$ es continua $\forall i \in I$. 
-        \item[(iv)] O bien $A_i\in \cc{T}$\ \ $\forall i \in I$ o bien $A_i \in \cc{C}_{\cc{T}}$\ \ $\forall i \in I$ con $I$ finito. 
+        % \item[(iv)] O bien $A_i\in \cc{T}$\ \ $\forall i \in I$ o bien $A_i \in \cc{C}_{\cc{T}}$\ \ $\forall i \in I$ con $I$ finito. 
+        \item[(iv)] Satisface alguna de las siguientes condiciones:
+        \begin{itemize}
+            \item $A_i\in \cc{T}$\ \ $\forall i \in I$.
+            \item $A_i \in \cc{C}_{\cc{T}}$\ \ $\forall i \in I$ con $I$ finito. 
+        \end{itemize}
     \end{enumerate}
     Entonces la aplicación 
     \begin{align*}
@@ -170,9 +175,9 @@
     \end{align*}
     está bien definida y es continua.
     \begin{proof}\
-        Es claro que la aplicación $f$ está bien definida por las condiciones (i) y (ii). Tendremos que ver su continuidad. Tendremos que distinguir dos casos. Demostraremos uno y el otro será análogo y se deja propuesto como ejercicio para el lector:\\
+        Es claro que la aplicación $f$ está bien definida por las condiciones (i) y (ii). Tendremos que ver su continuidad. Tendremos que distinguir dos casos según la condición (iv). Lo demostraremos para el segundo caso y el otro será análogo y se deja propuesto como ejercicio para el lector:\\
 
-        Supongamos $I$ es finito y $A_i\in \cc{C}_{\cc{T}}$\ \ $\forall i \in I$. Sea $C'\in \cc{C}_{\cc{T}'}$, tendremos que ver que $f^{-1}(C')\in \cc{C}_{\cc{T}}$. Tenemos que $f^{-1}(C') = X\cap f^{-1}(C')\overset{(i)}{=}\left(\bigcup\limits_{i\in I}A_i\right)\cap f^{-1}(C') = \bigcup\limits_{i\in I}(A_i\cap f^{-1}(C')) = \bigcup\limits_{i\in I}\{x\in A : f_i(x)\in C'\} = \bigcup\limits_{i\in I} f_i^{-1}(C')$. Como $f_i^{-1}(C')\in \cc{C}_{\cc{T}_{A_i}}$ y además $A_i\in \cc{C}_{\cc{T}}\Rightarrow f_i^{-1}(C')\in \cc{C}_{\cc{T}}$, entonces por (iv) tenemos que $\bigcup\limits_{i\in I} f_i^{-1}(C')\in \cc{C}_{\cc{T}}$.\\
+        Supongamos $I$ es finito y $A_i\in \cc{C}_{\cc{T}}$\ \ $\forall i \in I$. Sea $C'\in \cc{C}_{\cc{T}'}$, tendremos que ver que $f^{-1}(C')\in \cc{C}_{\cc{T}}$. Tenemos que $f^{-1}(C') = X\cap f^{-1}(C')\overset{(i)}{=}\left(\bigcup\limits_{i\in I}A_i\right)\cap f^{-1}(C') = \bigcup\limits_{i\in I}(A_i\cap f^{-1}(C')) = \bigcup\limits_{i\in I}\{x\in A_i : f_i(x)\in C'\} = \bigcup\limits_{i\in I} f_i^{-1}(C')$. Como $f_i^{-1}(C')\in \cc{C}_{\cc{T}_{A_i}}$ y además $A_i\in \cc{C}_{\cc{T}}\Rightarrow f_i^{-1}(C')\in \cc{C}_{\cc{T}}$, entonces por (iv) tenemos que $\bigcup\limits_{i\in I} f_i^{-1}(C')\in \cc{C}_{\cc{T}}$.\\
     \end{proof}
 \end{lema}
 
@@ -378,9 +383,9 @@
 
         \item En $(\bb{R}, \cc{T}_u)$, $[a,b]\cong [0,1]$\ \ $\forall a<b$ pero $[a,b]\ncong [c, +\infty)$ (lo demostraremos en el Tema 3).
         
-        \item \textbf{Proyección estereográfica:} Esta proyección (para $n=3$) prueba que una esfera a la que se le quita un punto es homeomorfa a un plano. Para ello podemos trazar la recta que va desde el polo norte de la esfera (el punto que le falta a la esfera) hacia cualquier punto $p$ de la esfera y hallar la intersección de dicha recta con el plano que resulta de poner la última coordenada a 0. Dicha intersección será $\Phi(p)$ y repitiendo esto con todos los puntos obtengo el plano con última coordenada 0. Veámoslo analíticamente:
+        \item \textbf{Proyección estereográfica:} Esta proyección (para $n=3$) prueba que una esfera a la que se le quita un punto es homeomorfa a un plano. Para ello podemos trazar la recta que va desde el polo norte de la esfera (el punto que le falta a la esfera) hacia cualquier punto $p$ de la esfera y hallar la intersección de dicha recta con el plano que resulta de fijar la última coordenada a 0. Dicha intersección será $\Phi(p)$ y repitiendo esto con todos los puntos obtenemos el plano con última coordenada 0. Veámoslo analíticamente:
         
-        Sea $\bb{S}^{n}=\{x_1, \dots, x_n, x_n+1 : x_1^2 + \dots + x_n^2 + x_{n+1}^2 = 1\} = S((0,\dots,0,0), 1)\subset \bb{R}^{n+1}$. Sea $N=(0,\dots,0,1)\in \bb{S}^n$ el polo norte. Podemos definir la aplicación 
+        Sea $\bb{S}^{n}=\{x_1, \dots, x_n, x_{n+1} : x_1^2 + \dots + x_n^2 + x_{n+1}^2 = 1\} = S((0,\dots,0,0), 1)\subset \bb{R}^{n+1}$. Sea $N=(0,\dots,0,1)\in \bb{S}^n$ el polo norte. Podemos definir la aplicación 
         \begin{align*}
             \Phi : \bb{S}^n\setminus \{N\} &\to \bb{R}^n\\
             (x_1, \dots, x_n, x_{n+1}) &\mapsto \frac{1}{1-x_{n+1}}(x_1, \dots, x_n)\in \bb{R}^n.
@@ -933,6 +938,7 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
     \begin{gather*}
         \emptyset \neq S = \{f^{-1}(U_i) : U_i \in X_i, i\in I\} \subset \cc{P}(X)
     \end{gather*}
+    Esta topología es la menos fina que hace que todas las aplicaciones $f_i$ sean continuas. 
     \endsquare
 \end{definicion}
 
@@ -971,6 +977,7 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
         \item[(i)] $f:(X, \cc{T})\to (Y, \cc{T}_f)$ es continua.
         \item[(ii)] Si $\cc{T}'$ es una topología en $Y$ con $f:(X, \cc{T})\to (Y, \cc{T}')$ es continua, entonces $\cc{T}'\leq \cc{T}_f$
     \end{enumerate}
+    Esto quiere decir que la topología final es la topología más fina que hace que la aplicación $f$ sea continua.
     \begin{proof}
         Veamos en primer lugar que efectivamente $\cc{T}_f$ es una topología en $X$
         \begin{enumerate}
@@ -1042,7 +1049,7 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
                 \shorthandoff{>} % Para poner puntas de flecha
 
                 \node at (0,0) {$(X, \cc{T})$};
-                \node at (0,-1.5) {$(Y, \cc{T}')$};
+                \node at (0,-1.5) {$(Y, \cc{T}_f)$};
                 \node at (3,-1.5) {$(Z, \cc{T}'')$};
 
                 \draw[->] (0.6,-0.3) -- (2.4,-1.2);
@@ -1193,7 +1200,7 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
 \begin{propiedades}
     En esta situación, $p:(X, \cc{T})\to (X/R, \cc{T}/R)$ es una identifiación, luego:
     \begin{enumerate}
-        \item[(i)] $p$ es continua y $T/R$ es la topología más fina que hace a $p$ continua.
+        \item[(i)] $p$ es continua y $\cc{T}/R$ es la topología más fina que hace a $p$ continua.
         \item[(ii)] $f:(X/R, \cc{T}/R)\to (Y, \cc{T}')$ continua $\sii f\circ p:(X, \cc{T})\to (Y, \cc{T}')$ continua.
         \item[(iii)] $\cc{T}/R=\{\tilde{U}\subset X/R : p^{-1}(\tilde{U})\in \cc{T}\} = \{p(U) : U\in \cc{T} \text{ p-saturado}\}$.
         \item[(iv)] $\cc{C}_{\cc{T}/R} = \{\tilde{C}\subset X/R : p^{-1}(\tilde{C})\in \cc{C}_{\cc{T}}\} = \{p(C) : C\in \cc{C}_{\cc{T}} \text{ p-saturado}\}$.
