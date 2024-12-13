@@ -571,3 +571,74 @@ Intuitivamente podemos entender la arcoconexión como que existe una línea (cam
     \end{proof}
 \end{coro}
 
+\subsection{Propiedades de los compactos}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t., entonces equivalen:
+    \begin{enumerate}
+        \item[(i)] $(X, \cc{T})$ es compacto.
+        \item[(ii)] Si $\{C_i\}_{i\in I} \subset \cc{C}_{\cc{T}}$ con $\bigcap\limits_{i\in I}C_i = \emptyset \Rightarrow \exists i_1,\dots,i_n\in I$ tal que $\bigcap\limits_{j=1}^n C_{i_j}=\emptyset$.
+        \item[(iii)] Si $\cc{B}$ es base de $\cc{T}$, entonces de cada recubrimiento por abiertos básicos se puede extraer un subrecubrimiento finito.
+    \end{enumerate}
+    \begin{proof}\
+        \begin{itemize}
+            \item[(i)$\sii$(ii) )] Trivial.
+            \item[(i)$\Rightarrow$(iii) )] Trivial.
+            \item[(iii)$\Rightarrow$(i) )] Sea $\{U_i\}_{i\in I}$ un recubrimiento de $X$ por abiertos de $\cc{T}$, $\cc{A}=\{B\in \cc{B} : \exists i \in I \text{ con }B\subset U_i\}$. Como $\cc{B}$ es base, $\cc{A}$ es un recubrimiento por abiertos básicos de $X$. Por (iii) tenemos que $\exists B_1,\dots,B_n\in \cc{A}$ con $\bigcup\limits_{j=1}^n B_j = X$, pero $\bigcup\limits_{j=1}^n B_j \subset \bigcup\limits_{j=1}^n U_{i_j} = X$ y tenemos lo buscado.
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{lema}
+    (Lema de la subbase de Alexander)Sea $(X, \cc{T})$ un e.t, entonces $(X, \cc{T})$ compacto si y solo sí de toda subbase $S$ de $\cc{T}$, entonces de cada recubrimiento por abiertos básicos de la topología generada por $S$, $\cc{T}(S) = \cc{T}(\cc{B}(S))$, se puede extraer un subrecubrimiento finito.
+    \endsquare %TODO: revisar
+\end{lema}
+
+\begin{prop}
+    Si $(X, \cc{T})$ es compacto y $f:(X, \cc{T})\to (Y, \cc{T}')$ es continua, entonces $f(X)$ es compacto en $(Y, \cc{T}')$. En particular, la compacidad es un invariante topológico.\\
+
+    % TODO: pedir esta demostración terminada (kessler no la tiene del todo)
+
+    Me falta la demostración.
+    \begin{proof}
+        
+    \end{proof}
+
+    % \begin{proof}
+    %     Sea $\{U_i'\}_{i\in I}\subset \cc{T}'$ un recubrimiento de $f(X)$ por abiertos de $\cc{T}'$, sabemos que $f(X)\subset \bigcup_{i\in I}U_i' \Rightarrow \{f^{-1}(U_i')\}_{i\in I}$
+    % \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $\bb{S}^1\subset \bb{R}^2$ es compacto. Lo podemos ver considerando la función $f$ dada por 
+        \begin{align*}
+            f:([0,1], \cc{T}_u)&\to (\bb{S}^1, \cc{T}_u)\\
+            x&\mapsto (\cos(2\pi x), \sen(2\pi x))
+        \end{align*}
+        que es claramente continua y además $f([0,1])=\bb{S}^1$.
+        \item La compacidad no es una propiedad hereditaria. Para verlo podemos considerar en $\cc{T}_u$ el intervalo $[0,2]$ que es compacto, mientras que $]1,\nicefrac{1}{2}[$ no lo es.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{lema}
+    (Lema del tubo) Sean $(X, \cc{T})$, $(Y, \cc{T}')$ e.t. con $(Y, \cc{T}')$ compacto y sea $W\in \cc{T}\times \cc{T}'$ con $\{x\}\times Y \subset W$ para algún $x\in X$. Entonces $\exists U\in \cc{T}$ con $x\in U$ y $U\times Y \subset W$.
+    \endsquare
+\end{lema}
+
+\begin{teo}
+    (Teorema de Tychonoff) Sean $(X, \cc{T})$, $(Y, \cc{T}')$ e.t., entonces $(X\times Y)$ compacto $\sii (X, \cc{T})$ y $(Y, \cc{T}')$ son compactos.
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$)] Trivial porque las proyecciones son continuas.
+            \item[$\Leftarrow$)] Vamos a aplicar el lema del tubo. Sea $\{W_i\}_{i\in I}$ un recubrimiento de $X\times Y$ por abiertos de $\cc{T}\times \cc{T}'$, entonces $\{x\}\times Y \subset X\times Y = \bigcup\limits_{i\in I}W_i\ \ \forall x \in X$. 
+        \end{itemize}
+    \end{proof}
+\end{teo}
+
+\begin{coro}
+    El teorema anterior se puede generalizar para cualquier producto $(X_1\times \dots\times X_n, \cc{T}_1\times \dots\times \cc{T}_n)$ con $n\geq 2$, que será compacto si y solo si $(X_i, \cc{T}_i)$ es compacto para cada $i\in 1,\dots,n$.
+    \endsquare
+\end{coro}
+
