@@ -92,15 +92,13 @@ int main( int argc, char *argv[] )
          // calcular el siguiente instante de inicio del ciclo secundario
          ini_sec += Ts_ms ;
 
-         time_point<steady_clock> instante_inicio = steady_clock::now() ;
-
          // esperar hasta el inicio de la siguiente iteración del ciclo secundario
          sleep_until( ini_sec );
 
-         time_point<steady_clock> instante_fin   = steady_clock::now() ;
-         steady_clock::duration   duracion       = instante_fin - instante_inicio ;
+         time_point<steady_clock> instante_actual   = steady_clock::now() ;
+         steady_clock::duration   retraso       = instante_actual - ini_sec;
          
-         cout<<"Retraso: "<< milliseconds_f(duracion).count() <<"ms"<<endl;
+         cout<<"      Retraso: "<< milliseconds_f(retraso).count() <<"ms"<<endl;
       }
    }
 }
