@@ -642,3 +642,106 @@ Intuitivamente podemos entender la arcoconexión como que existe una línea (cam
     \endsquare
 \end{coro}
 
+\begin{teo}
+    (Teorema de Heine-Borel generalizado) Un subespacio de $(\bb{R}^n, \cc{T}_u)$ es compacto si y solo si es cerrado y acotado.ç
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$ )] Es corolario de un resultado anterior.
+            \item[$\Leftarrow$ )] Sea $S\subset \bb{R}^n$ cerrado y acotado. Como $S$ es acotado está contenido en una bola y en particular considerando la norma infinito tenemos que $\exists r>0$ tal que $S\subset [-r,r]\times \dots\times [-r,r]$. Por el teorema de Heine-Borel sabemos que cada $[-r,r]$ es compacto y por Tijonoff sabemos que el producto de compactos es compacto. Tenemos que $S$ es acotado y está contenido en un compacto luego $S$ es compacto.  %TODO: revisar
+        \end{itemize}
+    \end{proof}
+\end{teo}
+
+\begin{observacion}
+    No es cierto en todo espacio métrico. Por ejemplo, si consideramos $(\bb{R}, \cc{T}_{disc})$ que es un espacio métrico y tomamos $\overline{B}(0,2)$ que es cerrado y acotado pero $\overline{B}(0,2)=\bb{R}$ (recordemos que la distancia discreta es siempre menor que 2) y $\bb{R}$ no es compacto.
+    \endsquare
+\end{observacion}
+
+\begin{ejemplo}Considerando en cada caso $\cc{T}_u$
+    \begin{itemize}
+        \item $\bb{S}^n$ es compacto y $\bb{T}\cong \bb{S}^1\times \bb{S}^1$ compacto (por ser un invariante topológico).
+        \item $\bb{R}^n$ no es compacto por lo que $\bb{S}^1\times \bb{R}$ tampoco lo es.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{coro}
+    Si $(X, \cc{T})$ es compacto y $f:(X, \cc{T})\to (\bb{R}, \cc{T}_u)$ es continua, entonces $f$ es acotada y alcanza su máximo y su mínimo.
+    \begin{proof}
+        Comencemos viendo que $f$ es acotada. Tendremos dos formas de hacerlo:
+
+        \begin{itemize}
+            \item[\textbf{1: }] Como $f$ es continua y $X$ es compacto tenemos que $f(X)\subset \bb{R}$ es compacto y por el teorema de Heine-Borel generalizado tenemos que $f(X)$ es cerrado y acotado en $\bb{R}$.
+            \item[\textbf{2: }] $\{f^{-1}((-n,n)):n\in \bb{N}\}$ es un recubrimiento por abiertos de $X$ y como $X$ es compacto existe un subrecubrimiento finito. Entonces $\exists n_0\in \bb{N}$ tal que $X=f^{-1}((-n_0, n_0)) \Rightarrow f(X)\subset (-n_0, n_0)$ luego $f$ acotado.
+        \end{itemize}
+        
+        Veamos que alcanza su máximo y su mínimo. Para ello tendremos que ver que el supremo y el ínfimo del conjunto $f(X)$ está contenido en $f(X)$ pero como $f(X)$ es cerrado esto se tiene.
+
+    \end{proof}
+\end{coro}
+
+\begin{coro}
+    Si $f:[a,b]\to \bb{R}$ es continua, entonces $f$ es constante o $f([a,b])$ es un intervalo cerrado y acotado.
+    \endsquare
+\end{coro}
+
+\begin{prop}
+    (Lema de la aplicación cerrada) Si $(X, \cc{T})$ es compacto, $(Y, \cc{T}')$ es T2 y $f:(X, \cc{T})\to (Y, \cc{T}')$ es continua, entonces $f$ es cerrada.
+    \begin{proof}
+        Para ver que $f$ es cerrada tendremos que ver que la imagen de un cerrado es cerrada. Sea $C\in \cc{C}_{\cc{T}}$ y como $X$ es compacto, entonces $C$ es compacto (un cerrado en un compacto es un compacto). Como $f$ es continua tenemos que $f(C)\subset Y$ es compacto y como $Y$ es T2, entonces $f(C)$ es cerrado (ya que un compacto en un T2 es cerrado) y tenemos lo que buscábamos.
+
+    \end{proof}
+\end{prop}
+
+\begin{coro}
+    Si $(X, \cc{T})$ es compacto, $(Y, \cc{T}')$ es T2 y $f:(X, \cc{T})\to (Y, \cc{T}')$ es continua, entonces 
+    \begin{itemize}
+        \item Si $f$ es inyectiva $\Rightarrow$ $f$ es un embebimiento.
+        \item Si $f$ es sobreyectiva $\Rightarrow$ $f$ es una identificación.
+        \item Si $f$ es biyectiva $\Rightarrow$ es un homeomorfismo.
+    \end{itemize}
+    \endsquare
+\end{coro}
+
+\begin{ejemplo}
+    Toda función continua y monótona $f:[a,b]\Rightarrow \bb{R}$ tiene inversa continua $f^{-1}:f([a,b])=[c,d] \to [a,b]$.
+    \endsquare
+\end{ejemplo}
+
+\subsection{Compacidad en espacios métricos}
+
+\begin{definicion}
+    Un e.t. $(X, \cc{T})$ se dice
+    \begin{itemize}
+        \item \textbf{Compacto por punto límite} si todo subconjunto infinito de $X$ tiene un punto de acumulación, es decir, si $A\subset X$ infinito, entonces $\exists x_0\in X$ con $A\cap(N\setminus\{x_0\})\neq \emptyset,\ \ \forall N\in \cc{N}_x$.
+        \item \textbf{Compacto por sucesiones} o \textbf{secuencialmente compacto} si toda sucesión en $X$ tiene una parcial convergente. 
+    \end{itemize}
+    \endsquare
+\end{definicion}
+
+En general compacidad y compacidad por sucesiones implica compacto por punto límite, pero compacto y compacto por sucesiones no son propiedades comparables (ya que hay espacios que son una pero no la otra). Poco a poco se irá viendo la relación entre estos conceptos.
+
+\begin{prop}
+    (Bolzano-Weierstrass) Todo e.t. compacto es compacto por punto límite.
+    \begin{proof}
+        Sea $(X, \cc{T})$ un e.t. compacto, $A\subset X$ infinito y veamos que $A$ tiene puntos de acumulación por reducción al absurdo. Para ello supongamos que $A$ no tiene puntos de acumulación. En dicho caso tendremos que $\forall x \in X$, entonces $\exists U_x\in \cc{T}$ con $x\in U_x$ y $A\cap(U_x\setminus \{x\})=\emptyset$. Como esto ocurre para cada $x\in X$ por lo que puedo escribir $X=\bigcup\limits_{x\in X}U_x$ y como $X$ es compacto, admite un subrecubrimiento finito, luego $\exists x_1,\dots,x_n\subset X$ con $X=\bigcup\limits_{j=1}^n U_{x_j}$. Tenemos
+        \begin{align*}
+            A=A\cap X = A \cap \left(\bigcup\limits_{j=1}^n\right) = \bigcup\limits_{j=1}^n(A\cap U_{x_j})\subset \{x_1,\dots,x_n\}
+        \end{align*} 
+        y llegamos a contradicción ya que el conjunto $A$ es infinto.
+
+    \end{proof}
+\end{prop}
+
+\begin{teo}
+    Si $(X, d)$ es un espacio métrico, entonces equivalen:
+    \begin{enumerate}
+        \item[(i)] $(X, d)$ es compacto.
+        \item[(ii)] $(X, d)$ es compacto por punto límite.
+        \item[(iii)] $(X, d)$ es compacto por sucesiones.
+        \item[(iv)] (\textbf{Numerablemente compacto}) Todo recubrimiento numerable por abiertos de $X$ admite un subrecubrimiento finito.
+    \end{enumerate}
+\end{teo}
+
+% ii y iv son equivalentes en cualquier espacio topológico
+
