@@ -1,5 +1,10 @@
 #!/bin/bash
 
-flex++ ./html-to-latex.l
-g++ -o html-to-latex lex.yy.cc
-./html-to-latex ./fichero.txt
+script_file=lex
+text_file=fichero.html
+output_file=salida.tex
+
+flex++ ./$script_file.l
+g++ -o ./$script_file ./$script_file.yy.cc
+./$script_file ./$text_file > ./$output_file
+# pdflatex ./$output_file
