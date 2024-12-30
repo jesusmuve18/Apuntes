@@ -21,11 +21,11 @@ Una primera intuición nos puede decir que un conjunto es conexo si todos sus pu
         \item $(X, \cc{T}_t)$ es conexo siempre.
         \item Si $\#X=1$ y consideramos $(X, \cc{T})$, entonces es conexo.
         \item Si $\#X\geq 2 \Rightarrow (X, \cc{T}_{disc})$ es disconexo. Para verlo podemos tomar $U\in \cc{T}_{disc}$ con $U\notin \{\emptyset, X\}$ y entonces tenemos $X\setminus U\in \cc{T}_{disc}$ y además $X\setminus U\neq \notin \{X, \emptyset\}$ y tenemos que $U\cap (X\setminus U) = \emptyset$ y $U\cup (X\setminus U) = X$.
-        \item $(X, \cc{T}_{x_0})$ es conexo (si $U,V\in \cc{T}_{s_0}$ no vacíos, entonces $x\in (U\cap V) \neq \emptyset$).
-        \item Si $\#=\infty \Rightarrow (X, \cc{T}_{CF})$ es conexo. Para verlo supongamos que existen $U,V\in \cc{T}_{CF}\setminus \{\emptyset\}$ con $U\cup V =X$ y $U\cap V = \emptyset$. Entonces $X\setminus U$, $X\setminus V$ son finitos y entonces $(U\setminus U)\cup (X\setminus V)$ es finito pero $(U\setminus U)\cup (X\setminus V) = X \setminus (U\cap V) = X$ que no es finito y por tanto llegamos a contradición.
-        \item $(\{0,1\}, \cc{T}_u|_{[0,1]})$ es disconexo ya que $\{\{0\}, \{1\}\}$ es una separación.
+        \item $(X, \cc{T}_{x_0})$ es conexo (si $U,V\in \cc{T}_{x_0}$ no vacíos, entonces $x_0\in (U\cap V) \neq \emptyset$).
+        \item Si $\#X=\infty \Rightarrow (X, \cc{T}_{CF})$ es conexo. Para verlo supongamos que existen $U,V\in \cc{T}_{CF}\setminus \{\emptyset\}$ con $U\cup V =X$ y $U\cap V = \emptyset$. Entonces $X\setminus U$, $X\setminus V$ son finitos y entonces $(X\setminus U)\cup (X\setminus V)$ es finito pero $(X\setminus U)\cup (X\setminus V) = X \setminus (U\cap V) = X$ que no es finito y por tanto llegamos a contradición.
+        \item $(\{0,1\}, \cc{T}_u|_{\{0,1\}})$ es disconexo ya que $\{\{0\}, \{1\}\}$ es una separación.
         \item $(\{0,1\}, \cc{T})$ con $\cc{T}=\{\emptyset, \{0,1\}, \{0\}\}$ es conexo.
-        \item $X=(\{0\}\times \bb{R})\cup (\{1\}\times \bb{R})\subset \bb{R}^2$ es disconexo en $\bb{R}^2$ en $(\bb{R}^2, \cc{T}_u)$.
+        \item $X=(\{0\}\times \bb{R})\cup (\{1\}\times \bb{R})\subset \bb{R}^2$ es disconexo en $(\bb{R}^2, \cc{T}_u)$.
         \item $[0,1]\cup \{2\}\subset \bb{R}$ es disconexo en $(\bb{R}, \cc{T}_u)$ 
         \item $\bb{Q}\subset \bb{R}$ es disconexo en $(\bb{R}, \cc{T}_u)$.
         \item $\bb{Z}$ es disconexo en $(\bb{R}, \cc{T}_u)$.
@@ -43,7 +43,7 @@ Una primera intuición nos puede decir que un conjunto es conexo si todos sus pu
     \end{enumerate}
     \begin{proof}\
         \begin{itemize}
-            \item[(i)$\Rightarrow$(ii) )] $A\in \cc{T}\cap \cc{C}_{\cc{T}} \Rightarrow (X\setminus A) \in \cc{T} \Rightarrow \{A, X\setminus A\}$ es una separación de $(X, \cc{T})$. Por (i) tenemos que $\{A, X\setminus A\}=\{X, \emptyset\}$ por lo que $A\in \{\emptyset, X\}$.
+            \item[(i)$\Rightarrow$(ii) )] $A\in \cc{T}\cap \cc{C}_{\cc{T}} \Rightarrow (X\setminus A) \in \cc{T} \Rightarrow \{A, (X\setminus A)\}$ es una separación de $(X, \cc{T})$. Por (i) tenemos que $\{A, (X\setminus A)\}=\{X, \emptyset\}$ por lo que $A\in \{\emptyset, X\}$.
             \item[(ii)$\Rightarrow$(iii) )] Sea $f:(X, \cc{T})\to (\bb{R}, \cc{T}_u)$ continua. Veamos que verifica la propiedad de los valores intermedios. Hagamos una distinción de casos:
             \begin{itemize}
                 \item[$\bullet)$] Si $f$ es constante, entonces cumple trivialmente PVI.
@@ -65,7 +65,7 @@ Una primera intuición nos puede decir que un conjunto es conexo si todos sus pu
 \end{teo}
 
 \begin{observacion}
-    A veces $[a,a]=\{a\}$ y lo llamaremos intervalo (a pesar de no ser estrictamente un intervalo según su definición formal). Con esto podríamos traducir el apartado (iii) del teorema anterior en que $f(X)$ sea un intervalo.
+    Consideraremos que $[a,a]=\{a\}$ y lo llamaremos intervalo (a pesar de no ser estrictamente un intervalo según su definición formal). Con esto podríamos traducir el apartado (iii) del teorema anterior en que $f(X)$ sea un intervalo.
     \endsquare
 \end{observacion}
 
@@ -103,10 +103,11 @@ Una primera intuición nos puede decir que un conjunto es conexo si todos sus pu
     Si $f$ es además sobreyectiva, entonces $(Y, \cc{T}')$ es conexo.
     \begin{proof}
         Tenemos que comprobar que $(f(X), \cc{T}'|_{f(X)})$ es conexo. Para ello consideramos $g:(f(X), \cc{T}'|_{f(X)})\to (\{0,1\}, \cc{T}_{disc})$ continua y tendremos que ver que $g=cte$. Tomamos $g\circ f^{f(X)}:(X, \cc{T})\to (\{0,1\}, \cc{T}_{disc})$ que es continua (por ser composición de continuas) y además, por hipótesis tenemos que $(X, \cc{T})$ es conexo por lo que $g\circ f^{f(X)}$ es constante y por tanto $g$ es constante y por el teorema anterior tenemos lo buscado.
+
     \end{proof}
 \end{coro}
 
-\begin{coro}
+\begin{coro}\
     \begin{enumerate}
         \item[(i)] La conexión es un invariante topológico.
         \item[(ii)] Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es una identificación y $(X, \cc{T})$ es conexo, entonces $(Y, \cc{T}')$ es conexo.
@@ -118,10 +119,12 @@ Una primera intuición nos puede decir que un conjunto es conexo si todos sus pu
     \end{enumerate}
     \begin{proof}\
         \begin{enumerate}
-            \item[(i),(ii),(iii)] Triviales.
-            \item[(iv)] Sabemos que $([0,1], \cc{T}_u|_{[0,1]})$ es conexo y tenemos que existe una función $f:([0,1], \cc{T}_u|_{[0,1]})\to (\bb{S}^1, \cc{T}_u)$ es continua y sobreyectiva, por ejemplo, $f(t)=(\cos(2\pi t), \sen(2\pi t))$.
-            \item[(v)] Supongamos que $[a,b)\cong(a,b)$. Entonces tenemos que existe un homeomorfismo $f:([a,b), \cc{T}_u)\to ((a,b), \cc{T}_u)$. Pero entonces $f|_{[a,b]}:([a,b), \cc{T}_u)\to ((a,b)\setminus \{f(a)\}, \cc{T}_u)$ sería un homeomorfismo pero llegaríamos a contradicción ya que la conexión es un invariante topológico.
-            \item[(vi),(vii)] Se dejan planteadas como ejercicios para el lector.  
+            \item[(i) )] Trivial.
+            \item[(ii) )] Trivial.
+            \item[(iii) )] Trivial.
+            \item[(iv) )] Sabemos que $([0,1], \cc{T}_u|_{[0,1]})$ es conexo y tenemos que existe una función $f:([0,1], \cc{T}_u|_{[0,1]})\to (\bb{S}^1, \cc{T}_u)$ es continua y sobreyectiva, por ejemplo, $f(t)=(\cos(2\pi t), \sen(2\pi t))$.
+            \item[(v) )] Supongamos que $[a,b)\cong(a,b)$. Entonces tenemos que existe un homeomorfismo $f:([a,b), \cc{T}_u)\to ((a,b), \cc{T}_u)$. Pero entonces $f|_{[a,b]}:([a,b), \cc{T}_u)\to ((a,b)\setminus \{f(a)\}, \cc{T}_u)$ sería un homeomorfismo pero llegaríamos a contradicción ya que la conexión es un invariante topológico.
+            \item[(vi),(vii) )] Se dejan planteadas como ejercicios para el lector.  
         \end{enumerate}
     \end{proof}
 \end{coro}
