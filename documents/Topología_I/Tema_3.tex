@@ -119,12 +119,12 @@ Una primera intuición nos puede decir que un conjunto es conexo si todos sus pu
     \end{enumerate}
     \begin{proof}\
         \begin{enumerate}
-            \item[(i) )] Trivial.
-            \item[(ii) )] Trivial.
-            \item[(iii) )] Trivial.
-            \item[(iv) )] Sabemos que $([0,1], \cc{T}_u|_{[0,1]})$ es conexo y tenemos que existe una función $f:([0,1], \cc{T}_u|_{[0,1]})\to (\bb{S}^1, \cc{T}_u)$ es continua y sobreyectiva, por ejemplo, $f(t)=(\cos(2\pi t), \sen(2\pi t))$.
-            \item[(v) )] Supongamos que $[a,b)\cong(a,b)$. Entonces tenemos que existe un homeomorfismo $f:([a,b), \cc{T}_u)\to ((a,b), \cc{T}_u)$. Pero entonces $f|_{[a,b]}:([a,b), \cc{T}_u)\to ((a,b)\setminus \{f(a)\}, \cc{T}_u)$ sería un homeomorfismo pero llegaríamos a contradicción ya que la conexión es un invariante topológico.
-            \item[(vi),(vii) )] Se dejan planteadas como ejercicios para el lector.  
+            \item[(i)] Trivial.
+            \item[(ii)] Trivial.
+            \item[(iii)] Trivial.
+            \item[(iv)] Sabemos que $([0,1], \cc{T}_u|_{[0,1]})$ es conexo y tenemos que existe una función $f:([0,1], \cc{T}_u|_{[0,1]})\to (\bb{S}^1, \cc{T}_u)$ es continua y sobreyectiva, por ejemplo, $f(t)=(\cos(2\pi t), \sen(2\pi t))$.
+            \item[(v)] Supongamos que $[a,b)\cong(a,b)$. Entonces tenemos que existe un homeomorfismo $f:([a,b), \cc{T}_u)\to ((a,b), \cc{T}_u)$. Pero entonces $f|_{[a,b]}:([a,b), \cc{T}_u)\to ((a,b)\setminus \{f(a)\}, \cc{T}_u)$ sería un homeomorfismo pero llegaríamos a contradicción ya que la conexión es un invariante topológico.
+            \item[(vi),(vii)] Se dejan planteadas como ejercicios para el lector.  
         \end{enumerate}
     \end{proof}
 \end{coro}
@@ -149,7 +149,7 @@ Una primera intuición nos puede decir que un conjunto es conexo si todos sus pu
     (Teorema de la invariaza del dominio) Si $A\neq \emptyset $ es abierto en $(\bb{R}, \cc{T}_u)$ y $f:(A, \cc{T}|_A)\to (\bb{R}, \cc{T}_u)$ es un embebimiento, entonces $f(A)$ es abierto en $(\bb{R}, \cc{T}_u)$.
 
     \begin{proof}
-        Sabemos que $A\in \cc{T}_u$ y además $A\neq \emptyset$ luego podemos escribir $A=\bigcup\limits_{i\in I}I_i$ donde $I_i$ es un itervalo abierto en $(\bb{R}, \cc{T}_u)$\ \ $\forall i \in I$, luego tenemos que $f(A)=f(\bigcup\limits_{i\in I})=\bigcup\limits_{i\in I}f(I_i)$. Si conseguimos ver que $f(I_i)\in \cc{T}_u\ \ \forall i \in I$ tendremos lo buscado. 
+        Sabemos que $A\in \cc{T}_u$ y además $A\neq \emptyset$ luego podemos escribir $A=\bigcup\limits_{i\in I}I_i$ donde $I_i$ es un itervalo abierto en $(\bb{R}, \cc{T}_u)$\ \ $\forall i \in I$, luego tenemos que $f(A)=f(\bigcup\limits_{i\in I}I_i)=\bigcup\limits_{i\in I}f(I_i)$. Si conseguimos ver que $f(I_i)\in \cc{T}_u\ \ \forall i \in I$ tendremos lo buscado. 
 
         Sabemos que $I_i$ es conexo y $f$ es continua luego $f(I_i)$ es conexo en $(\bb{R}, \cc{T}_u)$ y por tanto es un intervalo (no unitario porque $f$ es inyectiva). Además, como $f$ es un embebimiento tenemos que $f(I_i)\cong I_i$ que es un intervalo abierto por lo que $f(I_i)$ será también un intervalo abierto y entonces $f(I_i)\in \cc{T}_u$. Como $i$ era arbitrario tenemos lo buscado.
 
@@ -747,4 +747,3 @@ En general compacidad y compacidad por sucesiones implica compacto por punto lí
 \end{teo}
 
 % ii y iv son equivalentes en cualquier espacio topológico
-
