@@ -1,0 +1,94 @@
+\documentclass[12pt]{article}
+
+\input{../_assets/preambulo.tex}
+\input{../_assets/portada.tex}
+
+\begin{document}
+
+\portada[%
+    titulo=Probabilidad,
+    subtitulo=Resumen,
+    autor=Jesús Muñoz Velasco,
+    año=Curso 2024-2025]
+
+    \section{Tema 4}
+
+    \begin{itemize}
+        \item \textbf{Esperanza condicionada:}
+        \begin{gather*}
+            E[X|Y](y):=E[X|Y=y]
+        \end{gather*}
+        \begin{itemize}
+            \item Caso discreto:
+            \begin{align*}
+                E[X|Y=y] = \sum\limits_{x\in E_x} x \cdot P[X=x|Y=y]
+            \end{align*}
+            \item Caso continuo:
+            \begin{align*}
+                E[X|Y=y] = \int_{-\infty}^{\infty} x \cdot f_{X|Y=y}(x) dx
+            \end{align*}
+            \item Propiedades:
+            \begin{itemize}
+                \item $E[c|Y]=c$,\ \ $c\in \bb{R}$
+                \item $E[aX_1 + bX_2|Y]=aE[X_1|Y]+ bE[X_2|Y]$
+                \item Si $X,Y$ independientes, entonces $E[g(X)|Y]=E[g(X)]$ con $g$ medible.
+                \item $E[E[g(X)|Y]]=E[g(X)]$ con $g$ medible.
+            \end{itemize}
+        \end{itemize}
+
+        \item \textbf{Varianza Condicionada:}
+        \begin{gather*}
+            Var[X|Y]=E[X^2|Y]-(E[X|Y])^2\\
+            Var[X|Y]=Var[E[X|Y]] + E[Var[X|Y]]
+        \end{gather*}
+
+        \item \textbf{Error cuadrático medio:}
+        \begin{gather*}
+            E.C.M(\varphi) = E[(Y-\varphi(X))^2]
+        \end{gather*}
+
+        \item \textbf{Curva de Regresión Mínimo Cuadrática de $Y$ sobre $X$:}
+        \begin{gather*}
+            \hat{Y}(x)=E[Y|X=x]\ \ \forall x \in E_x
+        \end{gather*}
+
+        \item \textbf{Curva de Regresión Mínimo Cuadrática de $X$ sobre $Y$:}
+        \begin{gather*}
+            \hat{X}(y)=E[X|Y=y]\ \ \forall y \in E_y
+        \end{gather*}
+
+        \item \textbf{Razón de correlación}
+        \begin{gather*}
+            \eta^2_{Y/X} = \frac{Var[E[Y|X]]}{Var[Y]}\\\\
+            \eta^2_{X/Y} = \frac{Var[E[X|Y]]}{Var[X]}
+        \end{gather*}
+
+        \item \textbf{Rectas de Regresión:}
+        El cálculo consistirá en minimizar $E[(Y-aX-b)^2]$. Con este proceso llegamos a 
+        \begin{gather*}
+            a=\frac{Cov(X,Y)}{Var[X]}\hspace{2cm} b=E[Y]-\frac{Cov(X,Y)}{Var[Y]}E[X]
+        \end{gather*}
+        Por lo que la recta será
+        \begin{gather*}
+            \hat{Y}=E[Y]+\frac{Cov(X,Y)}{Var[X]}(X-E[X])
+        \end{gather*}
+        Su error cuadrático medio será
+        \begin{gather*}
+            E.C.M(\hat{Y}) = Var[Y] - \frac{Cov^2(X,Y)}{Var[X]}
+        \end{gather*}
+
+        \item \textbf{Coeficiente de determinación lineal:}
+        \begin{gather*}
+            \rho^2_{X,Y} = \frac{Cov^2(X,Y)}{Var[X]\cdot Var[Y]}
+        \end{gather*}
+
+        \item \textbf{Coeficiente de correlación lineal de Pearson:}
+        \begin{gather*}
+            \rho_{X,Y} = \frac{Cov(X,Y)}{\sqrt{Var[X]\cdot Var[Y]}}
+        \end{gather*}
+    \end{itemize}
+
+    
+    
+\end{document}
+
