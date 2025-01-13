@@ -21,11 +21,11 @@
         \begin{itemize}
             \item Caso discreto:
             \begin{align*}
-                E[X|Y=y] = \sum\limits_{x\in E_x} x \cdot P[X=x|Y=y]
+                E[X|Y=y] = \sum\limits_{x\in E_x} x \cdot P[X=x|Y=y] = \sum\limits_{x\in E_x} x \cdot \frac{P[X=x, Y=y]}{P[Y=y]}
             \end{align*}
             \item Caso continuo:
             \begin{align*}
-                E[X|Y=y] = \int_{-\infty}^{\infty} x \cdot f_{X|Y=y}(x) dx
+                E[X|Y=y] = \int_{-\infty}^{\infty} x \cdot f_{X|Y=y}(x) dx = \int_{-\infty}^{\infty} x \cdot \frac{f_{X,Y}(x,y)}{f_Y(y)} dx
             \end{align*}
             \item Propiedades:
             \begin{itemize}
@@ -43,9 +43,12 @@
         \end{gather*}
 
         \item \textbf{Error cuadrático medio:}
-        \begin{gather*}
-            E.C.M(\varphi) = E[(Y-\varphi(X))^2]
-        \end{gather*}
+        \begin{align*}
+            E.C.M(\varphi) &= E[(Y-\varphi(X))^2] = \\
+            E.C.M(E[Y|X]) &= E[(y-E[Y|X])^2]\\
+            E.C.M(E[Y|X]) &= E[Var[Y|X]] = E[E[Y^2|X] - E[Y|X]^2] = \\
+            &= E[Y^2]- E[E[Y|X]^2]
+        \end{align*}
 
         \item \textbf{Curva de Regresión Mínimo Cuadrática de $Y$ sobre $X$:}
         \begin{gather*}
@@ -87,6 +90,33 @@
             \rho_{X,Y} = \frac{Cov(X,Y)}{\sqrt{Var[X]\cdot Var[Y]}}
         \end{gather*}
     \end{itemize}
+
+    \section{Tema 5}
+    
+    \subsection{Distribución multinomial}
+
+    \begin{itemize}
+        \item \textbf{Función masa de probabilidad:}
+        \begin{gather*}
+            P[X=(x_1, \dots, x_k)] = \frac{n!}{\left(\prod\limits_{i=1}^k x_i!\right) \cdot \left(n- \sum\limits_{i=1}^k x_i\right)!} \cdot \prod\limits_{i=1}^k p_i^{x_i} \cdot \left(1-\sum\limits_{i=1}^k p_i\right)^{n - \sum\limits_{i=1}^k x_i}
+        \end{gather*}
+        \item \textbf{Función generatriz de momentos:}
+        \begin{gather*}
+            M_X(t_1,\dots,t_k) = \left[\left(\sum\limits_{i=1}^k p_ie^{t_i}\right) + \left(1 - \sum\limits_{i=1}^k p_i\right)\right]^n
+        \end{gather*}
+        \item \textbf{Esperanza:}
+        \begin{gather*}
+            E[X]=n(p_1, \dots, p_k)
+        \end{gather*}
+        \item \textbf{Covarianza:}
+        \begin{gather*}
+            Cov(X_i, X_j) = -n \cdot p_ip_j \hspace{2cm} \forall i,j \{1, \dots, k\}, i\neq j
+        \end{gather*}
+    \end{itemize}
+
+    \subsection{Distribución Normal Bidimensional}
+
+    
 
     
     
