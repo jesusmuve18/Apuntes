@@ -600,11 +600,9 @@ Intuitivamente podemos entender la arcoconexión como que existe una línea (cam
 \begin{prop}
     Si $(X, \cc{T})$ es compacto y $f:(X, \cc{T})\to (Y, \cc{T}')$ es continua, entonces $f(X)$ es compacto en $(Y, \cc{T}')$. En particular, la compacidad es un invariante topológico.\\
 
-    % TODO: pedir esta demostración terminada (kessler no la tiene del todo)
-
-    Me falta la demostración.
+    
     \begin{proof}
-        
+        Sea $\{U_i'\}_{i\in I}$ un recubrimiento de $f(X)$ por compactos de $\cc{T}'$, $f(X)\subset \bigcup\limits_{i\in I}U_i'$. Consideramos $\{f^{-1}(U_i')\}_{i\in I}$. Tenmemos $\bigcup\limits_{i\in I}f^{-1}(U_i) = f^{-1}(\bigcup\limits_{i\in I} U_i') \supset f^{-1}(f(X)) = X$. Como $X$ es compacto tenemos que $\exists i_1, \dots, i_n \in I$ con $X = \bigcup\limits_{j=1}^n f^{-1}(U_{ij}') \Rightarrow f(X)=f(\bigcup\limits_{j=1}^n f^{-1}(U_{ij}')) = \bigcup\limits_{j=1}^n f(f^{-1}(U_{ij}')) \subset \bigcup\limits_{j=1}^n U_{ij}$.
     \end{proof}
 
     % \begin{proof}
