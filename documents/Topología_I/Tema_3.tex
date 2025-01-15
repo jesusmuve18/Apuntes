@@ -602,7 +602,15 @@ Intuitivamente podemos entender la arcoconexión como que existe una línea (cam
 
     
     \begin{proof}
-        Sea $\{U_i'\}_{i\in I}$ un recubrimiento de $f(X)$ por compactos de $\cc{T}'$, $f(X)\subset \bigcup\limits_{i\in I}U_i'$. Consideramos $\{f^{-1}(U_i')\}_{i\in I}$. Tenmemos $\bigcup\limits_{i\in I}f^{-1}(U_i) = f^{-1}(\bigcup\limits_{i\in I} U_i') \supset f^{-1}(f(X)) = X$. Como $X$ es compacto tenemos que $\exists i_1, \dots, i_n \in I$ con $X = \bigcup\limits_{j=1}^n f^{-1}(U_{ij}') \Rightarrow f(X)=f(\bigcup\limits_{j=1}^n f^{-1}(U_{ij}')) = \bigcup\limits_{j=1}^n f(f^{-1}(U_{ij}')) \subset \bigcup\limits_{j=1}^n U_{ij}$.
+        Sea $\{U_i'\}_{i\in I}$ un recubrimiento de $f(X)$ por compactos de $\cc{T}'$, $f(X)\subset \bigcup\limits_{i\in I}U_i'$. Consideramos $\{f^{-1}(U_i')\}_{i\in I}$. Tenemos 
+        \begin{align*}
+            \bigcup\limits_{i\in I}f^{-1}(U_i) = f^{-1}\left(\bigcup\limits_{i\in I} U_i'\right) \supset f^{-1}(f(X)) = X
+        \end{align*}
+        Como $X$ es compacto tenemos que $\exists i_1, \dots, i_n \in I$ con
+        \begin{align*}
+            X = \bigcup\limits_{j=1}^n f^{-1}(U_{ij}') \Rightarrow f(X)=f\left(\bigcup\limits_{j=1}^n f^{-1}(U_{ij}')\right) = \bigcup\limits_{j=1}^n f(f^{-1}(U_{ij}')) \subset \bigcup\limits_{j=1}^n U_{ij}
+        \end{align*}
+
     \end{proof}
 
     % \begin{proof}
