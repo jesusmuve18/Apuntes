@@ -18,7 +18,7 @@
 \begin{observacion}
     De \apuntar{A3} podemos concretar que si $U_1, \dots, U_k \in \cc{T}$, entonces $\bigcap\limits_{i=1}^{k}U_i \in \cc{T}$, es decir, que la intersección finita de abiertos es abierto (se prueba con una inducción trivial).
 
-    En general, si $\{U_i\}_{i=1}^{\infty}\in \cc{T}$, entonces $\bigcup\limits_{i=1}^{\infty}U_i$ no tiene por qué ser abierto.
+    En general, si $\{U_i\}_{i=1}^{\infty}\in \cc{T}$, entonces $\bigcap\limits_{i=1}^{\infty}U_i$ no tiene por qué ser abierto.
     \endsquare
 \end{observacion}
 
@@ -36,7 +36,7 @@
             X \setminus \left(\bigcup\limits_{i\in I}U_i\right) &= \bigcap\limits_{i\in I}(X \setminus U_i) \text{(intersección de finitos es finito)}\\
             X \setminus (U_1 \cap U_2) &= (X\setminus U_1) \cup (X \setminus U_2)\text{(unión de finitos es finito)}
         \end{align*}
-        \item \textbf{Topología conumerable:} (o topología de los complementos numerables) Sea $X \neq \emptyset$, $\cc{T}_{CF} = \{\emptyset\}\cup\{U\subset X : X \setminus U \text{ es numerable}\} \Rightarrow (X, \cc{T}_{CF})$ es un e.t.
+        \item \textbf{Topología conumerable:} (o topología de los complementos numerables) Sea $X \neq \emptyset$, $\cc{T}_{CN} = \{\emptyset\}\cup\{U\subset X : X \setminus U \text{ es numerable}\} \Rightarrow (X, \cc{T}_{CN})$ es un e.t.
         \item $\bb{R}$, $ \cc{T}=\{\emptyset, \bb{R}, \bb{Q}, \bb{R}\setminus \bb{Q}\}, \Rightarrow (\bb{R}, \cc{T})$ es un e.t. 
         \item \textbf{Topología de Sierpinski:} $X=\{a,b\}$, $\cc{T}=\{\emptyset, \{a\}, X\} \Rightarrow (X, \cc{T})$ es un e.t. (es un caso particular del punto incluido, $\cc{T}_a$).
         \item \textbf{Topología de Sorgenfrey:} $X=\bb{R}$, $\cc{T}_S$, $U\in \cc{T}_S \sii \forall x \in U \ \  \exists \veps > 0 \text{ tal que } [x, x+\veps) \subset U$. 
@@ -106,7 +106,7 @@
 \end{ejercicio}
 
 \begin{definicion}
-    $(X,d)$ e.m.\footnote{A partir de ahora notaremos así a un espacio métrico} $x \in X$, $r >0$, se definen:
+    Sea $(X,d)$ un e.m.\footnote{A partir de ahora notaremos así a un espacio métrico} $x \in X$, $r >0$, se definen:
 
     \begin{itemize}
         \item La \textbf{bola (abierta)} de centro $x$ y radio $r$ como 
@@ -229,21 +229,21 @@
     \end{align*}
     Con la distancia así definida tenemos:
     \begin{align*}
-        B(x,y) &=
+        B(x,r) &=
         \left\{ 
         \begin{array}{ccc}
             X & \text{si} & r>1\\
             \{x\} & \text{si} & r \leq 1
         \end{array}
         \right. \\\\
-        \overline{B}(x,y) &=
+        \overline{B}(x,r) &=
         \left\{ 
         \begin{array}{ccc}
             X & \text{si} & r \geq 1\\
             \{x\} & \text{si} & r < 1
         \end{array}
         \right.\\\\
-        S(x,y) &=
+        S(x,r) &=
         \left\{ 
         \begin{array}{ccc}
             X \setminus \{x\} & \text{si} & r =1 \\
@@ -355,7 +355,7 @@
 
 \begin{ejemplo}\
     \begin{itemize}
-        \item $(X,d)$ e.m. En general, no todo abierto es una bola. Por ejemplo la unión de bolas no concéntricas.
+        \item Sea $(X,d)$ un e.m. En general, no todo abierto es una bola. Por ejemplo la unión de bolas no concéntricas.
         \item No todo conjunto en $(\bb{R}^n, \cc{T}_u)$ es abierto. Por ejemplo $\{x\}\subset \bb{R}^n$ no es abierto.
         \item En $(\bb{R}, \cc{T}_u)$ los únicos intervalos abiertos (topológicamente) son los intervalos abiertos, es decir, los del tipo $\bb{R}=(-\infty, +\infty)$, $(a,b)$ con $a<b$, $(-\infty, a)$ y $(b, +\infty)$.
         \item En $(X, d)$, en general la intersección infinita de abiertos no es abierto. Por ejemplo, $\bigcap\limits_{n\in \bb{N}}\left(\frac{-1}{n}, \frac{1}{n}\right) = \{0\}$ que no es abierto.
@@ -428,7 +428,7 @@
 \begin{ejemplo}\
     \begin{itemize}
         \item $X \neq \emptyset$,\ $\cc{T}_{CF}\leq \cc{T}_{CN}$.
-        \item $(X,\cc{T})$ e.t, entonces $\cc{T}_t \leq \cc{T} \leq \cc{T}_{disc}$ 
+        \item Si $(X,\cc{T})$ es un e.t cualquiera, entonces $\cc{T}_t \leq \cc{T} \leq \cc{T}_{disc}$ 
         % (ya que todas las topologías contienen a la trivial)
         \item Si $\cc{T}_1 \leq \cc{T}_2$ y $\cc{T}_2\leq \cc{T}_1$, entonces $\cc{T}_1= \cc{T}_2$ (por doble inclusión).
         \item En general si tenemos dos topologías en $X$, no siempre son comparables. Por ejemplo la topología del punto incluido en dos puntos distintos: 
@@ -438,7 +438,7 @@
         Veamos que $\cc{T}_0 \nleq \cc{T}_1$, ya que $\{0\}\notin \cc{T}_1$, y por el mismo motivo (pero con el 1) tenemos $\cc{T}_1\nleq \cc{T}_0$.
 
         Otro ejemplo sería $(\bb{R}, \cc{T}_u)$, $(\bb{R},\cc{T}_{x_0})$ ya que $\{x_0\}\in \cc{T}_{x_0}$, $\{x_0\}\notin \cc{T}_u\Rightarrow \cc{T}_{x_0\nleq \cc{T}_u}$
-        Igualmente $(x_0+1,x_0+2)\in \cc{T}_u$ y $(x_0+1,x_0+2)\in \cc{T}_{x_0} \Rightarrow \cc{T}_u \nleq topoº_{x_0}$
+        Igualmente $(x_0+1,x_0+2)\in \cc{T}_u$ y $(x_0+1,x_0+2)\in \cc{T}_{x_0} \Rightarrow \cc{T}_u \nleq \cc{T}_{x_0}$
         \item En $\bb{R}$, $\cc{T}_u\leq \cc{T}_{Sorgenfrey}$.
         \item $(X,d)$, $(X,d')$, $d \leq d' \Rightarrow \cc{T}_d \leq \cc{T}_{d'}$.
     \end{itemize}
@@ -475,7 +475,7 @@
     \begin{itemize}
         \item Topología trivial: $\cc{T}_t=\{\emptyset, X\} \Rightarrow \cc{C}_{\cc{T}_t} = \cc{C}_t = \{\emptyset, X\}$.
         \item Topología discreta: $\cc{T}_{disc} = \cc{P}(X) \Rightarrow \cc{C}_{\cc{T}_{disc}} = \cc{C}_{disc} = \cc{P}(X)$.
-        \item Topología del punto incluido: $x_o \in X$, $\cc{T}_{x_0}=\{\emptyset\} \cup \{U\subset X : x_0 \in U\} \Rightarrow \cc{C}_{\cc{T}_{x_0}} = \cc{C}_{x_0} = \{X\}\cup \{F \subset X : x_0 \notin F\}$
+        \item Topología del punto incluido: $x_0 \in X$, $\cc{T}_{x_0}=\{\emptyset\} \cup \{U\subset X : x_0 \in U\} \Rightarrow \cc{C}_{\cc{T}_{x_0}} = \cc{C}_{x_0} = \{X\}\cup \{F \subset X : x_0 \notin F\}$
         \item Topología cofinita: $\cc{T}_{CF} = \{\emptyset\}\cup \{U\subset X : X \setminus U \text{ finito }\} \Rightarrow \cc{C}_{\cc{T}_{CF}}=\cc{C}_{CF}=\{X\}\cup \{F\subset X : F \text{ finito}\}$
         \item En ocasiones no es fácil describir $\cc{C}_{\cc{T}}$. Por ejemplo en $\cc{T}_u$ o $\cc{T}_{Sorgenfrey}$.
     \end{itemize}
@@ -531,7 +531,7 @@
 \section{Bases de topología}
 
 \begin{definicion}
-    Sea $(X,\cc{T})$ un e.t. Una familia de abiertos $\cc{B}\subset \cc{T}$ es una \textbf{base} de la topología $\cc{T}$ si $\forall U \in \cc{T}$\ \ \ $\exists \{B_i\}\subset \cc{B}$ tal que $U=\bigcup\limits_{i\in I}B_i$.
+    Sea $(X,\cc{T})$ un e.t. Una familia de abiertos $\cc{B}\subset \cc{T}$ es una \textbf{base} de la topología $\cc{T}$ si $\forall U \in \cc{T}$\ \ \ $\exists \{B_i\}_{i\in I}\subset \cc{B}$ tal que $U=\bigcup\limits_{i\in I}B_i$.
 
     A los elementos de $\cc{B}$ se les llama \textbf{abiertos básicos}.
     \endsquare
@@ -579,7 +579,7 @@
             Sea $\{x\}\in \cc{T}_{disc}$, como $\cc{B}'$ es base podemos considerar $x\in \{x\}$ y entonces $\exists B \in \cc{B}'$ tal que $x\in B \subset \{x\}$ y entonces $B=\{x\}\subset \cc{B}'$ $\forall x \in X\Rightarrow \cc{B}\subset \cc{B}'$
         \end{proof}
         \item $(X, \cc{T}_{x_0})$, $x_0 \in X \neq \emptyset$, $\cc{B}=\{\{x,x_0\}: x\in X\}$ es una base. Esta es la base más económica.
-        \item $(\bb{R}, \cc{T}_{Sorgenfrey})$ (recordemos que $U \in \cc{T}_S \sii \forall x \in U,\ \ \exists \veps : [x, x+\veps)\subset U$). $\cc{B}=\{[x,x+\veps): x\in \bb{R}, \veps>0\}$ es base. $\cc{B}'=\{[x,x+\veps): x\in \bb{Q}, \veps\in \bb{Q}, \veps>0\}$ no lo es (ya que tomando un intervalo de la forma $[x,x+\veps)$ con $x\in \bb{Q}$ entonces no existe ningún elemento de $\cc{B}'$ que contenga a $x$ y quede enmedio).
+        \item $(\bb{R}, \cc{T}_{Sorgenfrey})$ (recordemos que $U \in \cc{T}_S \sii \forall x \in U,\ \ \exists \veps : [x, x+\veps)\subset U$). $\cc{B}=\{[x,x+\veps): x\in \bb{R}, \veps>0\}$ es base. $\cc{B}'=\{[x,x+\veps): x\in \bb{Q}, \veps\in \bb{Q}, \veps>0\}$ no lo es (ya que tomando un intervalo de la forma $[x,x+\veps)$ con $x\in \bb{Q}$ entonces no existe ningún elemento de $\cc{B}'$ que contenga a $x$ y quede en medio).
     \end{itemize}
     \endsquare
 \end{ejemplo}
@@ -607,17 +607,17 @@
     \end{enumerate}
     Entonces existe una única topología $\cc{T}(\cc{B})$ en $X$ tal que $\cc{B}$ es base de $\cc{T}(\cc{B})$. Además,
     \begin{align*}
-        \cc{T}(\cc{B})&=\{\emptyset\}\cup\{U\subset X : \exists \{B_i\}_{i\in I}\subset \cc{B} \text{ con } U = \bigcup\limits_{i\in I}B_i\}\\
+        \cc{T}(\cc{B})&=\{\emptyset\}\cup\{U\subset X : \exists \{B_i\}_{i\in I}\subset \cc{B} \text{ con } U = \bigcup\limits_{i\in I}B_i\}=\\
         &=\{\emptyset\}\cup \{U\in X:\forall x\in U\ \ \exists B=B_x\in \cc{B} \text{ con } x\in B\subset U \}
     \end{align*}
-    Además, $\cc{T}(\cc{B})$ es la topología menos fina conteniendo a $\cc{B}$, es decir, si $(X,\cc{T}')$ es un e.t y $\cc{B}\subset \cc{T}'$, entonces $\cc{T}(\cc{B})\leq \cc{T}'$. A esta topología se le llama la \textbf{topología generada} por $\cc{B}$.
+    Además, $\cc{T}(\cc{B})$ es la topología menos fina que contiene a $\cc{B}$, es decir, si $(X,\cc{T}')$ es un e.t y $\cc{B}\subset \cc{T}'$, entonces $\cc{T}(\cc{B})\leq \cc{T}'$. A esta topología se le llama la \textbf{topología generada} por $\cc{B}$.
 
     \begin{proof}
         Empezaremos por probar la existencia. Para ello tendremos que ver que $\cc{T}(\cc{B})$ es una topología, probando que verifica las propiedades de las topologías:
         \begin{enumerate}[label=(A\arabic*)]
             \item $\emptyset\in \cc{T}(\cc{B})$ por la definición de $\cc{T}(\cc{B})$. Por \apuntar{B1}, tenemos también que $X\in \cc{T}(\cc{B})$.
             \item Sea $\{U_i\}_{i\in I}\subset \cc{T}(\cc{B})$ y sea $x\in \bigcup\limits_{i\in I}U_i\Rightarrow \exists i \in I : x\in U_i\in \cc{T}(\cc{B})$ por lo que $\exists B_x\in \cc{B}$ tal que $x \in B_x \subset U_i\subset \bigcup_{i\in I}U_i\Rightarrow \bigcup\limits_{i\in I}U_i \in \cc{T}(\cc{B})$.
-            \item Sean $U_1, U_2 \in \cc{T}(\cc{B})$ (si la intersección es vacía es trivial). Consideramos $x\in U_1\cap U_2\Rightarrow \exists B_1, B_2 \in \cc{B}$ con $x \in B_1 \subset U$ y $x_\in B_2\subset U_2$ por tanto $x\in B_1 \cap B_2 \subset U_1 \cap U_2$. Por \apuntar{B2}, existe un $B_2\in \cc{B}$ tal que $x\in B_3 \subset B_1\cap B_2 \subset U_1 \cap U_2$ por lo que $U_1\cap U_2\in \cc{T}(\cc{B})$.
+            \item Sean $U_1, U_2 \in \cc{T}(\cc{B})$ (si la intersección es vacía es trivial). Consideramos $x\in U_1\cap U_2\Rightarrow \exists B_1, B_2 \in \cc{B}$ con $x \in B_1 \subset U_1$ y $x \in B_2\subset U_2$ por tanto $x\in B_1 \cap B_2 \subset U_1 \cap U_2$. Por \apuntar{B2}, existe un $B_3\in \cc{B}$ tal que $x\in B_3 \subset B_1\cap B_2 \subset U_1 \cap U_2$ por lo que $U_1\cap U_2\in \cc{T}(\cc{B})$.
         \end{enumerate}
         Con esto queda probado que es una topología. Tendremos que ver ahora que $\cc{B}$ es base de $\cc{T}(\cc{B})$. Para ello empiezo viendo que $\cc{B}\subset \cc{T}$. Por la segunda defición de $\cc{T}(\cc{B})$, esto es evidente. Como verifica las hipótesis del Teorema 1.7, es base de $\cc{T}(\cc{B})$.\\
 
@@ -676,7 +676,7 @@
 
 \begin{ejemplo}\
     \begin{itemize}
-        \item Toda base $(X,\cc{T})$ es subbase de $(X,\cc{T})$.
+        \item Toda base de $(X,\cc{T})$ es subbase de $(X,\cc{T})$.
         \item $S=\{X\}$ es subbase de $\cc{T}_t$.
         \item En $\bb{R}$, $S=\{(a,+\infty):a\in \bb{R}\}\cup \{(-\infty,b): b\in \bb{R}\}$ es subbase de $\cc{T}_u$.
     \end{itemize}
@@ -714,6 +714,8 @@
         \item[(i)] $U\in \cc{T}$.
         \item[(ii)] $U\in \cc{N}_x$\ \ $\forall x \in U$.
     \end{enumerate}
+
+    Es decir, un conjunto es abierto si y solo si es entorno de todos sus puntos.
 
     \begin{proof}\
         \begin{enumerate}
@@ -791,7 +793,7 @@
             Sea $N \in \cc{N}_x \Rightarrow \exists U \in \cc{T}$ con $x \in U \subset N$. Como $\cc{B}$ es base de $\cc{T}$, entonces $\exists B \in \cc{B}$ con $x\in B \subset U\subset N$. 
         \end{proof}
 
-        \item En general, no todo entoorno de un punto es unión de entornos básico. Por ejemplo, $(\bb{R}, \cc{T}_u)$, $x=0$, $\cc{B}_x = \{(a,b) : a<x<b\}$ es una b.d.e. de $x$. Tomamos $[-1,1) \in \cc{N}_x$ (es entorno de $x=0$) pero no es unión de elementos de $\cc{B}_x$.
+        \item En general, no todo entorno de un punto es unión de entornos básico. Por ejemplo, $(\bb{R}, \cc{T}_u)$, $x=0$, $\cc{B}_x = \{(a,b) : a<x<b\}$ es una b.d.e. de $x$. Tomamos $[-1,1) \in \cc{N}_x$ (es entorno de $x=0$) pero no es unión de elementos de $\cc{B}_x$.
     \end{itemize}
     \endsquare
 \end{observacion}
@@ -1184,7 +1186,7 @@
 
 \begin{observacion}\
     \begin{itemize}
-        \item Sea $O\subset A$, entonces $O \in \cc{T}A \sii \exists U \in \cc{T}$ con $O=U\cap A$.
+        \item Sea $O\subset A$, entonces $O \in \cc{T}_A \sii \exists U \in \cc{T}$ con $O=U\cap A$.
         \item Sea $O \subset A$, entonces $O\in \cc{T} \Rightarrow O \in \cc{T}_A$ (ya que $O=O\cap A$). El recíproco no es cierto ya que no todo abierto de un subespacio tiene que ser abierto en el espacio. Por ejemplo, en $(\bb{R}, \cc{T}_u)$ consideramos $A=[0,3)$, entonces $[0,1)\in \cc{T}_A$ pero $[0,1)\notin \cc{T}_u$ (podemos considerar $[0,1) = (-1,1)\cap A$).
     \end{itemize}
     \endsquare
