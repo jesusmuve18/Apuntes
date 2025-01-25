@@ -508,7 +508,7 @@
             \item[(ii)] Como $f$ es cerrada se verifica.
             \item[(iii)] Tengo que comprobar varias cosas:
             \begin{itemize}
-                \item $f(B)\in \cc{T}'$\ \ $\forall B \in base$. Esto es cierto ya que $B\in \cc{T}$ y $f$ es abierta.
+                \item $f(B)\in \cc{T}'$\ \ $\forall B \in \cc{B}$. Esto es cierto ya que $B\in \cc{T}$ y $f$ es abierta.
                 \item Sea $U'\in \cc{T}'$, $y\in U'$ tendré que ver que existe un abierto básico entremedias. Para ello tomo $f^{-1}(y)\subset f^{-1}(U')$ y como $f$ es continua tenemos que $f^{-1}(U')\in \cc{T}$. Como $\cc{B}$ es base tenemos que $\exists B \in \cc{B}$ con $f^{-1}(y)\in \cc{B}\subset f^{-1}(U')$ y como $f$ es biyectiva, $y\in f(B)\subset U'$ con $f(B)\in \cc{B}'$.
             \end{itemize}
             \begin{center}
@@ -661,7 +661,7 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
     \begin{proof} Para ver que esto es cierto tendremos que comprobar que cumple las condiciones del Teorema \ref{teorema1_6}:
         \begin{enumerate}
             \item[\apuntar{B1}] $X\times Y \in \cc{B}_{\cc{T}\times \cc{T}'}\Rightarrow \bigcup\limits_{B\in \cc{B}_{\cc{T}\times \cc{T}'}}B=X\times Y$.
-            \item[\apuntar{B2}] $U_1\times U_1', U_2\times U_2'\in \cc{B}_{\cc{T}\times \cc{T}'}$. Tenemos que $(U_1\times U_1')\cap (U_2\times U_2') = (U_1\cap U_2)\times (U_1'\times U_2')\in \cc{B}_{\cc{T}\times \cc{T}'}$. ya que $(U_1\cap U_2)\in \cc{T}$ y $(U_1'\cap U_2')\in \cc{T}'$.
+            \item[\apuntar{B2}] $U_1\times U_1', U_2\times U_2'\in \cc{B}_{\cc{T}\times \cc{T}'}$. Tenemos que $(U_1\times U_1')\cap (U_2\times U_2') = (U_1\cap U_2)\times (U_1'\cap U_2')\in \cc{B}_{\cc{T}\times \cc{T}'}$. ya que $(U_1\cap U_2)\in \cc{T}$ y $(U_1'\cap U_2')\in \cc{T}'$.
         \end{enumerate}
         y ya lo tenemos probado.
 
