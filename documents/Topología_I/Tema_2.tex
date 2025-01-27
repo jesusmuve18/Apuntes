@@ -497,7 +497,7 @@
         \item[(ii)] Si $C\subset X$, entonces $C\subset \cc{C}_{\cc{T}} \sii f(C)\in \cc{C}_{\cc{T}'}$.
         \item[(iii)] Si $\cc{B}\subset\cc{P}(X)$, entonces $\cc{B}$ es base de $\cc{T} \sii $ $\cc{B}'=f(\cc{B})=\{f(B):B\in \cc{B}\}$ es base de $\cc{T}'$.
         \item[(iv)] Si $x\in X$, y $N\subset X$, entonces $N\in \cc{N}_x \sii f(N)\in \cc{N}_{f(x)}'$.
-        \item[(v)] Si $x\in X$, $\cc{B}_x\subset \cc{P}(X)$, entonces $\cc{B}_x$ es b.d.e. de $x$ en $\cc{T} \sii \cc{B}_{f(x)}'=f(\cc{B}_x)=\{f(V):V\in \cc{B}_x\}$ es b.d.e. de $f(y)$ en $\cc{T}'$.     
+        \item[(v)] Si $x\in X$, $\beta_x\subset \cc{P}(X)$, entonces $\beta_x$ es b.d.e. de $x$ en $\cc{T} \sii \cc{B}_{f(x)}'=f(\beta_x)=\{f(V):V\in \beta_x\}$ es b.d.e. de $f(y)$ en $\cc{T}'$.     
     \end{enumerate}
 
     \begin{proof}
@@ -549,7 +549,7 @@
                 \end{tikzpicture}
             \end{center}
             \item[(iv)] Sea $x\in X$, $N\in \cc{N}_x$. Como $\cc{N}_x$ es entorno, $\exists U\in \cc{T}$ con $x\in U\subset N' \Rightarrow f(x)\in f(U)\subset f(N)$ y como $f$ es abierta tengo que $f(U)\in \cc{T}'$ por lo que $f(N)\in \cc{N}_{f(x)}'$
-            \item[(v)] Sea $N'\in \cc{N}_{f(x)}'$. Por (iv) (la implicación hacia la izquierda) tenemos que $f^{-1}(N')\in \cc{N}_x$. Como tenemos una b.d.e tenemos que $\exists V \in \cc{B}_x$ con $V\subset f^{-1}(N') \Rightarrow f(V)\subset N'$ y de nuevo por (iv) tenemos que $f(V)\in \cc{N}_{f(x)}'$ y tenemos lo que queríamos.
+            \item[(v)] Sea $N'\in \cc{N}_{f(x)}'$. Por (iv) (la implicación hacia la izquierda) tenemos que $f^{-1}(N')\in \cc{N}_x$. Como tenemos una b.d.e tenemos que $\exists V \in \beta_x$ con $V\subset f^{-1}(N') \Rightarrow f(V)\subset N'$ y de nuevo por (iv) tenemos que $f(V)\in \cc{N}_{f(x)}'$ y tenemos lo que queríamos.
             \begin{center}
                 \begin{tikzpicture}
                     \def\incolor{gray!20}
@@ -689,9 +689,9 @@ En esta sección estudiaremos cómo a partir de dos e.t. $(X, \cc{T})$, $(Y, \cc
             \tilde{\cc{B}}=\cc{B}\times \cc{B}'=\{B\times B': B\in \cc{B}, B'\in \cc{B}'\}
         \end{align*}
         es base de $\cc{T}\times \cc{T}'$.
-        \item[(ii)] Si $x\in X$, $\cc{B}_x$ b.d.e. de $x$ en $(X, \cc{T})$ y $y\in Y$, $\cc{B}_y'$ b.d.e. de $y$ en $(Y, \cc{T}')$, entonces
+        \item[(ii)] Si $x\in X$, $\beta_x$ b.d.e. de $x$ en $(X, \cc{T})$ y $y\in Y$, $\beta_y'$ b.d.e. de $y$ en $(Y, \cc{T}')$, entonces
         \begin{gather*}
-            \tilde{\cc{B}}_{(x,y)}=\cc{B}_x\times \cc{B}_y' =\{V\times V': V\in \cc{B}_x, V'\in \cc{B}_y'\}
+            \tilde{\cc{B}}_{(x,y)}=\beta_x\times \beta_y' =\{V\times V': V\in \beta_x, V'\in \beta_y'\}
         \end{gather*}
         es b.d.e. de $(x,y)$ en $(X\times Y, \cc{T}\times \cc{T}')$.
     \end{enumerate}

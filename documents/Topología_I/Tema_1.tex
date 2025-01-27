@@ -772,64 +772,64 @@
 \subsection{Bases de Entornos}
 
 \begin{definicion}
-    Sea $(X, \cc{T})$ e.t. y $x\in X $,. Entonces una \textbf{base de entornos} de $x$ en $\cc{T}$ es una familia de entornos, $\cc{B}_x\subset \cc{N}_x$ tal que $\forall N \in \cc{N}_x$\ \ $\exists V \in \cc{B}_x$ con $x \in V \subset N$.\\
+    Sea $(X, \cc{T})$ e.t. y $x\in X $,. Entonces una \textbf{base de entornos} de $x$ en $\cc{T}$ es una familia de entornos, $\beta_x\subset \cc{N}_x$ tal que $\forall N \in \cc{N}_x$\ \ $\exists V \in \beta_x$ con $x \in V \subset N$.\\
 
-    A los elementos de $\cc{B}_x$ se les llama \textbf{entornos básicos}.
+    A los elementos de $\beta_x$ se les llama \textbf{entornos básicos}.
     \endsquare
 \end{definicion}
 
 \begin{observacion}\
     \begin{itemize}
-        \item Si $\cc{B}_x$ es b.d.e\footnote{Notaremos así a las bases de entornos}. entonces $\cc{N}_x=\{N\subset X : \exists V \in \cc{B}_x \text{ con } V \subset N\}$.
+        \item Si $\beta_x$ es b.d.e\footnote{Notaremos así a las bases de entornos}. entonces $\cc{N}_x=\{N\subset X : \exists V \in \beta_x \text{ con } V \subset N\}$.
 
-        \item $\cc{B}_x\neq \emptyset$.
+        \item $\beta_x\neq \emptyset$.
 
         \item $\cc{N}_x$ es una b.d.e. de $x$.
 
-        \item $\cc{B}_x = \cc{N}_x \cap \cc{T}=\{U\subset \cc{T}: x\in U\}$ es también una b.d.e. de $x$.
+        \item $\beta_x = \cc{N}_x \cap \cc{T}=\{U\subset \cc{T}: x\in U\}$ es también una b.d.e. de $x$.
 
         \item Si $\cc{B}$ es base de $\cc{T}$, entonces $\cc{B}\cap \cc{N}_x = \{B \in \cc{B} : x \in B$\} es una b.d.e. de $x$
         \begin{proof}
             Sea $N \in \cc{N}_x \Rightarrow \exists U \in \cc{T}$ con $x \in U \subset N$. Como $\cc{B}$ es base de $\cc{T}$, entonces $\exists B \in \cc{B}$ con $x\in B \subset U\subset N$. 
         \end{proof}
 
-        \item En general, no todo entorno de un punto es unión de entornos básico. Por ejemplo, $(\bb{R}, \cc{T}_u)$, $x=0$, $\cc{B}_x = \{(a,b) : a<x<b\}$ es una b.d.e. de $x$. Tomamos $[-1,1) \in \cc{N}_x$ (es entorno de $x=0$) pero no es unión de elementos de $\cc{B}_x$.
+        \item En general, no todo entorno de un punto es unión de entornos básico. Por ejemplo, $(\bb{R}, \cc{T}_u)$, $x=0$, $\beta_x = \{(a,b) : a<x<b\}$ es una b.d.e. de $x$. Tomamos $[-1,1) \in \cc{N}_x$ (es entorno de $x=0$) pero no es unión de elementos de $\beta_x$.
     \end{itemize}
     \endsquare
 \end{observacion}
 
 \begin{ejemplo}\
     \begin{itemize}
-        \item $(X, \cc{T}_u)$, $x\in X\Rightarrow \cc{B}_x=\{X\}$ es la única b.d.e de $x$ posible.
-        \item $(X, \cc{T}_{disc})$, $x \in X \Rightarrow \cc{B}_x=\{\{x\}\}$ es una b.d.e de $x$ (la más ``económica'').
-        \item $(X, \cc{T}_{x_0})$, $x \in X \Rightarrow \cc{B}_x = \{\{x,x_0\}\}$ es b.d.e de $x$ (la más ``económica'').
-        \item $(\bb{R}^n, \cc{T}_u)$, $x \in X\Rightarrow \cc{B}_x = \{B(x, \veps): \veps > 0\}$ es una b.d.e de $x$. $\cc{B}_x = \{B(x, \veps):\veps > 0 , \veps \in \bb{Q}\}$, $\cc{B}_x = \{B(x, \veps):\veps =\frac{1}{k}, k\in \bb{N}\}$, $\cc{B}_x = \{B(x, \veps):\veps =\frac{1}{k}, k\in \bb{N}, k\text{ par}\}$ también son bases de entornos de $x$ (cada una más económica que la anterior).
+        \item $(X, \cc{T}_u)$, $x\in X\Rightarrow \beta_x=\{X\}$ es la única b.d.e de $x$ posible.
+        \item $(X, \cc{T}_{disc})$, $x \in X \Rightarrow \beta_x=\{\{x\}\}$ es una b.d.e de $x$ (la más ``económica'').
+        \item $(X, \cc{T}_{x_0})$, $x \in X \Rightarrow \beta_x = \{\{x,x_0\}\}$ es b.d.e de $x$ (la más ``económica'').
+        \item $(\bb{R}^n, \cc{T}_u)$, $x \in X\Rightarrow \beta_x = \{B(x, \veps): \veps > 0\}$ es una b.d.e de $x$. $\beta_x = \{B(x, \veps):\veps > 0 , \veps \in \bb{Q}\}$, $\beta_x = \{B(x, \veps):\veps =\frac{1}{k}, k\in \bb{N}\}$, $\beta_x = \{B(x, \veps):\veps =\frac{1}{k}, k\in \bb{N}, k\text{ par}\}$ también son bases de entornos de $x$ (cada una más económica que la anterior).
     \end{itemize}
     \endsquare
 \end{ejemplo}
 
 \begin{prop}
-    Sea $(X,\cc{T})$ un e.t., $\cc{B}_x$ una b.d.e. de $x$\ \ $\forall x \in X$ y $U\subset X$. Equivalen:
+    Sea $(X,\cc{T})$ un e.t., $\beta_x$ una b.d.e. de $x$\ \ $\forall x \in X$ y $U\subset X$. Equivalen:
     \begin{enumerate}
         \item[(i)] $U\in \cc{T}$.
-        \item[(ii)] $\forall x \in U$\ \ $\exists V = V_x\in \cc{B}_x$ con $V_x\subset U$. 
+        \item[(ii)] $\forall x \in U$\ \ $\exists V = V_x\in \beta_x$ con $V_x\subset U$. 
     \end{enumerate}
 
     \begin{proof}\ 
         \begin{itemize}
-            \item[(i) $\Rightarrow$ (ii)] Como $U\in \cc{T}$, entonces $U\in \cc{N}_x$\ \ $\forall x \in U$. Por tanto, $\forall x \in U,$\ \ $\exists V_x\in \cc{B}_x$ con $V_x\subset U$.
+            \item[(i) $\Rightarrow$ (ii)] Como $U\in \cc{T}$, entonces $U\in \cc{N}_x$\ \ $\forall x \in U$. Por tanto, $\forall x \in U,$\ \ $\exists V_x\in \beta_x$ con $V_x\subset U$.
             \item[(ii) $\Rightarrow$ (i)] Por la hipótesis tenemos que $U\in \cc{N}_x$\ \ $\forall x \in U$ por lo que $U\in \cc{T}$ (por la Proposición \ref{proposicion1_11})
         \end{itemize}
     \end{proof}
 \end{prop}
 
 \begin{prop}
-    Sea $(X,\cc{T})$ un e.t. y $\cc{B}_x$ una b.d.e de $x$\ \ $\forall x \in X$. Entonces:
+    Sea $(X,\cc{T})$ un e.t. y $\beta_x$ una b.d.e de $x$\ \ $\forall x \in X$. Entonces:
     \begin{enumerate}
-        \item[\objetivo{V1}] $\cc{B}_x\neq \emptyset$.
-        \item[\objetivo{V2}] Si $V\in \cc{B}_x$, entonces $x\in V$. %(por \apuntar{N2})
-        \item[\objetivo{V3}] Si $V_1, V_2\in \cc{B}_x$, entonces $\exists V_3 \in \cc{B}_x$ con $V_3 \subset V_1 \cap V_2$. (En general, la intersección de dos abiertos básicos no tiene por qué ser abierto básico pero sí contener a uno).
-        \item[\objetivo{V4}] Si $V\in \cc{B}_x$, entonces $\exists V'\in \cc{B}_x$ con $V'\subset V$ tal que $\forall y\in V'$\ \ $\exists V_y\in \cc{B}_y$ con $V_y\subset V$.
+        \item[\objetivo{V1}] $\beta_x\neq \emptyset$.
+        \item[\objetivo{V2}] Si $V\in \beta_x$, entonces $x\in V$. %(por \apuntar{N2})
+        \item[\objetivo{V3}] Si $V_1, V_2\in \beta_x$, entonces $\exists V_3 \in \beta_x$ con $V_3 \subset V_1 \cap V_2$. (En general, la intersección de dos abiertos básicos no tiene por qué ser abierto básico pero sí contener a uno).
+        \item[\objetivo{V4}] Si $V\in \beta_x$, entonces $\exists V'\in \beta_x$ con $V'\subset V$ tal que $\forall y\in V'$\ \ $\exists V_y\in \beta_y$ con $V_y\subset V$.
     \end{enumerate}
 
     \begin{center}
@@ -858,25 +858,25 @@
     
     \begin{proof}\
         \begin{enumerate}
-            \item[\apuntar{V4}] $V\in \cc{B}_x\subset \cc{N}_x$, entonces, por \apuntar{N5} $\exists N'\in \cc{N}_x$ con $N'\subset V$ tal que $V \in \cc{N}_y$\ \ $\forall y \in N'$. Como $\cc{B}_x$ es b.d.e, $\exists V'\in \cc{B}_x$ con $V'\subset N'\subset V$.\\
+            \item[\apuntar{V4}] $V\in \beta_x\subset \cc{N}_x$, entonces, por \apuntar{N5} $\exists N'\in \cc{N}_x$ con $N'\subset V$ tal que $V \in \cc{N}_y$\ \ $\forall y \in N'$. Como $\beta_x$ es b.d.e, $\exists V'\in \beta_x$ con $V'\subset N'\subset V$.\\
             
-            Sea $y\in V'\subset N'\Rightarrow V\in \cc{N}_y$. Como $\cc{B}_y$ es b.d.e, $\exists V_y \in \cc{B}_y$ con $V_y \subset V$.
+            Sea $y\in V'\subset N'\Rightarrow V\in \cc{N}_y$. Como $\beta_y$ es b.d.e, $\exists V_y \in \beta_y$ con $V_y \subset V$.
         \end{enumerate}
     \end{proof}
 \end{prop}
 
 \begin{prop}
-    Sea $X \neq \emptyset$ un conjunto y supongamos que $\forall x \in X$ tenemos una familia $\cc{B}_x \subset \cc{P}(X)$ cumpliendo \apuntar{V1}, \dots, \apuntar{V4}. Entonces existe una única topología $\cc{T}$ en $X$ tal que $\cc{B}_x$ es b.d.e de $x$ en $(X,\cc{T})$\ \ $\forall x \in X$.\\
+    Sea $X \neq \emptyset$ un conjunto y supongamos que $\forall x \in X$ tenemos una familia $\beta_x \subset \cc{P}(X)$ cumpliendo \apuntar{V1}, \dots, \apuntar{V4}. Entonces existe una única topología $\cc{T}$ en $X$ tal que $\beta_x$ es b.d.e de $x$ en $(X,\cc{T})$\ \ $\forall x \in X$.\\
 
-    Además, $\cc{T}$ es la única topología con $\cc{N}_x=\{N\subset X : \exists V=V_x \in \cc{B}_x\text{ con }V_x\subset N\}$\ \ $\forall x \in X$.
+    Además, $\cc{T}$ es la única topología con $\cc{N}_x=\{N\subset X : \exists V=V_x \in \beta_x\text{ con }V_x\subset N\}$\ \ $\forall x \in X$.
 
     \begin{proof}
-        Tengo que comprobar que $\cc{N}_x$ cumplen \apuntar{N1},\dots, \apuntar{N5} usando que $\cc{B}_x$ cumplen \apuntar{V1}, \dots, \apuntar{V4}. La demostración se deja propuesta como ejercicio para el lector. % TODO
+        Tengo que comprobar que $\cc{N}_x$ cumplen \apuntar{N1},\dots, \apuntar{N5} usando que $\beta_x$ cumplen \apuntar{V1}, \dots, \apuntar{V4}. La demostración se deja propuesta como ejercicio para el lector. % TODO
     \end{proof}
 \end{prop}
 
 \begin{ejercicio}
-    Sean $(X, \cc{T})$ y $(X, \cc{T}')$ espacios topológicos y $\cc{B}_x$ b.d.e de $x$ en $(X,\cc{T})$\ \ $\forall x \in X$. Si $V$ es entorno de $x$ en $\cc{T}'$\ \ $\forall V \in \cc{B}_x$, entonces $\cc{T} \leq \cc{T}'$.
+    Sean $(X, \cc{T})$ y $(X, \cc{T}')$ espacios topológicos y $\beta_x$ b.d.e de $x$ en $(X,\cc{T})$\ \ $\forall x \in X$. Si $V$ es entorno de $x$ en $\cc{T}'$\ \ $\forall V \in \beta_x$, entonces $\cc{T} \leq \cc{T}'$.
     \endsquare
 \end{ejercicio}
 
@@ -897,13 +897,13 @@
         \item[(i)] $x$ es adherente a $A$.
         \item[(ii)] $A\cap U \neq \emptyset$\ \ $\forall U \in \cc{T}$ con $x\in U$.
         \item[(iii)] $A \cap B \neq \emptyset \ \ \forall B \in \cc{B}$ con $x\in B$, donde $\cc{B}$ es base de $\cc{T}$.
-        \item[(iv)] $A\cap V \neq \emptyset$\ \ $\forall V \in \cc{B}_x$ con $\cc{B}_x$ base de entornos de $x$.  
+        \item[(iv)] $A\cap V \neq \emptyset$\ \ $\forall V \in \beta_x$ con $\beta_x$ base de entornos de $x$.  
     \end{enumerate}
 
     \begin{proof}\
         \begin{itemize}
-            \item[(iii) $\Rightarrow$ (iv)] Sea $V\in \cc{B}_x\Rightarrow \exists U \in \cc{T}$ con $x\in U \subset V$. Como $\cc{B}$ es base de $\cc{T}$, entonces $\exists B\in \cc{B}$ con $x\in B\subset U \subset V$. Por hipótesis, $B\cap A \neq \emptyset$, por lo que $V\cap A \neq \emptyset$
-            \item[(iv)$\Rightarrow$(i)] Sea $N \in \cc{N}_x$. Como $\cc{B}_x$ es base de entornos de $x$, entonces $\exists V \in \cc{B}_x$ con $V\subset N$. Por hipótesis, $A\cap V\neq \emptyset \Rightarrow A\cap N \neq \emptyset$ por lo que $x$ es adherente a A.
+            \item[(iii) $\Rightarrow$ (iv)] Sea $V\in \beta_x\Rightarrow \exists U \in \cc{T}$ con $x\in U \subset V$. Como $\cc{B}$ es base de $\cc{T}$, entonces $\exists B\in \cc{B}$ con $x\in B\subset U \subset V$. Por hipótesis, $B\cap A \neq \emptyset$, por lo que $V\cap A \neq \emptyset$
+            \item[(iv)$\Rightarrow$(i)] Sea $N \in \cc{N}_x$. Como $\beta_x$ es base de entornos de $x$, entonces $\exists V \in \beta_x$ con $V\subset N$. Por hipótesis, $A\cap V\neq \emptyset \Rightarrow A\cap N \neq \emptyset$ por lo que $x$ es adherente a A.
         \end{itemize}
     \end{proof}
 \end{prop}
@@ -931,7 +931,7 @@
 \begin{ejemplo} En $(\bb{R}, \cc{T}_u)$
     \begin{itemize}
         \item $A=(0,1)\Rightarrow \overline{A}=[0,1]$ y todos los puntos son de acumulación.
-        \item $A=(0,1)\cup \{2\}\Rightarrow [0,1]\cup\{2\}$. Además $x$ es de acumulación $\forall x \in [0,1]$ y $x=2$ es aislado (ya que puedo considerar $N=\left(\frac{3}{2}, \frac{5}{2}\right)\in \cc{N}_2$ y $N\cap A =\{2\}$).
+        \item $A=(0,1)\cup \{2\}\Rightarrow \overline{A} = [0,1]\cup\{2\}$. Además $x$ es de acumulación $\forall x \in [0,1]$ y $x=2$ es aislado (ya que puedo considerar $N=\left(\frac{3}{2}, \frac{5}{2}\right)\in \cc{N}_2$ y $N\cap A =\{2\}$).
     \end{itemize}
     \endsquare
 \end{ejemplo}
@@ -1384,7 +1384,7 @@
 
 \begin{observacion}\
     \begin{itemize}
-        \item $2AN \Rightarrow 1AN$ ya que si $\cc{B}$ es base numerable y $x\in X$ entonces $\cc{B}_x=\{B\in \cc{B} : x\in B\}$ es una b.d.e de $x$ numerable.
+        \item $2AN \Rightarrow 1AN$ ya que si $\cc{B}$ es base numerable y $x\in X$ entonces $\beta_x=\{B\in \cc{B} : x\in B\}$ es una b.d.e de $x$ numerable.
         \item Si $\{V_n\}_{n\in \bb{N}}$ es una b.d.e de $x\in X$, entonces definiendo $W_n=\bigcap\limits_{k=1}^n V_k$, tenemos que $\{W_n : n\in \bb{N}\}$ es b.d.e de $x$ y $W_1 \supset W_2 \supset W_3 \supset \dots$. Es decir, para todo espacio 1AN podemos encontrar una base de entornos numerable y encajada.
         \item Las propiedades 1AN y 2AN son propiedades hereditarias.
         \begin{proof}\
@@ -1403,7 +1403,7 @@
         \item $(X, \cc{T}_{CF})$, si $X$ es numerable entonces tiene una cantidad numerable de subconjuntos finitos por lo que con esta condición, $\cc{T}_{CF}$ es numerable y por tanto 2AN (luego también 1AN). Si $X$ no es nuerable, entonces no es 1AN (luego tampoco 2AN).
         
         \begin{proof}
-            Veamos que si $X$ no es numerable entonces no es 1AN. Hagámoslo por reducción al absurdo. Supongamos $x \in X$, $\cc{B}_x=\{V_n\}_{n\in \bb{N}}$ b.d.e. de $x$. Entonces podemos escribir $V_n = X \setminus C_n$ con $C_n$ finito. Entonces $C=\bigcup\limits_{n\in \bb{N}}C_n$ es numerable y además $C\subset X$. Por tanto, $X\setminus C$ no es vacío y además tiene infinitos elementos por lo que puedo tomar un $y\in X\setminus C$ con $y\neq x$ y consideramos $X\setminus\{y\}$ que es abierto en $\cc{T}_{CF}$. Como $\{V_n\}_{n\in \bb{N}}$ es b.d.e. de $x$, entonces existe un $n\in \bb{N}$ con $x\in V_n\subset X\setminus \{y\}\Rightarrow \{y\}\subset C_n$ y llegammos a contradicción (ya que $V_n = X\setminus C_n$).
+            Veamos que si $X$ no es numerable entonces no es 1AN. Hagámoslo por reducción al absurdo. Supongamos $x \in X$, $\beta_x=\{V_n\}_{n\in \bb{N}}$ b.d.e. de $x$. Entonces podemos escribir $V_n = X \setminus C_n$ con $C_n$ finito. Entonces $C=\bigcup\limits_{n\in \bb{N}}C_n$ es numerable y además $C\subset X$. Por tanto, $X\setminus C$ no es vacío y además tiene infinitos elementos por lo que puedo tomar un $y\in X\setminus C$ con $y\neq x$ y consideramos $X\setminus\{y\}$ que es abierto en $\cc{T}_{CF}$. Como $\{V_n\}_{n\in \bb{N}}$ es b.d.e. de $x$, entonces existe un $n\in \bb{N}$ con $x\in V_n\subset X\setminus \{y\}\Rightarrow \{y\}\subset C_n$ y llegammos a contradicción (ya que $V_n = X\setminus C_n$).
         \end{proof}
         \item si $X$ no es numerable, entonces $(X, \cc{T}_{CF})$ no es 1AN (misma demostración que el apartado anterior pero con finito en lugar de numerable) y por tanto tampoco es 2AN.
         
@@ -1415,8 +1415,8 @@
 \begin{ejemplo}
     $(\bb{R}, \cc{T}_S)$ la topología de Sorgenfrey
     \begin{itemize}
-        \item Es 1AN: $x\in \bb{R}$, $\cc{B}_x = \{[x, x+\frac{1}{n}): n\in \bb{N}\}$ es b.d.e. de $x$.
-        \item No es 2AN: para verlo tomo $\cc{B}$ base de $\cc{T}_S$. $\forall x \in \bb{R}$, $[x, x+1)\in \cc{T}_S$ y $x\in [x, x+1)$. Como $\cc{B}$ es base, entonces $\exists B_x \in \cc{B}$ con $x \in B_x \subset [x, x+1)$ y entonces $x$ es el mínimo de $\cc{B}_x$. Esto quiere decir que $B_x\neq B_y$ para todo $x\neq y$. Entonces la familia $\{B_x : x\in \bb{R}\}\subset \cc{B}$ no es numerable por lo que $\cc{B}$ no es numerable.
+        \item Es 1AN: $x\in \bb{R}$, $\beta_x = \{[x, x+\frac{1}{n}): n\in \bb{N}\}$ es b.d.e. de $x$.
+        \item No es 2AN: para verlo tomo $\cc{B}$ base de $\cc{T}_S$. $\forall x \in \bb{R}$, $[x, x+1)\in \cc{T}_S$ y $x\in [x, x+1)$. Como $\cc{B}$ es base, entonces $\exists B_x \in \cc{B}$ con $x \in B_x \subset [x, x+1)$ y entonces $x$ es el mínimo de $\beta_x$. Esto quiere decir que $B_x\neq B_y$ para todo $x\neq y$. Entonces la familia $\{B_x : x\in \bb{R}\}\subset \cc{B}$ no es numerable por lo que $\cc{B}$ no es numerable.
     \end{itemize}
 \end{ejemplo}
 
