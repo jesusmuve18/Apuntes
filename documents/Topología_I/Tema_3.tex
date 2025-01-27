@@ -222,7 +222,7 @@ Una primera intuición nos puede decir que un conjunto es conexo si todos sus pu
 \end{coro}
 
 \begin{teo}
-    (Teorema de Borsuk-Ulam) Si $f:(\bb{S}^n, \cc{T}_u)\to (\bb{R}, \cc{T}_u)$ continua, entonces $\exists p_0\in \bb{S}^n$ tal que $f(p_0)=p(-p_0)$.
+    (Teorema de Borsuk-Ulam) Si $f:(\bb{S}^n, \cc{T}_u)\to (\bb{R}, \cc{T}_u)$ continua, entonces $\exists p_0\in \bb{S}^n$ tal que $f(p_0)=f(-p_0)$.
     \begin{proof}
         Sea $h:\bb{S}^n \to \bb{R}$ dada por $h(p)=f(p)-f(-p)$ que es continua por serlo $f$. Se tiene que $h(-p)=f(-p)-f(p)=-h(p) \Rightarrow h\equiv 0$ o $h$ toma valores negativos y negativos. En este segundo caso tendremos que $\exists p_0 \in \bb{S}^n$ tal que $h(p_0)=0=f(p_0)-f(-p_0)$ y lo tenemos en cualquiera de los dos casos.
 
@@ -259,7 +259,7 @@ Una primera intuición nos puede decir que un conjunto es conexo si todos sus pu
             \begin{align*}
                 X\times Y = \left(\bigcup\limits_{x\in X}\{x\}\times Y\right) \cup \left(X \times \{y_0\}\right)
             \end{align*}
-            Por lo que $X\times Y$ es unión de conexos y $(X, \{y_0\})$ tiene intersección con todos los $\{x\}\times Y$ luego $X\times Y$ es conexo.
+            Por lo que $X\times Y$ es unión de conexos y $(X \times \{y_0\})$ tiene intersección con todos los $\{x\}\times Y$ luego $X\times Y$ es conexo.
 
         \end{itemize}
     \end{proof}
@@ -286,19 +286,19 @@ Una primera intuición nos puede decir que un conjunto es conexo si todos sus pu
     Sea $(X, \cc{T})$ un e.t, $x\in X$. Entonces
     \begin{enumerate}
         \item[(i)] $\cc{C}(x)$ es el mayor conexo en $X$ que contiene a $x$.
-        \item[(ii)] Las c.c. de $(X, \cc{T})$ determinan una partición de $X$, es decir que $\bigcup\limits_{x\in X}\bb{C}(x)=X$ y $\forall x,y\in X$ se tiene que o bien $\bb{C}(x)=\bb{C}(y)$ o bien $\bb{C}(x)\cap \bb{C}(y)=\emptyset$.
-        \item[(iii)] $(X, \cc{T})$ es conexo si y solo sí tiene una única c.c., es decir, $\bb{C}(x)=X$\ \ $\forall x \in X$.
+        \item[(ii)] Las c.c. de $(X, \cc{T})$ determinan una partición de $X$, es decir que $\bigcup\limits_{x\in X}\cc{C}(x)=X$ y $\forall x,y\in X$ se tiene que o bien $\cc{C}(x)=\cc{C}(y)$ o bien $\cc{C}(x)\cap \cc{C}(y)=\emptyset$.
+        \item[(iii)] $(X, \cc{T})$ es conexo si y solo sí tiene una única c.c., es decir, $\cc{C}(x)=X$\ \ $\forall x \in X$.
         \item[(iv)] Las c.c. de $(X, \cc{T})$ son cerrados en $(X, \cc{T})$ (en general no serán abiertos).
         \item[(v)] Si $\emptyset \neq A \subset X$ es abierto cerrado y conexo, es decir, $A\in (\cc{T}\cap \cc{C}_{\cc{T}})$ y conexo, entonces $A$ es una c.c. de $(X, \cc{T})$ (la otra implicación no es cierta en general, en concreto que $A$ sea abierto). 
-        \item[(vi)] Si $\{A_i\}_{i\in I}\subset \cc{T}$, $A_i$ conexo $\forall i \in I$, es una partición de $X$ , es decir, $\bigcup\limits_{i\in I}A_i=X$ y $A_i\cap A_j=\emptyset$\ \ $\forall i \neq j$, entonces $\{A_i\}_{i\in I}$ con las c.c. de $(X, \cc{T})$ (de nuevo la otra implicación no es cierta ya que no siempre la partición tiene que ser por abiertos).
+        \item[(vi)] Si $\{A_i\}_{i\in I}\subset \cc{T}$, $A_i$ conexo $\forall i \in I$, es una partición de $X$ , es decir, $\bigcup\limits_{i\in I}A_i=X$ y $A_i\cap A_j=\emptyset$\ \ $\forall i \neq j$, entonces $\{A_i\}_{i\in I}$ son las c.c. de $(X, \cc{T})$ (de nuevo la otra implicación no es cierta ya que no siempre la partición tiene que ser por abiertos).
     \end{enumerate}
     \begin{proof}\
         \begin{enumerate}
             \item[(i)] Trivial, porque la unión de conexos con intersección no vacía es conexa.
-            \item[(ii)] Como $x\in \bb{C}(x) \Rightarrow \bigcup\limits_{x\in X}\bb{C}(x)=X$. Veamos ahora la segunda parte. Para ello supongamos que tenemos dos componentes conexas de forma que $C(x)\cap C(y)\neq \emptyset $, tendré que ver que entonces $\bb{C}(x)=\bb(C)(y)$. Como la intersección es no vacía tengo que $x,y,\in C(x)\cup C(y)$ y es conexo por lo que $\bb{C}(x)\cup \bb{C}(y)\subset \bb{C}(x)$ y también $\bb{C}(x)\cup \bb{C}(y)\subset \bb{C}(y)$ por lo que $\bb{C}(x)\cup \bb{C}(y)\subset \bb{C}(x)\cap \bb{C}(y)$ y por tanto $\bb{C}(x)=\bb{C}(y)$.
+            \item[(ii)] Como $x\in \cc{C}(x) \Rightarrow \bigcup\limits_{x\in X}\cc{C}(x)=X$. Veamos ahora la segunda parte. Para ello supongamos que tenemos dos componentes conexas de forma que $\cc{C}(x)\cap \cc{C}(y)\neq \emptyset $, tendré que ver que entonces $\cc{C}(x)=\cc{C}(y)$. Como la intersección es no vacía tengo que $x,y,\in \cc{C}(x)\cup \cc{C}(y)$ y es conexo por lo que $\cc{C}(x)\cup \cc{C}(y)\subset \cc{C}(x)$ y también $\cc{C}(x)\cup \cc{C}(y)\subset \cc{C}(y)$ por lo que $\cc{C}(x)\cup \cc{C}(y)\subset \cc{C}(x)\cap \cc{C}(y)$ y por tanto $\cc{C}(x)=\cc{C}(y)$.
             \item[(iii)] Trivial.
-            \item[(iv)] Sea $x\in X$ y queremos ver que $\bb{C}$ es cerrado, es decir, que coincide con su adherencia. Para ello sabemos que $\overline{\bb{C}(x)}$ es conexo y además $x\in \overline{\bb{C}(x)}$ por lo que $\overline{\bb{C}(x)}\subset \bb{C}(x)$ y como la otra inclusión se da siempre ya lo tenemos probado.
-            \item[(v)] Sea $x\in A$, tendremos que ver que $A=\bb{C}(x)$. Sea $B\subset X$ conexo con $A\subset B$. Si esto implica que $A=B$ entonces tendré que $A$ es una componente conexa (ya que no hay ningún conexo más grande). Para ello tenemos que 
+            \item[(iv)] Sea $x\in X$ y queremos ver que $\cc{C}$ es cerrado, es decir, que coincide con su adherencia. Para ello sabemos que $\overline{\cc{C}(x)}$ es conexo y además $x\in \overline{\cc{C}(x)}$ por lo que $\overline{\cc{C}(x)}\subset \cc{C}(x)$ y como la otra inclusión se da siempre ya lo tenemos probado.
+            \item[(v)] Sea $x\in A$, tendremos que ver que $A=\cc{C}(x)$. Sea $B\subset X$ conexo con $A\subset B$. Si esto implica que $A=B$ entonces tendré que $A$ es una componente conexa (ya que no hay ningún conexo más grande). Para ello tenemos que 
             \begin{align*}
                 \left.
                 \begin{array}{ccc}
@@ -328,7 +328,7 @@ Una primera intuición nos puede decir que un conjunto es conexo si todos sus pu
 \begin{ejemplo}\
     \begin{itemize}
         \item $(X, \cc{T}_{disc})$ las c.c. son $\{\{x\}:x\in X\}$ (abierto, cerrado, conexo y no vacío).
-        \item Si $x_1<x_2<\dots<x_n \in \bb{R}$, las c.c. de $(\bb{R}\setminus \{x_1,x_2,\dots,x_n, \cc{T}_u\})$ son 
+        \item Si $x_1<x_2<\dots<x_n \in \bb{R}$, las c.c. de $(\bb{R}\setminus \{x_1,x_2,\dots,x_n\}, \cc{T}_u)$ son 
         \begin{align*}
         \{(-\infty, x_1), (x_n, +\infty)\}\cup\{(x_i, x_i+1):i=1,2,\dots,n-1\}
         \end{align*}
@@ -423,7 +423,7 @@ Intuitivamente podemos entender la arcoconexión como que existe una línea (cam
 \section{Compacidad}
 
 \begin{definicion}
-    Seann $X\neq \emptyset$ un conjunto y $S\subset X$ un subconjunto. Se llama \textbf{recubrimiento} de $S$ es una familia $\cc{A}=\{U_i\}_{i\in I}$ de subconjuntos de $X$ tal que $S\subset \bigcup\limits_{i\in I}U_i$.
+    Sean $X\neq \emptyset$ un conjunto y $S\subset X$ un subconjunto. Se llama \textbf{recubrimiento} de $S$ es una familia $\cc{A}=\{U_i\}_{i\in I}$ de subconjuntos de $X$ tal que $S\subset \bigcup\limits_{i\in I}U_i$.
 
     Un \textbf{subrecubrimiento} $\cc{A}'$ de $\cc{A}$ es un recubrimiento de $S$ con $\cc{A}'\subset\cc{A}$.
     \endsquare
@@ -467,7 +467,7 @@ Intuitivamente podemos entender la arcoconexión como que existe una línea (cam
 \end{ejemplo}
 
 \begin{definicion}
-    Sea $(X, \cc{T})$ un e.t. y $S\subset X$. DEcimos que $S$ es \textbf{compacto} en $(X, \cc{T})$ si $(S, \cc{T}|_S)$ es compacto.
+    Sea $(X, \cc{T})$ un e.t. y $S\subset X$. Decimos que $S$ es \textbf{compacto} en $(X, \cc{T})$ si $(S, \cc{T}|_S)$ es compacto.
     \endsquare
 \end{definicion}
 
@@ -648,7 +648,7 @@ Intuitivamente podemos entender la arcoconexión como que existe una línea (cam
 \end{coro}
 
 \begin{teo}
-    (Teorema de Heine-Borel generalizado) Un subespacio de $(\bb{R}^n, \cc{T}_u)$ es compacto si y solo si es cerrado y acotado.ç
+    (Teorema de Heine-Borel generalizado) Un subespacio de $(\bb{R}^n, \cc{T}_u)$ es compacto si y solo si es cerrado y acotado.
     \begin{proof}\
         \begin{itemize}
             \item[$\Rightarrow$ )] Es corolario de un resultado anterior.
