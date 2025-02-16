@@ -1,0 +1,79 @@
+\documentclass[12pt]{article}
+
+\input{../../../_assets/preambulo.tex}
+\input{../../../_assets/portada.tex}
+\usepackage{ wasysym }
+
+\begin{document}
+
+\portada[%
+        titulo=Fundamentos de Bases de Datos,
+        subtitulo=Ejercicio 7 (AR-II) y Ejercicio 3.7 (SQL),
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2024-2025]
+
+\setcounter{ejercicio}{6}
+
+\begin{ejercicio}(AR-II)
+    Encontrar los códigos de los proyectos que usan una pieza que vende S1.
+    \begin{align*}
+        \pi_{codpj}(\sigma_{codpro=S1}(ventas))
+    \end{align*}
+\end{ejercicio}
+
+\setcounter{ejercicio}{2}
+\begin{ejercicio}\hspace{-0.15cm}\textbf{7.}(SQL) Resolver la consulta del ejemplo 3.8 utilizando el operador $\cap$.
+    \endsquare
+Recordemos que el ejemplo 3.8 era el siguiente:
+
+Ciudades donde viven proveedores con status mayor 
+de 2 en las que no se fabrica la pieza 'P1'.
+
+
+\begin{minted}{sql}
+(SELECT DISTINCT ciudad
+FROM proveedor
+WHERE status>2)
+MINUS
+(SELECT DISTINCT ciudad
+FROM pieza
+WHERE codpie='P1');
+\end{minted}
+La solución propuesta inicialmente utlizando la intersección es la siguiente:
+\begin{minted}{sql}
+SELECT DISTINCT ciudad
+FROM proveedor
+WHERE status > 2
+AND ciudad NOT IN (
+    SELECT DISTINCT ciudad
+    FROM proveedor
+    WHERE status > 2
+    INTERSECT
+    SELECT DISTINCT ciudad
+    FROM pieza
+    WHERE codpie = 'P1'
+);
+\end{minted}
+En clase se trabajaron dos soluciones alternativas adicionales, l aprimera con el producto cartesiano y una segunda que evita incluso el uso de la intersección:
+\begin{minted}{sql}
+--Segunda opcion
+(SELECT DISTINCT proveedor.ciudad
+FROM proveedor
+WHERE proveedor.status>2
+INTERSECT
+SELECT proveedor.ciudad
+FROM proveedor, pieza
+WHERE pieza.codpie='P1' AND proveedor.ciudad!=pieza.ciudad);
+
+--Tercera opcion (sin usar intersect)
+SELECT proveedor.ciudad
+FROM proveedor, pieza
+WHERE pieza.codpie='P1' 
+    AND proveedor.ciudad!=pieza.ciudad 
+    AND proveedor.status>2;
+
+\end{minted}
+\end{ejercicio}
+    
+
+\end{document}

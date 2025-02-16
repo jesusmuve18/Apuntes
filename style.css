@@ -50,3 +50,7 @@ h1 {
     margin: 20px 0;
     color: #333;
 }
+#hidden{
+    visibility: hidden;
+    display: none;
+}
