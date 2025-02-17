@@ -1,0 +1,52 @@
+Profesora teoría: Lidia Fernández Rodríguez (email: lidiafr@ugr.es)
+Profesor prácticas: Juan Antonio Villegas Recio (email: jantoniovr@ugr.es)
+
+Profesor de prácticas no vuelve hasta Semana Santa.
+En principio se dará toda la teoría (excepto que se vea conveniente hacer alguna práctica)
+y cuando vuelva el profesor se darán las prácticas.
+
+Asignatura (6 créditos): 
+    - 75% teoría + problemas (4,5 créditos)
+    - 25% prácticas ordenador (1,5 créditos)
+
+Aula: C22
+
+Asistencia:
+    No hay control de asistencia
+    Aún así se pondran ejercicios en clase sin avisar que calificarán (el que esté en clase 
+    se beneficiará de ello) y en todo caso serán adicionales (se puede optar a la calificación máxima
+    sin realizar ningún ejercicio ni salir a la pizarra).
+    En las prácticas sí es obligatoria la asistencia.
+
+Material:
+    Se usará Prado donde se irán subiendo los apuntes (transparencias) en cuanto acaben los temas.
+    Hay apuntes escritos (no transparencias) que se darán al final del tema también.
+    Las relaciones de ejercicios se intentarán renovar (con ejercicios de exámenes de otros años).
+
+Prácticas:
+    0: Introducción al software de computación numérica
+    1: Resolución de Ecuaciones
+    2: Derivación e Integración Numérica
+    3: Resolución de PVI
+
+Bibliografía: Burden y Kinkaid (los más recomendados).
+
+Evaluación Continua:
+    Teoría (70%):
+        Test 1: 5%      Tema 1 y parte del 2    8 abril?
+        Prueba 1: 30%   Tema 1 y parte del 2    9 abril?
+        Test 2: 5%      Resto Tema 2 y Tema 3   27 mayo?
+        Prueba 2: 30%   Resto Tema 2 y Tema 3   28 mayo?
+    Prácticas (30%):
+        Control 1: 10%  Sesiones 1 y 2          ?
+        Control 2: 10%  Sesiones 3 y 4          ?
+        Control 3: 10%  Sesiones 5 y 6          26 de mayo?
+
+No se puede optar a evaluación ordinaria (si se suspende la evaluación continua)
+y se irá directamente a evaluación extraordinaria (salvo evaluación única final).
+
+No hay mínimo para hacer media (ni en teoría ni en prácticas)
+para aprobar se necesita que la suma total de teoría y prácticas sea superior a 5 puntos.
+
+Se puede conservar una parte para la extraordinaria (o teoría o prácticas).
+No se puede guardar la mitad de alguna parte, solo completa (teoría o prácticas enteras).
