@@ -1,0 +1,39 @@
+Profesora: Aurora Inés del Río 
+
+Email: adelrio@ugr.es
+
+Horario Tutorías:
+    Martes: 16:00-18:30
+    Miércoles: 10:00-12:00 y 16:00-17:30
+
+Contenido: 8 temas
+
+Bibliografías: Dummit, Jacobson, Lang (los más recomendados), Jesús García Miranda
+
+Evaluación: 
+    Opción 1:
+        Pruebas Intermedias + Ejercicios de clase: 40% (+5% adicional ejercicios)
+            Prueba 1: Temas 1 y 2 (19 de Marzo): 20%
+            Prueba 2: Temas 3 y 4 (30 de Abril): 20%
+        Examen Final: 60%
+    Opción 2:
+        Examen Final: 100%
+
+Se elegirá la opción más ventajosa, es decir,
+
+Nota final = max{0.4*(Pruebas_intermedias + Ejercicios_clase)+0.6*Examen_Final , Examen_Final}
+
+Para hacer media habrá que sacar como mínimo un 3 en el examen final
+
+Las pruebas intermedias tendrán la siguiente estructura:
+    - Cuestionario de 10 preguntas
+    - 1 o 2 Ejercicios
+
+Examen final: (contenido de todos los temas) (18 de Junio)
+    - Cuestionario
+    - Ejercicios
+    - Preguntas de teoría
+
+La asistencia no es obligatoria
+No le importa que lleguemos tarde (pero no preguntar)
+Si alguien se tiene que ir antes que avise
