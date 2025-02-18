@@ -1,1 +1,126 @@
-\chapter{Tema 1}
+\chapter{Tema 1: Combinatoria y Teoría Elemental de Grafos}
+
+% Permutaciones Variaciones y Combinaciones
+
+\section{Definiciones}
+
+\begin{definicion}
+    Una \textbf{permutación} de un conjunto $X$ es una aplicación biyectiva $f:X\to X$.\\
+
+    El conjunto de todas las permutaciones de un conjunto X se denota $Perm(X)$. En particular, si $X = \{1,2,\dots,n\}$ el conjunto de permutaciones se representa por $S_n$ y su cardinal es $n!$. (importa el orden)
+\end{definicion}
+
+\begin{definicion}
+    Se llaman \textbf{variaciones sin repetición} de $n$ elementos, tomados de $m$ en $m$ a cada una de las posibles elecciones ordenadas de $m$ elementos distintos, dentro de un conjunto de $n$ elementos. (también importa el orden)
+    \begin{align*}
+        V_n^m = \frac{n!}{(n-m)!}
+    \end{align*}
+\end{definicion}
+
+\begin{definicion}
+    Se llaman variaciones con repetición de $n$ elementos, tomados de $m$ en $m$ ...
+\end{definicion}
+
+En ambos casos, dos posibles elecciones se diferencian, bien en la naturaleza de los elementos elegidos, bien en el orden en el que se han elegido.
+
+\begin{definicion}
+    Una combinación sin repetición de $n$ elementos tomados de $m$ en $m$, con $1\leq m \leq n$, es cada uno de los posibles subjconjuntos de $m$ elementos distintos dentro de un conjunto de $n$ elementos. (no importa el orden).
+\end{definicion}
+
+El número de combinaciones sin repetición de $n$ elementos tomados de $m$ a $m$, 
+
+\begin{definicion}
+    Una combinación con repetición de $n$ elementos tomados de $m$ a $m$, $1\leq m \leq n$,  es cada una de las posibles agrupaciones de $m$ elementos (no necesariamente distintos).
+\end{definicion}
+
+En ambos casos se tiene por tanto que dos combinaciones son iguales si y solo si tienen los mismos elementos sin importar el orden.
+
+\begin{prop}
+    
+\end{prop}
+
+\begin{definicion}
+    Dado $\{a_1,a_2,\dots,a_m\}\subset \{1,2,\dots,n\}$, un ciclo de longitud $m$ es una permutación $\sigma \in S_n$ tal que
+    \begin{align*}
+        \left\{
+        \begin{array}{ll}
+            \sigma(a_i)= a_{i+1} & i=1,\dots,a_{m-1}\\
+            \sigma(a_m)=a_1\\
+            \sigma(a_j)=a_j & \forall a_j \notin\{a_1,a_2,\dots,a_m\}
+        \end{array}
+        \right.
+    \end{align*}
+    y lo representamos $\sigma = (a_1,a_2,\dots,a_m)$, pero también por $(a_2,\dots,a_m,a_1) = (a_3,\dots,a_1,a_2) = \dots = (a_m,a_1,\dots,a_{m-1})$. Hay $m$ formas distintas de representar un ciclo de longitud $m$.
+\end{definicion}
+
+\begin{ejemplo}\
+    En $S_3$, los ciclos de longitud 2 son $(12), (13), (23)$ y los de longitud 3 son $(123), (231), (312); (132), (321), (213)$. El número de ciclos de longitud 3, como importa el orden, hay $V_3^3 = P_3$, pero cada ciclo de longitud 3 se expresa de 3 maneras distintas, el número de ciclos es $\dfrac{V_3^3}{3} = 2$.
+
+    En general, el número de ciclos de longitud $m$ en $S_n = \dfrac{V_n^m}{m} $%$=\dbinom{m}{n}$ (revisar)
+\end{ejemplo}
+
+\section{Grafos. Introducción}
+
+\begin{definicion}
+    Un grafo $G$ es un par $(V,E)$, donde $V$ y $E$ son dos conjuntos, junto con una aplicación $\gamma_G:E \to \{\{u,v\} : u,v\in V\}$. $V$ es el conjunto de vértices, $E$ el conjunto de lados o aristas y $\gamma_G$ aplicación de incidencia.
+\end{definicion}
+
+\begin{ejemplo}
+    Puentes de Konigsberg
+\end{ejemplo}
+
+\begin{definicion}
+    Un grafo dirigido u orientado es un par $(V,E)$, donde $V$ y $E$ son conjuntos, junto con dos aplicaciones $s,t:E \to V$.
+\end{definicion}
+
+\begin{definicion}
+    Sea $G=(V,E)$ un grafo con aplicación de incidencia $\gamma_G$. Un subgrafo de $G$ es un nuevo grafo $G'=(V',E')$ donde $V'\subseteq V$, $E'\subseteq E$ y se verifica que $\gamma_{G'}(e) = \gamma_G(e)$ para cualquier $e\in E'$.
+\end{definicion}
+
+\begin{definicion}
+    Un subgrafo $G'$ se dice pleno si se verifica que $e\in E$ es tal que $\gamma(e)\subseteq(V')$ entonces $e \in E'$, es decir, si tiene todas las aristas de $G$ que unen vértices de $V'$.
+\end{definicion}
+
+\begin{definicion}
+    Un camino es una sucesión finita de lados con la propiedad de que cada lado acaba donde empieza el siguiente.\\
+
+    Un camino de longitud $n$ es una sucesión de lados $e_1,e_2,\dots,e_n$, junto con una sucesión de vértices $v_0,v_1,\dots,v_n$ tales que $\gamma_G(e_i) = \{v_{i-1}, v_i\}$.\\
+
+    Un camino puede ser:
+    \begin{itemize}
+        \item \textbf{Cerrado:} camino que empieza y acaba en el mismo vértice.
+    \end{itemize}
+\end{definicion}
+
+Sea $G$ un grafo, si existe un camino de $u$ a $v$, entonces existe un camino simple de $u$ a $v$.\\
+
+Sea $G$ un frafo y sean $u$ y $v$ dos vértices distintos. Si existen dos caminos simples distintos de $u$ a $v$, entonces hay un ciclo en $G$.\\
+
+En el conjunto de vértices de un frafo $G$ se puede establecer la siguiente relación binaria $R$ (que es de equivalencia)
+
+\begin{align*}
+    u,v\in V, uRv \sii \text{existe un camino de $u$ a $v$}
+\end{align*}
+
+Un grafo se dice conexo si todo par de vértices están relacionados por la relación anterior, es decir, están conectados por un camino. El conjunto cociente $V/R$ es unitario.\\
+
+Sea $G$ un grafo cuyo conjunto de vértices es $V=\{v_1,v_2,\dots,v_n\}$. Se define su matriz de adyaciencia como la matriz $A\in M_n(\bb{N})$ cuyo coeficiente $a_{ij}$ es el número de aristas que unen $v_i$ con $v_j$.
+
+\begin{propiedades}
+    Para un grafo sin lazos y no dirigido se verifica que:
+    \begin{itemize}
+        \item los elementos de la diagonal principal son todos 0
+        \item es simétrica
+        \item la matriz de adyaciencia no es única, depende de la ordenación de los vértices (se pasa de una a otra mediante una permutación, matriz invertuble con un 1 por fila y los demás ceros)
+        \item toda matriz cuadrada con coeficientes en $\bb{N}$ es la matriz de adyacencia de algún grafo
+        \item %TODO
+    \end{itemize}
+\end{propiedades}
+
+\begin{teo}
+    Sea $G$ un grafo y $A$ su matriz de adyacencia. En la posición $ij$ de la matriz $A^k$ aparece el número de caminos de longitud $k$ que unen $v_i$ y $v_j$.\\
+
+    Se demuestra por inducción sobre $n$.
+\end{teo}
+
+
