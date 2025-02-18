@@ -102,16 +102,20 @@ En el conjunto de vértices de un frafo $G$ se puede establecer la siguiente rel
     u,v\in V, uRv \sii \text{existe un camino de $u$ a $v$}
 \end{align*}
 
-Un grafo se dice conexo si todo par de vértices están relacionados por la relación anterior, es decir, están conectados por un camino. El conjunto cociente $V/R$ es unitario.\\
+\begin{definicion}
+    Un grafo se dice conexo si todo par de vértices están relacionados por la relación anterior, es decir, están conectados por un camino. El conjunto cociente $V/R$ es unitario.
+\end{definicion}
 
-Sea $G$ un grafo cuyo conjunto de vértices es $V=\{v_1,v_2,\dots,v_n\}$. Se define su matriz de adyaciencia como la matriz $A\in M_n(\bb{N})$ cuyo coeficiente $a_{ij}$ es el número de aristas que unen $v_i$ con $v_j$.
+\begin{definicion}
+    Sea $G$ un grafo cuyo conjunto de vértices es $V=\{v_1,v_2,\dots,v_n\}$. Se define su matriz de adyacencia como la matriz $A\in M_n(\bb{N})$ cuyo coeficiente $a_{ij}$ es el número de aristas que unen $v_i$ con $v_j$.
+\end{definicion}
 
 \begin{propiedades}
     Para un grafo sin lazos y no dirigido se verifica que:
     \begin{itemize}
         \item los elementos de la diagonal principal son todos 0
         \item es simétrica
-        \item la matriz de adyaciencia no es única, depende de la ordenación de los vértices (se pasa de una a otra mediante una permutación, matriz invertuble con un 1 por fila y los demás ceros)
+        \item la matriz de adyacencia no es única, depende de la ordenación de los vértices (se pasa de una a otra mediante una permutación, matriz invertuble con un 1 por fila y los demás ceros)
         \item toda matriz cuadrada con coeficientes en $\bb{N}$ es la matriz de adyacencia de algún grafo
         \item %TODO
     \end{itemize}
@@ -122,5 +126,16 @@ Sea $G$ un grafo cuyo conjunto de vértices es $V=\{v_1,v_2,\dots,v_n\}$. Se def
 
     Se demuestra por inducción sobre $n$.
 \end{teo}
+
+\begin{definicion}
+    Sea $G$ un grafo cuyo conjunto de vértices es $V=\{v_1,v_2,\dots,v_n\}$. Se define su \textbf{matriz de incidencia} como la matriz $A\in M_{n\times m}(\bb{N})$ cuyo coeficiente $a_{ij}$ vale $1$ si $v_i\in \gamma_G(e_j)$ y $0$ en otro caso. 
+\end{definicion}
+
+\begin{propiedades}\
+    \begin{itemize}
+        \item La matriz de incidencia no es única, depende de la ordenación de los vértices.
+        \item Si un grafo %TODO
+    \end{itemize}
+\end{propiedades}
 
 
