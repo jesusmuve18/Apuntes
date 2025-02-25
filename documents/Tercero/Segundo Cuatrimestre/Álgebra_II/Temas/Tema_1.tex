@@ -89,6 +89,8 @@ En ambos casos se tiene por tanto que dos combinaciones son iguales si y solo si
     Un camino puede ser:
     \begin{itemize}
         \item \textbf{Cerrado:} camino que empieza y acaba en el mismo vértice.
+        \item \textbf{Recorrido:} camino sin lados repetidos.
+        \item \textbf{Simple:}
     \end{itemize}
 \end{definicion}
 
@@ -134,8 +136,171 @@ En el conjunto de vértices de un frafo $G$ se puede establecer la siguiente rel
 \begin{propiedades}\
     \begin{itemize}
         \item La matriz de incidencia no es única, depende de la ordenación de los vértices.
-        \item Si un grafo %TODO
+        \item Si un grafo tiene lados paralelos %TODO
     \end{itemize}
 \end{propiedades}
 
+\begin{ejemplo}
+    Supongamos que tenemos la siguiente matriz de adyacencia:
+    \begin{align*}
+        \begin{pmatrix}
+            0 & 1 & 0 & 1 & 1\\
+            1 & 0 & 1 & 1 & 1\\
+            0 & 1 & 0 & 0 & 0\\
+            1 & 1 & 0 & 0 & 0\\
+            1 & 1 & 0 & 0 & 0\\
+        \end{pmatrix}
+    \end{align*}
+    Entonces el grafo asociado será: 
+    %TODO
+
+\end{ejemplo}
+
+\begin{ejemplo}
+    Supongamos que tenemos la siguiente matriz de adyacencia:
+    \begin{align*}
+        \begin{pmatrix}
+            0 & 1 & 1 & 1 \\
+            1 & 0 & 0 & 0 \\
+            1 & 0 & 0 & 1 \\
+            1 & 0 & 1 & 0 \\
+        \end{pmatrix}
+    \end{align*}
+    Entonces el grafo asociado será: 
+    %TODO
+    \begin{center}
+        \begin{tikzpicture}
+            \node at (0,0) {$v_4$};
+            \node at (2,0) {$v_3$};
+            \node at (0,2) {$v_1$};
+            \node at (2,2) {$v_2$};
+
+            \draw (0.25, 0.25) -- (1.75, 0.25);
+            \draw (0.25, 0.25) -- (0.25, 1.75);
+            \draw (0.25, 1.75) -- (1.75, 1.75);
+            \draw (0.25, 1.75) -- (1.75, 0.25);
+        \end{tikzpicture}
+    \end{center}
+
+\end{ejemplo}
+
+\begin{definicion}
+    Dos grafos $G$ y $G'$ se dice que son isomorfos si existen dos biyecciones $h_V:V\to V'$, $h_E: E \to E'$ tales que para cada lado $e\in E$ se verifica que $\gamma_G'(h_E(e)) = \{\}$
+\end{definicion}
+
+\begin{definicion}
+    Una propiedad se dice invariante por isomorfismo si dados dos grafos isomorfos $G$ y $G'$, uno satisface la propiedad si y solo si lo satisface el otro. Los dos primeros invariantes son el número de vértices y el número de lados.
+\end{definicion}
+
+\begin{definicion}
+    Sea $G$ un grafo y $v$ un vértice de $G$ se define el grado de $v$, y lo denotaremos por $gr(v)$, como el número de lados que son incidentes en $v$. Denotaremos mediante $D_k(G)$ al número de vértices de $V$ de grado $k$. A la sucesión $D_0(G), D_1(G),\dots,D_k(G),\dots$ la llamaremos sucesión de grados del grafo.
+\end{definicion}
+
+\begin{observacion}
+    El grado de un vértice es un invariante por isomorfismos, esto es, $gr(v)=gr(h_V(v))$.
+\end{observacion}
+
+\begin{observacion}
+    Las sucesiones de grados de dos grafos isomorfos son iguales.
+\end{observacion}
+
+\begin{propiedades}\
+    \begin{itemize}
+        \item La relación entre grados y lados la podemos expresar como
+        \begin{align*}
+            \sum\limits_i gr(v_i) = 2 \cdot l
+        \end{align*}
+        con $l=|E|$ el número de lados.
+    
+        \item En un grafo, el número de vértices de grado impar es par.
+    \end{itemize}
+\end{propiedades}
+
+\begin{definicion}
+    Un grafo se dice que es regular si todos los vértices tienen el mismo grado.
+\end{definicion}
+
+\begin{ejercicio}(Ejercicio 5 de la relación)\
+    \begin{center}
+        \begin{tikzpicture}
+            \node at (1.5,3) {$A$};
+            \node at (0,0) {$C$};
+            \node at (3,0) {$D$};
+            \node at (0,2) {$B$};
+            \node at (3,2) {$E$};
+
+            \draw (0.25, 0.25) -- (2.75, 0.25);
+            \draw (0.25, 0.25) -- (0.25, 1.75);
+            \draw (0.25, 1.75) -- (2.75, 1.75);
+            \draw (0.25, 1.75) -- (2.75, 0.25);
+            \draw (2.75, 1.75) -- (2.75, 0.25);
+            \draw (0.25, 1.75) -- (2.75, 1.75);
+            \draw (2.75, 1.75) -- (1.5, 2.75);
+            \draw (0.25, 0.25) -- (2.75, 1.75);
+            \draw (0.25, 1.75) -- (1.5, 2.75);
+        \end{tikzpicture}
+    \end{center}
+\end{ejercicio} 
+
+\begin{definicion}
+    Se llama grafo completo de $n$ vértices y se denota $K_n$ al grafo (con $n$ vértices) que no tiene lados paralelos, y dados dos vértices hay un lado que los une. $|V|=n$; $|E| = \dfrac{1}{2}(n-1) \cdot n$.\\
+
+    Su matriz de adyacencia vale $0$ en la diagonal principal y $1$ en el resto (de forma que haya $n-1$ unos en cada fila).
+\end{definicion}
+
+\begin{definicion}
+    Sea $G=(V,E)$ un grafo. Se dice que $G$ es bipartido si podemos descomponer $V$ en dos subconjuntos disjuntos $V_1$ y $V2$ de manera que todo lado incide en un vértice de $V_1$ y en un vértice de $V_2$. $|V| = |V_1| + |V_2|$.
+\end{definicion}
+
+\begin{definicion}
+    Un grafo $G=(V,E)$ se dice bipartido completo si es bipartido y para cada $v_1\in V_1$ y $v_2\in V_2$ existe un único lado $e\in E$ tal que $\gamma(e)=\{v_1,v_2\}$. Se denotan mediante $K_{n,m}$, donde $n=|V_1|$ y $m=|V_2|$. En este cado, $|V| = m + n $ y $|E| = m \cdot n$.
+\end{definicion}
+
+\begin{definicion}
+    Un grafo $G=(V,E)$ se dice ciclo con $n$ vértices si cada vértice es incidente únicamente con los vértices anterior y posterior. $|V|=n$ y $|E|=n$. Se denota mediante $C_n$.
+\end{definicion}
+
+\begin{definicion}
+    Un grafo $G=(V,E)$ se dice rueda con $n$ vértices si cada vértice es incidente únicamente con los vértices anterior y posterior y con un tercer vértice central. $|V| = n+1$ y $|E|=2n$. Se denota mediante $W_n$.
+\end{definicion}
+
+\begin{definicion}
+    Sean $d_1,d_2,\dots,d_n\in \bb{N}$. Decimos que la sucesión $d_1,d_2,\dots,d_n$ es una sucesión gráfica si existe un grafo $G$ sin lazos, ni lados paralelos con $n$ vértices $\{v_1,v_2,\dots,v_n\}$ y tal que $gr(v_i)=d_i$. Diremos que $G$ es una realización de la sucesión $d_1,d_2,\dots,d_n$.
+\end{definicion}
+
+\begin{teo}(Havel-Hakini)\ 
+    
+    Sea $d_1,d_2,\dots,d_n$ una sucesión de números naturales ordenada $(d_1 \geq d_2 \geq \dots \geq d_n)$ y con $d_1 < n$. Entonces $d_1,d_2,\dots,d_n$ es una sucesión gráfica si y solo si $d_2-1, d_3-1,\dots,d_{d_1+1}-1,d_{d_1+2},\dots,d_n$ es una sucesión gráfica.
+\end{teo}
+
+\begin{definicion}
+    Un camino de Euler en un grafo G es un recorrido en el que aparecen todos los lados.
+\end{definicion}
+
+\begin{definicion}
+    Un circuito de Euler es un camino de Euler cerrado .
+\end{definicion}
+
+\begin{definicion}
+    Un grafo G es un grafo de Euler si es conexo y tiene un circuito de Euler.
+\end{definicion}
+
+\begin{teo}
+    Un grafo conexo es de Euler si y solo si todos sus vértices son de grado par.
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$)] Supongamos que $G$ es conexo y es de Euler. Sea $\alpha$ un circuito de Euler y para cada vez que pasamos por un vértice le estamos añadiendo un grado 2 al vértice. Como cada lado aparece una sola vez, entonces el grado es múltiplo de 2.
+            \item[$\Leftarrow$)] Se hace por inducción. Veamos qué ocurre para el caso $n=4$. Hagamos la siguiente partición:% PEDIR DIBUJO TODO A ALI
+            \begin{align*}
+                \sigma_1 = v_1 e_1 v_2 e_2 v_3 e_6 v_1\\
+                \sigma_2 = v_3 e_3 v_4 e_4 v_5 e_1 v_3\\
+                \sigma_3 = v_2 e_9 v_4 e_{10} v_1 e_3 v_3 v_2\\
+            \end{align*}
+            y hacemos el siguiente circuito, conectando los anteriores por $v_3$ y $v_4$:
+            \begin{align*}
+                \sigma = v_3 e_6 v_1 e_1 v_2 e_2 v_3 e_3 v_4 e_{10} v_1 e_5 v_5 e_8 v_2 e_9 v_4 e_4 v_5 e_7 v_3
+            \end{align*}
+        \end{itemize}
+    \end{proof}
+\end{teo}
 
