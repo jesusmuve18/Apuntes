@@ -1,0 +1,163 @@
+\chapter{Tema 2: Grupos. Definición, generalidades y ejemplos}
+
+\begin{definicion}
+    Sea $G$ un conjunto, una \textbf{operación binaria} en $G$ es una aplicación
+    \begin{align*}
+        \ast : G\times G &\to G\\
+        (a,b) & \mapsto a\ast b = a \cdot b = ab
+    \end{align*} 
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Suma y producto en $\bb{N}, \bb{Z}, \bb{R}$
+        \item Dado $X$ un conjunto, $\cc{P}(X)$, $\cup, \cap $ son operaciones binarias.
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{definicion}
+    Un \textbf{monoide} es un conjunto no vacío junto con una operación binaria verificando:
+    \begin{enumerate}
+        \item[i)] La propiedad asociativa: $(x\ast y) \ast z = x \ast (y \ast z)$
+        \item[ii)] Existencia de elemento neutro: $\exists e \in G$ tal que $e\ast x = x$ \ \ $\forall x \in G$
+    \end{enumerate}
+\end{definicion}
+
+\begin{lema}
+    En un monoide el neutro es único.
+\end{lema}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item $(\bb{N},+,0)$, $(\bb{N},\times,1)$
+        \item $(\cc{P}(X), \cap, X)$, $(\cc{P}(X), \cup, \emptyset)$
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{definicion}
+    Un \textbf{grupo} es un conjunto no vacío junto con una operación binaria verificando:
+    \begin{enumerate}
+        \item[i)] La propiedad asociativa: $(x\ast y) \ast z = x \ast (y \ast z)$
+        \item[ii)] Existencia de elemento neutro: $\exists e \in G$ tal que $e\ast x = x$ \ \ $\forall x \in G$
+        \item[iii)] Existencia de elemento simétrico: $\forall x \in G$\ \ $\exists x'\in G$ tal que $x\ast x' = e$
+    \end{enumerate}
+    y si además se cumple que 
+    \begin{enumerate}
+        \item[iv)] Propiedad conmutativa: $x\ast y = y \ast x$\ \ $\forall x,y\in G$ 
+    \end{enumerate}
+    Entonces $G$ es un \textbf{grupo abeliano}.
+\end{definicion}
+
+\begin{observacion}\
+    \begin{enumerate}
+        \item $(G,\ast,e) \leadsto G$
+        \item Notación multiplicativa: 
+        \begin{itemize}
+            \item $x\ast y = xy$
+            \item Neutro $\leadsto 1$
+            \item simétrico $\leadsto$ inverso $x^{-1}$
+        \end{itemize}
+        \item Notación aditiva: 
+        \begin{itemize}
+            \item $x+ y$
+            \item Neutro $\leadsto 0$
+            \item simétrico $\leadsto$ opuesto $-x$
+        \end{itemize}
+    \end{enumerate}
+\end{observacion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item $\bb{Z}, \bb{Q}, \bb{R}, \bb{C}$ con la suma son grupos abelianos.
+        \item $\bb{Q}^*, \bb{R}^*, \bb{C}^*$ con el producto son grupos abelianos.
+        \item $\{1,-1,i,-i\}\subset \bb{C}$ con el producto es un grupo abeliano.
+        \item $(\cc{M}_2(\bb{R}), +)$ es un grupo abeliano
+        \item $GL_2(\bb{R})$ el grupo lineal de orden $2$ con el producto es un grupo (pero no abeliano, ya que el producto de matrices no es conmutativo).
+        \begin{align*}
+            GL_2(\bb{R}) = \{A\in \cc{M}_2(\bb{R}) \text{ tal que }\det(A)\neq 0\}
+        \end{align*}
+        \item $\bb{Z}_n$ con la suma es un grupo abeliano.
+        \item $U(\bb{Z}_n)=\{\overline{a}\in \bb{Z}_n \text{ tal que } m.c.d(a,n)=1\}$ con la multiplicación (multiplicación de clases) es un grupo abeliano. Por ejemplo:        
+        \begin{align*}
+            U(\bb{Z}_4) = \{1,3\} \hspace*{1cm} 1\cdot 1 = 1 ,\ 3\cdot 3 = 1
+        \end{align*}
+        \item $n\geq 1$, $\mu_n=\{$raíces complejas de $x^n-1\} = \{\xi_k = \cos \frac{2k \pi}{n} + i \sen \frac{2k \pi}{n},\ k=0,\dots,n-1\}=\{1, \xi, \xi^2, \dots, \xi^{n-1}\text{ tal que } \xi=\cos \frac{2 \pi}{n} + i \sen \frac{2 \pi}{n}\}$ es un grupo abeliano con el producto.
+        \item $SL_2(\bb{K})=\{$matrices con $\det=1\}$ con $\bb{K}$ un cuerpo con el producto de matrices es un grupo.
+        \item $G$ y $H$ grupos, $G\times H$ es un grupo con $(x,y)\ast(x',y')=(xx',yy')$ y se llama \textbf{producto directo} de $G$ y $H$.
+        \item Sea $X$ un conjunto no vacío. Consideramos 
+        \begin{align*}
+            S(X)=\{f:X\to X \text{ biyectivas}\}
+        \end{align*}
+        el conjunto de las permutaciones de $X$. Con la composición es un grupo. Llamaremos a este grupo $S_n$ donde $n$ será el número de elementos de $X$, $X=\{1,2,\dots,n\}$.
+        \item Sean $G$ un grupo, $X$ un conjunto. Consideramos
+        \begin{align*}
+            Apl(X,G) = G^X = \{f:X \to G \text{ aplicaciones}\}
+        \end{align*}
+        podemos definir $(f\ast g)(x) = f(x)g(x)$. Si $f\in G^X$, tendremos que $f'(x)=(f(x))'$.\\
+
+        Si $X=\emptyset$, entonces $G^X=\{\emptyset\}$ y si $X=\{1,2\}$, entonces $G^X$ es isomorfo a $G\times G$.
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{lema}
+    Sea $G$ un grupo, entonces
+    \begin{enumerate}
+        \item[i)] $xx^{-1} = e$\ \ $\forall x \in G$.
+        \item[ii)] $x e = x$\ \ $\forall x \in G$.
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item[i)] $x^{-1}(x x^{-1}) = (x^{-1} x)x^{-1} = e x^{-1} = x^{-1}$
+            \item[ii)] $xe = x(x^{-1}x) = (x x^{-1})x = ex = x$ 
+        \end{enumerate}
+    \end{proof}
+\end{lema}
+
+\begin{lema}
+    En un grupo $G$, el neutro del grupo y el simétrico de cada elemento son únicos.
+    %TODO: demostración (suponiendo que hay 2)
+\end{lema}
+
+\begin{lema}
+    (Propiedad cancelativa). \
+    \begin{align*}
+        \forall x,y,z\in G \left\{
+        \begin{array}{l}
+            xy = xz \Rightarrow y=z\\
+            xy = zy \Rightarrow x=z
+        \end{array}
+        \right.
+    \end{align*}
+    \begin{proof}
+        Para el primer caso tenemos $y=ey=(x^{-1}x)y = x^{-1}(xy)=x^{-1}(xz)=(x^{-1}x)z = ez = z$. El segundo caso es análogo %TODO
+    \end{proof}
+\end{lema}
+
+\begin{lema}
+    Sea $G$ un grupo, entonces
+    \begin{enumerate}
+        \item[i)] $e^{-1} = e$
+        \item[ii)] $(x^{-1})^{-1}=x$\ \ $\forall x \in G$.
+        \item[iii)] $(xy)^{-1} = y^{-1}x^{-1}$\ \ $\forall x,y\in G$.
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item[i)] $ee=e$
+            \item[ii)] $xx^{-1=e} \Rightarrow (x^{-1})^{-1} = x$.
+            \item[iii)] $(y^{-1}x^{-1})(xy) = y^{-1}x^{-1}xy = y^{-1} e y = y^{-1}y = e$
+        \end{enumerate}
+    \end{proof}
+\end{lema}
+
+\begin{lema}
+    Sea $G$ un conjunto no vacío con una operación binaria asociativa. Entonces son equivalentes:
+    \begin{enumerate}
+        \item[i)] $G$ es un grupo.
+        \item[ii)] Para cada par de elementos $a,b\in G$, las ecuaciones $aX=b$, $Xa=b$ tienen solución en $G$, es decir, que $\exists c,d\in G$ de forma que $ac=b$ y $da=b$, en cuyo caso $c$ y $d$ son las soluciones de la ecuación. 
+    \end{enumerate}
+    \begin{proof}\
+        \begin{itemize}
+            \item[i) $\Rightarrow$ ii)] $aX=b \Rightarrow c=a^{-1}b$ y $Xa=b\Rightarrow d=ba^{-1}$.
+        \end{itemize}
+    \end{proof}
+\end{lema} 
