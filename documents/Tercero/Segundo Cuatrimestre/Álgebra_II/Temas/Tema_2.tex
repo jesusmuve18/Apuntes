@@ -157,7 +157,240 @@
     \end{enumerate}
     \begin{proof}\
         \begin{itemize}
-            \item[i) $\Rightarrow$ ii)] $aX=b \Rightarrow c=a^{-1}b$ y $Xa=b\Rightarrow d=ba^{-1}$.
+            \item[i) $\Rightarrow$ ii) )] $aX=b \Rightarrow c=a^{-1}b$ y $Xa=b\Rightarrow d=ba^{-1}$.
+            \item[ii) $\Rightarrow$ i) )] Sabemos que $aX=b$ tiene solución y la notamos por $e_a$. Consideramos también $\forall b\in G$, $Xa=b$ y tomamos $x$ tal que $xa=b$. Entonces $be_a = xae_a = xa = b \Rightarrow e_a \leadsto e$ es un neutro por la derecha. Por tanto tenemos que $aX=e \leadsto \exists a^{-1} \Rightarrow G$ es un grupo. 
         \end{itemize}
     \end{proof}
 \end{lema} 
+
+\begin{lema}
+    (Ley asociativa general)\\
+    Sea $G$ un grupo, $\forall x \in G$, $\forall m,n>0$ con $n>m>0$, entonces se tiene
+    \begin{align*}
+        \left(\prod\limits_{i=1}^m x_i\right)\left(\prod\limits_{i=m+1}^n x_i\right) = \prod\limits_{i=1}^n x_i
+    \end{align*}
+
+    % La demostración se hace por inducción
+\end{lema}
+
+\begin{definicion}
+    Potencia
+    \begin{align*}
+        x^n = \left\{
+        \begin{array}{ll}
+            x^n & n>0\\
+            e & n=0\\
+            (x^{-1})^{-n} & n<0
+        \end{array}
+        \right.\hspace{2cm} x^{n+m}=x^n \cdot x^m
+    \end{align*}
+\end{definicion}
+
+\begin{definicion}
+    Sea $G$ un grupo, si $G$ tiene un número finito de elementos, entonces se llama \textbf{grupo finito} y a ese número de elementos se le llama orden del grupo y lo notaremos por $|G|$.
+\end{definicion}
+
+\begin{definicion}
+    (Tabla de Cayley)\\
+    En un grupo finito $G=\{x_1=1, x_2, \dots, x_n\}$  se llama \textbf{tabla de Cayley} (o tabla de multiplicar) a la matriz $n\times n$ cuya entrada $(i,j)$ es $x_ix_j$.
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $G=\{0,1\}$
+
+        \begin{tabular}{c|c|c|}
+            $\ast_1$ & 0 & 1\\
+            \hline
+            0 & 0 & 1\\
+            \hline
+            1 & 1 & 0\\
+            \hline
+        \end{tabular}
+
+        \ \\
+
+        \begin{tabular}{c|c|c|}
+            $\ast_2$ & 0 & 1\\
+            \hline
+            0 & 1 & 0\\
+            \hline
+            1 & 0 & 1\\
+            \hline
+        \end{tabular}
+
+        \item $G=\{0,1,2\}$
+
+        \begin{tabular}{c|c|c|c|}
+            $+$ & 0 & 1 & 2\\
+            \hline
+            0 & 0 & 1 & 2\\
+            \hline
+            1 & 1 & 2 & 0\\
+            \hline
+            2 & 2 & 0 & 1\\
+            \hline
+        \end{tabular}
+
+        \item $G=\{0,1,2,3\}$
+
+        \begin{tabular}{c|c|c|c|c|}
+             & 0 & 1 & 2 & 3\\
+            \hline
+            0 & 0 & 1 & 2 & 3\\
+            \hline
+            1 & 1 & 2 & 3 & 0\\
+            \hline
+            2 & 2 & 3 & 0 & 1\\
+            \hline
+            3 & 3 & 0 & 1 & 2\\
+            \hline
+        \end{tabular}
+
+        \ \\
+
+        \begin{tabular}{c|c|c|c|c|}
+            & 0 & 1 & 2 & 3\\
+           \hline
+           0 & 0 & 1 & 2 & 3\\
+           \hline
+           1 & 1 & 0 & 3 & 2\\
+           \hline
+           2 & 2 & 3 & 0 & 1\\
+           \hline
+           3 & 3 & 2 & 1 & 0\\
+           \hline
+       \end{tabular}
+    \end{itemize}
+\end{ejemplo}
+
+\begin{propiedades}\
+    \begin{itemize}
+        \item Todas las tablas son simétricas (en el caso de grupo abeliano).
+        \item Todos los elementos aparecen en todas las filas y todas las columnas (sino las ecuaciones del lema anterior no tendrían solución).
+        \item Tiene que haber una fila igual que el encabezado (actúa de neutro).
+    \end{itemize}
+\end{propiedades}
+
+\begin{definicion}
+    En un grupo $G$, el \textbf{orden} de un elemento $x$ es el menor entero positivo $n$ si existe, tal que $x^n=1$. Lo notaremos por $O(x)$ o por $ord(x)$\\
+
+    Si no existe dicho $n$, se dice que el orden es infinito.
+\end{definicion}
+
+\begin{observacion}
+    \begin{gather*}
+        x^m = 1 \Rightarrow n|m\\
+        m=nq +r \ \ 0\leq r \leq n\\
+        1 = x^m = x^{nq} \cdot x^r = x^r \Rightarrow r=0
+    \end{gather*}
+\end{observacion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item $O(x)=1 \sii x=1$
+        \item $O(x)=O(x^{-1})\ \ \ \forall x \in G$
+        \item $\forall x \neq 0$, $\bb{Z},$ $\bb{Q}$, $\bb{R}$ se tiene que $O(x)=+\infty$
+        \item $\bb{C}^\ast$, $O(i)=4$
+        \item $\bb{Z}_9$, $O(\overline{6})=3$
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{ejercicio}
+    Consideramos $(\bb{Z}, \ast)$ donde $\ast$ es la operación binaria definida por
+    \begin{align*}
+        a\ast b = a+b+1
+    \end{align*}
+    Probar que esto es un grupo abeliano.
+    \begin{proof}
+        Para verlo tendremos que ver que verifica las propiedades de un grupo abeliano:
+        \begin{itemize}
+            \item Asociativa: $(a\ast b) \ast c = (a+b+1)\ast c = a+b+c+2 = a\ast (b \ast c)$ 
+            \item Neutro: $a\ast x = a$, $a+x+1 = a$, por lo que $x=-1$.
+            \item Inverso: $a \ast a^{-1}=-1$, $a^{-1} = -a-2$.
+        \end{itemize}
+        Además se verifica la conmutativa por ser una suma en $\bb{Z}$ (que es conmutativa).
+    \end{proof}
+\end{ejercicio}
+
+\section{Grupos Diédricos ($D_n$)}
+
+Estos grupos vienen de las isometrías de un polígono regular que dejan fija la figura (en el plano).
+
+\subsection{Triángulo}
+\begin{center} %TODO: terminar dibujo
+    \begin{tikzpicture}
+        \draw (0,0) -- (1,2) -- (2,0) -- cycle;
+    \end{tikzpicture}
+\end{center}
+
+Rotaciones: 
+\begin{itemize}
+    \item Identidad
+    \item Rotación de ángulo $\frac{2\pi}{3}$, $r_1$ $1-2-3-1$ $(1\ 2\ 3)$ $(r)$
+    \item Rotación de ángulo $\frac{4\pi}{3}$, $r_2$ $1-3-2-1$ $(1\ 3\ 2)$ $(r^2)$
+\end{itemize}
+
+Simetrías: %TODO: pedir dibujo
+\begin{itemize}
+    \item $s_1$ $(1\ 2)$ $s$
+    \item $s_2$ $(1\ 3)$ $sr = s_2$
+    \item $s_3$ $(2\ 3)$ $sr^2=s_3$
+\end{itemize}
+
+\subsection{Cuadrado}
+
+\begin{center} %TODO: terminar dibujo
+    \begin{tikzpicture}
+        \draw (0,0) -- (0,2) -- (2,2) -- (2,0) -- cycle;
+    \end{tikzpicture}
+\end{center}
+
+Rotaciones: 
+\begin{itemize}
+    \item Identidad
+    \item Rotación de ángulo $\frac{\pi}{2}$ $(1\ 2\ 3\ 4)$ $(r)$
+    \item Rotación de ángulo $\pi$ $(1\ 3)(2\ 4)$ $(r^2)$
+    \item Rotación de ángulo $\frac{3\pi}{3}$ $(1\ 4\ 3\ 2)$ $(r^3)$
+\end{itemize}
+
+Simetrías: %TODO: pedir dibujo
+\begin{itemize}
+    \item $s_1$: $(1\ 2)(3\ 4)$
+    \item $s_2$: $(1\ 4)(2\ 3)$
+    \item $s_3$: $(2\ 4)$
+    \item $s_4$: $(1\ 3)$
+\end{itemize}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item Se tiene que $sr \neq rs$
+        \item Además, $sr=r^3s$
+    \end{itemize}
+\end{observacion}
+
+La tabla de $D_4$ será:
+
+\begin{center} % Aplicamos que rs=sr^3, sr=r^3s, s=(1 2)(3 4)
+    \begin{tabular}{c|c|c|c|c|c|c|c|c|} %TODO: Terminar 
+        & 1 & $r$ & $r^2$ & $r^3$ & $s$ & $sr$ & $sr^2$ & $sr^3$\\
+        \hline
+        1 & 1 & $r$  & $r^2$ & $r^3$ & $s$ & $sr$ & $sr^2$ & $sr^3$\\
+        \hline
+        $r$ & $r$ & $r^2$ & $r^3$ & 1\\
+        \hline
+        $r^2$ & $r^2$\\
+        \hline
+        $r^3$ & $r^3$\\
+        \hline
+        $s$ & $s$\\
+        \hline
+        $sr$ & $sr$\\
+        \hline
+        $sr^2$ & $sr^2$\\
+        \hline
+        $sr^3$ & $sr^3$\\
+        \hline
+    \end{tabular}
+\end{center}
+
