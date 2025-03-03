@@ -365,7 +365,7 @@ Simetrías: %TODO: pedir dibujo
 \begin{observacion}\
     \begin{itemize}
         \item Se tiene que $sr \neq rs$
-        \item Además, $sr=r^3s$
+        \item Además, $sr=r^3s$ y $r=sr^3$
     \end{itemize}
 \end{observacion}
 
@@ -377,20 +377,91 @@ La tabla de $D_4$ será:
         \hline
         1 & 1 & $r$  & $r^2$ & $r^3$ & $s$ & $sr$ & $sr^2$ & $sr^3$\\
         \hline
-        $r$ & $r$ & $r^2$ & $r^3$ & 1\\
+        $r$ & $r$ & $r^2$ & $r^3$ & 1 & $sr^3$ & $s$ & $sr$ & $sr^2$\\
         \hline
-        $r^2$ & $r^2$\\
+        $r^2$ & $r^2$ & $r^3$ & $1$ & $r$ & $sr^2$ & $sr^3$ & $s$ & $sr$\\
         \hline
-        $r^3$ & $r^3$\\
+        $r^3$ & $r^3$ & 1 & $r$ & $r^2$ & $sr$ & $sr^2$ & $sr^3$ & $s$\\
         \hline
-        $s$ & $s$\\
+        $s$ & $s$ & $sr$ & $sr^2$ & $sr^3$ & 1 & $r$ & $r^2$ & $r^3$\\
         \hline
-        $sr$ & $sr$\\
+        $sr$ & $sr$ & $sr^2$ & $sr^3$ & $s$ & $r^3$ & 1 & $r$ & $r^2$\\
         \hline
-        $sr^2$ & $sr^2$\\
+        $sr^2$ & $sr^2$ & $sr^3$ & $s$ & $sr$ & $r^2$ & $r^3$ & 1 & $r$\\
         \hline
-        $sr^3$ & $sr^3$\\
+        $sr^3$ & $sr^3$ & $s$ & $sr$ & $sr^2$ & $r$ & $r^2$ & $r^3$ & 1\\
         \hline
     \end{tabular}
 \end{center}
 
+\begin{align*}
+    rs &=sr^{-1}\\
+    rsr &=sr^{-1}r=s \\
+    rsr^2 &= sr^{-1}r^2 = sr \\
+    rsr^3 &= sr^{-1}r^3= sr^2\\
+\end{align*}
+
+\subsection{En general, $D_n$}
+
+$D_n$ son las isometrías que dejan fijo un polígono regular de $n$ lados.
+Tendremos $2n$ elementos:
+\begin{itemize}
+    \item $n$ rotaciones $\frac{2k\pi}{n} = r_k$, $k=0,\dots,n-1$.
+    \item $n$ simetrías, $s_1,\dots,s_n$
+\end{itemize}
+Si $n$ es par tendremos $\frac{n}{2}$ diagonales y $\frac{n}{2}$ mediatrices. Si $n$ es impar tendremos $n$ radios que irán desde un vértice hasta el punto medio del lado opuesto.
+
+\begin{notacion}
+    \begin{align*}
+        r &\equiv \text{rotación de ángulo }\frac{2\pi}{n}\\
+        s & \equiv \text{ simetría que pasa por el origen de coordenadas y el vértice }1\ (s=s_1)
+    \end{align*}
+\end{notacion}
+
+\begin{lema}\
+    \begin{enumerate}
+        \item $1,r,r^2,\dots,r^{n-1}$ son todos distintos y $r^n=1$ ($(O(r)=n)$)
+        \item $s^2=1$, $O(s)=2$
+        \item $s\neq r^i$\ \  $\forall\ 0 \leq i \leq n-1$ ($s$ fija el $1$ pero las rotaciones no).
+        \item $sr^i$, $0\leq i \leq n-1$ son simetrías en los ejes de simetrías ($s_2, s_3,\dots,s_n$) y $sr^i\neq sr^j$ para $i\neq j$.
+        \item $sr=r^{-1}s$ y en general $sr^i = r^{-i}s$
+    \end{enumerate}
+\end{lema}
+
+\begin{ejemplo}
+    En $D_2$ tenemos que $sr^9sr^6 = r^9$
+\end{ejemplo}
+
+\begin{definicion}
+    Un conjunto de generadores de un grupo $G$ es un subconjunto $S\subset G$ tal que todo elemento de $G$ puede escribirse como producto finito de elementos de $S$ y sus inversos. Lo notaremos como $G=<S>$ o, en el caso de $S=\{x_1,\dots,x_n\}$ podremos escribir $G=<x_1,\dots,x_n>$ y diremos que $G$ está generado por $S$.\\
+
+    Cualquier elemento $x\in G$ podremos escribirlo como
+    \begin{align*}
+        x=x_1^{\gamma_1}x_2^{\gamma_2}\dots x_n^{\gamma_n}\ \ x_i\in S,\ \ \gamma_i=\pm1
+    \end{align*}
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item $G=<x>$, $S=<x>$ es un grupo cíclico. $\bb{Z}=<1>$
+        \item $D_n=<r,s>$
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{definicion}
+    Si $G=<S>$ y existe un conjunto de relaciones $R_1,R_2,\dots,R_m$ (igualdades entre elementos de $S\cup\{1\}$) tal que cualquier relación entre los elementos de $S$ puede deducirse de estas, entonces decimos que estos generadores y relaciones constituyen una \textbf{presentación de} $G$ y lo escribimos como
+    \begin{align*}
+        G=<S /R_1,R_2,\dots,R_m>
+    \end{align*}
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item $D_n=<r,s /rs=rs=sr^{-1},\ r^n=1,\ s^2=1>$ (presentación abstracta de $D_n$).\\ 
+        Podemos considerar $D_1=<s/s^2=1>$ y $D_2=<r,s / r^2=s^2=1, sr=rs>$ que no tienen sentido geométrico pero sí abstracto.
+
+        \item $C_n=<x / x^n=1>=\{1,x,x^2,\dots,x^{n-1}\}$ es el grupo cíclico de orden $n$.
+        \item $V^{abs} = <x,y / x^2=1,\ y^2,\ (xy)^2=1>=<1,x,y,xy>$ es el grupo de Klein abstracto
+        \item $Q_2^{abs} = <x,y/x^4=1,\ y^2=x^2,\ yxy^{-1}=x>$ es el grupo de cuaternios abstracto. $Q_2=\{\pm 1, \pm i, \pm j, \pm k\}$ (cuaternios).
+    \end{enumerate}
+\end{ejemplo}

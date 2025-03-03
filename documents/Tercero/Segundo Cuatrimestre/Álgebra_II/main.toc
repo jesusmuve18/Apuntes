@@ -1,0 +1,9 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {chapter}{\numberline {1}Tema 1: Combinatoria y Teoría Elemental de Grafos}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Definiciones}{5}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Grafos. Introducción}{6}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Tema 2: Grupos. Definición, generalidades y ejemplos}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Grupos Diédricos ($D_n$)}{16}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Triángulo}{16}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Cuadrado}{16}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}En general, $D_n$}{17}{subsection.2.1.3}%
