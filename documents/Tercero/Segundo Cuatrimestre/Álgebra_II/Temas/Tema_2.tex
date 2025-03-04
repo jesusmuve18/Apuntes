@@ -457,11 +457,258 @@ Si $n$ es par tendremos $\frac{n}{2}$ diagonales y $\frac{n}{2}$ mediatrices. Si
 
 \begin{ejemplo}\
     \begin{enumerate}
-        \item $D_n=<r,s /rs=rs=sr^{-1},\ r^n=1,\ s^2=1>$ (presentación abstracta de $D_n$).\\ 
+        \item $D_n=<r,s /rs=sr^{-1}>$ (presentación abstracta de $D_n$).\\ 
         Podemos considerar $D_1=<s/s^2=1>$ y $D_2=<r,s / r^2=s^2=1, sr=rs>$ que no tienen sentido geométrico pero sí abstracto.
 
         \item $C_n=<x / x^n=1>=\{1,x,x^2,\dots,x^{n-1}\}$ es el grupo cíclico de orden $n$.
         \item $V^{abs} = <x,y / x^2=1,\ y^2,\ (xy)^2=1>=<1,x,y,xy>$ es el grupo de Klein abstracto
-        \item $Q_2^{abs} = <x,y/x^4=1,\ y^2=x^2,\ yxy^{-1}=x>$ es el grupo de cuaternios abstracto. $Q_2=\{\pm 1, \pm i, \pm j, \pm k\}$ (cuaternios).
+        \item $Q_2^{abs} = <x,y/x^4=1,\ y^2=x^2,\ yxy^{-1}=x^{-1}>$ es el grupo de cuaternios abstracto. %$Q_2=\{\pm 1, \pm i, \pm j, \pm k\}$ (cuaternios).
+        Tenemos que $Q_2^{abs}=\{1,x,x^2,x^3,y,xy,x^2y,x^3y\}$, $O(x)=4$, $|Q_2^{abs}|=8$, $O(x^2)=2$, los demás tienen orden 4.\\
+
+        Podemos identificar este grupo con $SL_2(\bb{C})$ de la siguiente forma:
+        \begin{gather*}
+            1 = 
+            \begin{pmatrix}
+                1 & 0\\
+                0 & 1\\
+            \end{pmatrix}
+            \hspace{1cm}
+            x = 
+            \begin{pmatrix}
+                i & 0\\
+                0 & -i\\
+            \end{pmatrix}
+            \hspace{1cm}
+            y = 
+            \begin{pmatrix}
+                0 & -1\\
+                1 & 0\\
+            \end{pmatrix}
+            \hspace{1cm}
+            x^2 = 
+            \begin{pmatrix}
+                -1 & 0\\
+                0 & -1\\
+            \end{pmatrix}\\\\
+            x^3 = 
+            \begin{pmatrix}
+                -i & 0\\
+                0 & i\\
+            \end{pmatrix}
+            \hspace{1cm}
+            xy = 
+            \begin{pmatrix}
+                0 & -i\\
+                -i & 0\\
+            \end{pmatrix}
+            \hspace{1cm}
+            x^2y = 
+            \begin{pmatrix}
+                0 & 1\\
+                -1 & 0\\
+            \end{pmatrix}
+            \hspace{1cm}
+            x^3y = 
+            \begin{pmatrix}
+                0 & i\\
+                i & 0\\
+            \end{pmatrix}
+        \end{gather*}
+        y tenemos los Cuaternios $Q_2=\{\pm 1, \pm i, \pm j, \pm k\}$ y se tiene que $i^2=j^2=k^2=-1$ y además se verifica
+        \begin{gather*}
+            ij=k \hspace{1cm} jk=i \hspace{1cm} ki=j\\
+            ji=-k \hspace{1cm} kj=-i \hspace{1cm} ik=-j
+        \end{gather*}
+        y podemos hacer la siguiente identificación:
+        \begin{gather*}
+            1 = 
+            \begin{pmatrix}
+                1 & 0\\
+                0 & 1\\
+            \end{pmatrix} \equiv 1
+            \hspace{1cm}
+            x = 
+            \begin{pmatrix}
+                i & 0\\
+                0 & -i\\
+            \end{pmatrix} \equiv i
+            \hspace{1cm}
+            y = 
+            \begin{pmatrix}
+                0 & -1\\
+                1 & 0\\
+            \end{pmatrix} \equiv j \\\\
+            \hspace{1cm}
+            x^2 = 
+            \begin{pmatrix}
+                -1 & 0\\
+                0 & -1\\
+            \end{pmatrix} \equiv -1
+            \hspace{1cm}
+            x^3 = 
+            \begin{pmatrix}
+                -i & 0\\
+                0 & i\\
+            \end{pmatrix} \equiv -i
+            \hspace{1cm}
+            xy = 
+            \begin{pmatrix}
+                0 & -i\\
+                -i & 0\\
+            \end{pmatrix} \equiv k\\\\
+            x^2y = 
+            \begin{pmatrix}
+                0 & 1\\
+                -1 & 0\\
+            \end{pmatrix} \equiv -j
+            \hspace{1cm}
+            x^3y = 
+            \begin{pmatrix}
+                0 & i\\
+                i & 0\\
+            \end{pmatrix} \equiv -k
+        \end{gather*}
+        de esta forma hemos identificado el grupo $Q_2^{abs}$ con $Q_2$ (la presentación con el grupo descrito por sus elementos).
     \end{enumerate}
 \end{ejemplo}
+
+\section{Grupos Simétricos ($S_n$)}
+
+Este grupo lo construiremos a partir de las permutaciones. Dado un conjunto $X$, podemos definir el conjunto de aplicaciones biyectivas 
+\begin{gather*}
+    S(X)=\{f:X \to X \text{ biyectivas}\}
+\end{gather*}
+que ya se ha trabajado como el conjunto de permutaciones. Dado $X=\{1,\dots,n\}$ finito podemos considerar el n-ésimo grupo simétrico $S(X)=S_n$ (con la composición). Se va a verificar que $|S_n|=n!$. \\
+
+Una forma de representar los elementos $\sigma \in S_n$ es con la \textbf{representación matricial}
+\begin{align*}
+    \begin{pmatrix}
+        1 & 2 & 3 & \dots & n\\
+        \sigma(1) & \sigma(2) & \sigma(3) & \dots & \sigma(n)
+    \end{pmatrix}
+\end{align*}
+
+ \begin{ejemplo}
+    $S_5$ podemos describirlo matricialmente de la siguiente forma:
+    \begin{align*}
+        \sigma=\begin{pmatrix}
+            1 & 2 & 3 & 4 & 5\\
+             2 & 3 & 4 & 5 & 1
+        \end{pmatrix} \leadsto (1\ 2\ 3\ 4\ 5)
+        \hspace{1cm}
+        \tau=\begin{pmatrix}
+            1 & 2 & 3 & 4 & 5\\
+            3 & 4 & 5 & 1 & 2
+        \end{pmatrix} \leadsto (1\ 3)(2\ 4\ 5)\\\\
+        \sigma\tau=\begin{pmatrix}
+            1 & 2 & 3 & 4 & 5\\
+            4 & 5 & 2 & 1 & 3
+        \end{pmatrix} \leadsto (1\ 4)(2\ 5\ 3)
+        \hspace{1cm}
+        \tau\sigma=\begin{pmatrix}
+            1 & 2 & 3 & 4 & 5\\
+            4 & 1 & 5 & 2 & 3
+        \end{pmatrix} \leadsto (1\ 4\ 2)(3\ 5)
+    \end{align*}
+    Esta segunda representación (la que aparece a continuación de la matricial) es la representación en ciclos disjuntos. No siempre tienen que variar los elementos
+ \end{ejemplo}
+
+ \begin{definicion}
+    Sea $\sigma\in S_n$ tal que desplaza circularmente al conjunto $\{a_1,a_2,\dots,a_m\}\subseteq X$ y al resto de elementos los deja fijos (no se desplazan). Esto será un \textbf{ciclo de longitud} $m$.\\
+
+    Es indiferente el primer elemento de estos ciclos de forma que
+    \begin{align*}
+        \sigma=(a_1,a_2,\dots,a_m) = (a_2,a_3,\dots,a_m,a_1) = \dots = (a_m, a_1, \dots, a_{m-1})
+    \end{align*}
+    Tendremos $\dfrac{V_m^n}{m}$ ciclos de longitud $m$.
+ \end{definicion}
+
+ \begin{ejemplo}
+    En $S_5$ tendremos $\dfrac{V_5^2}{2}$ ciclos de longitud $2$ y $\dfrac{V_5^3}{3}$ ciclos de longitud $3$.
+ \end{ejemplo}
+
+ \begin{lema}\
+    \begin{itemize}
+        \item El orden de un ciclo de longitud $m$ es $m$.
+        \item Dado $\sigma=(a_1,a_2,\dots,a_m) \leadsto \sigma^{-1}=(a_m, a_{m-1},\dots,a_2, a_1)$.
+    \end{itemize} 
+ \end{lema}
+
+ \begin{definicion}
+    Los 2-ciclos los llamaremos \textbf{trasposiciones}
+ \end{definicion}
+
+ \begin{definicion}
+     Podemos descomponer cualquier ciclo en ciclos disjuntos de distinta longitud de la forma
+     \begin{align*}
+        \sigma = (a_1,a_2,\dots,a_{m_1})(a_{m_1+1}, a_{m_1+2}, \dots, a_{m_2})\dots(a_{m_k+1}, a_{m_k+2},\dots,a_{m_{k+1}})
+     \end{align*}
+     y lo llamaremos \textbf{descomposición en ciclos disjuntos}.\\
+
+     De esta forma tendremos que $\sigma(a_k)=a_{k+1}$ para cualquier elemento de un ciclo que no sea el último, $\sigma(a_n)=a_{1}$ para el último elemento del ciclo y $\sigma(a_j)=a_j$ para todo elemento que no esté en el ciclo.
+ \end{definicion}
+
+ \begin{ejemplo}
+    Consideramos $S_{13}$ la siguiente representación matricial:
+    \begin{align*}
+        \sigma = \left(
+        \begin{array}{ccccccccccccc}
+            1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13\\
+            12 & 13 & 3 & 1 & 11 & 9 & 5 & 10 & 6 & 4 & 7 & 8 & 2
+        \end{array}
+        \right)
+    \end{align*}
+    Tendremos que la descomposición en ciclos disjuntos será
+    \begin{align*}
+        \sigma = (1\ 12\ 8\ 10\ 4)(2\ 13)(3)(5\ 11\ 7)(6\ 9)
+    \end{align*}
+    Tenemos que el inverso por tanto será
+    \begin{align*}
+        \sigma = (4\ 10\ 8\ 12\ 1)(2\ 13)(7\ 11\ 5)(6\ 9)
+    \end{align*}
+    Por ejemplo, tenemos que $\sigma(7)=5$
+ \end{ejemplo}
+
+ \begin{observacion}\
+    \begin{itemize}
+        \item Si $\sigma \in S_n$, entonces $\sigma\in S_m$ para todo $m\geq n$.
+        \item En general, $S_n$ no es abeliano para $n\geq 3$
+    \end{itemize}
+ \end{observacion}
+
+ \begin{ejercicio}(Ejercicio 14 de la Relación)\\
+    Sean $s_1, s_2\in S_7$ dados por
+    \begin{gather*}
+        s_2=\begin{pmatrix}
+            1 & 2 & 3 & 4 & 5 & 6 & 7\\
+            5 & 7 & 6 & 2 & 1 & 4 & 3
+        \end{pmatrix}
+        \hspace{1cm}
+        s_1=\begin{pmatrix}
+            1 & 2 & 3 & 4 & 5 & 6 & 7\\
+            3 & 2 & 4 & 5 & 1 & 7 & 6
+        \end{pmatrix}
+    \end{gather*}
+    Calculamos los siguientes elementos:
+    \begin{gather*}
+        s_1s_2=\begin{pmatrix}
+            1 & 2 & 3 & 4 & 5 & 6 & 7\\
+            1 & 6 & 7 & 2 & 3 & 5 & 4
+        \end{pmatrix} 
+        \hspace{1cm}
+        s_2s_1=\begin{pmatrix}
+            1 & 2 & 3 & 4 & 5 & 6 & 7\\
+            6 & 7 & 2 & 1 & 5 & 3 & 4
+        \end{pmatrix}\\\\
+        s_2^2=\begin{pmatrix}
+            1 & 2 & 3 & 4 & 5 & 6 & 7\\
+            1 & 3 & 4 & 7 & 5 & 2 & 6
+        \end{pmatrix}
+    \end{gather*}
+    Los podemos expresar en ciclos disjuntos como
+    \begin{gather*}
+        s_1s_2=(2\ 6\ 5\ 3\ 7\ 4)\hspace{1cm} s_2s_1=(1\ 6\ 3\ 2\ 7\ 4)\\
+        s_2^2=(2\ 3\ 4\ 7\ 6)
+    \end{gather*}
+ \end{ejercicio}
+
