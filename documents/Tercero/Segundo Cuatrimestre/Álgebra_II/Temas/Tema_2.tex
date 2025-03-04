@@ -707,8 +707,78 @@ Una forma de representar los elementos $\sigma \in S_n$ es con la \textbf{repres
     \end{gather*}
     Los podemos expresar en ciclos disjuntos como
     \begin{gather*}
-        s_1s_2=(2\ 6\ 5\ 3\ 7\ 4)\hspace{1cm} s_2s_1=(1\ 6\ 3\ 2\ 7\ 4)\\
+        s_1s_2=(2\ 6\ 5\ 3\ 7\ 4)\hspace{1cm} s_2s_1=(1\ 6\ 3\ 2\ 7\ 4)\\\\
         s_2^2=(2\ 3\ 4\ 7\ 6)
     \end{gather*}
  \end{ejercicio}
+
+ \begin{teo}
+    Toda permutación $\sigma \in S_n$ con $\sigma \neq 1$ se expresa en la forma $\sigma=\gamma_1 \gamma_2 \dots \gamma_k$ donde $\gamma_i$, $i=1,\dots,k$ son ciclos disjuntos de longitud mayor o igual que $2$. Además, esta descomposición es única salvo el orden de los factores.
+    \begin{proof}
+        Vamos a definir una relación de equivalencia en $X$. Para ello suponemos $X=\{1,2,\dots,n\}$ y $\sigma\in S_n$ con $\sigma\neq 1$ (no es la identidad). Además, consideramos la relación $R$ dada por 
+        \begin{gather*}
+            xRy \sii \exists m\in \bb{Z} \text{ tal que } y=\sigma^m(x)
+        \end{gather*}
+        Es fácil ver que $R$ así definida es una relación de equivalencia en $X$. Consideramos entonces la clase de equivalencia para $x\in S$
+        \begin{gather*}
+            C=\{\sigma^m(x) / m\in \bb{Z}\}
+        \end{gather*}
+        Donde $C$ tiene un número finito de elementos (ya que $X$ es finito). Por tanto tenemos que $x,\sigma(x),\sigma^2(x),\dots,\sigma^{m+1}(x)=x$ son elementos de la misma clase $C$.\\
+
+        Podemos considerar la permutación $\gamma \in S_n$ dada por
+        \begin{gather*}
+            \gamma=(x\ \sigma(x)\ \sigma^2(x)\ \dots\ \sigma^m(x))
+        \end{gather*}
+        De esta forma tenemos
+        \begin{gather*}
+            \gamma(y)=\left\{ 
+            \begin{array}{ll}
+                \sigma(y) & y\in C\\
+                y & y\neq C
+            \end{array}
+            \right.
+        \end{gather*}
+        y tenemos una partición de $X$ en clases de equivalencia $C_i$, con $\gamma_i$ dada por
+        \begin{gather*}
+            \gamma_i(y)=\left\{ 
+            \begin{array}{ll}
+                \sigma(y) & y\in C_i\\
+                y & y\neq C_i
+            \end{array}
+            \right.
+        \end{gather*}
+        Tenemos que los ciclos son disjuntos porque la partición es disjunta ya que si $y\in \gamma_i$, entonces $\gamma_i(y)=\sigma(y)$. Si $y\in \gamma_j$ con $j\neq i$, entonces $\gamma_j(y)=y$ y por tanto no puede estar en $C_i$ y en $C_j$ simultáneamente.\\
+
+        Tendremos que $\sigma = \gamma_1\gamma_2\dots \gamma_k$. Veamos ahora cuál es la imagen de un cierto $y\in C_i$. Para ello tenemos
+        \begin{gather*}
+            \sigma(y)=\gamma_1\gamma_2\dots\gamma_i(y) = \gamma_1\gamma_2\dots\gamma_{i-1}(\sigma(y)) = \sigma(y)
+        \end{gather*}
+        y se verifica la igualdad (trivialmente).\\
+
+        Para ver que es única se supone que existe otra y por tanto la única posibilidad es reordenar los elementos pero el resto se queda igual.
+    \end{proof}
+ \end{teo}
+
+ \begin{coro}
+    El orden de cualquier permutación es el $m.c.m.$ de las longitudes de los ciclos disjuntos en los que se descompone.
+    \begin{proof}
+        Supongamos $\sigma = \gamma_1\gamma_2\dots\gamma_k$. Sabemos que los ciclos conmutan, es decir que $\gamma_i\gamma_j=\gamma_j\gamma_i$. Podemos escribir entonces 
+        \begin{gather*}
+            \sigma^m = \gamma_1^m\gamma_2^m...\gamma_k^m
+        \end{gather*}
+        Por tanto tenemos que
+        \begin{gather*}
+            \sigma^m = 1 \sii \gamma_i^m = 1\ \ \forall i=1,\dots,m
+        \end{gather*}
+        y en dicho caso $O(\sigma)=m$. Por tanto $O(\sigma_i)|m$ (divide a $m$) para todo $i=1,\dots,m$. Por tanto $O(\sigma_i)$ es $m.c.m.$ de las longitudes.
+    \end{proof}
+ \end{coro}
+
+ \begin{ejemplo}\
+    \begin{itemize}
+        \item $S_2$: $X=\{1,2\}$ y tenemos $S_2 = \{id, (1\ 2)\}$
+        \item $S_3$: $X=\{1,2,3\}$ y tenemos $S_3 = \{id, (1\ 2\ 3), (1\ 3\ 2), (1\ 2), (1\ 3),(2\ 3)\} \cong D_3$ 
+        \item $S_4$: $X=\{1,2,3,4\}$ y tenemos $S_4 = \{id, (1\ 2), (1\ 3), (1\ 4), (2\ 3), (2\ 4), (3\ 4),\\ (1\ 2\ 3), (1\ 3\ 2), (1\ 2\ 4), (1\ 4\ 2), (1\ 3\ 4), (1\ 4\ 3), (2\ 3\ 4), (2\ 4\ 3), (1\ 2\ 3\ 4), (1\ 2\ 4\ 3),\\ (1\ 3\ 2\ 4), (1\ 3\ 4\ 2), (1\ 4\ 2\ 3), (1\ 4\ 3\ 2), (1\ 2)(2\ 4), (1\ 4)(2\ 3) \}$ 
+    \end{itemize}
+ \end{ejemplo}
 
