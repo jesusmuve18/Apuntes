@@ -22,7 +22,7 @@
    6. Entramos a `Configuración -> Red -> Adaptador 2` y lo activamos. Le ponemos la opción "conectado a" en "Adaptador solo anfitrión" y seleccionamos la red que acabamos de crear.
    7. Lanzamos la máquina de nuevo.
 5. Abrimos la máquina:
-   1. Iniciamos sesión con las credenciales `root` y la contraseña que hemos asignado durante la instalación.
+   1. Iniciamos sesión con el usuario `root` y la contraseña que hemos asignado durante la instalación.
    2. Ejecutamos la instrucción `ip a` y nos aseguramos de que contamos con la interfaz `enp0s8`
    3. Creamos el archivo `/etc/sysconfig/network-scripts/ifcfg-enp0s8` que contendrá la siguiente información:
     ```javascript
