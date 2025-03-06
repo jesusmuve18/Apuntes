@@ -29,7 +29,7 @@
     DEVICE=enp0s8
     BOOTPROTO=static
     ONBOOT=yes
-    IPADDR=192.168.56.100 // la que aparece en el ipv4 de la red solo-anfitrión
+    IPADDR=192.168.56.100 // la que aparece en el ipv4 de la red solo-anfitrión pero con la dirección de dispositivo cambiada (por ejemplo 100)
     NETMASK=255.255.255.0
     ```
     4. Ejecutamos la instrucción `sudo systemctl restart NetworkManager` para aplicar la configuración. A veces es necesario reiniciar la máquina.
