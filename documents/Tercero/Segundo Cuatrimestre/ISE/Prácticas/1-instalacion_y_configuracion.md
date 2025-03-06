@@ -22,8 +22,9 @@
    6. Entramos a `Configuración -> Red -> Adaptador 2` y lo activamos. Le ponemos la opción "conectado a" en "Adaptador solo anfitrión" y seleccionamos la red que acabamos de crear.
    7. Lanzamos la máquina de nuevo.
 5. Abrimos la máquina:
-   1. Ejecutamos la instrucción `ip a` y nos aseguramos de que contamos con la interfaz "enp0s8"
-   2. Creamos el archivo `/etc/sysconfig/network-scripts/ifcfg-enp0s8` que contendrá la siguiente información:
+   1. Iniciamos sesión con las credenciales `root` y la contraseña que hemos asignado durante la instalación.
+   2. Ejecutamos la instrucción `ip a` y nos aseguramos de que contamos con la interfaz `enp0s8`
+   3. Creamos el archivo `/etc/sysconfig/network-scripts/ifcfg-enp0s8` que contendrá la siguiente información:
     ```javascript
     DEVICE=enp0s8
     BOOTPROTO=static
@@ -31,20 +32,20 @@
     IPADDR=192.168.56.100 // la que aparece en el ipv4 de la red solo-anfitrión
     NETMASK=255.255.255.0
     ```
-    3. Ejecutamos la instrucción `sudo systemctl restart NetworkManager` para aplicar la configuración. A veces es necesario reiniciar la máquina.
-    4. Probamos a hacer ping al host con `ping 192.168.56.1` (o la dirección que proceda según la red configurada).
-    5. Creamos un usuario con
+    4. Ejecutamos la instrucción `sudo systemctl restart NetworkManager` para aplicar la configuración. A veces es necesario reiniciar la máquina.
+    5. Probamos a hacer ping al host con `ping 192.168.56.1` (o la dirección que proceda según la red configurada).
+    6. Creamos un usuario con
    ```bash
     useradd  jmunoz #Inicial y primer apellido
     passwd jmunoz #para asignarle una contraseña
     usermod -aG wheel jmunoz #para asignarle privilegios sudo
    ```
-   6. Entramos en el usuario con `su jmunoz`
-   7. Editamos el archivo `~/.bashrc` y añadimos la siguiente línea al final:
+   4. Entramos en el usuario con `su jmunoz`
+   5. Editamos el archivo `~/.bashrc` y añadimos la siguiente línea al final:
    ```javascript
     PS1="[\u@jmvMV-\t \w] "
    ```
-   8. Ya tendremos creado el usuario jmunoz con el prompt correspondiente (se cambiará "jmvMV-" por las siglas del usuario seguidas de MV- (Máquina Virtual -))
+   6. Ya tendremos creado el usuario jmunoz con el prompt correspondiente (se cambiará "jmvMV-" por las siglas del usuario seguidas de MV- (Máquina Virtual -))
 6. Desde el ordenador host:
    1. Abrimos una terminal y probamos a hacer ping al servidor con `ping 192.168.56.100` y comprobamos que funciona.
    2. Probamos a hacer ssh al servidor con `ssh jmunoz@192.168.56.100`.
