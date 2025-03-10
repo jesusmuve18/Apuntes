@@ -124,3 +124,5 @@ Hay una nueva plataforma de TFG en la plataforma del grado (solo sirve en el DGI
 Hay que tener aprobado el 70% de los créditos de la titulación y el 80% de formación básica.
 
 Se asigna por orden de expediente.
+
+La Casa del estudiante ofrece un Taller semestral de elaboración de TFG.
