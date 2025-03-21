@@ -252,4 +252,37 @@ Se trabajan problemas como:
 - Problema de la membrana vibrante.
 - Otras aplicaciones: resistencia de materiales, torsión de una barra, ondas relativistas, etc.
 
+# Departamento de Geometría y Topología
 
+Ponente: Antonio Martínez López
+
+## Variedades Diferenciables
+
+- Ambiente natural en Física Teórica (espacios de coordenadas).
+- Análisis en variedades (Cálculo diferencial e integral)
+
+Temario:
+- Tema 1: Nociones básicas
+- Tema 2: Campos de vectores
+- Tema 3: Formas diferenciales
+- Tema 4: Integración en variedades
+- Tema 5: Teorema de Stokes
+
+## Geometría global de curvas y superficies
+
+Teoría muy clásica con resultados abismales que la mayoría de los geómetras han trabajado alguna vez en su vida. El curso que se da se queda corto, ya que este tema tiene muchos resultados bastante útiles.
+
+Se trabajan temas como:
+- Jordan-Brower
+- Rigidez de Ovaloides
+- Teorema de Gauss-Bonnet
+
+## Taller de geometría y topología
+
+Se trabaja geometría clásica de la forma clásica, usando regla y compás, utilizándolos para demostrar resultados interesantes. Se utilizan estas herramientas para describir isometrías (giros, reflexiones, etc.).
+
+Además, se trabajan también simetrías de objetos, mosaicos (como caleidoscopio), poliedros y universoss.
+
+Por último, se trabajan la geometría hiperbólica y la geometría esférica.
+
+https://www.youtube.com/watch?v=-gLNIC_hQ3M
