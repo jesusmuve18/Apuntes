@@ -126,3 +126,130 @@ Hay que tener aprobado el 70% de los créditos de la titulación y el 80% de for
 Se asigna por orden de expediente.
 
 La Casa del estudiante ofrece un Taller semestral de elaboración de TFG.
+
+---
+# Máster en Ciencia de Datos e Ingeniería de Computadores
+
+Escuela internacional de Posgrado
+
+La ciencia de datos es el campo interdisciplinario que involucra métodos científicos, procesos y sistemas para extraer conocimiento o mejor entendimiento de datos estructurados y no estructurados.
+
+Continuación de campos de análisis como la estadística, la minería de datos, el aprendizaje automático y la analítica descriptiva.
+
+El data Science se compone principalmente de los campos de matemáticas y estadística, computación y substantive knowledge.
+
+## Salidas profesionales (principales, taxonomía):
+- **Data Scientist:** El que está al mando de todo. Entre $85830-$121150 anuales.
+- **Data Analyst:** El que se sumerge en los datos y acaba generando el intercambio de información para conocer la tendencia de los datos y tiene el conocimiento más profundo en el tema. Entre $55400-$70760 anuales.
+- **Data Engineer:** Que la información sea legible, se pueda trabajar con ella, tenga un sentido. Se encarga de preparar la información para que los demás puedan trabajar con ella. Entre $77400-$119250 anuales.
+- **Machine Learning Engineer:** Elige el modelo a trabajar y le da funcionalidad al modelo. Entre $93580-$148370 anuales.
+- **IoT Infraestructure Architech**
+- **Cloud Architech**
+- **Cloud Engineer**
+- **Cybersecurity**
+
+## Acceso
+
+Se tienen distintos niveles de prioridad de acceso:
+- **Alta:** Ingeniería Informática (Doble Grado), Telecomunicaciones, Matemáticas, Estadística.
+- **Media:** Física, Ingenierías con experiencia en computación (electrónica, civil, química...).
+- **Baja:** Resto de titulaciones (biociencias, economía, sociología...).
+
+Se recomienda tener experiencia en:
+- Programación
+- Matemáticas y estadística
+- Aprendizaje automático
+
+Se ofertan 60 plazas y se suelen recibir unas 400 solicitudes (aproximadamente).
+
+El precio ronda los 1000€ (incluídos gastos de emisión de título ).
+
+## Asignaturas Comunes
+
+### Módulo Introductorio (3 asignaturas)
+- Emprendimiento y Transferencia de conocimiento
+- Introducción a la Ciencia de Datos
+- Introducción a la Programación para Ciencia de Datos
+- Introducción a la Programación para Ingeniería de Computadores
+- Metodología de la Investigación
+
+### Módulo nivelación de conocimientos (2 asignaturas)
+- Minería de Datos. Aprendizaje No Supervisado y Detección de Anomalías
+- Minería de Datos. Preprocesamiento y Clasificación
+- Servidores Seguros
+- Sistemas Empotrados y Co-Diseño Hw/Sw
+
+## Perfiles de Especialización
+
+### Modelos avanzados de ciencias de datos
+- Extracción de Características en Imágenes
+- Minería de Datos: Aspectos Avanzados
+- Minería de Medios Sociales
+- Minería de Procesos
+- Modelos Gráficos Probabilísticos
+- Series Temporales y Minería de Flujos de Datos
+
+### Big Data y Cloud Computing
+- Big Data I
+- Big Data II
+
+### Tecnologías inteligentes e inteligencia computacional
+- Soft Computing. Conjuntos y Sistemas Difusos
+- Técnicas de Soft Computing para Aprendizaje y Optimización. Redes Neuronales y Metaheurísticas, Programación Evolutiva y Bioinspirada.
+- Visión por Computador
+
+### Aplicaciones de Ciencia de Datos y tecnologías inteligentes
+
+## Proceso de Solicitud y Matriculación
+- 60% Expediente Académico
+- 40% Valoración del consejo del Máster
+
+# Departamento de Análisis Matemático
+
+Ponente: Antonio Cañada
+
+## Variable Compleja II
+
+Se imparte en el segundo cuatrimestre de tercero.
+
+Es una continuación natural de Variable Compleja I. Es una asignatura "dura" a nivel de contenido y se recomienda que se haya disfrutado Variable Compleja I. 
+
+Incluye:
+- Representación Conforme
+- Teorema de Riemann
+- Funciones armónicas, problema de Dividilet y otras aplicaciones
+
+Esta materia es muy útil para una posterior iniciación a la investigación en Matemáticas, Física y cualquier Ingeniería.
+
+Prerrequisitos: Materia básica "Matemáticas" y las del módulo obligatorio "Análisis Matemático"
+
+## Análisis Vectorial
+
+Se imparte en el primer cuatrimestre de cuarto.
+
+Incluye:
+- Integral de línea 
+- Integral de Superficie
+- Teoremas clásicos del Análisis Vectorial: Teorema de Green, Teorema de Stokes, Teorema de la divergencia (o de Gauss).
+
+## Análisis de Fourier
+
+Se imparte en el primer cuatrimestre de cuarto.
+
+Incluye:
+- Series y transformada de Fourier.
+- Aplicaciones del Análisis de Fourier a las Ecuaciones clásicos de la Física Matemática, Desigualdades isoperimétricas, Principio de incertidumbre, muestreo de señales, etc.
+
+## Ecuaciones en Derivadas Parciales
+
+Se imparte en el segundo cuatrimestre de cuarto.
+
+Se trabajan problemas como:
+- Ecuación de ondas
+- Ecuación del calor
+- Ecuación del potencial de Laplace
+- Problema de la cuerda vibrante
+- Problema de la membrana vibrante.
+- Otras aplicaciones: resistencia de materiales, torsión de una barra, ondas relativistas, etc.
+
+
