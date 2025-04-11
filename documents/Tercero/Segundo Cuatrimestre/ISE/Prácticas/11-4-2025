@@ -1,0 +1,20 @@
+Un exporter ofrece un puerto HTTP donde expone sus métrics. ESto es bastante útil ya que está bastante controlado por proxys y equipos intermedios. El contenido (información) de estos exporters es texto plano por lo que es fácil hacer nuestros propios exporters. Con prometheus se puede hacer de forma muy sencilla. 
+
+Para hacerlo tendremos que ejecutar `GET /metrics`. Al recuperar la información la va a meter en su base de datos. Todos estos datos los llamaremos series temporales (ya que todos son una evolución a lo largo del tiempo). Hay bases de datos específicos para este tipo de series (ya que son fáciles de comprimir).
+
+Con una GUI podemos crear un entorno muy sencillo para visualizar los parámetros. 
+
+1. Ejecutamos `docker compose up`
+2. Entramos en `http://localhost:9090` a través de un explorador (safari no que tiene bugs)
+
+Cuando añadamos un nodo nos vamos a status y a targets. Tenemos que conseguir que el nodo esté en state UP. Para abrirlo tendremos que cambiar la URL a `localhost:9090/metrics`.
+
+Podremos ver más información en `prometheus.io`
+
+En el apartado de Graph de Prometheus podemos ver el valor de ciertas variables. Cuando tengamos etiquetas es muy recomendable usarlas para asegurar que nos dé el dato correctamente. Al abrirla podemos ver un gráfico con la evolución temporal de la variable.
+
+Nos vamos a centrar en la función `rate()` que calcula por segundo la tasa de incremento de una variable temporal. No obliga a que sea de tipo counter, podría ser de tipo gauge pero entonces podría tomar valores negativos.
+
+Cuando entremos a grafana la primera vez tendremos que introducir en el login `admin` tanto para usuario como contraseña (y luego tendremos que cambiarlo). Podemos añadir un data source de prometheus. Le dejaremos el nombre que tiene (prometheus). Tendremos que cambiar la dirección a `prometheus:9090` (en lugar de `localhost:9090`).
+
+Las alertas en grafana se gestionan desde alertas o vinculándolas a la gráfica (para el ejercicio será necesaria esta última opción). Desde el edit panel se puede añadir una alerta que abre un asistente en la que ya ha copiado los datos de la gráfica (recordemos que es una gráfica por lo que si modificamos cualquier parámetro en el gráfico no se actualizará en la alerta).
