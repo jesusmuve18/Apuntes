@@ -18,3 +18,17 @@ Nos vamos a centrar en la función `rate()` que calcula por segundo la tasa de i
 Cuando entremos a grafana la primera vez tendremos que introducir en el login `admin` tanto para usuario como contraseña (y luego tendremos que cambiarlo). Podemos añadir un data source de prometheus. Le dejaremos el nombre que tiene (prometheus). Tendremos que cambiar la dirección a `prometheus:9090` (en lugar de `localhost:9090`).
 
 Las alertas en grafana se gestionan desde alertas o vinculándolas a la gráfica (para el ejercicio será necesaria esta última opción). Desde el edit panel se puede añadir una alerta que abre un asistente en la que ya ha copiado los datos de la gráfica (recordemos que es una gráfica por lo que si modificamos cualquier parámetro en el gráfico no se actualizará en la alerta).
+
+# El Ejercicio que tenemos que hacer
+
+Vamos a tener que lanzar una monitorización con un equipo Rocky linux. Vamos a tener que lanzar una máquina virtual y vamos a tener que instalar el exporter de prometheus. El exporter (que está en las referencias) podemos instalarlo en su última versión con las instrucciones de la documentación. Cuando instalamos el exporter se guardará como un zip. Lo extraemos en `/usr/local/bin/node_exporter`. Para no tener que ejecutarlo cada vez que iniciemos el equipo tendremos que arrancarlo como un servicio. Podemos seguir el tutorial casi al pie de la letra excepto por algún detalle. Tendremos que activar el firewall y además la security extension va a bloquear el servicio nuevo. Lo podremos desactivar con `restorecon -v /usr/local/bin/node_exporter`. Además tendremos que ajustar las versiones de los programas que se utilizan (ya que es algo antiguo).
+
+Está recomendado no hacer el dashboard desde cero sino coger alguno ya hecho y adaptarlo a lo que se nos pide. Se nos recomiendan dos en concreto (que están en las referencias). Hay un error tipográfico en la documentación del dashboard (ya lo buscamos nosotros y lo corregimos).
+
+La API de JMeter corre en un docker compose diferente. Desde el host se puede acceder con `http://localhost:3000/metrics/`. El problema es que no tiene dirección IP. 
+
+La opción más incorrecta sería acceder con la IP del Host. El problema es que el equipo cambia de IP cada vez que se enciende.
+
+La segunda opción (más perra) es meter todos los servidores en el mismo docker compose. Igualmente esta solución es una mierda.
+
+La última opción (la buena) es acceder a la tarjeta con un nombre simbólico. Lucía tiene una foto. Además tenemos que activar la opción de extra_hosts al contenedor que queremos monitorizar.
