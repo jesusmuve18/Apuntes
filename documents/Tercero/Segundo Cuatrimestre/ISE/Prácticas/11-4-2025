@@ -32,3 +32,5 @@ La opción más incorrecta sería acceder con la IP del Host. El problema es que
 La segunda opción (más perra) es meter todos los servidores en el mismo docker compose. Igualmente esta solución es una mierda.
 
 La última opción (la buena) es acceder a la tarjeta con un nombre simbólico. Lucía tiene una foto. Además tenemos que activar la opción de extra_hosts al contenedor que queremos monitorizar.
+
+Todas las clases que quedan serán de trabajo.
