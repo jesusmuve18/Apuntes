@@ -50,3 +50,7 @@ para aprobar se necesita que la suma total de teoría y prácticas sea superior 
 
 Se puede conservar una parte para la extraordinaria (o teoría o prácticas).
 No se puede guardar la mitad de alguna parte, solo completa (teoría o prácticas enteras).
+
+Horario de tutorías Juan Antonio:
+Miércoles 10:30-12:30
+Despacho B4 IMAG
