@@ -1,0 +1,37 @@
+2025/05/22 16:12:44 INFO  - jmeter.util.JMeterUtils: Setting Locale to es_ES 
+2025/05/22 16:12:44 INFO  - jmeter.util.JMeterUtils: Could not find resources for 'es_ES', using 'es' 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: Loading user properties from: /usr/share/jmeter/bin/user.properties 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: Loading system properties from: /usr/share/jmeter/bin/system.properties 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: Copyright (c) 1998-2015 The Apache Software Foundation 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: Version 2.13.19691222 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: java.version=21.0.7 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: java.vm.name=OpenJDK 64-Bit Server VM 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: os.name=Linux 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: os.arch=amd64 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: os.version=6.8.0-60-generic 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: file.encoding=UTF-8 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: Default Locale=español (España) 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: JMeter  Locale=español (España) 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: JMeterHome=/usr/share/jmeter 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: user.dir  =/home/jesusmuve/Escritorio/Apuntes/documents/Tercero/Segundo Cuatrimestre/ISE/Prácticas/Ejercicio_jMeter 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: PWD       =/home/jesusmuve/Escritorio/Apuntes/documents/Tercero/Segundo Cuatrimestre/ISE/Prácticas/Ejercicio_jMeter 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: IP: 127.0.1.1 Name: jesusmuve-Modern-14-B10MW FullName: jesusmuve-Modern-14-B10MW 
+2025/05/22 16:12:44 INFO  - jmeter.gui.action.LookAndFeelCommand: Using look and feel: javax.swing.plaf.metal.MetalLookAndFeel [Metal, CrossPlatform] 
+2025/05/22 16:12:44 INFO  - jmeter.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties 
+2025/05/22 16:12:45 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must contain the string: '.functions.' 
+2025/05/22 16:12:45 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must not contain the string: '.gui.' 
+2025/05/22 16:12:45 FATAL - jmeter.JMeter: An error occurred:  java.lang.reflect.InaccessibleObjectException: Unable to make field private static java.lang.String sun.awt.X11.XToolkit.awtAppClassName accessible: module java.desktop does not "opens sun.awt.X11" to unnamed module @24273305
+	at java.base/java.lang.reflect.AccessibleObject.throwInaccessibleObjectException(AccessibleObject.java:391)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:367)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:315)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:183)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:177)
+	at org.apache.jmeter.gui.MainFrame.setWindowTitle(MainFrame.java:808)
+	at org.apache.jmeter.gui.MainFrame.init(MainFrame.java:512)
+	at org.apache.jmeter.gui.MainFrame.<init>(MainFrame.java:219)
+	at org.apache.jmeter.JMeter.startGui(JMeter.java:242)
+	at org.apache.jmeter.JMeter.start(JMeter.java:387)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.apache.jmeter.NewDriver.main(NewDriver.java:264)
+
