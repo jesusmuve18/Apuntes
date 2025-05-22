@@ -12,6 +12,7 @@
         groups: "{{ admin_group }}"
         append: true
         state: present
+        password: "{{ item.password | password_hash('sha512') }}"
       loop: "{{ users }}"
     
     - name: Conceder acceso por SSH con llave pública

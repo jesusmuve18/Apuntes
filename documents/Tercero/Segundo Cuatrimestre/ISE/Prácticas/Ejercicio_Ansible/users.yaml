@@ -1,3 +1,5 @@
 users:
   - name: usuario1
+    password: ISE2025_1
   - name: usuario2
+    password: ISE2025_2
