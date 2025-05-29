@@ -148,9 +148,63 @@ systemctl daemon-reload
 systemctl daemon-reexec
 systemctl restart node_exporter
 ```
-
+---
 Una vez añadido el servicio de exporter de la máquina virtual se ha lanzado el `docker` del host (sobre el directorio `progra` creado de acuerdo a la documentación) (img20)
 ```bash
 sudo docker compose up
 ```
+Con esto ya tendremos disponible en el puerto 9090 Prometheus (img21) y en el puerto 4000 Grafana en `localhost`. Configuramos el `Data Source` en Grafana para que lea las métricas de Prometheus.
 
+En Frafana podemos importar un dashboard a partir de su id. En mi caso he elegido el modelo con id `1860` (por ser bastante completo).
+
+Ahora pasamos a añadir las dos nuevas métricas que nos pide el ejercicio. Para ello se añade un nuevo panel y en el Query que se despliega añadimos el siguiente código (img22):
+```
+service_up{service="sshd"}
+```
+En las métricas de la derecha podemos cambiar el título del panel y ponerle por ejemplo `SSHD Service [JMV]`. En Units podemos ponerlo de tipo `Bool`, en concreto `On/Off` para mejorar la visibilidad de la variable. Podemos también hacerlo de tipo `Stat` (para no ver una gráfica lineal sino únicamente el valor) y añadir thresolds para que se vea verde cuando esté activo y rojo cuando esté inactivo (img23). 
+
+Si repetimos este proceso una vez más pero con el código 
+```
+service_up{service="httpd"}
+```
+podremos obtener una vista como la siguiente (img24):
+
+![](./images_numeradas/img24.png)
+
+Donde ya tenemos los paneles pedidos. Ahora podemos pasar a hacer pruebas en los servidores para comprobar si funcionan correctamente estos paneles. 
+
+Comenzamos instalando `httpd` en el servidor (img25):
+```bash
+sudo dnf install httpd
+```
+Podemos ver que inicialmente el panel `Httpd Service [JMV]` se encuentra en estado `Off` (img26) :
+![](./images_numeradas/img26.png)
+
+Si ahora probamos a iniciar el servicio `httpd` obtenemos (img27): 
+```bash
+systemctl start httpd
+```
+![](./images_numeradas/img27.png)
+
+Y vemos que efectivamente se activa el panel correspondiente.
+
+Probamos ahora a desactivar el servicio `sshd` (img28):
+```bash
+systemctl stop sshd
+```
+![](./images_numeradas/img28.png)
+
+Y vemos que efectivamente se desactiva.
+Probamos nuevamente a desactivar también `httpd`
+(img29):
+```bash
+systemctl stop httpd
+```
+![](./images_numeradas/img29.png)
+
+Finalmente podemos activar los dos a la vez y tenemos el siguiente resultado (img30):
+```bash
+systemctl start httpd
+systemctl start sshd
+```
+![](./images_numeradas/img30.png)
