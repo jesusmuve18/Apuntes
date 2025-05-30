@@ -251,3 +251,118 @@ Cree un monitores para las siguientes métricas:
 Realice una memoria de prácticas en la que se ponga de manifiesto la ejecución de la prueba de carga diseñada para Jmeter y se aprecie el efecto de la misma en los monitores anteriormente descritos.
 
 ## Resolución
+Para comenzar el ejercicio se ha copiado el directorio del ejercicio de `jMeter` y se han añadido las carpetas de `prometheus_data` y `grafana_data` del ejercicio anterior. Finalmente se ha añadido un archivo para la configuración de prometheus, `prometheus.yml` y se ha quitado todo lo que no hacía falta para el funcionamiento de la API Web. El resultado ha sido el siguiente:
+```bash
+Ejercicio_Grafana
+  |-grafana_data
+  |-jMeter
+  |-mongodb
+  |-nodejs
+  |-prometheus_data
+  |-docker-compose.yml
+  |-prometheus.yml
+```
+Donde el archivo `docker_compose.yml` contiene la siguiente configuración:
+```yml
+version: "3"
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.50.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus_data:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+
+  grafana:
+    image: grafana/grafana:9.1.0
+    ports:
+      - "4000:3000"
+    volumes:
+      - ./grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+  mongodb:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+
+  mongodbinit:
+    build: ./mongodb
+    depends_on:
+      - mongodb
+
+  nodejs:
+    build: ./nodejs
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+```
+
+Y el archivo `prometheus.yml` contiene:
+```yml
+---
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: "prometheus_service"
+    static_configs:
+      - targets: ["prometheus:9090"]
+  
+  - job_name: 'nodejs-api'
+    static_configs:
+      - targets: ["nodejs:3000"]
+```
+
+De esta forma hemos añadido al docker de jMeter lo necesario para poder ejecutar y monitorizar la API Web (que estará corriendo en `localhost`, puerto 3000). Al lanzar el contenedor:
+```bash
+sudo docker compose up
+```
+Se habilitan los siguientes puertos:
+- `localhost:3000`: API de la Web de la ETSIIT
+- `localhost:9090`: Prometheus monitorizando la API de la Web de la ETSIIT.
+- `localhost:4000`: Grafana
+
+Con esto ya tenemos la configuración inicial para poder hacer lo que pide el ejercicio. 
+
+---
+
+En primer lugar crearemos los paneles que se piden en Grafana. Para ello abrimos Grafana y le especificamos en la configuración que coja datos de Prometheus (especificando el `Data Source`).
+
+Creamos ahora un nuevo Dashboard (en mi caso lo cree vacío solo para añadir los paneles requeridos). Dentro del Dashboard pasamos a crear los siguientes paneles:
+#### Tiempo de Uso de la CPU
+En el código del Query añadimos:
+```
+rate(process_cpu_seconds_total[1m])
+```
+Y conseguimos el tiempo de uso de la CPU por segundo. Tocando un poco las leyendas y los estilos, poniéndolo de tipo Stat obtenemos el siguiente resultado (img37):
+
+![](./images_numeradas/img37.png)
+
+#### Memoria disponible
+Añadimos ahora dos Querys y ponemos:
+```bash
+nodejs_heap_size_total_bytes # En la primera
+nodejs_heap_size_used_bytes  # En la segunda
+```
+Y conseguimos dos líneas temporales que indican la memoria usada y la memoria total en cada caso (img38).
+
+![](./images_numeradas/img38.png)
+
+#### Tiempos de respuesta de los endpoints de la API
+Añadimos ahora dos Querys y ponemos:
+```bash
+nodejs_heap_size_total_bytes # En la primera
+nodejs_heap_size_used_bytes  # En la segunda
+```
+Y conseguimos dos líneas temporales que indican la memoria usada y la memoria total en cada caso (img38).
+
+![](./images_numeradas/img38.png)
+
+
