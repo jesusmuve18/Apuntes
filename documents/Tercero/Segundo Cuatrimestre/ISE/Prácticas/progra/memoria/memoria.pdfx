@@ -1,0 +1,277 @@
+<h1 id="ejercicio-monitorización-con-grafanaprometheus">Ejercicio
+Monitorización con Grafana+Prometheus</h1>
+<h2 id="indicaciones">Indicaciones</h2>
+<p>Se han hecho capturas de pantalla de todo el proceso y están adjuntas
+en una carpeta aparte (<code>images</code>). Durante el documento se
+referenciaran en qué imagenes aparecen las instrucciones que se usan. Se
+ha hecho así para facilitar la lectura y poder consultar cualquier duda
+en las imágenes. Se han indicado con (img_) donde ’_’ representa el
+número de imagen (ese será su nombre en el directorio recién
+mencionado). Se han adjuntado directamente además las que se piden de
+forma directa en los ejercicios.</p>
+<h2 id="monitorización-de-servidor-linux">Monitorización de Servidor
+Linux</h2>
+<h3 id="enunciado">Enunciado</h3>
+<p>Emplear la plataforma Prometheus + Grafana instalada para monitorizar
+las prestaciones de un servidor Rocky corriendo en una VM. El alumno/a
+puede elegir los componentes de Prometheus y Grafana que prefiera o
+crear nuevos componentes por si mismo/a. No obstante, se sugiere emplear
+como base el exporter de Linux para Prometheus, configurado como un
+servicio y emplear como base algún dashboard predefinido para Grafana.
+Siga las instrucciones de cada dashboard para posibles ajustes en
+Prometheus. En Granafa vaya a <code>Dashboards → Import</code> y
+proporcionar el <code>Id</code> del dashboard.</p>
+<p>El dashboard debe recibir como identificador, el nombre y apellidos
+del alumno/a en CamelCase junto con el sufijo “Linux”. Por ejemplo,
+mariaGarciaPerezLinux. Todos los paneles creados se presentarán con un
+título que contenga las iniciales del alumno/a. Siguiendo con el ejemplo
+anterior: %CPU (MGP).</p>
+<p>El alumno/a debe extender el dashboard anterior para incorporar
+indicadores sobre el el nivel de activación (“Activo”/”Inactivo”, 1/0)
+de los servicios: SSHD y Apache Httpd en el equipo Linux
+monitorizado.</p>
+<p>Además, deberá agregar un nuevo panel sobre el nivel de uso total de
+la CPU en tanto por ciento (%). A este panel se le asociará una alarma
+para que se dispare cuando la media del uso de CPU supere el 75% de CPU
+durante 5 minutos. Ponga de manifiesto el funcionamiento de la alarma
+empleando alguna herramienta de carga de las vistas en clase (por
+ejemplo, <code>stress</code>).</p>
+<p>Para poner de manifiesto el funcionamiento de la monitorización, se
+adjuntará una memoria en la que se presenten: - Descripción de la
+secuencia de pasos realizada para ejecutar el exporter de Linux. Con
+capturas de pantalla de los pasos seguidos para su ejecución y/o
+configuración. - Capturas de pantalla de los monitores de Sshd y Httpd
+poniendo de manifiesto su comportamiento cuando los servicios están
+activos e inactivos. Captura de pantalla del monitor de uso de CPU antes
+y después de lanzar la carga de CPU. - Captura de pantalla del comando
+empleado para disparar la carga de CPU. - Captura de pantalla que ponga
+de manifiesto el disparo de la alarma asociada al monitor de CPU</p>
+<h3 id="resolución">Resolución</h3>
+<p>En primer lugar se ha instalado en la máquina virtual
+<code>wget</code> y se ha clonado el repositorio de github (img1,
+img2):</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf install wget</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> wget https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-amd64.tar.gz</span></code></pre></div>
+<p>Una vez descargado el archivo
+<code>node_exporter-1.9.1.linux-amd64.tar.gz</code> se ha descargado
+<code>tar</code> y se ha extraído el contenido del archivo con (img3,
+img4)</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf install tar</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvf</span> node_exporter-1.9.1.linux-amd64.tar.gz</span></code></pre></div>
+<p>Se ha creado a continuación un usuario nuevo sin terminal ni shell
+(img5), se le ha dado la propiedad del archivo descomprimido
+anteriormente (img6) y se ha cambiado el nombre del archivo a
+<code>node_exporter</code> (para facilitar su uso). Finalmente se le ha
+dado permiso de ejecución (img7)</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">useradd</span> <span class="at">--no-create-home</span> <span class="at">--shell</span> /bin/false node_exporter</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span> <span class="at">-R</span> node_exporter:node_exporter /opt/node_exporter-1.9.1.linux-amd64</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> /opt/node_exporter-1.9.1.linux-amd64 /opt/node_exporter</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> u+x /opt/node_exporter</span></code></pre></div>
+<p>Después se ha creado un servicio para el exporter y se ha añadido la
+información necesaria para el funcionamiento (img8, img9)</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> /etc/systemd/system/node_exporter.service</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vi</span> /etc/systemd/system/node_exporter.service</span></code></pre></div>
+<p>En el archivo se ha añadido el siguiente contenido (img10):</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[Unit]</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">Description</span><span class="op">=</span>Node <span class="ex">Exporter</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="va">Wants</span><span class="op">=</span>network-online.target</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="va">After</span><span class="op">=</span>network-online.target</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[Service]</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="va">User</span><span class="op">=</span>node_exporter</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="va">Group</span><span class="op">=</span>node_exporter</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="va">Typer</span><span class="op">=</span>simple</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="va">ExecStart</span><span class="op">=</span>/opt/node_exporter/node_exporter</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="ex">[Install]</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="va">WantedBy</span><span class="op">=</span>default.target</span></code></pre></div>
+<p>Una vez hecho esto se han recargado los demonios y se ha habilitado
+el nuevo servicio recién creado (img11)</p>
+<pre><code>systemctl daemon-reexec
+systemctl daemon-reload
+systemctl enable node_exporter</code></pre>
+<p>Se ha habilitado el puerto 9100 (img12)</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--permanent</span> <span class="at">--add-port</span><span class="op">=</span>9100/tcp</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firewall-cmd</span> <span class="at">--reload</span></span></code></pre></div>
+<p>Para que el exporter pueda ver la nueva información que se quiere
+recopilar se ha modificado una opción en su arranque. Para ello, en
+lugar de modificar el servicio creado se han añadido directrices (un
+parámetro para la ejecución). El proceso ha sido el siguiente
+(img13):</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /var/lib/node_exporter/textfile_collector</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl edit node_exporter</span></code></pre></div>
+<p>Con esta última instrucción se nos abre un archivo al que se le va
+añadir la siguiente información (img14):</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[Service]</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="va">ExecStart</span><span class="op">=</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="va">ExecStart</span><span class="op">=</span>/usr/local/bin/node_exporter <span class="ex">--collector.textfile.directory=/var/lib/node_exporter/textfile_collector</span></span></code></pre></div>
+<p>Se le ha dado la propiedad del <code>textfile_collector</code> al
+<code>node_exporter</code> y se han recargado los demonios y el servicio
+<code>node_exporter</code> (img15):</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chown node_exporter:node_exporter /var/lib/node_exporter/textfile_collector</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl daemon-reexec</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart node_exporter</span></code></pre></div>
+<p>Una vez hecho esto solo nos queda indicar qué parámetros queremos
+exportar. Para ello se ha modificado el archivo (img16)</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vi /usr/local/bin/check_services.sh</span></code></pre></div>
+<p>Y se ha añadido el siguiente contenido (img17):</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="va">OUTPUT_FILE</span><span class="op">=</span><span class="st">&quot;/var/lib/node_exporter/textfile_collector/service_status.prom&quot;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;# HELP service_up Whether a systemd service is up (1) or down (0)&quot;</span> <span class="op">&gt;</span> <span class="va">$OUTPUT_FILE</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;# TYPE service_up gauge&quot;</span> <span class="op">&gt;&gt;</span> <span class="va">$OUTPUT_FILE</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> service <span class="kw">in</span> httpd sshd<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="ex">systemctl</span> is-active <span class="at">--quiet</span> <span class="va">$service</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;service_up{service=</span><span class="dt">\&quot;</span><span class="va">$service</span><span class="dt">\&quot;</span><span class="st">} 1&quot;</span> <span class="op">&gt;&gt;</span> <span class="va">$OUTPUT_FILE</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;service_up{service=</span><span class="dt">\&quot;</span><span class="va">$service</span><span class="dt">\&quot;</span><span class="st">} 0&quot;</span> <span class="op">&gt;&gt;</span> <span class="va">$OUTPUT_FILE</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<p>Después le daremos la propiedad al <code>node_exporter</code> (img18)
+y permiso de ejecución:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod u+x /usr/local/bin/check_services.sh</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chown node_exporter:node_exporter /var/lib/node_exporter/textfile_collector/service_status.prom</span></code></pre></div>
+<p>Con este script mandamos al archivo <code>service_status.prom</code>
+4 líneas. Las 2 primeras son comentarios que ayudaran a otras tareas.
+Las 2 últimas serán de la forma:</p>
+<pre><code>service_up{service=httpd} *
+service_up{service=httpd} *</code></pre>
+<p>Donde en ’*’ aparecerá un número (0 o 1) que indica si el servicio
+entre llaves está activo o no (es fácil de leer en el script).</p>
+<p>Solo nos queda hacer que este script se ejecute periódicamente para
+poder comprobar de forma continua el estado de estos servicios. Para
+ello vamos a ejecutar los siguientes comandos (no tengo imagen de su
+ejecución):</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> crontab <span class="at">-e</span></span></code></pre></div>
+<p>Y añadimos la siguiente línea al archivo:</p>
+<pre><code>* * * * * /usr/local/bin/check_services.sh</code></pre>
+<p>Con esto hacemos que el script anterior se ejecute cada minuto. Una
+vez hecho esto ya hemos finalizado la configuración en la máquina
+virtual (el servidor que queremos monitorizar). Recargamos los demonios
+(img19)</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> daemon-reload</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> daemon-reexec</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> restart node_exporter</span></code></pre></div>
+<hr />
+<p>Una vez añadido el servicio de exporter de la máquina virtual se ha
+lanzado el <code>docker</code> del host (sobre el directorio
+<code>progra</code> creado de acuerdo a la documentación) (img20)</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker compose up</span></code></pre></div>
+<p>Con esto ya tendremos disponible en el puerto 9090 Prometheus (img21)
+y en el puerto 4000 Grafana en <code>localhost</code>. Configuramos el
+<code>Data Source</code> en Grafana para que lea las métricas de
+Prometheus.</p>
+<p>En Frafana podemos importar un dashboard a partir de su id. En mi
+caso he elegido el modelo con id <code>1860</code> (por ser bastante
+completo).</p>
+<p>Ahora pasamos a añadir las dos nuevas métricas que nos pide el
+ejercicio. Para ello se añade un nuevo panel y en el Query que se
+despliega añadimos el siguiente código (img22):</p>
+<pre><code>service_up{service=&quot;sshd&quot;}</code></pre>
+<p>En las métricas de la derecha podemos cambiar el título del panel y
+ponerle por ejemplo <code>SSHD Service [JMV]</code>. En Units podemos
+ponerlo de tipo <code>Bool</code>, en concreto <code>On/Off</code> para
+mejorar la visibilidad de la variable. Podemos también hacerlo de tipo
+<code>Stat</code> (para no ver una gráfica lineal sino únicamente el
+valor) y añadir thresolds para que se vea verde cuando esté activo y
+rojo cuando esté inactivo (img23).</p>
+<p>Si repetimos este proceso una vez más pero con el código</p>
+<pre><code>service_up{service=&quot;httpd&quot;}</code></pre>
+<p>podremos obtener una vista como la siguiente (img24):</p>
+<p><img src="./images_numeradas/img24.png" /></p>
+<p>Donde ya tenemos los paneles pedidos. Ahora podemos pasar a hacer
+pruebas en los servidores para comprobar si funcionan correctamente
+estos paneles.</p>
+<p>Comenzamos instalando <code>httpd</code> en el servidor (img25):</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> dnf install httpd</span></code></pre></div>
+<p>Podemos ver que inicialmente el panel
+<code>Httpd Service [JMV]</code> se encuentra en estado <code>Off</code>
+(img26) : <img src="./images_numeradas/img26.png" /></p>
+<p>Si ahora probamos a iniciar el servicio <code>httpd</code> obtenemos
+(img27):</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> start httpd</span></code></pre></div>
+<p><img src="./images_numeradas/img27.png" /></p>
+<p>Y vemos que efectivamente se activa el panel correspondiente.</p>
+<p>Probamos ahora a desactivar el servicio <code>sshd</code>
+(img28):</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> stop sshd</span></code></pre></div>
+<p><img src="./images_numeradas/img28.png" /></p>
+<p>Y vemos que efectivamente se desactiva. Probamos nuevamente a
+desactivar también <code>httpd</code> (img29):</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> stop httpd</span></code></pre></div>
+<p><img src="./images_numeradas/img29.png" /></p>
+<p>Finalmente podemos activar los dos a la vez y tenemos el siguiente
+resultado (img30):</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> start httpd</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> start sshd</span></code></pre></div>
+<p><img src="./images_numeradas/img30.png" /></p>
+<p>Vamos ahora con el panel para medir el uso de la CPU. Creamos un
+nuevo panel y añadimos el siguiente Query (img31):</p>
+<pre><code>100 - (avg by (instance) (rate(node_cpu_seconds_total{mode=&quot;idle&quot;}[1m])) * 100)</code></pre>
+<p>Podemos tocar los tresholds de nuevo para darle un aspecto más
+atractivo. Finalizada la creación de este panel es hora de crear una
+alerta. Le damos a alerts y añadimos una nueva alerta (img32).</p>
+<p>Le indicamos la misma métrica que antes y en la expresión B añadimos
+<code>WHEN last OF A IS ABOVE 75</code>. Una vez hecho esto terminamos
+de configurar la alerta poniéndole <code>Evaluate 1m for 5m</code> para
+que salte a los 5 min comprobándolo cada minuto. Podemos pasar ya a
+probar el panel y la alerta (img33). Ejecutamos en la máquina
+virtual:</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">stress</span> <span class="at">--cpu</span> 4 <span class="at">--timeout</span> 360</span></code></pre></div>
+<p><img src="./images_numeradas/img33.png" /></p>
+<p>Y vemos cómo empieza a subir el uso de la CPU en el panel recién
+creado. Si vemos un poco más observamos que cuando supera el 75% (línea
+roja) se dispara la alarma pero en estado <code>pending</code>
+(img34):</p>
+<p><img src="./images_numeradas/img34.png" /></p>
+<p>Ahora empezará a contar 5 minutos hasta que se cumpla la condición
+para que salte la alarma (img35):</p>
+<p><img src="./images_numeradas/img35.png" /></p>
+<p>Si lo dejamos un poco más vemos cómo de desactiva la alerta al volver
+a un uso bajo de la CPU (img36):</p>
+<p><img src="./images_numeradas/img36.png" /></p>
+<h2 id="monitorización-de-api-web">Monitorización de API WEB</h2>
+<h3 id="enunciado-1">Enunciado</h3>
+<p>La aplicación empleada en apartado anterior para la prueba de carga,
+expone en el path “/metrics” los indicadores de NodeJS para Prometheus.
+Para más información, el exporter de Prometheus de la API Web se ha
+generado empleando los componentes estandar: prom-client y
+express-prom-bundle.</p>
+<p>Cree un nuevo Dashboard con algunas de las métricas expuestas. Para
+el dashboard emplee como nombre su nombre y apellidos en CamelCase
+seguido del sufijo API. Por ejemplo, anaTorrentRamonetAPI. Todos los
+paneles creados se presentarán con un título que contenga las iniciales
+del alumno/a. Siguiendo con el ejemplo anterior: %Memoria (ATR).</p>
+<p>Cree un monitores para las siguientes métricas: - Tiempos de
+respuesta de los endpoints de la API
+(http_request_duration_seconds_bucket) - Memoria disponible
+(nodejs_heap_size_total_bytes) vs la usada actualmente
+(nodejs_heap_size_used_bytes) - Uso de CPU
+(process_cpu_seconds_total)</p>
+<p>Realice una memoria de prácticas en la que se ponga de manifiesto la
+ejecución de la prueba de carga diseñada para Jmeter y se aprecie el
+efecto de la misma en los monitores anteriormente descritos.</p>
+<h2 id="resolución-1">Resolución</h2>

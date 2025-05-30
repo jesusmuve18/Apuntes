@@ -235,4 +235,19 @@ Si lo dejamos un poco más vemos cómo de desactiva la alerta al volver a un uso
 
 ![](./images_numeradas/img36.png)
 
+## Monitorización de API WEB
 
+### Enunciado
+La aplicación empleada en apartado anterior para la prueba de carga, expone en el path “/metrics” los indicadores de NodeJS para Prometheus. Para más información, el exporter de Prometheus de la API Web se ha generado empleando los componentes estandar: prom-client y express-prom-bundle.
+
+Cree un nuevo Dashboard con algunas de las métricas expuestas. Para el dashboard emplee como nombre su nombre y apellidos en CamelCase seguido del sufijo API. Por ejemplo, anaTorrentRamonetAPI. Todos los paneles creados se presentarán con un título que contenga las iniciales del alumno/a. Siguiendo con el ejemplo anterior: %Memoria (ATR).
+
+Cree un monitores para las siguientes métricas:
+- Tiempos de respuesta de los endpoints de la API (http_request_duration_seconds_bucket)
+- Memoria disponible (nodejs_heap_size_total_bytes) vs la usada actualmente
+(nodejs_heap_size_used_bytes)
+- Uso de CPU (process_cpu_seconds_total)
+  
+Realice una memoria de prácticas en la que se ponga de manifiesto la ejecución de la prueba de carga diseñada para Jmeter y se aprecie el efecto de la misma en los monitores anteriormente descritos.
+
+## Resolución
