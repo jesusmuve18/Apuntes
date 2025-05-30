@@ -208,3 +208,31 @@ systemctl start httpd
 systemctl start sshd
 ```
 ![](./images_numeradas/img30.png)
+
+Vamos ahora con el panel para medir el uso de la CPU. Creamos un nuevo panel y añadimos el siguiente Query (img31):
+```
+100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100)
+```
+
+Podemos tocar los tresholds de nuevo para darle un aspecto más atractivo. Finalizada la creación de este panel es hora de crear una alerta. Le damos a alerts y añadimos una nueva alerta (img32). 
+
+Le indicamos la misma métrica que antes y en la expresión B añadimos
+`WHEN last OF A IS ABOVE 75`. Una vez hecho esto terminamos de configurar la alerta poniéndole `Evaluate 1m for 5m` para que salte a los 5 min comprobándolo cada minuto. Podemos pasar ya a probar el panel y la alerta (img33). Ejecutamos en la máquina virtual:
+```bash
+stress --cpu 4 --timeout 360
+```
+![](./images_numeradas/img33.png)
+
+Y vemos cómo empieza a subir el uso de la CPU en el panel recién creado. Si vemos un poco más observamos que cuando supera el 75% (línea roja) se dispara la alarma pero en estado `pending` (img34):
+
+![](./images_numeradas/img34.png)
+
+Ahora empezará a contar 5 minutos hasta que se cumpla la condición para que salte la alarma (img35):
+
+![](./images_numeradas/img35.png)
+
+Si lo dejamos un poco más vemos cómo de desactiva la alerta al volver a un uso bajo de la CPU (img36):
+
+![](./images_numeradas/img36.png)
+
+
