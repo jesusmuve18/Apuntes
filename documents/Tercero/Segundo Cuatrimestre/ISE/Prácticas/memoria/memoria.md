@@ -155,7 +155,7 @@ sudo docker compose up
 ```
 Con esto ya tendremos disponible en el puerto 9090 Prometheus (img21) y en el puerto 4000 Grafana en `localhost`. Configuramos el `Data Source` en Grafana para que lea las métricas de Prometheus.
 
-En Frafana podemos importar un dashboard a partir de su id. En mi caso he elegido el modelo con id `1860` (por ser bastante completo).
+En Grafana podemos importar un dashboard a partir de su id. En mi caso he elegido el modelo con id `1860` (por ser bastante completo).
 
 Ahora pasamos a añadir las dos nuevas métricas que nos pide el ejercicio. Para ello se añade un nuevo panel y en el Query que se despliega añadimos el siguiente código (img22):
 ```
@@ -356,13 +356,21 @@ Y conseguimos dos líneas temporales que indican la memoria usada y la memoria t
 ![](./images_numeradas/img38.png)
 
 #### Tiempos de respuesta de los endpoints de la API
-Añadimos ahora dos Querys y ponemos:
+Añadimos ahora::
 ```bash
-nodejs_heap_size_total_bytes # En la primera
-nodejs_heap_size_used_bytes  # En la segunda
+histogram_quantile(0.95, sum(rate(prometheus_http_request_duration_seconds_bucket[$__rate_interval])) by (le))
 ```
-Y conseguimos dos líneas temporales que indican la memoria usada y la memoria total en cada caso (img38).
+(img39).
 
-![](./images_numeradas/img38.png)
+![](./images_numeradas/img39.png)
 
+Ya podemos pasar a hacer la prueba de jMeter. Como jMeter estaba configurado para acceder a la API a través de `localhost:3000` no tendremos que modificar nada en su configuración, simplemente ejecutar la prueba de carga.
 
+Al ejecutarlo tenemos inicialmente una situación como la siguiente (img40):
+![](./images_numeradas/img40.png)
+donde todo el sistema monitorizado parece en un estado de uso "bajo".
+
+Al ejecutar la prueba tenemos el siguiente resultado (img41):
+![](./images_numeradas/img41.png)
+
+Donde se aprecia perfectamente un pico en las medidas tanto de tiempo de uso de CPU como de memoria usada y de tiempo de acceso.
