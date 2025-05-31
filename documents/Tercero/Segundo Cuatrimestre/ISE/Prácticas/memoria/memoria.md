@@ -169,7 +169,7 @@ service_up{service="httpd"}
 ```
 podremos obtener una vista como la siguiente (img24):
 
-![](./images_numeradas/img24.png)
+![img24](./images/img24.png)
 
 Donde ya tenemos los paneles pedidos. Ahora podemos pasar a hacer pruebas en los servidores para comprobar si funcionan correctamente estos paneles. 
 
@@ -178,13 +178,13 @@ Comenzamos instalando `httpd` en el servidor (img25):
 sudo dnf install httpd
 ```
 Podemos ver que inicialmente el panel `Httpd Service [JMV]` se encuentra en estado `Off` (img26) :
-![](./images_numeradas/img26.png)
+![](./images/img26.png)
 
 Si ahora probamos a iniciar el servicio `httpd` obtenemos (img27): 
 ```bash
 systemctl start httpd
 ```
-![](./images_numeradas/img27.png)
+![](./images/img27.png)
 
 Y vemos que efectivamente se activa el panel correspondiente.
 
@@ -192,7 +192,7 @@ Probamos ahora a desactivar el servicio `sshd` (img28):
 ```bash
 systemctl stop sshd
 ```
-![](./images_numeradas/img28.png)
+![](./images/img28.png)
 
 Y vemos que efectivamente se desactiva.
 Probamos nuevamente a desactivar también `httpd`
@@ -200,14 +200,14 @@ Probamos nuevamente a desactivar también `httpd`
 ```bash
 systemctl stop httpd
 ```
-![](./images_numeradas/img29.png)
+![](./images/img29.png)
 
 Finalmente podemos activar los dos a la vez y tenemos el siguiente resultado (img30):
 ```bash
 systemctl start httpd
 systemctl start sshd
 ```
-![](./images_numeradas/img30.png)
+![](./images/img30.png)
 
 Vamos ahora con el panel para medir el uso de la CPU. Creamos un nuevo panel y añadimos el siguiente Query (img31):
 ```
@@ -221,19 +221,19 @@ Le indicamos la misma métrica que antes y en la expresión B añadimos
 ```bash
 stress --cpu 4 --timeout 360
 ```
-![](./images_numeradas/img33.png)
+![](./images/img33.png)
 
 Y vemos cómo empieza a subir el uso de la CPU en el panel recién creado. Si vemos un poco más observamos que cuando supera el 75% (línea roja) se dispara la alarma pero en estado `pending` (img34):
 
-![](./images_numeradas/img34.png)
+![](./images/img34.png)
 
 Ahora empezará a contar 5 minutos hasta que se cumpla la condición para que salte la alarma (img35):
 
-![](./images_numeradas/img35.png)
+![](./images/img35.png)
 
 Si lo dejamos un poco más vemos cómo de desactiva la alerta al volver a un uso bajo de la CPU (img36):
 
-![](./images_numeradas/img36.png)
+![](./images/img36.png)
 
 ## Monitorización de API WEB
 
@@ -251,60 +251,41 @@ Cree un monitores para las siguientes métricas:
 Realice una memoria de prácticas en la que se ponga de manifiesto la ejecución de la prueba de carga diseñada para Jmeter y se aprecie el efecto de la misma en los monitores anteriormente descritos.
 
 ## Resolución
-Para comenzar el ejercicio se ha copiado el directorio del ejercicio de `jMeter` y se han añadido las carpetas de `prometheus_data` y `grafana_data` del ejercicio anterior. Finalmente se ha añadido un archivo para la configuración de prometheus, `prometheus.yml` y se ha quitado todo lo que no hacía falta para el funcionamiento de la API Web. El resultado ha sido el siguiente:
+Para comenzar el ejercicio se ha copiado el directorio del ejercicio anterior y se ha metido en una carpeta llamada `Grafana_Prometheus_docker` en el cual se han cambiado algunos archivos de configuración para que prometheus pueda monitorizar la API Web. La red de directorios resultante ha sido la siguiente
 ```bash
-Ejercicio_Grafana
+Grafana_Prometheus_docker
   |-grafana_data
-  |-jMeter
-  |-mongodb
-  |-nodejs
   |-prometheus_data
   |-docker-compose.yml
   |-prometheus.yml
 ```
 Donde el archivo `docker_compose.yml` contiene la siguiente configuración:
 ```yml
+---
 version: "3"
-
 services:
   prometheus:
     image: prom/prometheus:v2.50.0
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
-      - "9090:9090"
+      - 9090:9090
     volumes:
       - ./prometheus_data:/prometheus
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
-
+    - "--config.file=/etc/prometheus/prometheus.yml"
   grafana:
     image: grafana/grafana:9.1.0
     ports:
-      - "4000:3000"
+    - 4000:3000
     volumes:
-      - ./grafana_data:/var/lib/grafana
+    - ./grafana_data:/var/lib/grafana
     depends_on:
-      - prometheus
-
-  mongodb:
-    image: mongo:6
-    ports:
-      - "27017:27017"
-
-  mongodbinit:
-    build: ./mongodb
-    depends_on:
-      - mongodb
-
-  nodejs:
-    build: ./nodejs
-    ports:
-      - "3000:3000"
-    depends_on:
-      - mongodb
+    - prometheus
 ```
 
-Y el archivo `prometheus.yml` contiene:
+Y al archivo `prometheus.yml` se le ha añadido un job para poder monitorizar la API:
 ```yml
 ---
 global:
@@ -315,21 +296,24 @@ scrape_configs:
     static_configs:
       - targets: ["prometheus:9090"]
   
-  - job_name: 'nodejs-api'
+  - job_name: "API_Web"
     static_configs:
-      - targets: ["nodejs:3000"]
+      - targets: ['host.docker.internal:3000'] # Acceso a API Web
+
 ```
 
-De esta forma hemos añadido al docker de jMeter lo necesario para poder ejecutar y monitorizar la API Web (que estará corriendo en `localhost`, puerto 3000). Al lanzar el contenedor:
+De esta forma podemos conectar los componentes necesarios para la realización del ejercicio. Si volvemos al directorio de jMeter y lanzamos el docker con la API:
 ```bash
 sudo docker compose up
 ```
+
+Y hacemos lo mismo en el directorio `Grafana_Prometheus_docker` para activar grafana y prometheus tenemos ya la configuración terminada.
 Se habilitan los siguientes puertos:
 - `localhost:3000`: API de la Web de la ETSIIT
 - `localhost:9090`: Prometheus monitorizando la API de la Web de la ETSIIT.
 - `localhost:4000`: Grafana
 
-Con esto ya tenemos la configuración inicial para poder hacer lo que pide el ejercicio. 
+Y ya podremos comenzar con el ejercicio
 
 ---
 
@@ -343,7 +327,7 @@ rate(process_cpu_seconds_total[1m])
 ```
 Y conseguimos el tiempo de uso de la CPU por segundo. Tocando un poco las leyendas y los estilos, poniéndolo de tipo Stat obtenemos el siguiente resultado (img37):
 
-![](./images_numeradas/img37.png)
+![](images/img37.png)
 
 #### Memoria disponible
 Añadimos ahora dos Querys y ponemos:
@@ -353,7 +337,7 @@ nodejs_heap_size_used_bytes  # En la segunda
 ```
 Y conseguimos dos líneas temporales que indican la memoria usada y la memoria total en cada caso (img38).
 
-![](./images_numeradas/img38.png)
+![](./images/img38.png)
 
 #### Tiempos de respuesta de los endpoints de la API
 Añadimos ahora::
@@ -362,15 +346,15 @@ histogram_quantile(0.95, sum(rate(prometheus_http_request_duration_seconds_bucke
 ```
 (img39).
 
-![](./images_numeradas/img39.png)
+![](./images/img39.png)
 
 Ya podemos pasar a hacer la prueba de jMeter. Como jMeter estaba configurado para acceder a la API a través de `localhost:3000` no tendremos que modificar nada en su configuración, simplemente ejecutar la prueba de carga.
 
 Al ejecutarlo tenemos inicialmente una situación como la siguiente (img40):
-![](./images_numeradas/img40.png)
+![](./images/img40.png)
 donde todo el sistema monitorizado parece en un estado de uso "bajo".
 
 Al ejecutar la prueba tenemos el siguiente resultado (img41):
-![](./images_numeradas/img41.png)
+![](./images/img41.png)
 
 Donde se aprecia perfectamente un pico en las medidas tanto de tiempo de uso de CPU como de memoria usada y de tiempo de acceso.
