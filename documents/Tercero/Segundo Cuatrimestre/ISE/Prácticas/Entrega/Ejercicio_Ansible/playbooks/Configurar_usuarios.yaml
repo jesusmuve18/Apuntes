@@ -1,0 +1,72 @@
+---
+- name: Configurar usuarios
+  hosts: servers
+  vars_files:
+    - ../vars.yaml
+    - ../users.yaml
+  become: yes                           # para sudo de root
+  tasks:
+      # Apartado 1
+    - name: Crear usuario admin
+      ansible.builtin.user:             # este módulo crea un usuario
+        name: "{{ admin_user }}"
+        state: present                  # si ya existe no lo crea
+
+    - name: Configurar sudo sin contraseña para admin
+      ansible.builtin.copy:             # este módulo copia un fichero en un destino
+        dest: "/etc/sudoers.d/{{ admin_user }}"
+        content: "{{ admin_user }} ALL=(ALL) NOPASSWD:ALL\n"
+        validate: 'visudo -cf %s'       # pasarlo por visudo
+      
+      # Apartado 2
+    - name: Añadir clave pública a admin
+      ansible.posix.authorized_key:
+        user: "{{ admin_user }}"
+        state: present
+        key: "{{ lookup('ansible.builtin.file', '../keys/' + admin_user + '.pub') }}"
+      
+      # Apartado 3
+    - name: Crear wheel si no existe
+      ansible.builtin.group:
+        name: "{{ admin_group }}"
+        state: present                  # si ya está no lo crea
+
+    - name: Permitir ejecutar sudo 
+      community.general.sudoers:
+        name: "{{ admin_group }}"
+        state: present                  # si ya está no lo crea
+        group: "{{ admin_group }}"
+        commands: ALL
+        nopassword: false               # si se quisiese sin contraseña se cambiaría esta opción
+      
+      # Apartado 4
+    - name: Añadir usuarios
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        groups: "{{ admin_group }}"
+        append: true
+        state: present
+        password: "{{ item.password | password_hash('sha512') }}"
+      loop: "{{ users }}"
+    
+    - name: Conceder acceso por SSH con llave pública
+      ansible.posix.authorized_key:
+        user: "{{ item.name }}"
+        state: present
+        key: "{{ lookup('ansible.builtin.file', '../keys/' + item.name + '.pub') }}"
+      loop: "{{ users }}"
+
+      # Apartado 5
+    - name: Deshabilitar el acceso SSH para root
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        state: present
+        line: "PermitRootLogin\tprohibit-password"
+        regex: '^PermitRootLogin\s+'
+        validate: "sshd -t -f %s"
+    
+    - name: Reinicar servicio SSH
+      ansible.builtin.service:
+        name: sshd
+        state: restarted
+        enabled: true    

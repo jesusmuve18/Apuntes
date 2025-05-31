@@ -1,0 +1,17 @@
+---
+- name: Crear usuario admin y configurar sudo sin contraseña
+  hosts: servers
+  vars_files:
+    - ../vars.yaml
+  become: yes       # para sudo de root
+  tasks:
+    - name: Crear usuario admin
+      ansible.builtin.user:             # este módulo crea un usuario
+        name: "{{ admin_user }}"
+        state: present  # si ya existe no lo crea
+
+    - name: Configurar sudo sin contraseña para admin
+      ansible.builtin.copy:             # este módulo copia un fichero en un destino
+        dest: "/etc/sudoers.d/{{ admin_user }}"
+        content: "{{ admin_user }} ALL=(ALL) NOPASSWD:ALL\n"
+        validate: 'visudo -cf %s' # pasarlo por visudo

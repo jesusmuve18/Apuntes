@@ -1,0 +1,105 @@
+\documentclass[12pt]{article}
+
+\input{../../../../../_assets/preambulo.tex}
+\input{../../../../../_assets/portada.tex}
+
+% Mejor tipografía en bloques de código
+\usepackage{inconsolata}
+
+\definecolor{codebg}{gray}{0.9}
+
+% Para código en línea
+\newcommand{\icode}[1]{\colorbox{codebg}{\texttt{\detokenize{#1}}}}
+
+% Para bloques de código
+\lstdefinestyle{mycode}{
+  backgroundcolor=\color{codebg},   
+  basicstyle=\ttfamily\small,
+  numbers=none,               
+  frame=none,                 
+  breaklines=true,            
+  showstringspaces=false,
+  aboveskip=1em,   % espacio antes del bloque
+  belowskip=1em    % espacio después del bloque
+}
+
+\lstnewenvironment{icodeblock}[1][]
+{
+  \lstset{style=mycode, language=#1}
+}
+{}
+
+\usepackage{sectsty} % paquete para modificar estilos de secciones
+\allsectionsfont{\sffamily}
+
+\newcommand{\img}[1] {
+    \begin{center}
+        \includegraphics[width=15cm]{./images/img#1.png}
+    \end{center}
+}
+
+
+\begin{document}
+
+\sffamily
+    \portada[%
+        titulo=Ingeniería de Servidores (Prácticas),
+        subtitulo=Ejercicio Ansible,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2024-2025]
+        
+    \thispagestyle{empty}
+    \tableofcontents
+    \newpage
+
+    \section{Enunciado}
+El ejercicio versa sobre la configuración de servidores empleando Ansible playbooks. Se valorará, la estructuración y claridad del código, el uso de parámetros para facilitar la reutilización de los playbooks, el uso de comentarios, el uso de variables, la organización de los artefactos, el uso de convenciones de nombrado de Ansible y de Yaml y, aunque escapa al objetivo de este ejercicio, el posible uso de recursos para reutilización de artefactos, como los Ansible Roles.\\
+
+Partiendo de dos servidores, configurados de acuerdo a los requerimientos del apartado 2, debe modificarlos para que sea posible el acceso remoto del usuario root empleando contraseña (el acceso con contraseña está desactivado por defecto en la instalación de Rocky).
+
+A continuación, realizará la siguiente configuración en los dos servidores empleando un playbook:
+
+\begin{enumerate}
+    \item Crear un nuevo usuario llamado “admin” que pueda ejecutar comandos privilegiados sin contraseña.
+    \item Dar acceso por SSH al usuario “admin” con llave pública.
+    \item Crear el grupo “wheel” (si no existe) y permitir a sus miembros ejecutar sudo.
+    \item Añadir una lista variable de usuarios (se proporcionará un ejemplo con al menos dos), añadiéndolos al grupo “wheel” y concediéndoles acceso por SSH con llave pública.
+    \item Deshabilitar el acceso por contraseña sobre SSH para el usuario root.
+\end{enumerate}
+
+Los servidores anteriormente configurados son ahora administrables mediante Ansible
+empleando el usuario “admin”. Ponga a prueba esta configuración con los siguientes
+cambios/playbooks:
+
+\begin{enumerate}
+    \item Modifique conveniente el inventario para el uso del nuevo usuario “admin”.
+    \item Uno de los servidores se empleará para correr Apache Httpd y el otro Nginx. Modifique el inventario de forma conveniente para realizar correctamente su administración.
+    \item Desarrolle un playbook para implementar los requerimientos del ejercicio 4.1.1 en los dos servidores, instalando en cada caso Apache Httpd o Nginx según la configuración del inventario.
+\end{enumerate}
+Todos los archivos necesarios para la ejecución de los Playbooks (playbooks, inventario, variables, scripts, \dots) deben estar estar localizado en un directorio (con posibles subdirectorios).
+Junto a los archivos propios de Ansible, debe proporcionar dos scripts (por ejemplo, \icode{iniciarNodosManejados.sh} y \icode{configurarWebServers.sh}) para la ejecución de los playbooks con todos los parámetros necesarios..
+
+\newpage
+
+\section{Resolución}
+
+En primer lugar se debe de garantizar el acceso con el usuario root utilizando contraseña. Para ello se deberá cambiar en el archivo \icode{/etc/ssh/sshd_config} la opción \icode{PermitRootLogin} a 'yes'
+Una vez hecho esto se podrá continuar con la ejecución haciendo \icode{sudo systemctl restart sshd}.\\
+
+Nos queda solo instalar en local sshpass (\icode{sudo apt-get install sshpass}).
+
+Una vez realizado esto es suficiente con ejecutar los 2 scripts pedidos:
+\begin{icodeblock}[bash]
+./iniciarNodosManejados.sh
+./configurarWebServers.sh
+\end{icodeblock}
+
+En cuanto a la estructura general:
+\begin{itemize}
+    \item Los playbooks se encuentran todos en la carpeta \icode{playbooks} donde estarán tanto las tareas individuales (dentro de \icode{individual}) como las que agrupan cada uno de los apartados (\icode{Configurar_usuarios} y \icode{Configurar_servidores_web.yaml})
+    \item Para la configuración de los nodos manejados se cogen las claves públicas del directorio \icode{keys} y los nombres y contraseñas de los usuarios de \icode{users}
+    \item Las variables globales están en \icode{vars}.
+    \item En cuanto a los inventarios hay uno para cada una de las tareas, el primero en \icode{hosts.yaml} (acceso por root), y el segundo en \icode{hosts2.yaml} (acceso por admin).
+\end{itemize}
+
+\end{document}

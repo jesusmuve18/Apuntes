@@ -1,0 +1,56 @@
+---
+# General - Abrir puerto HTTP en todos los servidores
+- name: Abrir puerto HTTP en el firewall
+  hosts: servers
+  become: true
+  tasks:
+    - name: Habilitar el puerto HTTP en el firewall
+      ansible.posix.firewalld:
+        service: http
+        permanent: true
+        state: enabled
+        immediate: true
+
+# Configuración de Servidor Apache Httpd
+- name: Configurar Apache Httpd
+  hosts: apache_httpd
+  become: true
+  tasks:
+    - name: Instalar Apache Httpd
+      ansible.builtin.package:
+        name: httpd
+        state: present
+
+    - name: Activar el servicio HTTP 
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Crear el archivo index.html
+      ansible.builtin.copy:
+        dest: "/var/www/html/index.html"
+        src: "../index.html"
+        mode: preserve
+
+# Configuración de Servidor Nginx
+- name: Configurar Nginx
+  hosts: nginx
+  become: true
+  tasks:
+    - name: Instalar Nginx
+      ansible.builtin.package:
+        name: nginx
+        state: present
+
+    - name: Activar el servicio Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: Crear el archivo index.html
+      ansible.builtin.copy:
+        dest: "/usr/share/nginx/html/index.html"
+        src: "../index.html"
+        mode: preserve

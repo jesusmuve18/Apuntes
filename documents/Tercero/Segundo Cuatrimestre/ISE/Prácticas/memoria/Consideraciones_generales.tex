@@ -1,0 +1,57 @@
+\documentclass[12pt]{article}
+
+\input{../../../../../_assets/preambulo.tex}
+\input{../../../../../_assets/portada.tex}
+
+% Mejor tipografía en bloques de código
+\usepackage{inconsolata}
+
+\definecolor{codebg}{gray}{0.9}
+
+% Para código en línea
+\newcommand{\icode}[1]{\colorbox{codebg}{\texttt{\detokenize{#1}}}}
+
+% Para bloques de código
+\lstdefinestyle{mycode}{
+  backgroundcolor=\color{codebg},   
+  basicstyle=\ttfamily\small,      
+  numbers=none,               
+  frame=none,                 
+  breaklines=true,            
+  showstringspaces=false,
+  aboveskip=1em,   % espacio antes del bloque
+  belowskip=1em    % espacio después del bloque
+}
+
+\lstnewenvironment{icodeblock}[1][]
+{
+  \lstset{style=mycode, language=#1}
+}
+{}
+
+\usepackage{sectsty} % paquete para modificar estilos de secciones
+\allsectionsfont{\sffamily}
+
+\newcommand{\img}[1] {
+    \begin{center}
+        \includegraphics[width=15cm]{./images/img#1.png}
+    \end{center}
+}
+
+
+\begin{document}
+
+\sffamily
+    \portada[%
+        titulo=Ingeniería de Servidores (Prácticas),
+        subtitulo=Consideraciones generales,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2024-2025]
+        
+
+    Todos los ejercicios se han incluido en un directorio independiente (comprimido), cada uno con el nombre del ejercicio que aparece en los guiones de prácticas, además de un ejercicio evaluable. \\
+
+    En cada uno de estos directorios contienen un archivo llamado \icode{memoria.pdf} que contiene un guion acerca del desarrollo del ejercicio. Además, algunos directorios incluyen una carpeta llamada \icode{images} que contiene imágenes relativas a la resolución del ejercicio. Todas ellas aparecen en los guiones referenciadas y algunas incluídas (no se han incluido todas directamente para facilitar la legibilidad del guion y que no fuese excesivamente largo).
+
+
+\end{document}
