@@ -4,7 +4,6 @@
   vars_files:
     - ../vars.yaml
     - ../users.yaml
-  become: yes                           # para sudo de root
   tasks:
       # Apartado 1
     - name: Crear usuario admin
