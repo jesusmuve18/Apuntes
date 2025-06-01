@@ -20,7 +20,8 @@
   breaklines=true,            
   showstringspaces=false,
   aboveskip=1em,   % espacio antes del bloque
-  belowskip=1em    % espacio después del bloque
+  belowskip=1em,    % espacio después del bloque
+  literate={\$}{{\textdollar}}1
 }
 
 \lstnewenvironment{icodeblock}[1][]
@@ -79,30 +80,41 @@ que se presenten:
 
 \section{Resolución}
 
+\subsection{Configuración inicial}
+
 En primer lugar se ha instalado en la máquina virtual \icode{wget} y se ha clonado el repositorio de github (img1, img2):
+
 \begin{icodeblock}[bash]
 sudo dnf install wget
 sudo wget https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-amd64.tar.gz
 \end{icodeblock}
+
 Una vez descargado el archivo \icode{node_exporter-1.9.1.linux-amd64.tar.gz}
 se ha descargado \icode{tar} y se ha extraído el contenido del archivo con (img3, img4) 
+
 \begin{icodeblock}[bash]
 sudo dnf install tar
 tar -xvf node_exporter-1.9.1.linux-amd64.tar.gz
 \end{icodeblock}
+
 Se ha creado a continuación un usuario nuevo sin terminal ni shell (img5), se le ha dado la propiedad del archivo descomprimido anteriormente (img6) y se ha cambiado el nombre del archivo a \icode{node_exporter} (para facilitar su uso). Finalmente se le ha dado permiso de ejecución (img7)
+
 \begin{icodeblock}[bash]
 useradd --no-create-home --shell /bin/false node_exporter
 chown -R node_exporter:node_exporter /opt/node_exporter-1.9.1.linux-amd64
 mv /opt/node_exporter-1.9.1.linux-amd64 /opt/node_exporter
 chmod u+x /opt/node_exporter
 \end{icodeblock}
+
 Después se ha creado un servicio para el exporter y se ha añadido la información necesaria para el funcionamiento (img8, img9)
+
 \begin{icodeblock}[bash]
 touch /etc/systemd/system/node_exporter.service
 vi /etc/systemd/system/node_exporter.service
 \end{icodeblock}
+
 En el archivo se ha añadido el siguiente contenido (img10):
+
 \begin{icodeblock}[bash]
 [Unit]
 Description=Node Exporter
@@ -118,7 +130,9 @@ ExecStart=/opt/node_exporter/node_exporter
 [Install]
 WantedBy=default.target
 \end{icodeblock}
+
 Una vez hecho esto se han recargado los demonios y se ha habilitado el nuevo servicio recién creado (img11)
+
 \begin{icodeblock}
 systemctl daemon-reexec
 systemctl daemon-reload
@@ -126,10 +140,12 @@ systemctl enable node_exporter
 \end{icodeblock}
 
 Se ha habilitado el puerto 9100 (img12)
+
 \begin{icodeblock}[bash]
 firewall-cmd --permanent --add-port=9100/tcp
 firewall-cmd --reload
 \end{icodeblock}
+
 Para que el exporter pueda ver la nueva información que se quiere recopilar se ha modificado una opción en su arranque. Para ello, en lugar de modificar el servicio creado se han añadido directrices (un parámetro para la ejecución). El proceso ha sido el siguiente (img13):
 \begin{icodeblock}[bash]
 sudo mkdir -p /var/lib/node_exporter/textfile_collector
@@ -143,29 +159,34 @@ ExecStart=/usr/local/bin/node_exporter --collector.textfile.directory=/var/lib/n
 \end{icodeblock}
 
 Se le ha dado la propiedad del \icode{textfile_collector} al \icode{node_exporter} y se han recargado los demonios y el servicio \icode{node_exporter} (img15):
+
 \begin{icodeblock}[bash]
 sudo chown node_exporter:node_exporter /var/lib/node_exporter/textfile_collector
 sudo systemctl daemon-reexec
 sudo systemctl restart node_exporter
 \end{icodeblock}
+
 Una vez hecho esto solo nos queda indicar qué parámetros queremos exportar. Para ello se ha modificado el archivo (img16)
+
 \begin{icodeblock}[bash]
 sudo vi /usr/local/bin/check_services.sh
 \end{icodeblock}
+
 Y se ha añadido el siguiente contenido (img17):
+
 \begin{icodeblock}[bash]
 #!/bin/bash
 
 OUTPUT_FILE="/var/lib/node_exporter/textfile_collector/service_status.prom"
 
-echo "\# HELP service_up Whether a systemd service is up (1) or down (0)" > \$OUTPUT_FILE
-echo "\# TYPE service_up gauge" >> \$OUTPUT_FILE
+echo "# HELP service_up Whether a systemd service is up (1) or down (0)" > $OUTPUT_FILE
+echo "# TYPE service_up gauge" >> $OUTPUT_FILE
 
 for service in httpd sshd; do
-    if systemctl is-active --quiet \$service; then
-        echo "service_up{service=\"\$service\"} 1" >> \$OUTPUT_FILE
+    if systemctl is-active --quiet $service; then
+        echo "service_up{service=\"$service\"} 1" >> $OUTPUT_FILE
     else 
-        echo "service_up{service=\"\$service\"} 0" >> \$OUTPUT_FILE
+        echo "service_up{service=\"$service\"} 0" >> $OUTPUT_FILE
     fi
 done
 \end{icodeblock}
@@ -177,11 +198,13 @@ sudo chown node_exporter:node_exporter /var/lib/node_exporter/textfile_collector
 \end{icodeblock}
 
 Con este script mandamos al archivo \icode{service_status.prom} 4 líneas. Las 2 primeras son comentarios que ayudaran a otras tareas. Las 2 últimas serán de la forma:
+
 \begin{icodeblock}
 service_up{service=httpd} *
-service_up{service=httpd} *
+service_up{service=sshd} *
 \end{icodeblock}
-Donde en '*' aparecerá un número (0 o 1) que indica si el servicio entre llaves está activo o no (es fácil de leer en el script).
+
+Donde en '*' aparecerá un número (0 o 1) que indica si el servicio entre llaves está activo o no (es fácil de leer en el script).\\
 
 
 Solo nos queda hacer que este script se ejecute periódicamente para poder comprobar de forma continua el estado de estos servicios. Para ello vamos a ejecutar los siguientes comandos (no tengo imagen de su ejecución):
@@ -198,19 +221,24 @@ Y añadimos la siguiente línea al archivo:
 
 Con esto hacemos que el script anterior se ejecute cada minuto.
 Una vez hecho esto ya hemos finalizado la configuración en la máquina virtual (el servidor que queremos monitorizar). Recargamos los demonios (img19)
+
 \begin{icodeblock}[bash]
 systemctl daemon-reload
 systemctl daemon-reexec
 systemctl restart node_exporter
 \end{icodeblock}
----
+
+\subsection{Monitorización}
+
 Una vez añadido el servicio de exporter de la máquina virtual se ha lanzado el \icode{docker} del host (sobre el directorio \icode{progra} creado de acuerdo a la documentación) (img20)
+
 \begin{icodeblock}[bash]
 sudo docker compose up
 \end{icodeblock}
-Con esto ya tendremos disponible en el puerto 9090 Prometheus (img21) y en el puerto 4000 Grafana en \icode{localhost}. Configuramos el \icode{Data Source} en Grafana para que lea las métricas de Prometheus.
 
-En Grafana podemos importar un dashboard a partir de su id. En mi caso he elegido el modelo con id \icode{1860} (por ser bastante completo).
+Con esto ya tendremos disponible en el puerto 9090 Prometheus (img21) y en el puerto 4000 Grafana en \icode{localhost}. Configuramos el \icode{Data Source} en Grafana para que lea las métricas de Prometheus.\\
+
+En Grafana podemos importar un dashboard a partir de su id. En mi caso he elegido el modelo con id \icode{1860} (por ser bastante completo).\\
 
 Ahora pasamos a añadir las dos nuevas métricas que nos pide el ejercicio. Para ello se añade un nuevo panel y en el Query que se despliega añadimos el siguiente código (img22):
 
@@ -218,7 +246,7 @@ Ahora pasamos a añadir las dos nuevas métricas que nos pide el ejercicio. Para
 service_up{service="sshd"}
 \end{icodeblock}
 
-En las métricas de la derecha podemos cambiar el título del panel y ponerle por ejemplo \icode{SSHD Service [JMV]}. En Units podemos ponerlo de tipo \icode{Bool}, en concreto \icode{On/Off} para mejorar la visibilidad de la variable. Podemos también hacerlo de tipo \icode{Stat} (para no ver una gráfica lineal sino únicamente el valor) y añadir thresolds para que se vea verde cuando esté activo y rojo cuando esté inactivo (img23). 
+En las métricas de la derecha podemos cambiar el título del panel y ponerle por ejemplo \icode{SSHD Service [JMV]}. En Units podemos ponerlo de tipo \icode{Bool}, en concreto \icode{On/Off} para mejorar la visibilidad de la variable. Podemos también hacerlo de tipo \icode{Stat} (para no ver una gráfica lineal sino únicamente el valor) y añadir thresholds para que se vea verde cuando esté activo y rojo cuando esté inactivo (img23).\\
 
 Si repetimos este proceso una vez más pero con el código 
 
@@ -228,64 +256,83 @@ service_up{service="httpd"}
 
 podremos obtener una vista como la siguiente (img24):
 
-![img24](./images/img24.png)
+\img{24}
 
 Donde ya tenemos los paneles pedidos. Ahora podemos pasar a hacer pruebas en los servidores para comprobar si funcionan correctamente estos paneles. 
 
 Comenzamos instalando \icode{httpd} en el servidor (img25):
+
 \begin{icodeblock}[bash]
 sudo dnf install httpd
 \end{icodeblock}
+
 Podemos ver que inicialmente el panel \icode{Httpd Service [JMV]} se encuentra en estado \icode{Off} (img26):
+
 \img{26}
 
 Si ahora probamos a iniciar el servicio \icode{httpd} obtenemos (img27): 
+
 \begin{icodeblock}[bash]
 systemctl start httpd
 \end{icodeblock}
-![](./images/img27.png)
 
-Y vemos que efectivamente se activa el panel correspondiente.
+\img{27}
+
+Y vemos que efectivamente se activa el panel correspondiente.\\
 
 Probamos ahora a desactivar el servicio \icode{sshd} (img28):
+
 \begin{icodeblock}[bash]
 systemctl stop sshd
 \end{icodeblock}
-![](./images/img28.png)
+
+\img{28}
 
 Y vemos que efectivamente se desactiva.
 Probamos nuevamente a desactivar también \icode{httpd}
 (img29):
+
 \begin{icodeblock}[bash]
 systemctl stop httpd
 \end{icodeblock}
+
 \img{29}
+
 Finalmente podemos activar los dos a la vez y tenemos el siguiente resultado (img30):
+
 \begin{icodeblock}[bash]
 systemctl start httpd
 systemctl start sshd
 \end{icodeblock}
+
 \img{30}
+
 Vamos ahora con el panel para medir el uso de la CPU. Creamos un nuevo panel y añadimos el siguiente Query (img31):
+
 \begin{icodeblock}
 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100)
 \end{icodeblock}
 
-Podemos tocar los tresholds de nuevo para darle un aspecto más atractivo. Finalizada la creación de este panel es hora de crear una alerta. Le damos a alerts y añadimos una nueva alerta (img32). 
+Podemos tocar los thresholds de nuevo para darle un aspecto más atractivo. Finalizada la creación de este panel es hora de crear una alerta. Le damos a alerts y añadimos una nueva alerta (img32). 
 
-Le indicamos la misma métrica que antes y en la expresión B añadimos
-\icode{WHEN last OF A} \icode{IS ABOVE 75}. Una vez hecho esto terminamos de configurar la alerta poniéndole \icode{Evaluate 1m for 5m} para que salte a los 5 min comprobándolo cada minuto. Podemos pasar ya a probar el panel y la alerta (img33). Ejecutamos en la máquina virtual:
+Le indicamos la misma métrica que antes y en la expresión B añadimos \icode{WHEN last OF A} \icode{IS ABOVE 75}. Una vez hecho esto terminamos de configurar la alerta poniéndole \icode{Evaluate 1m for 5m} para que salte a los 5 min comprobándolo cada minuto. Podemos pasar ya a probar el panel y la alerta (img33). Ejecutamos en la máquina virtual:
+
 \begin{icodeblock}[bash]
 stress --cpu 4 --timeout 360
 \end{icodeblock}
+
 \img{33}
-Y vemos cómo empieza a subir el uso de la CPU en el panel recién creado. Si vemos un poco más observamos que cuando supera el 75% (línea roja) se dispara la alarma pero en estado \icode{pending} (img34):
+
+Y vemos cómo empieza a subir el uso de la CPU en el panel recién creado. Si vemos un poco más observamos que cuando supera el 75\% (línea roja) se dispara la alarma pero en estado \icode{pending} (img34):
 
 \img{34}
+
 Ahora empezará a contar 5 minutos hasta que se cumpla la condición para que salte la alarma (img35):
 
 \img{35}
+
 Si lo dejamos un poco más vemos cómo de desactiva la alerta al volver a un uso bajo de la CPU (img36):
 
 \img{36}
+
 \end{document}
