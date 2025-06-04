@@ -214,6 +214,69 @@
     \end{enumerate}
     \end{teo}
 
-    
+    \section{Tema 13}
+
+    \begin{teo}[\textbf{Desarrolo en serie de Laurent}] Sea $\Gamma = A(a;r,R)$ un anillo abierto arbitrario y $f\in \cc{H}(\Omega)$. Entonces exite una única serie de Laurent no trivial $\sum\limits_{n \in \bb{Z}}c_n(z-a)^n$, cuyo anillo de convergencia contiene a $\Omega$, que verifica:
+    \begin{gather*}
+        f(z) = \sum\limits_{n=-\infty}^{+\infty} c_n(z-a)^n \hspace{1cm} \forall z \in \Omega
+    \end{gather*}
+    De hecho, para cualquier $\rho\in \bb{R}^+$ que verifique $r < \rho < R$, se tiene;
+    \begin{gather*}
+        c_n = \frac{1}{2\pi i} \int_{C(a, \rho)} \frac{f(w)}{(w-a)^{n+1}}dw \hspace{1cm} \forall n \in \bb{Z}
+    \end{gather*}
+    \end{teo}
+
+    \begin{prop}[\textbf{Caracterización de los puntos regulares}]
+        Las siguientes afirmaciones son equivalentes:
+        \begin{enumerate}
+            \item $a$ es un punto regular de $f$.
+            \item $c_{-n} = 0 $ para todo $n\in \bb{N}$.
+            \item Existe $g\in \cc{H}(\Omega)$ tal que $f(z) = g(z)$ para todo $z \in \Omega \setminus \{a\}$.
+            \item $f$ tiene límite en $a$: $\lim\limits_{z\to a } f(z) = w \in \bb{C}$.
+            \item Existen $M,\delta\in \bb{R}^+$ tales que $D(a, \delta) \subset \Omega$ y $|f(z)|\leq M$ para todo $z\in D(a,\delta)\setminus \{a\}$.
+            \item $\lim\limits_{z\to a} (z-a)f(z) = 0$
+        \end{enumerate}
+    \end{prop}
+
+    \begin{prop}[\textbf{Caracterización de los polos teniendo en cuenta su orden}] Dado $k \in \bb{N}$, las siguientes afirmaciones son equivalentes:
+        \begin{enumerate}
+            \item $a$ es un polo de orden $k$ de $f$.
+            \item $c_{-k}\neq 0$ y $c_{-n} = 0$ para $n> k$.
+            \item $\lim\limits_{z \to a}(z-a)^kf(z) = \alpha \in \bb{C}^*$.
+            \item Existe una función $\psi\in \cc{H}(\Omega)$ con $\psi(a) \neq 0$ tal que:
+            \begin{gather*}
+                f(z) = \frac{\psi(z)}{(z-a)^k} \hspace{1cm} \forall z \in \Omega \setminus \{a\}
+            \end{gather*}
+        \end{enumerate}
+    \end{prop}
+
+    \begin{prop}[\textbf{Caracterización de los polos}]
+        La función $f$ tiene un polo en $a$ si y solo si diverge en $a$.
+    \end{prop}
+
+    \begin{teo}[\textbf{Teorema de Casorati}] Las siguientes afirmaciones son equivalentes:
+    \begin{enumerate}
+        \item La función $f$ tiene una singularidad esencial en el punto $a$
+        \item Para cada $\delta \in \bb{R}^+$ con $D(a, \delta)\subset \Omega$, el conjunto $f(D(a, \delta)\setminus \{a\})$ es denso en $C$.
+        \item Para cada $w\in \bb{C}$ existe una sucesión $\{z_n\}$ de puntos de $\Omega \setminus \{a\}$ tal que $\{z_n\} \to a$ y $\{f(z_n)\}\to w$. También existe una sucesión $\{u_n\}$ de puntos de $\Omega \setminus \{a\}$ tal que $\{u_n\} \to a$ y $\{f(u_n)\} \to \infty$.
+    \end{enumerate}
+    \end{teo}
+
+    \section{Tema 14}
+
+    \begin{teo}[\textbf{Teorema de los residuos}]
+        Sea $\Omega$ un abierto del plano, $A$ un subconjunto de $\Omega$ tal que $A'\cap \Omega = \emptyset$, y $f\in \cc{H}(\Omega \setminus A)$. Sea $\Gamma$ un ciclo en $\Gamma \setminus A$, nul-homólogo con respecto a $\Omega$. Entonces, el conjunto $\{a\in A : Ind_\Gamma(a)\neq 0\}$ es finito y se verifica que
+        \begin{gather*}
+            \int_\Gamma f(z)dz = 2\pi i \sum\limits_{a\in A} Ind_\Gamma (a) Res(f(z), a)
+        \end{gather*}
+    \end{teo}
+
+    \begin{teo}[\textbf{Teorema de l'Hôpital para funciones holomorfas}] Sean $a\in \bb{C}$, $R\in \bb{R}^+$ y $f,g\in \cc{H}(D(a, R))$. Supongamos que $f(a)=g(a)=0$ y que $g$ no es idénticamente nula. Entonces existe un $\delta \in ]0,R[$, tal que $g(z)\neq 0$ y $g'(z)\neq 0$ para todo $z\in D(a, \delta)\setminus \{a\}$. Además, se verifica una de las dos afirmaciones siguientes:
+    \begin{enumerate}
+        \item $\displaystyle \lim\limits_{z\to a} \frac{f(z)}{g(z)} = \lim\limits_{z\to a} \frac{f'(z)}{g'(z)} = \alpha \in \bb{C}$.
+        \item $\dfrac{f(z)}{g(z)} \to \infty\  (z \to a)$ y $\dfrac{f'(z)}{g'(z)} \to \infty\ (z \to a)$.
+    \end{enumerate}
+        
+    \end{teo}
     
 \end{document}
