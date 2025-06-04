@@ -1,0 +1,219 @@
+\documentclass[12pt]{article}
+
+\input{../../../_assets/preambulo.tex}
+\input{../../../_assets/portada.tex}
+
+\begin{document}
+    \portada[%
+        titulo=Variable Compleja I,
+        subtitulo=Resumen,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2024-2025]
+
+
+    % \section{Test de Weierstrass}
+
+    % Sea $\sum\limits_{n\geq 0} f_n$ una serie de funciones complejas definidas en un conjunto $A\subset \bb{C}$, y sea $B\subset A$. Supongamos que, para cada $n\in \bb{N}\cup \{0\}$, existe una constante $M_n\in \bb{R}$ tal que:
+    % \begin{gather*}
+    %     |f_n(z)| \leq M_n \hspace{1cm} \forall z \in B
+    % \end{gather*}
+    % Si la serie de números reales $\sum\limits_{n\geq 0} M_n$ es convergente, entonces la serie de funciones $\sum\limits_{n\geq 0} f_n$ converge absoluta y uniformemente en $B$.
+
+    % \section{Teorema de convergencia de Weierstrass}
+
+    % Sea $\Omega$ un abierto no vacío de $\bb{C}$ y para cada $n\in \bb{N}$, sea $f_n\in \cc{H}(\Omega)$. Supongamos que la sucesión $\{f_n\}$ converge uniformemente en cada subconjunto compacto de $\Omega$ a una función $f:\Omega \to \bb{C}$, en particular:
+    % \begin{gather*}
+    %     f(z) = \lim_{n\to \infty} f_n(z) \hspace{1cm} \forall z \in \Omega
+    % \end{gather*}
+    % Entonces $f\in \cc{H}(\Omega)$ y para cada $k\in \bb{N}$ se tiene que la sucesión $\{f_n^{(k)}\}$ de las k-ésimas derivadas, converge a la derivada k-ésima $f^{(k)}$, uniformemente en cada subconjunto compacto de $\Omega$, en  particular:
+    % \begin{gather*}
+    %     f^{(k)}(z) = \lim_{n\to \infty} f_n^{(k)}(z) \hspace{1cm} \forall z \in \Omega,\ \ \forall k \in \bb{N}
+    % \end{gather*}
+
+    % \section{Holomorfía de funciones dependientes de un parámetro}
+
+    \section{Tema 3}
+
+    \begin{teo}
+        Sea $A$ un subconjunto no vacío de $\bb{C}$ y $f\in \cc{F}(A)$. Como $A\subset \bb{R}^2$, podemos considerar las funciones $u,v:A \to \bb{R}$ definidas, para todo $(x,y)\in A$ por
+        \begin{gather*}
+            u(x,y) = Re\ f(x+iy) \hspace{1cm} y \hspace{1cm} v(x,y) = Im\ f(x+iy)
+        \end{gather*}
+        Para $z_0=(x_0,y_0)\in A^\circ$, las siguientes afirmaciones son equivalentes:
+        \begin{enumerate}
+            \item La función $f$ es derivable en el punto $z_0$.
+            \item Las funciones $u$ y $v$ son diferenciables en el punto $(x_0, y_0)$ verificando que 
+            \begin{gather*}
+                \frac{\partial u}{\partial x} (x_0, y_0) = \frac{\partial v}{\partial y} (x_0, y_0) \hspace{1cm} y \hspace{1cm} \frac{\partial u}{\partial y} (x_0, y_0) = -\frac{\partial v}{\partial x} (x_0, y_0)
+            \end{gather*}
+            Estas ecuaciones reciben el nombre de \textbf{ecuaciones de Cauchy-Riemann}.
+        \end{enumerate}
+        Caso de que se cumplan 1. y 2., se tiene:
+        \begin{gather*}
+            f'(z_0) = \frac{\partial u}{\partial x} (x_0, y_0) + i \frac{\partial v}{\partial x} (x_0, y_0)
+        \end{gather*}
+    \end{teo}
+
+    \section{Tema 4}
+
+    \begin{teo}[\textbf{Test de Weierstrass}]
+        Sea $\sum\limits_{n\geq 0} f_n$ una serie de funciones complejas definidas en un conjunto $A\subset \bb{C}$, y sea $B\subset A$. Supongamos que, para cada $n\in \bb{N}\cup \{0\}$, existe una constante $M_n\in \bb{R}$ tal que:
+        \begin{gather*}
+            |f_n(z)| \leq M_n \hspace{1cm} \forall z \in B
+        \end{gather*}
+        Si la serie de números reales $\sum\limits_{n\geq 0} M_n$ es convergente, entonces la serie de funciones $\sum\limits_{n\geq 0} f_n$ converge absoluta y uniformemente en $B$.
+    \end{teo}
+
+    \begin{lema}[\textbf{Lema de Abel}] Dado $\rho\in \bb{R}^+$, supongamos que la sucesión $\{|\alpha_n|\rho^n\}$ está mayorada. Entonces la serie de potencias $\sum\limits_{n\geq 0} \alpha_n ( z-a)^n$ converge absolutamente en el disco abierto $D(a, \rho)$ y uniformemente en cada compacto $K$ que esté contenido en dicho disco.
+    \end{lema}
+
+    \begin{prop}[\textbf{Fórmula de Cauchy-Hadamard}]
+        Sea $R$ el radio de convergencia de la serie $\sum\limits_{n\geq0}\alpha_nz^n$
+        \begin{enumerate}
+            \item Si la suceción $\{\sqrt[n]{|\alpha_n|}\}$ no está mayorada, entonces $R=0$.
+            \item Si $\{\sqrt[n]{|\alpha_n|}\} \to 0$, entonces $R=\infty$.
+            \item En otro caso se tiene: $R = \dfrac{1}{\limsup \{\sqrt[n]{|\alpha_n|}\}}$
+        \end{enumerate}
+    \end{prop}
+
+    \begin{coro}
+        Supongamos que $\alpha_n\in \bb{C}^*$ para todo $n\in \bb{N}$ y sea $R$ el radio de convergencia de la serie de potencias $\sum\limits_{n\geq 0} \alpha_n z^n$.
+        \begin{enumerate}
+            \item Si $\{\alpha_{n+1} / \alpha_n\} \to \infty$, entonces $R=0$.
+            \item Si $\{\alpha_{n+1} / \alpha_n\} \to 0$, entonces $R=\infty$.
+            \item Si $\{\alpha_{n+1} / \alpha_n\} \to \lambda \in \bb{R}^+$, entonces $R=1/\lambda$.
+        \end{enumerate}
+    \end{coro}
+
+    \section{Tema 6}
+
+    \begin{teo}[\textbf{Caracterización de la existencia de primitiva}] Sea $\Omega$ un abierto no vacío de $\bb{C}$ y $f\in \cc{C}(\Omega)$. Las siguientes afirmaciones son equivalentes:
+    \begin{enumerate}
+        \item Existe $F\in \cc{H}(\Omega)$ tal que $F'(z) = f(z)$ para todo $z\in \Omega$.
+        \item Para todo camino cerrado $\gamma$ en $\Omega$ se tiene que $\displaystyle\int_\gamma f(z)dz = 0$.
+    \end{enumerate}
+        
+    \end{teo}
+
+    \section{Tema 7}
+
+    \begin{teo}[\textbf{Teorema local de Cauchy}]
+        Si $\Omega$ es un dominio estrellado, entonces toda función admite una primitiva en $\Omega$, es decir, existe $F\in \cc{H}(\Omega)$ tal que $F'(z) = f(z)$ para todo $z\in \Omega$. Equivalentemente se tiene
+        \begin{gather*}
+            \int_\gamma f(z) dz = 0
+        \end{gather*}
+        Para toda función $f\in \cc{H}(\Omega)$ y todo camino cerrado $\gamma$ en $\Omega$.
+    \end{teo}
+
+    \begin{prop}[\textbf{Fórmula de Cauchy}]
+        Sean $\Omega$ un abierto de $\bb{C}$ y $f\in \cc{H}(\Omega)$. Dado $a\in \Omega$, sea $r\in \bb{R}^+$ tal que $\overline{D}(a,r)\subset \Omega$. Se tiene entonces:
+        \begin{gather*}
+            f(z) = \frac{1}{2\pi i } \int_{C(a,r)} \frac{f(w)}{w-z} dw \hspace{1cm} \forall z \in D(a,r)
+        \end{gather*}
+    \end{prop}
+
+    \section{Tema 8}
+    \begin{teo}[\textbf{Desarrollo en serie de Taylor}]
+        Si $\Omega$ es un abierto no vacío de $\bb{C}$ y $f\in \cc{H}(\Omega)$, entonces $f$ es analítica en $\Omega$ y, en particular, $f$ es indefinidamente derivable en $\Omega$. Además:
+        \begin{enumerate}
+            \item Si $\Omega = \bb{C}$, para todo $a\in \bb{C}$, la serie $\sum\limits_{n\geq 0} \dfrac{f^{(n)}(a)}{n!}(z-a)^n$ tiene radio de convergencia infinito y se verifica que:
+            \begin{gather*}
+                f(z) = \sum\limits_{n=0}^\infty \frac{f^{(n)}(a)}{n!} (z-a)^n \hspace{1cm} \forall z \in \bb{C}
+            \end{gather*}
+            \item Si $\Omega \neq \bb{C}$ y para cada $a\in \Omega$ tomamos $R_a = d(a,\bb{C}\setminus \Omega)$, la serie $\sum\limits_{n\geq 0} \dfrac{f^{(n)}(a)}{n!}(z-a)^n$ tiene radio de convergencia mayor o igual que $R_a$ y se verifica que 
+            \begin{gather*}
+                f(z) = \sum\limits_{n=0}^\infty \frac{f^{(n)}(a)}{n!} (z-a)^n \hspace{1cm} \forall z \in D(a, R_a)
+            \end{gather*}
+        \end{enumerate}
+    \end{teo}
+
+    \begin{prop}[\textbf{Teorema de Cauchy para las derivadas}] Sean $\Omega$ un abierto de $\bb{C}$ y $f\in \cc{H}(\Omega)$. Dado $a\in \Omega$, sea $r\in \bb{R}^+$ tal que $\overline{D}(a,r)\subset \Omega$. Se tiene entonces:
+        \begin{gather*}
+            f^{(k)} (z) = \frac{k!}{2\pi i } \int_{C(a,r)} \frac{f(w)}{(w-z)^{k+1}} dw \hspace{1cm} \forall z \in D(a,r),\ \forall k \in \bb{N}\cup \{0\}
+        \end{gather*}
+    \end{prop}
+
+    \begin{teo}[\textbf{Teorema de extensión de Riemann}]
+        Sean $\Omega$ un abierto de $\bb{C}$, $z_0 \in \Omega$ y $f\in \cc{H}(\Omega\setminus \{z_0\})$. Las siguientes afirmaciones son equivalentes:
+        \begin{enumerate}
+            \item Existe $g\in \cc{H}(\Omega)$ tal que $g(z) = f(z)$ para todo $z\in \Omega \setminus \{z_0\}$.
+            \item $f$ tiene límite en el punto $z_0$.
+            \item Existen $\delta,M>0$ tales que $|f(z)|\leq M$ para todo $z \in \Omega$ que verifique $0 < |z - z_0| < \delta$.
+            \item $\lim\limits_{z \to z_0} (z - z_0) f(z) = 0$.
+        \end{enumerate}
+    \end{teo}
+
+    \section{Tema 9}
+
+    \begin{prop}[\textbf{Desigualdades de Cauchy}] Sean $\Omega$ un abierto de $\bb{C}$, $f\in \cc{H}(\Omega)$ y $a\in \Omega$. Dado $r\in \bb{R}^+$ tal que $\overline{D}(a,r)\subset \Omega$, sea $M(f,a,r) = \max \{|f(z)|: z\in C(a,r)^*\}$. Se tiene entonces:
+    \begin{gather*}
+        \frac{|f^{(n)}(a)|}{n!} \leq \frac{M(f,a,r)}{r^n} \hspace{1cm} \forall n \in \bb{N}\cup \{0\}
+    \end{gather*}       
+    \end{prop}
+
+    \begin{teo}[\textbf{Teorema de Liouville}] Toda función entera y acotada es constante. De hecho, la imagen de cualquier función entera no constante es un conjunto denso en $\bb{C}$, es decir, para $f\in \cc{H}(\bb{C})$ tal que $\exists M\in \bb{R}^+$ de forma que $|f(z)| \leq M$ $\forall z \in \bb{C}$, entonces se tiene que $\overline{Im(f)} = \bb{C}$.
+    \end{teo}
+
+    \begin{teo}[\textbf{Teorema fundamental de Álgebra}] El cuerpo $\bb{C}$ es algebraicamente cerrado, es decir, si $P$ es un polinomio con coeficientes complejos, no constante, existe $z\in \bb{C}$ tal que $P(z) = 0$.
+    \end{teo}
+
+    \begin{prop}[\textbf{Principio de identidad para funciones holomorfas}] Sea $\Omega$ un dominio y $f,g\in \cc{H}(\Omega)$. Si $A$ es un subconjunto de $\Omega$ tal que $f(a) = g(a)$ para todo $a\in A$, y $A' \cap \Omega \neq \emptyset$, entonces $f$ y $g$ son idénticas: $f(z)=g(z)$ para todo $z\in \Omega$.
+    \end{prop}
+
+    \section{Tema 10}
+
+    \begin{teo}[\textbf{Teorema de convergencia de Weierstrass}] Sea $\Omega$ un abierto no vacío de $\bb{C}$ y, para cada $n\in \bb{N}$, sea $f_n \in \cc{H}(\Omega)$. Supongamos que la sucesión $\{f_n\}$ converge uniformemente en cada subconjunto compacto de $\Omega$ a una función $f:\Omega \to \bb{C}$, en particular:
+    \begin{gather*}
+        f(z) = \lim_{n\to \infty} f_n(z) \hspace{1cm} \forall z \in \Omega
+    \end{gather*}
+    Entonces $f\in \cc{H}(\Omega)$ y, para cada $k\in \bb{N}$, se tiene que la sucesión $\{f^{(k)}_n\}$ de las k-ésimas derivadas, converge a la derivada k-ésima $f^{(k)}$, uniformemente en cada subconjunto compacto de $\Omega$, en particular:
+    \begin{gather*}
+        f^{(k)} (z) = \lim_{n\to \infty} f_n^{(k)} (z) \hspace{1cm} \forall z \in \Omega,\ \forall k \in \bb{N}
+    \end{gather*}
+    Este resultado también se puede usar para series
+    \end{teo}
+
+    \begin{teo}[\textbf{Holomorfía de la integral dependiente de un parámetro}]
+        Sea $\gamma$ u ncamino, $\Omega$ un abierto del plano y $\Phi:\gamma^* \times \Omega \to \bb{C}$ una función continua. Supongamos que, para cada $w\in \gamma^*$, la función $\Phi_w:\Omega \to \bb{C}$ definida por $\Phi_w(z) = \Phi(w,z)$ para todo $z\in \Omega$, es holomorfa en $\Omega$. Entonces, definiendo
+        \begin{gather*}
+            f(z) = \int_\gamma \Phi(w,z) dw \hspace{1cm} \forall z \in \Omega
+        \end{gather*}
+        se obtiene una función holomorfa: $f \in \cc{H}(\Omega)$. Además, para cada $k\in \bb{N}$ y cada $z\in \Omega$, la función $w \mapsto \Phi_w ^{(k)}(z)$, de $\gamma^*$ en $\bb{C}$, es continua y se verifica que
+        \begin{gather*}
+            f^{(k)} (z) = \int_\gamma \Phi_w^{(k)} dw = \int_\gamma \frac{\partial^k \Phi}{\partial z^k}(w,z) \hspace{1cm} \forall z \in \Omega, \forall k \in \bb{N}
+        \end{gather*}
+    \end{teo}
+
+    \section{Tema 11}
+
+    \begin{prop}[\textbf{Propiedad de la media}]
+        Sea $\Gamma$ un abierto de $\bb{C}$ y $f\in \cc{H}(\bb{C})$. Para $a\in \Omega$ y $r\in \bb{R}^+$ tales que $\overline{D}(a,r)\subset \Omega$, se tiene:
+        \begin{gather*}
+            f(a) = \frac{1}{2\pi} \int_{-\pi}^{\pi} f(a+re^{it}) dt
+        \end{gather*}
+    \end{prop}
+
+    \begin{teo}[\textbf{Principio del módulo máximo}] Sea $\Omega$ un dominio y $f\in \cc{H}(\Omega)$. Supongamos que $|f|$ tiene un máximo relativo en un punto $a\in \Omega$, es decir, existe $\delta > 0$ tal que $D(a, \delta)\subset \Omega$ y $|f(z)| \leq |f(a)|$ para todo $z\in D(a, \delta)$. Entonces $f$ es constante.
+    \end{teo}
+
+    \begin{teo}[\textbf{Principio del módulo mínimo}] Sea $\Omega$ un dominio y $f\in \cc{H}(\Omega)$. Supongamos que $|f|$ tiene un mínimo relativo en un punto $a\in \Omega$ es decir, existe $\delta > 0$ tal que $D(a, \delta)\subset \Omega$ y $|f(z)| \geq |f(a)|$ para todo $z\in D(a, \delta)$. Entonces, o bien $f(a)=0$, o bien $f$ es constante.
+    \end{teo}
+
+    \begin{teo}[\textbf{Teorema de la función inversa global}] Sea $U$ un dominio y $f\in \cc{H}(U)$ una función inyectiva. Entonces $V=f(U)$ es un dominio y $f^{-1}\in \cc{H}(V)$ con 
+    \begin{gather*}
+        (f^{-1})'(f(z)) = \frac{1}{f'(z)} \hspace{1cm} \forall z \in U
+    \end{gather*}
+    \end{teo}
+
+    \section{Tema 12}
+
+    \begin{teo}[\textbf{Forma general del teorema de Cauchy y la fórmula integral de Cauchy}] Sea $\Omega$ un abierto del plano y $\Gamma$ un ciclo en $\Omega$, nul-homólogo con respecto a $\Omega$. Para toda función $f\in \cc{H}(\Omega)$ se tiene:
+    \begin{enumerate}
+        \item $\displaystyle Ind_\Gamma (z)f(z) = \frac{1}{2\pi i} \int_\Gamma \frac{f(w)}{w-z} dw$ \hspace{1cm} $\forall z \in \Omega \setminus \Gamma^*$
+        \item $\displaystyle \int_\Gamma f(w) dw = 0$
+    \end{enumerate}
+    \end{teo}
+
+    
+    
+\end{document}
