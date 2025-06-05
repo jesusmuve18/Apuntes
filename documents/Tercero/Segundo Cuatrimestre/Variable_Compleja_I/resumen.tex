@@ -106,7 +106,7 @@
     \section{Tema 7}
 
     \begin{teo}[\textbf{Teorema local de Cauchy}]
-        Si $\Omega$ es un dominio estrellado, entonces toda función admite una primitiva en $\Omega$, es decir, existe $F\in \cc{H}(\Omega)$ tal que $F'(z) = f(z)$ para todo $z\in \Omega$. Equivalentemente se tiene
+        Si $\Omega$ es un dominio estrellado, entonces toda función $f\in \cc{H}(\Omega)$ admite una primitiva en $\Omega$, es decir, existe $F\in \cc{H}(\Omega)$ tal que $F'(z) = f(z)$ para todo $z\in \Omega$. Equivalentemente se tiene
         \begin{gather*}
             \int_\gamma f(z) dz = 0
         \end{gather*}
@@ -347,9 +347,17 @@
     \end{ejercicio}
     
 
-    f no es entera pol. Entonces existe sucesión $\{w_n\}$ de $\bb{C}\setminus D(0,n)$ tal que $\{w_n\}\to \infty$ $\{f(w_n)\}\to 0$. Existe una sucesión $\{g(v_n)\}$ tal que $g(v_n)=w_n$. Entonces $\{f(g(v_n))\} \to v^3 = \infty$.
+    $f$ no es entera polinómica. Entonces existe sucesión $\{w_n\}$ de $\bb{C}\setminus D(0,n)$ tal que $\{w_n\}\to \infty$ y $\{f(w_n)\}\to 0$. Por el TFA existe una sucesión $\{g(v_n)\}$ tal que $g(v_n)=w_n$. Entonces $\{f(g(v_n))\} \to v^3 = \infty$.
 
+    \newpage
 
+    \section{Cosas que debería de saber hacer}
+    \begin{enumerate}
+        \item probar que una sucesión es uniformemente continua (test de weierstrass).
+        \item probar que una integral dependiente de un parámetro es holomorfa en un cierto dominio (t. convergencia de weierstrass).
+        \item probar que una función es un polinomio (ppio de identidad) (t. d casorati, corolario).
+        \item integrar (t. de los residuos).
+        \item ejercicio teórico (genérico), probablemente (ppio mod max o ppio mod min).
+    \end{enumerate}
 
-    $A$ es denso en $X$ $\sii \overline{A}=X$
 \end{document}
