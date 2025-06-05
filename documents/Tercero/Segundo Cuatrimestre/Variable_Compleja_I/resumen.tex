@@ -297,6 +297,13 @@
         \end{gather*}
     \end{teo}
 
+    \begin{prop}[\textbf{Cálculo de residuos}]
+        Sea $f\in\cc{H}(D(a,R)\setminus\{a\})$ con $a\in \bb{C}$ y $R\in \bb{R}^+$. Si $f$ tiene un polo de orden $k\in \bb{N}$ en el punto $a$, se tiene:
+        \begin{gather*}
+            Res(f(z),a) = \frac{1}{(k-1)!} \lim_{z\to a} \frac{d^{k-1}}{dz^{k-1}} ((z-a)^k f(z))
+        \end{gather*}
+    \end{prop}
+
     \begin{teo}[\textbf{Teorema de l'Hôpital para funciones holomorfas}] Sean $a\in \bb{C}$, $R\in \bb{R}^+$ y $f,g\in \cc{H}(D(a, R))$. Supongamos que $f(a)=g(a)=0$ y que $g$ no es idénticamente nula. Entonces existe un $\delta \in ]0,R[$, tal que $g(z)\neq 0$ y $g'(z)\neq 0$ para todo $z\in D(a, \delta)\setminus \{a\}$. Además, se verifica una de las dos afirmaciones siguientes:
     \begin{enumerate}
         \item $\displaystyle \lim\limits_{z\to a} \frac{f(z)}{g(z)} = \lim\limits_{z\to a} \frac{f'(z)}{g'(z)} = \alpha \in \bb{C}$.
