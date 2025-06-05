@@ -3,6 +3,8 @@
 \input{../../../_assets/preambulo.tex}
 \input{../../../_assets/portada.tex}
 
+\usepackage{ upgreek }
+
 \begin{document}
     \portada[%
         titulo=Variable Compleja I,
@@ -280,6 +282,10 @@
     \end{enumerate}
     \end{teo}
 
+    \begin{coro}
+        Si $g$ es una función entera no polinómica, entonces $\exists \{z_n\}\to \infty$ donde $z_n\in \bb{C}\setminus D(z, \delta)$, $\delta>0$ $\forall n \in \bb{N}$ y tal que $g(z_n) \to z\in \bb{C}$ o $g(z_n) \to \infty$.
+    \end{coro}
+
     \newpage
 
     \section{Tema 14}
@@ -298,5 +304,52 @@
     \end{enumerate}
         
     \end{teo}
+
+    \newpage
+
+    \section{Ejercicios tutoria}
+
+    \begin{ejercicio}
+        \begin{gather*}
+            \int_{-\infty}^\infty \frac{x\sen(\pi x)}{x^2-5x+6} dx \hspace{1cm} f(z) = \frac{z e^{i\pi z}}{z^2-5z+6}\hspace{1cm} f\in \cc{H}(\bb{C}\setminus \{2,3\})
+        \end{gather*}
+        Fijamos $R>3$ y $\veps >0$ tal que $2+\veps < 3-\veps$ y $3+\veps <R$.
+
+        % \begin{tikz}
+        %     \draw (-2,0)--(-2,1)--(2,1)--(2,0)--cycle;
+        % \end{tikz}
+
+        Por el teorema de los residuos tenemos que
+        \begin{gather*}
+            \int_{\Gamma_{R,\veps}} f(z)dz = 0 = \\
+            \int_{\gamma_R} f(z) dz + \int_{-R}^{2-\veps} f(x) dx + \int_{2`\veps}^{3-\veps} f(x) dx + \int_{3+\veps}^R f(x) dx + \int_{\sigma_\veps}f(z) dz + \int_{\xi\veps} f(z) dz
+        \end{gather*}
+
+        Tomando límite con $R\to \infty$ y $\veps \to 0$ obtenemos 
+        \begin{gather*}
+            \int_{-\infty}^{+\infty} f(x) dx = -\lim\limits_{\veps\to 0} \int_{\sigma_\veps} f(z)dz - \lim\limits_{\veps \to 0} \int_{\xi\veps} f(z) dz 
+        \end{gather*}
+
+        \begin{prop}
+            Sea $ f \in \cc{H}( \Omega \setminus \{a\})$ abierto , $a$ un polo de orden 1 de $f$, $\gamma_\veps: [\alpha, \beta] \to \bb{C}$, $(\alpha<\beta)$. Tenemos que $\gamma_\veps(t) = a + \veps e^{it}$ es la circunferencia de centro $a$ y radio $\veps$. Entonces
+            \begin{gather*}
+                \lim\limits_{\veps\to 0} \int_{\gamma\veps} f(z) dz = i(\beta-\alpha) Res(f(z),a)
+            \end{gather*}
+            \begin{proof}
+                $f$ tiene un polo en $a$. Entonces $\exists \psi\in \cc{H}(\bb{C})$ con $\psi(a) \neq 0$ y $f(z)=\dfrac{\psi(z)}{(z-a)}$ $\forall z \in \Omega \setminus \{a\}$.
+                \begin{gather*}
+                    \int_{\gamma_\veps} f(z) dz = \int_{\gamma_\veps} \frac{\psi(z)}{(z-a)} dz = \int_\alpha^\beta \frac{\psi(a+ \veps e^{it})}{\cancel{a} + \veps e^{it}-\cancel{a}}i\veps e^{it} dz = \int_\alpha^\beta \frac{\psi(a+ \veps e^{it})}{\cancel{\veps e^{it}}}i\cancel{\veps e^{it}} dz\\\\
+                    \lim_{\veps \to 0} i\int_\alpha^\beta \psi(a+\veps e^{it}) dt = \lim_{z\to a} i(\beta - \alpha) \psi(z) = \lim_{z\to a } i(\beta - \alpha) f(z) (z-a) =\\= i(\beta - \alpha) Res(f(z),a)
+                \end{gather*}
+            \end{proof}
+        \end{prop}
+
+    \end{ejercicio}
     
+
+    f no es entera pol. Entonces existe sucesión $\{w_n\}$ de $\bb{C}\setminus D(0,n)$ tal que $\{w_n\}\to \infty$ $\{f(w_n)\}\to 0$. Existe una sucesión $\{g(v_n)\}$ tal que $g(v_n)=w_n$. Entonces $\{f(g(v_n))\} \to v^3 = \infty$.
+
+
+
+    $A$ es denso en $X$ $\sii \overline{A}=X$
 \end{document}
