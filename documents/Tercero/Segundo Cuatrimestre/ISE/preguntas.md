@@ -349,3 +349,105 @@ o duración del contrato.
 25. Los conectores de la placa base de la figura de la derecha podrían ser de tipo SATA. <br><img src="./Images/conector_sata.png" alt="Conector SATA" width="400">
     - (x) Verdadero
     - ( ) Falso
+
+# Enero 2024
+
+1. Un servidor que siempre me da respuesta, pero que a veces me da respuestas incorrectas, tiene una disponibilidad del 100%.
+    - (x) Verdadero
+    - ( ) Falso
+
+2. Con “sar -P 1” puedo conocer el estado del proceso con id=1.
+    - ( ) Verdadero
+    - (x) Falso
+
+3. Cuando nos referimos al método USE para la monitorización del rendimiento de un servidor, la “S” de USE viene de “Saturation”.
+    - (x) Verdadero
+    - ( ) Falso
+
+4. Un zócalo PGA tiene agujeritos para que entren las palillas del procesador.
+    - (x) Verdadero
+    - ( ) Falso
+
+5. Una celda SRAM tiene más componentes electrónicos (condensadores, transistores...) que una DRAM.
+    - (x) Verdadero
+    - ( ) Falso
+
+6. Un microprocesador puede acceder a la vez a dos módulos de memoria del banco de un mismo canal.
+    - ( ) Verdadero
+    - (x) Falso
+
+7. PCle 5.0 usa codificación 8b/10b.
+    - ( ) Verdadero
+    - (x) Falso
+
+8. No solo se puede conectar una tarjeta PCIe 2.0 en una ranura PCIe 5.0 de la placa base, sino que también se
+puede conectar una tarjeta PCIe 5.0 en una ranura PCle 2.0 de la placa base.
+    - (x) Verdadero
+    - ( ) Falso
+
+9. A través del System Panel (o Front Panel) se puede conectar un dispositivo USB del chasis a la placa base.
+    - ( ) Verdadero
+    - (x) Falso
+
+10. Las placas de servidores suelen tener un conector VGA en el panel trasero.
+    - (x) Verdadero
+    - ( ) Falso
+
+11. \\(N_0 = \sum\limits_{i=1}^K V_i \times N_i \\)
+    - ( ) Verdadero
+    - (x) Falso
+
+12. Los pliegos de prescripciones técnicas en ningún caso contendrán declaraciones o cláusulas que deban figurar en el pliego de cláusulas administrativas particulares.
+    - (x) Verdadero
+    - ( ) Falso
+
+# Febrero 2024
+
+1. A la hora de escoger un servidor ateniéndonos únicamente al valor de la relación prestaciones/coste, es mejor escoger la versión con un valor numérico mayor.
+    - (x) Verdadero
+    - ( ) Falso
+
+2. Los procesadores Intel Core están especialmente diseñados para placas con dos o más zócalos de CPU.
+    - ( ) Verdadero
+    - (x) Falso
+
+3. La primera arquitectura comercial de procesadores de 64 bits surgió en 2003 de la mano de AMD.
+    - ( ) Verdadero
+    - (x) Falso
+
+4. Una memoria DRAM necesita refresco porque es volátil.
+    - ( ) Verdadero
+    - (x) Falso
+
+5. Decimos que un módulo de DRAM tiene dos rangos si tiene chips por las dos caras.
+    - ( ) Verdadero
+    - (x) Falso
+
+6. NCQ (Native Command Queuing) es una extensión de SATA concebida especialmente para optimizar el acceso a unidades de estado sólido.
+    - ( ) Verdadero
+    - (x) Falso
+
+7. Una de las líneas del protocolo PCIe se usa en exclusiva para transmitir la señal de reloj.
+    - ( ) Verdadero
+    - (x) Falso
+
+8. El puente sur del chipset se encarga de las líneas de PCIe x16.
+    - ( ) Verdadero
+    - (x) Falso
+
+9. Un determinado monitor software por muestreo se activa cada 5s. Cada activación del monitor (para medir lo que tenga que medir) requiere un total de 6 ms de uso de la única CPU de nuestro servidor. Entonces, la sobrecarga de CPU del monitor será 0,0012%.
+    - ( ) Verdadero
+    - (x) Falso
+
+10. La precisión de un sensor está relacionada con la dispersión de las medidas que realiza.
+    - (x) Verdadero
+    - ( ) Falso
+
+11. El indice SPEC no tiene unidades.
+    - (x) Verdadero
+    - ( ) Falso
+
+12. El pliego de prescripciones técnicas debe contener, con carácter general, la información sobre el plazo de ejecución o duración del contrato.
+    - ( ) Verdadero
+    - (x) Falso
+
