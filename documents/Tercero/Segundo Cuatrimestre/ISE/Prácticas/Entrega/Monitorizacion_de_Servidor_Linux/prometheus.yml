@@ -1,0 +1,11 @@
+---
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: "prometheus_service"
+    static_configs:
+    - targets: ["prometheus:9090"]
+  - job_name: "nodo_mv"
+    static_configs:
+    - targets: ["192.168.56.100:9100"]
