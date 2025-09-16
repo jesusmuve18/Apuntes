@@ -1,17 +1,17 @@
 # Diseño y Desarrollo de Sistemas de Información
 
 
-### Información General
+## Información General
 Profesor: Daniel
 
 Departamento: Ciencias de la computación
 
 Correo: daniels@ugr.es
 
-### Horario Tutorías
+## Horario Tutorías
 - Miércoles y Jueves 9:30 - 12:30
 
-### Temario
+## Temario
 - Tema 1: Introducción a los sistemas de Información
 - Tema 2: Desarrollo de Sistemas de Información
 - Tema 3: Diseño avanzado de bases de datos relacionales
@@ -19,7 +19,7 @@ Correo: daniels@ugr.es
 
 No se evaluarán los temas de forma específica, pero todo su contenido será necesario para el desarrollo y defensa de los trabajos de prácticas.
 
-### Evaluación
+## Evaluación
 
 Se utilizarán las siguientes técnicas de evaluación, donde cada uno de los ítems se evaluará sobre 10 puntos:
 
