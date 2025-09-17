@@ -1,7 +1,7 @@
 \chapter*{Repaso}
 
 \begin{definicion}[Espacio normado]
-    $E$ un espacio vectorial y $\|.\|: E \to \bb{R}$ una norma que verifica:
+    $E$ un espacio vectorial y $\|\cdot\|: E \to \bb{R}$ una función que verifica:
     \begin{enumerate}
         \item $\|x\| \geq 0$ $\forall x \in E$
         \item $\|x\| = 0 \sii x=0$
@@ -9,107 +9,199 @@
         \item $\|\lambda x\| = |\lambda|$ $\forall x,y\in E$, $\lambda \in \bb{R}$
     \end{enumerate} 
 
-    Podemos definir además una función $d:E\times E \to \bb{R}$ dada por $d(x,y) = \|x-y\|$ $\forall x,y \in E$ llamada distancia.\\
+    A esta función la llamaremos \textbf{norma} y diremos que $E$ es un \textbf{espacio normado}
 
-    Si $E$ es completo (toda sucesión de cauchy es convergente), entonces $(E, \|.\|)$ es un espacio de Banach.
+    Podemos definir además una función $d:E\times E \to \bb{R}$ dada por $d(x,y) = \|x-y\|$ $\forall x,y \in E$ a la que llamaremos \textbf{distancia}.
+
+    Decimos que un espacio $E$ es \textbf{completo} si toda sucesión de Cauchy es convergente.
+
+    Si $E$ es un espacio normado completo, entonces $(E, \|.\|)$ es un \textbf{espacio de Banach}.
 \end{definicion}
 
 \begin{definicion}[Espacio prehilbertiano]
-    Supongamos que $H$ es un espacio vectorial, un producto escalar es una función $(.,.):H\times H \to \bb{R}$ tal que sea bilineal, simétrica, positiva y definida positiva, es decir:
+    Sea $H$ es un espacio vectorial, un \textbf{producto escalar} es una función $(\cdot,\cdot):H\times H \to \bb{R}$ tal que verifica las siguientes propiedades:
     \begin{enumerate}
-        \item $(\alpha x + \beta y, z) = \alpha(x,z) + \beta(y,z)$, $(z, \alpha x + \beta y) = \alpha(z,x) + \beta(z,y)$ donde $x,y,z\in H$, $\alpha, \beta \in \bb{R}$
-        \item $(x,y) = (y,x)$ $\forall x,y\in H$
-        \item $(x,x)\geq 0 \forall x \in H$
-        \item $(x,x) > 0 \forall x \in H\setminus\{0\}$
-    \end{enumerate}
-
-    Las dos últimas propiedades se pueden resumir en que $(x,x) = 0 \sii x=0$.\\
-
-    Todo espacio prehilbertiano es en particular un espacio normado, ya que podemos definir $\|x\| = \sqrt{(x,x)}$ que es una norma.\\
-
-    Si $\|.\|$ es completa, diremos que $(H, (.,.))$ es un espacio de Hilbert
-\end{definicion}
-
-\begin{ejemplo}\ \\
-    \begin{enumerate}
-        \item $(\bb{R}, |.|)$ es de Banach.
-        \item $(\bb{R}^N, |.|)$, donde $|x| = |(x_1, x_2, \dots, x_N)| = \sqrt{x_1^2 + x_2^2 + \dots + x_N^2}$. Además es de Hilbert ya que $(x,y) = \sum_{i=1}^N x_i y_i$ es un producto escalar.
-        \item  dado $A\subset \bb{R}^N$ tomamos $\cc{L}_b(A) = \{f: A \to \bb{R} \text{ tal que } f \text{ es continua y acotada en } A \}$ (la b viene de bounded en inglés). Podemos definir una norma en este espacio como 
+        \item \textbf{Bilineal:} para todo $x,y,z\in H$, $\alpha, \beta \in \bb{R}$ se verifica que 
         \begin{align*}
-            \|f\|_{\cc{L}_b(A)} = \sup\{|f(x)| : x\in A\}
+            (\alpha x + \beta y, z) = \alpha(x,z) + \beta(y,z)\\
+            (x, \alpha y + \beta z) = \alpha(x,y) + \beta(x,z)
         \end{align*}
 
-        \item Supongamos que $K\subset \bb{R}^N$ compacto. Consideramos el conjunto de las funciones continuas en $K$ denotado por $\cc{L}(K)$ y el espacio $(K, (.,.))$, donde $(f,g) = \int_K f(x)g(x) dx$ es un producto escalar que hace a este un espacio prehilbertiano. Tendríamos $\|f\| = \left(\displaystyle\int_K f(x)^2 dx\right)^{1/2}$
+        \item \textbf{Simétrica:} $(x,y) = (y,x) \ \ \ \forall x,y\in H$
+         
+        \item \textbf{Positiva:} $(x,x)\geq 0  \ \ \ \forall x \in H$
+
+        \item \textbf{Definida positiva:} $(x,x) > 0 \ \ \ \forall x \in H\setminus\{0\}$
+    \end{enumerate}
+
+    Las dos últimas propiedades se pueden resumir en $(x,x) = 0 \sii x=0$.
+    
+    Diremos que $(H, (\cdot, \cdot))$ es un \textbf{espacio prehilbertiano}.
+
+    Todo espacio prehilbertiano es en particular un espacio normado, ya que podemos definir $\|x\| = \sqrt{(x,x)}$ que es claramente una norma.\\
+
+    Si $\|\cdot\|$ es completa, diremos que $(H, (\cdot,\cdot))$ es un \textbf{espacio de Hilbert}.
+\end{definicion}
+
+\begin{ejemplo}Los siguientes espacios son de Banach:\\
+    \begin{enumerate}
+        \item $(\bb{R}, |\cdot|)$.
+        \item $(\bb{R}^N, |\cdot|)$, donde $|x| = |(x_1, x_2, \dots, x_N)| = \sqrt{x_1^2 + x_2^2 + \dots + x_N^2}$. Además es de Hilbert ya que $(x,y) = \sum_{i=1}^N x_i y_i$ es un producto escalar.
+        \item  Dado\footnote{la $b$ de $\cc{C}_b$ viene de \textit{bounded} (acotado en inglés)} $A\subset \bb{R}^N$ tomamos $\cc{C}_b(A) = \{f: A \to \bb{R} : f \text{ es continua y acotada en } A \}$. Podemos definir una norma en este espacio como 
+        \begin{align*}
+            \|f\|_{\cc{C}_b(A)} = \sup\{|f(x)| : x\in A\}
+        \end{align*}
+
+        \item Tomamos $K\subset \bb{R}^N$ compacto. Consideramos el conjunto de las funciones continuas en $K$ denotado por $\cc{C}(K)$ y el espacio $(K, (\cdot,\cdot))$, donde 
+        \begin{gather*}
+            (f,g) = \int_K f(x)g(x) dx
+        \end{gather*}
+        es un producto escalar que hace a este un espacio prehilbertiano. Tendríamos 
+        \begin{gather*}
+            \|f\| = \left(\displaystyle\int_K f(x)^2 dx\right)^{1/2}
+        \end{gather*}
     \end{enumerate}
 \end{ejemplo}
 
 \begin{ejemplo}[El espacio del punto 4 No es de Hilbert]
 
+    Veámoslo con un contraejemplo.
 
-    $K = [0,1]\subset \bb{R}$. Tenemos $\forall n \in \bb{N}$ la función  $f_n : [0,1] \to \bb{R}^+$ donde $f_n^2$ viene dada por la siguiente gráfica [insertar gráfica]:
+    Tomamos $K = [0,1]\subset \bb{R}$ y podemos definir $\forall n \in \bb{N}$ la función  $f_n : [0,1] \to \bb{R}^+$ tal que $f_n^2$ viene dada por la siguiente gráfica:
 
-    %  |
-    %  |
-    % 1|
-    %  |\
-    %  | \ f_n^2
-    %  |  \____________________
-    %  -------------------------
-    %     1/n
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xlabel={$x$},
+                ylabel={$f_n^2(x)$},
+                ylabel style={rotate=-90}, % asegura que esté vertical recto
+                height=5cm, width=7cm,
+                xmin=0, xmax=3,
+                ymin=0, ymax=1.2,
+                xtick={0,1,3},
+                xticklabels={$0$,$\nicefrac{1}{n}$},
+                ytick={1},
+                yticklabels={$1$},
+                grid=none
+            ]
+                % Línea descendente desde (0,1) hasta (1/n,0)
+                \addplot[very thick,red!60!black] coordinates {(0,1) (1,0)};
+                % Línea horizontal en 0 desde (1/n,0) hasta (3,0)
+                \addplot[very thick,red!60!black] coordinates {(1,0.01) (3,0.01)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{figure}
 
-    \begin{align*}
-        \|f_n\|^2 = \int_0^1 f_n^2(x) dx = \frac{1}{n} \cdot \frac{1}{2} = \frac{1}{2n}\\
-        \|f_n\| = \frac{1}{\sqrt{2n}} \to 0
-    \end{align*}
-    y vemos que $\{f_n(x)\} \to 0$ para todo $x\in (0,1]$ mientras que $\{f_n(0) = 1\} \to 1$.\\
+    De esta forma tenemos que
+    \begin{gather*}
+        \|f_n\|^2 = \int_0^1 f_n^2(x) dx = \frac{1}{n} \cdot \frac{1}{2} = \frac{1}{2n} \Rightarrow \|f_n\| = \frac{1}{\sqrt{2n}} \to 0
+    \end{gather*}
 
-    Con esto tenemos que la sucesión $\{f_n\} \to 0$ en $(\cc{L}([0,1]), (.,.))$ (ya que la norma converge a 0).\\
+    y vemos que
+
+    \begin{gather*}
+        \left\{
+        \begin{array}{c  c}
+            \{f_n(x)\} \to 0 & \forall x\in (0,1]\\
+            \{f_n(0) = 1\} \to 1 &\\
+        \end{array}
+        \right.
+    \end{gather*}
+
+    Con esto tenemos que la sucesión $\{f_n\} \to 0$ en $(\cc{L}([0,1]), (\cdot,\cdot))$ (ya que la norma converge a 0).\\
 
     PARA MAÑANA RESOLVER QUÉ ES LO QUE NO ESTÁ CLARO (la contradicción para ser espacio de Hilbert).\\
-
-    Consideramos $\emptyset \neq \Omega \subset \bb{R}^N$ medible, entonces podemos definir $L^2(\Omega) = \cc{L}^2(\Omega)/\sim = \{f:\Omega \to \bb{R} \text{ medible } : \int_\Omega f(x)^2 dx < \infty\}$. $L^2(\Omega)$ con la norma definida anteriormente (en el punto 4) es un espacio de Hilbert (teorema de Fisher)
 \end{ejemplo}
 
 \begin{ejemplo}
-    Sea $1 \leq p < \infty$. Consideramos $L^p(\Omega) = \{f: \Omega \to \bb{R} \text{ medibles } : \int_\Omega |f|^p dx < \infty\}$. Entonces tenemos que con $\|f\|_{L^p(\Omega)} = (\int_\Omega |f|^p dx )^{1/p}$ es un espacio de Banach. Recordemos para este resultado la desigualdad de Hilder, Minteowski.\\
+    Consideramos $\emptyset \neq \Omega \subset \bb{R}^N$ medible, entonces podemos definir
+    \begin{gather*}
+        L^2(\Omega) = \cc{L}^2(\Omega)/\sim = \{f:\Omega \to \bb{R} \text{ medible } : \int_\Omega f(x)^2 dx < \infty\}
+    \end{gather*}
+    $L^2(\Omega)$ con la norma definida anteriormente (en el punto 4) es un espacio de Hilbert (teorema de Fischer)
+\end{ejemplo}
 
-    Definimos el conjugado de $p$.
-
-    Tenemos $p' = \frac{p}{p-1}$ para $1<p<\infty$ y $\infty$ para $p=1$. Con esto tenemos que $\frac{1}{p} + \frac{1}{p'} = 1$.
-
-    La desigualdad de Holder dice que si $f\in L^p(\Omega)$ y $g \in L^{p'}(\Omega)$ entonces $fg \in L^1(\Omega)$ y además $\int |f(x)g(x)| dx \leq (\int |f|^p dx)^{1/p} dx (\int |f|^{p'} dx)^{1/{p'}} = \|f\|_{L^p} \|g\|_{L^{p'}}$
+\begin{ejemplo}
+    Sea $1 \leq p < \infty$. Consideramos el conjunto
+    \begin{gather*}
+        L^p(\Omega) = \left\{f: \Omega \to \bb{R} \text{ medibles } : \int_\Omega |f|^p dx < \infty\right\}
+    \end{gather*}
+    Entonces tenemos que con la norma definida como 
+    \begin{gather*}
+        \|f\|_{L^p(\Omega)} = \left(\int_\Omega |f|^p dx \right)^{1/p}
+    \end{gather*}
+    es un espacio de Banach. Recordemos para este resultado la desigualdad de Hölder y Minkowski. Definimos para ello el conjugado de $p$ de la siguiente forma\footnote{donde asumimos que $\nicefrac{1}{\infty} = 0$}:
+    \begin{gather*}
+        p' = \left\{
+        \begin{array}{c c l}
+            \frac{p}{p-1} & \text{ si } & 1<p<\infty\\\\
+            \infty & \text{ si } & p=1
+        \end{array}
+        \right\} \Rightarrow \frac{1}{p} + \frac{1}{p'} = 1 \ \ \ \forall p \in [1, \infty)
+    \end{gather*}
+    Con esto tendremos que 
+    \begin{gather*}
+        \left.
+            \begin{array}{c}
+                f\in L^p(\Omega)\\
+                g \in L^{p'}(\Omega)
+            \end{array}
+        \right\} \Rightarrow fg \in L^1(\Omega)
+    \end{gather*}
+    Además, se tiene que 
+    \begin{gather*}
+        \int |f(x)g(x)| dx \leq \left(\int |f|^p dx\right)^{\nicefrac{1}{p}} \left(\int |f|^{p'} dx\right)^{\nicefrac{1}{p'}} = \|f\|_{L^p} \|g\|_{L^{p'}}
+    \end{gather*}
 \end{ejemplo}
 
 \begin{ejemplo}\ \\
     \begin{enumerate}
-        \item $(\bb{R}^N, \|.\|_ p)$ con $\|x\|_p = (\sum_{i=1}^N |x_i|^p)^{1/p}(x,y) = \sum_{i=1}^N x_i y_i$.
-        \item $\bb{R}^N, \|.\|_\infty$ con $\|x\|_\infty = \max \{|x_i|: i=1,\dots,N\}$
-        \item Sea $p=\infty$. Tenemos $L^{\infty} = \{f:\Omega \to \bb{R} \text{ medible } : \sup\{|f(x)| : x\in \Omega\}< \infty\}$. A este supremo lo llamaremos supremo esencial que se define de la siguiente forma:
-        
-        $\sup_{\Omega}|f| = \inf \{M \geq 0 : |f(x)| \leq M \ \ a.e. \ x\in \Omega\}$ a.e. significa almost everywhere (casi por doquier). En algunos libros se denota por $ess\sup$.
+        \item $(\bb{R}^N, \|\cdot\|_ p)$ con $\|x\|_p = (\sum_{i=1}^N |x_i|^p)^{1/p}(x,y) = \sum_{i=1}^N x_i y_i$.
+        \item $(\bb{R}^N, \|\cdot\|_\infty)$ con $\|x\|_\infty = \max \{|x_i|: i=1,\dots,N\}$
+        \item Sea $p=\infty$. Tenemos
+        \begin{gather*}
+            L^{\infty} = \{f:\Omega \to \bb{R} \text{ medible } : \sup\{|f(x)| : x\in \Omega\}< \infty\}
+        \end{gather*}
+        A este supremo lo llamaremos \textbf{supremo esencial}, que se define de la siguiente forma\footnote{\textit{a.e} viene de \textit{almost everywhere} (casi por doquier en inglés)}:
+        \begin{gather*}
+            \sup_{\Omega}|f| = \inf \{M \geq 0 : |f(x)| \leq M \ \ a.e. \ x\in \Omega\}
+        \end{gather*}        
+        En algunos libros se denota por $ess\sup$.
 
-        Tendremos que reescribir lo anterior como $L^{\infty} = \{f:\Omega \to \bb{R} \text{ medible } : \sup_\Omega |f|< \infty\}$.
+        Podremos reescribir lo anterior como
+        \begin{gather*}
+            L^{\infty} = \{f:\Omega \to \bb{R} \text{ medible } : \sup_\Omega |f|< \infty\}
+        \end{gather*}
+        Entonces el espacio $(L^\infty, \|\cdot\|_\infty)$ con $\|f\|_\infty = \sup_\Omega |f|$ es un espacio de Banach.
 
-        Entonces el espacio $(L^\infty, \|x\|_\infty)$ con $\|f\|_\infty = \sup_\Omega |f|$ es un espacio de Banach.
-
-        La desigualdad de Holder con $p=\infty$, $p'=1$ nos dice que $\lambda \in L^\infty$, $g\in L^1(\Omega)$ entonces $fg \in L^1(\Omega)$ y $\|fg\|_{L^1}\leq \|f\|_{L^\infty} \|g\|_{L^{1}}$ es una norma en $H$.
+        La desigualdad de Hölder con $p=\infty$, $p'=1$ nos dice que para $f \in L^\infty(\Omega)$, $g\in L^1(\Omega)$ entonces $fg \in L^1(\Omega)$ y $\|fg\|_{L^1}\leq \|f\|_{L^\infty} \|g\|_{L^{1}}$ es una norma en $H$.
     \end{enumerate}
 \end{ejemplo}
 
 \begin{ejemplo}
-    Consideramos $1\leq p < \infty$. Consideramos $\cc{L}^p = \{ x : \bb{N} \to \bb{R} : \sum_{n=1}^{\infty}|x(n)|^p < \infty\}$. Si definimos $\|x\|_{\cc{L}^p} = (\sum_{n=1}^{\infty}|x(n)|^p)^{1/p}$, entonces $(\cc{L}^p, \|.\|_p)$ es un espacio de Banach.\\
+    Consideramos $1\leq p < \infty$ y definimos el conjunto de sucesiones.
+    \begin{gather*}
+        \cc{L}^p = \{ x : \bb{N} \to \bb{R} : \sum_{n=1}^{\infty}|x(n)|^p < \infty\}
+    \end{gather*}
+    Si definimos ahora
+    \begin{gather*}
+        \|x\|_{\cc{L}^p} = \left(\sum_{n=1}^{\infty}|x(n)|^p\right)^{\nicefrac{1}{p}}
+    \end{gather*}
+    entonces $(\cc{L}^p, \|\cdot\|_p)$ es un espacio de Banach. Para verlo podemos tomar $x\in \cc{L}^p$, $y\in \cc{L}^{p'}$ y tenemos que 
+    \begin{gather*}
+        xy\in \cc{L}^1 \text{\ \  y\ \  } \|xy\|_{\cc{L}^1} \leq \|x\|_{\cc{L}^p} \|y\|_{\cc{L}^{p'}}
+    \end{gather*} de la que se deduce la desigualdad de Mikowsky.\\
 
-    Esto se hace tomando $x\in \cc{L}^p$, $y\in \cc{L}^{p'}$ y tenemos que $xy\in \cc{L}^1$ y que $\|xy\|_{\cc{L}^1} \leq \|x\|_{\cc{L}^p} \|y\|_{\cc{L}^{p'}}$ de la que se deduce la desigualdad de Mikowsky.\\
-
-    Para $p=2$ tenemos que es un espacio de Hilbert.\\
-
-    Para $p=\infty$ podemos definir $\cc{L}^{\infty} = \{x : \bb{N} \to \bb{R} : x \text{ sucesión acotada}\}$ y con $\|x\|_\infty = \sup\{|x(n)| : n\in \bb{N}\}$ es un espacio de Banach.
+    Para $p=2$ tenemos que $(\cc{L}^2, \|\cdot\|_2)$ es un espacio de Hilbert.     Para $p=\infty$ podemos definir $\cc{L}^{\infty} = \{x : \bb{N} \to \bb{R} : x \text{ sucesión acotada}\}$ y con $\|x\|_\infty = \sup\{|x(n)| : n\in \bb{N}\}$ es un espacio de Banach.
 \end{ejemplo}
 
-\begin{ejemplo}
-    Tomamos $C = \{x\in \cc{L}^{\infty} : x \text{ es convergente}\}$ y es un subespacio del anterior. 
-
-    Podemos tomar otro subespacio de este $C_0 = \{x\in C : x \text{ es convergente a } 0\}$
+\begin{ejemplo} Podemos considerar los siguientes subespacios que seguirán siendo espacios de Banach:
+    \begin{enumerate}
+        \item Tomamos $C = \{x\in \cc{L}^{\infty} : x \text{ es convergente}\}$ y es un subespacio de $\cc{L}^\infty$. 
+        \item Podemos tomar otro subespacio de este, $C_0 = \{x\in C : x \text{ es convergente a } 0\}$ que de nuevo es un subespacio de $\cc{L}^{\infty}$.
+    \end{enumerate}    
 \end{ejemplo}
 
 
