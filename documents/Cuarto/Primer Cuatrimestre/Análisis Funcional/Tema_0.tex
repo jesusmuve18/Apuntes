@@ -1,0 +1,116 @@
+\chapter*{Repaso}
+
+\begin{definicion}[Espacio normado]
+    $E$ un espacio vectorial y $\|.\|: E \to \bb{R}$ una norma que verifica:
+    \begin{enumerate}
+        \item $\|x\| \geq 0$ $\forall x \in E$
+        \item $\|x\| = 0 \sii x=0$
+        \item $\|x + y\| \leq \|x\| + \|y\|$
+        \item $\|\lambda x\| = |\lambda|$ $\forall x,y\in E$, $\lambda \in \bb{R}$
+    \end{enumerate} 
+
+    Podemos definir además una función $d:E\times E \to \bb{R}$ dada por $d(x,y) = \|x-y\|$ $\forall x,y \in E$ llamada distancia.\\
+
+    Si $E$ es completo (toda sucesión de cauchy es convergente), entonces $(E, \|.\|)$ es un espacio de Banach.
+\end{definicion}
+
+\begin{definicion}[Espacio prehilbertiano]
+    Supongamos que $H$ es un espacio vectorial, un producto escalar es una función $(.,.):H\times H \to \bb{R}$ tal que sea bilineal, simétrica, positiva y definida positiva, es decir:
+    \begin{enumerate}
+        \item $(\alpha x + \beta y, z) = \alpha(x,z) + \beta(y,z)$, $(z, \alpha x + \beta y) = \alpha(z,x) + \beta(z,y)$ donde $x,y,z\in H$, $\alpha, \beta \in \bb{R}$
+        \item $(x,y) = (y,x)$ $\forall x,y\in H$
+        \item $(x,x)\geq 0 \forall x \in H$
+        \item $(x,x) > 0 \forall x \in H\setminus\{0\}$
+    \end{enumerate}
+
+    Las dos últimas propiedades se pueden resumir en que $(x,x) = 0 \sii x=0$.\\
+
+    Todo espacio prehilbertiano es en particular un espacio normado, ya que podemos definir $\|x\| = \sqrt{(x,x)}$ que es una norma.\\
+
+    Si $\|.\|$ es completa, diremos que $(H, (.,.))$ es un espacio de Hilbert
+\end{definicion}
+
+\begin{ejemplo}\ \\
+    \begin{enumerate}
+        \item $(\bb{R}, |.|)$ es de Banach.
+        \item $(\bb{R}^N, |.|)$, donde $|x| = |(x_1, x_2, \dots, x_N)| = \sqrt{x_1^2 + x_2^2 + \dots + x_N^2}$. Además es de Hilbert ya que $(x,y) = \sum_{i=1}^N x_i y_i$ es un producto escalar.
+        \item  dado $A\subset \bb{R}^N$ tomamos $\cc{L}_b(A) = \{f: A \to \bb{R} \text{ tal que } f \text{ es continua y acotada en } A \}$ (la b viene de bounded en inglés). Podemos definir una norma en este espacio como 
+        \begin{align*}
+            \|f\|_{\cc{L}_b(A)} = \sup\{|f(x)| : x\in A\}
+        \end{align*}
+
+        \item Supongamos que $K\subset \bb{R}^N$ compacto. Consideramos el conjunto de las funciones continuas en $K$ denotado por $\cc{L}(K)$ y el espacio $(K, (.,.))$, donde $(f,g) = \int_K f(x)g(x) dx$ es un producto escalar que hace a este un espacio prehilbertiano. Tendríamos $\|f\| = \left(\displaystyle\int_K f(x)^2 dx\right)^{1/2}$
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{ejemplo}[El espacio del punto 4 No es de Hilbert]
+
+
+    $K = [0,1]\subset \bb{R}$. Tenemos $\forall n \in \bb{N}$ la función  $f_n : [0,1] \to \bb{R}^+$ donde $f_n^2$ viene dada por la siguiente gráfica [insertar gráfica]:
+
+    %  |
+    %  |
+    % 1|
+    %  |\
+    %  | \ f_n^2
+    %  |  \____________________
+    %  -------------------------
+    %     1/n
+
+    \begin{align*}
+        \|f_n\|^2 = \int_0^1 f_n^2(x) dx = \frac{1}{n} \cdot \frac{1}{2} = \frac{1}{2n}\\
+        \|f_n\| = \frac{1}{\sqrt{2n}} \to 0
+    \end{align*}
+    y vemos que $\{f_n(x)\} \to 0$ para todo $x\in (0,1]$ mientras que $\{f_n(0) = 1\} \to 1$.\\
+
+    Con esto tenemos que la sucesión $\{f_n\} \to 0$ en $(\cc{L}([0,1]), (.,.))$ (ya que la norma converge a 0).\\
+
+    PARA MAÑANA RESOLVER QUÉ ES LO QUE NO ESTÁ CLARO (la contradicción para ser espacio de Hilbert).\\
+
+    Consideramos $\emptyset \neq \Omega \subset \bb{R}^N$ medible, entonces podemos definir $L^2(\Omega) = \cc{L}^2(\Omega)/\sim = \{f:\Omega \to \bb{R} \text{ medible } : \int_\Omega f(x)^2 dx < \infty\}$. $L^2(\Omega)$ con la norma definida anteriormente (en el punto 4) es un espacio de Hilbert (teorema de Fisher)
+\end{ejemplo}
+
+\begin{ejemplo}
+    Sea $1 \leq p < \infty$. Consideramos $L^p(\Omega) = \{f: \Omega \to \bb{R} \text{ medibles } : \int_\Omega |f|^p dx < \infty\}$. Entonces tenemos que con $\|f\|_{L^p(\Omega)} = (\int_\Omega |f|^p dx )^{1/p}$ es un espacio de Banach. Recordemos para este resultado la desigualdad de Hilder, Minteowski.\\
+
+    Definimos el conjugado de $p$.
+
+    Tenemos $p' = \frac{p}{p-1}$ para $1<p<\infty$ y $\infty$ para $p=1$. Con esto tenemos que $\frac{1}{p} + \frac{1}{p'} = 1$.
+
+    La desigualdad de Holder dice que si $f\in L^p(\Omega)$ y $g \in L^{p'}(\Omega)$ entonces $fg \in L^1(\Omega)$ y además $\int |f(x)g(x)| dx \leq (\int |f|^p dx)^{1/p} dx (\int |f|^{p'} dx)^{1/{p'}} = \|f\|_{L^p} \|g\|_{L^{p'}}$
+\end{ejemplo}
+
+\begin{ejemplo}\ \\
+    \begin{enumerate}
+        \item $(\bb{R}^N, \|.\|_ p)$ con $\|x\|_p = (\sum_{i=1}^N |x_i|^p)^{1/p}(x,y) = \sum_{i=1}^N x_i y_i$.
+        \item $\bb{R}^N, \|.\|_\infty$ con $\|x\|_\infty = \max \{|x_i|: i=1,\dots,N\}$
+        \item Sea $p=\infty$. Tenemos $L^{\infty} = \{f:\Omega \to \bb{R} \text{ medible } : \sup\{|f(x)| : x\in \Omega\}< \infty\}$. A este supremo lo llamaremos supremo esencial que se define de la siguiente forma:
+        
+        $\sup_{\Omega}|f| = \inf \{M \geq 0 : |f(x)| \leq M \ \ a.e. \ x\in \Omega\}$ a.e. significa almost everywhere (casi por doquier). En algunos libros se denota por $ess\sup$.
+
+        Tendremos que reescribir lo anterior como $L^{\infty} = \{f:\Omega \to \bb{R} \text{ medible } : \sup_\Omega |f|< \infty\}$.
+
+        Entonces el espacio $(L^\infty, \|x\|_\infty)$ con $\|f\|_\infty = \sup_\Omega |f|$ es un espacio de Banach.
+
+        La desigualdad de Holder con $p=\infty$, $p'=1$ nos dice que $\lambda \in L^\infty$, $g\in L^1(\Omega)$ entonces $fg \in L^1(\Omega)$ y $\|fg\|_{L^1}\leq \|f\|_{L^\infty} \|g\|_{L^{1}}$ es una norma en $H$.
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{ejemplo}
+    Consideramos $1\leq p < \infty$. Consideramos $\cc{L}^p = \{ x : \bb{N} \to \bb{R} : \sum_{n=1}^{\infty}|x(n)|^p < \infty\}$. Si definimos $\|x\|_{\cc{L}^p} = (\sum_{n=1}^{\infty}|x(n)|^p)^{1/p}$, entonces $(\cc{L}^p, \|.\|_p)$ es un espacio de Banach.\\
+
+    Esto se hace tomando $x\in \cc{L}^p$, $y\in \cc{L}^{p'}$ y tenemos que $xy\in \cc{L}^1$ y que $\|xy\|_{\cc{L}^1} \leq \|x\|_{\cc{L}^p} \|y\|_{\cc{L}^{p'}}$ de la que se deduce la desigualdad de Mikowsky.\\
+
+    Para $p=2$ tenemos que es un espacio de Hilbert.\\
+
+    Para $p=\infty$ podemos definir $\cc{L}^{\infty} = \{x : \bb{N} \to \bb{R} : x \text{ sucesión acotada}\}$ y con $\|x\|_\infty = \sup\{|x(n)| : n\in \bb{N}\}$ es un espacio de Banach.
+\end{ejemplo}
+
+\begin{ejemplo}
+    Tomamos $C = \{x\in \cc{L}^{\infty} : x \text{ es convergente}\}$ y es un subespacio del anterior. 
+
+    Podemos tomar otro subespacio de este $C_0 = \{x\in C : x \text{ es convergente a } 0\}$
+\end{ejemplo}
+
+
+
