@@ -63,3 +63,72 @@ Recordaremos ahora los conceptos de subanillo y subcuerpo. Para ello consideramo
     En $\Gamma$ podemos tomar la intersección, $\bigcap\limits_{F\in\Gamma}F$ que es el subgrupo más pequeño que contiene a $S$. Para $S=\emptyset$ obtengo el menor subcuerpo de $K$ y a este subcuerpo lo llamaremos \textbf{subcuerpo primo} de $K$.
 \end{definicion}
 
+\begin{observacion}
+    Si tenemos $\chi: \bb{Z} \to K$ el homomorfismo de anillos, de forma que $p$ es la característica de $K$, es decir, $p\bb{Z} = \ker\chi$. Entonces por el primer teorema de isomorfía tenemos que
+    \begin{gather*}
+        \frac{\bb{Z}}{p\bb{Z}} = \frac{\bb{Z}}{\ker\chi} \cong  Im\chi \leq K
+    \end{gather*}
+    Donde la última inclusión es de subanillo. Como $Im\chi$ es un dominio de integridad tendremos que $p=0$ o, si $p>0$, entonces $p$ es primo.
+\end{observacion}
+
+\begin{prop}
+    Sea $K$ un cuerpo de característica $p$, entonces, 
+    \begin{itemize}
+        \item si $p>0$, el subcuerpo primo de $K$ es isomorfo a $\bb{Z}_p$
+        \item si $p=0$, el subcuerpo primo de $K$ es isomorfo a $\bb{Q}$
+    \end{itemize}
+    \begin{proof}
+        Denotamos por $\Pi$ al subcuerpo primo de $K$.
+        \begin{itemize}
+            \item Si $p>0$, entonces $Im\chi$ es un subcuerpo de $K$ $\Rightarrow \Pi\subseteq Im\chi$, pero $Im\chi\cong \bb{Z}_p$ y como $\bb{Z}_p$ no tiene subcuerpos propios, entonces $\Pi = Im\chi \cong\bb{Z}_p$
+            
+            \item Si $p=0$, entonces $\bb{Z}\cong Im\chi \leq K$ (subanillo) y entonces $Im\chi\subseteq \Pi$, ya que $Im\chi$ es el subanillo más pequeño. Si $Q$ es el cuerpo de funciones de $Im\chi$, entonces $Q\cong \bb{Q}$. Aplicando la propiedad universal del cuerpo de fracciones tenemos que $\bb{Q}\subseteq \Pi$ por lo que $\bb{Q}=\Pi$ por unicidad del cuerpo de fracciones excepto isomorfismos.
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{definicion}[Extensión de cuerpos]
+    Sea $F$ un subcuerpo de $K$, diremos que $F\leq K$ es una \textbf{extensión de cuerpos}.
+\end{definicion}
+
+\begin{observacion}
+    Sea $F\leq K$ una extensión, entonces $K$ es un espacio vectorial sobre $F$ donde 
+    \begin{itemize}
+        \item  la suma de $K$ es la suma como espacio vectorial
+        \item la acción de los escalares, $\lambda \in F$, $\alpha \in K$,  $\lambda\alpha$ es el producto en $K$
+    \end{itemize} 
+\end{observacion}
+
+\begin{definicion}
+    Sea $\bb{R}\leq K$ una extensión, entonces la dimensión de $K$ sobre $F$ (como espacio vectorial) se llama \textbf{grado} de la extensión $F\leq K$ y se denota por $[K:F]$, es decir
+    \begin{gather*}
+        [K:F] = \dim_F(K)
+    \end{gather*}
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $[\bb{C}: \bb{R}] = 2$
+        \item $[\bb{R}: \bb{Q}] = \infty$, ya que $\bb{R}$ no es numerable
+    \end{itemize}
+\end{ejemplo}
+
+\begin{notacion}
+    Si $[K:F]<\infty$ diremos que $F\leq K$ es finita. Si $[K:F]=\infty$ diremos que $F\leq K$ no es finita o es infinita.
+\end{notacion}
+
+\begin{ejercicio}
+    Demostrar que el cardinal de un cuerpo finito es de la forma $p^n$ con $p$ primo y $n\geq 1$.
+
+    % el Subcuerpo primo de un cuerpo finito tiene característica p primo por lo que mi cuerpo abstracto finito tiene que ser un espacio vectorial sobre Z_p de dimensión finita n. Sabemos que es isomorfo como espacio vectorial a Z_p x Z_p x ... x Z_p n veces por lo que el cardinal es p^n.
+\end{ejercicio}
+
+\begin{notacion}
+    Sea la extensión $F\subseteq K$ y $S\subseteq K$ un subconjunto de $K$. Podemos considerar el menor subcuerpo de $K$ que contiene a $F\cup S$ y lo denotaremos por $F(S)$ y lo llamaremos \textbf{extensión de $F$ generada por $S$} (dentro de $K$). Si $S$ es finito, es decir, $S=\{s_1,\dots,s_t\}$ simplifico la notación como $F(\{s_1,\dots,s_t\}) = F(s_1,\dots,s_t)$
+\end{notacion}
+
+\begin{ejemplo}
+    $\bb{Q}(\sqrt(2))$ donde $\sqrt{2}\in \bb{R}$, es decir, es el menor subcuerpo de los reales que contiene a $\sqrt{2}$. Por tanto $\bb{Q}(\sqrt(2)) = \{a+b\sqrt{2} : a,b\in \bb{Q}\}$. Esto se ve fácilmente viendo la doble inclusión. La inclución $\supseteq$ es obvia y demostrando que $\{a+b\sqrt{2} : a,b\in \bb{Q}\}$ es un subcuerpo tenemos automáticamente la igualdad. Esta extensión tendrá grado 2.
+\end{ejemplo}
+
+
