@@ -1,2 +1,23 @@
 \chapter*{Introducción}
 
+Comenzaremos la introducción al contenido de esta asignatura recordando brevemente el concepto de cuerpo\footnote{\textit{field} en inglés}. Lo primero que sabemos es que un cuerpo es un tipo de anillo conmutativo. Un anillo\footnote{\textit{ring} en inglés} es un conjunto no vacío, $A$ que tiene definidas dos aplicaciones binarias y dos elementos especiales, $(A, +, 0, \cdot, 1)$. Con $(+,0)$ tenemos que $A$ es un grupo aditivo y con $(\cdot, 1)$ tenemos que $A$ es un monoide, es decir, que cuenta con una aplicación asociativa con elemento neutro $1$. Además estas 2 operaciones tienen que guardar una cierta compatibilidad (axiomas), que llamamos leyes distributivas y que son los siguientes:
+\begin{itemize}
+    \item $a\cdot(b+c) = a\cdot b + a \cdot c$
+    \item $(b+c)\cdot a = b\cdot a + c \cdot a$, \ \ $\forall a,b\in A$
+\end{itemize}
+Con esto habremos completado la definición de anillo. La conmutatividad hace referencia a la siguiente propiedad:
+\begin{gather*}
+    a\cdot b = b \cdot a  \ \ \forall a,b\in A
+\end{gather*}
+Veamos ahora qué tiene que suceder para que a este anillo conmutativo lo llamemos cuerpo. Para ello, es equivalente decir que $A\setminus \{0\}$ es un grupo y que $\forall a \in A\setminus\{0\}$ existe un $a^{-1}\in A\setminus \{0\}$ tal que $a\cdot a^{-1} = 1$ (lo cual implica claramente $0\neq 1$).
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Los racionales, $\bb{Q}$.
+        \item Los reales, $\bb{R}$.
+        \item Los complejos, $\cc{C}$.
+        \item $\bb{Z}_p$ con $p$ primo.
+    \end{itemize}
+\end{ejemplo}
+
+Recordaremos ahora los conceptos de subanillo y subcuerpo
