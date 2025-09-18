@@ -20,4 +20,46 @@ Veamos ahora qué tiene que suceder para que a este anillo conmutativo lo llamem
     \end{itemize}
 \end{ejemplo}
 
-Recordaremos ahora los conceptos de subanillo y subcuerpo
+\begin{notacion}
+    Denotaremos el producto de 2 elementos por yuxtaposición\footnote{Las matemáticas son el arte de ser ambiguo siendo preciso en cada instante (Torrecillas, 18-9-2025)}, es decir, $a\cdot b = ab$
+\end{notacion}
+
+Recordaremos ahora los conceptos de subanillo y subcuerpo. Para ello consideramos $A$ un anillo y un subconjunto $B\subseteq A$ tal que $1\in B$. Si además tenemos que $(B,+)$ es un subgrupo de $(A, +)$ y que para todo $a,b\in B$ se tiene que $ab\in B$, entonces diremos que $B$ es un subanillo de $A$.
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $\bb{Z}$ es subanillo de $\bb{Q}$.
+        \item $\bb{Q}$ es subanillo de $\bb{R}$.
+        \item $\bb{R}$ es subanillo de $\bb{C}$
+    \end{itemize}
+\end{ejemplo}
+
+\begin{definicion}[Homomorfismo de anillos]
+    Dados $A$ y $B$ dos anillos, un \textbf{homomorfismo} $f:A\to B$ es una aplicación que verifica para todo $a,b\in A$ las siguientes propiedades:
+    \begin{itemize}
+        \item $f(1)=1$
+        \item $f(a+b) = f(a) + f(b)$
+        \item $f(ab) = f(a)f(b)$
+    \end{itemize}
+\end{definicion}
+
+\begin{definicion}[Característica de un anillo]
+    Dado $A$ un anillo, existe un único homomorfismo de anillos\footnote{se prueba fácilmente por inducción} $\chi:\bb{Z} \to A$. Entonces $\ker\chi$ es un ideal de $\bb{Z}$ y por tanto será principal, es decir, que $\ker\chi = n\bb{Z}$ para cierto $n\in \bb{N}$. Dicho $n$ es el número al que llamaremos \textbf{característica} de $A$ y la notaremos como $n=car(A)$.
+\end{definicion}
+
+\begin{definicion}[Subanillo]
+    Si $K$ es un cuerpo, entonces un subcuerpo de $K$ es un \textbf{subanillo} $F$ de $K$ tal que $F$ es un cuerpo.
+\end{definicion}
+
+\begin{observacion}
+    Sea $K$ un cuerpo y $\Gamma$ un conjunto no vacío\footnote{El propio $K$ está en este conjunto} de subcuerpos de $K$. Entonces $\bigcap\limits_{F\in\Gamma}F$ es un subcuerpo de $K$.
+\end{observacion}
+
+\begin{definicion}[Subcuerpo primo]
+    Sea $K$ un cuerpo y tomamos $S\subset K$ un subconjunto y consideramos
+    \begin{gather*}
+        \Gamma = \{\text{ subcuerpos de }K \text{ que contienen a }S\}
+    \end{gather*}
+    En $\Gamma$ podemos tomar la intersección, $\bigcap\limits_{F\in\Gamma}F$ que es el subgrupo más pequeño que contiene a $S$. Para $S=\emptyset$ obtengo el menor subcuerpo de $K$ y a este subcuerpo lo llamaremos \textbf{subcuerpo primo} de $K$.
+\end{definicion}
+
