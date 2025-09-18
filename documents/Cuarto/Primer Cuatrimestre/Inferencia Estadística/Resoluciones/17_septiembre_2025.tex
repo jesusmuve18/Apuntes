@@ -10,7 +10,7 @@
         \begin{gather*}
             P[X_1=x_1, \dots, X_n = x_n] = \prod_{i=1}^{n} P[X=x_i]\ \ \ ,(x_1, \dots,x_n) \in \chi^n 
         \end{gather*}
-        Aplicándolo al caso particular de una distribución binomial tenemos que
+        Aplicándolo al caso particular de una distribución binomial tenemos que para $x_i\in \{0,\dots,k_0\}$, $i=1,\dots,n$
         \begin{align*}
             P[X_1=x_1, \dots, X_n = x_n] &= \prod_{i=1}^{n} \binom{k_0}{x_i} p^{x_i} (1-p)^{(k_0-x_i)} = p^{\sum\limits_{i=1}^n x_i} \cdot (1-p)^{\sum\limits_{i=1}^n k_0 - x_i} \cdot \prod_{i=1}^{n} \binom{k_0}{x_i}
         \end{align*}
@@ -21,10 +21,11 @@
         \begin{gather*}
             f_{(X_1,\dots,X_n)}(x_1,\dots,x_n) = \prod_{i=1}^n f_X(x_i)\ \ \ ,(x_1, \dots,x_n) \in \chi^n 
         \end{gather*}
-        Conociendo la función de densidad de una distribución uniforme tenemos
+        Conociendo la función de densidad de una distribución uniforme tenemos, para todo $x_i\in [a,b]$, $i=1,\dots,n$
         \begin{gather*}
-            f_{(X_1,\dots,X_n)}(x_1,\dots,x_n) = \prod_{i=1}^n \frac{1}{b-a} = \frac{n}{b-a}
+            f_{(X_1,\dots,X_n)}(x_1,\dots,x_n) = \prod_{i=1}^n \frac{1}{b-a} = \frac{1}{(b-a)^n}
         \end{gather*}
+        En otro caso tendremos $f_{(X_1,\dots,X_n)}(x_1,\dots,x_n) = 0$
     \end{itemize}
 \end{ejercicio}
 
@@ -33,12 +34,12 @@
 
     Por la definición de función de distribución muestral tenemos que
     \begin{align*}
-        F^*_{X_1, \dots, X_5}(x) &= \frac{1}{5} \sum_{i=1}^5 I(-\infty,x](X_i) = \\
+        F^*_{(3,8,5,4,5)}(x) &= \frac{1}{5} \sum_{i=1}^5 I(-\infty,x](X_i) = \\
         &= \frac{1}{5} (I(-\infty,x](3) + I(-\infty,x](4) + 2I(-\infty,x](5) + I(-\infty,x](8))
     \end{align*}
     Lo que resulta 
     \begin{gather*}
-        F^*_{X_1, \dots, X_5}(x) = \left\{
+        F^*_{(3,8,5,4,5)}(x) = \left\{
         \begin{array}{l l}
             \nicefrac{1}{5} \cdot 0 = 0 & \forall x \in (-\infty,3) \\
             \nicefrac{1}{5} \cdot 1 = \nicefrac{1}{5} & \forall x \in [3,4) \\
@@ -80,4 +81,8 @@
     \end{tikzpicture}
 \end{figure}
 
+\end{ejercicio}
+
+\begin{ejercicio}
+    
 \end{ejercicio}
