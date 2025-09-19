@@ -118,7 +118,7 @@
     \end{proof}
 \end{teo}
 
-\begin{ejemplo}
+\begin{ejemplo} %TODO formatear
     Consideramos $X_n = [0,1]\times \left\{\frac{1}{n}\right\}$, $n\in \bb{N}$ y $X_0=\{1\}\times [0,1]$. Llamamos $X=\{(0,0)\}\cup \left(\bigcup\limits_{n\in \bb{N}\cup \{0\}}X_n\right)$ y queremos ver que $X$ es conexo pero no es arcoconexo.\\
 
     Si denotamos por $Y=\bigcup\limits_{n\in \bb{N}\cup \{0\}}X_n$ es conexo porque es unión de los $X_n$ que son todos conexos y cada uno de ellos corta a uno fijo, $X_0$. Entonces $X$ es conexo porque $Y\subset X \subset \overline{Y}$. Veamos sin embargo que $X$ no es arcoconexo.\\
@@ -127,3 +127,59 @@
 
     Escribimos $\alpha(t) = (x(t), y(t))\in \bb{R}^2$, como $\alpha(0)=(0,0)$, si tomamos $((-\nicefrac{1}{2}, \nicefrac{1}{2})\times (-\nicefrac{1}{2}, \nicefrac{1}{2})) \cap X$ un abierto que contiene al origen, entonces $\exists \veps > 0$ tal que $\alpha([0,\veps))\subseteq ((-\nicefrac{1}{2}, \nicefrac{1}{2})\times (-\nicefrac{1}{2}, \nicefrac{1}{2})) \cap X$. Como $y(t)$ es continua y se tiene que $y([0,\veps))\subseteq \{0\}\cup\left(\bigcup\limits_{n>2} \left\{\frac{1}{n}\right\}\right)$. Por el teorema del valor intermedio tenemos que $y([0,\veps)) = \{0\}$ por lo que $\alpha([0,\veps))=\{(0,0)\}$
 \end{ejemplo}
+
+\begin{teo}
+    Si $A\subseteq \bb{R}^n$ es estrellado, entonces $A$ es arcoconexo.
+    \begin{proof}
+        Como $A$ es estrellado existe un $x_0\in A$ tal que para cualquier $x\in A$, el segmento que los une, $(1-t)x + tx_0\in A$ para todo $t\in [0,1]$ y entonces $\alpha(t)=(1-t)x+tx_0$ es una curva continua uniendo $x$ con $x_0$. Dados dos puntos cualesquiera $x,y \in A$ se tiene que $\alpha_x\ast \tilde{\alpha}_y$ es una curva continua que une $x$ con $y$.
+    \end{proof}
+\end{teo}
+
+\begin{coro}
+    Cualquier conjunto $A$ de $\bb{R}^n$ convexo es arcoconexo. Por ejemplo, las bolas abiertas o las bolas cerradas de $\bb{R}^n$.
+\end{coro}
+
+\begin{coro}
+    En $\bb{R}$ coinciden los conjuntos conexos y arcoconexos (son solo los intervalos).
+\end{coro}
+
+\begin{teo}
+    La imagen mediante una aplicación continua de un arcoconexo es un arcoconexo. En particular, ser arcoconexo es una propiedad topológica, es decir, se conserva por homeomorfismos.
+    \begin{proof}
+        Dados $x,y\in f(X)$, entonces existen $x_0,y_0\in X$ tal que $f(x_0)=x$ y $f(y_0) = y$. Por ser $X$ arcoconexo, entonces existe un arco $\alpha:[0,1]\to X$ con $\alpha(0)=x_0$ y $\alpha(1)=y_0$. Entonces tenemos que $f\circ \alpha: [0,1]\to f(X)$ es continua y $(f\circ \alpha)(0) = f(x_0) = x$ y $(f\circ\alpha)(1) = f(y_0) = y$ y tenemos demostrado el resultado que buscábamos.
+    \end{proof}
+\end{teo}
+
+\begin{teo}
+    Sean $X$ un e.t y $\{A_i\}_{i\in I}$ una familia de arcoconexos de $X$. Si $\bigcap\limits_{i\in I}A_i \neq \emptyset$, entones $\bigcup\limits_{i\in I}A_i$ es arcoconexo.
+\end{teo}
+
+\begin{observacion}
+    Hay resultados de conexión que no son ciertos para arcoconexión. Por ejemplo, si en un e.t. $X$ se tiene que $A\subseteq X$ es arcoconexo podría ocurrir que si $A\subseteq B \subseteq \overline{A}$, se diera que $B$ no sea arcoconexo (como en el ejemplo anterior\footnote{el ejemplo del ``peine``'}).
+\end{observacion}
+
+\begin{ejemplo}
+    $\bb{S}^n = \{x\in \bb{R}^{n+1} : |x| = 1\}$ es arcoconexo. Lo podemos ver sabiendo que $\bb{S}^n\setminus \{N\}$, con $N=(0,\dots,0,1)$ es homeomorfo a $\bb{R}^n$ que es arcoconexo por lo que $\bb{S}^n \setminus\{N\}$ es arcoconexo. De igual forma, $\bb{S}^n \setminus\{S\}$ con $S=(0,\dots,0,-1)$ es arcoconexo y podemos escribir
+    \begin{gather*}
+        \bb{S}^n = (\bb{S}^n \setminus\{N\}) \cup (\bb{S}^n \setminus\{S\})
+    \end{gather*}
+    por lo que $\bb{S}^n$ es unión de arcoconexos con puntos en común, luego es arcoconexo.
+\end{ejemplo}
+
+\begin{teo}
+    Sean $X,Y$ e.t., entonces $X\times Y$ es arcoconexo (con la topología producto) si y solo si $X$ e $Y$ son arcoconexos.
+\end{teo}
+
+\begin{teo}
+    Dado un e.t. $X$, se tiene que $X$ es arcoconexo si y solo si $X$ es conexo y todo punto $x\in X$ tiene un entorno suyo arcoconexo.
+
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$)] Hemos visto que si $X$ es arcoconexo, entonces $X$ es conexo. Además, $X$ es un entorno de cualquier punto suyo luego todo punto tiene un entorno conexo.
+            \item[$\Leftarrow$)] Elegimos un $x\in X$ fijo y definimos $A = \{y\in X : \exists \alpha_y \text{ arco uniendo $x$ con $y$ }\}$
+            
+            Como $x\in A$ tenemos que $A\neq \emptyset$. Si probamos que $A$ es abierto y cerrado, entonces como $X$ es conexo tendremos que $A=X$, es decir podremos unir $x$ con cualquier otro punto $y\in X$. Esto se deja como ejercicio para el lector.
+        \end{itemize}
+
+    \end{proof}
+\end{teo}
