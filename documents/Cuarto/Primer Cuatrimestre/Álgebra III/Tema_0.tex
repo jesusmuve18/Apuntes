@@ -147,7 +147,43 @@ Recordaremos ahora los conceptos de subanillo y subcuerpo. Para ello consideramo
 \end{ejemplo}
 
 \begin{observacion}
-    Si $f\in Q[x]$, entonces tomo todas sus raíces en $\bb{C}$, digamos $\alpha_1, \dots, \alpha_t$ y c.d.d de $f$ es $Q(\alpha_1, \dots, \alpha_t)$
+    Si $f\in Q[x]$, entonces tomo\footnote{alpicando el Teorema Fundamental del Álgebra} todas sus raíces en $\bb{C}$, digamos $\alpha_1, \dots, \alpha_t$ y c.d.d de $f$ es $Q(\alpha_1, \dots, \alpha_t)$
 \end{observacion}
+
+\begin{ejemplo}
+    Dado $f\in \bb{Q}[x]$, $f=x^2-2$, entonces el c.d.d de $f$ es $\bb{Q}(\sqrt{2}) = \bb{Q}(\{\sqrt{2}\})$
+\end{ejemplo}
+
+\begin{ejercicio}
+    Si tengo $F\leq K$ una extensión de cuerpos y dos subconjuntos $S,T\subset K$, demostrar que $F(S\cup T) = F(S)(T)$
+\end{ejercicio}
+
+\begin{ejemplo}
+    Consideramos el polinomio $f=x^3-2 \in \bb{Q}[X]$. El conjunto de raíces de $f$ será
+    \begin{gather*}
+        \text{Raíces de }f = \{\sqrt[3]{2}, w\sqrt[3]{2}, w^2\sqrt[3]{2}\}\\
+        w = e^{\frac{2\pi i}{3}} = \cos\left(\frac{2\pi}{3}\right) + i\sen\left(\frac{2\pi}{3}\right) = -\frac{1}{2} + i \frac{\sqrt{3}}{2}\\
+        (\sqrt[3]{2} w)^3 = 2 \Rightarrow \sqrt[3]{2} w \in \text{Raíces de }f
+    \end{gather*}
+    En este caso decimos que el c.d.d de $f$ es $\bb{Q}(\sqrt[3]{2}, w\sqrt[3]{2}, w^2\sqrt[3]{2})$, o lo que es lo mismo\footnote{se puede comprobar fácilmente viendo que el conjunto de generadores de un espacio está en el otro y viceversa} $\bb{Q}(\sqrt[3]{2}, w)$
+\end{ejemplo}
+
+\begin{ejercicio}(Solo hay que plantearse la pregunta, en eso consiste el ejercicio)
+    ¿Quién es el c.d.d de $x^2+ x +1 \in \bb{Z}_2[x]$?¿Existe?
+\end{ejercicio}
+
+\begin{ejemplo}
+    $f=x^n-1$ con $n\geq1$. Sabemos que tiene $n$ raíces ya que $f=nx^{n-1}$ por lo que no puede haber raíces con multiplicidad mayor que 1 y por tanto hay $n$ raíces distintas en $\bb{C}$. Además, sus raíces son
+    \begin{gather*}
+        \left\{\left(e^{\frac{i2\pi}{n}}\right)^k : k=0,\dots,n-1\right\}
+    \end{gather*}
+    que son las raíces n-ésimas de la unidad real. Esto es un subgrupo cíclico de orden $n$ de $\bb{C}^* = \bb{C}\setminus \{0\}$, con $e^{\frac{i 2\pi}{n}}$ como generador. Cada uno de sus generadores se llama raíz n-ésima compleja primitiva de la unidad.\\
+
+    El c.d.d de $x^n-1\in \bb{Q}[x]$ es $\bb{Q}(\eta)$, $\eta\in \bb{C}$ que es $\sqrt[n]{1}$ primitiva.
+\end{ejemplo}
+
+\begin{definicion}
+    Dado $F\leq K$ una extensión, $\alpha in K$, diremos que $\alpha$ es \textbf{algebraico sobre $F$} si $f(\alpha)=0$ para algún $f\in F[x]$, $f\neq 0$. Sino, $\alpha$ se llama \textbf{trascendente sobre $F$}.
+\end{definicion}
 
 
