@@ -1,0 +1,48 @@
+\chapter*{Tema 0. Conexión por arcos}
+
+\section{Conexión}
+
+\begin{notacion}
+    Notaremos por e.t al espacio topológico $(X,\cc{T})$ o diremos $X$ es un e.t.
+\end{notacion}
+
+\begin{definicion}
+    Se dice que un e.t $X$ es {no} conexo si existen $U$ y $V$ abiertos disjuntos y no vacíos tales que $X=U\cup V$. 
+\end{definicion}
+
+\begin{prop}
+    Dado un e.t. $X$ equivalen las siguientes afirmaciones:
+    \begin{enumerate}
+        \item[(i)] $X$ es conexo.
+        \item[(ii)] Los únicos subconjuntos de $X$ que son abiertos y cerrados a la vez son el vacío y el total. 
+        \item[(iii)] Los únicos subconjuntos de $X$ con frontera vacía son el vacío y el total. 
+    \end{enumerate}
+\end{prop}
+
+\begin{teo}
+    El ser conexo se conserva por aplicaciones continuas. En particular, ser conexo es una propiedad topológica (se conserva por homeomorfismos).
+\end{teo}
+
+\begin{teo}
+    La unión de una colección de subconjuntos conexos que tienen un punto común de un e.t. $X$ es también conexa.
+\end{teo}
+
+\begin{teo}
+    Si $A$ es un subconjunto del e.t. $X$ y $A$ es conexo, entonces dado $B$ con $A\subset B\subset\overline{A}$, entonces se tiene que $B$ también es conexo. En particular, la adherencia de un conexo siempre es un conjunto conexo.
+\end{teo}
+
+\begin{teo}
+    Dados dos espacios topológicos $X,Y$ se cumple que $X\times Y$ es conexo (con la topología producto) si y solo si $X$ e $Y$ son conexos.
+\end{teo}
+
+\begin{teo}
+    Los conjuntos conexos de $\bb{R}$ con la topología usual son exactamente los intervalos (incluyendo los puntos).
+\end{teo}
+
+\begin{definicion}
+    Dados un e.t. $X$ y un punto $x_0$ se define la componente conexa de $x_0$ es $X$ como el mayor conexo de $X$ que contiene a $x_0$
+\end{definicion}
+
+\begin{teo}
+    Las componentes conexas de un e.t. $X$ forman una partición de $X$ es conjuntos conexos maximales y cerrados.
+\end{teo}
