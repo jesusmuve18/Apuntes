@@ -131,4 +131,23 @@ Recordaremos ahora los conceptos de subanillo y subcuerpo. Para ello consideramo
     $\bb{Q}(\sqrt(2))$ donde $\sqrt{2}\in \bb{R}$, es decir, es el menor subcuerpo de los reales que contiene a $\sqrt{2}$. Por tanto $\bb{Q}(\sqrt(2)) = \{a+b\sqrt{2} : a,b\in \bb{Q}\}$. Esto se ve fácilmente viendo la doble inclusión. La inclución $\supseteq$ es obvia y demostrando que $\{a+b\sqrt{2} : a,b\in \bb{Q}\}$ es un subcuerpo tenemos automáticamente la igualdad. Esta extensión tendrá grado 2.
 \end{ejemplo}
 
+\begin{definicion}
+    Sea $K$ un cuerpo, consideramos el cuerpo de polinomios con coeficientes en $K$, y lo denotamos por $K[x]$. \\
+    
+    Dado un $f\in K[x]$ y $K\leq E$ una extensión de cuerpos tal que $f$ se descompone completamente en $E[X]$ como producto de polinomios lineales\footnote{de grado 1} y $E=K(\alpha_1,\dots,\alpha_t)$ con $\alpha_1, \dots, \alpha_t\in E$ las raíces de $f$, entonces diremos que $E$ es un \textbf{cuerpo de descomposición} (de escisión) de $f$ (sobre $K$).
+\end{definicion}
+
+\begin{ejemplo}
+    Consideramos el polinomio $x^2 + 1 \in \bb{R}[x]$ que es irreducible\footnote{no tiene raíces en $\bb{R}$ y no se puede descomponer en producto de polinomios de grado menor} sobre $\bb{R}$. Un cuerpo de descomposición suyo es $\bb{C}$.\\
+
+    Podemos considerar además $x^2+1 \in \bb{Q}[x]$ y entonces el c.d.d\footnote{cuerpo de descomposición} es $\bb{Q}(i)$ (y además $[\bb{C} : \bb{Q}(i)]=\infty$ y se deja esto como ejercicio).
+    \begin{gather*}
+        x^2 +1 = (x-i)(x+i)
+    \end{gather*}
+\end{ejemplo}
+
+\begin{observacion}
+    Si $f\in Q[x]$, entonces tomo todas sus raíces en $\bb{C}$, digamos $\alpha_1, \dots, \alpha_t$ y c.d.d de $f$ es $Q(\alpha_1, \dots, \alpha_t)$
+\end{observacion}
+
 
