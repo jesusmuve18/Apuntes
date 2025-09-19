@@ -46,3 +46,84 @@
 \begin{teo}
     Las componentes conexas de un e.t. $X$ forman una partición de $X$ es conjuntos conexos maximales y cerrados.
 \end{teo}
+
+\section{Conexión por arcos}
+
+\begin{definicion}
+    Un \textbf{arco} (o camino) en un espacio topológico $X$ es una aplicación continua $\alpha:[0,1]\to X$. Si además $\alpha(0) = \alpha(1)$ diremos que $\alpha$ es un lazo.\\
+
+    Diremos que un arco $\alpha:[0,1]\to X$ une $x$ con $y$ si se verifica que $\alpha(0)=x$ y $\alpha(1) = y$. Si $\alpha$ es un arco, diremos que está basado en $x$ (o su punto base es $x$) si $\alpha(0)=x=\alpha(1)$.\\
+
+    Denotaremos por 
+    \begin{gather*}
+        \Omega(X;x,y) = \{\alpha:[0,1]\to X \text{ continua } : \alpha(0)=x, \ \ \alpha(1)=y\}
+    \end{gather*}
+    al conjunto de arcos que unen $x$ con $y$. Denotaremos además por  
+    \begin{gather*}
+        \Omega(X;x) = \{\alpha:[0,1]\to X \text{ continua } : \alpha(0)=x=\alpha(1)\}
+    \end{gather*}
+    al conjunto de lazos basados en $x$.
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Dados un e.t. $X$ y un punto $x_0\in X$ siempre se tiene que
+        \begin{align*}
+            \veps_{x_0}:[0,1]&\to X\\
+            t &\mapsto x_0
+        \end{align*}
+        es un lazo basado en $x_0$. De hecho, si $X$ tiene la topología discreta, entonces los únicos arcos que hay en $X$ son los arcos constantes.\\
+
+        Esto se debe a que $\alpha^{-1}(\{x_0\})$ será abierto y cerrado y por tanto $\alpha^{-1}(\{x_0\})\in\{\emptyset, X\}$
+
+
+        \item Sean $\alpha:[0,1]\to X$ un arco uniendo $x$ con $y$ y $\beta:[0,1]\to X$ un arco uniendo $y$ con $z$.
+        \begin{align*}
+            \alpha\ast\beta : [0,1]\to X : (\alpha\ast\beta)(t) = \left\{ 
+                \begin{array}{l c c}
+                    \alpha(2t) & \text{ si } & 0 \leq t \leq \nicefrac{1}{2} \\
+                    \beta(2t-1) & \text{ si } & \nicefrac{1}{2}\leq t \leq 1
+                \end{array}
+            \right.
+        \end{align*}
+        Entonces $\alpha\ast\beta$ es continua ya que $(\alpha\ast\beta)_{|_{[0,\nicefrac{1}{2}]}}$ y $(\alpha\ast\beta)_{|_{[\nicefrac{1}{2},1]}}$ lo son y para $t=\nicefrac{1}{2}$ se tiene que
+        \begin{gather*}
+            \alpha \left(2 \cdot \frac{1}{2}\right) = \alpha(1) = \beta(0) = \beta\left(2\cdot \frac{1}{2} -1\right)
+        \end{gather*}
+        con $\left[0, \frac{1}{2}\right]$ y $\left[\frac{1}{2}, 1\right]$ cerrados
+
+        \item Si $\alpha:[0,1]\to X$ es un arco uniendo $x$ con $y$, entonces
+        \begin{align*}
+            \tilde{\alpha}:[0,1]&\to X\\
+            t & \mapsto \alpha(1-t)
+        \end{align*}
+        es un arco que une $y$ con $x$.
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{definicion}
+    Decimos que un e.t. $X$ es \textbf{arcoconexo} (o \textbf{conexo por arcos}) si para cualesquiera $x,y\in X$ existe un arco en $X$ que une el punto $x$ con el punto $y$.\\
+
+    Si $X$ es un e.t. y $A\subset X$, diremos que $A$ es arcoconexo si $A$ es arcoconexo con la topología de inducida de $X$
+\end{definicion}
+
+\begin{teo}
+    Todo e.t. arcoconexo es conexo.
+    \begin{proof}
+        Dado $x_0\in X$ fijo y $x\in X$ cualquiera existe $\alpha:[0,1]\to X$ un arco tal que $\alpha(0)=x_0$ y $\alpha(1)=x$. En particular, como el intervalo $[0,1]$ es conexo y $\alpha$ es continua, entonces se tiene que $\alpha([0,1])$ es conexo y podremos escribir 
+        \begin{gather*}
+            X=\bigcup\limits_{x\in X}\{x\}\subseteq \bigcup\limits_{x\in X} \alpha_x ([0,1])\in X \Rightarrow X = \bigcup\limits_{x\in X}\alpha_x\{[0,1]\}
+        \end{gather*}
+        y además $x_0 \in \bigcap\limits_{x\in X}\alpha_x\{[0,1]\}$ por lo que $X$ es conexo.
+    \end{proof}
+\end{teo}
+
+\begin{ejemplo}
+    Consideramos $X_n = [0,1]\times \left\{\frac{1}{n}\right\}$, $n\in \bb{N}$ y $X_0=\{1\}\times [0,1]$. Llamamos $X=\{(0,0)\}\cup \left(\bigcup\limits_{n\in \bb{N}\cup \{0\}}X_n\right)$ y queremos ver que $X$ es conexo pero no es arcoconexo.\\
+
+    Si denotamos por $Y=\bigcup\limits_{n\in \bb{N}\cup \{0\}}X_n$ es conexo porque es unión de los $X_n$ que son todos conexos y cada uno de ellos corta a uno fijo, $X_0$. Entonces $X$ es conexo porque $Y\subset X \subset \overline{Y}$. Veamos sin embargo que $X$ no es arcoconexo.\\
+
+    Para ello vamos a demostrar que si $\alpha:[0,1]\to X : \alpha$ es continua con $\alpha(0)=(0,0)$, entonces $\alpha(t)=(0,0)$ para todo $t\in [0,1]$.\\
+
+    Escribimos $\alpha(t) = (x(t), y(t))\in \bb{R}^2$, como $\alpha(0)=(0,0)$, si tomamos $((-\nicefrac{1}{2}, \nicefrac{1}{2})\times (-\nicefrac{1}{2}, \nicefrac{1}{2})) \cap X$ un abierto que contiene al origen, entonces $\exists \veps > 0$ tal que $\alpha([0,\veps))\subseteq ((-\nicefrac{1}{2}, \nicefrac{1}{2})\times (-\nicefrac{1}{2}, \nicefrac{1}{2})) \cap X$. Como $y(t)$ es continua y se tiene que $y([0,\veps))\subseteq \{0\}\cup\left(\bigcup\limits_{n>2} \left\{\frac{1}{n}\right\}\right)$. Por el teorema del valor intermedio tenemos que $y([0,\veps)) = \{0\}$ por lo que $\alpha([0,\veps))=\{(0,0)\}$
+\end{ejemplo}
