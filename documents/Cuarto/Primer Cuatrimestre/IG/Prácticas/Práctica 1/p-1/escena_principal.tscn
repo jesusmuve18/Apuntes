@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://divq67slfuf5q"]
+
+[ext_resource type="Script" uid="uid://dqpxbsfp12s2s" path="res://ejes3D.gd" id="1_jdg2m"]
+[ext_resource type="Script" uid="uid://dlarofldpmv8x" path="res://piramide.gd" id="3_hcujj"]
+[ext_resource type="Script" uid="uid://i02ohha2s4em" path="res://camara_3d_orbital_simple.gd" id="3_rftnj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_r0811"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0811"]
+albedo_color = Color(1, 1, 0, 1)
+
+[node name="Escena Principal" type="Node3D"]
+transform = Transform3D(0.99546784, 0, 0.09509869, 0, 1, 0, -0.09509869, 0, 0.99546784, 0, 0, 0)
+
+[node name="Cubo" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
+mesh = SubResource("BoxMesh_r0811")
+surface_material_override/0 = SubResource("StandardMaterial3D_r0811")
+
+[node name="Ejes3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_jdg2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.38829583, -0.33427235, 0.85877144, 0.048350424, 0.937999, 0.34324947, -0.9202655, -0.09176038, 0.38038325, 1.9184475, 2.5505667, 0.66814667)
+
+[node name="Piramide" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+script = ExtResource("3_hcujj")
+altura = 0.5
+
+[node name="Camera3DOrbital" type="Camera3D" parent="."]
+script = ExtResource("3_rftnj")

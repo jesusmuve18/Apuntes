@@ -58,11 +58,11 @@
     \begin{gather*}
         \Omega(X;x,y) = \{\alpha:[0,1]\to X \text{ continua } : \alpha(0)=x, \ \ \alpha(1)=y\}
     \end{gather*}
-    al conjunto de arcos que unen $x$ con $y$. Denotaremos además por  
+    al \textbf{conjunto de arcos} que unen $x$ con $y$. Denotaremos además por  
     \begin{gather*}
         \Omega(X;x) = \{\alpha:[0,1]\to X \text{ continua } : \alpha(0)=x=\alpha(1)\}
     \end{gather*}
-    al conjunto de lazos basados en $x$.
+    al \textbf{conjunto de lazos} basados en $x$.
 \end{definicion}
 
 \begin{ejemplo}\
@@ -72,12 +72,13 @@
             \veps_{x_0}:[0,1]&\to X\\
             t &\mapsto x_0
         \end{align*}
-        es un lazo basado en $x_0$. De hecho, si $X$ tiene la topología discreta, entonces los únicos arcos que hay en $X$ son los arcos constantes.\\
+        es un lazo basado en $x_0$ al que llamaremos \textbf{arco constante}. De hecho, si $X$ tiene la topología discreta, entonces los únicos arcos que hay en $X$ son los arcos constantes.
+        \begin{proof}
+            Si $X$ tiene la topología discreta, entonces como $\alpha$ es continua $\alpha^{-1}(\{x_0\})$ será abierto y cerrado y por tanto $\alpha^{-1}(\{x_0\})\in\{\emptyset, X\}$ por ser $X$ conexo.
+        \end{proof}
 
-        Esto se debe a que $\alpha^{-1}(\{x_0\})$ será abierto y cerrado y por tanto $\alpha^{-1}(\{x_0\})\in\{\emptyset, X\}$
 
-
-        \item Sean $\alpha:[0,1]\to X$ un arco uniendo $x$ con $y$ y $\beta:[0,1]\to X$ un arco uniendo $y$ con $z$.
+        \item Sean $x,y,z\in X$, $\alpha:[0,1]\to X$ un arco uniendo $x$ con $y$ y $\beta:[0,1]\to X$ un arco uniendo $y$ con $z$. Buscaremos ahora un arco formado a partir de estos dos de la siguiente forma:
         \begin{align*}
             \alpha\ast\beta : [0,1]\to X : (\alpha\ast\beta)(t) = \left\{ 
                 \begin{array}{l c c}
@@ -90,7 +91,7 @@
         \begin{gather*}
             \alpha \left(2 \cdot \frac{1}{2}\right) = \alpha(1) = \beta(0) = \beta\left(2\cdot \frac{1}{2} -1\right)
         \end{gather*}
-        con $\left[0, \frac{1}{2}\right]$ y $\left[\frac{1}{2}, 1\right]$ cerrados
+        con $\left[0, \frac{1}{2}\right]$ y $\left[\frac{1}{2}, 1\right]$ cerrados. Aplicando el lema de pegado\footnote{visto en Topología I} tenemos que $\alpha\ast \beta$ es continua.
 
         \item Si $\alpha:[0,1]\to X$ es un arco uniendo $x$ con $y$, entonces
         \begin{align*}
@@ -104,28 +105,36 @@
 \begin{definicion}
     Decimos que un e.t. $X$ es \textbf{arcoconexo} (o \textbf{conexo por arcos}) si para cualesquiera $x,y\in X$ existe un arco en $X$ que une el punto $x$ con el punto $y$.\\
 
-    Si $X$ es un e.t. y $A\subset X$, diremos que $A$ es arcoconexo si $A$ es arcoconexo con la topología de inducida de $X$
+    Si $X$ es un e.t. y $A\subset X$, diremos que $A$ es arcoconexo si $A$ es arcoconexo con la topología de inducida de $X$.
 \end{definicion}
 
 \begin{teo}
-    Todo e.t. arcoconexo es conexo.
+    Todo espacio topológico arcoconexo es conexo.
     \begin{proof}
-        Dado $x_0\in X$ fijo y $x\in X$ cualquiera existe $\alpha:[0,1]\to X$ un arco tal que $\alpha(0)=x_0$ y $\alpha(1)=x$. En particular, como el intervalo $[0,1]$ es conexo y $\alpha$ es continua, entonces se tiene que $\alpha([0,1])$ es conexo y podremos escribir 
+        Dado $x_0\in X$ fijo y otro punto $x\in X$ cualquiera, sabemos que existe $\alpha:[0,1]\to X$ un arco tal que $\alpha(0)=x_0$ y $\alpha(1)=x$. En particular, como el intervalo $[0,1]$ es conexo y $\alpha$ es continua, entonces se tiene que $\alpha([0,1])$ es conexo y podremos escribir 
         \begin{gather*}
             X=\bigcup\limits_{x\in X}\{x\}\subseteq \bigcup\limits_{x\in X} \alpha_x ([0,1])\in X \Rightarrow X = \bigcup\limits_{x\in X}\alpha_x\{[0,1]\}
         \end{gather*}
-        y además $x_0 \in \bigcap\limits_{x\in X}\alpha_x\{[0,1]\}$ por lo que $X$ es conexo.
+        y además $x_0 \in \bigcap\limits_{x\in X}\alpha_x\{[0,1]\}$ por lo que $X$ es conexo (por el lema del peine).
     \end{proof}
 \end{teo}
 
-\begin{ejemplo} %TODO formatear
-    Consideramos $X_n = [0,1]\times \left\{\frac{1}{n}\right\}$, $n\in \bb{N}$ y $X_0=\{1\}\times [0,1]$. Llamamos $X=\{(0,0)\}\cup \left(\bigcup\limits_{n\in \bb{N}\cup \{0\}}X_n\right)$ y queremos ver que $X$ es conexo pero no es arcoconexo.\\
+\begin{ejemplo}
+    Veamos que la otra implicación no es cierta en general. Para ello consideramos los siguientes conjuntos: 
+    \begin{gather*}
+        X_0=\{1\}\times [0,1] \hspace{0.5cm}\text{ y } \hspace{0.5cm} X_n = [0,1]\times \left\{\frac{1}{n}\right\},\ n\in \bb{N}
+    \end{gather*}
+    Llamamos $X=\{(0,0)\}\cup \left(\bigcup\limits_{n\in \bb{N}\cup \{0\}}X_n\right)$ y queremos ver que $X$ es conexo pero no es arcoconexo.\\
 
-    Si denotamos por $Y=\bigcup\limits_{n\in \bb{N}\cup \{0\}}X_n$ es conexo porque es unión de los $X_n$ que son todos conexos y cada uno de ellos corta a uno fijo, $X_0$. Entonces $X$ es conexo porque $Y\subset X \subset \overline{Y}$. Veamos sin embargo que $X$ no es arcoconexo.\\
+    Si tomamos la segunda parte de esta unión, es decir, 
+    \begin{gather*}
+        Y=\bigcup\limits_{n\in \bb{N}\cup \{0\}}X_n
+    \end{gather*}
+    tenemos que $Y$ es es conexo porque es unión de los $X_n$ que son todos conexos y que intersecan con $X_0$. Entonces, como $Y\subset X \subset \overline{Y}$ tenemos que $X$ es conexo. Veamos sin embargo que $X$ no es arcoconexo.\\
 
     Para ello vamos a demostrar que si $\alpha:[0,1]\to X : \alpha$ es continua con $\alpha(0)=(0,0)$, entonces $\alpha(t)=(0,0)$ para todo $t\in [0,1]$.\\
 
-    Escribimos $\alpha(t) = (x(t), y(t))\in \bb{R}^2$, como $\alpha(0)=(0,0)$, si tomamos $((-\nicefrac{1}{2}, \nicefrac{1}{2})\times (-\nicefrac{1}{2}, \nicefrac{1}{2})) \cap X$ un abierto que contiene al origen, entonces $\exists \veps > 0$ tal que $\alpha([0,\veps))\subseteq ((-\nicefrac{1}{2}, \nicefrac{1}{2})\times (-\nicefrac{1}{2}, \nicefrac{1}{2})) \cap X$. Como $y(t)$ es continua y se tiene que $y([0,\veps))\subseteq \{0\}\cup\left(\bigcup\limits_{n>2} \left\{\frac{1}{n}\right\}\right)$. Por el teorema del valor intermedio tenemos que $y([0,\veps)) = \{0\}$ por lo que $\alpha([0,\veps))=\{(0,0)\}$
+    Podemos escribir la curva como $\alpha(t) = (x(t), y(t))\in \bb{R}^2$. Como $\alpha(0)=(0,0)$, si tomamos $((-\nicefrac{1}{2}, \nicefrac{1}{2})\times (-\nicefrac{1}{2}, \nicefrac{1}{2})) \cap X$ un abierto que contiene al origen, entonces $\exists \veps > 0$ tal que $\alpha([0,\veps))\subseteq ((-\nicefrac{1}{2}, \nicefrac{1}{2})\times (-\nicefrac{1}{2}, \nicefrac{1}{2})) \cap X$ por ser $\alpha$ continua. Como $y(t)$ es continua y se tiene que $y([0,\veps))\subseteq \{0\}\cup\left(\bigcup\limits_{n>2} \left\{\frac{1}{n}\right\}\right)$. Por el teorema del valor intermedio tenemos que $y([0,\veps)) = \{0\}$ por lo que $\alpha([0,\veps))=\{(0,0)\}$. De esta forma hemos probado que no hay ningún arco que conecte $(0,0)$ con un punto distinto (el único arco es el constante).
 \end{ejemplo}
 
 \begin{teo}
@@ -155,11 +164,11 @@
 \end{teo}
 
 \begin{observacion}
-    Hay resultados de conexión que no son ciertos para arcoconexión. Por ejemplo, si en un e.t. $X$ se tiene que $A\subseteq X$ es arcoconexo podría ocurrir que si $A\subseteq B \subseteq \overline{A}$, se diera que $B$ no sea arcoconexo (como en el ejemplo anterior\footnote{el ejemplo del ``peine``'}).
+    Hay resultados de conexión que no son ciertos para arcoconexión. Por ejemplo, si en un e.t. $X$ se tiene que $A\subseteq X$ es arcoconexo podría ocurrir que si $A\subseteq B \subseteq \overline{A}$, se diera que $B$ no sea arcoconexo (como en el ejemplo anterior).
 \end{observacion}
 
 \begin{ejemplo}
-    $\bb{S}^n = \{x\in \bb{R}^{n+1} : |x| = 1\}$ es arcoconexo. Lo podemos ver sabiendo que $\bb{S}^n\setminus \{N\}$, con $N=(0,\dots,0,1)$ es homeomorfo a $\bb{R}^n$ que es arcoconexo por lo que $\bb{S}^n \setminus\{N\}$ es arcoconexo. De igual forma, $\bb{S}^n \setminus\{S\}$ con $S=(0,\dots,0,-1)$ es arcoconexo y podemos escribir
+    Veamos que $\bb{S}^n = \{x\in \bb{R}^{n+1} : |x| = 1\}$ es arcoconexo. Podemos hacerlo sabiendo que $\bb{S}^n\setminus \{N\}$, con $N=(0,\dots,0,1)$ es homeomorfo a $\bb{R}^n$ que es arcoconexo por lo que $\bb{S}^n \setminus\{N\}$ es arcoconexo. Análogamente, $\bb{S}^n \setminus\{S\}$ con $S=(0,\dots,0,-1)$ es arcoconexo y podemos escribir
     \begin{gather*}
         \bb{S}^n = (\bb{S}^n \setminus\{N\}) \cup (\bb{S}^n \setminus\{S\})
     \end{gather*}
@@ -175,11 +184,10 @@
 
     \begin{proof}\
         \begin{itemize}
-            \item[$\Rightarrow$)] Hemos visto que si $X$ es arcoconexo, entonces $X$ es conexo. Además, $X$ es un entorno de cualquier punto suyo luego todo punto tiene un entorno conexo.
+            \item[$\Rightarrow$)] Hemos visto que si $X$ es arcoconexo, entonces $X$ es conexo. Además, $X$ es entorno de cualquier punto suyo luego todo punto tiene un entorno conexo.
             \item[$\Leftarrow$)] Elegimos un $x\in X$ fijo y definimos $A = \{y\in X : \exists \alpha_y \text{ arco uniendo $x$ con $y$ }\}$
             
-            Como $x\in A$ tenemos que $A\neq \emptyset$. Si probamos que $A$ es abierto y cerrado, entonces como $X$ es conexo tendremos que $A=X$, es decir podremos unir $x$ con cualquier otro punto $y\in X$. Esto se deja como ejercicio para el lector.
+            Como $x\in A$ tenemos que $A\neq \emptyset$. Si probamos que $A$ es abierto y cerrado, entonces como $X$ es conexo tendremos que $A=X$, es decir podremos unir $x$ con cualquier otro punto $y\in X$. Esto se deja como ejercicio para el lector.\\
         \end{itemize}
-
     \end{proof}
 \end{teo}
