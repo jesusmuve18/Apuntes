@@ -346,13 +346,13 @@ Recordemos que un espacio de Hilbert es un par $(H, (\cdot, \cdot))$ donde $H$ e
     \begin{gather*}
         \forall f \in H \ \ \ \exists_1u\in M \text{ tal que } \|f-u\| = dist(f,M)
     \end{gather*}
-    Además, $u$ está caracterizado por
+    Además, $u=F_Mf$ está caracterizado por
     \begin{itemize}
         \item $u\in M$
         \item $(f-u, w) = 0$ \ \ \ $\forall w \in M$
     \end{itemize}
 
-    Además, $P_M:H \to H$ es lineal.
+    Y se tiene que $P_M:H \to H$ es lineal.
     \begin{proof}
         Comencemos con la primera parte del corolario. Sabemos que $u\in K$ y $(f-u, v-u)\leq 0$\ \ \ $\forall v \in M$ del teorema de la proyección. Tendremos que probar la equivalencia entre esto y $(f-u, w) = 0$ \ \ \ $\forall w \in M$ cuando $M$ es un subespacio vectorial. Veamos ambas implicaciones:
         \begin{itemize}
@@ -399,7 +399,7 @@ Recordemos que un espacio de Hilbert es un par $(H, (\cdot, \cdot))$ donde $H$ e
 \begin{definicion}[Dual topológico]
    Dado $(E, \|\cdot\|)$ un espacio normado, llamamos \textbf{dual topológico} a
     \begin{gather*}
-        E^\# = \{f: E \to \bb{R}: f \text{ es lineal y continua}\}
+        E^* = \{f: E \to \bb{R}: f \text{ es lineal y continua}\}
     \end{gather*} 
 \end{definicion}
 
@@ -457,6 +457,43 @@ Recordemos que un espacio de Hilbert es un par $(H, (\cdot, \cdot))$ donde $H$ e
 
 \begin{teo}[Teorema de Riesz-Fischer]
     Para toda $\varphi\in H^*$, se tiene que $\exists_1 v\in H$ tal que $\varphi(u)=(u,v)\ \ \ \forall u\in H$. Además, se tiene que $\|\varphi\|_{H^*} = \|v\|_H$
+\end{teo}
+
+\begin{ejercicio} % TODO: poner f como f_y
+    Sea $H$ un espacio de Hilbert, y tomamos un elemento cualquiera $y\in H$. Consideramos $f:H\to \bb{R}$ dada por $f_y(x)=(x,y)$ para todo $x\in H$. Entonces se tiene que $f_y$ es lineal, y además
+    \begin{gather*}
+        |f_y(x)| = |(x,y)| \leq \|y\|\cdot \|x\| \ \ \forall x\in H \Rightarrow f_y \text{ acotada}
+    \end{gather*}
+    con lo que $\|f_y\|_{H^*}\leq \|y\|_{H}$.\\
+
+    Con la definición de la norma tenemos que 
+    \begin{gather*}
+        \|f_y\|_{H^*} = \sup\{|(x,y)| : x\in H,\ \|x\|_H\leq 1\} \leq \|y\|_H \sup\{\|x\|_H: x\in H,\ \|x\|_H\leq 1\} = \|y\|_H
+    \end{gather*}
+    Comenzamos con el caso $y\neq 0$ y tomamos $x=\frac{y}{\|y\|_H}$ y tenemos que
+    \begin{gather*}
+        |(x,y)| = \left|\left(\frac{y}{\|y\|_H}, y\right)\right| = \frac{1}{\|y\|_H}(y,y) = \|y\|_H
+    \end{gather*}
+    por lo que hemos visto que se alcanza el máximo por lo que $\|f_y\|_{H^*}=\|y\|_H$ . Veamos ahora qué sucede cuando $y=0$. En este caso tendremos $f_y(x) = (x,0)$ y por tanto se tiene directamente que $\|f_y\|_{H^*}=0=\|y\|_H$.\\
+
+    La linealidad se deja como ejercicio.
+\end{ejercicio}
+
+\begin{teo}[Teorema de representación del dual de un espacio de Hilbert de Riesz-Fréchet] 
+    Sea $H$ un espacio de Hilbert, entonces $\forall f \in H^*$ existe un único $y\in H$ tal que $f(x)=(x,y)$\ \ $\forall x \in H$. Además, $\|f\|_{H^*}=\|y\|_H$.
+
+    \begin{proof}
+        Solo tenemos que probar la primera parte, pues la segunda es consecuencia del ejercicio anterior. Para ello tomamos $f\in H^*$ y tenemos dos casuísticas:
+        \begin{itemize}
+            \item Si $f=0$, entonces puedo tomar $y=0$ y es evidente.
+            \item Si $f\neq 0$, entonces tenemos que $M=f^{-1}(\{0\})\varsubsetneq H$ es un subespacio vectorial cerrado (imagen inversa de un cerrado por una función continua\footnote{nos dice que es cerrado.} y lineal\footnote{nos dice que es espacio vectorial.}). Podemos aplicar entonces el teorema de la proyección ortogonal. Sabemos que $\exists z_0 \in H\setminus M$. Llamamos $z_1=P_Mz_0\in M$ y tenemos que $(z_0-z_1, v) = 0$ para todo $v\in M$. Definimos ahora
+            \begin{gather*}
+                z = \frac{z_0-z_1}{\|z_0-z_1\|_H}
+            \end{gather*}
+            y está bien definido ya que $z_0\notin M$ y $z_1 \in M$ luego $z_0-z_1\neq 0$.
+        \end{itemize}
+    \end{proof}
+    
 \end{teo}
 
 
