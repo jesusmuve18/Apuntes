@@ -413,9 +413,10 @@ Recordemos que un espacio de Hilbert es un par $(H, (\cdot, \cdot))$ donde $H$ e
         \item[(iv)] $T$ es acotada, es decir, $T(A)$ es acotada en $F$ para todo $A\subset E$ que esé acotado
         \item[(v)] $T$ es Lipschitziana.
     \end{enumerate}
+    
     %La demostración se deja como ejercicio.
 
-    \begin{proof}\ %TODO: formatear un poco mejor y poner productos 
+    \begin{proof}\ 
         \begin{itemize}
             \item[(v)$\Rightarrow$(iv) )] Trivial
             \item[(iv)$\Rightarrow$(iii) )] Trivial
@@ -427,7 +428,7 @@ Recordemos que un espacio de Hilbert es un par $(H, (\cdot, \cdot))$ donde $H$ e
             \end{gather*}
             luego $\|T(x)\| \leq M\|x\|$ para todo $x\in E$. De esta forma tenemos que 
             \begin{gather*}
-                \|T(x)\| = \left\| T \left(\frac{x}{\|x\|} \|x\| \frac{\delta}{2} \frac{2}{\delta}\right) \right\| = \frac{2}{\delta}\left\| T\left(\frac{x}{\|x\|} \frac{\delta}{2} \right) \right\| < \frac{2}{\delta}\|x\|
+                \|T(x)\| = \left\| T \left(\frac{x}{\|x\|} \cdot \|x\| \cdot \frac{\delta}{2} \cdot \frac{2}{\delta}\right) \right\| = \frac{2}{\delta}\left\| T\left(\frac{x}{\|x\|} \cdot\frac{\delta}{2} \right) \right\| < \frac{2}{\delta}\cdot \|x\|
             \end{gather*}
             \item [(iii)$\Rightarrow$(vi) )] Sabemos que $A\subset E$ está acotado, luego $T(A)$ también, es decir que $T(A)\subset B(0,M)$ para cierto $M>0$. Tenemos que probar que
             \begin{gather*}
@@ -438,7 +439,7 @@ Recordemos que un espacio de Hilbert es un par $(H, (\cdot, \cdot))$ donde $H$ e
                 \|T(x)\| \leq N\|x\| \leq N \|x\| < NR = M
             \end{gather*}
             y tenemos la inclusión que queríamos probar.
-            \item [(iv)$\Rightarrow$(ii) )] Por hipótesis tenemos que si $\|x\|<1$ entonces $\|T(x)\|\leq R$ y queremos probar que $\forall \veps >0 \ \ \exists \delta>0$ tal que si $\|x\|<\delta$, entonces $\|T(x)\|<\veps$. Tomamos $\delta = \frac{\veps}{2R}$ y tenemos que
+            \item [(iv)$\Rightarrow$(ii) )] Por hipótesis tenemos que si $\|x\|<1$ entonces $\|T(x)\|\leq R$ y queremos probar que $\forall \veps >0 \ \ \exists \delta>0$ tal que si $\|x\|<\delta$, entonces $\|T(x)\|<\veps$. Tomamos $\delta = \frac{\veps}{2R}$ y como $x\in E$, entonces $\|x\|<\delta$ y tenemos que
             \begin{gather*}
                 \|T(x)\| = \left\|T\left(\frac{x}{2\|x\|}\cdot 2 \|x\|\right)\right\| = 2\|x\| \left\|T\left(\frac{x}{2\|x\|}\right)\right\| \leq 2\|x\|R < 2\delta R = \veps
             \end{gather*}
