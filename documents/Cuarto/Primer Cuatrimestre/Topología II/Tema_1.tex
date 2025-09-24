@@ -1,0 +1,70 @@
+\chapter{El grupo fundamental}
+
+\section{Homotopía por arcos}
+
+\begin{definicion}
+    Sean $X$ e $Y$ dos espacios topologicos y $f,g:X\to Y$ dos aplicaciones continuas. Decimos que $f$ es \textbf{homotópica} a $g$ si existe $H:X\times[0,1]\to Y$ continua tal que 
+    \begin{gather*}
+        H(x,0) = f(x) \hspace{0.5cm} \text{ y } \hspace{0.5cm} H(x,1) = g(x) \ \ \ \forall x\in X
+    \end{gather*}
+\end{definicion} 
+
+\begin{definicion}
+    Dados $X$ e.t., $x,y\in X$ y dos arcos $\alpha, \beta\in \Omega(X;x,y)$, decimos que $\alpha, \beta$ son \textbf{homotópicos por arcos} si existe $H:[0,1]\times [0,1] \to X$ continua tal que 
+    \begin{align*}
+        H(s,0) = \alpha(s) \hspace{0.5cm} &\text{ y } \hspace{0.5cm} H(s,1) = \beta(x) \ \ \ &\forall s\in [0,1]\\
+        H(0,t) = x  \hspace{0.5cm} &\text{ y } \hspace{0.5cm} H(1,t) = y \ \ \ &\forall t \in [0,1]
+    \end{align*}
+\end{definicion}
+
+\begin{lema}
+    Ser homotópico por arcos da lugar a una relación de equivalencia en $\Omega(X;x,y)$.
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] Dado $\alpha \in \Omega(X;x,y)$ queremos ver que $\alpha$ es homotópica por arcos con $\alpha$. Para ello tenemos 
+            \begin{align*}
+                H(s,t) = \alpha(s) \hspace{1cm} & H(s,0) = \alpha(s)=H(s,1)\\
+                H(0,t) = \alpha(0)=x \hspace{1cm} & H(1,t) = \alpha(1) = y
+            \end{align*}
+
+            \item[(ii)] Dados $\alpha, \beta\in \Omega(X;x,y)$ tales que existe $H:[0,1]\times [0,1]\to X$ continua tal que 
+            \begin{align*}
+                H(s,0) = \alpha(s) \hspace{0.5cm} &\text{ y } \hspace{0.5cm} H(s,1) = \beta(x) \ \ \ &\forall s\in [0,1]\\
+                H(0,t) = x  \hspace{0.5cm} &\text{ y } \hspace{0.5cm} H(1,t) = y \ \ \ &\forall t \in [0,1]
+            \end{align*}
+            Queremos ver que existe un $\tilde{H}:[0,1]\times[0,1]\to X$ continua tal que 
+            \begin{align*}
+                \tilde{H}(s,0) = \beta(s) \hspace{0.5cm} &\text{ y } \hspace{0.5cm} \tilde{H}(s,1) = \alpha(x) \ \ \ &\forall s\in [0,1]\\
+                \tilde{H}(0,t) = x  \hspace{0.5cm} &\text{ y } \hspace{0.5cm} \tilde{H}(1,t) = y \ \ \ &\forall t \in [0,1]
+            \end{align*}
+            Tomando $\tilde{H}(s,t):=H(s, 1-t)$ cumple claramente con lo que buscamos.
+
+            \item[(iii)] Dado $\alpha, \beta, \gamma\in \Omega(X;x,y)$ y $H_1,H_2:[0,1]\times[0,1]\to X$ continuas tales que 
+            \begin{gather*}
+                \begin{array}{c c|c c}
+                    H_1(s,0) = \alpha(s) &&& H_2(s,0) = \beta(s)\\
+                    H_1(s,1) = \beta(s) &&& H_2(s,1) = \gamma(s)\\
+                    H_1(0,t) = x &&& H_2(0,t) = x\\
+                    H_1(1, t) = x &&& H_2(1,t) = y
+                \end{array}
+            \end{gather*}
+            Queremos ver que existe un $H:[0,1]\times [0,1]\to X$ tal que 
+            \begin{align*}
+                H(s,t) = \alpha(s) \hspace{1cm} & H(s,0) = \alpha(s)=H(s,1)\\
+                H(0,t) = \alpha(0)=x \hspace{1cm} & H(1,t) = \alpha(1) = y
+            \end{align*}
+            Para ello consideramos 
+            \begin{gather*}
+                H(s,t) = \left\{
+                    \begin{array}{c c c}
+                        H_1(s,2t) & \text{ si } & 0 \leq t \leq \nicefrac{1}{2}\\
+                        H_2(s, 2t-1) & \text{ si } & \nicefrac{1}{2} \leq t \leq 1
+                    \end{array}
+                \right.
+            \end{gather*}
+            Y con el lema de pegado es fácil ver que es continua y que satisface las condiciones que buscábamos.
+        \end{enumerate}
+    \end{proof}
+\end{lema}
+
+% TODO: Hacer lo mismo pero para homotopía
