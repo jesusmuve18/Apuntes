@@ -415,13 +415,34 @@ Recordemos que un espacio de Hilbert es un par $(H, (\cdot, \cdot))$ donde $H$ e
     \end{enumerate}
     %La demostración se deja como ejercicio.
 
-    \begin{proof}\
+    \begin{proof}\ %TODO: formatear un poco mejor y poner productos 
         \begin{itemize}
             \item[(v)$\Rightarrow$(iv) )] Trivial
             \item[(iv)$\Rightarrow$(iii) )] Trivial
             \item[(iii)$\Rightarrow$(i) )] Trivial
             \item[(i)$\Rightarrow$(ii) )] Trivial
-            \item[(ii)$\Rightarrow$(iii) )] Sabemos que $T$ es continua en $0$. Luego para $\veps = 1$\ \ $\exists \delta>0$ tal que $\|x\|_E<\delta$ luego $\|T(x)\|_F<1$
+            \item[(ii)$\Rightarrow$(iii) )] Sabemos que $T$ es continua en $0$. Luego para $\veps = 1$\ \ $\exists \delta>0$ tal que $\|x\|_E<\delta$ luego $\|T(x)\|_F<1$. Tenemos que
+            \begin{gather*}
+                \|T(x-y)\| = \|T(x)-T(y)\| \leq M\|x-y\| \ \ \ \forall x,y \in E
+            \end{gather*}
+            luego $\|T(x)\| \leq M\|x\|$ para todo $x\in E$. De esta forma tenemos que 
+            \begin{gather*}
+                \|T(x)\| = \left\| T \left(\frac{x}{\|x\|} \|x\| \frac{\delta}{2} \frac{2}{\delta}\right) \right\| = \frac{2}{\delta}\left\| T\left(\frac{x}{\|x\|} \frac{\delta}{2} \right) \right\| < \frac{2}{\delta}\|x\|
+            \end{gather*}
+            \item [(iii)$\Rightarrow$(vi) )] Sabemos que $A\subset E$ está acotado, luego $T(A)$ también, es decir que $T(A)\subset B(0,M)$ para cierto $M>0$. Tenemos que probar que
+            \begin{gather*}
+                T(A) \subset T(B(0,R))\subset B(0,M)
+            \end{gather*}
+            Dado $x\in A$ tal que $\|x\|\leq R$, como además es Lipschitziana tenemos que 
+            \begin{gather*}
+                \|T(x)\| \leq N\|x\| \leq N \|x\| < NR = M
+            \end{gather*}
+            y tenemos la inclusión que queríamos probar.
+            \item [(iv)$\Rightarrow$(ii) )] Por hipótesis tenemos que si $\|x\|<1$ entonces $\|T(x)\|\leq R$ y queremos probar que $\forall \veps >0 \ \ \exists \delta>0$ tal que si $\|x\|<\delta$, entonces $\|T(x)\|<\veps$. Tomamos $\delta = \frac{\veps}{2R}$ y tenemos que
+            \begin{gather*}
+                \|T(x)\| = \left\|T\left(\frac{x}{2\|x\|}\cdot 2 \|x\|\right)\right\| = 2\|x\| \left\|T\left(\frac{x}{2\|x\|}\right)\right\| \leq 2\|x\|R < 2\delta R = \veps
+            \end{gather*}
+            y ya lo tenemos.
         \end{itemize}
     \end{proof}
 \end{observacion}

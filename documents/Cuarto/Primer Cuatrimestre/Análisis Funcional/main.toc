@@ -1,4 +1,0 @@
-\babel@toc {spanish}{}\relax 
-\contentsline {section}{\numberline {0.1}Espacios de Hilbert}{8}{section.0.1}%
-\contentsline {section}{\numberline {0.2}Espacios Duales}{12}{section.0.2}%
-\contentsline {section}{\numberline {0.3}Espacio Dual de un Espacio de Hilbert}{13}{section.0.3}%
