@@ -413,7 +413,17 @@ Recordemos que un espacio de Hilbert es un par $(H, (\cdot, \cdot))$ donde $H$ e
         \item[(iv)] $T$ es acotada, es decir, $T(A)$ es acotada en $F$ para todo $A\subset E$ que esé acotado
         \item[(v)] $T$ es Lipschitziana.
     \end{enumerate}
-    La demostración se deja como ejercicio.
+    %La demostración se deja como ejercicio.
+
+    \begin{proof}\
+        \begin{itemize}
+            \item[(v)$\Rightarrow$(iv) )] Trivial
+            \item[(iv)$\Rightarrow$(iii) )] Trivial
+            \item[(iii)$\Rightarrow$(i) )] Trivial
+            \item[(i)$\Rightarrow$(ii) )] Trivial
+            \item[(ii)$\Rightarrow$(iii) )] Sabemos que $T$ es continua en $0$. Luego para $\veps = 1$\ \ $\exists \delta>0$ tal que $\|x\|_E<\delta$ luego $\|T(x)\|_F<1$
+        \end{itemize}
+    \end{proof}
 \end{observacion}
 
 \begin{definicion}
@@ -424,7 +434,9 @@ Recordemos que un espacio de Hilbert es un par $(H, (\cdot, \cdot))$ donde $H$ e
 \end{definicion}
 
 \begin{ejercicio} % Hacer para el miércoles que viene
-    Demostrar que $\|f\|_{E^*}$ es una norma.
+    Demostrar que $\|f\|_{E^*}$ es una norma.\\
+
+    
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -490,10 +502,23 @@ Recordemos que un espacio de Hilbert es un par $(H, (\cdot, \cdot))$ donde $H$ e
             \begin{gather*}
                 z = \frac{z_0-z_1}{\|z_0-z_1\|_H}
             \end{gather*}
-            y está bien definido ya que $z_0\notin M$ y $z_1 \in M$ luego $z_0-z_1\neq 0$.
+            y está bien definido ya que $z_0\notin M$ y $z_1 \in M$ luego $z_0-z_1\neq 0$. Es claro que $\|z\| = 1$ y veamos cuánto vale $(z,v)$ para todo $v\in M$:
+            \begin{gather*}
+                (z,v) = \frac{1}{\|z_0-z_1\|}(z_0-z_1,v) = 0\ \ \ \forall v \in M
+            \end{gather*}
+            Veamos que $z\notin M$. Sabemos que $M$ es un espacio vectorial y si $z_0-z_1$ estuviera en $M$, entonces $z_0\in M$ pero sabemos que $z_0\notin M$ luego $z\notin M$ o equivalentemente $f(z)\neq 0$ (por la definición de $M$).\\
+
+            Tenemos ahora que para todo $x\in H$ tenemos que $x-\frac{f(x)}{f(z)}\in M = \ker f$ ya que
+            \begin{gather*}
+                f\left(x - \frac{f(x)}{f(z)}z\right) = f(x)-\frac{f(x)}{f(z)}f(z) = 0
+            \end{gather*}
+            luego $f(x) = f\left(\frac{f(x)}{f(z)}z\right)$ lo que nos dice que
+            \begin{gather*}
+                0 = \left(z, x - \frac{f(x)}{f(z)}z\right) = (z,x) - \frac{f(x)}{f(z)} \Rightarrow f(x) = f(z)(z,x) = (x, f(z)z)
+            \end{gather*}
+            Por tanto, tomando $y=f(z)z$ tenemos la existencia probada. Nos queda por ver la unicidad. Para ello, supongamos que existen $y_1,y_2\in H$ tal que $f(x)=(x,y_1)=(x,y_2)$ para todo $x\in H$. Con esto tendríamos que $(x, y_1-y_2) = 0$ para todo $x\in H$. Elijo $x = y_1-y_2$ y tenemos que $0 =(y_1-y_2, y_1-y_2) = \|y_1-y_2\|^2$ por lo que finalmente $y_1=y_2$.
         \end{itemize}
     \end{proof}
-    
 \end{teo}
 
 
