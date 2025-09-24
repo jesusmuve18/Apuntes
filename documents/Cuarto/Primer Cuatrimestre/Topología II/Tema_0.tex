@@ -187,7 +187,16 @@
             \item[$\Rightarrow$)] Hemos visto que si $X$ es arcoconexo, entonces $X$ es conexo. Además, $X$ es entorno de cualquier punto suyo luego todo punto tiene un entorno conexo.
             \item[$\Leftarrow$)] Elegimos un $x\in X$ fijo y definimos $A = \{y\in X : \exists \alpha_y \text{ arco uniendo $x$ con $y$ }\}$
             
-            Como $x\in A$ tenemos que $A\neq \emptyset$. Si probamos que $A$ es abierto y cerrado, entonces como $X$ es conexo tendremos que $A=X$, es decir podremos unir $x$ con cualquier otro punto $y\in X$. Esto se deja como ejercicio para el lector.\\
+            Como $x\in A$ tenemos que $A\neq \emptyset$. Si probamos que $A$ es abierto y cerrado, entonces como $X$ es conexo tendremos que $A=X$, es decir podremos unir $x$ con cualquier otro punto $y\in X$.\\
+
+            Veamos que $A$ es abierto. Tomamos $z\in A$ y queremos demostrar que $\exists U$ entorno de $z$ tal que $U\subseteq A$. Por hipótesis sabemos que existe un entorno $U$ arcoconexo de $z$. Entonces dado $u\in U$ existe un arco $\alpha_u$ que une $z$ con $u$. Por otro lado, como $z\in A$, entonces existe un arco $\beta_z$ que une $x$ con $z$. Tendremos entonces que $\beta_z\ast\alpha_u$ es un arco que une $x$ con $u$ y por definción tendremos $u\in A$, luego $U\subseteq A$.\\
+            
+            Nos queda ver que $A$ es cerrado. Tomamos para ello $z\in \overline{A}$. Por hipótesis existe un entorno $U$ de $z$ arcoconexo. Por ser $U$ entorno de $z$ y $z\in \overline{A}$ necesariamente $U\cap A \neq \emptyset$ por lo que existe al menos un $u\in U \cap A$. Como $u\in A$ existe un arco $\alpha_u$ que une $x$ con $u$ y como $u\in U$ existe también un arco $\beta_u$ que une $u$ con $z$ y tendríamos que $\alpha_u\ast\beta_u$ es un arco uniendo $x$ con $z$ llegando a que $z\in A$. Tendríamos $\overline{A}\subseteq A$ y como la otra inclusión se da siempre, tendremos que $A$ coincide con su adherencia, por lo que es cerrado.
         \end{itemize}
     \end{proof}
 \end{teo}
+
+\begin{definicion}
+    
+\end{definicion}
+
