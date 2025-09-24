@@ -186,4 +186,44 @@ Recordaremos ahora los conceptos de subanillo y subcuerpo. Para ello consideramo
     Dado $F\leq K$ una extensión, $\alpha in K$, diremos que $\alpha$ es \textbf{algebraico sobre $F$} si $f(\alpha)=0$ para algún $f\in F[x]$, $f\neq 0$. Sino, $\alpha$ se llama \textbf{trascendente sobre $F$}.
 \end{definicion}
 
+\begin{prop}
+    Sea $F\leq K$ una extensión de cuerpos, $\alpha \in K$ algebraico sobre $F$. Entonces existe un único polinomio mónico\footnote{el coeficiente director es 1} irreducible\footnote{que no se puede factorizar como producto de polinomios propios} $f\in F[X]$ tal que $f(\alpha)=0$. Además, se tiene un isomorfismo de cuerpos
+    \begin{gather*}
+        F(\alpha) \cong \frac{F[X]}{\langle f \rangle}
+    \end{gather*}
+    y además, $\{1, \alpha, \dots, \alpha^{\deg f -1}\}$ es una F-base de $F(\alpha)$. Adí, $[F(\alpha):F] = \deg f$
 
+    \begin{proof}
+        Tomo $e_\alpha : F[X] \to K$ la aplicación definida por $e_\alpha (y) = g(\alpha)$. Entonces tenemos que $e_\alpha$ es un homomorfismo de anillos. Tomo $\ker e_\alpha$, que es un ideal de $F[X]$ y 
+        \begin{gather*}
+            \exists f\in F[X] \text{ tal que } \ker e_\alpha = \langle f \rangle \text{ mónico}
+        \end{gather*}
+        Por el teorema de isomofismo para anillos tenemos que 
+        \begin{gather*}
+            Im\ e_\alpha \cong \frac{F[X]}{\ker e_\alpha} = \frac{F[X]}{\langle f \rangle}
+        \end{gather*}
+        Como $Im\ e_\alpha$ es subanillo de $K$, resulta ser un dominio de integridad por lo que $\frac{F[X]}{\langle f \rangle}$ es un DI. Por tanto $f$ es irreducible y $\frac{F[X]}{\langle f \rangle}$ es un cuerpo.\\
+
+        Veamos ahora la unicidad. Si tomo $h\in F[X]$ irreducible y mónico tal que $h(\alpha) = 0$, entonces $h\in \langle f \rangle$, luego $\langle h \rangle \subseteq \langle f \rangle$ y al ser maximal se tiene que $\langle h \rangle = \langle f \rangle$ y al ser mónicos se tiene $h=f$.\\
+
+        NVeamos el isomorfismo. Sabemos que $Im\ e_\alpha$ es un subcuerpo de $K$, que $F\leq Im\ e_\alpha$ y $\alpha \in Im\ e_\alpha$. Tenemos entonces que $F(\alpha) \leq Im\ e_\alpha$. Un elemento de $Im\ e_\alpha$ es de la forma $g(\alpha)$ para $g\in F[X]$. Tendremos que $g(x) = \sum\limits_{i=0}^n g_iX^i$, con $g_i\in F$ por lo que $g(\alpha) = \sum\limits_{i=0}^n g_i \alpha^i$ luego tenemos el espacio completo y la otra inclusión. Concluimos que $F(\alpha)=Im\ e_\alpha \cong \frac{F[X]}{\langle f \rangle}$.\\
+
+        Finalmente, $\{1, \alpha, \dots, \alpha^{\deg f -1}\}$ es F-lineal de $F(\alpha)$ porque $\{1+\langle f \rangle, X + \langle f \rangle, \dots, X^{\deg f -1} + \langle f \rangle\}$ es F-base de $\frac{F[X]}{\langle f \rangle}$ en vista de la división euclidiana.
+    \end{proof}
+\end{prop}
+
+\begin{definicion}
+    El $f$ de la proposición anterior se llama \textbf{polinomio irreducible} (o \textbf{mínimo}) de $\alpha$ sobre $F$. Lo notaremos como $f=Irr(\alpha, F)$.
+\end{definicion}
+
+\begin{observacion}
+    $Irr(\alpha, F)$ es el mónico de grado mínimo en $F[X]$ del cual $\alpha$ es raíz. Todo otro polinomio $g\in F[X]$ tal que $g(\alpha)=0$ satisface que $g = h \cdot  Irr(\alpha, F)$
+\end{observacion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $Irr(i,\bb{Q}) = x^2 +1\in \bb{Q}[x]$, por lo que $\{1,i\}$ es una $\bb{Q}-base$ de $\bb{Q}(i)$
+        \item $Irr(\sqrt{2}, \bb{Q}) = x^2 -2\in \bb{Q}[x]$
+        \item $Irr(e^{\frac{i2\pi}{3}}, \bb{Q})$. Sabemos que $e^{\frac{i2\pi}{3}}$ es raíz de $x^3-1\in \bb{Q}$, sin embargo no es irreducible ya que $x^3 -1 = (x-1)(x^2+x+1)$ y como $(x^2+x+1)$ es irreducible (si se calculan las raíces es fácil ver que no están en $\bb{Q}$) y $e^{\frac{i2\pi}{3}}$ sigue siendo raíz suya por lo que $Irr(e^{\frac{i2\pi}{3}}, \bb{Q}) = (x^2+x+1)$. Una $\bb{Q}-$base de $\bb{Q}(e^{\frac{i2\pi}{3}})$ es $\{1, e^{\frac{i2\pi}{3}}\}$ y $[\bb{Q}(e^{\frac{i2\pi}{3}}), \bb{Q}]=2$.
+    \end{itemize}
+\end{ejemplo}
