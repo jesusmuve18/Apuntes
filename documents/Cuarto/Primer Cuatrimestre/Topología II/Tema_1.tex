@@ -13,10 +13,9 @@
         \begin{tikzpicture}[scale=0.8]
             \shorthandoff{>}
 
-            % Cono 
+            % Cilindro 
             \draw[dashed] (-3,2) ellipse (1 and 0.5);
             \draw[dashed] (-3,-2) ellipse (1 and 0.5);
-
             \draw (-4,-2.5) -- (-4,2.5);
             \draw (-2,-2.5) -- (-2,2.5);
 
@@ -83,6 +82,55 @@
 
 \begin{lema}
     Ser homotópico por arcos da lugar a una relación de equivalencia en $\Omega(X;x,y)$.
+
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \shorthandoff{>}
+
+            % Cilindro 1
+            \draw[dashed] (-3,0) ellipse (1 and 0.5);
+            \draw (-4,-2) -- (-4,2);
+            \draw (-2,-2) -- (-2,2);
+
+            % Cilindro 2
+            \draw[dashed] (1,0) ellipse (1 and 0.5);
+            \draw (0,-2) -- (0,2);
+            \draw (2,-2) -- (2,2);
+
+            % Puntos x e y (1)
+            \node[draw, circle, fill=black, inner sep=0.5pt, label=below:$x$] at (-3.75,1) {};
+            \node[draw, circle, fill=black, inner sep=0.5pt, label=below:$y$] at (-2.25,1) {};
+
+            % Arcos (1)
+            \draw[blue] plot[smooth] coordinates {
+                (-3.75,1) (-3.25,0.7) (-2.6,1)  (-2.25,1)
+            };
+            \draw[red] plot[smooth] coordinates {
+                (-3.75,1) (-3,1.3) (-2.3,1.2)  (-2.25,1)
+            };
+            \node[red] at (-3,1.5) {$\alpha$};
+            \node[blue] at (-3,0.5) {$\beta$};
+
+            % Puntos x e y (2)
+            \node[draw, circle, fill=black, inner sep=0.5pt, label=below:$y$] at (1.75,1) {};
+            \node[draw, circle, fill=black, inner sep=0.5pt, label=below:$x$] at (0.25,1) {};
+
+            % Arcos (2)
+            \draw[blue, dashed] (2,0.65) arc (0:-180:1 and 0.5);
+            \draw[blue] (2,0.65) arc (0:45:1 and 0.5);
+            \draw[blue] (0,0.65) arc (180:135:1 and 0.5);
+            \draw[red] (0.25,1) arc (135:45:1 and 0.5);
+            \node[red] at (1,1.4) {$\alpha$};
+            \node[blue] at (1,-0.2) {$\beta$};
+
+            % Textos
+            \node at (1,-2.5) {No equivalenes};
+            \node at (-3,-2.5) {Equivalenes};
+
+        \end{tikzpicture}
+    \end{figure}
+
     \begin{proof}\
         \begin{enumerate}
             \item[(i)] Dado $\alpha \in \Omega(X;x,y)$ queremos ver que $\alpha$ es homotópica por arcos con $\alpha$. Para ello tenemos 
@@ -105,7 +153,7 @@
 
             \item[(iii)] Dado $\alpha, \beta, \gamma\in \Omega(X;x,y)$ y $H_1,H_2:[0,1]\times[0,1]\to X$ continuas tales que 
             \begin{gather*}
-                \begin{array}{l c|c l}
+                \begin{array}{c c c c}
                     H_1(s,0) = \alpha(s) &&& H_2(s,0) = \beta(s)\\
                     H_1(s,1) = \beta(s) &&& H_2(s,1) = \gamma(s)\\
                     H_1(0,t) = x &&& H_2(0,t) = x\\
@@ -233,7 +281,7 @@
     con $\alpha\in \Omega(X;x,y)$, $\beta \in \Omega(X;y,z)$
 \end{lema}
 
-\begin{teo} %TODO: Arreglar el cacho de enmedio (segunda parte de la demostración)
+\begin{teo}
     Dado $X$ e.t., $\alpha\in \Omega(X;x,y)$, $\beta\in \Omega(X;y,z)$ y $\gamma\in \Omega(X;z,w)$ se tiene que 
     \begin{enumerate}
         \item[(i)] $[\alpha] \ast ([\beta] \ast [\gamma]) = ([\alpha] \ast [\beta]) \ast [\gamma]$
@@ -243,6 +291,56 @@
     \begin{proof}\
         \begin{enumerate}
             \item[(i)] Desarrollemos lo que estamos calculando
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+
+                    % Líneas discontinuas
+                    \draw[gray!50, dashed] (0,-1) -- (0,2);
+                    \draw[gray!50, dashed] (4,-1) -- (4,2);
+                    \draw[gray!50, dashed] (8,-1) -- (8,2);
+                    \draw[gray!50, dashed] (12,-1) -- (12,2);
+                    
+
+                    % Puntos
+                    \node[draw, circle, fill=black, inner sep=0.5pt, label=below:$x$] at (0,0) {};
+                    \node[draw, circle, fill=black, inner sep=0.5pt, label=below:$y$] at (4,1) {};
+                    \node[draw, circle, fill=black, inner sep=0.5pt, label=below:$z$] at (8,0.8) {};
+                    \node[draw, circle, fill=black, inner sep=0.5pt, label=below:$w$] at (12,1) {};
+
+                    % Arcos
+                    \draw[blue] plot[smooth, tension=1] coordinates {
+                        (0,0) (2,1) (4,1)
+                    };
+                    \draw[red] plot[smooth, tension=1] coordinates {
+                        (4,1) (6,0.6) (8,0.8)
+                    };
+                    \draw[green!60!black] plot[smooth, tension=1] coordinates {
+                        (8,0.8) (9,1) (10.6,0.6) (12,1)
+                    };
+
+                    % Nombre arcos
+                    \node[blue] at (2,1.3) {$\alpha$};
+                    \node[red] at (6,0.9) {$\beta$};
+                    \node[green!60!black] at (10,1) {$\gamma$};
+
+                    % Leyenda tiempos
+                    \node at (0,-1.2) {$s=0$};
+                    \node[violet] at (4,-1.2) {$s=\nicefrac{1}{4}$};
+                    \node[violet] at (8,-1.2) {$s=\nicefrac{1}{2}$};
+                    \node[orange!90!black] at (4,-1.7) {$s=\nicefrac{1}{2}$};
+                    \node[orange!90!black] at (8,-1.7) {$s=\nicefrac{3}{4}$};
+                    \node at (12,-1.2) {$s=1$};
+
+                    % Leyenda colores
+                    \draw[violet] (13,2)--(13.5,2);
+                    \draw[orange!90!black] (13,0)--(13.5,0);
+                    \node[anchor=west, text width=2.2cm, align=center] at (13.7,2) {Tiempos de \\$(\alpha\ast\beta)\ast\gamma$};
+                    \node[anchor=west, text width=2.2cm, align=center] at (13.7,0) {Tiempos de \\$\alpha\ast(\beta\ast\gamma)$};
+
+                \end{tikzpicture}
+            \end{figure}
             \begin{align*}
                 (\beta\ast\gamma)(s) &= \left\{
                     \begin{array}{l c c}
@@ -298,7 +396,8 @@
                     \end{array}
                 \right.
             \end{align*}
-            Usando el ejemplo 2 anterior se tiene que $[\alpha] \ast ([\beta] \ast [\gamma]) = ([\alpha] \ast [\beta]) \ast [\gamma]$
+
+            Usando el ejemplo 2 anterior se tiene que $[\alpha] \ast ([\beta] \ast [\gamma]) = ([\alpha] \ast [\beta]) \ast [\gamma]$ (realmente se están recorriendo las mismas curvas pero a distinta velocidad).
         \end{enumerate}
     \end{proof}
 \end{teo}
