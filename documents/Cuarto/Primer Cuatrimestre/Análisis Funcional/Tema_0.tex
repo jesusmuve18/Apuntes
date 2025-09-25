@@ -543,6 +543,68 @@ Recordemos que un espacio de Hilbert es un par $(H, (\cdot, \cdot))$ donde $H$ e
     \end{proof}
 \end{teo}
 
+Nos planteamos ahora qué ocurre cuando tenemos un espacio de Banach $E$ y un subespacio $G\subset E$. Tenemos además una aplicación $g:G\to \bb{R}$ lineal y continua. Lo que nos plantemos ahora es si existe una aplicación $f:E \to \bb{R}$ lineal y continua tal que su restricción $f_{|_G}=g$.\\
+
+Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo $x\in G$ y queremos ver si se verifica la continuidad de $f$, es decir que $|f(x)| \leq k \|x\|$ para todo $x\in E$.
+
+\begin{ejercicio}
+    Definimos $p(x)=k\|x\|$\ \ $\forall x \in E$. Probar que se verifican las siguientes propiedades:
+    \begin{enumerate}
+        \item $p(x+y) \leq p(x) + p(y)$ \ \ \  $\forall x,y\in E$
+        \item $p(\lambda x) = \lambda p(x)$ \ \ $\forall \lambda>0$, \ \ $\forall x \in E$
+    \end{enumerate}
+\end{ejercicio}
+
+% aq iba el teorema
+
+\begin{definicion}
+    Sea $\emptyset \neq P$ un conjunto con una relación $\leq$ de orden (reflexiva, antisimétrica y transitiva). Entonces
+    \begin{itemize}
+        \item un subconjunto $Q\subset P$ es \textbf{totalmente ordenado} si para cualesquiera dos elementos $a,b\in Q$ se tiene que $a\leq b$ o $b\leq a$ (o ambas).
+        \item Si $Q\subset P$ y $x\in P$, diremos que $x$ es \textbf{cota superior} de $Q$ si $a\leq x$ para todo $a\in Q$.
+        \item Si $m\in P$, entonces diremos que $m$ es un \textbf{elemento maximal} de $P$ si
+        \begin{gather*}
+            \{x\in P : m\leq x\} = \{m\}
+        \end{gather*}
+        es decir, no hay ningún elemento de $P$ excepto $m$ que esté por encima de $m$.
+        \item Diremos que $P$ es \textbf{inductivo} si todo subconjunto $Q\subset P$ que sea totalmente ordenado posee una cota superior.
+    \end{itemize} 
+\end{definicion}
+
+\begin{lema}[Lema de Zorn]
+    Sea $\emptyset \neq P$ un conjunto con una relación de orden $\leq$. Entonces se tiene que si $P$ es inductivo, entonces $P$ tiene un elemento máximo.
+\end{lema}
+
+\begin{teo}[versión analítica del teorema de Hanh-Banach]
+    Supongamos que $E$ es un espacio vectorial y tenemos $p:E\to \bb{R}$ tal que se verifica
+    \begin{gather*}
+        p(x+y) \leq p(x) + p(y)\ \ \ \forall x,y\in E\\
+        p(\lambda x) = \lambda p(x) \ \ \ \forall x \in E\ \ \forall \lambda >0
+    \end{gather*}
+    Sea $G\subset E$ un subespacio vectorial y $G:G\to \bb{R}$ una aplicación lineal verificando
+    \begin{gather*}
+        g(x) \leq p(x)\ \ \ \forall x \in G
+    \end{gather*}
+    Entonces se tiene que $\exists f:E\to \bb{R}$ lineal verificando
+    \begin{gather*}
+        f(x) \leq p(x)\ \ \ \forall x \in E\\
+        f_{|_G} = g
+    \end{gather*}
+
+    \begin{proof}
+        Definimos el siguiente conjunto
+        \begin{gather*}
+            P = \left\{h: D(h) \to \bb{R} :
+            \begin{array}{l}
+                G\subset D(h) \text{ subespacio vectorial de }E\\
+                h\text{ lineal},\ h(x)\leq p(x)\ \ \ \forall x \in D(h) \\
+                h(x) = g(x)\ \ \ \forall x \in G
+            \end{array}
+            \right\}
+        \end{gather*}
+        y lo llamaremos \textbf{conjunto de extensiones} de $g$
+    \end{proof}
+\end{teo}
 
 
 
