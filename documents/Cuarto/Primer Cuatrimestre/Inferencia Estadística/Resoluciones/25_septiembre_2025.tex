@@ -1,0 +1,42 @@
+\begin{ejercicio}
+    \begin{gather*}
+        M_{(\overline{X}, X_1-\overline{X}, \dots, X_n-\overline{X})} =? M_{\overline{X}}(t) M_{(X_1-\overline{X}, \dots, X_n-\overline{X})}
+    \end{gather*}
+    Pero sabemos que 
+    ...
+
+    \begin{enumerate}
+        \item Ya probada
+        \item Ya probada
+        \item $\dfrac{(n-1)S^2}{\sigma^2} \rightsquigarrow  \chi^2(n-1)$
+        \begin{proof}
+            Tipificando tenemos
+            \begin{gather*}
+                \sum_{i=1}^n \left(\frac{X_i - \mu}{\sigma}\right)^2 \rightsquigarrow \chi^2(n)
+            \end{gather*}
+            Podemos ahora sumando y restando el mismo término obtener
+            \begin{gather*}
+                \frac{\sum_{i=1}^n (X_i-\mu)^2}{\sigma^2} = \frac{\sum_{i=0}^n (X_i - \overline{X} + \overline{X} - \mu)^2}{\sigma^2} =\\
+                = \frac{\sum_{i=1}^n (X-\overline{X})^2 + \sum_{i=0}^n (\overline{X}-\mu)^2 + 2\sum_{i=0}^n(X_i-\overline{X})(\overline{X}-\mu)}{\sigma^2} =\\
+                = \frac{\sum_{i=1}^n (X_i-\overline{X})^2}{\sigma^2} + \frac{(\overline{X}-\mu)^2}{\nicefrac{\sigma^2}{n}}
+            \end{gather*}
+            Sabemos ahora que $\dfrac{(\overline{X}-\mu)^2}{\nicefrac{\sigma^2}{n}} \rightsquigarrow \chi^2(1)$. Además, por la propiedad de independiencia tenemos que la función generatriz de momentos de la suma coincide con el producto de funciones generatrices de momentos
+            \begin{gather*}
+                M_{A=B+C}(t) = M_B(t)M_C(t) = M_B(t)\frac{1}{(1-2t)^{\nicefrac{1}{2}}}
+            \end{gather*}
+            Despejando obtenemos
+            \begin{gather*}
+                M_B(t) = 
+                \frac{\frac{1}{(1-2t)^{n/2}}}{\frac{1}{(1-2t)^{n/2}}} = \frac{1}{(1-2t)^\frac{n-1}{2}}\ \ \ t<\frac{1}{2}
+            \end{gather*}
+        \end{proof}
+
+        \item $\dfrac{\overline{X}-\mu}{\frac{S}{\sqrt{n}}} \rightsquigarrow t(n-1)$
+        \begin{proof}
+            Sabemos que $\overline{X} \rightsquigarrow N\left(\mu, \frac{\sigma^2}{n}\right)$ por lo que tipificando tenemos $\dfrac{\overline{X} - \mu}{\frac{\sigma}{\sqrt{2}}} \rightsquigarrow N(0,1)$ y además sabemos que $\dfrac{(n-1)S^2}{\sigma^2} \rightsquigarrow \chi^2(n-1)$. Como son independientes podemos aplicar el lema de Fisher
+            \begin{gather*}
+                \frac{\frac{\overline{X}-\mu}{\frac{\sigma}{\sqrt{n}}}}{\sqrt{\frac{(n-1)S^2}{\sigma^2(n-1)}}} = \frac{\frac{\overline{X}-\mu}{\frac{\sigma}{\sqrt{n}}}}{\frac{S}{\sigma}} = \frac{\overline{X}-\mu}{\frac{S}{\sqrt{n}}} \rightsquigarrow t(n-1)
+            \end{gather*}
+        \end{proof}
+    \end{enumerate}
+\end{ejercicio}
