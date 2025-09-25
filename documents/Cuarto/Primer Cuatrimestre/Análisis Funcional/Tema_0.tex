@@ -602,7 +602,41 @@ Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo 
             \end{array}
             \right\}
         \end{gather*}
-        y lo llamaremos \textbf{conjunto de extensiones} de $g$
+        y lo llamaremos \textbf{conjunto de extensiones} de $g$. Sabemos que $P\neq \emptyset$ ya que $g\in P$ (es una extensión de sí misma en el espacio $P$). Necesitamos ahora definir una relación de orden. Lo haremos de la siguiente forma
+        \begin{gather*}
+            h_1\leq h_2 \sii \left\{
+                \begin{array}{l}
+                    D(h_1)\subset D(h_2)\\
+                    h_2{|_{D(h_1)}} = h_1
+                \end{array}
+            \right.\ \ \ \ \ \forall h_1,h_2\in P
+        \end{gather*}
+        y diremos que $h_2$ es una \textbf{extensión} de $h_1$. Se deja como ejercicio demostrar que $\leq$ es una relación de orden.\\
+
+        Probemos ahora que $P$ es inductivo. Para ello tendremos que probar que cualquier subconjunto suyo que esté totalmente ordenado tiene una cota superior. Sea $Q\subset P$ totalmente ordenado. Consideramos
+        \begin{gather*}
+            V_0 = \bigcup_{h\in Q}D(h)
+        \end{gather*}
+        y definimos la aplicación
+        \begin{align*}
+            h_0: V_0 &\to \bb{R}\\
+            x &\mapsto h_0(x) = h(x) \ \ \ \text{ si } x\in D(h)
+        \end{align*}
+        Está bien definida como consecuencia de que el conjunto sea totalmente ordenado. Se deja como ejercicio demostrar que $V_0$ es un subespacio vectorial, que $h_0$ está bien definida, que es lineal y que $h_0(x)\leq p(x)$ para todo $x\in V_0$.\\
+
+        Con esto tengo que $h_0$ es una extensión de todas las $h\in Q$, es decir, $h\leq h_0$ para todo $h\in Q$ lo que nos dice que $h_0$ es la cota superior de $Q$. Con esto podemos concluir que $P$ es inductivo.\\
+        
+        Tenemos todas las hipótesis necesarias para aplicar el teorema de Zorn, que nos dice que $\exists f \in P$ elemento maximal de $P$, es decir, 
+        \begin{align*}
+            f:D(f) \to \bb{R} \left\{
+            \begin{array}{l}
+                G\subset D(f)\subset E\\
+                f\text{ lineal, }\ f(x)\leq p(x)\ \ \ \forall x \in D(f)\\
+                f_{|_G} = g
+            \end{array}
+            \right.
+        \end{align*}
+        Se deja como ejercicio demostrar que si $f$ es maximal, entonces $D(f)=E$ (por contrarrecíproco).
     \end{proof}
 \end{teo}
 
