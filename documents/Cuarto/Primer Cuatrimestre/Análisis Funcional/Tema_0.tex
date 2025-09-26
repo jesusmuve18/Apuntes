@@ -694,9 +694,9 @@ Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo 
 \end{observacion}
 
 \begin{definicion}
-    Si $A,B\subset E$ es un espacio normado. Diremos que el hiperplano $H=[f=\alpha]$ \textbf{separa} $A$ y $B$ si
+    Si $A,B\subset E$ es un espacio normado. Diremos que el hiperplano $H=[f=\alpha]$ \textbf{separa} $A$ y $B$ si 
     \begin{gather*}
-        f(x) \leq \alpha \leq f(y)\ \ \ \forall x \in A,\ \ \forall y \in B
+        \exists \alpha \in \bb{R} \text{ tal que } f(x) \leq \alpha \leq f(y)\ \ \ \forall x \in A,\ \ \forall y \in B
     \end{gather*}
     Diremos que \textbf{separa estrictamente} $A$ y $B$ si 
     \begin{gather*}
@@ -706,6 +706,24 @@ Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo 
 
 \begin{teo}[Primera forma geométrica del teorema de Hanh-Banach]
     Supongamos que $E$ es un espacio normado, $A,B\subset E$ dos subconjuntos de $E$ no vacíos, disjuntos, es decir, $A\cap B = \emptyset$, convexos y con $A$ abierto. Entonces existe un hiperplano cerrado $H$ que separa $A$ y $B$.
+    \begin{proof}\
+        \begin{itemize}
+            \item[\textbf{Paso 1:}] Vamos a considerar $B=\{x_0\}$ y $\emptyset \neq A \subset E$ abierto convexo con $x_0\notin A$. Elijo $C = A -z_0$. Se deja como ejercicio probar que $C$ es convexo y abierto con $0\in C$. Probar también que $y_0 = x_0-z_0\notin C$.\\
+            
+            Sabemos que $\bb{R}y_0$ es un espacio de dimensión 1 y buscamos 
+            una función lineal, que en este espacio será de la forma
+            \begin{align*}
+                g:\bb{R}y_0 &\to \bb{R}\\
+                t{y_0} & \mapsto g(t{y_0}) = t
+            \end{align*}
+            Buscamos ahora una aplicación $f:E \to \bb{R}$ que extienda a $g$ verificando $f(x) \leq f(y_0) = g(y_0) = 1 $ para todo $x\in C$. El teorema de Hanh-Banach nos dirá que existe un $f:E\to \bb{R}$ lineal tal que 
+            \begin{gather*}
+                f(ty_0) = t \ \ \ \forall t \in \bb{R}\\
+                f(x) \leq p(x)\ \ \ \forall x \in E
+            \end{gather*}
+        \end{itemize}
+
+    \end{proof}
 \end{teo}
 
 
