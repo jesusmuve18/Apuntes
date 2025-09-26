@@ -542,7 +542,20 @@
             F_\alpha : \pi_1(X,y) &\to \pi_1(X,x)\\
             [\gamma] & \mapsto [\alpha]\ast[\gamma]\ast[\tilde{\alpha}]
         \end{align*}
-        que está bien definida por lo visto anteriormente sobre el operador $\ast$. Queremos ver ahora 
+        que está bien definida por lo visto anteriormente sobre el operador $\ast$. Queremos ver ahora que $F_\alpha$ es un isomorfismo de grupos. Para ello comencemos por ver que $F_\alpha$ es un homomorfismo, es decir, que se verifica
+        \begin{gather*}
+            F_\alpha([\gamma_1] \ast [\gamma_2]) = F_\alpha[\gamma_1]\ast F_\alpha([\gamma_2])
+        \end{gather*}
+        Desarrollamos el segundo término de la expresión:
+        \begin{align*}
+            F_\alpha[\gamma_1]\ast F_\alpha([\gamma_2]) &= ([\alpha] \ast [\gamma_1] \ast [\tilde{\alpha}]) \ast ([\alpha] \ast [\gamma_2] \ast [\tilde{\alpha}]) = [\alpha] \ast [\gamma_1] \ast [\gamma_2] \ast [\tilde{\alpha}] =\\
+            &= F_\alpha([\gamma_1] \ast [\gamma_2])
+        \end{align*}
+        y tenemos la igualdad buscada. Veamos ahora que tiene inversa considerando $F_{\tilde{\alpha}}$ que por definición es $F_{\tilde{\alpha}}([\beta]) = [\tilde{\alpha}] \ast [\beta] \ast [\alpha]$ y que además verifica
+        \begin{gather*}
+            (F_{\tilde{\alpha}} \circ F_{\tilde{\alpha}})([\gamma]) = F_{\tilde{\alpha}}([\alpha]\ast [\gamma]\ast [\tilde{\alpha}]) = [\tilde{\alpha}] \ast ([\alpha]\ast [\gamma]\ast [\tilde{\alpha}]) \ast [\alpha] = [\gamma] = Id_{\pi_1(X,y)}([\gamma])
+        \end{gather*}
+        Análogamente se prueba que $F_\alpha \circ F_{\tilde{\alpha}}=Id_{\pi_1(X,x)}$.
     \end{proof}
 \end{teo}
 
