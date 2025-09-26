@@ -398,6 +398,152 @@
             \end{align*}
 
             Usando el ejemplo 2 anterior se tiene que $[\alpha] \ast ([\beta] \ast [\gamma]) = ([\alpha] \ast [\beta]) \ast [\gamma]$ (realmente se están recorriendo las mismas curvas pero a distinta velocidad).
+
+
+            \item[(ii)] Tendremos que ver que $\alpha \ast \veps_y$ se relaciona por una homotopía con arcos con $\alpha$. Recordemos que
+            \begin{gather*}
+                (\alpha \ast \veps_y) = \left\{
+                    \begin{array}{l c c}
+                        \alpha(2s) & \text{ si } & 0\leq s \leq \nicefrac{1}{2} \\
+                        \veps_y(2s-1) & \text{ si } & \nicefrac{1}{2} \leq s \leq 1
+                    \end{array}
+                \right. = 
+                \left\{
+                    \begin{array}{l c c}
+                        \alpha(2s) & \text{ si } & 0\leq s \leq \nicefrac{1}{2} \\
+                        y & \text{ si } & \nicefrac{1}{2} \leq s \leq 1
+                    \end{array}
+                \right.
+            \end{gather*}
+            De nuevo del ejemplo 2 se tiene que son homotópicas
+
+            \item[(iii)] Tendremos que ver en este caso que $\alpha\ast\tilde{\alpha}$ es homotópico por arcos a $\veps_x$. Describamos ambas curvas.
+            \begin{gather*}
+                (\alpha \ast \tilde{\alpha}) = \left\{
+                    \begin{array}{l c c}
+                        \alpha(2s) & \text{ si } & 0\leq s \leq \nicefrac{1}{2} \\
+                        \tilde{\alpha}(2s-1) & \text{ si } & \nicefrac{1}{2} \leq s \leq 1
+                    \end{array}
+                \right. = \left\{
+                    \begin{array}{l c c}
+                        \alpha(2s) & \text{ si } & 0\leq s \leq \nicefrac{1}{2} \\
+                        \tilde{\alpha}(2-2s) & \text{ si } & \nicefrac{1}{2} \leq s \leq 1
+                    \end{array}
+                \right.\\\\
+                \veps_x(s) = x \ \ \ \forall s \in [0,1]
+            \end{gather*}
+            Pensamos ahora una transformación $H$ que haga que cada vez la curva se vaya quedando más cerca de $x$ (cada vez vuelve antes de llegar a $y$). Intuitivamente podríamos pensar en la siguiente gráfica, en la que vamos reduciendo la distancia desde la función roja hasta la verde
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}[scale=0.75]
+                    \begin{axis}[
+                        axis lines=left,
+                        height=8cm, width=8cm,
+                        xmin=-0.2, xmax=1.2,
+                        ymin=-0.2, ymax=1.2,
+                        xtick={0,0.5,1},
+                        ytick={0,1},
+                        xticklabels={$0$, $\tfrac{1}{2}$, $1$},
+                        yticklabels={$0$,$1$},
+                        grid=major,
+                        axis x line=middle, % eje X en y=0
+                        axis y line=middle, % eje Y en x=0
+                        xlabel={$s$},       % nombre eje X
+                        ylabel={$t$},       % nombre eje Y
+                        xlabel style={below},  % opcional: ajustar posición
+                        ylabel style={left},  % opcional: ajustar posición
+                    ]
+                        % Líneas
+                        \addplot[very thick,red!60!black] coordinates {(0,0) (0.5,1) (1,0)};
+                        \addplot[very thick,blue!60!black] coordinates {(0,0) (0.5,0.8) (1,0)};
+                        \addplot[very thick,yellow] coordinates {(0,0) (0.5,0.3) (1,0)};
+                        \addplot[very thick,green!60!black] coordinates {(0,0.01) (0.5,0.01) (1,0.01)};
+                    \end{axis}
+                \end{tikzpicture}%
+            \end{figure}%
+            \begin{gather*}
+                h(s) = \left\{
+                    \begin{array}{l c c}
+                        2s & \text{ si } & s\in [0,\nicefrac{1}{2}]\\
+                        2-2s & \text{ si } & s\in [\nicefrac{1}{2}, 1]
+                    \end{array}
+                \right. 
+            \end{gather*}
+            Y podemos construir $H(s,t) = \alpha((1-t)h(s))$ que claramente es continua y verifica
+            \begin{align*}
+                H(s,0) = \alpha(h(s)) = (\alpha\ast\tilde{\alpha}(s)) \hspace{0.5cm} &\text{ y } \hspace{0.5cm} H(s,1) = \alpha(0) = x = \veps_x(s) \ \ \ &\forall s\in [0,1]\\
+                H(0,t) = \alpha(0) = x  \hspace{0.5cm} &\text{ y } \hspace{0.5cm} H(1,t) = \alpha(0) = x \ \ \ &\forall t \in [0,1]
+            \end{align*}
         \end{enumerate}
     \end{proof}
+
+    \section{El grupo fundamental}
+    \begin{coro}
+        Dados un e.t. $X$ y un punto $x_0\in X$ se tiene que el conjunto de lazos en $X$ basados en $x_0$ bajo la relación de equivalencia de ser homotópicos por arcos y con operación $\ast$ forman un grupo algebraico.
+
+        \begin{proof}
+            Definimos el siguiente conjunto
+            \begin{gather*}
+                G = \frac{\Omega(X;x_0)}{R}
+            \end{gather*}
+            donde $R$ es la relación de equivalencia ``ser homotópico por arcos''. Veamos ahora que esta $G$ recién definida tiene estructura de grupo:
+            \begin{enumerate}
+                \item \textbf{Propiedad asociativa.} Tendremos que ver que se verifica para cualesquiera $[\alpha],[\beta], [\gamma]\in G$.
+                \begin{gather*}
+                    [\alpha] \ast ([\beta] \ast [\gamma]) = ([\alpha] \ast [\beta]) \ast [\gamma]
+                \end{gather*}
+                pero esto lo tenemos claramente del teorema anterior
+
+                \item \textbf{Existencia del elemento neutro.} Por el teorema anterior tenemos que para $x=y=x_0$ se tiene que $[\alpha] \ast [\veps_{x_0}] = [\alpha] = [\veps_{x_0}] \ast [\alpha]$ para cualquier $[\alpha]\in G$ luego tenemos la existencia probada.
+                \item \textbf{Existencia del elemento opuesto.} De nuevo usamos el teorema anterior y nos dice que para cualquier $[\alpha]\in G$ se tiene que 
+                \begin{gather*}
+                    [\alpha] \ast [\tilde{\alpha}] = [\veps_{x_0}] =  [\tilde{\alpha}] \ast [\alpha] 
+                \end{gather*}
+                y se tiene directamente.
+            \end{enumerate}
+            Con esto hemos probado finalmente que $G$ es un grupo.
+        \end{proof}
+    \end{coro}
 \end{teo}
+
+\begin{definicion}
+    Al grupo algebraico dado por el corolario anterior lo llamaremos el \textbf{grupo fundamental} de $X$ en $x_0$ y lo denotaremos por $\pi_1(X,x_0)$.
+\end{definicion}
+
+\begin{ejemplo}\ \\ % TODO
+
+    [Insertar gráfica] \\
+
+    En $\bb{R}^2\setminus\{(0,0)\}$ tenemos que $[\veps_{x_0}] \neq [\alpha] \neq [\tilde{\alpha}] \neq [\beta]$ y probaremos más adelante que $\pi_1(X,x_0)$ es isomorfo a $\bb{Z}$ aunque intuitivamente se puede entender el 0 como el lazo trivial (el que no rodea a $(0,0)$), los números positivos son .
+\end{ejemplo}
+
+\begin{ejemplo}
+    Sea $X\subseteq \bb{R}^n$ un subconjunto estrellado desde un punto $x_0$. Entonces $\pi_1(X;x_0) = \{[\veps_{x_0}]\}$, es decir, es trivial.
+
+    \begin{proof}
+        Dado $\alpha(s)$ un lazo basado en $x_0$ dentro de $X$, entonces 
+        \begin{gather*}
+            H(s,t) = (1-t)\alpha(s)+tx_0
+        \end{gather*}
+        es una aplicación continua dentro\footnote{aquí es donde usamos que es estrellado} de $X$ tal que 
+        \begin{align*}
+            H(s,0) = \alpha(s) = \hspace{0.5cm} &\text{ y } \hspace{0.5cm} H(s,1) = x_0 = \veps_{x_0}(s) \ \ \ &\forall s\in [0,1]\\
+            H(0,t) = x_0  \hspace{0.5cm} &\text{ y } \hspace{0.5cm} H(1,t) = x_0\ \ \ &\forall t \in [0,1]
+        \end{align*}
+    \end{proof}
+    En particular, las bolas abiertas, las bolas cerradas, los convexos en general como $\bb{R}^n$ tienen grupo fundamental trivial.
+\end{ejemplo}
+
+\begin{teo}
+    Sean $x,y$ dos puntos de un e.t. $X$. Si $X$ es arcoconexo, entonces $\pi_1(X,x)$ y $\pi_1(X,y)$ son iguales salvo isomorfismo.
+    \begin{proof}
+        Como $X$ es arcoconexo podemos considerar $\alpha$ un arco uniendo $x$ con $y$ y la aplicación
+        \begin{align*}
+            F_\alpha : \pi_1(X,y) &\to \pi_1(X,x)\\
+            [\gamma] & \mapsto [\alpha]\ast[\gamma]\ast[\tilde{\alpha}]
+        \end{align*}
+        que está bien definida por lo visto anteriormente sobre el operador $\ast$. Queremos ver ahora 
+    \end{proof}
+\end{teo}
+
+
