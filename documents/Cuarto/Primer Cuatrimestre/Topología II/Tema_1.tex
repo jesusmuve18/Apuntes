@@ -302,7 +302,6 @@
                     \draw[gray!50, dashed] (8,-1) -- (8,2);
                     \draw[gray!50, dashed] (12,-1) -- (12,2);
                     
-
                     % Puntos
                     \node[draw, circle, fill=black, inner sep=0.5pt, label=below:$x$] at (0,0) {};
                     \node[draw, circle, fill=black, inner sep=0.5pt, label=below:$y$] at (4,1) {};
@@ -510,11 +509,55 @@
     Al grupo algebraico dado por el corolario anterior lo llamaremos el \textbf{grupo fundamental} de $X$ en $x_0$ y lo denotaremos por $\pi_1(X,x_0)$.
 \end{definicion}
 
-\begin{ejemplo}\ \\ % TODO
+\begin{ejemplo} Consideramos $\bb{R}^2\setminus \{0,0\}$ y un punto cualquiera $x_0$.
 
-    [Insertar gráfica] \\
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \shorthandoff{>}
 
-    En $\bb{R}^2\setminus\{(0,0)\}$ tenemos que $[\veps_{x_0}] \neq [\alpha] \neq [\tilde{\alpha}] \neq [\beta]$ y probaremos más adelante que $\pi_1(X,x_0)$ es isomorfo a $\bb{Z}$ aunque intuitivamente se puede entender el 0 como el lazo trivial (el que no rodea a $(0,0)$), los números positivos son .
+            % Ejes
+            \draw (-3,0) -- (3,0);
+            \draw (0,-2) -- (0,3);
+
+            % Arcos
+            \draw[blue] plot[smooth, tension=1] coordinates {
+                (1.5,0) (1.5,0.7) (1.9,1) (2.1,0.5) (1.5,0)
+            };
+            \draw[->, blue] (1.9,1) ++(-0.01, 0) -- ++(0.01,0);
+
+
+            \draw[red] plot[smooth, tension=1] coordinates {
+                (1.5,0) (0,1) (-1.5,0) (0,-1) (1.5,0)
+            };
+            \draw[->, red] (-0.22,0.99) ++(+0.01, 0) -- ++(-0.01,0);
+
+            \draw[orange] plot[smooth, tension=1] coordinates {
+                (1.5,0) (0,2) (-1,0) (0,-0.5) (0.5,0) (0,0.7) (-0.5, 0) (0,-1.5) (1.5,0)
+            };
+            \draw[->, orange] (-0.2,1.98) ++(+0.01, 0) -- ++(-0.01,0);
+
+            % Leyendas
+            \node[blue] at (2.5,1) {$[\veps_{x_0}]$};
+            \node[red] at (-1.5, -0.8) {$[\alpha]$};
+            \node[orange] at (-0.7, 2) {$[\beta]$};
+
+            % Puntos
+            \node[draw, circle, fill=white, inner sep=1pt] at (0,0) {};
+            \node[draw, circle, fill=black, inner sep=1pt, label=below:$x_0$] at (1.5,0) {};
+
+        \end{tikzpicture}%
+    \end{figure}%
+
+    En este espacio tenemos que $[\veps_{x_0}] \neq [\alpha] \neq [\tilde{\alpha}] \neq [\beta]$. Intuitivamente podríamos intentar identificar este espacio con $\bb{Z}$ de la siguiente forma:
+    
+    \begin{itemize}
+        \item La clase $[\veps_{x_0}]$ la podemos interpretar como el $0$ de $\bb{Z}$.
+        \item Identificaremos los números positivos como el número de vueltas que da cada curva al punto $(0,0)$ en sentido positivo (el que elijamos como positivo). Por ejemplo $[\alpha]$ sería $1\in \bb{Z}$, $[\beta]$ sería $2\in \bb{Z}$ y podríamos seguir así con todos los números enteros.
+        \item Para los números negativos tomaremos los opuestos de los anteriores, es decir, las curvas recorridas en sentido contrario. Por ejemplo $[\tilde{\alpha}]$ será el $-1\in \bb{Z}$, $[\tilde{\beta}]$ será el $-2$ y así sucesivamente. 
+    \end{itemize}
+
+    Más adelante probaremos que $\pi_1(X,x_0)$ es isomorfo a $\bb{Z}$ de una forma más rigurosa.
 \end{ejemplo}
 
 \begin{ejemplo}
