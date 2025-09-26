@@ -636,10 +636,77 @@ Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo 
             \end{array}
             \right.
         \end{align*}
-        Se deja como ejercicio demostrar que si $f$ es maximal, entonces $D(f)=E$ (por contrarrecíproco).
+        Se deja como ejercicio demostrar que si $f$ es maximal, entonces $D(f)=E$ (por contrarrecíproco).\\
+
+        Para ello supongamos que por contradicción se tuviera $D(f) \varsubsetneq E$ por lo que $\exists x_0\in E\setminus D(f)$. Por tanto,
+        \begin{align*}
+            D(f) \oplus x_0 \bb{R} & \to \bb{R}\\
+            x+tx_0 & \mapsto f(x) + t\alpha = \hat{f}(x+t_0)
+        \end{align*}
+        Solo tendremos que ver que $\hat{f}_{|_{D(f)}}=f$ y que $\hat{f}(x+tx_0)\leq p(x+tx_0)$ para todo $x\in D(f)$, $\forall t \in \bb{R}$.\\
+
+        Sabemos que Esto es equivalente a
+        \begin{align*}
+            &\hat{f}(x+tx_0)\leq p(x+tx_0) \ \ \ \forall x \in D(f),\ \forall r \in \bb{R} \sii\\ 
+            \sii &\hat{f}(t_z+tx_0)\leq p(t_z+tx_0) \ \ \ \forall z \in D(f),\ \forall r \in \bb{R} \sii\\
+            \sii &t \hat{f}(z+x_0) \leq p(t(z+x_0)) = 
+            \left\{
+                \begin{array}{l c}
+                    tp(z+x_0) & t>0\\
+                    -tp(-z-x_0) & t<0
+                \end{array}
+            \right. \sii\\
+            \sii & \left\{
+                \begin{array}{l c}
+                    f(z) +\alpha = \hat{f}(z+x_0)\leq p(z+x_0) & t>0,\ z\in D(f)\\
+                    -f(z) -\alpha = -\hat{f}(z+x_0)\leq p(-z-x_0) & t>0,\ z\in D(f)\\
+                \end{array}
+            \right. \sii\\
+            \sii & \left\{
+                \begin{array}{l}
+                    \alpha \leq -f(z) + p(z+x_0)\\
+                    -f(z)-p(-z-x_0) \leq \alpha
+                \end{array}
+            \right. \forall z \in D(f)
+        \end{align*}
+        Por lo que nos basta con demostrar lo siguiente
+        \begin{gather*}
+            \sup\{f(-z)-p(-z-x_0) : z\in D(f)\} \leq \alpha \leq \inf\{-f(z) + p(z+x_0):z\in D(f)\}
+        \end{gather*}
+        Podemos cambiar $-z$ por un $w\in D(f)$ cualquiera de la siguiente forma:
+        \begin{gather*}
+            \sup\{f(w)-p(w-x_0) : w\in D(f)\} \leq \alpha \leq \inf\{-f(z) + p(z+x_0):z\in D(f)\}
+        \end{gather*}
+        Veamos que esta desigualdad se verifica. Para cualesquiera $z,w\in D(f)$
+        \begin{gather*}
+            f(z) + f(w) = f(z+w) \leq p(z+w) = p(z+x_0-x_0+w) \leq p(z+x_0) + p(w)-x_0 \Rightarrow \\
+            f(w) - f(w-x_0) \leq -f(z)+p(z+x_0)
+        \end{gather*}
+        y hemos probado que cualquier elemento del segundo conjunto es cota superior de todos los elementos del primer conjunto, lo que prueba la existencia del $\alpha$ probando lo buscado.
     \end{proof}
 \end{teo}
 
+\begin{observacion}
+    Sea $E$ un espacio normado, $f:E\to \bb{R}$ una aplicación no nula ($f\neq 0$) y $\alpha \in \bb{R}$. Si $f$ lineal y continua, entonces
+    \begin{gather*}
+        [f=\alpha] = \{x\in E : f(x)=\alpha\} = f^{-1}(\{\alpha\})
+    \end{gather*} es un hiperplano\footnote{basta con la linealidad (primer teorema de isomorfía)} cerrado\footnote{por ser $f$ continua}.
+\end{observacion}
+
+\begin{definicion}
+    Si $A,B\subset E$ es un espacio normado. Diremos que el hiperplano $H=[f=\alpha]$ \textbf{separa} $A$ y $B$ si
+    \begin{gather*}
+        f(x) \leq \alpha \leq f(y)\ \ \ \forall x \in A,\ \ \forall y \in B
+    \end{gather*}
+    Diremos que \textbf{separa estrictamente} $A$ y $B$ si 
+    \begin{gather*}
+        \exists \veps > 0 \text{ tal que } f(x)\leq \alpha -\veps < \alpha + \veps \leq f(y)\ \ \ \forall x \in A,\ \forall y \in B
+    \end{gather*}
+\end{definicion}
+
+\begin{teo}[Primera forma geométrica del teorema de Hanh-Banach]
+    Supongamos que $E$ es un espacio normado, $A,B\subset E$ dos subconjuntos de $E$ no vacíos, disjuntos, es decir, $A\cap B = \emptyset$, convexos y con $A$ abierto. Entonces existe un hiperplano cerrado $H$ que separa $A$ y $B$.
+\end{teo}
 
 
 
