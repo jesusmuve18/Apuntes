@@ -438,7 +438,7 @@
                 \begin{tikzpicture}[scale=0.75]
                     \begin{axis}[
                         axis lines=left,
-                        height=8cm, width=8cm,
+                        height=8cm, width=10cm,
                         xmin=-0.2, xmax=1.2,
                         ymin=-0.2, ymax=1.2,
                         xtick={0,0.5,1},
@@ -486,7 +486,7 @@
             \begin{gather*}
                 G = \frac{\Omega(X;x_0)}{R}
             \end{gather*}
-            donde $R$ es la relación de equivalencia ``ser homotópico por arcos''. Veamos ahora que esta $G$ recién definida tiene estructura de grupo:
+            donde $R$ es la relación de equivalencia ``ser homotópico por arcos''. Veamos ahora que $G$ tiene estructura de grupo:
             \begin{enumerate}
                 \item \textbf{Propiedad asociativa.} Tendremos que ver que se verifica para cualesquiera $[\alpha],[\beta], [\gamma]\in G$.
                 \begin{gather*}
@@ -553,9 +553,11 @@
         \end{align*}
         y tenemos la igualdad buscada. Veamos ahora que tiene inversa considerando $F_{\tilde{\alpha}}$ que por definición es $F_{\tilde{\alpha}}([\beta]) = [\tilde{\alpha}] \ast [\beta] \ast [\alpha]$ y que además verifica
         \begin{gather*}
-            (F_{\tilde{\alpha}} \circ F_{\tilde{\alpha}})([\gamma]) = F_{\tilde{\alpha}}([\alpha]\ast [\gamma]\ast [\tilde{\alpha}]) = [\tilde{\alpha}] \ast ([\alpha]\ast [\gamma]\ast [\tilde{\alpha}]) \ast [\alpha] = [\gamma] = Id_{\pi_1(X,y)}([\gamma])
+            (F_{\tilde{\alpha}} \circ F_{\tilde{\alpha}})([\gamma]) = F_{\tilde{\alpha}}([\alpha]\ast [\gamma]\ast [\tilde{\alpha}]) = [\tilde{\alpha}] \ast ([\alpha]\ast [\gamma]\ast [\tilde{\alpha}]) \ast [\alpha] = [\gamma] = Id_{\pi_1(X,y)}([\gamma])\\
+            %
+            (F_\alpha \circ F_{\tilde{\alpha}})([\gamma]) = F_\alpha([\tilde{\alpha}] \ast [\gamma] \ast [\alpha]) = [\alpha] \ast ([\tilde{\alpha}] \ast [\gamma] \ast [\alpha]) \ast [\tilde{\alpha}] = [\gamma] = Id_{\pi_1(X,x)}([\gamma])
         \end{gather*}
-        Análogamente se prueba que $F_\alpha \circ F_{\tilde{\alpha}}=Id_{\pi_1(X,x)}$.
+        por lo que es su inversa. Hemos encontrado por tanto un homomorfismo biyectivo, luego $\pi_1(X,x) \cong \pi_1(X,y)$
     \end{proof}
 \end{teo}
 
