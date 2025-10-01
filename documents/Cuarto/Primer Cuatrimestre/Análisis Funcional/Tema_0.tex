@@ -792,9 +792,80 @@ Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo 
             \begin{gather*}
                 \frac{x}{p(x)+\veps} \in C \ \ \ \forall \veps > 0
             \end{gather*}
+            y por el apartado anterior tenemos que 
+            \begin{gather*}
+                p\left(\frac{x}{p(x)+\veps}\right)<1
+            \end{gather*}
+            Como $C$ es convexo, puedo considerar $\frac{y}{p(y)+\veps}\in C$ y cualquier combinación convexa de $x$ e $y$ estará en $C$. Consideramos 
+            \begin{gather*}
+                0\leq t = \frac{p(x)+\veps}{p(x)+p(y)+2\veps} \leq 1
+            \end{gather*}
+            y con este $t$ formamos la siguiente combinación
+            \begin{gather*}
+                t \frac{x}{p(x)+\veps} + (1-t) \frac{y}{p(y)+\veps} = \frac{x + y}{p(x)+p(y)+2\veps} \in C
+            \end{gather*}
+            por el apartado anterior tenemos que $p(x+y)\leq p(x) + p(y)$.
         \end{enumerate}
     \end{proof}
 \end{propiedades}
+
+\begin{ejemplo}
+    Para $C=B(0,1)$ tenemos que $p_C(x)=\|x\|$ (sale claramente si se piensa lo que se está haciendo).
+\end{ejemplo}
+
+\begin{teo}[Primera forma geométrica del teorema de Hanh-Banach]
+    Supongamos que $E$ es un espacio normado, $A,B\subset E$ dos subconjuntos de $E$ no vacíos, disjuntos, es decir, $A\cap B = \emptyset$, convexos y con $A$ abierto. Entonces existe un hiperplano cerrado $H$ que separa $A$ y $B$.
+    \begin{proof}\
+        \begin{itemize}
+            \item[\textbf{Paso 1:}] Vamos a considerar $B=\{x_0\}$ y $\emptyset \neq A \subset E$ abierto convexo con $x_0\notin A$. Elijo $C = A -z_0$. Se deja como ejercicio probar que $C$ es convexo y abierto con $0\in C$. Probar también que $y_0 = x_0-z_0\notin C$.\\
+            
+            Sabemos que $G=\bb{R}y_0$ es un espacio de dimensión 1 y buscamos 
+            una función lineal, que en este espacio será de la forma
+            \begin{align*}
+                g:\bb{R}y_0 &\to \bb{R}\\
+                t{y_0} & \mapsto g(t{y_0}) = t
+            \end{align*}
+
+            Considero $p$ el funcionar de Minkowski de $C$. Observemos 
+
+            \begin{itemize}
+                \item Como $y_0\notin C \Rightarrow p(y_0) \geq 1$
+                \item Si $t>0$, entonces $g(ty_0)=t \leq p(y_0) = p(ty_0)$
+                \item Si $t<0$, entonces $g(ty_0) = t < 0 \leq p(ty_0)$
+            \end{itemize}
+            En cualquier caso tendremos que 
+            \begin{gather*}
+                g(ty_0)\leq p(ty_0)\ \ \ \forall t \in \bb{R}
+            \end{gather*}
+            Usando el teorema de Hanh-Banach tenemos que existe un  $f:E\to \bb{R}$ lineal tal que 
+            \begin{gather*}
+                f_{|_G} = g\\
+                \text{y}\\
+                f(y) \leq p(y) \leq M \|y\|\ \ \ \forall x \in E
+            \end{gather*}
+            Por lo que podemos concluir que 
+            \begin{gather*}
+                |f(y)| \leq M\|y\| \ \ \ \forall y \in E
+            \end{gather*}
+            lo que nos dice que $f$ es continua. Nos queda probar que $f$ es la aplicación que queremos buscar y por tanto tendremos que encontrar $\alpha$, es decir, probar que $f(y)\leq 1 = f(y_0)$ para todo $y\in C$, lo que significaría que hemos separado $C$ de $y_0$. Se deja como ejercicio.
+
+            \item[\textbf{Paso 2:}] Consideramos $\emptyset\neq A \subset E$ abierto, $\emptyset\neq B\subset E$ convexos tales que $A\cap B=\emptyset$. Consideramos 
+            \begin{gather*}
+                A-B = \{a-b : a\in A,\ b\in B\}
+            \end{gather*}
+            y como $A\cap B=\emptyset$ sabemos que $0\notin (A-B)$. Veamos ahora que $A-B$ es abierto. Esto es muy sencillo ya que podemos escribir
+            \begin{gather*}
+                A-B = \bigcup\limits_{b\in B}(A-b)
+            \end{gather*}
+            y tenemos que es unión de abiertos trasladados que siguen siendo abiertos luego $A-B$ es abierto.
+            Se deja como ejercicio demostrar que $A-B$ es convexo y terminar la demostración.
+        \end{itemize}
+    \end{proof}
+\end{teo}
+
+\begin{teo}[Primera forma geométrica del teorema de Hanh-Banach]
+    
+\end{teo}
 
 
 
