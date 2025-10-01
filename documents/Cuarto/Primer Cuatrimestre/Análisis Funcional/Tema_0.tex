@@ -863,9 +863,26 @@ Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo 
     \end{proof}
 \end{teo}
 
-\begin{teo}[Primera forma geométrica del teorema de Hanh-Banach]
-    
+\begin{teo}[Segunda forma geométrica del teorema de Hanh-Banach]
+    Sea $\emptyset\neq A \subset E$, $\emptyset \neq B \subset E$ tal que $A\cap B\neq \emptyset$  y con $A$ y $B$ convexos, $A$ cerrado y $B$ compacto. Entonces existe un hiperplano que separa estrictamente $A$ y $B$, es decir,
+    \begin{gather*}
+        \exists f :E \to \bb{R} \text{ lineal y continua}\\
+        \text{ y }\\
+        \exists \alpha \in \bb{R}, \ \exists \veps >0 : f(a) \leq \alpha - \veps < \alpha < \alpha + \veps \leq f(b) \ \ \ \forall a \in A,\ \forall b \in B
+    \end{gather*}
+
+    \begin{proof}
+        Consideramos el conjunto $C:=A-B$ que sabemos que es convexo de la demostración del teorema anterior. Como $A$ es cerrado y $B$ es compacto sabemos que $C$ es cerrado (se deja la demostración como ejercicio). Igual que antes, sabemos que $0\notin C$ y además, como $C$ es cerrado tenemos que $E\setminus C$ es abierto y tenemos que 
+        \begin{gather*}
+            \exists r >0: B_E(0,r)\cap C =0
+        \end{gather*}
+        Por la primera forma geométrica del teorema de Hanh-Banach podemos separar $B_E(0,r)$ y $C$. El resto de la demostración se deja como ejercicio (la idea es separar estrictamente $0$ de $C$ y aprovechar la linealidad para separar estrictamente $A$ de $B$).
+    \end{proof}
 \end{teo}
+
+
+
+
 
 
 
