@@ -681,4 +681,49 @@
     es un isomorfismo de grupos, es decir, el grupo fundamental se conserva\footnote{salvo isomorfismo} por homeomorfismos.
 \end{coro}
 
+\begin{definicion}
+    Si $(G_1,\ast_1)$ y $(G_2, \ast_2)$ son dos grupos algebraicos, consideramos sobre $G_1\times G_2$ el producto $\ast$ dado por 
+    \begin{gather*}
+        (a_1,b_1)\ast(a_2,b_2) := (a_1\ast_1 a_2, b_1 \ast_2 b_2)
+    \end{gather*}
+    para $a_1,a_2\in G_1$, $b_1,b_2\in G_2$
+\end{definicion}
+
+\begin{teo}
+    Sean $X,Y$ dos e.t., $x\in X$, $y\in Y$. Entonces, con la topología producto en $X\times Y$ se tiene que 
+    \begin{gather*}
+        \pi_1(X\times Y, (x,y)) \cong \pi_1(X,x) \times \pi_1(Y,y)
+    \end{gather*}
+    \begin{proof}
+        Veasmos que 
+        \begin{align*}
+            \phi: \pi_1(X\times Y,(x,y)) &\longrightarrow \pi_1(X,x) \times \pi_1(Y,y) \\
+            [\alpha] & \longmapsto ([p_1 \circ \alpha], [p_2\circ \alpha])
+        \end{align*}
+        donde $p_1$ y $p_2$ son las proyecciones a $X$ y a $Y$ respectivamente está bien definida. Esto es fácil de ver ya que 
+        \begin{gather*}
+            ([p_1 \circ \alpha], [p_2\circ \alpha]) = ((p_1)_*([\alpha]), (p_2)_*([\alpha]))
+        \end{gather*}
+        y además es un homomorfismo. Consideramos además la siguiente aplicación
+        \begin{align*}
+            \psi: \pi_1(X,x)\times \pi_1(Y,y) \longrightarrow \pi_1(X\times Y, (x,y))\\
+            ([\beta], [\gamma]) & \longmapsto [(\beta, \gamma)]
+        \end{align*}
+        y es fácil ver que está bien definida y es un homomorfismo tal que
+        \begin{gather*}
+            \psi \circ \phi = Id_{\pi_1(X\times Y,(x,y))}\\
+            \phi \circ \psi = Id_{\pi_1(X,x) \times \pi_1(Y,y)}
+        \end{gather*}
+    \end{proof}
+\end{teo}
+
+\section{Espacios recubridores}
+
+\begin{definicion}
+    Sea $p:R\to B$ una aplicación continua y sobreyectiva entre dos espacios topológicos. Dado un punto $b\in B$ decimos que un abierto $O$ que contiene a $b$ está \textbf{regularmente recubierto} si se verifican las siguientes propiedades
+    \begin{enumerate}
+        \item $p^{-1}(O)$ es una unión disjunta de abiertos $A_i\subseteq R$, $i\in I$.
+        \item Para cada $i\in I$, $p_{|A_i}:A_i \to O$ es un homeomorfismo.
+    \end{enumerate}
+\end{definicion}
 
