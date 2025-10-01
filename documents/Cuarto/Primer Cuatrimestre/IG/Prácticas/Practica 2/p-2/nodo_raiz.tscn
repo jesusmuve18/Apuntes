@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://drdkissjirps2"]
+
+[ext_resource type="Script" uid="uid://vbongdsotjuy" path="res://script_raiz.gd" id="1_ldyy8"]
+[ext_resource type="PackedScene" uid="uid://4vnsvyas763r" path="res://modelos_3d/cubone/Cubone.glb" id="2_us6xe"]
+[ext_resource type="ArrayMesh" uid="uid://byqi1ghopy26g" path="res://modelos_3d/Low Poly Squirtle/model.obj" id="3_rgsny"]
+[ext_resource type="Script" uid="uid://bimhklfcrdtjx" path="res://donut.gd" id="4_l4mx1"]
+[ext_resource type="Script" uid="uid://vaj8kblxok3n" path="res://cubo_8_vertices.gd" id="5_bexy6"]
+[ext_resource type="Script" uid="uid://ba5wqd0wde1ct" path="res://camara_3d_orbital_simple.gd" id="5_l4mx1"]
+[ext_resource type="Script" uid="uid://b3wno26jax4j3" path="res://cubo_24_vertices.gd" id="6_gsrvs"]
+[ext_resource type="Script" uid="uid://b8jkercqiqlqf" path="res://ejemplo_rotacion.gd" id="7_owntv"]
+
+[node name="Nodo raiz" type="Node3D"]
+script = ExtResource("1_ldyy8")
+
+[node name="Objetos_P2" type="Node3D" parent="."]
+
+[node name="Cubone" parent="Objetos_P2" instance=ExtResource("2_us6xe")]
+transform = Transform3D(0.9788674, 0, 0.20449604, 0, 1, 0, -0.20449604, 0, 0.9788674, -0.28334174, 0.13671568, -0.10543567)
+visible = false
+
+[node name="Squirtle" type="MeshInstance3D" parent="Objetos_P2"]
+transform = Transform3D(0.8149528, 0, 1.4115398, 0, 1.6299057, 0, -1.4115398, 0, 0.8149528, 0.2690451, 0.018316224, 0)
+visible = false
+mesh = ExtResource("3_rgsny")
+
+[node name="Donut" type="MeshInstance3D" parent="Objetos_P2"]
+visible = false
+skeleton = NodePath("../..")
+script = ExtResource("4_l4mx1")
+
+[node name="Cubo8vertices" type="MeshInstance3D" parent="Objetos_P2"]
+visible = false
+script = ExtResource("5_bexy6")
+
+[node name="Cubo24vertices" type="MeshInstance3D" parent="Objetos_P2"]
+skeleton = NodePath("../Cubo8vertices")
+script = ExtResource("6_gsrvs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Objetos_P2"]
+script = ExtResource("7_owntv")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("5_l4mx1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.9999978, 2.3283013e-10, 0.0021078992, 0.0015225433, 0.69157606, 0.7223021, -0.0014577723, 0.7223036, -0.6915746, 0.013162851, 2.1924424, -2.1179066)

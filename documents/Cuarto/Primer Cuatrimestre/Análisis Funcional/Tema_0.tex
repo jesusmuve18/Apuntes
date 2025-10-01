@@ -722,10 +722,79 @@ Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo 
                 f(x) \leq p(x)\ \ \ \forall x \in E
             \end{gather*}
         \end{itemize}
-
     \end{proof}
 \end{teo}
 
+\section{Funcional de Minkowski de un conjunto}
+
+\begin{definicion}[Funcional de Minkowski]
+    Sea $E$ un espacio normado y $C\subset E$ convexo, abierto y tal que $0\in C$. Consideramos la aplicación
+    \begin{align*}
+        p:E &\to \bb{R}\\
+        x & \mapsto p(x) = 
+        \left\{
+        \begin{array}{l c c}
+            \inf\left\{\alpha>0 : \frac{x}{\alpha}\in C\right\} & \text{ si }& \forall x \in E\setminus \{0\}\\
+            0 & \text{ si }& x=0
+        \end{array}
+        \right.
+    \end{align*}
+    y la llamaremos \textbf{funcional de Minkowski}.
+\end{definicion}
+
+\begin{propiedades}
+    El funcional de Minkowski verifica las siguientes propiedades:
+    \begin{enumerate}
+        \item $p(\lambda x) = \lambda p(x)  \ \ \ \forall x \in E, \ \ \ \forall \lambda >0$
+        \item $\exists M>0$ tal que $0\leq p(x)\leq M\|x\|\ \ \ \forall x \in E$
+        \item $C=\{x\in E : p(x)<1\}$
+        \item $p(x+y)\leq p(x) + p(y) \ \ \ \forall x,y\in E$
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item $p(\lambda x ) = hf\{\alpha>0 : \frac{x}{\nicefrac{\alpha}{\lambda}} = \frac{\lambda x}{\alpha}\in C\} = \lambda \inf\{\alpha>0 : \frac{x}{\alpha}\in C\} = \lambda p(x)$
+
+            \item Como $C$ ebierto y $0\in C$ sabemos que $\exists r>0 : B_E(0,r)\subset C$ y se tiene
+            \begin{gather*}
+                \alpha > \frac{\|x\|}{r} \Rightarrow \left\| \frac{x}{\alpha} \right\| < r \Rightarrow \frac{x}{\alpha}\in B_E(0,r)\subset C
+            \end{gather*}
+            por lo que 
+            \begin{gather*}
+                \left(\frac{\|x\|}{r}, +\infty\right)\subset \left\{\alpha>0 : \frac{x}{\alpha}\in C\right\} \Rightarrow p(x) \leq \frac{\|x\|}{r}
+            \end{gather*}
+
+            \item Queremos ver que $p(x)<1$ para todo $x\in C$. Sabemos que si $x\in C$ abierto, entonces $\exists r>0$ tal que $B_E(x,r)\subset C$. Tomamos ahora un $\veps>0$ y queremos ver cuánto vale la siguente norma:
+            \begin{gather*}
+                \left\| \frac{x}{1+\veps} - x\right\| = \left\| \frac{-\veps x}{1+\veps}\right\| = \frac{\veps}{1+\veps} \|x\|
+            \end{gather*}
+            Elegimos ahora un $\veps_0>0$ tal que 
+            \begin{gather*}
+                \frac{\veps_0}{1+\veps_0} < \veps_0 < \frac{r}{\|x\| + 1}
+            \end{gather*}
+            y podemos afirmar que 
+            \begin{gather*}
+                \left\| \frac{x}{1+\veps} - x\right\| < r \ \ \ \forall \veps \in (0,\veps_0]
+            \end{gather*}
+            por lo que 
+            \begin{gather*}
+                \frac{x}{1+\veps} \in B_E(x,r)\subset C \ \ \ \forall \veps \in (0,\veps_0]
+            \end{gather*}
+            Acabamos de demostrar que $p(x)\leq \frac{1}{1+\veps}$ para todo $\veps\in (0,\veps_0]$. Hay algo mal en la demostración de este apartado. Se deja como ejercicio para el lector averiguar qué es lo q está mal (deberíamos haber empezado con $(1+\veps)x$ en vez de con $\frac{x}{1+\veps}$).
+
+            La otra inclusión la haremos sabiendo que si $p(x)=\inf\left\{ \alpha >0 : \frac{x}{\alpha}\in C\right\}<1$, entonces sabemos que $\exists \alpha_0<1$ tal que $\frac{x}{\alpha_0}\in C$. Como además $C$ es convexo y $0\in C$ tenemos que
+            \begin{gather*}
+                x=\alpha_0 \cdot \frac{x}{\alpha_0} + (1-\alpha) \in C
+            \end{gather*}
+
+
+            \item Podemos afirmar que 
+            \begin{gather*}
+                \frac{x}{p(x)+\veps} \in C \ \ \ \forall \veps > 0
+            \end{gather*}
+        \end{enumerate}
+    \end{proof}
+\end{propiedades}
 
 
 
