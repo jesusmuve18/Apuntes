@@ -727,3 +727,97 @@
     \end{enumerate}
 \end{definicion}
 
+\begin{ejemplo}
+    [Insertar gráfica]
+\end{ejemplo}
+
+\begin{definicion}
+    Decimos que una aplicación $p:R \to B$ entre dos espacios topológicos es una \textbf{aplicación recubridora} si $p$ es continua, sobreyectiva y todo punto $b \in B$ está contenido en un abierto $O_b$ regularmente recubierto.
+\end{definicion}
+
+\begin{observacion}
+    Todo homeomorfismo es una aplicación recubridora\footnote{Podemos verlo fácilmente tomando $O_b = X$ el total.}. 
+\end{observacion}
+
+\begin{teo}
+    La aplicación
+    \begin{align*}
+        p:\bb{R} & \to \bb{S}^1\\
+        x & \mapsto (\cos(2\pi x), \sen (2\pi x))
+    \end{align*}
+    es una aplicación recubridora
+    \begin{proof}
+        Es claro que es sobreyectiva y continua por las propiedades del seno y el coseno en $\bb{R}$. Tendremos que ver que 
+        \begin{gather*}
+            O=\bb{S}^1\cap ((0,\infty)\times \bb{R}) = \bb{S}^1 \cap \{(x_1,x_2)\in \bb{R}^2 : x_1>0\}
+        \end{gather*}
+        está regularmente recubierto. Para ello consideramos
+        \begin{align*}
+            p^{-1}(O) &= \{x\in \bb{R}: \cos(2\pi x) > 0\} = \{x\in \bb{R} : 2\pi x \in \left(-\frac{\pi}{2} + 2k\pi, \frac{\pi}{2} +2k\pi\right),\ k\in \bb{Z}\} =\\
+            &=\{x\in \bb{R} : x \in \left(k-\frac{1}{4}, k+\frac{1}{4}\right),\ k\in \bb{Z}\} = \bigcup\limits_{k\in \bb{Z}}\left(k-\frac{1}{4}, k+\frac{1}{4}\right)
+        \end{align*}
+        Tomando $A_k = \left(k-\frac{1}{4}, k+\frac{1}{4}\right)$ falta ver que cada abierto $A_{k_0}$ cumple que $p:A_{k_0} \to O$ es un homeomorfismo.\\
+
+        Por las propiedades de $(\cos(2\pi x), \sen(2\pi x))$ es claro que $p$ es inyectiva y sobreyectiva en $A_{k_0}$. Para ello podemos considerar 
+        \begin{align*}
+            p':\left[k-\frac{1}{4}, k+\frac{1}{4}\right] \to \overline{O}
+        \end{align*}
+        que es continua y va desde un compacto en un conjunto T2, lo que nos dice que $p_{|_{\left[k-\frac{1}{4}, k+\frac{1}{4}\right]}}$ es cerrada por lo que
+        \begin{gather*}
+            p':\left[k-\frac{1}{4}, k+\frac{1}{4}\right] \to \overline{O}
+        \end{gather*}
+        es un homeomorfismo y por tanto
+        \begin{gather*}
+            p':\left(k-\frac{1}{4}, k+\frac{1}{4}\right) \to \overline{O}
+        \end{gather*}
+        también lo es y como por la definición de $A_k$ tenemos lo que buscábamos. \\
+
+        Si repetimos este razonamiento de forma análoga para el conjunto $\bb{S}^1\cap \{(x_1,x_2)\in \bb{R}^2 : x_1>0\}$ tendremos la demostración completa.
+    \end{proof}
+\end{teo}
+
+\begin{ejemplo}
+    La aplicación
+    \begin{align*}
+        p:\bb{S}^1 & \to \bb{S}^1\\
+        (x,y) & \mapsto (x^2-y^2, 2xy)
+    \end{align*}
+    que podemos entender como la aplicación que lleva
+    \begin{align*}
+        (x+iy) &\mapsto (x+iy)^2\\
+        (\cos \theta, \sen \theta) &\mapsto (\cos 2\theta, \sen 2\theta)
+    \end{align*}
+    es recubridora. Intuitivamente la podemos ver como\\
+
+    [Insertar gráfica]\\
+
+    Esta aplicación se podría generalizar como 
+    \begin{align*}
+        p_n : \bb{S}^1 & \to \bb{S}^1\\
+        (\cos \theta, \sen \theta) &\mapsto (\cos n\theta, \sen n\theta)\\
+        (x+iy) & \mapsto (x+iy)^n
+    \end{align*}
+    con $n\in \bb{Z}\setminus \{0\}$.
+\end{ejemplo}
+
+\begin{propiedades}\
+    \begin{enumerate}
+        \item Sean $f:X\to Y$, $g:Y\to Z$ dos aplicaciones tales que una de ellas es un homeomorfismo y la otra una aplicación recubridora. Entonces $g\circ f : X\to Z$ es una aplicación recubridora.
+
+        \item Sea $p:R\to B$ una aplicación recubridora y $B_0$ un subconjunto de $B$, entonces
+        \begin{align*}
+            p_{|_{p^{-1}(B_0)}}:p^{-1}(B_0) \to B_0
+        \end{align*}
+        es una aplicación recubridora.
+
+        \item Si $p_1:R_1\to B_1$ y $p_2:R_2\to B_2$ son dos aplicaciones recubridoras, entonces
+        \begin{align*}
+            p_1\times p_2 & \to B_1\times B_2\\
+            (x,y) &\mapsto (p_1(x), p_2(y))
+        \end{align*}
+        es una aplicación recubridora cuando consideramos la topología producto en $R_1\times R_2$ y $B_1\times B_2$.
+    \end{enumerate}
+\end{propiedades}
+
+
+
