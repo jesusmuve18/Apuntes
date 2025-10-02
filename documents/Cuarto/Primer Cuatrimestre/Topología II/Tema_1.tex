@@ -727,8 +727,49 @@
     \end{enumerate}
 \end{definicion}
 
-\begin{ejemplo}
-    [Insertar gráfica]
+\begin{ejemplo} En este caso, si consideramos la aplicación $p:\bb{R} \to \bb{S}^1$ descrita en la gráfica, que es claramente continua y sobreyectiva\footnote{de hecho es un homeomorfismo que estudiamos en Topología I} podemos ver que $O$, que contiene al $(1,0)$ está regularmente recubierto
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \shorthandoff{>}
+
+            % Recta
+            \draw[line width=1pt] (-3,3) -- (3,3);
+            \node at (4,3) {$R = \bb{R}$};
+
+            % Abiertos en preimagen
+            \node[blue] at (-2,3) {$(\ \ \ \ \ )$};
+            \node[blue] at (0,3) {$(\ \ \ \ \ )$};
+            \node[blue] at (2,3) {$(\ \ \ \ \ )$};
+
+            \draw[line width=2pt, blue] (-2.45, 3) -- (-1.55, 3);
+            \draw[line width=2pt, blue] (-0.45, 3) -- (0.45, 3);
+            \draw[line width=2pt, blue] (2.45, 3) -- (1.55, 3);
+
+            \node[blue] at (-2,3.5) {$A_{-1}$};
+            \node[blue] at (0,3.5) {$A_{0}$};
+            \node[blue] at (2,3.5) {$A_{1}$};
+
+            % Puntos
+            \node[draw, circle, fill=black, inner sep=1pt, label=below:$-1$] at (-2,3) {};
+            \node[draw, circle, fill=black, inner sep=1pt, label=below:$0$] at (0,3) {};
+            \node[draw, circle, fill=black, inner sep=1pt, label=below:$1$] at (2,3) {};
+
+            % Flecha función
+            \draw[line width=0.8pt,->] (0,2) -- (0,1);
+            \node[anchor=west] at (0.5,1.5) {$p(x) = (\cos(2\pi x), \sen(2\pi x))$};
+
+            % Circunferencia
+            \draw[thick] (0,-1) circle [radius=1.5];
+            \node[anchor=west] at (1.7,0) {$B=\bb{S}^1$};
+            \node[rotate=90, blue] at (1.45,-1) {$(\ \ \ \ \ )$};
+            \draw[blue, line width=2pt] (1.5,-1) arc (0:17.5:1.5);
+            \draw[blue, line width=2pt] (1.5,-1) arc (0:-17.5:1.5);
+            \node[draw, circle, fill=black, inner sep=1pt, label=right:{$(1,0)$}] at (1.5,-1) {};
+            \node[blue] at (1.9,-1.5) {$O$};
+
+        \end{tikzpicture}%
+    \end{figure}%
 \end{ejemplo}
 
 \begin{definicion}
