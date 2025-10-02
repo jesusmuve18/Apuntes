@@ -815,9 +815,42 @@
             p_1\times p_2 & \to B_1\times B_2\\
             (x,y) &\mapsto (p_1(x), p_2(y))
         \end{align*}
-        es una aplicación recubridora cuando consideramos la topología producto en $R_1\times R_2$ y $B_1\times B_2$.
+        es una aplicación recubridora cuando consideramos la topología producto en $R_1\times R_2$ y $B_1\times B_2$. 
     \end{enumerate}
 \end{propiedades}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item $\bb{R}^2$ es un recubridor del cilindro $\bb{S}^1\times \bb{R}$. Para ello podemos considerar la aplicación 
+        \begin{align*}
+            p_1: \bb{R} & \to \bb{S}^1\\
+            x & \mapsto (\cos(2\pi x), \sen(2\pi x))
+        \end{align*}
+        y $p_2 = Id_{\bb{R}}$ y como $p_1$ es un recubrimiento y $p_2$ es un homeomorfismo tendremos que la aplicación
+        \begin{align*}
+            p_1\times p_2 : \bb{R}^2 & \to \bb{S}^1\times \bb{R}\\
+            (x,y) & \mapsto (\cos(2\pi x), \sen(2\pi x), y)
+        \end{align*}
+        es una aplicación recubridora. Intuitivamente podemos entenderlo de forma gráfica como \\
+
+        [Insertar gráfica]
+
+        \item $\bb{R}^2$ es un recubridor del toro $\bb{S}^1\times \bb{S}^1$ de $\bb{R}^4$ (o el toro de rotación de $\bb{R}^3$ porque ambos toros son homeomorfos). Para ello consideramos 
+        \begin{align*}
+            p :\bb{R} & \to \bb{S}^1\\
+            x & \mapsto (\cos(2\pi x), \sen(2\pi x))
+        \end{align*}
+         y su producto 
+         \begin{align*}
+            p\times p :\bb{R}\times \bb{R} & \to \bb{S}^1 \times \bb{S}^1\\
+            x & \mapsto (\cos(2\pi x), \sen(2\pi x), \cos(2\pi x), \sen(2\pi x))
+        \end{align*}
+        que sería la aplicación recubridora. Intuitivamente podemos entenderlo de forma gráfica como \\
+
+        [Insertar gráfica]
+
+    \end{enumerate}
+\end{ejemplo}
 
 
 
