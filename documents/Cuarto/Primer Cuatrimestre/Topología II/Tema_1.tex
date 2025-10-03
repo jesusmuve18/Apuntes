@@ -1181,6 +1181,11 @@
         \phi: \pi_1(B,b_0) \to p^{-1}(b_0)
     \end{align*}
     es sobreyectiva. Además, si $R$ es simplemente conexo, entonces $\phi$ es biyectiva.
+    \begin{proof}
+        Si $R$ es arcoconexo tenemos que probar que dado $r_1\in p^{-1}(b_0)\subseteq R$ existe un lazo $\alpha:[0,1]\to B$ de forma que $\phi([\alpha]) = r_1$, es decir, su único levantamiento $\hat{\alpha}:[0,1]\to R$ cumple que $\hat{\alpha}(0) = r_0$ y $\hat{\alpha}(1) = r_1$.\\
+
+        Para ello tomo un arco cualquiera $\alpha^*:[0,1]\to R$ tal que $\alpha^*(0) = r_0$ y $\alpha^*(1) = r_1$ que existe por ser $R$ arcoconexo. Elijo ahora $\alpha = p\circ \alpha^*$ que es un arco en $B$ tal que $\alpha(0)= p(\alpha^*(0)) = p(r_0) = b_0$ y $\alpha(1) = p(\alpha^*(1)) = p(r_1) = b_0$. Tenemos entonces que $\alpha$ es un lazo basado en $b_0$ y como $\alpha=p\circ \alpha^*$, entonces $\hat{\alpha} = \alpha^*$ es un levantamiento de $\alpha$ con $\hat{\alpha}(0) = \alpha^*(0) = r_0$ por lo que $\phi([\alpha]) = \hat{\alpha}(1) = \alpha^*(1) = r_1$.
+    \end{proof}
 \end{teo}
 
 
