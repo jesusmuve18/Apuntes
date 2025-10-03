@@ -1164,5 +1164,24 @@
     Sea $p:R\to B$ una aplicación recubridora, $\alpha$, $\beta:[0,1]\to B$ dos arcos con $[\alpha]=[\beta]$ y tomamos un $r_0\in p^{-1}(\alpha(0))$ ($\alpha(0)=\beta(0)$). Si elegimos $\hat{\alpha}, \hat{\beta}:[0,1]\to R$ como los únicos arcos con $\hat{\alpha}(0)=r_0=\hat{\beta}(0)$, entonces $[\hat{\alpha}] = [\hat{\beta}]$.
 \end{coro}
 
+\begin{definicion}
+    Consideramos una aplicación recubridora $p:R\to B$, un punto $b_0\in B$ y otro $r_0\in R$ tal que $p(r_0)=b_0$. Entonces podemos definir la siguiente aplicación
+    \begin{align*}
+        \phi : \pi_1(B,b_0) & \to p^{-1}(b_0)\\
+        [\alpha] & \mapsto \hat{\alpha}(1)
+    \end{align*}
+    donde $\hat{\alpha}$ es el único levantamiento de $\alpha$ con $\hat{\alpha}(0)=r_0$.
+    % Lo importante de esta aplicación es que cuenta el número de vueltas de cada [\alpha].
+    A la aplicación $\phi$ la llamaremos \textbf{correspondencia del levantamiento}.
+\end{definicion}
+
+\begin{teo}
+    Sean $p:R \to B$ una aplicación recubridora, $b_0\in B$, $r_0\in R$ con $p(r_0)=b_0$. Si $R$ es arcoconexo, entonces la correspondencia del levantamiento 
+    \begin{align*}
+        \phi: \pi_1(B,b_0) \to p^{-1}(b_0)
+    \end{align*}
+    es sobreyectiva. Además, si $R$ es simplemente conexo, entonces $\phi$ es biyectiva.
+\end{teo}
+
 
 
