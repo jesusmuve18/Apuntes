@@ -1102,7 +1102,7 @@
         \begin{gather*}
             \alpha([0,1]) \subseteq O_{b_1} \cup O_{b_2}\cup \dots \cup O_{b_n}
         \end{gather*}
-        Entonces $[0,1]\subseteq p^{-1}( O_{b_1}) \cup p^{-1}(O_{b_2})\cup \dots \cup p^{-1}(O_{b_n})$ por lo que tendremos el intervalo $[0,1]$ recubierto por una familia finita de abiertos. Por el lema del número de Lebesgue\footnote{visto probablemente en alguna asignatura de Análisis.} sabemos que existe un $\delta>0$ tal que para cada $x\in[0,1]$ se tiene que $B(x,\delta)\cap[0,1]$ está contenido en algún $p^{-1}(O_{b_j})$ para cierto $j\in\{1,\dots,k\}$. Esto nos asegura que podemos hacer una subdivisión del intervalo $[0,1]$ tal que
+        Entonces $[0,1]\subseteq \alpha^{-1}( O_{b_1}) \cup \alpha^{-1}(O_{b_2})\cup \dots \cup \alpha^{-1}(O_{b_n})$ por lo que tendremos el intervalo $[0,1]$ recubierto por una familia finita de abiertos. Por el lema del número de Lebesgue\footnote{visto probablemente en alguna asignatura de Análisis.} sabemos que existe un $\delta>0$ tal que para cada $x\in[0,1]$ se tiene que $B(x,\delta)\cap[0,1]$ está contenido en algún $p^{-1}(O_{b_j})$ para cierto $j\in\{1,\dots,k\}$. Esto nos asegura que podemos hacer una subdivisión del intervalo $[0,1]$ tal que
         \begin{gather*}
             0 = t_0 < t_1 < \dots < t_{r-1} < t_r = 1
         \end{gather*}
@@ -1149,6 +1149,20 @@
        De forma recursiva se verifica la unicidad en todos los intervalos $[t_j, t_{j+1}]$ con $j\in \{0,\dots,r-1\}$.
     \end{proof}
 \end{lema}
+
+\begin{observacion}
+    Es importante tener en cuenta que en general el levantamiento de un lazo no es un lazo, sino simplemente un arco.\\
+
+    [Insertar gráfica]
+\end{observacion}
+
+\begin{lema}
+    Sean $p:R \to B$ una aplicación recubridora y $H:[0,1]\times[0,1]\to B$ una aplicación continua. Dados $b_0=H(0,0)$ y $r_0\in p^{-1}(b_0)$, entonces existe un único levantamiento $\hat{H}:[0,1]\times[0,1]\to R$ tal que $\hat{H}(0,0) = r_0$. Si además $H$ es una homotopía por arcos, entonces $\hat{H}$ también lo será.
+\end{lema}
+
+\begin{coro}
+    Sea $p:R\to B$ una aplicación recubridora, $\alpha$, $\beta:[0,1]\to B$ dos arcos con $[\alpha]=[\beta]$ y tomamos un $r_0\in p^{-1}(\alpha(0))$ ($\alpha(0)=\beta(0)$). Si elegimos $\hat{\alpha}, \hat{\beta}:[0,1]\to R$ como los únicos arcos con $\hat{\alpha}(0)=r_0=\hat{\beta}(0)$, entonces $[\hat{\alpha}] = [\hat{\beta}]$.
+\end{coro}
 
 
 
