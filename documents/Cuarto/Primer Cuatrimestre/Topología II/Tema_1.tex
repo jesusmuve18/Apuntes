@@ -1098,7 +1098,23 @@
     Sean $p:R\to B$ una aplicación recubridora, $r_0\in R$ y $b_0\in B$ tales que $p(r_0)=b_0$. Entonces dado un arco $\alpha:[0,1]\to B$ con $\alpha(0)=b_0$, exisste un único arco $\hat{\alpha};[0,1]\to R$ tal que $\hat{\alpha}(0) = r_0$ y $\hat{\alpha}$ es un levantamiento de $\alpha$.
 
     \begin{proof}
-        
+        Como $p$ es una aplicación recubridora, cada punto $b\in B$ tiene asociado un abierto $O_b$ regularmente recubierto que contiene a $b$. Como $\alpha([0,1])$ es compacto tenemos que existe un recubrimiento finito, es decir,
+        \begin{gather*}
+            \alpha([0,1]) \subseteq O_{b_1} \cup O_{b_2}\cup \dots \cup O_{b_n}
+        \end{gather*}
+        Entonces $[0,1]\subseteq p^{-1}( O_{b_1}) \cup p^{-1}(O_{b_2})\cup \dots \cup p^{-1}(O_{b_n})$ por lo que tendremos el intervalo $[0,1]$ recubierto por una familia finita de abiertos. Por el lema del número de Lebesgue\footnote{visto probablemente en alguna asignatura de Análisis} sabemos que existe un $\delta>0$ tal que para cada $x\in[0,1]$ se tiene que $B(x,\delta)\cap[0,1]$ está contenido en algún $p^{-1}(O_{b_j})$ para cierto $j\in\{1,\dots,k\}$. Esto nos asegura que podemos hacer una subdivisión del intervalo $[0,1]$ tal que
+        \begin{gather*}
+            0 = t_0 < t_1 < \dots < t_{r-1} < t_r = 1
+        \end{gather*}
+        tal que $\alpha([t_j, t_{j+1}])$ está contenido en algún $O_{b_l}$ para $j\in\{0,\dots,r-1\}$, $l\in\{1,\dots,k\}$.
+
+        Definimos $\hat{\alpha}$ de manera recursiva:\\
+
+       $ \alpha([t_0,t_1])$ está contenido en algún $O_{b_l}$. Como $O_{b_l}$ está regularmente recubierto
+       \begin{gather*}
+            p^{-1}(O_{b_l}) = \bigcup\limits_{i\in I} A_i\ \ \text{ unión disjunta de abiertos}\\
+            p_{|A_i}: A_i \to O_{b_l} \text{ es homeomorfismo}
+       \end{gather*}
     \end{proof}
 \end{lema}
 
