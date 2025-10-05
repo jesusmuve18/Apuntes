@@ -1132,7 +1132,11 @@
             \node at (-4,2.5) {$\bb{R}^2$};
 
             % Líneas 1
-            
+            \node[draw, circle, fill=black, inner sep=1pt] at (-3.5,-0.25) {};
+            \node[draw, circle, fill=black, inner sep=1pt] at (-2.25, 0.5) {};
+            \draw[blue] plot[smooth, tension=1] coordinates {
+                (-3.5,-0.25) (-3.25,0) (-3,0.75) (-2.5,0.6) (-2.25, 0.5)
+            };
 
             % Función p
             \draw[thick, ->] (-0.5,0) -- (0.5,0);
@@ -1150,6 +1154,7 @@
             % Líneas 2
             \draw[blue, thick] (4,0) arc (0:-180:1 and 0.3);
             \draw[blue, dashed, thick] (4,0) arc (0:180:1 and 0.3);
+            \node[draw, circle, blue, fill=blue, inner sep=1pt, label=below:{$\alpha$}] at (3, -0.3) {};
             
 
         \end{tikzpicture}%
@@ -1237,6 +1242,52 @@
     % Lo importante de esta aplicación es que cuenta el número de vueltas de cada [\alpha].
     A la aplicación $\phi$ la llamaremos \textbf{correspondencia del levantamiento}.
 \end{definicion}
+
+\begin{ejemplo}
+    Consideramos el caso de ``enrollar'' $\bb{R}$ sobre una circunferencia. La aplicación $\phi$ cuenta el número de vueltas que da cada arco, como se puede ver en el siguiente dibujo.
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \shorthandoff{>}
+
+            % Recta
+            \draw[line width=1pt] (-3,3) -- (3,3);
+            \node at (4,3) {$R = \bb{R}$};
+
+            % Abiertos en preimagen
+            \draw[line width=1pt, green, ->] (-2, 2.96) -- (2, 2.96);
+            \draw[line width=1pt, blue, ->] (-2, 3) -- (0, 3);
+            \draw[line width=1pt, red, ->] (-2, 3.04) -- (-1.5, 3.04);
+
+            % Puntos
+            \node[draw, circle, fill=black, inner sep=1pt, label=below:{$r_0=0$}] at (-2,3) {};
+            \node[draw, circle, fill=black, inner sep=1pt, label=below:$1$] at (0,3) {};
+            \node[draw, circle, fill=black, inner sep=1pt, label=below:$2$] at (2,3) {};
+
+            % Flecha función
+            \draw[line width=0.8pt,->] (0,2) -- (0,1);
+            \node[anchor=west] at (0.5,1.5) {$p(x) = (\cos(2\pi x), \sen(2\pi x))$};
+
+            % Circunferencia
+            \draw[thick] (0,-1) circle [radius=1.5];
+            \node[anchor=west] at (1.7,0) {$B=\bb{S}^1$};
+            \draw[green, line width=1pt] (1.54,-1) arc (0:180:1.54);
+            \draw[green, line width=1pt] (1.6,-1) arc (0:-180:1.57);
+            \draw[green, line width=1pt] (1.6,-1) arc (0:180:1.6);
+            \draw[green, line width=1pt, <-] (1.66,-1) arc (0:-180:1.63);
+
+            \draw[blue, line width=1pt, ->] (1.5,-1) arc (0:360:1.5);
+            \draw[red, line width=1pt, ->] (1.46,-1) arc (0:45:1.46);
+            
+            \node[draw, circle, fill=black, inner sep=1pt, label=right:{\ $b_0 = (1,0)$}] at (1.5,-1) {};
+
+            % Ejes
+            \draw[thick] (0,-2.75) -- (0,0.75);
+            \draw[thick] (-1.75,-1) -- (1.75,-1);
+
+        \end{tikzpicture}%
+    \end{figure}%
+\end{ejemplo}
 
 \begin{teo}
     Sean $p:R \to B$ una aplicación recubridora, $b_0\in B$, $r_0\in R$ con $p(r_0)=b_0$. Si $R$ es arcoconexo, entonces la correspondencia del levantamiento 
