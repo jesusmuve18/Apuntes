@@ -37,7 +37,7 @@ func _init() -> void:
 	mat.albedo_color = Color(0.0, 0.737, 0.871, 1.0)
 	mat.metallic = 0.3
 	mat.roughness = 0.1
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_PER_VERTEX
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_PER_PIXEL
 	
 	material_override = mat
 	

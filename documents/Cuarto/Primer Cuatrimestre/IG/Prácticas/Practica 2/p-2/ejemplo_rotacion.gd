@@ -2,7 +2,7 @@ extends MeshInstance3D
 
 func _init() -> void:
 	var profile := PackedVector2Array()  # array vacío
-	var n_copies := 30
+	var n_copies := 10
 	var vertices := PackedVector3Array()
 	var triangulos := PackedInt32Array()
 	

@@ -880,6 +880,80 @@ Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo 
     \end{proof}
 \end{teo}
 
+% Lunes
+
+\begin{lema}
+    Sean $E$, $F$ espacios normados, $T\in L(E,F)$, entonces se tiene que 
+    \begin{gather*}
+        \sup\limits_{\|x-x_0\|<r} \|T_x\| \geq r \|T\| \ \ \ \forall x_0\in E,\ \ \forall f>0
+    \end{gather*}
+
+    \begin{proof}
+        Tenemos, para todo $y\in E$ que
+        \begin{gather*}
+            \|T_y\| = \left\|T\left(\frac{1}{2}[x_0 +y - (x_0 -y)]\right)\right\| = \frac{1}{2}\left[ \|T(x_0+y)\| + \|T(x_0-y)\| \right] \leq\\
+            \leq \max\{\|T(x_0+y)\|,\ \|T(x_0-y)\|\}\ \ \ \forall x_0\in E
+        \end{gather*}
+        Además,
+        \begin{gather*}
+            r\|T\| = \sup\limits_{\|y\| \leq r} \|Ty\| \leq \sup\limits_{\|y\| \leq r} \max\{\|T(x_0+y)\|,\ \|T(x_0-y)\|\} \leq \\
+            \leq \sup\limits_{\|z-x_0\| \leq r} \|Tz\|
+        \end{gather*}
+    \end{proof}
+\end{lema}
+
+\begin{prop}[Principio de acotación uniforme]
+
+    Sea $E$ un espacio de Banach, $F$ espacio normado, $\cc{F}$ una familia de operadores $T\in L(E,F)$. Si $\sup\limits_{T\in \cc{F}} \|T_x\| < \infty$ para todo $x\in E$, entonces $\sup\limits_{T\in \cc{F}} \|T\|<\infty$.
+
+    \begin{proof}
+        Por contradicción al absurdo. Supongamos que $\sup\limits_{T\in \cc{F}} \|T\| = \infty$. Esto significa que existe una sucesión de operadores de $\cc{F}$, $\{T_n\}\subset \cc{F}$ con $\|T_n\|\geq 4^n$ para todo $n\in \bb{N}$. Tomo $x_0=0$ y $r=\frac{1}{3}$ y aplicamos el lema recién probado y llegamos a que existe un $x_1\in B(x_0, \nicefrac{1}{3})$
+        \begin{gather*}
+            \|T_1x_1\| > \frac{2}{3} \cdot \frac{1}{3} \|T_1\|
+        \end{gather*}
+        y seguimos contruyendo por inducción
+        \begin{gather*}
+            \sup\limits_{\|x-x_{n-1}\| < \frac{1}{3^n}} \|Tx\| \geq \frac{1}{3^n} \|T_n\| > \frac{2}{3} \cdot \frac{1}{3^n} \|T_n\|
+        \end{gather*}
+        Esto nos da una sucesión $\{x_n\}\subset E$ y veamos ahora que dicha sucesión es de Cauchy. Para ello tomamos $m>n$ y tenemos
+        \begin{gather*}
+            \|x_m-x_n\| = \|x_m-x_{m-1}+x_{m-1} - x_{m-2} + \dots + x_{n+1} - x_n \| \leq\\
+            \leq  \|x_m - x_{m-1}\| + \|x_{m-1} - x_{m-2}\| + \dots + \|x_{n+1} - x_n\| \leq \frac{1}{3^n} + \frac{1}{3^{m-1}} + \dots + \frac{1}{3^{n+1}} =\\
+            = \frac{1}{3^n} \left[\frac{1}{3^{m-n} + \dots + \frac{1}{3}}\right] = \frac{1}{3^n} \sum_{j=1}^\infty \frac{1}{3^t} = \frac{1}{3^n} \cdot \frac{\frac{1}{3}}{1-\frac{1}{3}} = \frac{1}{2} \cdot \frac{1}{3^n}
+        \end{gather*}
+        y tenemos que es de Cauchy en un espacio de Banach, luego $\{x_n\}$ converge a un $x\in E$. Tenemos además
+        \begin{gather*}
+            \lim_{n\to\infty} \|x_m-x_n\| = \|lim_{m\to \infty} (x_m-x_n)\| = \|x-x_n\| \leq \frac{1}{2} \cdot \frac{1}{3^n}
+        \end{gather*}
+        Vamos a estimar la norma de $T_nx$. Para ello escribimos
+        \begin{gather*}
+            \|T_n(x)\| = \| T_n(x-x_n+x_n)\| \geq \|T_n(x_n)\| - \|T_n(x-x_n)\| \geq \frac{2}{3} \cdot \frac{1}{3^n} \|T_n\| - \|T_n\|\|x - x_n\| \geq \\
+            \geq \left(\frac{2}{3} - \frac{1}{2} \right) \frac{1}{3^n} \|T_n\| = \frac{1}{6} \cdot \frac{1}{3^n} \|T_n\| \geq \frac{1}{6}\left(\frac{4}{3}\right)^n \to \infty
+        \end{gather*}
+        y en este caso tendríamos que
+        \begin{gather*}
+            \sup_{T\in \cc{F}} \|Tx\| \geq \sup_{n\in \bb{N}} \|T_nx\| = \infty
+        \end{gather*}
+        por lo que llegamos a la contradicción buscada.
+    \end{proof}
+\end{prop}
+
+\begin{lema} [Lema de Beire]
+    Supongamos que $X$ es un espacio métrico completo, $X_n\subset X$ tal que $X_n$ cerrado y $int X_n = \emptyset$ para todo $n\in \bb{N}$. Etnonces se tiene que
+    \begin{gather*}
+        int \left(\bigcup\limits_{n=1}^\infty X_n\right) = \emptyset
+    \end{gather*}
+\end{lema}
+
+\begin{observacion}
+    El contrarrecíprodo del lema anterior sería:\\
+    Si $X$ es un espacio métrico completo y $X_n\subset X$ es cerrado $\forall n\in \bb{N}$. Entonces
+    \begin{gather*}
+        int \left(\bigcup\limits_{n=1}^\infty X_n\right) \neq \emptyset \Rightarrow \exists n_0\in \bb{N} \text{ tal que } intX_{n_0}\neq \emptyset
+    \end{gather*}
+    Se recomienda ver este lema y su demostración en el libro de Brezis.
+\end{observacion}
+
 
 
 

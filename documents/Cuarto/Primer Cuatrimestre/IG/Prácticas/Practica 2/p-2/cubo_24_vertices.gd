@@ -11,36 +11,25 @@ func _init() -> void:
 				for k in range (3): # Triplico los vertices
 					vertices.append(Vector3(x, y, z))
 				
-	var triangulos2 := PackedInt32Array([
-		0,6,9, 0,9,3,
-		4,11,21, 5,21,16,
-		15,23,18, 15,18,14,
-		12,19,7, 12,7,1, 
-		10,8,20, 10,20,22,
-		2,4,17, 2,17,13
-	])
 	
 	var triangulos := PackedInt32Array([
 		0,6,11, 0,11,3,
-		5,9,21, 5,21,16,
+		5,10,21, 5,21,16,
 		15,23,18, 15,18,14,
 		12,20,7, 12,7,1,
 		9,8,19, 9,19,22,
 		2,4,17, 2,17,13
 	])
 	
-	var triangulos3 := PackedInt32Array([
-		0,11,6, 0,3,11,
-		5,21,9, 5,16,21,
-		15,18,23, 15,14,18,
-		12,7,20, 12,1,7,
-		9,19,8, 9,22,19,
-		2,17,4, 2,13,17
-	])
-	
-		
 	var normales := Utilidades.calcNormales( vertices, triangulos )
-
+	
+	# Después de calcular las normales
+	for i in range(vertices.size()):
+		var n = normales[i].normalized()
+		var desplazamiento = 0.2  # cuánto quieres "abrir" el cubo
+		vertices[i] += n * desplazamiento
+	
+	
 	## inicializar el array con las tablas
 	var tablas : Array = []   ## tabla vacía incialmente
 	tablas.resize( Mesh.ARRAY_MAX ) ## redimensionar al tamaño adecuado
@@ -57,7 +46,7 @@ func _init() -> void:
 	mat.albedo_color = Color(1.0, 0.502, 0.161, 1.0)
 	mat.metallic = 0.3
 	mat.roughness = 0.1
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_PER_VERTEX
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_PER_PIXEL
 	
 	material_override = mat
 	

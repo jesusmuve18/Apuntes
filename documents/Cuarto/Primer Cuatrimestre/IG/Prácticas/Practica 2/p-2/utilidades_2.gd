@@ -5,22 +5,20 @@ func generate_revolution_mesh(
 	n_copies: int,
 	vertices: PackedVector3Array, 
 	triangulos: PackedInt32Array,) -> void :
-	
-	
+
 	
 	## Vertices para cerrar la figura
-	if (profile[0].x!=0.0):
-		var nuevo := PackedVector2Array()
-		nuevo.append(Vector2(0,profile[0].y))  # el nuevo elemento al principio
-		for p in profile:
-			nuevo.append(p)
-		profile = nuevo
+	# if (profile[0].x!=0.0):
+	#	var nuevo := PackedVector2Array()
+	#	nuevo.append(Vector2(0,profile[0].y))  # el nuevo elemento al principio
+	#	for p in profile:
+	#		nuevo.append(p)
+	#	profile = nuevo
 	
-	if (profile[profile.size()-1].x!=0.0):
-		profile.append(Vector2(0,profile[profile.size()-1].y))
-		
-	print(profile)
-		
+	# if (profile[profile.size()-1].x!=0.0):
+	#	profile.append(Vector2(0,profile[profile.size()-1].y))
+				
+				
 	## Genera vértices rotando el profile alrededor del eje y
 	for i in range(n_copies): 
 		var angulo = (i * 2 * PI) / n_copies
