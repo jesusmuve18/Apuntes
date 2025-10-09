@@ -956,6 +956,23 @@ Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo 
 
 % Corolario 2.3, Corolario 2.4, Corolario 2.5 ya los podemos hacer como ejercicios y mañana se presentarán en clase
 
+\begin{ejercicio}
+    Sean $X,Y$ espacio de Banach, $T\in L(X,Y)$ y definimos
+    \begin{gather*}
+        \|y\|_n := \inf\{\|u\|_X+n \|y\|_Y: u\in X,\ v\in Y, \ y=T(u)+v\}\ \ \ \forall n \in \bb{N},\ \ \forall y \in Y
+    \end{gather*}
+    Probar que $\|\cdot\|_n$ es una norma en $Y$ que verifica
+    \begin{gather*}
+        \|y\|_n \leq n \|y\|_y \ \ \ \forall y \in Y
+    \end{gather*}
+    Además, si $y=T(x)$, con $x\in X$ entonces se verifica
+    \begin{gather*}
+        \|y\|_n \leq \|x\|_X
+    \end{gather*}
+\end{ejercicio}
+
+% El truco está en que tengo muchas formas de escribir y=Y(u)+v y habrá que jugar con ellas para probar esto (por ejemplo para la segunda parte basta con ver que \|x\|_X está en el conjunto por lo que el ínfimo será menor o igual).
+
 
 
 
