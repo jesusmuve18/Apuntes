@@ -1396,5 +1396,83 @@
 
 \begin{prop}
     No existe ninguna aplicación continua\footnote{$\overline{\bb{D}}$ denota el disco cerrado de $\bb{R}^2$ centrado en el $(0,0)$ y con radio 1} $f : \overline{\bb{D}} \to \bb{S}^1$ tal que $f(x) = x$ para todo $x\in \bb{S}^1$
+
+    \begin{proof}
+        Tomamos $\alpha (s) = (\cos(2\pi s), \sen(2\pi s))$, lazo basado en $(1,0)$. Su clase de equivalencia en el disco sería 
+        \begin{gather*}
+            [\alpha]_{\overline{\bb{D}}} = [\veps_{(1,0)}]
+        \end{gather*}
+        ya que $\overline{\bb{D}}$ es simplemente conexo. Si exisitiese una $f$ continua, entonces tendríamos que
+        \begin{align*}
+            f_*:\pi_1(\overline{\bb{D}}(1,0)) & \to \pi_1(\bb{S}^1, (1,0))\text{ es homeomorfismo}\\
+            [\alpha]_{\overline{\bb{D}}} & \mapsto f_*([\alpha]_{\overline{\bb{D}}}) \overset{def}{=}[f\circ \alpha]_{\bb{S}^1} = [\alpha]_{\bb{S}^1}
+        \end{align*}
+        Pero $[\alpha]_{\overline{\bb{D}}} = [\veps_{(1,0)}]$ por lo que 
+        \begin{gather*}
+            f_x([\alpha]_{\overline{\bb{D}}}) = f_*([\veps_{(1,0)}]_{\overline{\bb{D}}}) = [\veps_(1,0)]_{\bb{S}^1}
+        \end{gather*}
+        pero como $f_x([\alpha]_{\overline{\bb{D}}}) = [\alpha]_{\bb{S}^1}$ llegamos a contradicción ya que $\deg(\alpha) = 1$ y $\deg(\veps_{(1,0)}) = 0$
+    \end{proof}
 \end{prop}
+
+\begin{teo}[punto fijo de Brouwer]
+    Si $f:\overline{\bb{D}} \to \overline{\bb{D}}$ es continua, entonces existe $x_0\in \overline{\bb{D}}$ tal que $f(x_0)=x_0$.
+
+    \begin{proof}
+        Supongamos que $f$ no tiene ningún punto fijo, es decir, $f(x)\neq x$ para todo $x\in \overline{\bb{D}}$. Buscaremos ahora construir una aplicación a partir de esta hipótesis que deje a los puntos de la circunferencia $\bb{S}^1$ fijos para poder aplicar la proposición anterior. \\
+
+        Para cada $x$ consideramos la semirrecta abierta 
+        \begin{gather*}
+            f(x) + \lambda_x (x-f(x))\ \ \ \forall \lambda_x >0
+        \end{gather*}
+        y la intersección de dicha semirrecta con la circunferencia unidad. Como $f(x),x\in \overline{\bb{D}}$ y $f(x)\neq x$, lo recién definido es efectivamente una semirrecta y ha de cortar exactamente en un único punto a $\bb{S}^1$.
+        \begin{gather*}
+            1 = \langle f(x) + \lambda_x (x-f(x)), f(x) + \lambda_x (x-f(x)) \rangle =\\
+            \langle f(x) \rangle + 2\lambda_x \langle f(x), x-f(x)\rangle + \lambda_x^2 \langle x-f(x), x-f(x) \rangle
+        \end{gather*}
+        Por lo que podemos despejar $\lambda_x$ y nos queda
+        \begin{gather*}
+            \lambda_x = \frac{-2\langle f(x), x-f(x) \rangle + \sqrt{4\langle f(x), x-f(x)\rangle^2 - 4(\langle f(x),f(x)-1\rangle)\langle x-f(x), x-f(x)\rangle}}{2\langle x-f(x), x-f(x) \rangle}
+        \end{gather*}
+        Por lo que $g(x) = f(x) + \lambda_x(x-f(x))$ es continua y $|g(x)|=1$. Por tanto tenemos que si $x\in \bb{S}^1$, entonces $g(x)=x$ lo que contradice la proposición anterior.
+    \end{proof}
+\end{teo}
+
+\begin{observacion}
+    El teorema del punto fijo de Brouwer no solo es cierto para $\overline{\bb{D}}$ sino para cualquier espacio topológico $X$ homeomorfo a $\overline{\bb{D}}$. Es decir, si $f:X\to X$ es continua con $X$ homeomorfo a $\overline{\bb{D}}$, entonces existe al menos un punto $x_0\in X$ tal que $f(x_0)=x_0$.
+
+    \begin{proof}
+        Notemos por $h:\overline{\bb{D}}\to X$ al homeomorfismo y estaremos en la siguiente situación
+        \begin{gather*}
+            \overline{\bb{D}} \overset{h}{\longrightarrow} X \overset{f}{\longrightarrow} X \overset{h^{-1}}{\longrightarrow} \overline{\bb{D}}
+        \end{gather*}
+        Entonces tendríamos $h^{-1}\circ f \circ h : \overline{\bb{D}} \to \overline{\bb{D}}$ continua y por el teorema de Brower existe $y_0\in \overline{\bb{D}}$ tal que $(h^{-1}\circ f \circ h)(y_0) = y_0$.
+    \end{proof}
+\end{observacion}
+
+\begin{coro}
+    Sea $V:\overline{\bb{D}}\to \bb{R}^2 \setminus \{(0,0)\}$ una aplicación continua. Entonces existen puntos $x,y\in \bb{S}^1$ de forma que $V(x) = \lambda x$, $V(y) = -\mu y$ con $\lambda, \mu >0$.
+
+    \begin{proof}
+        Consideramos la aplicación $f(x) = \frac{V(x)}{|V(x)|}$ que es continua (ya que $V(x)\neq 0$ para todo $x\in \overline{{\bb{D}}}$). Por el teorema de Brouwer tenemos que $\exists x_0\in \overline{\bb{D}}$ tal que $f(x_0) = x_0$ por lo que $x_0 = \frac{V(x_0)}{|V(x_0)|}$ y entonces $V(x_0) = |V(x_0)|x_0 = \lambda x_0$ (tomando $\lambda = |V(x_0|$). Si tomamos $g(x) = - \frac{V(x_0)}{|V(x_0)|}$ tendríamos análogamente que existe un $y_0$ tal que $y_0 = g(y_0) = \frac{V(y_0)}{|V(y_0)|}\in \bb{S}^1$ y $V(y_0) = -|V(y_0)|y_0 = -\mu y_0$ (tomando $\mu = |V(y_0)|$). En general, para poder considerar cualquier ángulo $\theta$ tendremos que considerar
+        \begin{gather*}
+            h(x) = \frac{V(x)}{e^{i\theta} |V(x)|}
+        \end{gather*}
+    \end{proof}
+\end{coro}
+
+\begin{teo}[Teorema fundamental del álgebra]
+    Todo polinomio complejo de grado $n \geq 1$ tiene al menos una raíz compleja
+    \begin{proof}
+        Vamos a considerar $p(z) = a_0+a_1z + \dots + a_{n-1}z^{n-1} + z^n$ con $n\geq 1$ y la siguiente aplicación
+        \begin{gather*}
+            H(s,t) = \left\{
+                \begin{array}{l c c}
+                    \dfrac{p\left(\dfrac{t}{1-t} e^{2\pi i s}\right) \cdot \left|p\left(\dfrac{t}{1-t}\right)\right|}{\left|p\left(\dfrac{t}{1-t} e^{2\pi i s}\right)\right| \cdot p\left(\dfrac{t}{1-t}\right)} & \text{ si } & (s,t)\in [0,1]\times [0,1)\\\\
+                    e^{2\pi i n s} & \text{ si } & (s,t)\in [0,1]\times\{1\}
+                \end{array}
+            \right.
+        \end{gather*}
+    \end{proof}
+\end{teo}
 
