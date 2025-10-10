@@ -1394,7 +1394,7 @@
     \end{itemize}
 \end{observacion}
 
-\begin{prop}
+\begin{prop}\label{prop1-12}
     No existe ninguna aplicación continua\footnote{$\overline{\bb{D}}$ denota el disco cerrado de $\bb{R}^2$ centrado en el $(0,0)$ y con radio 1} $f : \overline{\bb{D}} \to \bb{S}^1$ tal que $f(x) = x$ para todo $x\in \bb{S}^1$
 
     \begin{proof}
@@ -1464,15 +1464,74 @@
 \begin{teo}[Teorema fundamental del álgebra]
     Todo polinomio complejo de grado $n \geq 1$ tiene al menos una raíz compleja
     \begin{proof}
-        Vamos a considerar $p(z) = a_0+a_1z + \dots + a_{n-1}z^{n-1} + z^n$ con $n\geq 1$ y la siguiente aplicación
+        Vamos a considerar $p(z) = a_0+a_1z + \dots + a_{n-1}z^{n-1} + z^n$ con $n\geq 1$ y supongamos que $p(z)\neq 0$ \ $\forall z \in \bb{C}$, es decir, que no tiene raíces en $\bb{C}$. Consideramos la siguiente aplicación
         \begin{gather*}
             H(s,t) = \left\{
                 \begin{array}{l c c}
-                    \dfrac{p\left(\dfrac{t}{1-t} e^{2\pi i s}\right) \cdot \left|p\left(\dfrac{t}{1-t}\right)\right|}{\left|p\left(\dfrac{t}{1-t} e^{2\pi i s}\right)\right| \cdot p\left(\dfrac{t}{1-t}\right)} & \text{ si } & (s,t)\in [0,1]\times [0,1)\\\\
+                    \dfrac{p\left(\dfrac{t}{1-t} e^{2\pi i s}\right) \cdot \left|p\left(\dfrac{t}{1-t}\right)\right|}{\left|p\left(\dfrac{t}{1-t} e^{2\pi i s}\right)\right| \cdot p\left(\dfrac{t}{1-t}\right)} & \text{ si } & (s,t)\in [0,1]\times [0,1[\\\\
                     e^{2\pi i n s} & \text{ si } & (s,t)\in [0,1]\times\{1\}
                 \end{array}
             \right.
         \end{gather*}
+        Esta aplicación lo que hace es considerar el plano complejo y su imagen mediante $p$. La aplicación $p$ no pasa por el origen porque así lo hemos supuesto. Para $t=0$ (tiempo inicial) tenemos que $H(s,0) = (1,0)_{\bb{R}^2} \cong 1_{\bb{C}}$. Además para $s=0$ tenemos $H(0,t) = (1,0)_{\bb{R}^2} \cong 1_{\bb{C}}$. Si la aplicación $H$ fuera una homotopía, al principio (cuando $t$ es bajo) no daría ninguna vuelta (en la imagen) y al final (cuando domina $z^n$) daría $n$ vueltas por lo que no puede ser.\\
+
+        Comprobemos que $H$ es continua. Para esto simplemente veamos que 
+        \begin{gather*}
+            \lim_{t\to 1^-}\frac{p\left(\frac{t}{1-t} e^{2\pi i s_0}\right) \cdot \left|p\left(\frac{t}{1-t}\right)\right|}{\left|p\left(\frac{t}{1-t} e^{2\pi i s_0}\right)\right| \cdot p\left(\frac{t}{1-t}\right)} = e^{2 \pi i n s_0}\\\\
+            \lim_{t\to 1^-}\frac{p\left(\frac{t}{1-t} e^{2\pi i s_0}\right) \cdot \left|p\left(\frac{t}{1-t}\right)\right|}{\left|p\left(\frac{t}{1-t} e^{2\pi i s_0}\right)\right| \cdot p\left(\frac{t}{1-t}\right)} =\\
+            = \lim_{t\to 1^-} \frac{\left(\left(\frac{t}{1-t}\right)^n e^{2\pi i n s_0} + a_{n-1} \left(\frac{t}{1-t}\right)^{n-1} e^{2\pi i (n-1) s_0} + \dots\right) \cdot \left|\left(\frac{t}{1-t}\right)^n + a_{n-1} \left(\frac{t}{1-t}\right)^{n-1}  + \dots\right|  }%
+            {\left|\left(\frac{t}{1-t}\right)^n e^{2\pi i n s_0} + a_{n-1} \left(\frac{t}{1-t}\right)^n e^{2\pi i (n-1) s_0} + \dots\right| \cdot \left(\left(\frac{t}{1-t}\right)^n + a_{n-1} \left(\frac{t}{1-t}\right)^{n-1}  + \dots\right)} = \\
+            = \frac{e^{2\pi i n s_0}}{|e^{2\pi i n s_0|}} \cdot \frac{|1|}{1} = e^{2\pi i n s_0}
+        \end{gather*}
+        y tenemos claramente que $H:[0,1]\times [0,1]\to \bb{S}^1$ es continua. Además se tiene 
+        \begin{align*}
+            &H(0,t) = 1 \ \ \ \ \ ,t\in [0,1]\\
+            &H(1,t) = 1 \ \ \ \ \ ,t\in [0,1]\\
+            &H(s,0) = 1 \ \ \ \ \ ,s\in [0,1]\\
+            &H(s,1) = e^{2\pi i n s} \ \ \ \ \ ,s\in [0,1]\\
+        \end{align*}
+        por lo que $H$ es una homotopía por arcos entre los lazos $\alpha_1(s) = 1$ y $\alpha_2(s) = e^{2\pi i n s}$. Entonces tendremos que 
+        \begin{gather*}
+            [\alpha_1] = [\alpha_2] \ \ \ \text{ y } \ \ \ 0 = \deg(\alpha_1) = \deg(\alpha_2) = n
+        \end{gather*}
+        y llegamos a contradicción ya que $n\geq 1$. Por tanto $\exists z \in \bb{C}$ tal que $f(z) = 0$.
     \end{proof}
 \end{teo}
 
+\section{Retracciones, tipos de homotopía y retractos de deformación}
+
+\begin{definicion}
+    Sea $X$ un espacio topológico y $A\subseteq X$. Decimos que una aplicación continua $r:X \to A$ es una \textbf{retracción} si se cumple que $r(a) = a\ \ \forall a \in A$.\\
+
+    Se dice que $A$ es un \textbf{retracto} de $X$ si existe una retracción $r:X \to A$.
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item $\bb{S}^1$ es un retracto de $\bb{R}^{n+1}\setminus \{0\}$. Podemos considerar
+        \begin{align*}
+            r:\bb{R}^{n+1}\setminus \{0\} &\to \bb{S}^1\\
+            x & \mapsto \frac{x}{|x|}
+        \end{align*}
+        que es claramente continua y $r(x) = x$ para todo $x\in \bb{S}^1$.
+
+        \item $\bb{S}$ no es un retracto de $\overline{\bb{D}}$ por lo visto en la proposición \ref{prop1-12}.
+        
+        \item La compresión de un cuadrado también es un retracto. [Insertar gráfica]
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{lema}
+    Sean $X$ un e.t. y $A\subseteq X$ tal que $A$ es un retracto de $X$. Entonces la aplicación inclusión $i:A\to X$ induce un homomorfismo inyectivo
+    \begin{gather*}
+        i_* : \pi_1(A, a_0) \to \pi_1(X,a_0)
+    \end{gather*}
+
+    \begin{proof}
+        Si $A$ es retracto de $X$, entonces por definición tenemos que  $\exists r :X \to A$ continua tal que $r(a)=a$ para cualquier $a\in A$.
+        \begin{align*}
+            A \overset{i}{\longrightarrow} X \overset{r}{\longrightarrow} A& \ \ \ ,r\circ i = Id_A\\
+            a \longmapsto a  \longmapsto a&
+        \end{align*}
+    \end{proof}
+\end{lema}
