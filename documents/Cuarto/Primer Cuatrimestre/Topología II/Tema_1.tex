@@ -1473,7 +1473,7 @@
                 \end{array}
             \right.
         \end{gather*}
-        Esta aplicación lo que hace es considerar el plano complejo y su imagen mediante $p$. La aplicación $p$ no pasa por el origen porque así lo hemos supuesto. Para $t=0$ (tiempo inicial) tenemos que $H(s,0) = (1,0)_{\bb{R}^2} \cong 1_{\bb{C}}$. Además para $s=0$ tenemos $H(0,t) = (1,0)_{\bb{R}^2} \cong 1_{\bb{C}}$. Si la aplicación $H$ fuera una homotopía, al principio (cuando $t$ es bajo) no daría ninguna vuelta (en la imagen) y al final (cuando domina $z^n$) daría $n$ vueltas por lo que no puede ser.\\
+        Esta aplicación lo que hace es considerar el plano complejo y su imagen mediante $p$. La aplicación $p$ no pasa por el origen porque así lo hemos supuesto. Para $t=0$ (tiempo inicial) tenemos que $H(s,0) = (1,0)_{\bb{R}^2} \equiv 1_{\bb{C}}$. Además para $s=0$ tenemos $H(0,t) = (1,0)_{\bb{R}^2} \equiv 1_{\bb{C}}$. Si la aplicación $H$ fuera una homotopía, al principio (cuando $t$ es bajo) no daría ninguna vuelta (en la imagen) y al final (cuando domina $z^n$) daría $n$ vueltas por lo que no puede ser.\\
 
         Comprobemos que $H$ es continua. Para esto simplemente veamos que 
         \begin{gather*}
@@ -1485,10 +1485,10 @@
         \end{gather*}
         y tenemos claramente que $H:[0,1]\times [0,1]\to \bb{S}^1$ es continua. Además se tiene 
         \begin{align*}
-            &H(0,t) = 1 \ \ \ \ \ ,t\in [0,1]\\
-            &H(1,t) = 1 \ \ \ \ \ ,t\in [0,1]\\
-            &H(s,0) = 1 \ \ \ \ \ ,s\in [0,1]\\
-            &H(s,1) = e^{2\pi i n s} \ \ \ \ \ ,s\in [0,1]\\
+            H(0,t) = 1\ \ \ \ \ & t\in [0,1]\\
+            H(1,t) = 1\ \ \ \ \  & t\in [0,1]\\
+            H(s,0) = 1\ \ \ \ \  & s\in [0,1]\\
+            H(s,1) = e^{2\pi i n s} \ \ \ \ \ & s\in [0,1]
         \end{align*}
         por lo que $H$ es una homotopía por arcos entre los lazos $\alpha_1(s) = 1$ y $\alpha_2(s) = e^{2\pi i n s}$. Entonces tendremos que 
         \begin{gather*}
@@ -1533,5 +1533,123 @@
             A \overset{i}{\longrightarrow} X \overset{r}{\longrightarrow} A& \ \ \ ,r\circ i = Id_A\\
             a \longmapsto a  \longmapsto a&
         \end{align*}
+        \begin{gather*}
+            \pi_1(A,a_0) \overset{i_*}{\longrightarrow} \pi_1(X, a_0) \overset{r_*}{\longrightarrow} \pi_1(A,a_0)\\
+            r_* \circ i_* = (Id_a)_* = Id_{\pi_1(A,a_0)}
+        \end{gather*}
+            
+        Como $Id_{\pi_1(A,a_0)}$ es inyectiva, entonces se tiene que $i_*$ es inyectiva.
+    \end{proof}
+\end{lema}
+
+\begin{definicion}
+    Sea $f:X\to Y$ una aplicación continua entre dos espacios topológicos. Decimos que $f$ es una \textbf{equivalencia homotópica} si existe $g:Y\to X$ continua tal que $g\circ f$ es homotópica a $Id_X$ y $f\circ g$ es homotópica a $Id_Y$.\\
+
+    Decimos que $X$ e $Y$ son \textbf{homotópicamente equivalentes} si existe una equivalencia homotópica entre ambos.\\
+
+    A la aplicación $g$ se le llama una \textbf{inversa homotópica} de $f$.
+\end{definicion}
+
+\begin{observacion}\
+    \begin{enumerate}
+        \item[(i)] La inversa homotópica no tiene por qué ser única
+        \item[(ii)] La composición de equivalencias homotópicas sigue siendo una equivalencia homotópica, de lo que se deduce que ser homotópicamente equivalente es una relación de equivalencia.
+        \item[(iii)] Una equivalencia homotópica no tiene por qué ser ni inyectiva ni sobreyectiva. 
+        \item[(iv)] Todo heomorfismo es una equivalencia homotópica.
+    \end{enumerate}
+\end{observacion}
+
+\begin{lema}
+    Sean $f,g:X\to Y$ dos aplicaciones continuas, $x_0\in X$. Si $H$ es una homotopía entre $f$ y $g$ y consideramos el arco $\alpha(t)=H(x_0, t)$. Entonces se tiene que el siguiente diagrama es conmutativo
+    \begin{gather*}    
+        \xymatrix{ %
+        & \pi_1(Y,f(x_0)) \ar[dd]^{\displaystyle\varphi \equiv \text{isomorfismo}}\\
+        \pi_1(X,x_0) \ar[ur]^{\displaystyle f_*} \ar[dr]^{\displaystyle g_*}\\ 
+        & \pi_1(Y, g(x_0))
+        }
+    \end{gather*}
+    donde $\phi([\gamma]) = [\tilde{\alpha}] \ast [\gamma] \ast [\alpha]$. En particular, $f_*$ es inyectiva (respectivamente sobreyectiva) si y solo si $g_*$ lo es.
+
+    \begin{proof}
+        Tenemos que demostrar que si $\beta$ es un lazo en $X$ basado en $x_0$, entonces:
+        \begin{gather*}
+            (\varphi \circ f_*) ([\beta]) = g_*([\beta]) = [g\circ \beta]
+        \end{gather*}
+        Pero tenemos además
+        \begin{gather*}
+            (\varphi \circ f_*) ([\beta]) = [\tilde{\alpha}] \ast [f\circ \beta] \ast [\alpha]
+        \end{gather*}
+        por lo que será equivalente a probar que
+        \begin{gather*}
+            [\alpha]\ast [g\circ \beta] = [f\circ \beta] \ast [\alpha]
+        \end{gather*}
+        es decir, que existe una homotopía por arcos que lleva $\alpha \ast(g\circ \beta)$ en $(f\circ \beta) \ast \alpha$.\\
+
+        [Insertar Gráfica]\\
+
+        Por hipótesis tenemos $H:X\times[0,1]\to Y$ continua tal que 
+        \begin{align*}
+            &(x,0) \mapsto f(x)\\
+            &(x,1) \mapsto g(x)\\
+            &\alpha(t) = H(x_0,t)
+        \end{align*}
+        Definimos la siguiente aplicación
+        \begin{align*}
+            F:[0,1]\times [0,1] & \to X\times [0,1]\ \ \ \text{ continua}\\
+            (s,t) & \mapsto (\beta(s), t)
+        \end{align*}
+        que verifica
+        \begin{align*}
+            b_0(s) = (s,0)\ \ \ \ \ & ,s\in [0,1]\\
+            b_1(s) = (s,1)\ \ \ \ \  & ,s\in [0,1]\\
+            h_0(s) = (0,s)\ \ \ \ \  & ,s\in [0,1]\\
+            h_1(s) = (1,s)\ \ \ \ \ & ,s\in [0,1]
+        \end{align*}
+        Como $[0,1]\times [0,1]$ es simplemente conexo y $b_0\ast h_1 \ast \tilde{b_1} \ast \tilde{h_0}$ es un lazo en el $(0,0)$, entonces se tiene que 
+        \begin{gather*}
+            [b_0\ast h_1 \ast \tilde{b_1} \ast \tilde{h_0}] = [\veps_{(0,0)}] \Rightarrow [b_0\ast h_1] = [h_0\ast b_1]
+        \end{gather*}
+        Por tanto tenemos que $\exists G:[0,1]\times[0,1] \to [0,1]\times[0,1]$ homotopía por arcos tal que $G(s,0) = (b_0\ast h_1)(s)$ y $G(s,1) = (h_0\ast b_1)(s)$ por lo que quedan los extremos fijos, es decir, $G(0,t) = (0,0)$ y $G(1,t) = (1,1)$. Consideramos entonces
+        \begin{gather*}
+            H\circ F \circ G : [0,1] \times [0,1] \to Y\ \ \  \text{ continua}
+        \end{gather*}
+        y tenemos que 
+        \begin{gather*}
+            (H\circ F \circ G) (0,t) = H(F(0,0)) = H(x_0,0) = f(x_0)\\
+            (H\circ F \circ G) (1,t) = H(F(1,1)) = H(x_0,1) = g(x_0)\\
+            (H\circ F \circ G) (s,0) = H(F((b_0\ast h_1)(s))) = (H\circ F)\left(\left\{
+                \begin{array}{l c c}
+                    b_0(2s) & \text{ si } & s\in [0, \nicefrac{1}{2}]\\
+                    h_1(2s-1) & \text{ si } & s \in [\nicefrac{1}{2}, 1]
+                \end{array}
+            \right\}\right) = \\
+            = (H\circ F) \left(\left\{
+                \begin{array}{l c c}
+                    (2s,0) & \text{ si } & s\in [0, \nicefrac{1}{2}]\\
+                    (1, 2s-1) & \text{ si } & s \in [\nicefrac{1}{2}, 1]
+                \end{array}
+            \right\}\right) =
+            H \left(\left\{
+                \begin{array}{l c c}
+                    (\beta(2s), 0) & \text{ si } & s\in [0, \nicefrac{1}{2}]\\
+                    (x_0, 2s-1) & \text{ si } & s \in [\nicefrac{1}{2}, 1]
+                \end{array}
+            \right\}\right) = \\
+            = \left\{
+                \begin{array}{l c c}
+                    f(\beta(2s)) & \text{ si } & s\in [0, \nicefrac{1}{2}]\\
+                    \alpha(2s-1) & \text{ si } & s \in [\nicefrac{1}{2}, 1]
+                \end{array}
+            \right\} = ((f\circ \beta) \circ \alpha)(s)
+        \end{gather*}
+        Análogamente se tiene que 
+        \begin{gather*}
+            (H\circ F \circ G) (s,1) = (\alpha \ast (g\circ \beta))(s)
+        \end{gather*}
+        Por lo que llegamos a que
+        \begin{gather*}
+            [\alpha]\ast [g\circ \beta] = [f\circ \beta] \ast [\alpha]
+        \end{gather*}
+        como queríamos probar.
     \end{proof}
 \end{lema}
