@@ -973,8 +973,76 @@ Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo 
 
 % El truco está en que tengo muchas formas de escribir y=Y(u)+v y habrá que jugar con ellas para probar esto (por ejemplo para la segunda parte basta con ver que \|x\|_X está en el conjunto por lo que el ínfimo será menor o igual).
 
+\section{Teorema de la aplicación abierta}
 
+\begin{ejercicio}
+    Sea $T:X\to Y$ lineal. Entonces se tiene que $T$ es abierta si y solo si
+    \begin{gather*}
+        \exists \delta>0 \text{ tal que } B_Y(0,\delta) \subset T(B_X(0,1))
+    \end{gather*}
+\end{ejercicio}
 
+\begin{teo}[Teorema de la aplicación abierta]
+    Sean $X,Y$ espacios de Banach, y $T\in L(X,Y)$ una aplicación sobreyectiva. Entonces $T$ es abierta.
+    \begin{proof}\
+        \begin{itemize}
+            \item[\textbf{Paso 1.}] Vamos a demostrar en primer lugar que existe un $r>0$ tal que
+            \begin{gather*}
+                B_Y(0,r)\subset \overline{T(B_X(0,1))}
+            \end{gather*}
+            Para ello considero en el espacio $Y$ la siguiente norma para todo $n\in \bb{N}$:
+            \begin{gather*}
+                \|y\|_n = \inf\{\|u\|_X+n \|v\|_Y: u\in X,\ v\in Y, \ y=T(u)+v\}\ \ \ \forall y \in Y
+            \end{gather*}
+            Abreviaremos la notación como 
+            \begin{gather*}
+                \|y\|_n = \inf_{y=T(u)+v}\{\|u\|_X+n \|v\|_Y\}\ \ \ \forall y \in Y
+            \end{gather*}
+            entendiendo que es equivalente a la definición anterior. Consideramos ahora el siguiente espacio
+            \begin{gather*}
+                Z \equiv 
+                \begin{array}{l}
+                    \text{espacio de todas las sucesiones } \{z_m\}_{m\in \bb{N}}\subset Y\\
+                    \text{ con un número finito de términos } z_m \text{ no nulo}
+                \end{array}
+            \end{gather*}
+            y en dicho espacio podemos considerar
+            \begin{gather*}
+                \|\{z_m\}_{m\in \bb{N}}\|_\infty = \max_{m\in \bb{N}} \|z_m\|_n
+            \end{gather*}
+            Se deja como ejercicio demostrar que esto es una norma en $Z$. Vamos a definir la aplicación
+            \begin{align*}
+                T_n : Y &\to Z\\
+                y &\mapsto T_n(y) = \{\delta_{nk}y\}_{k\in \bb{N}}\\\\
+            \end{align*}
+            donde $\delta_{nk}$ es la aplicación delta de Kronecker,
+            \begin{gather*}
+                \delta_{nk} = \left\{
+                    \begin{array}{l c c}
+                        1 & \text{ si } & k=n\\
+                        0 & \text{ si } & k \neq n
+                    \end{array}
+                \right.
+            \end{gather*}
+            Con estas definiciones tenemos que $\forall y_1,y_2\in Y$
+            \begin{align*}
+                T_n(y_1+y_2) &= \{\delta_{nk}(y_1+y_2)\}_{k\in \bb{N}} = \{\delta_{nk}y_1 + \delta_{nk} y_2\}_{k\in \bb{N}} =\\
+                &= \{\delta_{nk}y_1\}_{k\in \bb{N}} + \{\delta_{nk} y_2\}_{k\in \bb{N}} =\\
+                &= T_n(y_1) + T_n(y_2)
+            \end{align*}
+            por lo que $T_n$ es lineal y además es continua con $\|T_n\|_{L(Y,Z)} \leq n$. Con esto tenemos que
+            \begin{gather*}
+                \|T_n(y)\|_\infty = \|\{\delta_{nk} y\}_{k\in \bb{N}}\|_{\infty} = \max_{k\in \bb{N}} \|\delta_{nk} y\|_n = \|y\|_n \leq n \|y\|_Y
+            \end{gather*}
+            Vemos ahora que $\forall y \in Y$ la sucesión $\{T_n(y)\}_{n\in \bb{N}}$ está acotada. Como $T$ es sobreyectiva sabemos que $\exists x\in X$ tal que $T(x) = y$ por lo que podemos escribir $y=T(x)+0$ y tomando $u=x$, $v=0$ y con la definición de la norma anterior tenemos que 
+            \begin{gather*}
+                \|y\|_n \leq \|x\|_X + n\|0\| = \|x\|_X
+            \end{gather*}
+            
+            \item[\textbf{Paso 2.}] Vamos a demostrar ahora que $B_Y(0,\nicefrac{r}{2})\subset T(B_X(0,1))$.
+        \end{itemize}
+    \end{proof}
+\end{teo}
 
 
 
