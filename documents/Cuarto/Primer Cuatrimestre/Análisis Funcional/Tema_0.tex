@@ -1038,6 +1038,49 @@ Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo 
             \begin{gather*}
                 \|y\|_n \leq \|x\|_X + n\|0\| = \|x\|_X
             \end{gather*}
+            por lo que  $\|T_n(y)\|_\infty \leq n\|y\|_Y \leq n\|x\|_X$ y tenemos que la sucesión$\{T_n(y)\}_{n\in \bb{N}}$ está acotada. Por el principio de acotación uniforme sabemos que $\{\|T_n\|(y)\}_{n\in \bb{N}}$ está acotada, es decir, que $\exists M \geq 0$ tal que 
+            \begin{gather*}
+                \|T_n\|_{Y(Y,Z)} \leq M\ \ \ \forall n \in \bb{N}
+            \end{gather*}
+            lo que nos dice que
+            \begin{gather*}
+                \|T_n(y)\|_\infty \leq M \|y\|_Y\ \ \ \forall n \in \bb{N}
+            \end{gather*}
+            Sea $y\in B_Y(0,\nicefrac{1}{M})$ y queremos ver que $y\in \overline{T(B_X(0,1))}$. Para ello empecemos calculando
+            \begin{gather*}
+                \|y\|_n = \inf_{y=T(u)+v}\{\|u\|_X + n\|v\|_Y\} \leq M\|Y\|_Y < M \cdot \frac{1}{M} = 1
+            \end{gather*}
+
+            Vamos ahora a definir
+            \begin{gather*}
+                A = \{\|u\|_X + n\|v\|_Y : y=T(u)+v,\ u\in X,\ v\in Y\}
+            \end{gather*}
+            y sabemos que $\inf A < 1$, luego $\exists a_n \in A$ tal que $\inf A \swarrow a_n < 1$
+
+            y podemos garantizar que $\exists \{u_m\}\subset X$, $\exists \{v_m\}\subset Y$ tales que si podemos escribir $y=T(u_n) + v_n$, entonces 
+            \begin{gather*}
+                \|u_n\| + n\|v_n\|_Y <1\ \ \ \text{ y }\ \ \ \{\|u_m\|_X + n\|v_m\|_Y\}_{m\in \bb{N}} \to \|y\|_n
+            \end{gather*}
+            por lo que además por ser suma de cantidades positivas tenemos 
+            \begin{gather*}
+                \left.
+                \begin{array}{r}
+                    \|u_m\|_X<1\\
+                    n\|v_m\|_Y<1
+                \end{array}
+                \right\} \forall m \in \bb{N} \Rightarrow
+                \left.
+                \begin{array}{r}
+                    \|u_m\|_X<1\\
+                    \|v_m\|_Y<\frac{1}{n}
+                \end{array}
+                \right\} \forall m \in \bb{N}
+            \end{gather*}
+            Por lo que 
+            \begin{gather*}
+                T(\{u_m\}) = \{T(u_m) + v_m - v_m\} = \{y-v_m\}\\
+                \|T(u_m)\|_Y = \|y-v_m\|_Y \to
+            \end{gather*}
             
             \item[\textbf{Paso 2.}] Vamos a demostrar ahora que $B_Y(0,\nicefrac{r}{2})\subset T(B_X(0,1))$.
         \end{itemize}
