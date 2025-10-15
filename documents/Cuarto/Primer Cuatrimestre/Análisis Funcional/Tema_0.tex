@@ -1057,32 +1057,62 @@ Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo 
             \end{gather*}
             y sabemos que $\inf A < 1$, luego $\exists a_n \in A$ tal que $\inf A \swarrow a_n < 1$
 
-            y podemos garantizar que $\exists \{u_m\}\subset X$, $\exists \{v_m\}\subset Y$ tales que si podemos escribir $y=T(u_n) + v_n$, entonces 
+            y podemos garantizar que $\exists u_n\subset X$, $\exists v_n\subset Y$ tales que si podemos escribir $y=T(u_n) + v_n$, entonces 
             \begin{gather*}
-                \|u_n\| + n\|v_n\|_Y <1\ \ \ \text{ y }\ \ \ \{\|u_m\|_X + n\|v_m\|_Y\}_{m\in \bb{N}} \to \|y\|_n
+                \|u_n\| + n\|v_n\|_Y <1
             \end{gather*}
             por lo que además por ser suma de cantidades positivas tenemos 
             \begin{gather*}
                 \left.
                 \begin{array}{r}
-                    \|u_m\|_X<1\\
-                    n\|v_m\|_Y<1
+                    \|u_n\|_X<1\\
+                    n\|v_n\|_Y<1
                 \end{array}
-                \right\} \forall m \in \bb{N} \Rightarrow
+                \right\} \Rightarrow
                 \left.
                 \begin{array}{r}
-                    \|u_m\|_X<1\\
-                    \|v_m\|_Y<\frac{1}{n}
+                    \|u_n\|_X<1\\
+                    \|v_n\|_Y<\frac{1}{n}
                 \end{array}
-                \right\} \forall m \in \bb{N}
+                \right\}
             \end{gather*}
-            Por lo que 
+            Evaluamos ahora $T$ en $u_n$.
             \begin{gather*}
-                T(\{u_m\}) = \{T(u_m) + v_m - v_m\} = \{y-v_m\}\\
-                \|T(u_m)\|_Y = \|y-v_m\|_Y \to
+                T(u_n) = \{T(u_n) + v_n - v_n\} = \{y-v_n\} \overset{Y}{\to}y \ \ \ \text{ (cuando $n\to \infty$)}\\
+                % \|T(u_n)\|_Y = \|y-v_n\|_Y \to \|y\|_Y
             \end{gather*}
+            Sabemos que $v_n \to 0$ en $Y$ cuando $n\to \infty$ y $T(u_n)\in T(B_X(0,1))$ y como $y=T(u_n) + v_n$ tendremos que $y\in \overline{T(B_X(0,1))}$ como queríamos demostrar.
             
-            \item[\textbf{Paso 2.}] Vamos a demostrar ahora que $B_Y(0,\nicefrac{r}{2})\subset T(B_X(0,1))$.
+            \item[\textbf{Paso 2.}] Vamos a demostrar ahora que $B_Y(0,\nicefrac{r}{2})\subset T(B_X(0,1))$. Esto es equivalente a probar que 
+            \begin{gather*}
+                \frac{1}{2^n} B\left(0, \frac{r}{2^n}\right) \subset \overline{\frac{1}{2^n} \cdot T\left(B_X\left(0,\frac{1}{2^n}\right)\right)} \sii B\left(0, \frac{r}{2^n}\right) \subset \overline{T\left(B_X\left(0,\frac{1}{2^n}\right)\right)}
+            \end{gather*}
+            Veámoslo por inducción. Para $n=1$ tenemos que
+            \begin{gather*}
+                y\in B_Y\left(0,\frac{r}{2}\right) \subset \overline{T\left(B_X\left(0,\frac{1}{2}\right)\right)} \Rightarrow \exists x_1 \in B_X\left(0,\frac{1}{2}\right) : \|y-T(x_1)\| < \frac{r}{2^2}
+            \end{gather*}
+            Tenemos entonces 
+            \begin{gather*}
+                y-T(x_1) \in B_Y\left(0,\frac{r}{2^2}\right) \subset \overline{T\left(B_X\left(0,\frac{1}{2}\right)\right)} \Rightarrow\\
+                \Rightarrow \exists x_2 \in B_X\left(0,\frac{1}{2^2}\right) : \|y-T(x_1) - T(x_2)\| < \frac{r}{2^3}
+            \end{gather*}
+            Si repetimos este proceso podemos llegar a que 
+            \begin{gather*}
+                \exists x_n \in B_X\left(0,\frac{1}{2^n}\right) : \|y-\sum_{k=1}^n T(x_k)\| < \frac{r}{2^{n+1}}
+            \end{gather*}
+            Por lo tanto, tendríamos que 
+            \begin{gather*}
+                \sum_{n=1}^\infty \|x_n\|_X \leq \sum_{n=1}^\infty \frac{1}{2^n} < \infty
+            \end{gather*}
+            por lo que $\sum\limits_{n\geq 1} x_n$ converge en norma\footnote{o equivalentemente es de Cauchy}. Por ser $X$ un espacio de Banach tenemos que $\sum\limits_{n=1}^\infty x_n = x$. Tenemos entonces $\|x\|_X \leq \sum\limits_{n=1}^\infty \|x_n\|_X < 1$. Además, de lo anterior podemos concluir que
+            \begin{gather*}
+                \|y-\sum_{k=1}^ T(x_k)\| < \frac{r}{2^{n+1}} \Rightarrow \sum_{k=1}^\infty T(x_k) = y
+            \end{gather*}
+            Y escribirmos ahora
+            \begin{align*}
+                T(x) &= T\left(\sum_{k=1}^\infty x_k\right) = T\left(\lim_{N\to \infty}\sum_{k=1}^N x_k\right) \overset{T \text{ cont.}}{=} \lim_{N\to \infty}T\left(\sum_{k=1}^N x_k\right) \\
+                &\overset{T \text{ lineal.}}{=} \lim_{N\to \infty} \sum_{N\to \infty}^N T(x_k) = \sum_{k=1}^\infty T(x_k) = y\in T(B_X(0,1))
+            \end{align*}
         \end{itemize}
     \end{proof}
 \end{teo}
