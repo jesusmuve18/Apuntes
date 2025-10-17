@@ -2141,3 +2141,55 @@ Parece intuitivo que el grupo fundamental de una circunferencia es el trivial ya
     \end{proof}
 \end{coro}
 
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Calculamos el grupo fundamental de dos esferas $S_1, S_2$ de $\bb{R}^3$ que se cortan en un único punto.\\
+        
+        Sea $\{x_0\} = S_1\cap S_2$ y tomamos $U=X\setminus\{y_1\}$ con $y_1\in S_1\setminus\{x_0\}$ y $V=X\setminus\{y_2\}$ con $y_2\in S_2\setminus\{x_0\}$. Es claro que $X=U \cap V$ y $U,V$ son abiertos. $U\cap V$ es arcoconexo por ser unión de dos arcoconexos $(S_1\setminus\{y_1\})\cup (S_2\setminus\{y_2\})$ ya que 
+        \begin{gather*}
+            S_1\setminus\{y_1\} \text{ homeomorfo a } \bb{R}^2 \Rightarrow S_1\setminus\{y_1\} \text{ es arcoconexo}\\
+            S_2\setminus\{y_2\} \text{ homeomorfo a } \bb{R}^2 \Rightarrow S_2\setminus\{y_2\} \text{ es arcoconexo}
+        \end{gather*}
+        y que tienen un punto común $x_0$. Veamos ahora que $U$ tiene a $S_2$ por retracto de deformación. Si esto es cierto, entonces 
+        \begin{gather*}
+            \pi(U)\overset{\text{isom.}}{\cong}\pi_1(S_2)\cong \{0\}
+        \end{gather*}
+        Sabemos que $S_1\setminus\{y_1\}$ es homeomorfo a $\bb{R}^2$ y podemos suponer que la imagen mediante ese homeomorfosmo de $x_0$ es el origen $(0,0)$. Entonces la composición de este homeomorfismo y la homotopía 
+        \begin{gather*}
+            H(x,t) = (1-t)x \ \ \ x\in \bb{R}^2
+        \end{gather*}
+        nos da una homotopía $\hat{H}:(S_1\setminus \{y_1\}) \times [0,1] \to S_1\setminus \{y_1\}$ tal que $\hat{H}(x_0,t)=x_0$. Entonces
+        \begin{align*}
+            \tilde{H}:U \times [0,1] &\to U\\
+            (x,t) & \mapsto \left\{
+                \begin{array}{l c c}
+                    \hat{H}(x,t) & \text{ si } & x\in S_1\setminus \{y_1\}\\
+                    x & \text{ si } & x\in S_2
+                \end{array}
+            \right.
+        \end{align*}
+        es una homotopía desde la identidad hasta la que deja fijos a todos los puntos de $S_1$, luego $S_2$ es un retracto de deformación de $U$.
+
+        \item Si llamamos $S(x,r)$ a la esfera centrada en $x\in \bb{R}^3$ de radio $r>0$ y consideramos
+        \begin{gather*}
+            X = \bigcup\limits_{k\in \bb{Z}} S\left((k,0,0), \frac{1}{2}\right)
+        \end{gather*}
+        veamos que su grupo fundamental es el trivial.\\
+
+        Para ello, con una simple inducción se puede demostrar que esto es cierto para una cantidad finita de esferas usando el ejemplo anterior. En este caso tenemos una cantidad infinita de esferas pero como un lazo es un compacto en $\bb{R}^3$, tiene que caer en una unión finita de esferas (unidas dos a dos por un único punto) por lo que se podrá reducir al trivial.
+
+
+        \item Vamos a definir el siguiente conjunto
+        \begin{gather*}
+            X = \bb{S}^2 \cup \{(x,y,0) : x^2 + y^2 \leq 1\}
+        \end{gather*}
+        y veamos cual es su grupo fundamental.\\
+
+        Para ello tomamos $U=X\setminus \{(0,0,1)\}$ que es retracto de deformación de $U_1$ donde
+        \begin{gather*}
+            U_1 = \{(x_1,x_2,x_3)\in \bb{S}^2 : x_3 \leq 0\}\cup \{(x,y,0) : x^2 + y^2 \leq 1\}
+        \end{gather*}
+        y además $U_1$ es homeomorfo a $\bb{S}^2$ por lo que $\pi_1(U)$ es el trivial. De forma análoga si consideramos $U=X\setminus \{(0,0,-1)\}$ se tiene que $\pi_1(V)$ es trivial. Claramente se tiene que $U\cap V$ es arcoconexo\footnote{en un examen habrá que demostrarloo de forma más rigurosa} y por el teorema anterior se tiene que $X$ es simplemente conexo, luego su grupo fundamental es el trivial.
+    \end{enumerate}
+\end{ejemplo}
+
