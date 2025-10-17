@@ -2064,4 +2064,80 @@ Parece intuitivo que el grupo fundamental de una circunferencia es el trivial ya
         [\alpha] = [\alpha_1]\ast \dots \ast [\alpha_k]
     \end{gather*}
     donde la imagen de cada $\alpha_i$ cae completamente en $U$ o bien en $V$.
+    \begin{proof}
+        Comenzamos con el lazo $\alpha:[0,1]\to X$. Consideramos $\alpha^{-1}(U)$ y $\alpha^{-1}(V)$ que son abiertos en $[0,1]$. Por el lema del número de Lebesgue tenemos que existen
+        \begin{gather*}
+            0=t_0 < t_1 < \dots < t_m = 1 \text{ partición del }[0,1]
+        \end{gather*}
+        
+        tal que $\alpha([t_i, t_{i+1}])$ contenido en $U$ o bien en $V$ para $i\in\{0,\dots,m-1\}$. Si $\alpha(t_i)\notin U\cap V$ podemos quitar al $t_i$ de la partición ya que $\alpha([t_{i-1}, t_i]\cup [t_i, t_{i+1}])$ estaría contenido en $U$ o bien todo en $V$. Así suponemos todos los $\alpha(t_i)\in U\cap V$. Como $U\cap V$ es arcoconexo existe un arco $\beta_i$ uniendo $x_0$ con $\alpha(t_i)$ para cada $i\in \{1,\dots,m-1\}$. Tenemos por tanto
+        \begin{gather*}
+            [\alpha] = [\alpha_1\ast\alpha_2\ast\dots\ast\alpha_m]
+        \end{gather*}
+        donde $\alpha_i$ es una parametrización en $[0,1]$ de $\alpha|_{[t_{i-1}, t_i]}$. Tenemos que
+        \begin{align*}
+            [\alpha] &= [\alpha_1] \ast [\tilde{\beta}_1] \ast [\beta_1] \ast [\alpha_2]\ast[\tilde{\beta}_2] \ast \dots \ast [\beta_{m-1}] \ast [\alpha_m] =\\
+            &= [\alpha_1 \ast \beta_1] \ast [\beta_1\ast \alpha_2 \ast \tilde{\beta_2}] \ast \dots \ast [\beta_{m-1}\ast \alpha_m]
+        \end{align*}
+        Donde $[\alpha_1\ast \tilde{\beta}_1]$, cada $[\beta_i \ast \alpha_{i+1} \ast \tilde{\beta}_{i+1}]$ y $[\beta_{m-1}\ast \alpha_m]$ son lazos basados en $x_0$ completamente contenidos en $U$ o bien en $V$.
+    \end{proof}
 \end{lema}
+
+\begin{teo}
+    Sean $X$ un e.t y $U,V$ abiertos de $X$. Supongamos que
+    \begin{enumerate}
+        \item $X=U\cup V$
+        \item $U\cap V$ es arcoconexo (no vacío)
+        \item $U$ y $V$ son simplemente conexos
+    \end{enumerate}
+    Entonces $X$ es simplemente conexo.
+    \begin{proof}
+        Dado $\alpha$ lazo basado en $x_0\in U\cup V$ se tiene por el lema anterior que 
+        \begin{gather*}
+            [\alpha] = [\alpha_1]\ast [\alpha_2] \ast \dots \ast [\alpha_k]
+        \end{gather*}
+        donde cada $\alpha_i$ es un lazo completamente contenido en $U$ o bien en $V$. Como $U,V$ son simplemente conexos tenemos
+        \begin{gather*}
+            [\alpha] = [\veps_{x_0}]\ast[\veps_{x_0}]\ast \dots \ast [\veps_{x_0}] = [\veps_{x_0}]
+        \end{gather*}
+    \end{proof}
+\end{teo}
+
+\begin{coro}
+    Las esferas $\bb{S}^n$ para $n\geq 2$ con simplemente conexas.En particular su grupo fundamental es el trivial.
+
+    \begin{proof}
+        Definimos los siguientes conjuntos
+        \begin{gather*}
+            U=\bb{S}^n \setminus \{(0,\dots,1)\} \hspace{2cm} 
+            V = \bb{S}^n \setminus \{(1,\dots,0)\}
+        \end{gather*}
+        $U$ y $V$ son homeomorfos a $\bb{R}^n$ por lo que son simplemente conexos, $\bb{S}^n=U\cup V$ y además, como $U\cap V$ es homeomorfo a $\bb{R}^n \setminus \{(0,\dots,0)\}$ que es arcoconexo (ya que $n\geq 2$), tenemos que $U\cap V$ es arcoconexo.
+    \end{proof}
+\end{coro}
+
+\begin{coro}
+    El grupo fundamental de $\bb{R}P^n$ $\bb{R}\cc{P}^n$ es isomorfo a $\bb{Z}^2$ para $n\geq 2$.
+
+    \begin{proof}
+        Veamos que la aplicación
+        \begin{align*}
+            p: \bb{S}^n & \to \bb{R}P^n\\
+            x & \mapsto [x]
+        \end{align*}
+        es recubridora. Es claro que $p$ es continua y sobreyectiva. Por otro lado, dado cualquier punto $x_0\in \bb{S}^n$ tenemos que el abierto
+        \begin{gather*}
+            U_{x_0} = \{x\in \bb{S}^n : \langle x, x_0 \rangle \neq 0\}
+        \end{gather*}
+        es saturado, es decir, que $p^{-1}(p(U_{x_0})) = U_{x_0}$) y además podemos escribir
+        \begin{gather*}
+            U_{x_0} = \{x\in \bb{S}^n : \langle x, x_0 \rangle > 0\} \cup \{x\in \bb{S}^n : \langle x, x_0 \rangle < 0\} = U_{x_0}^+ \cup U_{x_0}^-
+        \end{gather*}
+        Es fácil probar que $p|_{U_{x_0}^+}$ y $p|_{U_{x_0}^-}$ son homeomorfismos. Entonces la correspondencia del levantamiento
+        \begin{gather*}
+            \varphi: \pi_1(\bb{R}P^n, [a_0]) \to p^{-1}([a_0]) = \{a_0,-a_0\}
+        \end{gather*}
+        es biyectiva (ya que $\bb{S}^1$ es simplemente conexo).
+    \end{proof}
+\end{coro}
+
