@@ -1172,7 +1172,33 @@ Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo 
     \end{proof}
 \end{teo}
 
+\section{Espacio Bidual}
 
+\begin{definicion}
+    Dado $E$ de Banach, entonces 
+    \begin{gather*}
+        (E^*, \|\cdot\|_{E^*})\text{ de Banach con } \|f\|_{E^*}:=\sup_{\|x\|\leq 1} |\langle f,x \rangle_{E^*, E} |
+    \end{gather*}
+    Tenemos $\chi\in E^{**}=(E^*)^*$ donde
+    \begin{align*}
+        \chi: E^* &\to \bb{R} \text{ lineal y continua}\\
+        f & \mapsto \langle x,f \rangle_{E^{**}, E^*}
+    \end{align*}
+    y se tiene que 
+    \begin{gather*}
+        \|\chi\|_{E^**} = \sup_{\|f\|_{E^*}\leq 1} |\langle f,x \rangle_{E^{**}, E^*}|
+    \end{gather*}
+    Dado un $x\in E$ podemos considerar $\chi_x\in E^{**}$ y tendremos
+    \begin{align*}
+        \chi_x : E^* & \to \bb{R} \text{ lineal y continua}\\
+        f & \mapsto \langle f, x \rangle_{E^*, E}
+    \end{align*}
+    y tendremos que 
+    \begin{gather*}
+        \|\chi\|_{E^{**}} = \sup_{\|f\|_{E^*}\leq 1} |\chi_x(f)| = \sup_{\|f\|_{E^*}\leq 1} |\langle f,x \rangle_{E^{*}, E}| = \|x\|_E
+    \end{gather*}
+    Normalmente notaremos $\chi_x = J(x)$.
+\end{definicion}
 
 
 
