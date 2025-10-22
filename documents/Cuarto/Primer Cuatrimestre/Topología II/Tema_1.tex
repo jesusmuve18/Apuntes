@@ -2268,7 +2268,70 @@ Parece intuitivo que el grupo fundamental de una circunferencia es el trivial ya
 
 \begin{ejemplo}\
     \begin{enumerate}
-        \item Calculamos el grupo fundamental de dos esferas $S_1, S_2$ de $\bb{R}^3$ que se cortan en un único punto.\\
+        \item Calculamos el grupo fundamental de dos esferas $S_1, S_2$ de $\bb{R}^3$ que se cortan en un único punto.
+        
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[scale=0.8]
+                \shorthandoff{>}
+
+                \begin{scope}[shift={(-5,0)}]
+                    % Circunferencia 1
+                    \draw[thick] (0,0) circle [radius=2];
+                    \draw[thick, dashed] (2,0) arc (0:180:2 and 0.5);
+                    \draw[thick] (2,0) arc (0:-180:2 and 0.5);
+
+                    % Circunferencia 2
+                    \draw[thick] (3,0) circle [radius=1];
+                    \draw[thick, dashed] (4,0) arc (0:180:1 and 0.25);
+                    \draw[thick] (4,0) arc (0:-180:1 and 0.25);
+
+                    % Leyenda
+                    \node at (0,2.5) {$S_1$};
+                    \node at (3,1.5) {$S_2$};
+
+                    % Intersección
+                    \node[draw, circle, fill=red, red, inner sep=0.8pt, label={[red]left:{$x_0$}}] at (2,0) {};
+                \end{scope}
+
+                \draw[->, thick, dashed] (0,0) -- (1,0);
+
+                \begin{scope}[shift={(3,2)}, scale=0.8]
+                    % Circunferencia 1
+                    \draw[thick, dashed] (-1.68,0) ellipse (0.25 and 1);
+                    \draw[thick] (-1.72,1) arc (150:-150:2 and 2);
+
+                    % Circunferencia 2
+                    \draw[thick] (3,0) circle [radius=1];
+                    \draw[thick, dashed] (4,0) arc (0:180:1 and 0.25);
+                    \draw[thick] (4,0) arc (0:-180:1 and 0.25);
+
+                    % Leyenda
+                    \node at (2,2) {$U$};
+
+                    % Intersección
+                    \node[draw, circle, fill=red, red, inner sep=0.8pt, label={[red]left:{$x_0$}}] at (2,0) {};
+                \end{scope}
+
+                \begin{scope}[shift={(3,-2)}, scale=0.8]
+                    % Circunferencia 1
+                    \draw[thick] (0,0) circle [radius=2];
+                    \draw[thick, dashed] (2,0) arc (0:180:2 and 0.5);
+                    \draw[thick] (2,0) arc (0:-180:2 and 0.5);
+
+                    % Circunferencia 2                    
+                    \draw[thick, dashed] (3.84,0) ellipse (0.125 and 0.5);
+                    \draw[thick] (3.86,0.5) arc (30:330:1 and 1);
+
+                    % Leyenda
+                    \node at (2,2) {$V$};
+
+                    % Intersección
+                    \node[draw, circle, fill=red, red, inner sep=0.8pt, label={[red]left:{$x_0$}}] at (2,0) {};
+                \end{scope}
+
+            \end{tikzpicture}
+        \end{figure}
         
         Sea $\{x_0\} = S_1\cap S_2$ y tomamos $U=X\setminus\{y_1\}$ con $y_1\in S_1\setminus\{x_0\}$ y $V=X\setminus\{y_2\}$ con $y_2\in S_2\setminus\{x_0\}$. Es claro que $X=U \cap V$ y $U,V$ son abiertos. $U\cap V$ es arcoconexo por ser unión de dos arcoconexos $(S_1\setminus\{y_1\})\cup (S_2\setminus\{y_2\})$ ya que 
         \begin{gather*}
@@ -2299,7 +2362,45 @@ Parece intuitivo que el grupo fundamental de una circunferencia es el trivial ya
         \begin{gather*}
             X = \bigcup\limits_{k\in \bb{Z}} S\left((k,0,0), \frac{1}{2}\right)
         \end{gather*}
-        veamos que su grupo fundamental es el trivial.\\
+        veamos que su grupo fundamental es el trivial.
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[scale=0.8]
+                \shorthandoff{>}
+
+                \node at (-3,0) {$\dots$};
+
+                \begin{scope}[shift={(-2,0)}]
+                        % Circunferencia
+                        \draw[thick] (0,1) arc (90:-90:1 and 1);
+                        \draw[dashed, thick] (0,0) ellipse (0.25 and 1);
+                        \draw[thick, dashed] (1,0) arc (0:100:1 and 0.25);
+                        \draw[thick] (1,0) arc (0:-75:1 and 0.25);
+                \end{scope}
+
+                % Cadena de circunferencias
+                \foreach \x in {0,2,...,10} {
+                    \begin{scope}[shift={(\x,0)}]
+                        % Circunferencia
+                        \draw[thick] (0,0) circle [radius=1];
+                        \draw[thick, dashed] (1,0) arc (0:180:1 and 0.25);
+                        \draw[thick] (1,0) arc (0:-180:1 and 0.25);
+                    \end{scope}
+                }
+
+                \begin{scope}[shift={(12,0)}]
+                        % Circunferencia
+                        \draw[thick] (0,1) arc (90:270:1 and 1);
+                        \draw[dashed, thick] (0,0) ellipse (0.25 and 1);
+                        \draw[thick, dashed] (-1,0) arc (180:80:1 and 0.25);
+                        \draw[thick] (-1,0) arc (180:255:1 and 0.25);
+                \end{scope}
+
+                \node at (13,0) {$\dots$};
+
+            \end{tikzpicture}
+        \end{figure}
 
         Para ello, con una simple inducción se puede demostrar que esto es cierto para una cantidad finita de esferas usando el ejemplo anterior. En este caso tenemos una cantidad infinita de esferas pero como un lazo es un compacto en $\bb{R}^3$, tiene que caer en una unión finita de esferas (unidas dos a dos por un único punto) por lo que se podrá reducir al trivial.
 
@@ -2308,13 +2409,52 @@ Parece intuitivo que el grupo fundamental de una circunferencia es el trivial ya
         \begin{gather*}
             X = \bb{S}^2 \cup \{(x,y,0) : x^2 + y^2 \leq 1\}
         \end{gather*}
-        y veamos cual es su grupo fundamental.\\
+        y veamos cual es su grupo fundamental.
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[scale=0.8]
+                \shorthandoff{>}
+
+                \fill[red, opacity=0.5] (0,0) ellipse (2 and 0.5);
+
+                \draw[thick] (0,0) circle [radius=2];
+                \draw[thick, dashed] (2,0) arc (0:180:2 and 0.5);
+                \draw[thick] (2,0) arc (0:-180:2 and 0.5);
+
+                \node at (0,2.5) {$X$};
+
+            \end{tikzpicture}
+        \end{figure}
 
         Para ello tomamos $U=X\setminus \{(0,0,1)\}$ que es retracto de deformación de $U_1$ donde
         \begin{gather*}
             U_1 = \{(x_1,x_2,x_3)\in \bb{S}^2 : x_3 \leq 0\}\cup \{(x,y,0) : x^2 + y^2 \leq 1\}
         \end{gather*}
-        y además $U_1$ es homeomorfo a $\bb{S}^2$ por lo que $\pi_1(U)$ es el trivial. De forma análoga si consideramos $U=X\setminus \{(0,0,-1)\}$ se tiene que $\pi_1(V)$ es trivial. Claramente se tiene que $U\cap V$ es arcoconexo\footnote{en un examen habrá que demostrarloo de forma más rigurosa} y por el teorema anterior se tiene que $X$ es simplemente conexo, luego su grupo fundamental es el trivial.
+        y además $U_1$ es homeomorfo a $\bb{S}^2$ por lo que $\pi_1(U)$ es el trivial. 
+        
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[scale=0.8]
+                \shorthandoff{>}
+
+                \begin{scope}[shift={(-2,0)}]
+                    \fill[red, opacity=0.5] (0,0) ellipse (2 and 0.5);
+
+                    \draw[thick] (0,0) circle [radius=2];
+                    \draw[thick, dashed] (2,0) arc (0:180:2 and 0.5);
+                    \draw[thick] (2,0) arc (0:-180:2 and 0.5);
+
+                    \node at (0,2.5) {$U$};
+
+                    \draw[thick, dashed] (-1.68,0) ellipse (0.25 and 1);
+                    \draw[thick] (-1.72,1) arc (150:-150:2 and 2);
+                \end{scope}
+
+            \end{tikzpicture}
+        \end{figure}
+        
+        De forma análoga si consideramos $U=X\setminus \{(0,0,-1)\}$ se tiene que $\pi_1(V)$ es trivial. Claramente se tiene que $U\cap V$ es arcoconexo\footnote{en un examen habrá que demostrarloo de forma más rigurosa} y por el teorema anterior se tiene que $X$ es simplemente conexo, luego su grupo fundamental es el trivial.
     \end{enumerate}
 \end{ejemplo}
 

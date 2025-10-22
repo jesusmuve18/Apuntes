@@ -1117,6 +1117,61 @@ Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo 
     \end{proof}
 \end{teo}
 
+\begin{teo}[Teorema de la gráfica cerrada]
+    Sean $E,F$ espacios de Banach, $T:E\to F$ lineal. Entonces si $T$ es continua si y solo si
+    \begin{gather*}
+        Gr(T) = \{(x,T_x):x\in E\}
+    \end{gather*}
+    es cerrado en $E\times F$.
+
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$)] Se deja como ejercicio.
+            \item[$\Leftarrow$)] Vamos a construir una nueva norma $\|\cdot\|_T$ que la definimos como 
+            \begin{gather*}
+                \|x\|_T := \|x\|_E + \|T_x\|_F\ \ \ \forall x \in E
+            \end{gather*}
+            Veamos que es una norma.
+            \begin{enumerate}
+                \item[(i)] $\|x\|_T \geq 0$ ya que es suma de dos normas.
+                \item[(ii)] $\|\lambda x\|_T = \|\lambda x\|_E + \|T(\lambda x)\|_F = |\lambda\ \|x\|_E + |\lambda| \|T_x\|_F = |\lambda| \|x\|_T$.
+                \item[(iii)] $\|x_1+x_2\|_T = \|x_1+x_2\|_E + \|T(x_1+x_2)\| \leq \|x_1\|_E + \|x_2\|_E + \|T_{x_1}\|_F + \|T_{x_2}\|_F = \|x_1\|_E + \|x_2\|_E$ 
+            \end{enumerate}
+            y ya tenemos probado que es una norma. Veamos ahora que es completa. En efecto si $\|x_n\|\subset E$ es de Cauchy para $\|\cdot\|_T$ se tiene que 
+            \begin{gather*}
+                \forall \veps > 0\ \ \exists n_0\in \bb{N}: n,m\geq n_0 \Rightarrow \|x_1-x_2\|_E + \|T_{x_n}-T_{x_m}\|_F = \|x_n-x-m\|_T < \veps
+            \end{gather*}
+            por lo que tenemos que 
+            \begin{gather*}
+                \{x_n\} \text{ de Cauchy para } \|\cdot\|_E \overset{\text{E.Banach}}{\Longrightarrow} \exists x\in E : \|x_n-x\|_E \overset{(n\to \infty)}{\longrightarrow} 0\\
+                \{T_{x_n}\} \text{ de Cauchy para } \|\cdot\|_F \overset{\text{E.Banach}}{\Longrightarrow} \exists y\in F : \|T_{x_n} -y\|_E \overset{(n\to \infty)}{\longrightarrow} 0
+            \end{gather*}
+
+            Esto nos dice que $\{(x_n, T_{x_n})\} \overset{E\times F}{\longrightarrow} (x,y)$. Además por hipótesis tenemos que $\{(x_n, T_{x_n})\}\subset Gr(T)$ cerrado en $E\times F$ luego se tiene que $(x,y)\in Gr(E) \Rightarrow y = T_x$.
+            \begin{gather*}
+                \|x_n-x\|_T = \|x_n-x\|_E + \|T_{x_n} - T_x\|_F \overset{(n\to\infty)}{\longrightarrow} 0
+            \end{gather*}
+            Por la definición de $\|\cdot\|_T$ tenemos que 
+            \begin{gather*}
+                \|x\|_E \leq \|x\|_T\ \ \forall x \in E
+            \end{gather*}
+            y por el teorema de la aplicación abierta sabemos que 
+            \begin{gather*}
+                \exists k \geq 0 : \|x\|_T \leq k\|x\|_E\ \ \ \forall x \in E
+            \end{gather*}
+            luego se tiene que 
+            \begin{gather*}
+                \|x\|_E + \|T_x\|_F \leq k \|x\|_E\ \ \ \forall x \in E \Rightarrow k \geq 1
+            \end{gather*}
+            es decir, 
+            \begin{gather*}
+                \|T_x\|_F \leq (k-1)\|x\|_E \ \ \ \forall x \in E
+            \end{gather*}
+            y tenemos entonces que es Lipschitziana y por tanto se tiene finalmente que $T$ es continua en $E$.
+        \end{itemize}
+    \end{proof}
+\end{teo}
+
 
 
 
