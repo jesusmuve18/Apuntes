@@ -51,3 +51,21 @@ func generate_revolution_mesh(
 			triangulos.append(d)
 			triangulos.append(c)
 	
+func dibujarNormalesMesh(verts: PackedVector3Array, normales: PackedVector3Array, long_norm: float = 0.1, color: Color = Color(1, 0, 0)) -> MeshInstance3D:
+	var mesh := ImmediateMesh.new()
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	for i in range(verts.size()):
+		var v0 = verts[i]
+		var v1 = v0 + normales[i] * long_norm
+		mesh.surface_add_vertex(v0)
+		mesh.surface_add_vertex(v1)
+	mesh.surface_end()
+
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+
+	var inst := MeshInstance3D.new()
+	inst.mesh = mesh
+	inst.material_override = mat
+	return inst

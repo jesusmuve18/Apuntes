@@ -29,7 +29,6 @@ skeleton = NodePath("../..")
 script = ExtResource("4_l4mx1")
 
 [node name="Cubo8vertices" type="MeshInstance3D" parent="Objetos_P2"]
-visible = false
 script = ExtResource("5_bexy6")
 
 [node name="Cubo24vertices" type="MeshInstance3D" parent="Objetos_P2"]
@@ -38,6 +37,7 @@ skeleton = NodePath("../Cubo8vertices")
 script = ExtResource("6_gsrvs")
 
 [node name="EjemploRevolucion" type="MeshInstance3D" parent="Objetos_P2"]
+visible = false
 script = ExtResource("7_owntv")
 
 [node name="Camera3D" type="Camera3D" parent="."]

@@ -2193,7 +2193,58 @@ Parece intuitivo que el grupo fundamental de una circunferencia es el trivial ya
 \begin{coro}
     El grupo fundamental de $\bb{R}P^n$ $\bb{R}\cc{P}^n$ es isomorfo a $\bb{Z}^2$ para $n\geq 2$.
 
-    \begin{proof}
+    \begin{proof}\
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[scale=0.8]
+                \shorthandoff{>}
+
+                \begin{scope}[shift={(-4,0)}]
+                    % Circunferencia
+                    \draw[thick] (0,0) circle [radius=2];
+                    \draw[thick, dashed] (2,0) arc (0:180:2 and 0.5);
+                    \draw[thick] (2,0) arc (0:-180:2 and 0.5);
+
+                    % Puntos
+                    \node[draw, circle, fill=blue, blue, inner sep=0.8pt, label={[blue]right:{$x$}}] at (1,1) {};
+                    \node[draw, circle, fill=blue, blue, inner sep=0.8pt, label={[blue]left:{$-x$}}] at (-1,-1) {};
+                    \draw[dashed, blue] (1,1) -- (-1,-1);
+
+                    \node[draw, circle, fill=red, red, inner sep=0.8pt, label={[red]right:{$y$}}] at (-1,1.5) {};
+                    \node[draw, circle, fill=red, red, inner sep=0.8pt, label={[red]left:{$-y$}}] at (1,-1.5) {};
+                    \draw[dashed, red] (-1,1.5) -- (1,-1.5);
+
+                    \node[draw, circle, fill=violet, violet, inner sep=0.8pt, label={[violet]right:{$z$}}] at (1,-0.45) {};
+                    \node[draw, circle, fill=violet, violet, inner sep=0.8pt, label={[violet]left:{$-z$}}] at (-1,0.45) {};
+                    \draw[dashed, violet] (1,-0.45) -- (-1,0.45);
+
+                \end{scope}
+
+                % Función p
+                \draw[->, thick] (-0.5,0) -- (0.5,0);
+                \node at (0,0.5) {$p$};
+
+                \begin{scope}[shift={(4,0)}]
+                    % Circunferencia
+                    \draw[thick] (2,0) arc (0:180:2 and 2);
+                    \draw[thick, dashed] (2,0) arc (0:180:2 and 0.5);
+                    \draw[thick] (2,0) arc (0:-180:2 and 0.5);
+
+                    % Puntos
+                    \node[draw, circle, fill=red, red, inner sep=0.8pt] at (1,-0.45) {};
+                    \node[draw, circle, fill=red, red, inner sep=0.8pt] at (-1,0.45) {};
+                    \draw[dashed, red] (1,-0.45) -- (-1,0.45);
+
+
+                    \node[draw, circle, fill=blue, blue, inner sep=0.8pt] at (-1,-0.45) {};
+                    \node[draw, circle, fill=blue, blue, inner sep=0.8pt] at (1,0.45) {};
+                    \draw[dashed, blue] (-1,-0.45) -- (1,0.45);
+
+                \end{scope}
+
+            \end{tikzpicture}
+        \end{figure}
+
         Veamos que la aplicación
         \begin{align*}
             p: \bb{S}^n & \to \bb{R}P^n\\

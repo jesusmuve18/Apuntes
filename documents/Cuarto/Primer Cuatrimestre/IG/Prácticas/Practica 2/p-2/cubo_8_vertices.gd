@@ -41,6 +41,10 @@ func _init() -> void:
 	
 	material_override = mat
 	
+	# Dibujar normales usando ImmediateMesh + MeshInstance3D
+	var normales_inst: MeshInstance3D = Utilidades2.dibujarNormalesMesh(vertices, normales, 0.5, Color(1,0,0))
+	add_child(normales_inst)
+	
 	## Translado el cubo para ponerlo al lado del de 24 vertices
 	var tras := Transform3D().translated( Vector3( 2.0, 0.0, 0.0))
-	transform = tras
+	#transform = tras

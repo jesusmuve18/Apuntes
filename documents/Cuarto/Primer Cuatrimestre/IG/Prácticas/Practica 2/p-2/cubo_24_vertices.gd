@@ -27,7 +27,7 @@ func _init() -> void:
 	for i in range(vertices.size()):
 		var n = normales[i].normalized()
 		var desplazamiento = 0.2  # cuánto quieres "abrir" el cubo
-		vertices[i] += n * desplazamiento
+		#vertices[i] += n * desplazamiento
 	
 	
 	## inicializar el array con las tablas
@@ -49,6 +49,9 @@ func _init() -> void:
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_PER_PIXEL
 	
 	material_override = mat
+	
+	var normales_inst: MeshInstance3D = Utilidades2.dibujarNormalesMesh(vertices, normales, 0.5, Color(1,0,0))
+	add_child(normales_inst)
 	
 	## Translado el cubo para ponerlo al lado del de 8 vertices
 	var tras := Transform3D().translated( Vector3( -2.0, 0.0, 0.0))
