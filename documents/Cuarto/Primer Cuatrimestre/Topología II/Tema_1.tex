@@ -2558,13 +2558,98 @@ Parece intuitivo que el grupo fundamental de una circunferencia es el trivial ya
 \begin{lema}
     No existe una aplicación continua $f:\bb{S}^2\to \bb{S}^1$ que conserve antípodas, es decir, tal que $f(-x)=-f(x)$ para todo $x\in \bb{S}^2$.
 
-    \begin{proof}
+    \begin{proof}\
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[scale=0.8]
+                \shorthandoff{>}
+
+                \begin{scope}[shift={(-4,0)}]
+                    \node at (0,2.5) {$\bb{S}^2$};
+
+                    % Circunferencia
+                    \draw[thick] (0,0) circle [radius=2];
+
+                    % Radio medio
+                    \draw[thick, dashed] (2,0) arc (0:180:2 and 0.5);
+                    \draw[thick] (2,0) arc (0:-180:2 and 0.5);
+
+                    % Arcos
+                    \draw[thick, red] (0,0) ellipse (2 and 0.5);
+                    \draw[->, red, thick] (0,-0.5) ++(-0.01, 0) -- ++(0.01,0);
+
+                    \draw[red, thick] plot[smooth, tension=1] coordinates {
+                        (-2,0) (-0.14,0.3) (1.3,1.5) (-0.56,1.205) (-2,0)
+                    };
+                    \draw[->, red, thick] (-0.14,0.3) ++(-0.065, -0.01) -- ++(+0.065,0.01);
+
+                    \draw[red, thick] plot[smooth, tension=1] coordinates {
+                        (-2,0) (-1.0537,0.795) (-0.5,1.9) (-1.446,1.104) (-2,0)
+                    };
+                    \draw[->, red, thick] (-1.0537,0.795) ++(-0.007, -0.01) -- ++(+0.007,0.01);
+                    
+                \end{scope}
+
+                \node at (0,0.5) {$f$};
+                \draw[->, thick] (-0.5,0) -- (0.5,0);
+
+                \begin{scope}[shift={(4,0)}]
+                    \node at (0,2.5) {$\bb{S}^1$};
+
+                    % Circunferencia
+                    \draw[thick, red] (0,0) circle [radius=2];
+                \end{scope}
+            \end{tikzpicture}
+        \end{figure}
+
         Supongamos que existiese $f:\bb{S}^2 \to \bb{S}^1$ continua con $f(-x) = -f(x)$\ \ $\forall x \in \bb{S}^2$. Entonces consideramos la aplicación 
         \begin{align*}
             j: \bb{S}^1 & \to \bb{S}^2\\
             (x,y) & \mapsto (x,y)
         \end{align*}
-        que es continua. Tenemos además que $f\circ j : \bb{S}^1 \to \bb{S}^1$ conserva antípodas (salvo rotación de $\bb{S}^1$ podemos suponer que $(f\circ j)(1,0)=(1,0)$). Por el lema anterior tenemos que existe un lazo $\alpha$ tal que $\deg((f\circ j)(\alpha))$ es impar. En particular se tiene que 
+        que es continua. 
+        
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[scale=0.8]
+                \shorthandoff{>}
+
+                \begin{scope}[shift={(-7,0)}]
+                    \node at (0,2.5) {$\bb{S}^1$};
+
+                    % Circunferencia
+                    \draw[thick] (0,0) circle [radius=2];
+                    
+                \end{scope}
+
+                \node at (-3.5,0.5) {$j$};
+                \draw[->, thick] (-4,0) -- (-3,0);
+
+                \begin{scope}[shift={(0,0)}]
+                    \node at (0,2.5) {$\bb{S}^2$};
+
+                    % Circunferencia
+                    \draw[thick] (0,0) circle [radius=2];
+
+                    % Radio medio
+                    \draw[thick, dashed] (2,0) arc (0:180:2 and 0.5);
+                    \draw[thick] (2,0) arc (0:-180:2 and 0.5);
+                \end{scope}
+
+                \node at (3.5,0.5) {$f$};
+                \draw[->, thick] (3,0) -- (4,0);
+
+                \begin{scope}[shift={(7,0)}]
+                    \node at (0,2.5) {$\bb{S}^1$};
+
+                    % Circunferencia
+                    \draw[thick] (0,0) circle [radius=2];
+                \end{scope}
+            \end{tikzpicture}
+        \end{figure}
+        
+        Tenemos además que $f\circ j : \bb{S}^1 \to \bb{S}^1$ conserva antípodas (salvo rotación de $\bb{S}^1$ podemos suponer que $(f\circ j)(1,0)=(1,0)$). Por el lema anterior tenemos que existe un lazo $\alpha$ tal que $\deg((f\circ j)(\alpha))$ es impar. En particular se tiene que 
         \begin{align*}
             (f\circ j)_*([\alpha]) &\neq [\veps_{(1,0)}]\\
             (f\circ j)_*([\alpha]) &= (f_* \circ j_*)([\alpha]) = [\veps_{(1,0)}]
