@@ -2599,6 +2599,8 @@ Parece intuitivo que el grupo fundamental de una circunferencia es el trivial ya
 
                     % Circunferencia
                     \draw[thick, red] (0,0) circle [radius=2];
+
+                    \draw[->, red, thick] (2,0) ++(0, -0.01) -- ++(0,0.01);
                 \end{scope}
             \end{tikzpicture}
         \end{figure}
@@ -2612,14 +2614,14 @@ Parece intuitivo que el grupo fundamental de una circunferencia es el trivial ya
         
         \begin{figure}[H]
             \centering
-            \begin{tikzpicture}[scale=0.8]
+            \begin{tikzpicture}[scale=0.6]
                 \shorthandoff{>}
 
                 \begin{scope}[shift={(-7,0)}]
                     \node at (0,2.5) {$\bb{S}^1$};
 
                     % Circunferencia
-                    \draw[thick] (0,0) circle [radius=2];
+                    \draw[thick, red] (0,0) circle [radius=2];
                     
                 \end{scope}
 
@@ -2633,8 +2635,8 @@ Parece intuitivo que el grupo fundamental de una circunferencia es el trivial ya
                     \draw[thick] (0,0) circle [radius=2];
 
                     % Radio medio
-                    \draw[thick, dashed] (2,0) arc (0:180:2 and 0.5);
-                    \draw[thick] (2,0) arc (0:-180:2 and 0.5);
+                    \draw[thick, red, dashed] (2,0) arc (0:180:2 and 0.5);
+                    \draw[thick, red] (2,0) arc (0:-180:2 and 0.5);
                 \end{scope}
 
                 \node at (3.5,0.5) {$f$};
@@ -2668,5 +2670,44 @@ Parece intuitivo que el grupo fundamental de una circunferencia es el trivial ya
         \end{gather*}
         y se tendría que $g(-x)=-g(x)$, lo que contradice el lema anterior.
     \end{proof}
+\end{teo}
+
+\begin{observacion}
+    Del teorema de Borsuk-Ulam se deduce que no existen aplicaciones continuas e inyectivas de $\bb{S}^2$ en $\bb{R}^2$. Se deduce que $\bb{S}^2$ no es homeomorfo a ningún subconjunto de $\bb{R}^2$.
+\end{observacion}
+
+\begin{teo}[de las tortitas]
+    Sean $A_1$ y $A_2$ dos compactos de $\bb{R}^2$, entonces existe una única que divide a ambos a la vez dejando la mitad del área de cada uno a cada lado de la recta.
+    \begin{proof}
+        Identificamos $\bb{R}^2$ dentro de $\bb{R}^3$ como $\bb{R}^2 \times \{1\}$. Para cada $x\in \bb{S}^2$ consideramos
+        \begin{gather*}
+            P_x^+ = \{v\in \bb{R}^3 : \langle v,x \rangle > 0\}\\
+            P_x^- = \{v\in \bb{R}^3 : \langle v,x \rangle < 0\}\\
+            L_x = \{v\in \bb{R}^3 : \langle v,x \rangle = 0\} \cap (\bb{R}^2\times\{1\})
+        \end{gather*}
+        Observamos que si $x\neq \pm (0,0,1)$, entonces $L_x$ es una recta. En otro caso, si $x= \pm (0,0,1)$, entonces $L_x=\emptyset$. Observemos además que $P_x^+=P_{-x}^-$. Además, si $area(A_1)=area(A_2)=0$, entonces cualquier recta nos vale. Vamos a suponer entonces que $area(A_1)>0$ y definimos
+        \begin{align*}
+            f: \bb{S}^2 & \to \bb{R}^2\\
+            x & \mapsto (area(A_1\cap P_x^+), area(A_2\cap P_x^+))
+        \end{align*}
+        Como $f$ es continua, entonces el teorema de Borsuk Ulam $\exists x_0\in \bb{S}^2$ tal que $f(x_0)=f(-x_0)$, es decir, tal que
+        \begin{gather*}
+            (area(A_1\cap P_{x_0}^+), area(A_2\cap P_{x_0}^+)) = (area(A_1\cap P_{x_0}^-), area(A_2\cap P_{x_0}^-))
+        \end{gather*}
+        por lo que llegamos a que 
+        \begin{gather*}
+            \left\{
+                \begin{array}{l}
+                    area(A_1\cap P_{x_0}^+) = area(A_1\cap P_{x_0}^-)\\
+                    area(A_2\cap P_{x_0}^+) = area(A_2\cap P_{x_0}^-)
+                \end{array}
+            \right.
+        \end{gather*}
+        (recordemos que $x_0\neq (0,0,1)$).
+    \end{proof}
+\end{teo}
+
+\begin{teo}[del bocadillo de jamón]
+    Sean $A_1$, $A_2$, $A_3$ tres compactos en $\bb{R}^3$, entonces existe un plano que divide a la vez a cada uno de ellos en dos partes de igual volumen.
 \end{teo}
 
