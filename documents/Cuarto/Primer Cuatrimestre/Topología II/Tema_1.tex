@@ -1308,9 +1308,9 @@
         \begin{gather*}
              \phi([\alpha]) = \phi([\beta]) \overset{?}{\Rightarrow} [\alpha]=[\beta]
         \end{gather*}
-        Sabiendo que $\hat{\alpha}(1) = \phi([\alpha])$ y $\hat{\beta}(1) = \phi([\beta])$. Como $\hat{\alpha}(1)=\hat{\beta}(1)$ consideramos $\hat{\alpha} \ast \hat{\beta}$ que es un lazo basado en $r_0$. Como $R$ es simplemente conexo tenemos que
+        Sabiendo que $\hat{\alpha}(1) = \phi([\alpha])$ y $\hat{\beta}(1) = \phi([\beta])$. Como $\hat{\alpha}(1)=\hat{\beta}(1)$ consideramos $\hat{\alpha} \ast \hat{\tilde{\beta}}$ que es un lazo basado en $r_0$. Como $R$ es simplemente conexo tenemos que
         \begin{gather*}
-            [\hat{\alpha}] \ast [\hat{\beta}] = [\hat{\alpha} \ast \hat{\beta}] = [\veps_{r_0}]
+            [\hat{\alpha}] \ast \left[\hat{\tilde{\beta}}\right] = \left[\hat{\alpha} \ast \hat{\tilde{\beta}}\right] = [\veps_{r_0}]
         \end{gather*}
         por lo que se tiene 
         \begin{gather*}
@@ -1325,7 +1325,7 @@
     \end{proof}
 \end{teo}
 
-\section{Grupo fundamental de la circuferencia}
+\section{Grupo fundamental de la circunferencia}
 
 \begin{definicion}
     Dado un lazo $\alpha:[0,1]\to \bb{S}^1 \subseteq \bb{R}^2$ basado en $(1,0)$, definimos el grado de $\alpha$ como el único número entero $\hat{\alpha}(1)$ dado por el levantamiento $\hat{\alpha}$ de $\alpha$ mediante la aplicación recubridora
@@ -2681,7 +2681,7 @@ Parece intuitivo que el grupo fundamental de una circunferencia es el trivial ya
 
     \begin{figure}[H]
         \centering
-        \begin{tikzpicture}[scale=0.8]
+        \begin{tikzpicture}[scale=0.5]
             \shorthandoff{>}
 
             \node at (-2,2) {$A_1$};
@@ -2690,7 +2690,7 @@ Parece intuitivo que el grupo fundamental de una circunferencia es el trivial ya
             \draw[thick, rotate around={30:(-2,0)}] (-2,0) ellipse (2 and 1);
             \draw[thick, rotate around={-40:(3,-1)}] (3,-1) ellipse (2 and 1);
 
-            \draw[thick, blue] (-7,1) -- (8,-2);
+            \draw[thick, violet] (-7,1) -- (8,-2);
         \end{tikzpicture}
     \end{figure}
 
@@ -2710,15 +2710,16 @@ Parece intuitivo que el grupo fundamental de una circunferencia es el trivial ya
                 % Ejes
                 \draw[thick, <-] (-1.5,-1.5) -- (0,0);
                 \draw[thick] (0,0) -- (0,0.5);
-                \draw[thick, dashed] (0,0.5) -- (0,1.5);
+                \draw[dashed] (0,0.5) -- (0,1.5);
                 \draw[thick, ->] (0,1.5) -- (0,3);
-                \draw[thick, ->] (0,0) -- (3,0);
+                \draw[thick, ->] (0,0) -- (5,0);
 
                 \node at (-0.25,1.7) {$1$};
 
                 % Vector x
                 \draw[thick, blue, ->] (0,0) -- (1, -0.25);
                 \node[blue] at (1.25, -0.25) {$x$};
+                \node[blue, anchor=north west] at (1.5, -0.25) {$(|x|=1)$};
 
                 % Compactos
                 \draw[thick, red, fill=red!20, rotate around={-10:(-1,1)}] (-1,1) ellipse (0.5 and 0.25);
@@ -2729,14 +2730,14 @@ Parece intuitivo que el grupo fundamental de una circunferencia es el trivial ya
 
                 % Plano perpendicular
                 \draw[thick, blue] (1.33,2.5) -- (1.33,3.75) -- (-1.33,1.75) -- (-1.33,-1) -- (0.75,0.5);
-                \draw[thick, blue, dashed] (0.75,0.5) -- (1.33,1) -- (1.33,2.5);
+                \draw[blue, dashed] (0.75,0.5) -- (1.33,1) -- (1.33,2.5);
                 \draw[thick, violet] (-1.333,0.5) -- (1.33,2.5);
                 \node[violet] at (1.68,2.75) {$L_x$};
                 \node[blue] at (3,3) {$P_x^+$};
 
                 % Plano horizontal
                 \draw[thick] (1.33,2.5) -- (5,2.5) -- (3,0.5) -- (-3,0.5) -- (-1,2.5) -- (-0.35,2.5);
-                \draw[thick, dashed] (-0.35,2.5) -- (1.33,2.5);
+                \draw[dashed] (-0.35,2.5) -- (1.33,2.5);
                 
             \end{tikzpicture}
         \end{figure}
