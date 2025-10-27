@@ -44,15 +44,15 @@
 \end{definicion}
 
 \begin{teo}
-    Las componentes conexas de un e.t. $X$ forman una partición de $X$ es conjuntos conexos maximales y cerrados.
+    Las componentes conexas de un e.t. $X$ forman una partición de $X$ en conjuntos conexos maximales y cerrados.
 \end{teo}
 
 \section{Conexión por arcos}
 
 \begin{definicion}
-    Un \textbf{arco} (o camino) en un espacio topológico $X$ es una aplicación continua $\alpha:[0,1]\to X$. Si además $\alpha(0) = \alpha(1)$ diremos que $\alpha$ es un lazo.\\
+    Un \textbf{arco} (o camino) en un espacio topológico $X$ es una aplicación continua $\alpha:[0,1]\to X$. Si además $\alpha(0) = \alpha(1)$ diremos que $\alpha$ es un \textbf{lazo}.\\
 
-    Diremos que un arco $\alpha:[0,1]\to X$ une $x$ con $y$ si se verifica que $\alpha(0)=x$ y $\alpha(1) = y$. Si $\alpha$ es un arco, diremos que está basado en $x$ (o su punto base es $x$) si $\alpha(0)=x=\alpha(1)$.\\
+    Diremos que un arco $\alpha:[0,1]\to X$ une $x$ con $y$ si se verifica que $\alpha(0)=x$ y $\alpha(1) = y$. Si $\alpha$ es un lazo, diremos que está basado en $x$ (o su punto base es $x$) si $\alpha(0)=x=\alpha(1)$.\\
 
     Denotaremos por 
     \begin{gather*}
@@ -80,7 +80,7 @@
 
         \item Sean $x,y,z\in X$, $\alpha:[0,1]\to X$ un arco uniendo $x$ con $y$ y $\beta:[0,1]\to X$ un arco uniendo $y$ con $z$. Buscaremos ahora un arco formado a partir de estos dos de la siguiente forma:
         \begin{align*}
-            \alpha\ast\beta : [0,1]\to X : (\alpha\ast\beta)(t) = \left\{ 
+            \alpha\ast\beta : [0,1]\to X \text{ dado por } (\alpha\ast\beta)(t) = \left\{ 
                 \begin{array}{l c c}
                     \alpha(2t) & \text{ si } & 0 \leq t \leq \nicefrac{1}{2} \\
                     \beta(2t-1) & \text{ si } & \nicefrac{1}{2}\leq t \leq 1
@@ -191,7 +191,7 @@
 \begin{teo}
     La imagen mediante una aplicación continua de un arcoconexo es un arcoconexo. En particular, ser arcoconexo es una propiedad topológica, es decir, se conserva por homeomorfismos.
     \begin{proof}
-        Dados $x,y\in f(X)$, entonces existen $x_0,y_0\in X$ tal que $f(x_0)=x$ y $f(y_0) = y$. Por ser $X$ arcoconexo, entonces existe un arco $\alpha:[0,1]\to X$ con $\alpha(0)=x_0$ y $\alpha(1)=y_0$. Entonces tenemos que $f\circ \alpha: [0,1]\to f(X)$ es continua y $(f\circ \alpha)(0) = f(x_0) = x$ y $(f\circ\alpha)(1) = f(y_0) = y$ y tenemos demostrado el resultado que buscábamos.
+        Sea $f$ el homeomorfismo y consideramos $x,y\in f(X)$, entonces existen $x_0,y_0\in X$ tal que $f(x_0)=x$ y $f(y_0) = y$. Por ser $X$ arcoconexo, entonces existe un arco $\alpha:[0,1]\to X$ con $\alpha(0)=x_0$ y $\alpha(1)=y_0$. Entonces tenemos que $f\circ \alpha: [0,1]\to f(X)$ es continua y $(f\circ \alpha)(0) = f(x_0) = x$ y $(f\circ\alpha)(1) = f(y_0) = y$ y tenemos demostrado el resultado que buscábamos.
     \end{proof}
 \end{teo}
 
