@@ -3131,9 +3131,37 @@ De esta forma, $(F(a), \cdot)$ es isomorfo a $\bb{Z}$
 
 \begin{ejemplo}\
     \begin{enumerate}
-        \item $\langle a; a^n \rangle$ es una presentación de 
+        \item $\langle a; a^n \rangle$ es una presentación de $\bb{Z}_n$
         \begin{gather*}
-            \frac{F(a)}{\langle a^n \rangle_N} = \frac{\{a^k : k\in \bb{Z}\}}{}
+            \frac{F(a)}{\langle a^n \rangle_N} = \frac{\{a^k : k\in \bb{Z}\}}{\{a^{ln} : l\in \bb{Z}\}} \cong \frac{\bb{Z}}{n\bb{Z}} = \bb{Z}_n
         \end{gather*}
+
+        \item $\langle a; \emptyset \rangle$ es una presentación de $\bb{Z}$.
+        \item $\langle a,b ; b\rangle$ es una presentación de $\bb{Z}$ ya que
+        \begin{gather*}
+            \frac{F(a,b)}{\langle b \rangle_N} \cong F(a) \cong \bb{Z}
+        \end{gather*}
+        Esto es más fácil de ver si entendemos que el cociente lleva al denominador al elemento neutro por lo que un elemento de este grupo será $[a^2a^3b^{-2} a b^{4} a^5] = [a^2a^3a a^5] = [a^9]$
+
+        \item $\langle a,b;a^n,b^m \rangle$
+        \begin{gather*}
+            \frac{F(a,b)}{\langle \{a^n, b^m\} \rangle} \cong \bb{Z}_n \ast \bb{Z}_m
+        \end{gather*}
+        Veámoslo para un caso particular, por ejemplo $\langle a, b; a^2,b^3\rangle$. Consideramos el elemento
+        \begin{gather*}
+            [b^7a^5b^{-2}a^{-4}] =[ (b^3b^3b)(a^2a^2a)b^{-2}((a^2)^{-1}(a^2)^{-1})] =[bab^{-2}]
+        \end{gather*}
+
+        \item $\langle a,b; aba^{-1}b^{-1} \rangle$
+        \begin{gather*}
+            \frac{F(a,b)}{\langle aba^{-1}b^{-1} \rangle} \cong \bb{Z}\times \bb{Z}
+        \end{gather*}
+        Veamos algunos casos particulares para entenderlo mejor
+        \begin{gather*}
+            [aba^{-1}b^{-1}] = [1]\\
+            [ab] = [ba]
+            [a^3b^7a^2b^5] = [a^5b^12]
+        \end{gather*}
+
     \end{enumerate}
 \end{ejemplo}
