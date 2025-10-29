@@ -138,3 +138,37 @@
 \begin{ejercicio}
     Probar que si $\dim E <\infty$, entonces $\sigma(E,E^*)=\T_{\|\cdot\|_E}$
 \end{ejercicio}
+
+\begin{prop}
+    Sea $\{x_n\}\subset E$ con $E$ espacio normado. Entonces se tiene que 
+    \begin{enumerate}
+        \item $\{x_n\} \overset{\sigma(E, E^*)}{\rightharpoonup} x \sii \{\langle f,x_n \rangle \} \to \langle f,x\rangle \ \ \forall f \in E^*$.
+        \item $\{x_n\} \to x \Rightarrow \{x_n\} \overset{\sigma(E,E^*)}{\rightharpoonup} x$.
+        \item $\{x_n\} \overset{\sigma(E,E^*)}{\rightharpoonup} x \Rightarrow \{\|x_n\|\}$ acotada y $\|x\| \leq \liminf_{n\to\infty} \|x_n\|$.
+        \item \begin{gather*}
+            \left.
+                \begin{array}{c}
+                    \{x_n\} \overset{\sigma(E, E^*)}{\rightharpoonup} x\\
+                    \{f_n\} \overset{E}{\to} f
+                \end{array}
+            \right\} \Rightarrow \{\langle f_n, x_n \rangle\} \overset{\bb{R}}{\to} \langle f,x \rangle.
+        \end{gather*} 
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item $\sigma(E,E^*)$ es la topología inicial.
+            \item Tenemos que $\{x_n\}\to x$ y además $|\langle f,x_n-x\rangle | \leq \|f\|_{E^*} \|x_n-x\|_{E}$ por lo que $\{\langle f,x_n \rangle\} \to \langle f,x \rangle$.
+            \item Tenemos que $B=\{x_n : n\in \bb{N}\}$ verifica $f(B)=\{\langle f,x_n \rangle : n\in \bb{N}\}$ acotado $\forall f \in E^*$. Por la tercera consecuencia del teorema de Banach-Steinhaus tenemos que $B$ está acotado. Tenemos entonces que
+            \begin{gather*}
+                |\langle f,x_n \rangle| \leq \|f\|_{E^*} \|x_n\|_E \overset{1.}{\Longrightarrow} \langle f,x \rangle \leq \liminf_{n\to\infty} \|x_n\|
+            \end{gather*}
+            luego $\sup\limits_{\|f\|_{E^*}\leq 1} \langle f,x \rangle \leq \liminf_{n\to\infty} \|x_n\|$ y por el teorema de Banach-Steinhaus tenemos que $\|x\|_E = \sup\limits_{\|f\|_{E^*}}$.
+
+            \item \begin{gather*}
+                |\langle f_n,x_n\rangle  - \langle f,x \rangle | \leq | \langle f_n-f, x_n \rangle| + |\langle f,x_n-x\rangle| \leq \\
+                \leq \|f_n-f\| \|x_n\| + |\langle f,x_n\rangle - \langle f,x \rangle | \to 0
+            \end{gather*}
+            ya que $\|f_n-f\| \to 0$, $\|x_n\|$ está acotada y $\langle f,x_n\rangle \to \langle f,x \rangle$.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
