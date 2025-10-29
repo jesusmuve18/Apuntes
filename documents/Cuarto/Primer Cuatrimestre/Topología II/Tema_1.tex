@@ -232,7 +232,7 @@
 \end{ejemplo}
 
 \begin{notacion}
-    Como convenio a la clase de equivalencia de un arco $\alpha$ en $\Omega(X;x,y)$ lo denotaremos por $[\alpha]$.
+    Por convenio, a la clase de equivalencia de un arco $\alpha$ en $\Omega(X;x,y)$ la denotaremos por $[\alpha]$.
 \end{notacion}
 
 \begin{lema}
@@ -290,12 +290,15 @@
         Análogamente se tiene que $H(s,1)=(\alpha_2\ast\beta_2)(s)$ con $H(0,t) = x$ y $H(1,t) = z$.
 
     \end{proof}
+\end{lema}
+
+\begin{definicion}
     A partir del lema anterior podemos definir
     \begin{gather*}
         [\alpha] \ast [\beta] := [\alpha \ast \beta]
     \end{gather*}
     con $\alpha\in \Omega(X;x,y)$, $\beta \in \Omega(X;y,z)$
-\end{lema}
+\end{definicion}
 
 \begin{teo}
     Dado $X$ e.t., $\alpha\in \Omega(X;x,y)$, $\beta\in \Omega(X;y,z)$ y $\gamma\in \Omega(X;z,w)$ se tiene que 
@@ -590,7 +593,7 @@
             H(0,t) = x_0  \hspace{0.5cm} &\text{ y } \hspace{0.5cm} H(1,t) = x_0\ \ \ &\forall t \in [0,1]
         \end{align*}
     \end{proof}
-    En particular, las bolas abiertas, las bolas cerradas, los convexos en general como $\bb{R}^n$ tienen grupo fundamental trivial.
+    En particular, las bolas abiertas, las bolas cerradas y los convexos en general como $\bb{R}^n$ tienen grupo fundamental trivial.
 \end{ejemplo}
 
 \begin{teo}
@@ -669,20 +672,20 @@
 \end{lema}
 
 \begin{definicion}
-    A la aplicación $f_x$ dada por el lema la llamaremos \textbf{homomorfismo inducido} por $f$.
+    A la aplicación $f_*$ dada por el lema la llamaremos \textbf{homomorfismo inducido} por $f$.
 \end{definicion}
 
 \begin{propiedades}
-    Algunas propiedades básicas de $f_x$ son
+    Algunas propiedades básicas de $f_*$ son
     \begin{enumerate}
         \item Si tenemos dos aplicaciones continuas $f:X\to Y$ y $g:Y \to Z$, entonces se tiene que 
         \begin{gather*}
-            (g\circ f)_* = g_x \circ f_x
+            (g\circ f)_* = g_* \circ f_*
         \end{gather*}
 
         \item  Se verifica que la aplicación dada por
         \begin{align*}
-            Id_x: \pi_1(X,x_0) &\to \pi(X,x_0)\\
+            Id_*: \pi_1(X,x_0) &\to \pi(X,x_0)\\
             [\alpha] & \mapsto [\alpha]
         \end{align*}
         es la identidad en grupos fundamentales.
@@ -711,7 +714,7 @@
         \pi_1(X\times Y, (x,y)) \cong \pi_1(X,x) \times \pi_1(Y,y)
     \end{gather*}
     \begin{proof}
-        Veasmos que 
+        Veamos que 
         \begin{align*}
             \phi: \pi_1(X\times Y,(x,y)) &\longrightarrow \pi_1(X,x) \times \pi_1(Y,y) \\
             [\alpha] & \longmapsto ([p_1 \circ \alpha], [p_2\circ \alpha])
@@ -1141,8 +1144,6 @@
     
     Nos planteamos ahora cuál sería un levantamiento de $\tilde{\alpha}(s) = \alpha(1-s)$. Podemos ver que $\hat{\tilde{\alpha}}_k(s) = k-s$ para $k\in \bb{Z}$ es en efecto un levantamiento de $\tilde{\alpha}(s)$.\\
 
-    [Terminar Gráfica]
-
     \begin{figure}[H]
         \centering
         \begin{tikzpicture}
@@ -1427,9 +1428,9 @@
             f_*:\pi_1(\overline{\bb{D}}(1,0)) & \to \pi_1(\bb{S}^1, (1,0))\text{ es homeomorfismo}\\
             [\alpha]_{\overline{\bb{D}}} & \mapsto f_*([\alpha]_{\overline{\bb{D}}}) \overset{def}{=}[f\circ \alpha]_{\bb{S}^1} = [\alpha]_{\bb{S}^1}
         \end{align*}
-        Pero $[\alpha]_{\overline{\bb{D}}} = [\veps_{(1,0)}]$ por lo que 
+        Pero $[\alpha]_{\overline{\bb{D}}} = [\veps_{(1,0)}]_{\overline{\bb{D}}}$ por lo que 
         \begin{gather*}
-            f_x([\alpha]_{\overline{\bb{D}}}) = f_*([\veps_{(1,0)}]_{\overline{\bb{D}}}) = [\veps_(1,0)]_{\bb{S}^1}
+            f_x([\alpha]_{\overline{\bb{D}}}) = f_*([\veps_{(1,0)}]_{\overline{\bb{D}}}) = [\veps_{(1,0)}]_{\bb{S}^1}
         \end{gather*}
         pero como $f_x([\alpha]_{\overline{\bb{D}}}) = [\alpha]_{\bb{S}^1}$ llegamos a contradicción ya que $\deg(\alpha) = 1$ y $\deg(\veps_{(1,0)}) = 0$
     \end{proof}

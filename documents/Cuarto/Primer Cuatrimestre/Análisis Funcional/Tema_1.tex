@@ -1,0 +1,140 @@
+\chapter{Topologías Débiles}
+
+\section{Topología inicial}
+
+\begin{observacion}
+    Si $\T_d:=\{A: A\subset X\}$ es la topología discreta $\Rightarrow \varphi_i$ es continua para todo $\varphi:X\to Y$, con $Y$ espacio topológico. 
+\end{observacion}
+
+\begin{definicion}
+    Sea $X$ un conjunto y $\{\varphi_i: X\to Y_i: Y_i$ espacio topológico $i\in I\}$ una familia de funciones. Buscamos la topología $\tau$ es $X$ que contiene menos cantidad de abiertos para la que toda la familia de funciones $\varphi_i$ son continuas.\\
+
+    Necesariamente $\T\supset U = \{\phi_i^{-1}:w_i$ abierto en $Y_i,\ i\in I\}\Rightarrow$ por lo que podemos reformular la búsqueda anterior de la siguiente forma: dado un conjunto $X$ y una familia $U=\{U_\lambda : \lambda \in \Lambda\}$ hallad la topología $\T$ con menos cantidad de abiertos que contiene a $U$.\\
+
+    Consideramos entonces el siguiente conjunto
+    \begin{gather*}
+        \cc{V} := \left\{ V = \bigcap\limits_{i=1}^n U_{\lambda_i}:\lambda_1, \lambda_2,...,\lambda_n \in \Lambda,\ n \in \bb{N} \right\}
+    \end{gather*}
+    y vemos que es estable por intersecciones finitas, y no estable por uniones arbitrarias. Definimos entonces el siguiente conjunto:
+    \begin{gather*}
+        \T :=\left\{ \bigcup_{\eta\in \Lambda_0} V_\eta : V_\eta \in \cc{V},\ \Lambda_0\subset \Lambda,\ \Lambda_0 \text{ arbitrario} \right\}
+    \end{gather*}
+    y es fácil probar que este conjunto es una topología\footnote{se hizo en Topología I} a la que llamaremos \textbf{topología inicial}.\\
+
+    Podemos considerar la siguiente base de entornos para cada $x\in X$:
+    \begin{gather*}
+        \left\{\bigcap_{i\in J} \varphi_i^{-1} (V_i): V_i \text{ entorno de } \varphi_i(x) \text{ en } Y_i,\ I\supset J \text{ finito}\right\}
+    \end{gather*}
+\end{definicion}
+
+\begin{prop}
+    Sea $(X, \T)$ un e.t, $\T$ la topología inicial y una sucesión $\{x_n\}\subset X$, $x\in X$. Entonces
+    \begin{gather*}
+        \{X_n\} \overset{\T}{\longrightarrow} \{\varphi_i(x_n)\} \overset{(n\to \infty)}{\longrightarrow} \varphi_i(x),\ \ \forall i \in I
+    \end{gather*}
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$)] Es clara porque las $\varphi_i$ son continuas en $(X, \T)$ para todo $i\in I$.
+            \item[$\Leftarrow$)] Sea $U$ un entorno de $x$, entonces existe $W=\cap_{i\in J}\varphi_i^{-1}(V_i)$ con $V_i$ entorno de $\phi_i(x)$ en $Y_i$ e $I\supset J$ finito. Tenemos $x\in W \subset U$.
+            \begin{gather*}
+                \left.
+                    \begin{array}{c}
+                        \varphi_i(x)\in V_i\\
+                        \{\varphi_i(x_n)\} \overset{(n\to \infty)}{\longrightarrow} \varphi_i(x)
+                    \end{array}
+                \right\} \Rightarrow \exists N_i\in \bb{N} : \varphi_i(x_n)\in V_i,\ \ \forall n \geq N_i 
+            \end{gather*}
+            Como $J$ es finito tenemos que existe $N=\max\limits_{i\in J} N_i $ luego $\varphi_i(x)\in V,\ \ \forall i \in J,\ \ n\geq N$ por lo que
+            \begin{gather*}
+                x_n\in W=\cap_{i\in J}\varphi_i^{-1}(V_i)\subset U,\forall n \geq N
+            \end{gather*}
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{prop}
+    Sea $(X,\T)$ un e.t. donde $\T$ es la topología inicial y $Z$ un e.t. Si $\psi:Z\to X$, entonces se tiene que 
+    \begin{gather*}
+        \psi \text{ continua } \sii \varphi_i \circ \psi : Z\to Y_i \text{ contina } \forall i \in I
+    \end{gather*}
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$)] Regla de la cadena
+            \item[$\Leftarrow$)] 
+            \begin{gather*}
+                \left.
+                    \begin{array}{c}
+                        U\subset X\\
+                        U \text{ abierto}
+                    \end{array}
+                \right\} \Rightarrow U = \bigcup\limits_{\text{arbitrario}}\bigcap\limits_{\text{finito}} \varphi_i^{-1}(w_i)\text{ con } w_i \text{ abierto en }Y_i
+            \end{gather*}
+            por tanto se tiene que 
+            \begin{gather*}
+                \psi^{-1} (U) = \bigcup\limits_{\text{arbitrario}}\bigcap\limits_{\text{finito}} \psi^{-1}(\varphi^{-1}(w_i)) = \bigcup\limits_{\text{arbitrario}}\bigcap\limits_{\text{finito}} (\varphi_i \circ \psi)^{-1}(w_i)
+            \end{gather*}
+            y como $(\varphi_i \circ \psi)^{-1}(w_i)$ es abierto en $Z$ por ser $(\varphi_i \circ \psi)$ continua, se tendrá que $\psi^{-1}(U)$ es abierto y por tanto $\psi$ continua.
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\section{Topología débil}
+
+\begin{definicion}
+    Sea $E$ un espacio normado y consideramos $\sigma(E,E^*)$, la topología inicial en $E$ para 
+    \begin{gather*}
+        X=E,\ \ I=E^*\\
+        Y_f=\bb{R},\ \ \forall f \in E^*\\
+        \{f:E\to \bb{R} : f\in E^*\}
+    \end{gather*}
+    que es una topología en $E$ que hace continuas todas las aplicaciones de $E^*$ y la llamaremos \textbf{topología débil} de un espacio normado $E$.
+\end{definicion}
+\begin{observacion}
+    $\sigma(E,E^*) \subset \T_{\|\cdot \|_E}$
+\end{observacion}
+
+\begin{prop}
+    $\sigma(E,E^*)$ es Hausdorff\footnote{también denotado por T2}.
+    \begin{proof}
+        Sean $x_1,x_2\in E$ con $x_1\neq x_2$. Podemos considerar $A=\{x_1\}$, $B=\{x_2\}$ que son cerrados, convexos y disjuntos. Por la segunda forma geométrica del Teorema de Hahn-Banach tenemos que 
+        \begin{gather*}
+            \exists f \in E^*\setminus\{0\}\text{ y } \exists \alpha\in \bb{R} \text{ tal que } \langle f,x_1 \rangle < \alpha < \langle f,x_2\rangle
+        \end{gather*}
+        tenemos entonces que 
+        \begin{gather*}
+            x_1\in \Theta_1 := \{x \in E : \langle f,x \rangle < \alpha\} = f^{-1} ((-\infty, \alpha)) \text{ abierto en } \sigma(E, E^*)\\
+            x_2\in \Theta_2 := \{x \in E : \langle f,x \rangle > \alpha\} = f^{-1} ((\alpha, +\infty)) \text{ abierto en } \sigma(E, E^*)
+        \end{gather*}
+    \end{proof}
+\end{prop}
+
+\begin{prop}
+    Sea $x_0\in E$, $f_1,f_2,...,f_k\in E^*$
+    \begin{enumerate}
+        \item $V=V(f_1,...,f_k ; \veps) = \{x\in E : |\langle f_i,x-x_0\rangle | <\veps,\ i=1,...,k\}$ es un entorno de $x_0$ en $\sigma(E, E^*)$.
+        \item $\cc{V} = \{V(f_1,...,f_k;\veps) : \veps >0,\ f_1,f_2,...,f_k\in E^*\}$ es base de entornos de $x_0$ en $\sigma(E, E^*)$.
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item Definimos $a_i:=\langle f_i,x_0\rangle$ y tenemos que
+            \begin{gather*}
+                V=V(f_1,...,f_k;\veps) = \bigcap\limits_{i=1}^{k} f_i^{-1}(a_i-\veps, a_i+\veps)
+            \end{gather*}
+            es abierto y $x_0 \in V$.
+
+            \item Si $U$ es entorno de $x_0$ en $\sigma(E, E^*)$, entonces existe un entorno básico de $\sigma(E,E^*)$ tal que
+            \begin{gather*}
+                \exists k\in \bb{N},\ \exists f_1,...,f_k\in E^* \text{ tal que } x_0\in \bigcap\limits_{j=1}^k f_j^{-1}(V_j) \subset U
+            \end{gather*}
+            con $V_j$ entorno de $f_j(x_0)$. Entonces tenemos que 
+            \begin{gather*}
+                \exists \veps >0 : (f_j(x_0)-\veps, f_j(x_0)+\veps)\subset V_j,\ \forall j = 1,...,k
+            \end{gather*}
+            y llegamos a que $V(f_1,...,f_k;\veps) \subset \bigcap\limits_{j=1}^k f_j^{-1} (V_j)\subset U$
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{ejercicio}
+    Probar que si $\dim E <\infty$, entonces $\sigma(E,E^*)=\T_{\|\cdot\|_E}$
+\end{ejercicio}
