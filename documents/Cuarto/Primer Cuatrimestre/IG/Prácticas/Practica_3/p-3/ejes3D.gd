@@ -67,7 +67,6 @@ func _crear_material_plano( c : Color ) -> StandardMaterial3D :
 	m.albedo_color = c
 	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED  # ignorar las luces de la escena
 	m.cull_mode = BaseMaterial3D.CULL_DISABLED # no hacer cribado de caras traseras
-	m.lighting = false  # idem?
 	
 	return m
 
