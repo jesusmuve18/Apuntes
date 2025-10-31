@@ -3300,7 +3300,7 @@ Si consideramos ahora $g=[\beta]_{U\cap V}$ tendríamos que
                 \draw[thick] (-1,0) circle [radius=1];
                 \draw[thick] (0.5,0) circle [radius=0.5];
 
-                \node[draw, circle, fill=red, red, text=red, inner sep=1pt, label=left:{$x_0$}] at (0,0) {};
+                \node[draw, circle, fill=red, red, text=red, inner sep=1pt, label={[red]left:{$x_0$}}] at (0,0) {};
 
                 % Leyendas
                 \node at (-1,-1.25) {$C_1$};
@@ -3348,7 +3348,7 @@ Si consideramos ahora $g=[\beta]_{U\cap V}$ tendríamos que
                 \draw[thick] (0.5,0) circle [radius=0.5];
                 \draw[thick] (1.5,0) circle [radius=1.5];
 
-                \node[draw, circle, fill=red, red, text=red, inner sep=1pt, label=left:{$x_0$}] at (0,0) {};
+                \node[draw, circle, fill=red, red, text=red, inner sep=1pt, label={[red]left:{$x_0$}}] at (0,0) {};
 
                 % Leyendas
                 \node at (-1,-1.25) {$C_1$};
@@ -3396,8 +3396,7 @@ Si consideramos ahora $g=[\beta]_{U\cap V}$ tendríamos que
         \end{gather*}
         donde $i_{1*}([\gamma]_{U\cap V})^{-1} = [\gamma]_U^{-1}[\gamma]_V$
     
-        \item Consideramos $n$ circunferencias $C_1,...,C_n$ en $\bb{R}^n$ tal que se tocan entre sí en un único punto $x_0$.
-    
+        \item Consideramos $n$ circunferencias $C_1,...,C_n$ en $\bb{R}^n$ tal que se tocan entre sí en un único punto $x_0$.    
         \begin{figure}[H]
             \centering
             \begin{tikzpicture}[scale=0.8]
@@ -3416,8 +3415,11 @@ Si consideramos ahora $g=[\beta]_{U\cap V}$ tendríamos que
                 \node at (1.5,0) {$C_1$};
                 \node at (2.5,0) {$C_2$};
                 \node at (3.5,0) {$C_3$};
-                \node at (5,0) {$...$};
+                \node at (4.5,0) {$C_4$};
+                \node at (5.5,0) {$...$};
                 \node at (6.5,0) {$C_n$};
+
+                \node at (3,-3.5) {$X$};
             \end{tikzpicture}
         \end{figure}
         
@@ -3448,8 +3450,14 @@ Si consideramos ahora $g=[\beta]_{U\cap V}$ tendríamos que
                     \node at (1.5,0) {$C_1$};
                     \node at (2.5,0) {$C_2$};
                     \node at (3.5,0) {$C_3$};
-                    \node at (5,0) {$...$};
-                    \node at (6.5,0) {$C_n$};
+                    \node at (4.5,0) {$C_4$};
+                    \node at (5.5,0) {$...$};
+                    \node at (6.75,0) {$C_{m+1}$};
+
+                    % Puntos que le quito
+                    \node[draw, circle, fill=white, draw=blue, inner sep=1.5pt, label={[blue]below right:{$x_{m+1}$}}] at (6,0) {};
+
+                    \node at (3,-3.5) {$U$};
                 \end{scope}
 
                 \begin{scope}[shift={(5,0)}]
@@ -3466,14 +3474,23 @@ Si consideramos ahora $g=[\beta]_{U\cap V}$ tendríamos que
                     \node at (1.5,0) {$C_1$};
                     \node at (2.5,0) {$C_2$};
                     \node at (3.5,0) {$C_3$};
-                    \node at (5,0) {$...$};
-                    \node at (6.5,0) {$C_n$};
+                    \node at (4.5,0) {$C_4$};
+                    \node at (5.5,0) {$...$};
+                    \node at (6.75,0) {$C_{m+1}$};
+
+                    % Puntos que le quito
+                    \node[draw, circle, fill=white, draw=blue, inner sep=1.5pt, label={[blue] below right:{$x_1$}}] at (1,0) {};
+                    \node[draw, circle, fill=white, draw=blue, inner sep=1.5pt, label={[blue] below right:{$x_2$}}] at (2,0) {};
+                    \node[draw, circle, fill=white, draw=blue, inner sep=1.5pt, label={[blue] below right:{$x_3$}}] at (3,0) {};
+                    \node[draw, circle, fill=white, draw=blue, inner sep=1.5pt, label={[blue] below right:{$x_4$}}] at (4,0) {};
+
+                    \node at (3,-3.5) {$V$};
                 \end{scope}
             \end{tikzpicture}
         \end{figure}
-        Es claro que $X=U\cup V$ y además, $U,V$ y $U\cap V$ son arcoconexos. Es fácil ver que $U$ tiene por retracto de deformación a $\bigcup_{k=1}^{m}C_k$, es decir, podemos retraer la circunferencia $C_{m+1}$ a $x_0$ y dejar el resto igual. Por hipótesis de inducción tenemos que
+        Es claro que $X=U\cup V$ y además, $U,V$ y $U\cap V$ son arcoconexos. Es fácil ver que $U$ tiene por retracto de deformación a $\bigcup\limits_{k=1}^{m}C_k$, es decir, podemos retraer la circunferencia $C_{m+1}$ a $x_0$ y dejar el resto igual. Por hipótesis de inducción tenemos que
         \begin{gather*}
-            \pi_1(U,x_0) \cong \bb{Z} \ast \overset{(n)}{...} \bb{Z}
+            \pi_1(U,x_0) \cong \bb{Z} \ast \overset{(n)}{...} \ast \bb{Z}
         \end{gather*}
         Además, $V$ tiene por retracto de deformación a $C_{m+1}$ (se puede ver pensando en retraer todas las $C_i$ con $i=1,...,m$ a $x_0$), por lo que 
         \begin{gather*}
