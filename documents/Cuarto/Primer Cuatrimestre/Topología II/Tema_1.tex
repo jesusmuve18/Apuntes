@@ -1276,9 +1276,9 @@
             \node at (4,3) {$R = \bb{R}$};
 
             % Abiertos en preimagen
-            \draw[line width=1pt, green, ->] (-2, 2.96) -- (2, 2.96);
+            \draw[line width=1pt, green!60!black, ->] (-2, 2.96) -- (2, 2.96);
             \draw[line width=1pt, blue, ->] (-2, 3) -- (0, 3);
-            \draw[line width=1pt, red, ->] (-2, 3.04) -- (-1.5, 3.04);
+            \draw[line width=1pt, red, ->] (-2, 3.04) -- (-1.75, 3.04);
 
             % Puntos
             \node[draw, circle, fill=black, inner sep=1pt, label=below:{$r_0=0$}] at (-2,3) {};
@@ -1292,10 +1292,10 @@
             % Circunferencia
             \draw[thick] (0,-1) circle [radius=1.5];
             \node[anchor=west] at (1.7,0) {$B=\bb{S}^1$};
-            \draw[green, line width=1pt] (1.54,-1) arc (0:180:1.54);
-            \draw[green, line width=1pt] (1.6,-1) arc (0:-180:1.57);
-            \draw[green, line width=1pt] (1.6,-1) arc (0:180:1.6);
-            \draw[green, line width=1pt, <-] (1.66,-1) arc (0:-180:1.63);
+            \draw[green!60!black, line width=1pt] (1.54,-1) arc (0:180:1.54);
+            \draw[green!60!black, line width=1pt] (1.6,-1) arc (0:-180:1.57);
+            \draw[green!60!black, line width=1pt] (1.6,-1) arc (0:180:1.6);
+            \draw[green!60!black, line width=1pt, <-] (1.66,-1) arc (0:-180:1.63);
 
             \draw[blue, line width=1pt, ->] (1.5,-1) arc (0:360:1.5);
             \draw[red, line width=1pt, ->] (1.46,-1) arc (0:45:1.46);
@@ -1327,7 +1327,7 @@
         \end{gather*}
         Sabiendo que $\hat{\alpha}(1) = \phi([\alpha])$ y $\hat{\beta}(1) = \phi([\beta])$. Como $\hat{\alpha}(1)=\hat{\beta}(1)$ consideramos $\hat{\alpha} \ast \tilde{\hat{\beta}}$ que es un lazo basado en $r_0$. Como $R$ es simplemente conexo tenemos que
         \begin{gather*}
-             \left[\tilde{\hat{\beta}}\right] \ast [\hat{\alpha}] = \left[ \tilde{\hat{\beta}} \ast \hat{\alpha}\right] = [\veps_{r_0}]
+            [\hat{\alpha}] \ast \left[\tilde{\hat{\beta}}\right]  = \left[ \hat{\alpha} \ast \tilde{\hat{\beta}} \right] = [\veps_{r_0}]
         \end{gather*}
         por lo que se tiene 
         \begin{gather*}
