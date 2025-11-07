@@ -172,9 +172,112 @@
     Entonces son equivalentes:
     \begin{enumerate}
         \item Existe un levantamiento $\hat{f}:X \to R$ de $f$ con $\hat{f}(x_0)=r_0$.
-        \item $f_*(\pi_1(X,x_0))\subset p_*(\pi_1(R,r_0))$
+        \item $f_*(\pi_1(X,x_0))\subseteq p_*(\pi_1(R,r_0))$
     \end{enumerate}
     Además, si se cumple cualquiera de estas condiciones, el levantamiento $\hat{f}$ de $f$ con $\hat{f}(x_0)=r_0$ es único.
+
+    \begin{proof}\
+        \begin{itemize}
+            \item [(1) $\Rightarrow$ (2)] Estamos en la situación del siguiente diagrama
+            \begin{gather*}
+                \xymatrix{
+                    & \pi_1(R,r_0) \ar[d]^{p_*}\\
+                    \pi_1(X,x_0) \ar[ur]^{\hat{f}_x} \ar[r]_{f_*} & \pi_1(B,b_0)
+                }
+            \end{gather*}
+            y podemos ver que 
+            \begin{gather*}
+                f_*(\pi_1(X,x_0)) = p_*(\hat{f}_*(\pi_1(X,x_0))) \subseteq p_*(\pi_1(R,r_0))
+            \end{gather*}
+            ya que $\hat{f}_*(\pi_1(X,x_0))\subseteq \pi_1(R,r_0)$ por lo que tenemos esta implicación simplemente desarrollando la composición.
+
+            \item [(2) $\Rightarrow$ (1)] Empezamos definiendo $\hat{f}$:
+            \begin{gather*}
+                \xymatrix{
+                    & R \ar[d]^p\\
+                    X \ar[r]^f & B
+                }
+            \end{gather*}
+            Dado $x\in X$ elegimos $\alpha_x$ un arco en $X$ que una $x_0$ con $x$. Entonces $f\circ \alpha_x$ es un arco en $B$ que une $b_0 = f(x_0)$ con $f(x)$. Consideramos ahora $\widehat{f\circ \alpha_x}$ el único arco en $R$ tal que $\widehat{f\circ \alpha_x}(0) = r_0$ y definimos 
+            \begin{gather*}
+                \hat{f}(x) = \widehat{f\circ \alpha_x}(1)
+            \end{gather*}
+            Veamos que $\hat{f}$ está bien definida, es decir, que no depende del arco $\alpha_x$ elegido. Tomamos otro arco $\beta_x$ en $X$ tal que $\beta_x(0)=x_0$ y $\beta_x(1)=x$ y queremos ver que
+            \begin{gather*}
+                \widehat{f\circ \alpha_x}(1) = \widehat{f\circ \beta_x}(1)
+            \end{gather*}
+
+            Tomamos $\gamma=\alpha_x \ast \tilde{\beta_x}$ que es un lazo en $X$ con base en $x_0$. Tenemos entonces que 
+            \begin{gather*}
+                f \circ \gamma = (f\circ \alpha_x) \ast (f \circ \tilde{\beta_x})
+            \end{gather*}
+            es un lazo con base en $b_0$. Usamos ahora la hipótesis y tenemos que 
+            \begin{gather*}
+                [f\circ \gamma] = f_*([\gamma]) \in p_*(\pi_1(R, r_0))
+            \end{gather*}
+            Es decir, existe un arco $\delta$ con base en $r_0$ tal que $[f\circ \gamma] = [p\circ \delta]$. Sea $\widehat{f\circ \gamma}$ el único levantamiento de $f\circ \gamma$ que comienza en $r_0$. Tenemos que $f\circ \gamma$ es homotópico por arcos con $p\circ \delta$. Como $p_*$ es inyectiva tenemos que $\widehat{f\circ \gamma}$ es homotópico con $\delta$, por lo que ambos acaban en el mismo punto, es decir, tenemos que 
+            \begin{gather*}
+                \widehat{f\circ \gamma}(1) = \delta(1) = r_0
+            \end{gather*}
+            Además tenemos que 
+            \begin{gather*}
+                \widehat{f\circ \gamma} = \widehat{(f\circ \alpha_x) \ast \tilde{f\circ \beta_x}} = \widehat{f\circ \alpha_x} \ast \omega
+            \end{gather*}
+            donde $\widehat{f \circ \alpha_x}$ es el levantamiento de $f\circ \alpha_x$ empezando en $r_0$ y $\omega$ es el levantamiento de $\tilde{f\circ \beta_x}$ comenzando en $\widehat{f\circ \alpha_x}(1)$. Podemos ver que 
+            \begin{gather*}
+                 \left.
+                \begin{array}{c}
+                    p\circ \omega = \tilde{f\circ \beta_x} = f\circ \tilde{\beta_X}\\
+                    \omega(1) = r_0\\
+                    \omega(0) = \widehat{f\circ \alpha_x}(1)
+                \end{array}
+                \right\} \Rightarrow
+                \begin{array}{c}
+                    p\circ \tilde{\omega} = f\circ \beta_x\\
+                    \tilde{\omega}(0) = \omega(1) = r_0\\
+                    \tilde{\omega}(1) = \omega(0) = \widehat{f\circ \alpha_x}(1)
+                \end{array}
+            \end{gather*}
+            Por tanto
+            \begin{gather*}
+                \widehat{f\circ \beta_x}(1) = \tilde{\omega}(1)=\widehat{f\circ \alpha_x}(1)
+            \end{gather*}
+            lo que demuestra que la definición de $\hat{f}(x)$ está bien hecha.\\
+
+            Veamos ahora que $p\circ \hat{f}=f$. Para ello, dado $x\in X$ tenemos que ver que $(p\circ \hat{f})(x) = f(x)$. Veamos quién es $\hat{f}(x)$:
+            \begin{gather*}
+                \hat{f}(x) = \widehat{f\circ \alpha_x}(1)\\
+                p(\hat{f}(x)) = (p\circ (\widehat{f\circ \alpha_x}))(1) = (f\circ \alpha_x)(1) = f(\alpha_x(1)) = f(x)
+            \end{gather*}
+            También es claro que $\hat{f}(x_0)=r_0$ ya que para $x_0$ podemos elegir $\veps_{x_0}$ verificándose que $f\circ \veps_{x_0} = \veps_{b_0}$ luego 
+            \begin{gather*}
+                \widehat{f\circ \veps_{x_0}} = \hat{\veps}_{b_0} = \veps_{r_0} \Rightarrow \hat{f}(x_0) = \widehat{f\circ \veps_{x_0}}(1) = \veps_{r_0}(1) = r_0
+            \end{gather*}
+            Vamos a demostrar ahora que $\hat{f}$ es continua. 
+            \begin{gather*}
+                \xymatrix{
+                    & R \ar[d]^p\\
+                    X \ar[ur]^{\hat{f}} \ar[r]^f & B
+                }
+            \end{gather*}
+            Comenzamos tomando un punto $x\in X$ y vemos que $\hat{f}$ es continua en $x$. Sea $U$ un entorno de $\hat{f}(x)$. Tomamos $O$ abierto arcoconexo de $f(x)$ que esté regularmente recubierto, es decir
+            \begin{gather*}
+                p^{-1}(O) = \bigcup\limits_{i\in I} A_i \text{ con } A_i \text{ disjuntos}\\
+                p_{|A_i} : A_i \to O \text{ homomorfismo}
+            \end{gather*}
+            Como $\hat{f}(x)\in p^{-1}(f(x))\subseteq p^{-1}(O)$ tenemos que existe un único $i_0\in I$ tal que $\hat{f}(x)\in A_{i_0}$. Podemos suponer que $A_{i_0}\subseteq U$ (si no fuese así consideraríamos $U\cap A_{i_0}$). Como $f$ es continua, existe un abierto $V$ que contiene a $x$ tal que $f(V)\subseteq O$. Podemos suponer que $V$ es arcoconexo (si no lo fuese podríamos coger la componente arcoconexa de $V$ que contenga a $x$).\\
+            
+            Si probamos que $\hat{f}(V)\subseteq A_{i_0}\subseteq U$ tendríamos que $\hat{f}$ es continua en $x$. Para verlo consideramos un punto $y\in V$ y tomamos un arco $\gamma$ dentro de $V$ que una $x$ con $y$. Tenemos entonces que $\alpha_x\ast \gamma$ es un arco que une $x_0$ con $y$. Para ver quién es su imagen sabemos que 
+            \begin{gather*}
+                \hat{f}(y) = \widehat{f \circ (\alpha_x \ast \gamma)}(1) = \widehat{(f\circ \alpha_x) \ast (f\circ \gamma)}(1) 
+            \end{gather*}
+            donde $\widehat{(f\circ \alpha_x) \ast (f\circ \gamma)}$ es la única curva que se proyecta por $p$ en $(f\circ \alpha_x) \ast (f\circ \gamma)$ y comienza en $r_0$. Es decir, $\widehat{(f\circ \alpha_x) \ast (f\circ \gamma)}$ se puede ver como 
+            \begin{gather*}
+                \widehat{f\circ \alpha_x} \ast \widehat{\widehat{f\circ \gamma}}
+            \end{gather*}
+            donde $\widehat{\widehat{f\circ \gamma}}$ es el levantamiento de $f\circ \gamma$ pero comenzando en el punto $\widehat{f \circ \alpha_x}(1) = \hat{f}(x)$
+        \end{itemize}
+    \end{proof}
 \end{teo}
 
 \begin{observacion}
