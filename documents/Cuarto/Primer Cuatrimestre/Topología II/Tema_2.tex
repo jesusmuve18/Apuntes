@@ -263,7 +263,7 @@
             Comenzamos tomando un punto $x\in X$ y vemos que $\hat{f}$ es continua en $x$. Sea $U$ un entorno de $\hat{f}(x)$. Tomamos $O$ abierto arcoconexo de $f(x)$ que esté regularmente recubierto, es decir
             \begin{gather*}
                 p^{-1}(O) = \bigcup\limits_{i\in I} A_i \text{ con } A_i \text{ disjuntos}\\
-                p_{|A_i} : A_i \to O \text{ homomorfismo}
+                p_{|A_i} : A_i \to O \text{ homeomorfismo}
             \end{gather*}
             Como $\hat{f}(x)\in p^{-1}(f(x))\subseteq p^{-1}(O)$ tenemos que existe un único $i_0\in I$ tal que $\hat{f}(x)\in A_{i_0}$. Podemos suponer que $A_{i_0}\subseteq U$ (si no fuese así consideraríamos $U\cap A_{i_0}$). Como $f$ es continua, existe un abierto $V$ que contiene a $x$ tal que $f(V)\subseteq O$. Podemos suponer que $V$ es arcoconexo (si no lo fuese podríamos coger la componente arcoconexa de $V$ que contenga a $x$).\\
             
@@ -275,7 +275,14 @@
             \begin{gather*}
                 \widehat{f\circ \alpha_x} \ast \widehat{\widehat{f\circ \gamma}}
             \end{gather*}
-            donde $\widehat{\widehat{f\circ \gamma}}$ es el levantamiento de $f\circ \gamma$ pero comenzando en el punto $\widehat{f \circ \alpha_x}(1) = \hat{f}(x)$
+            donde $\widehat{\widehat{f\circ \gamma}}$ es el levantamiento de $f\circ \gamma$ pero comenzando en el punto $\widehat{f \circ \alpha_x}(1) = \hat{f}(x)$.
+            \begin{gather*}
+                Im(\gamma) \subseteq V \Rightarrow Im(f\circ \gamma)\subseteq O \Rightarrow \widehat{\widehat{f\circ \gamma}} \subseteq A_{i_0}
+            \end{gather*}
+            ya que $p_{|A_{i_0}}$ es un homeomorfismo por lo que llegamos finalmente a 
+            \begin{gather*}
+                \hat{f}(y) = \widehat{(f\circ \alpha_x) \ast (f\circ \gamma)}(1) = \widehat{\widehat{f\circ \gamma}}(1)\in A_{i_0}
+            \end{gather*}
         \end{itemize}
     \end{proof}
 \end{teo}
