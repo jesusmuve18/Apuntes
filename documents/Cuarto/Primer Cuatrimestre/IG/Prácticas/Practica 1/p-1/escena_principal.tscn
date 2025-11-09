@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://divq67slfuf5q"]
+[gd_scene load_steps=10 format=3 uid="uid://divq67slfuf5q"]
 
 [ext_resource type="Script" uid="uid://dqpxbsfp12s2s" path="res://scripts/globales/ejes3D.gd" id="1_jdg2m"]
 [ext_resource type="Script" uid="uid://cwrbe7bathbni" path="res://script_raiz.gd" id="1_rftnj"]
 [ext_resource type="Script" uid="uid://dlarofldpmv8x" path="res://scripts/nodos/piramide/piramide.gd" id="3_hcujj"]
 [ext_resource type="Script" uid="uid://i02ohha2s4em" path="res://scripts/globales/camara_3d_orbital_simple.gd" id="3_rftnj"]
 [ext_resource type="Script" uid="uid://cw10tlk1oxhw2" path="res://malla_piramide_l.gd" id="5_0or06"]
+[ext_resource type="Script" uid="uid://13gd73uir8rc" path="res://poligono_regular.gd" id="6_afc6g"]
+[ext_resource type="Script" uid="uid://slnjamjbutp6" path="res://estrella_z.gd" id="7_iupgd"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_r0811"]
 
@@ -37,4 +39,12 @@ altura = 0.5
 script = ExtResource("3_rftnj")
 
 [node name="MallaPiramideL" type="MeshInstance3D" parent="."]
+visible = false
 script = ExtResource("5_0or06")
+
+[node name="PoligonoRegular" type="MeshInstance3D" parent="."]
+visible = false
+script = ExtResource("6_afc6g")
+
+[node name="EstrellaZ" type="MeshInstance3D" parent="."]
+script = ExtResource("7_iupgd")

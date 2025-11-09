@@ -53,7 +53,7 @@ func _input( event : InputEvent ):
 				
 	elif event is InputEventMouseButton: ## botón ratón o rueda
 		match event.button_index:
-			MOUSE_BUTTON_RIGHT: 
+			MOUSE_BUTTON_RIGHT, MOUSE_BUTTON_LEFT: 
 				bdrp = event.pressed 
 				av = false 
 			MOUSE_BUTTON_WHEEL_DOWN: 
