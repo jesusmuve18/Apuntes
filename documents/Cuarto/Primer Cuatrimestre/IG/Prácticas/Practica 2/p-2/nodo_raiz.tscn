@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://drdkissjirps2"]
+[gd_scene load_steps=14 format=3 uid="uid://drdkissjirps2"]
 
 [ext_resource type="Script" uid="uid://vbongdsotjuy" path="res://scripts/nodos/script_raiz.gd" id="1_ldyy8"]
 [ext_resource type="PackedScene" uid="uid://4vnsvyas763r" path="res://modelos_3d/cubone/Cubone.glb" id="2_us6xe"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://jsg21l06sggw" path="res://scripts/nodos/RejillaY/rejilla_y.gd" id="9_b4wpg"]
 [ext_resource type="Script" uid="uid://b4fvpvxfgqy1r" path="res://scripts/nodos/Torre/torre.gd" id="10_68qwj"]
 [ext_resource type="Script" uid="uid://l0fgehqxtukx" path="res://scripts/nodos/ejes_3d.gd" id="11_pfnte"]
+[ext_resource type="Script" uid="uid://qr8j3dvdchnj" path="res://scripts/nodos/CasaX/casa_x.gd" id="11_vd7lh"]
 
 [node name="Nodo raiz" type="Node3D"]
 script = ExtResource("1_ldyy8")
@@ -42,7 +43,6 @@ skeleton = NodePath("../Cubo8vertices")
 script = ExtResource("6_gsrvs")
 
 [node name="EjemploRevolucion" type="MeshInstance3D" parent="Objetos_P2"]
-visible = false
 script = ExtResource("7_owntv")
 
 [node name="PiramideEstrellaZ" type="MeshInstance3D" parent="Objetos_P2"]
@@ -54,7 +54,12 @@ visible = false
 script = ExtResource("9_b4wpg")
 
 [node name="Torre" type="MeshInstance3D" parent="Objetos_P2"]
+visible = false
 script = ExtResource("10_68qwj")
+
+[node name="CasaX" type="MeshInstance3D" parent="Objetos_P2"]
+visible = false
+script = ExtResource("11_vd7lh")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 script = ExtResource("5_l4mx1")

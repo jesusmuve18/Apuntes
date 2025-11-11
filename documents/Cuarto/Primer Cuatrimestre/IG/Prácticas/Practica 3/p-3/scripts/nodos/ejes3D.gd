@@ -1,3 +1,6 @@
+## Nombre: Jesús, Apellidos: Muñoz Velasco, Titulación: GIM
+## email: jesusmuve18@correo.ugr.es, DNI o pasaporte: 76668409W
+
 extends Node3D
 
 func _crear_cilindro_y( n : int, dy : float ) -> ArrayMesh :
