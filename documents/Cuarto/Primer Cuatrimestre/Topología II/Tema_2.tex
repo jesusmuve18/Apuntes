@@ -311,15 +311,75 @@
     \end{gather*}
     Con la siguiente gráfica
 
-    podemos ver que $\pi_1(\bb{S}^1,(1,0))$ está generado por $[\alpha]$ con 
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[scale=0.8]
+            \shorthandoff{>}
+
+            \begin{scope}[shift={(-4,0)}]
+                % Ejes
+                \draw[thick] (-2,0) -- (2,0);
+                \draw[thick] (0,-2) -- (0,2);
+
+                % Circunferencia
+                \draw[thick, red, ->] (1.5,0) arc (0:360:1.5 and 1.5);
+                \node[red] at (2,0.75) {$\alpha(t)$};
+
+                % Punto
+                \node[draw, circle, fill=black,, violet, inner sep=1pt, label={[violet]below right:{\scriptsize $(1,0)$}}] at (1.5,0) {};
+
+
+                % Leyenda
+                \node at (0,-3) {$\bb{Z} \cong G = \pi_1(\bb{S}^1,(0,1))$};
+
+            \end{scope}
+
+            \node at (0,0.5) {$f_1$};
+            \draw[thick,->] (-0.5,0) -- (0.5,0);
+
+            \begin{scope}[shift={(4,0)}]
+                % Ejes
+                \draw[thick] (0,0) -- (0,2.5);
+                \draw[thick] (0,0) -- (2.5,0);
+                \draw[thick] (0,0) -- (-2.5,-2.5);
+                \draw[dashed] (0,0) ellipse (1 and 0.3);
+
+                % f_1(\alpha(t_1))
+                \draw[red, thick, dashed, rotate around={-45:(0,-0.3)}] (1.075,0.025)  arc (25:-155:1.2 and 0.75);
+                \draw[red, thick, rotate around={-45:(0,-0.3)}] (1.075,0.025)  arc (25:210:1.2 and 0.75);
+                \draw[->, red, thick, rotate around={-45:(0,-0.3)}] (0,0.45) ++(-0.02, 0) -- ++(0.01,0);
+
+                % Beta
+                \draw[dashed, blue] (-1,1) arc (180:0:1 and 0.3);
+                \draw[thick, blue] (-1,1) arc (-180:0:1 and 0.3);
+                \draw[->, blue, thick] (-0.3,0.7) ++(-0.02, 0.01) -- ++(0.01,-0.001);
+                \node[blue, anchor=west] at (1,1) {$\beta(t)$};
+
+                \node[red, anchor=west] at (1,-1) {$f_1(\alpha(t_1))$};
+
+                % Punto
+                \node[draw, circle, fill=black,, violet, inner sep=1pt, label={[violet]above:{\scriptsize $(1,0,1)$}}] at (-0.3,0.7) {};
+
+                % Cilindro 
+                \draw[thick] (-1,-2.5) -- (-1,2.5);
+                \draw[thick] (1,-2.5) -- (1,2.5);
+
+                % Leyenda
+                \node at (0,-3.5) {$G' = \pi_1(\bb{S}^1 \times \bb{R},(1,0,1))$};
+            \end{scope}
+
+        \end{tikzpicture}
+    \end{figure}
+
+    podemos ver que $\pi_1(\bb{S}^1,(1,0))$ está generado por $[\alpha]$ donde 
     \begin{gather*}
         \alpha(t) = (\cos(2\pi t), \sen(2\pi t))
     \end{gather*}
-    y $\pi_1(\bb{S}^1\times \bb{R}, (1,0,1))$ está generado por $[\beta]$ con 
+    y $\pi_1(\bb{S}^1\times \bb{R}, (1,0,1))$ está generado por $[\beta]$ done 
     \begin{gather*}
         \beta(t) = (\cos(2\pi t), \sen(2\pi t), 1)
     \end{gather*}
-    Además tenemos que 
+    Además es fácil ver en la misma gráfica que
     \begin{gather*}
         f_{1*}([\alpha]) = [f_1 \circ \alpha] = [\beta]\\
         f_{1*}(\pi_1(\bb{S}^1, (1,0))) = \pi_1(\bb{S}^1\times \bb{R}, (1,0,1))

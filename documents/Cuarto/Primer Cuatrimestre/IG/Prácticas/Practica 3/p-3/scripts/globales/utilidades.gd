@@ -123,6 +123,7 @@ func calcNormales( verts : PackedVector3Array,
 	# Hecho
 	return normales
 
+# Genera el arrayMesh a partir de los vertices y triangulos
 func GenerateArrayMesh(vertices: PackedVector3Array, triangulos: PackedInt32Array) -> ArrayMesh:
 	## Calculo las normales 
 	var normales = calcNormales(vertices, triangulos)

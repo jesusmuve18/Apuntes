@@ -3,6 +3,15 @@
 
 extends Node3D
 
+@export var rot_speed := 2.5 			# En vueltas por segundo
+@export var activar := "rotar_cubos" 	# Tecla 0
+var animacion_activa := true
+
+
+var nodo_rot_x := Node3D.new()	# Nodo que rotara en el eje X
+var nodo_rot_y := Node3D.new()	# Nodo que rotara en el eje Y
+var nodo_rot_z := Node3D.new()	# Nodo que rotara en el eje Z
+
 func _ready() -> void:
 	var n := 10 # Numero en eje X
 	var m := 10 # Numero en eje Z
@@ -19,9 +28,12 @@ func _ready() -> void:
 		mesh_plano.mesh = plano
 		mesh_plano.material_override = material
 		
+		# Caras laterales
 		if(i<4):
 			var angulo : float = (i*2*PI)/4
 			mesh_plano.rotate(Vector3.UP,angulo)
+		
+		# Tapas superior e inferior
 		if(i>=4):
 			var angulo : float = ((i-3.5)*PI)
 			print(angulo)
@@ -30,9 +42,10 @@ func _ready() -> void:
 		mesh_plano.translate(Vector3(0,0,0.5))
 		cubo_central.add_child(mesh_plano)
 	
+	# Añaddo el nodo cubo central
 	add_child(cubo_central)
 	
-	# Añado los cubos al cubo central
+	# Añado los cubos pequeños
 	material.albedo_color = Color(1.0, 1.0, 1.0, 1.0)
 	var size_cubo : float = 0.3
 	var alargar : float = 1.5
@@ -46,20 +59,38 @@ func _ready() -> void:
 		if(i<4):
 			var angulo : float = (i*2*PI)/4
 			mesh_cubo.rotate(Vector3.UP,angulo)
-		if(i>=4):
+		else :
 			var angulo : float = ((i-3.5)*PI)
-			print(angulo)
 			mesh_cubo.rotate(Vector3.RIGHT,angulo)
-		
 		
 		mesh_cubo.translate(Vector3(0,0,(size_cubo*alargar/2)+0.5))
 		mesh_cubo.scale = Vector3(1,1,alargar)
-		add_child(mesh_cubo)
+		
+		# Pongo cada cubo a rotar en su eje
+		if(i<4):
+			if(i%2==0):
+				nodo_rot_z.add_child(mesh_cubo)
+			else:
+				nodo_rot_x.add_child(mesh_cubo)
+		else:
+			nodo_rot_y.add_child(mesh_cubo)
 	
+	# Añado los nodos al nodo GrafoEstrellaX
+	add_child(nodo_rot_x)
+	add_child(nodo_rot_y)
+	add_child(nodo_rot_z)
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed(activar):
+		animacion_activa = !animacion_activa
 	
-	
-	
-	
+	if animacion_activa:	
+		# Girar cada nodo con respecto a su eje
+		nodo_rot_x.rotation.x += rot_speed * delta
+		nodo_rot_y.rotation.y += rot_speed * delta
+		nodo_rot_z.rotation.z += rot_speed * delta
+
+# Crea una rejilla perpendicular al eje Z
 func ArrayMeshRejilla( m: int, n: int ) -> ArrayMesh:
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -67,10 +98,10 @@ func ArrayMeshRejilla( m: int, n: int ) -> ArrayMesh:
 	
 	for i in range(n+1):
 		var fila = PackedVector3Array()
-		var tras_x : float = float(i)/n
+		var tras_x : float = (float(i)/n)-0.5
 		for j in range(m+1):
-			var tras_y : float = float(j)/m			
-			fila.append(Vector3(-0.5+tras_x, -0.5+tras_y, 0))
+			var tras_y : float = (float(j)/m)-0.5	
+			fila.append(Vector3(tras_x, tras_y, 0))
 		p.append(fila)
 		
 		
@@ -86,7 +117,7 @@ func ArrayMeshRejilla( m: int, n: int ) -> ArrayMesh:
 			
 	
 	return st.commit()
-	
+
 # Añade triángulo y calcula normal automáticamente
 func _add_triangulo_color(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, normal_override: Vector3 = Vector3.BACK):
 	var normal = normal_override
@@ -108,6 +139,7 @@ func _add_triangulo_color(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, n
 	st.set_color(Color(c.x, c.y, c.z))
 	st.add_vertex(c)
 
+# Crea un cubo de 24 vertices de tamaño size
 func ArrayMeshCubo24(size: float = 2) -> ArrayMesh:
 	## crear las tablas de vértices y triángulos de un cubo de 8 vertices 
 	var vertices := PackedVector3Array([])
@@ -129,13 +161,6 @@ func ArrayMeshCubo24(size: float = 2) -> ArrayMesh:
 	])
 	
 	var normales := Utilidades.calcNormales( vertices, triangulos )
-	
-	# Después de calcular las normales
-	for i in range(vertices.size()):
-		var n = normales[i].normalized()
-		var desplazamiento = 0.2  # cuánto quieres "abrir" el cubo
-		#vertices[i] += n * desplazamiento
-	
 	
 	## inicializar el array con las tablas
 	var tablas : Array = []   ## tabla vacía incialmente
