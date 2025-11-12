@@ -68,12 +68,12 @@ func ArrayMeshEstrellaZ( n: int ) -> ArrayMesh :
 	for i in range(2*n):
 		var p1 : Vector3 = p[i%(2*n)]
 		var p2 : Vector3 = p[(i+1)%(2*n)]
-		_add_triangulo_color(st, p1, p2, centro)
+		_add_triangulo_color_w(st, p1, p2, centro)
 	
 	return st.commit()
 	
 # De la practica 1
-func _add_triangulo_color(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, normal_override: Vector3 = Vector3.ZERO):
+func _add_triangulo_color_w(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, normal_override: Vector3 = Vector3.ZERO):
 	var normal = normal_override
 	if normal == Vector3.ZERO:
 		normal = Plane(a, b, c).normal
