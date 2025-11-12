@@ -348,14 +348,15 @@
                 \draw[red, thick, dashed, rotate around={-45:(0,-0.3)}] (1.075,0.025)  arc (25:-155:1.2 and 0.75);
                 \draw[red, thick, rotate around={-45:(0,-0.3)}] (1.075,0.025)  arc (25:210:1.2 and 0.75);
                 \draw[->, red, thick, rotate around={-45:(0,-0.3)}] (0,0.45) ++(-0.02, 0) -- ++(0.01,0);
-
+                \node[red, anchor=west] at (1,-1) {$f_1(\alpha(t_1))$};
+                
                 % Beta
                 \draw[dashed, blue] (-1,1) arc (180:0:1 and 0.3);
                 \draw[thick, blue] (-1,1) arc (-180:0:1 and 0.3);
                 \draw[->, blue, thick] (-0.3,0.7) ++(-0.02, 0.01) -- ++(0.01,-0.001);
                 \node[blue, anchor=west] at (1,1) {$\beta(t)$};
 
-                \node[red, anchor=west] at (1,-1) {$f_1(\alpha(t_1))$};
+                
 
                 % Punto
                 \node[draw, circle, fill=black,, violet, inner sep=1pt, label={[violet]above:{\scriptsize $(1,0,1)$}}] at (-0.3,0.7) {};
@@ -367,7 +368,6 @@
                 % Leyenda
                 \node at (0,-3.5) {$G' = \pi_1(\bb{S}^1 \times \bb{R},(1,0,1))$};
             \end{scope}
-
         \end{tikzpicture}
     \end{figure}
 
@@ -409,10 +409,10 @@
     \end{gather*}
     Como tenemos que 
     \begin{gather*}
-        f_{1*}(\pi_1(\bb{S}^1, (1,0))) = \{[\beta]^k : k\in \bb{Z}\}\\
-        p_*(\pi_1(\bb{S}^1 \times \bb{R}, (1,0,1))) = \{[\beta]^{2m}: m\in \bb{Z}\}
+        f_{1*}(\pi_1(\bb{S}^1, (1,0))) = \{[\beta]^k : k\in \bb{Z}\} \cong \bb{Z} \\
+        p_*(\pi_1(\bb{S}^1 \times \bb{R}, (1,0,1))) = \{[\beta]^{2m}: m\in \bb{Z}\} \cong 2\bb{Z}
     \end{gather*}
-    por lo que 
+    no se dará la inclusión 
     \begin{gather*}
         f_{1*}(\pi_1(\bb{S}^1, (1,0))) \nsubseteq p_*(\pi_1(\bb{S}^1 \times \bb{R}, (1,0,1)))
     \end{gather*}
