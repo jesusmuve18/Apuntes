@@ -453,14 +453,14 @@
 
 \section{Transformación de recubridores}
 
-Vamos a tratar hasta el final de este tema de clasificar los espacios recubridores de un espacio topológico $B$ dado. Para ello vamos a utilizar una nomenclatura clásica.
+Vamos a tratar en lo que queda de tema de clasificar los espacios recubridores de un espacio topológico $B$ dado. Comenzamos estableciendo para ello una nomenclatura clásica.
 
 \begin{notacion}
     Diremos que $(R,p)$ es un recubridor de $B$ si $p:R\to B$ es una aplicación recubridora.
 \end{notacion}
 
 \begin{definicion}
-    Sean $(R_1,p_2)$, $(R_2,p_2)$ dos espacios recubridores de un mismo e.t. base $B$, es decir, estamos en la siguiente situación
+    Sean $(R_1,p_2)$, $(R_2,p_2)$ dos espacios recubridores de un mismo e.t. base $B$, 
     \begin{gather*}
         \xymatrix{
             R_1 \ar[dr]_{p_1} & & R_2 \ar[dl]^{p_2}\\
@@ -477,7 +477,7 @@ Vamos a tratar hasta el final de este tema de clasificar los espacios recubridor
         \end{gather*}
         O equivalentemente $\phi$ es un levantamiento de la aplicación continua $p_1$ usando la aplicación recubridora $p_2$.
 
-        \item Un \textbf{isomorfismo de recubridores} $\phi$ de $(R_1,p_1)$ es $(R_2,p_2)$ es un homeomorfismo $\phi:R_1 \to R_2$ tal que $p_2 \circ \phi = p_1$.
+        \item Un \textbf{isomorfismo de recubridores} $\phi$ de $(R_1,p_1)$ es $(R_2,p_2)$ es un homomorfismo $\phi:R_1 \to R_2$ tal que $p_2 \circ \phi = p_1$.
 
         \item Un isomorfismo $\phi$ de $(R_1,p_1)$ es sí mismo se le llama \textbf{automorfismo de recubridores}. Al conjunto de todos los automorfismos lo notaremos por $\cc{A}(R_1,p_1)$.
     \end{enumerate}
@@ -492,9 +492,9 @@ Vamos a tratar hasta el final de este tema de clasificar los espacios recubridor
                 & B
             }
         \end{gather*}
-        recordando que la composición de una aplicación recubridora con un isomorfismo es recubridora. Además, $\phi$ de $(\hat{R}, p\circ \phi)$ en $(R,p)$ es un isomorfismo de recubridores. De hecho, de la definición se deduce que todo isomorfismo de recubridores es de la forma anterior.
+        recordando que la composición de una aplicación recubridora con un homeomorfismo es también una aplicación recubridora (visto en las propiedades de las aplicaciones recubridoras). Además, $\phi$ de $(\hat{R}, p\circ \phi)$ en $(R,p)$ es un isomorfismo de recubridores. De hecho, de la definición se deduce que todo isomorfismo de recubridores es de la forma anterior.
 
-        \item Si $\phi_1$ de $(R_1,p_1)$ es $(R_2,p_2)$ es un homomorfismo de recubridores y $\phi_2$ es otro desde $(R_2,p_2)$ en $(R_3,p_3)$, entonces $\phi_2\circ \phi_1$ es un homomorfismo de recubridores de $(R_1,p_1)$ en $R_3, p_3$. Tendríamos la siguiente situación:
+        \item Si $\phi_1$ de $(R_1,p_1)$ es $(R_2,p_2)$ es un homomorfismo de recubridores y $\phi_2$ es otro desde $(R_2,p_2)$ en $(R_3,p_3)$, entonces $\phi_2\circ \phi_1$ es un homomorfismo de recubridores de $(R_1,p_1)$ en $(R_3, p_3)$. Tendríamos la situación del siguiente diagrama:
         \begin{gather*}
             \xymatrix{
                 R_1 \ar[dr]_{p_1} \ar[r]^{\phi_1} & R_2 \ar[d]^{p_2} \ar[r]^{\phi_2} & R_3 \ar[dl]^{p_3}\\
@@ -528,13 +528,28 @@ Vamos a tratar hasta el final de este tema de clasificar los espacios recubridor
         Estamos en la siguiente situación
         \begin{gather*}
             \xymatrix{
-                R_1 \ar@/^/[rr]^{\phi_2} \ar@/_/[rr]_{\phi_1} \ar[dr]_{p_2} && R_2 \ar[dl]^{p_2} \\
+                R_1 \ar@/^/[rr]^{\phi_2} \ar@/_/[rr]_{\phi_1} \ar[dr]_{p_1} && R_2 \ar[dl]^{p_2} \\
                 & B
             }
         \end{gather*}
-        Si $\phi_1(r_1)=\phi_2(r_1)$, como $\phi_1$ y $\phi_2$ son levantamientos de $p_1$, entonces por el teorema de unicidad del levantamiento tenemos que $\phi_1=\phi_2$.\\
 
-        La segunda parte es aplicar la primera parte usando $\phi_1=\phi$ y $\phi_2=Id_R$.
+        Veamos la doble implicación de la primera mitad del corolario
+        \begin{itemize}
+            \item[$\Rightarrow$)] Es trivial que si $\phi_1=\phi_2$ entonces $\forall r \in R_1$ se tiene que $\phi_1(r)=\phi_2(r)$.
+            \item[$\Leftarrow$)] Supongamos que $\exists r_1\in R_1$ tal que $\phi_1(r_1)=\phi_2(r_1)$. Entonces, como $\phi_1$ y $\phi_2$ son levantamientos de $p_1$, por el teorema de unicidad del levantamiento tenemos que $\phi_1=\phi_2$.
+        \end{itemize}
+
+        Para probar la segunda parte del corolario aplicaremos lo ya probado tomando $\phi_1=\phi$ un homomorfismo de un recubridor $(R,p)$ en sí mismo y $\phi_2=Id_R$.
+        \begin{gather*}
+            \xymatrix{
+                R \ar@/^/[rr]^{Id_R} \ar@/_/[rr]_{\phi} \ar[dr]_{p} && R \ar[dl]^{p} \\
+                & B
+            }
+        \end{gather*}
+        Entonces tendríamos que 
+        \begin{gather*}
+            \phi = Id_R \sii \exists r\in R : \phi(r)=Id_R(r)=r
+        \end{gather*}
     \end{proof}
 \end{coro}
 
@@ -553,33 +568,51 @@ Vamos a tratar hasta el final de este tema de clasificar los espacios recubridor
     \end{enumerate}
 
     \begin{proof}
-        Estamos en la siguiente situación (donde se ha puesto la equivalencia con la notación que usamos para el teorema de existencia del levantamiento)
-        \begin{gather*}
-            \xymatrix{
-                X = R_1 \ar[rr]^{\phi \overset{?}{\equiv} \hat{f}} \ar[dr]_{f=p_1} && R_2=R \ar[dl]^{p_2=p} \\
-                & B
-            }
-        \end{gather*}
-        Entonces el teorema de existencia del levantamiento nos decía que existe $\phi$ levantamiento de $p_1$ con $\phi(r_1) = r_2$ si y solo si 
-        \begin{gather*}
-            p_{1*}(\pi_1(R_1,r_1)) \subseteq p_{2*}(\pi_1(R_2,r_2))
-        \end{gather*}
-        La segunda parte es clara por la doble inclusión. Es decir tenemos        \begin{gather*}
-            \xymatrix{
-                R_1 \ar[r]^{\phi} \ar[dr]_{p_1} & R_2 \ar[d]^{p_2} \ar[r]^{\varphi} & R_1\ar[dl]^{p^1} \\
-                & B
-            }
-        \end{gather*}
-        Tenemos que 
-        \begin{gather*}
-            p_{1*}(\pi_1(R_1,r_1)) \subseteq p_{2*}(\pi_1(R_2,r_2))\\
-            p_{2*}(\pi_2(R_2,r_2)) \subseteq p_{1*}(\pi_1(R_1,r_1))
-        \end{gather*}
-        y además 
-        \begin{gather*}
-            \varphi \circ \phi = Id_{R_1} \ \ \ \ \phi \circ \varphi = Id_{R_2}
-        \end{gather*}
-        por ser $r_1$ y $r_2$ puntos fijos respectivamente.
+        Veamos cada punto por separado.
+        \begin{enumerate}
+            \item Estamos en la siguiente situación (donde se ha puesto la equivalencia con la notación que usamos para el teorema de existencia del levantamiento)
+            \begin{gather*}
+                \xymatrix{
+                    X = R_1 \ar[rr]^{\phi \overset{?}{\equiv} \hat{f}} \ar[dr]_{f=p_1} && R_2=R \ar[dl]^{p_2=p} \\
+                    & B
+                }
+            \end{gather*}
+            Entonces por el teorema de existencia del levantamiento tenemos que existe $\phi$ levantamiento de $p_1$ con $\phi(r_1) = r_2$ si y solo si 
+            \begin{gather*}
+                p_{1*}(\pi_1(R_1,r_1)) \subseteq p_{2*}(\pi_1(R_2,r_2))
+            \end{gather*}
+
+            \item Veamos la doble inclusión. En primer lugar denotamos por $\phi$ al isomorfismo y a su inversa la llamaremos $\varphi$. Esta aplicación verifica  que
+            \begin{gather*}
+                \varphi \circ \phi = Id_{R_1} \ \ \ \ \phi \circ \varphi = Id_{R_2}
+            \end{gather*}
+            y además es también un isomorfismo (por lo que en particular es un homomorfismo). Estaríamos en la situación del siguiente diagrama
+            \begin{gather*}
+                \xymatrix{
+                    R_1 \ar[r]^{\phi} \ar[dr]_{p_1} & R_2 \ar[d]^{p_2} \ar[r]^{\varphi} & R_1\ar[dl]^{p^1} \\
+                    & B
+                }
+            \end{gather*}
+            donde $\phi$ y $\varphi$ son homomorfismos. Por hipótesis tenemos que $\exists r_1\in p_1^{-1}(b_0)$, $r_2\in p_2^{-1}(b_0)$ tales que $\phi(r_1)=r_2$. Si componemos esta igualdad por la izquierda con $\varphi$ tenemos
+            \begin{gather*}
+                (\varphi \circ \phi) (r_1) = \varphi(r_2) \Rightarrow Id_R(r_1) = \phi(r_2) \Rightarrow r_1 = \varphi(r_2)
+            \end{gather*}
+            Por tanto aplicando el primer punto del corolario a $\phi$ (es un homomorfismo con $\phi(r_1)=r_2$) tenemos que 
+            \begin{gather*}
+                p_{1*}(\pi_1(R_1,r_1)) \subseteq p_{2*}(\pi_1(R_2,r_2))
+            \end{gather*}
+            y aplicando lo mismo de nuevo a $\varphi$ (es un homomorfismo con $\varphi(r_2)=r_1$) tenemos que 
+            \begin{gather*}
+                p_{2*}(\pi_2(R_2,r_2)) \subseteq p_{1*}(\pi_1(R_1,r_1))
+            \end{gather*}
+            por lo que llegamos finalmente a que 
+            \begin{gather*}
+                p_{1*}(\pi_1(R_1,r_1)) = p_{2*}(\pi_1(R_2,r_2))
+            \end{gather*}
+        \end{enumerate}
+
+        
+        
     \end{proof}
 \end{coro}
 
