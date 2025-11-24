@@ -133,7 +133,9 @@
 
     \begin{proof}\
         \begin{enumerate}
-            \item[(i)] Dado $\alpha \in \Omega(X;x,y)$ queremos ver que $\alpha$ es homotópica por arcos con $\alpha$. Para ello tenemos 
+            \item[(i)] Dado $\alpha \in \Omega(X;x,y)$ queremos ver que $\alpha$ es homotópica por arcos con $\alpha$. Para ello podemos definir la homotopía por arcos
+            \Func{H}{[0,1]\times[0,1]}{X}{(s,t)}{\alpha(s)}
+            Como $\alpha\in \Omega(X;x,y)$ tenemos que $\alpha(s)\in X$ para todo $s\in [0,1]$. Además se verifica que
             \begin{align*}
                 H(s,t) = \alpha(s) \hspace{1cm} & H(s,0) = \alpha(s)=H(s,1)\\
                 H(0,t) = \alpha(0)=x \hspace{1cm} & H(1,t) = \alpha(1) = y
@@ -195,7 +197,9 @@
     \end{proof}
 \end{lema}
 
-% TODO: Hacer lo mismo pero para homotopía
+\begin{observacion}
+    Este resultado es análogo para homotopías. Es decir, ser homotópico da lugar a una relación de equivalencia en $C(X,Y) = \{f :X\to Y : f \text{ continua}\}$.
+\end{observacion}
 
 \begin{ejemplo}\
     \begin{enumerate}
@@ -258,7 +262,7 @@
         \begin{gather*}
             \begin{array}{c c c c}
                 H_1(s,0) = \alpha_1(s) &&& H_2(s,0) = \beta_1(s)\\
-                H_1(s,1) = \beta_1(s) &&& H_2(s,1) = \beta_2(s)\\
+                H_1(s,1) = \alpha_2(s) &&& H_2(s,1) = \beta_2(s)\\
                 H_1(0,t) = x &&& H_2(0,t) = y\\
                 H_1(1, t) = y &&& H_2(1,t) = z
             \end{array}
