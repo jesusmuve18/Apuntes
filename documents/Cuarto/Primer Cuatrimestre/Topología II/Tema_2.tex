@@ -1046,14 +1046,23 @@ Hasta ahora lo que hemos visto es que para estudiar el número de recubridores d
         \item Tomamos el conjunto de $\bb{R}^3$
         \begin{gather*}
             B = \left\{ (x,y,z)\in \bb{R}^3 : 
-                \begin{array}{c}
+                \begin{array}{l}
                     z=\lambda,\ \lambda \geq 0\\
                     (x,y) = \lambda(a,b),\ \text{ con } (a,b)\in \bigcup\limits_{n\in \bb{N}}S_n
                 \end{array}
             \right\}
         \end{gather*}
-        Donde $S_n$ es una de las circunferencias del ejemplo anterior. Esto si se analiza gráficamente es fácil ver que son un montón de conos unidos con el origen y tangentes al $(0,0,1)$ y que intersecan con el plano de altura $1$ formando circunferencias tangentes al $(0,0,1)$ de la forma $S_n$.\\
+        Donde $S_n$ es una de las circunferencias del ejemplo anterior. Esto si se analiza gráficamente es fácil ver que son un montón de conos unidos con el origen y tangentes a la recta $R = \cc{L}\{(0,0,1)\}$ y que intersecan con el plano de altura $1$ formando circunferencias tangentes al $(0,0,1)$ de la forma $S_n$.\\
 
         Tenemos que $B$ es simplemente conexo por ser contráctil pero no es localmente simplemente conexo.
     \end{enumerate}
 \end{ejemplo}
+
+\begin{teo}
+    Sea $B$ un espacio topológico conexo y localmente arcoconexo y fijamos un punto $b_0\in B$. Entonces las siguientes afirmaciones son equivalentes:
+    \begin{enumerate}
+        \item Para cada clase de conjugación de un subgrupo $H\leq \pi_1(B,b_0)$ existe un único recubridor $(R,p)$ (salvo isomorfismo), y un punto $r_0\in R$ tal que $p(r_0)=b_0$ y $H=p_*(\pi_1(R,r_0))$.
+        \item $B$ tiene un recubridor universal.
+        \item $B$ es semilocalmente simplemente conexo.
+    \end{enumerate} 
+\end{teo}
