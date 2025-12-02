@@ -1,0 +1,29 @@
+<tipo> & <identificador> = <iniciador>
+
+
+Ejemplo 1:
+
+int a=0; //Necesario para evitar el error de compilación (iniciador)
+int &ref=a;
+ref=5; //ahora "a" vale 5
+cout<<a<<endl;
+
+
+Ejemplo 2:
+
+int v[5]={1,2,3,4,5};
+int &ref=v[3]; //Modifica el dato de memoria almacenado en la posición 3 del array
+ref=0;
+cout<<v[3]<<endl;  // ahora vale 0
+
+Swap: "intercambiar"
+"La pila es donde se apila" Nosequien Cano
+
+Paso de valores por referencia:
+
+argumentos de la función:  Funcion (<tipo> &identificador, <tipo> &identificador); //Modifica los datos por referencia
+
+
+
+
+
