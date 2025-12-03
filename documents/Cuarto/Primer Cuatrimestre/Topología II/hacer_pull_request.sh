@@ -53,3 +53,6 @@ git push -f origin "$LOCAL_BRANCH"
 
 echo 
 echo "Listo para pull request desde GitHub"
+
+# --- Paso 7: abrir chrome ---
+google-chrome --profile-directory="Default" https://github.com/jesusmuve18/LosDelDGIIM.github.io/tree/local
