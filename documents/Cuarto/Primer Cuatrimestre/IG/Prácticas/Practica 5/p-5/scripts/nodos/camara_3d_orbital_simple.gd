@@ -11,7 +11,6 @@ const ar   := 0.5   ## ángulo de rot. con ratón (en grados x pixel)
 var   bdrp := false ## botón derecho del ratón presionado sí/no
 var   dz   := 3.0   ## distancia en Z de la cámara al origen
 var   dxy  := Vector2( 0.0, 0.0 ) ## ángulos hor. y vert. (en grados)
-var selected : Node = null ## Objeto seleccionado
 
 @onready var ray = $RayCast3D # == nodo `RayCast3D` hijo de la cámara
 
@@ -81,13 +80,9 @@ func _input( event : InputEvent ):
 							if padre.name == "Suelo":
 								Utilidades.crear_cubo_en(ray.get_collision_point())
 								print("Creado cubo en:", ray.get_collision_point())
-						if(padre!=selected):
-							seleccionar(padre)
-						else:
-							deseleccionar()
+						seleccionar(padre)
 					else:
 						print("Ningun objeto seleccionado")
-						deseleccionar()
 			_: av = false
 				
 	elif event is InputEventMouseMotion and bdrp: ## movim. ratón
@@ -99,12 +94,7 @@ func _input( event : InputEvent ):
 	if av:
 		_actualiza_transf_vista( )
 		
-func seleccionar(new_selected : Node) -> void:
-	deseleccionar()
-	if(new_selected!=null and new_selected.has_method("select")): new_selected.select()
-	selected = new_selected
+func seleccionar(selected : Node) -> void:
+	if(selected!=null and selected.has_method("select")): selected.select()
 
-func deseleccionar() -> void:
-	if(selected!=null and selected.has_method("unselect")): selected.unselect()
-	selected = null
 	
