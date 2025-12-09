@@ -1,0 +1,117 @@
+\documentclass[12pt]{book}
+
+\input{../../../../_assets/preambulo.tex}
+\input{../../../../_assets/portada.tex}
+
+\begin{document}
+    \portada[%
+        titulo=Inferencia Estadística,
+        subtitulo=Tema 8. Participación extra,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2025-2026]
+        
+    \begin{ejercicio}
+        El departamento de Recursos Humanos de una empresa de logística quiere analizar si existe una relación lineal entre la antigüedad de los empleados (en años) y su productividad mensual (medida en miles de unidades procesadas). Para ello, selecciona una muestra aleatoria de 8 empleados y obtiene los siguientes datos:
+        \begin{center}
+            \begin{tabular}{|l | c c c c c c c c|}
+                \hline
+                Antigüedad (años) & 2 & 4 & 6 & 8 & 10 & 12 & 14 & 16 \\
+                Productividad (miles uds./mes) & 14 & 16 & 26 & 38 & 30 & 42 & 54 & 55\\
+                \hline
+            \end{tabular}
+        \end{center}
+        \begin{enumerate}
+            \item[a)] Obtener la recta de regresión estimada de la productividad sobre la antigüedad e interpretar sus coeficientes.
+            \item[b)] Descomponer la variabilidad (VT, VE, VNE), obtener la varianza residual ($S_R^2$) y calcular el coeficiente de determinación ($r^2$), interpretando el resultado.
+            \item[c)] Predecir la productividad para un empleado con 11 años de antigüedad.
+            \item[d)] Suponiendo las hipótesis de normalidad, contrastar al nivel de significación $\alpha=0.05$ si existe una relación lineal significativa entre ambas variables.
+        \end{enumerate}
+    \end{ejercicio}
+    \hrulefill
+    \section*{Resolución}
+    \begin{enumerate}
+        \item[a)] De los datos aportados podemos construir la siguiente tabla
+        \begin{center}
+            \begin{tabular}{c | c c c c c}
+                & $x_i$ & $y_i$ & $x_i^2$ & $x_iy_i$ & $y_i^2$\\
+                \hline
+                & 2 & 14 & 4 & 28 & 196\\
+                & 4 & 16 & 16 & 64 & 256 \\
+                & 6 & 26 & 36 & 156 & 676 \\
+                & 8 & 38 & 64 & 304 & 1444 \\
+                & 10 & 30 & 100 & 300 & 900 \\
+                & 12 & 42 & 144 & 504 & 1764 \\
+                & 14 & 54 & 196 & 756 & 2916 \\
+                & 16 & 55 & 256 & 880 & 3025\\
+                \hline
+                Sumas & 72 & 275 & 816 & 2992 & 11177\\
+            \end{tabular}
+        \end{center}
+        Pasamos a calcular con estos datos las medidas necesarias para el cálculo de la recta de regresión:
+        \begin{gather*}
+            \overline{x} = \frac{72}{8} = 9 \text{ años}\\
+            \overline{y} = \frac{275}{8} = 34.375 \text{ miles uds./mes}\\
+            \sigma_x^2 = \frac{816}{8} -9^2 = 102 -81 = 21\\
+            \sigma_y^2 = \frac{11177}{8} - 34,375^2 \cong  1397,125 - 1181.64 = 215,485\\
+            \sigma_{xy} = \frac{2992}{8} - (9 \cdot 34,375) = 374 - 309,375 = 64,625
+        \end{gather*}
+        Como sabemos que la fórmula de la recta de regresión viene dada por 
+        \begin{gather*}
+            y = \bar{y} + \frac{\sigma_{xy}}{\sigma_x^2}(x - \bar{x})
+        \end{gather*}
+        podemos sustituir los valores recién calculados obteniendo finalmente la recta de regresión.
+        \begin{gather*}
+            y = 34,375 + \frac{64,625}{21}(x-9) \cong 6,6786 + 3,0774x
+        \end{gather*}
+        Podemos interpretar este resultado de la siguiente forma:
+        \begin{itemize}
+            \item Por cada año adicional de antigüedad, la productividad aumenta en promedio unas $3,0774$ miles de unidades.
+            \item Un empleado recién contratado ($x=0$) tendría una productividad base estimada de $6,6786$ miles de unidades mensuales.
+        \end{itemize}
+
+        \item[b)] Comenzamos calculando la variabilidad:
+        \begin{gather*}
+            VT = n\sigma_y^2 = 8 \cdot 215,485 = 1723,88\\
+            VE = \frac{n\sigma_{xy}^2}{\sigma_x^2} = \frac{8 \cdot 64,625^2}{21} \cong 1591,006\\
+            VNE = VT -VE = 1723,88 - 1591,006 = 132,874
+        \end{gather*}
+        Calculamos ahora la varianza residual:
+        \begin{gather*}
+            S_R^2 = \frac{VNE}{n-2} = \frac{132,874}{6} \cong 22,1457
+        \end{gather*}
+        Calculamos el coeficiente de determinación:
+        \begin{gather*}
+            r^2 = \frac{VE}{VT} = \frac{1591,006}{1723,88} \cong 0,9229
+        \end{gather*}
+        A partir de este resultado podemos concluir que el modelo estimado explica el $92,29\%$ de la variabilidad de la productividad. El ajuste es por tanto muy bueno por lo que hay una relación lineal bastante considerable. 
+
+        \item[c)] Calculamos ahora la productividad para un empleado con $x_p=11$ años de antigüedad a partir de la recta de regresión calculada anteriormente:
+        \begin{gather*}
+            \hat{y}_p = 6,6786 + 3,0774x_p = 6,6786 + 3,0774\cdot 11 = 40,53 \text{ miles uds./mes}
+        \end{gather*}
+        
+        \item[d)] Planteamos el contraste para confirmar si existe relación lineal
+        \begin{gather*}
+            \left\{
+                \begin{array}{c}
+                    H_0: \beta_1 = 0 \text{ (No hay relación lineal)}\\
+                    H_1: \beta_1 \neq 0 \text{ (Existe relación lineal)}
+                \end{array}
+            \right.
+        \end{gather*}
+        donde para $n=7$ y $\alpha = 0,05$
+        \begin{gather*}
+            \varphi(Y) = \left\{
+                \begin{array}{ccc}
+                    1 & \text{ si } & F(Y) > F_{1,n-2;\alpha} \\
+                    0 & \text{ si } & F(Y) \leq F_{1,n-2;\alpha} 
+                \end{array}
+            \right.
+        \end{gather*}
+        Consideramos entonces el siguiente estadístico de prueba
+        \begin{gather*}
+            F_{exp} =  \frac{VE}{S_R^2} = \frac{1591,006}{22,1457} \cong 71,8426
+        \end{gather*}
+        de la tabla $F$ de Snedecor tenemos que $F_{1, 6; 0.05} \cong 5.99$. Como $F_exp > F_{1,6;0,05}$ rechazamos la hipótesis $H_0$, es decir, los datos aportan evidencia de una relación lineal. Esto concuerda con el valor tan alto que hemos obtenido al calcular $r^2$. Finalmente podemos afirmar que existe evidencia estadística significativa, al $95\%$ de confianza, para concluir que la productividad depende linealmente de la antigüedad.
+    \end{enumerate}
+\end{document}
