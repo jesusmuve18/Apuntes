@@ -1041,6 +1041,58 @@ la podemos cambiar por
     w_i' = a_{i_l}^{-\veps_l}...a_{i_2}^{-\veps_2}a_{i_1}^{-\veps_1}
 \end{gather*}
 
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \shorthandoff{>}
+        \begin{scope}[shift={(-3.5,0)}]
+            % Cuadrado
+            \draw[thick] (0,1.5) -- (0,0); %1
+            \draw[thick] (0,0) -- (1.5,0); %2
+            \draw[thick] (1.5,0) -- (1.5,1.5); %3
+            \draw[thick] (1.5,1.5) -- (0,1.5); %4
+
+            \draw[dashed] (0.75,-0.1) -- (0.75,1.6);
+
+            % Leyenda
+            \node[label=left:{$c^{-1}$}] at (0, 0.75) {}; %1
+            \node[label=below:{$d^{-1}$}] at (0.75, 0) {}; %2
+            \node[label=right:{$a$}] at (1.5, 0.75) {}; %3
+            \node[label=above:{$b$}] at (0.75, 1.5) {}; %4
+
+            % Flechas
+            \draw[<-, thick] (0,0.75) ++(0, 0.01) -- ++(0,-0.01); %1
+            \draw[<-, thick] (0.75,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[->, thick] (1.5,0.75) ++(0, -0.01) -- ++(0,0.01); %3
+            \draw[->, thick] (0.75,1.5) ++(0.01, -0.01) -- ++(-0.01,0); %4
+
+        \end{scope}
+
+        \draw[thick, dashed, ->] (-0.5,0.75) -- (0.5,0.75);
+
+        \begin{scope}[shift={(2,0)}]
+            % Cuadrado
+            \draw[thick] (0,1.5) -- (0,0); %1
+            \draw[thick] (0,0) -- (1.5,0); %2
+            \draw[thick] (1.5,0) -- (1.5,1.5); %3
+            \draw[thick] (1.5,1.5) -- (0,1.5); %4
+
+            % Leyenda
+            \node[label=left:{$a^{-1}$}] at (0, 0.75) {}; %1
+            \node[label=below:{$d$}] at (0.75, 0) {}; %2
+            \node[label=right:{$c$}] at (1.5, 0.75) {}; %3
+            \node[label=above:{$b^{-1}$}] at (0.75, 1.5) {}; %4
+
+            % Flechas
+            \draw[<-, thick] (0,0.75) ++(0, 0.01) -- ++(0,-0.01); %1
+            \draw[->, thick] (0.75,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[->, thick] (1.5,0.75) ++(0, -0.01) -- ++(0,0.01); %3
+            \draw[<-, thick] (0.75,1.5) ++(0.01, -0.01) -- ++(-0.01,0); %4
+
+        \end{scope}
+    \end{tikzpicture}
+\end{figure}
+
 \subsubsection{Rotar}
 Dada una expresión
 \begin{gather*}
@@ -1051,6 +1103,49 @@ la podemos cambiar por
     w_i'=a_{i_{k+1}}^{\veps_{k+1}}...a_{i_l}^{\veps_l}a_{i_1}^{\veps_1}...a_{i_k}^{\veps_k}
 \end{gather*}
 
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \shorthandoff{>}
+
+        \begin{scope}[shift={(-3.5,0)}]
+            % Triángulo
+            \draw[thick] (1,1.5) -- (0,0); %1
+            \draw[thick] (0,0) -- (2,0); %2
+            \draw[thick] (2,0) -- (1,1.5); %3
+
+            % Leyenda
+            \node[label=left:{$b$}] at (0.5,0.73) {}; %1
+            \node[label=below:{$c^{-1}$}] at (1, 0) {}; %2
+            \node[label=right:{$a$}] at (1.5, 0.73) {}; %3
+
+            % Flechas
+            \draw[->, thick] (0.5,0.73) ++(0, 0.01) -- ++(-0.01,-0.01); %1
+            \draw[<-, thick] (1,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[->, thick] (1.5,0.73) ++(0, -0.01) -- ++(-0.01,0.01); %3
+        \end{scope}
+
+        \draw[thick, dashed, ->] (-0.5,0.75) -- (0.5,0.75);
+
+        \begin{scope}[shift={(1.5,0)}]
+            % Triángulo
+            \draw[thick] (1,1.5) -- (0,0); %1
+            \draw[thick] (0,0) -- (2,0); %2
+            \draw[thick] (2,0) -- (1,1.5); %3
+
+            % Leyenda
+            \node[label=left:{$a$}] at (0.5,0.73) {}; %1
+            \node[label=below:{$b$}] at (1, 0) {}; %2
+            \node[label=right:{$c^{-1}$}] at (1.5, 0.73) {}; %3
+
+            % Flechas
+            \draw[->, thick] (0.5,0.73) ++(0, 0.01) -- ++(-0.01,-0.01); %1
+            \draw[->, thick] (1,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[<-, thick] (1.5,0.73) ++(0, -0.01) -- ++(-0.01,0.01); %3
+        \end{scope}
+    \end{tikzpicture}
+\end{figure}
+
 \subsubsection{Cortar}
 Dada una expresión
 \begin{gather*}
@@ -1060,7 +1155,74 @@ podemos sustituirla por las dos expresiones
 \begin{gather*}
     w_i' = a_{i_1}^{\veps_1}...a_{i_k}^{\veps_k}b\ \ ,\ \ w_i'' = b^{-1}a_{i_{k+1}}^{\veps_{k+1}}...a_{i_l}^{\veps_l}
 \end{gather*}
-Esto siempre se podrá hacer siempre que $w_i'$ y $w_i''$ se queden con al menos de 3 símbolos.
+Esto se podrá hacer siempre que $w_i'$ y $w_i''$ se queden con al menos de 3 símbolos.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \shorthandoff{>}
+        \begin{scope}[shift={(-3.5,0)}]
+            % Cuadrado
+            \draw[thick] (0,1.5) -- (0,0); %1
+            \draw[thick] (0,0) -- (1.5,0); %2
+            \draw[thick] (1.5,0) -- (1.5,1.5); %3
+            \draw[thick] (1.5,1.5) -- (0,1.5); %4
+
+            \draw[dashed] (-0.5,-0.5) -- (2,2);
+
+            % Leyenda
+            \node[label=left:{$c$}] at (0, 0.75) {}; %1
+            \node[label=below:{$a^{-1}$}] at (0.75, 0) {}; %2
+            \node[label=right:{$a$}] at (1.5, 0.75) {}; %3
+            \node[label=above:{$b$}] at (0.75, 1.5) {}; %4
+
+            % Flechas
+            \draw[->, thick] (0,0.75) ++(0, 0.01) -- ++(0,-0.01); %1
+            \draw[<-, thick] (0.75,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[->, thick] (1.5,0.75) ++(0, -0.01) -- ++(0,0.01); %3
+            \draw[->, thick] (0.75,1.5) ++(0.01, -0.01) -- ++(-0.01,0); %4
+
+        \end{scope}
+
+        \draw[thick, dashed, ->] (-0.5,0.75) -- (0.5,0.75);
+
+        \begin{scope}[shift={(2,0)}]
+            % Cuadrado
+            \draw[thick] (0,1.5) -- (0,0); %1
+            \draw[thick, red] (0,0) -- (1.5,1.5); %2-3
+            \draw[thick] (1.5,1.5) -- (0,1.5); %4
+
+            % Leyenda
+            \node[label=left:{$c$}] at (0, 0.75) {}; %1
+            \node[label={[red]below:{$d^{-1}$}}] at (0.75, 0.75) {}; %2-3
+            \node[label=above:{$b$}] at (0.75, 1.5) {}; %4
+
+            % Flechas
+            \draw[->, thick] (0,0.75) ++(0, 0.01) -- ++(0,-0.01); %1
+            \draw[<-, thick, red] (0.75,0.75) ++(-0.01, -0.01) -- ++(0.01,0.01); %2-3
+            \draw[->, thick] (0.75,1.5) ++(0.01, -0.01) -- ++(-0.01,0); %4
+
+        \end{scope}
+
+        \begin{scope}[shift={(3,0)}]
+            % Cuadrado
+            \draw[thick] (0,0) -- (1.5,0); %2
+            \draw[thick] (1.5,0) -- (1.5,1.5); %3
+            \draw[thick, red] (1.5,1.5) -- (0,0); %4-1
+
+            % Leyenda
+            \node[label=below:{$a^{-1}$}] at (0.75, 0) {}; %2
+            \node[label=right:{$a$}] at (1.5, 0.75) {}; %3
+            \node[label={[red]above:{$d$}}] at (0.75, 0.75) {}; %4-1
+
+            % Flechas
+            \draw[->, thick] (0.75,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[->, thick] (1.5,0.75) ++(0, -0.01) -- ++(0,0.01); %3
+            \draw[->, thick, red] (0.75,0.75) ++(0.01, 0.01) -- ++(-0.01,-0.01); %4-1
+
+        \end{scope}
+    \end{tikzpicture}
+\end{figure}
 
 \subsubsection{Pegar}
 Es la operación opuesta a cortar. Dadas dos expresiones de la forma 
@@ -1071,6 +1233,71 @@ las podemos sustituir por una única
 \begin{gather*}
     w = a_{i_1}^{\veps_1}...a_{i_k}^{\veps_k}a_{j_{1}}^{\veps_{1}}...a_{j_l}^{\veps_l}
 \end{gather*}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \shorthandoff{>}
+        \begin{scope}[shift={(-4.5,0)}]
+            % Cuadrado
+            \draw[thick] (0,1.5) -- (0,0); %1
+            \draw[thick] (0,0) -- (1.5,1.5); %2-3
+            \draw[thick] (1.5,1.5) -- (0,1.5); %4
+
+            % Leyenda
+            \node[label=left:{$c$}] at (0, 0.75) {}; %1
+            \node[label={below:{$d^{-1}$}}] at (0.75, 0.75) {}; %2-3
+            \node[label=above:{$b$}] at (0.75, 1.5) {}; %4
+
+            % Flechas
+            \draw[->, thick] (0,0.75) ++(0, 0.01) -- ++(0,-0.01); %1
+            \draw[<-, thick] (0.75,0.75) ++(-0.01, -0.01) -- ++(0.01,0.01); %2-3
+            \draw[->, thick] (0.75,1.5) ++(0.01, -0.01) -- ++(-0.01,0); %4
+
+        \end{scope}
+
+        \begin{scope}[shift={(-3.5,0)}]
+            % Cuadrado
+            \draw[thick] (0,0) -- (1.5,0); %2
+            \draw[thick] (1.5,0) -- (1.5,1.5); %3
+            \draw[thick] (1.5,1.5) -- (0,0); %4-1
+
+            % Leyenda
+            \node[label=below:{$a^{-1}$}] at (0.75, 0) {}; %2
+            \node[label=right:{$a$}] at (1.5, 0.75) {}; %3
+            \node[label={above:{$d$}}] at (0.75, 0.75) {}; %4-1
+
+            % Flechas
+            \draw[->, thick] (0.75,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[->, thick] (1.5,0.75) ++(0, -0.01) -- ++(0,0.01); %3
+            \draw[->, thick] (0.75,0.75) ++(0.01, 0.01) -- ++(-0.01,-0.01); %4-1
+
+        \end{scope}
+
+        \draw[thick, dashed, ->] (-0.5,0.75) -- (0.5,0.75);
+
+        \begin{scope}[shift={(2,0)}]
+            % Cuadrado
+            \draw[thick] (0,1.5) -- (0,0); %1
+            \draw[thick] (0,0) -- (1.5,0); %2
+            \draw[thick] (1.5,0) -- (1.5,1.5); %3
+            \draw[thick] (1.5,1.5) -- (0,1.5); %4
+
+            % Leyenda
+            \node[label=left:{$c$}] at (0, 0.75) {}; %1
+            \node[label=below:{$a^{-1}$}] at (0.75, 0) {}; %2
+            \node[label=right:{$a$}] at (1.5, 0.75) {}; %3
+            \node[label=above:{$b$}] at (0.75, 1.5) {}; %4
+
+            % Flechas
+            \draw[->, thick] (0,0.75) ++(0, 0.01) -- ++(0,-0.01); %1
+            \draw[<-, thick] (0.75,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[->, thick] (1.5,0.75) ++(0, -0.01) -- ++(0,0.01); %3
+            \draw[->, thick] (0.75,1.5) ++(0.01, -0.01) -- ++(-0.01,0); %4
+        \end{scope}
+
+    \end{tikzpicture}
+\end{figure}
 
 \subsubsection{Desdoblar}
 Dada una expresión 
