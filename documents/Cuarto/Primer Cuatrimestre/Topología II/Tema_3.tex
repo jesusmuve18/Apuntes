@@ -1309,9 +1309,303 @@ le podemos añadir un símbolo nuevo $b$ cambiando la expresión anterior por
     w_i'=a_{i_1}^{\veps_1}...a_{i_k}^{\veps_k}bb^{-1}a_{i_{k+1}}^{\veps_{k+1}}...a_{i_l}^{\veps_l}
 \end{gather*}
 
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \shorthandoff{>}
+        \begin{scope}[shift={(-5,0)}]
+            % Triángulo
+            \draw[thick] (1,1.5) -- (0,0); %1
+            \draw[thick] (0,0) -- (2,0); %2
+            \draw[thick] (2,0) -- (1,1.5); %3
+
+            \draw[red, thick] (1,1.5) -- (1,0.6);
+
+            % Leyenda
+            \node[label=left:{$b$}] at (0.5,0.73) {}; %1
+            \node[label=below:{$c^{-1}$}] at (1, 0) {}; %2
+            \node[label=right:{$a$}] at (1.5, 0.73) {}; %3
+
+            % Flechas
+            \draw[->, thick] (0.5,0.73) ++(0, 0.01) -- ++(-0.01,-0.01); %1
+            \draw[<-, thick] (1,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[->, thick] (1.5,0.73) ++(0, -0.01) -- ++(-0.01,0.01); %3
+        \end{scope}
+
+        \draw[dashed, thick, ->] (-2,0.75) -- (-1,0.75);
+        
+        \begin{scope}[shift={(0,0)}]
+            % Triángulo
+            \draw[thick] (0.5,1.5) -- (0,0); %1
+            \draw[thick] (0,0) -- (2,0); %2
+            \draw[thick] (2,0) -- (1.5,1.5); %3
+
+            \draw[red, thick] (0.5,1.5) -- (1,0.6) -- (1.5, 1.5);
+
+            % Leyenda
+            \node[label=left:{$b$}] at (0.25,0.73) {}; %1
+            \node[label=below:{$c^{-1}$}] at (1, 0) {}; %2
+            \node[label=right:{$a$}] at (1.75, 0.75) {}; %3
+
+            \node[label={[red]left:{$d^{-1}$}}, anchor=west] at (1.1, 0.6) {};
+            \node[label={[red]right:{$d$}}, anchor=east] at (1.25, 1) {};
+
+            % Flechas
+            \draw[->, thick] (0.25,0.73) ++(0, 0.01) -- ++(-0.01,-0.02); %1
+            \draw[<-, thick] (1,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[->, thick] (1.75, 0.75) ++(0, -0.01) -- ++(-0.01,0.02); %3
+
+            \draw[<-, thick, red] (0.75, 1.05) ++(0.01,-0.01) -- ++(-0.01,0.02); %2
+            \draw[->, thick, red] (1.25, 1.05) ++(-0.01,-0.01) -- ++(0.01,0.02); %3
+        \end{scope}
+
+        \draw[dashed, thick, ->] (3,0.75) -- (4,0.75);
+        
+        \begin{scope}[shift={(5,-0.5)}]
+            % Triángulo
+            \draw[thick] (-0.25,1.5) -- (0,0); %1
+            \draw[thick] (0,0) -- (2,0); %2
+            \draw[thick] (2,0) -- (2.25,1.5); %3
+
+            \draw[red, thick] (-0.25,1.5) -- (1,2.5) -- (2.25, 1.5);
+
+            % Leyenda
+            \node[label=left:{$b$}] at (-0.125,0.73) {}; %1
+            \node[label=below:{$c^{-1}$}] at (1, 0) {}; %2
+            \node[label=right:{$a$}] at (2.125, 0.75) {}; %3
+
+            \node[label={[red]left:{$d^{-1}$}}] at (0.375, 2) {};
+            \node[label={[red]right:{$d$}}] at (1.625, 2) {};
+
+            % Flechas
+            \draw[->, thick] (-0.125,0.73) ++(0, -0.01) -- ++(-0.01,0.04); %1
+            \draw[<-, thick] (1,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[->, thick] (2.125, 0.75) ++(0, 0.01) -- ++(-0.01,-0.04); %3
+
+            \draw[<-, thick, red] (0.375, 2) ++(-0.01,-0.01) -- ++(0.01,0.01); %2
+            \draw[->, thick, red] (1.625, 2) ++(0.01,-0.01) -- ++(-0.01,0.01); %3
+        \end{scope}
+
+    \end{tikzpicture}
+\end{figure}
+
 \subsubsection{Doblar}
 Es el proceso contrario a desdoblar. Si una expresión $w$ tiene de forma consecutiva un símbolo y el mismo con exponente cambiado podemos quitar dicho símbolo de la expresión. Esto se podrá hacer siempre que al quitarle estos símbolos queden al menos 3.
 
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \shorthandoff{>}
+        \begin{scope}[shift={(-5,-0.5)}]
+            % Triángulo
+            \draw[thick] (-0.25,1.5) -- (0,0); %1
+            \draw[thick] (0,0) -- (2,0); %2
+            \draw[thick] (2,0) -- (2.25,1.5); %3
+
+            \draw[thick] (-0.25,1.5) -- (1,2.5) -- (2.25, 1.5);
+
+            % Leyenda
+            \node[label=left:{$b$}] at (-0.125,0.73) {}; %1
+            \node[label=below:{$c^{-1}$}] at (1, 0) {}; %2
+            \node[label=right:{$a$}] at (2.125, 0.75) {}; %3
+
+            \node[label={left:{$d^{-1}$}}] at (0.375, 2) {};
+            \node[label={right:{$d$}}] at (1.625, 2) {};
+
+            % Flechas
+            \draw[->, thick] (-0.125,0.73) ++(0, -0.01) -- ++(-0.01,0.04); %1
+            \draw[<-, thick] (1,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[->, thick] (2.125, 0.75) ++(0, 0.01) -- ++(-0.01,-0.04); %3
+
+            \draw[<-, thick] (0.375, 2) ++(-0.01,-0.01) -- ++(0.01,0.01); %2
+            \draw[->, thick] (1.625, 2) ++(0.01,-0.01) -- ++(-0.01,0.01); %3
+        \end{scope}
+
+        \draw[dashed, thick, ->] (-2,0.75) -- (-1,0.75);
+        
+        \begin{scope}[shift={(0,0)}]
+            % Triángulo
+            \draw[thick] (0.5,1.5) -- (0,0); %1
+            \draw[thick] (0,0) -- (2,0); %2
+            \draw[thick] (2,0) -- (1.5,1.5); %3
+
+            \draw[thick] (0.5,1.5) -- (1,0.6) -- (1.5, 1.5);
+
+            % Leyenda
+            \node[label=left:{$b$}] at (0.25,0.73) {}; %1
+            \node[label=below:{$c^{-1}$}] at (1, 0) {}; %2
+            \node[label=right:{$a$}] at (1.75, 0.75) {}; %3
+
+            \node[label={left:{$d^{-1}$}}, anchor=west] at (1.1, 0.6) {};
+            \node[label={right:{$d$}}, anchor=east] at (1.25, 1) {};
+
+            % Flechas
+            \draw[->, thick] (0.25,0.73) ++(0, 0.01) -- ++(-0.01,-0.02); %1
+            \draw[<-, thick] (1,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[->, thick] (1.75, 0.75) ++(0, -0.01) -- ++(-0.01,0.02); %3
+
+            \draw[<-, thick] (0.75, 1.05) ++(0.01,-0.01) -- ++(-0.01,0.02); %2
+            \draw[->, thick] (1.25, 1.05) ++(-0.01,-0.01) -- ++(0.01,0.02); %3
+        \end{scope}
+
+        \draw[dashed, thick, ->] (3,0.75) -- (4,0.75);
+        
+        \begin{scope}[shift={(5,0)}]
+            % Triángulo
+            \draw[thick] (1,1.5) -- (0,0); %1
+            \draw[thick] (0,0) -- (2,0); %2
+            \draw[thick] (2,0) -- (1,1.5); %3
+
+            % Leyenda
+            \node[label=left:{$b$}] at (0.5,0.73) {}; %1
+            \node[label=below:{$c^{-1}$}] at (1, 0) {}; %2
+            \node[label=right:{$a$}] at (1.5, 0.73) {}; %3
+
+            % Flechas
+            \draw[->, thick] (0.5,0.73) ++(0, 0.01) -- ++(-0.01,-0.01); %1
+            \draw[<-, thick] (1,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[->, thick] (1.5,0.73) ++(0, -0.01) -- ++(-0.01,0.01); %3
+        \end{scope}
+    \end{tikzpicture}
+\end{figure}
+
 \begin{ejemplo}
-    $\cc{P} = \{a,b,c; a^{-1}cb,\ ac^{-1}b^{-1}\}$
+    Consideramos la presentación $\cc{P} = \{a,b,c\ ; a^{-1}cb,\ ac^{-1}b^{-1}\}$. Veamos qué superficie $|\cc{P}|$ tiene asociada. De la presentación podemos obtener los triángulos $w_1=a^{-1}cb$ y $w_2=ac^{-1b^{-1}}$.
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \shorthandoff{>}
+            
+            \begin{scope}[shift={(-2,0)}]
+                % Triángulo
+                \draw[thick] (1,1.5) -- (0,0); %1
+                \draw[thick] (0,0) -- (2,0); %2
+                \draw[thick] (2,0) -- (1,1.5); %3
+
+                % Leyenda
+                \node[label=left:{$a^{-1}$}] at (0.5,0.73) {}; %1
+                \node[label=below:{$c$}] at (1, 0) {}; %2
+                \node[label=right:{$b$}] at (1.5, 0.73) {}; %3
+
+                % Flechas
+                \draw[<-, thick] (0.5,0.73) ++(0, 0.01) -- ++(-0.01,-0.01); %1
+                \draw[->, thick] (1,0) ++(-0.01,0) -- ++(0.01,0); %2
+                \draw[->, thick] (1.5,0.73) ++(0, -0.01) -- ++(-0.01,0.01); %3
+            \end{scope}
+
+            \begin{scope}[shift={(2,0)}]
+                % Triángulo
+                \draw[thick] (1,1.5) -- (0,0); %1
+                \draw[thick] (0,0) -- (2,0); %2
+                \draw[thick] (2,0) -- (1,1.5); %3
+
+                % Leyenda
+                \node[label=left:{$a$}] at (0.5,0.73) {}; %1
+                \node[label=below:{$c^{-1}$}] at (1, 0) {}; %2
+                \node[label=right:{$b^{-1}$}] at (1.5, 0.73) {}; %3
+
+                % Flechas
+                \draw[->, thick] (0.5,0.73) ++(0, 0.01) -- ++(-0.01,-0.01); %1
+                \draw[<-, thick] (1,0) ++(-0.01,0) -- ++(0.01,0); %2
+                \draw[<-, thick] (1.5,0.73) ++(0, -0.01) -- ++(-0.01,0.01); %3
+            \end{scope}
+        \end{tikzpicture}
+    \end{figure}
+    Podemos ahora rotar $w_1$ y $w_2$ obteniendo $w_1'=ba^{-1}c$ y $w_2'=c^{-1}b^{-1}a$.
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \shorthandoff{>}
+            
+            \begin{scope}[shift={(-2,0)}]
+                % Triángulo
+                \draw[thick] (1,1.5) -- (0,0); %1
+                \draw[thick] (0,0) -- (2,0); %2
+                \draw[thick] (2,0) -- (1,1.5); %3
+
+                % Leyenda
+                \node[label=left:{$b$}] at (0.5,0.73) {}; %1
+                \node[label=below:{$a^{-1}$}] at (1, 0) {}; %2
+                \node[label=right:{$c$}] at (1.5, 0.73) {}; %3
+
+                % Flechas
+                \draw[->, thick] (0.5,0.73) ++(0, 0.01) -- ++(-0.01,-0.01); %1
+                \draw[<-, thick] (1,0) ++(-0.01,0) -- ++(0.01,0); %2
+                \draw[->, thick] (1.5,0.73) ++(0, -0.01) -- ++(-0.01,0.01); %3
+            \end{scope}
+
+            \begin{scope}[shift={(2,0)}]
+                % Triángulo
+                \draw[thick] (1,1.5) -- (0,0); %1
+                \draw[thick] (0,0) -- (2,0); %2
+                \draw[thick] (2,0) -- (1,1.5); %3
+
+                % Leyenda
+                \node[label=left:{$c^{-1}$}] at (0.5,0.73) {}; %1
+                \node[label=below:{$b^{-1}$}] at (1, 0) {}; %2
+                \node[label=right:{$a$}] at (1.5, 0.73) {}; %3
+
+                % Flechas
+                \draw[<-, thick] (0.5,0.73) ++(0, 0.01) -- ++(-0.01,-0.01); %1
+                \draw[<-, thick] (1,0) ++(-0.01,0) -- ++(0.01,0); %2
+                \draw[->, thick] (1.5,0.73) ++(0, -0.01) -- ++(-0.01,0.01); %3
+            \end{scope}
+        \end{tikzpicture}
+    \end{figure}
+    Estamos ahora en condiciones de pegar ambos triángulos a través de $c$ obteniendo $w_0=ba^{-1}b^{-1}a$.
+
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \shorthandoff{>}
+            % Cuadrado
+            \draw[thick] (0,1.5) -- (0,0); %1
+            \draw[thick] (0,0) -- (1.5,0); %2
+            \draw[thick] (1.5,0) -- (1.5,1.5); %3
+            \draw[thick] (1.5,1.5) -- (0,1.5); %4
+
+            \draw[dashed] (0,1.5) -- (1.5,0);
+
+            % Leyenda
+            \node[label=left:{$b$}] at (0, 0.75) {}; %1
+            \node[label=below:{$a^{-1}$}] at (0.75, 0) {}; %2
+            \node[label=right:{$b^{-1}$}] at (1.5, 0.75) {}; %3
+            \node[label=above:{$a$}] at (0.75, 1.5) {}; %4
+
+            % Flechas
+            \draw[->, thick] (0,0.75) ++(0, 0.01) -- ++(0,-0.01); %1
+            \draw[<-, thick] (0.75,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[<-, thick] (1.5,0.75) ++(0, -0.01) -- ++(0,0.01); %3
+            \draw[->, thick] (0.75,1.5) ++(0.01, -0.01) -- ++(-0.01,0); %4
+        \end{tikzpicture}
+    \end{figure}
+
+    Con una última rotación obtenemos $w_0'=aba^{-1}b^{-1}$ que es fácil ver que se corresponde a un toro.
+
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \shorthandoff{>}
+            % Cuadrado
+            \draw[thick] (0,1.5) -- (0,0); %1
+            \draw[thick] (0,0) -- (1.5,0); %2
+            \draw[thick] (1.5,0) -- (1.5,1.5); %3
+            \draw[thick] (1.5,1.5) -- (0,1.5); %4
+
+            % Leyenda
+            \node[label=left:{$a$}] at (0, 0.75) {}; %1
+            \node[label=below:{$b$}] at (0.75, 0) {}; %2
+            \node[label=right:{$a^{-1}$}] at (1.5, 0.75) {}; %3
+            \node[label=above:{$b^{-1}$}] at (0.75, 1.5) {}; %4
+
+            % Flechas
+            \draw[->, thick] (0,0.75) ++(0, 0.01) -- ++(0,-0.01); %1
+            \draw[->, thick] (0.75,0) ++(-0.01,0) -- ++(0.01,0); %2
+            \draw[<-, thick] (1.5,0.75) ++(0, -0.01) -- ++(0,0.01); %3
+            \draw[<-, thick] (0.75,1.5) ++(0.01, -0.01) -- ++(-0.01,0); %4
+        \end{tikzpicture}
+    \end{figure}
+    Obtenemos entonces $|\cc{P}|\equiv \bb{T}$.
 \end{ejemplo}
+
+
