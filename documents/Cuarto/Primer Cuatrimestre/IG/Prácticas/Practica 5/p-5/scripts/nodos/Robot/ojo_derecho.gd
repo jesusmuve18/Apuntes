@@ -9,7 +9,7 @@ extends MeshInstance3D
 
 var scalation_max := 1
 var scalation_min := 0
-var activa := false
+var activa := true
 var seleccionada := false
 var sentido := 1.0   # 1 = positivo, -1 = negativo
 

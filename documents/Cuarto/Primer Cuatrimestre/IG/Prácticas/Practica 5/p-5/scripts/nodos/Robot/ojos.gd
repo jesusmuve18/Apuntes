@@ -8,7 +8,7 @@ extends Node3D
 @export var seleccionar := "seleccionar_ojos"
 
 var translation_max := 0.15
-var activa := false
+var activa := true
 var seleccionada := false
 var sentido := 1.0   # 1 = positivo, -1 = negativo
 
