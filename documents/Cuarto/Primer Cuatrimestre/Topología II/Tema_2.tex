@@ -512,7 +512,7 @@ Vamos a tratar en lo que queda de tema de clasificar los espacios recubridores d
     \end{enumerate}
 \end{observacion}
 
-\begin{coro}
+\begin{coro}\label{coro-2.3.1}
     Sean $\phi_1$, $\phi_2$ dos homomorfismos de recubridores desde $(R_1,p_1)$ en $(R_2,p_2)$. Entonces se tiene que 
     \begin{gather*}
         \phi_1 = \phi_2 \sii \exists r_1\in R_1 : \phi_1(r_1) = \phi_2(r_1)
@@ -580,39 +580,61 @@ Vamos a tratar en lo que queda de tema de clasificar los espacios recubridores d
                 p_{1*}(\pi_1(R_1,r_1)) \subseteq p_{2*}(\pi_1(R_2,r_2))
             \end{gather*}
 
-            \item Veamos la doble inclusión. En primer lugar denotamos por $\phi$ al isomorfismo y a su inversa la llamaremos $\varphi$. Esta aplicación verifica  que
-            \begin{gather*}
-                \varphi \circ \phi = Id_{R_1} \ \ \ \ \phi \circ \varphi = Id_{R_2}
-            \end{gather*}
-            y además es también un isomorfismo (por lo que en particular es un homomorfismo). Estaríamos en la situación del siguiente diagrama
-            \begin{gather*}
-                \xymatrix{
-                    R_1 \ar[r]^{\phi} \ar[dr]_{p_1} & R_2 \ar[d]^{p_2} \ar[r]^{\varphi} & R_1\ar[dl]^{p^1} \\
-                    & B
-                }
-            \end{gather*}
-            donde $\phi$ y $\varphi$ son homomorfismos. Por hipótesis tenemos que $\exists r_1\in p_1^{-1}(b_0)$, $r_2\in p_2^{-1}(b_0)$ tales que $\phi(r_1)=r_2$. Si componemos esta igualdad por la izquierda con $\varphi$ tenemos
-            \begin{gather*}
-                (\varphi \circ \phi) (r_1) = \varphi(r_2) \Rightarrow Id_R(r_1) = \phi(r_2) \Rightarrow r_1 = \varphi(r_2)
-            \end{gather*}
-            Por tanto aplicando el primer punto del corolario a $\phi$ (es un homomorfismo con $\phi(r_1)=r_2$) tenemos que 
-            \begin{gather*}
-                p_{1*}(\pi_1(R_1,r_1)) \subseteq p_{2*}(\pi_1(R_2,r_2))
-            \end{gather*}
-            y aplicando lo mismo de nuevo a $\varphi$ (es un homomorfismo con $\varphi(r_2)=r_1$) tenemos que 
-            \begin{gather*}
-                p_{2*}(\pi_2(R_2,r_2)) \subseteq p_{1*}(\pi_1(R_1,r_1))
-            \end{gather*}
-            por lo que llegamos finalmente a que 
-            \begin{gather*}
-                p_{1*}(\pi_1(R_1,r_1)) = p_{2*}(\pi_1(R_2,r_2))
-            \end{gather*}
+            \item Veamos la doble implicación. 
+            \begin{itemize}
+                \item[$\Rightarrow$)] Queremos ver que se verifica la igualdad entre las imágenes de los homomorfismos inducidos de los grupos fundamentales. Veámoslo por doble inclusión. En primer lugar denotamos por $\phi$ al isomorfismo y a su inversa la llamaremos $\varphi$. Esta aplicación verifica  que
+                \begin{gather*}
+                    \varphi \circ \phi = Id_{R_1} \ \ \ \ \phi \circ \varphi = Id_{R_2}
+                \end{gather*}
+                y además es también un isomorfismo (por lo que en particular es un homomorfismo). Estaríamos en la situación del siguiente diagrama
+                \begin{gather*}
+                    \xymatrix{
+                        R_1 \ar[r]^{\phi} \ar[dr]_{p_1} & R_2 \ar[d]^{p_2} \ar[r]^{\varphi} & R_1\ar[dl]^{p^1} \\
+                        & B
+                    }
+                \end{gather*}
+                donde $\phi$ y $\varphi$ son homomorfismos. Por hipótesis tenemos que $\exists r_1\in p_1^{-1}(b_0)$, $r_2\in p_2^{-1}(b_0)$ tales que $\phi(r_1)=r_2$. Si componemos esta igualdad por la izquierda con $\varphi$ tenemos
+                \begin{gather*}
+                    (\varphi \circ \phi) (r_1) = \varphi(r_2) \Rightarrow Id_R(r_1) = \phi(r_2) \Rightarrow r_1 = \varphi(r_2)
+                \end{gather*}
+                Por tanto aplicando el primer punto del corolario a $\phi$ (es un homomorfismo con $\phi(r_1)=r_2$) tenemos que 
+                \begin{gather*}
+                    p_{1*}(\pi_1(R_1,r_1)) \subseteq p_{2*}(\pi_1(R_2,r_2))
+                \end{gather*}
+                y aplicando lo mismo de nuevo a $\varphi$ (es un homomorfismo con $\varphi(r_2)=r_1$) tenemos que 
+                \begin{gather*}
+                    p_{2*}(\pi_2(R_2,r_2)) \subseteq p_{1*}(\pi_1(R_1,r_1))
+                \end{gather*}
+                por lo que llegamos finalmente a que 
+                \begin{gather*}
+                    p_{1*}(\pi_1(R_1,r_1)) = p_{2*}(\pi_1(R_2,r_2))
+                \end{gather*}
+
+                \item[$\Leftarrow$)] Supongamos que $p_{1*}(\pi_1(R_1,r_1)) = p_{2*}(\pi_1(R_2,r_2))$. Buscamos aplicar ahora el punto anterior a este caso. De la siguiente inclusión
+                \begin{gather*}
+                    p_{1*}(\pi_1(R_1,r_1)) \subseteq p_{2*}(\pi_1(R_2,r_2))
+                \end{gather*}
+                tenemos que existe un homomorfismo de recubridores $\phi$ de $(R_1,p_1)$ en $(R_2,p_2)$ con $\phi(r_1)=r_2$. Análogamente, de la siguiente inclusión  
+                \begin{gather*}
+                    p_{2*}(\pi_1(R_2,r_2)) \subseteq p_{1*}(\pi_1(R_1,r_1))
+                \end{gather*}
+                tenemos que existe un homomorfismo de recubridores $\varphi$ de $(R_2,p_2)$ en $(R_1,p_1)$ con $\varphi(r_2)=r_1$. Podemos considerar entonces su composición $\varphi \circ \phi$, que es claramente un homomorfismo de $(R_1,p_1)$ en sí mismo con $\varphi(\phi(r_1)) = r_1$. Por el corolario \ref{coro-2.3.1} tenemos que 
+                \begin{gather*}
+                    \varphi \circ \phi = Id_{R_1}
+                \end{gather*}
+                Análogamente podemos llegar a que
+                \begin{gather*}
+                    \phi \circ \varphi = Id_{R_2}
+                \end{gather*}
+                Tenemos entonces que $\phi$ es una aplicación continua, $\varphi$ es su inversa y además es también continua, luego $\phi$ es un homeomorfismo. Este será el que nos dé el isomorfismo de recubridores de $(R_1, p_1)$ en $(R_2, p_2)$.
+            \end{itemize}
+
         \end{enumerate}
     \end{proof}
 \end{coro}
 
 \begin{teo}
-    Sean $(R_1, p_1)$, $(R_2, p_2)$ dos recubridores de un e.t. $B$. Entonces existe un isomorfismo entre ambos recubridores si y solo si dado $b_0\in B$, $r_1\in R_1$ y $r_2 \in R_2$ con $p_1(r_1) = b_0 = p_2(r_2)$ tales que 
+    Sean $(R_1, p_1)$, $(R_2, p_2)$ dos recubridores de un e.t. $B$. Entonces existe un isomorfismo entre ambos recubridores si y solo si dado $b_0\in B$ existen $r_1\in R_1$ y $r_2 \in R_2$ con $p_1(r_1) = b_0 = p_2(r_2)$ tales que 
     \begin{gather*}
         p_{1*}(\pi_1(R_1,r_1)) = p_{2*}(\pi_1(R_2,r_2))
     \end{gather*}
