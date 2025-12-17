@@ -182,7 +182,7 @@
             \begin{gather*}
                 \xymatrix{
                     & \pi_1(R,r_0) \ar[d]^{p_*}\\
-                    \pi_1(X,x_0) \ar[ur]^{\hat{f}_x} \ar[r]_{f_*} & \pi_1(B,b_0)
+                    \pi_1(X,x_0) \ar[ur]^{\hat{f}_*} \ar[r]_{f_*} & \pi_1(B,b_0)
                 }
             \end{gather*}
             y podemos ver que 
@@ -288,7 +288,7 @@
 \end{teo}
 
 \begin{observacion}
-    Una consecuencia inmediata es que si $X$ es simplemente conexo, toda $X:X\to B$ continua se puede levantar.
+    Una consecuencia inmediata es que si $X$ es simplemente conexo, toda $f:X\to B$ continua se puede levantar.
 \end{observacion}
 
 \begin{ejemplo}
@@ -416,7 +416,7 @@
     \end{gather*}
     y tenemos que no existe $\hat{f_1} : \bb{S}^1 \to \bb{S}^1 \times \bb{R}$ levantamiento de $f_1$ con $\hat{f_1}(1,0)=(1,0,1)$.
 
-    Si tomamos otro punto $r_1$ cualquiera tal que $p(r_1)=(1,0,1)$ ($r_1$ colo podría ser el $(-1,0,1)$) entonces sabemos por un corolario anterior que 
+    Si tomamos otro punto $r_1$ cualquiera tal que $p(r_1)=(1,0,1)$ ($r_1$ solo podría ser el $(-1,0,1)$) entonces sabemos por un corolario anterior que 
     \begin{gather*}
         p_*(\pi_1(\bb{S}^1\times \bb{R}, r_1)) \text{ es conjugado de } p_*(\pi_1(\bb{S}^1 \times \bb{R}, (1,0,1)))
     \end{gather*}
@@ -424,7 +424,7 @@
     
     Veamos qué ocurre con $f_2$. En este caso tenemos que 
     \begin{gather*}
-        f_2(1,0) = (1,0,1)
+        f_2(1,0) = (0,1,1)
     \end{gather*}
     Además, $[\alpha]$ genera $\pi_1(\bb{S}^1, (1,0))$ y $[\gamma]$ genera $\pi_1(\bb{S}^1 \times \bb{R}, (0,1,1))$ donde 
     \begin{gather*}
@@ -444,7 +444,7 @@
     por lo que
     \begin{align*}
         f_{2*}(\pi_1(\bb{S}^1,(1,0))) &= \{[\gamma]^{2n} : n\in \bb{Z}\} =\\
-        &= p_*\left(\bb{S}^1 \times \bb{R}, \left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 1\right), \right) 
+        &= p_*\left(\pi_1\left(\bb{S}^1 \times \bb{R}, \left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 1\right)\right) \right) 
     \end{align*}
     y tenemos finalmente que existe el levantamiento $\hat{f_2}$ con $\hat{f_2}(1,0)=(0,1,1)$
 \end{ejemplo}
@@ -749,7 +749,11 @@ Vamos a tratar en lo que queda de tema de clasificar los espacios recubridores d
 
             \end{tikzpicture}%
         \end{figure}%
-        Para este recubridor $(\bb{R}, p)$ donde $p(t) = (\cos(2\pi t), \sen(2\pi t))$, su subgrupo asociado en $\pi_1(\bb{S}^1, (1,0))$ es $H_0$.\\
+        Para este recubridor $(\bb{R}, p)$ donde $p(t) = (\cos(2\pi t), \sen(2\pi t))$, su subgrupo asociado en $\pi_1(\bb{S}^1, (1,0))$ es $H_0$. Para ver que efectivamente es $H_0$ podemos considerar el generador de $\pi_1(\bb{R}, 0)$ que, por ser $\bb{R}$ simplemente conexo será un lazo trivial $[\veps_0]$. Si estudiamos la imagen de este generador tendremos 
+        \begin{gather*}
+            (p\circ \veps_0)(t) = p(\veps_0(t)) = p(0) = (1,0)
+        \end{gather*}
+        por lo que $p_*(\pi_1(\bb{R},0)) = \{[\veps_{(1,0)}]\} \cong \{0\}\cong H_0$.\\
 
         También podemos considerar el recubridor $(\bb{S}^1, p_1=Id_{\bb{S}^1})$ cuyo subgrupo asociado es $H_1 = \pi_1(\bb{S}^1, (1,0))$.\\
 
@@ -883,7 +887,7 @@ Vamos a tratar en lo que queda de tema de clasificar los espacios recubridores d
         De hecho, si tomamos un par de generadores $(a,b), (c,d)\in \bb{Z}\times \bb{Z}$ podemos definir la aplicación $p'_{(a,b)}\times p'_{(c,d)}: \bb{S}^1 \times \bb{S}^1 \to \bb{S}^1 \times \bb{S}^1$ dada por 
         \begin{gather*}
             (p'_{(a,b)}\times p'_{(c,d)})(\cos(\theta), \sen(\theta), \cos(\varphi), \sen(\varphi)) =\\
-            = (\cos(a\theta + c\varphi), \sen(a\theta + c\varphi), \cos(b\theta + d\varphi), \cos(b\theta + d\varphi))
+            = (\cos(a\theta + c\varphi), \sen(a\theta + c\varphi), \cos(b\theta + d\varphi), \sen(b\theta + d\varphi))
         \end{gather*}
         De esta forma, aplicando $p'_{(a,b)}\times p'_{(c,d)}$ en los generadores tenemos
         \begin{align*}

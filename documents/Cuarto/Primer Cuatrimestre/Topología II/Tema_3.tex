@@ -2218,15 +2218,119 @@ Vamos a partir de una presentación poligonal $\cc{P}$ y vamos a ver un algoritm
 
     \item Si nuestra expresión es de la forma $w=y_1ay_2a$ donde el símbolo $a$ aparece dos veces con el mismo exponente (y los $y_1$, $y_2$ son conjuntos de expresiones cualesquiera contenidas en $w$), entonces podré cambiar $w$ por $w'=y_1y_2^{-1}aa$ donde si $y_2=b_1^{\veps_1}...b_k^{\veps_k}$ entonces $y_2^{-1}=b_k^{-\veps_k}...b_1^{-\veps_1}$.
     \begin{proof}
-        Veamos brevemente una demostración de por qué se puede hacer este cambio. Si tenemos nuestra expresión $w=y_1ay_2a$ podemos realizar un corte obteniendo $w_1=y_1ac$ y $w_2=c^{-1}y_2a$. Buscamos ahora pegar a través de $a$ para lo que reflejamos $w_2$ obteniendo $w_2'=a^{-1}y_2^{-1}c$ y rotamos $w_1$ obteniendo $w_1'=cy_1a$. Estamos ya en condiciones de poder pegar $w_1'$ y $w_2'$ a través de $a$ de donde obtenemos una nueva expresión $w_0'=cy_1y_2^{-1}$. Podemos renombrar $c=a$ y obtenemos $w_0''=ay_1y_2^{-1}a$. Con una última rotación llegamos a $w_0'''=y_1y_2^{-1}aa$ que es lo que queríamos obtener.
+        Veamos brevemente una demostración de por qué se puede hacer este cambio. Si tenemos nuestra expresión $w=y_1ay_2a$ podemos realizar un corte obteniendo $w_1=y_1ac$ y $w_2=c^{-1}y_2a$. Buscamos ahora pegar a través de $a$ para lo que reflejamos $w_2$ obteniendo $w_2'=a^{-1}y_2^{-1}c$ y rotamos $w_1$ obteniendo $w_1'=cy_1a$. Estamos ya en condiciones de poder pegar $w_1'$ y $w_2'$ a través de $a$ de donde obtenemos una nueva expresión $w_0'=cy_1y_2^{-1}c$. Podemos renombrar $c=a$ y obtenemos $w_0''=ay_1y_2^{-1}a$. Con una última rotación llegamos a $w_0'''=y_1y_2^{-1}aa$ que es lo que queríamos obtener.
     \end{proof}
     En una cantidad finita de pasos la expresión inicial pasa a ser de la forma 
     \begin{gather*}
         w=ya_1a_1a_2a_2...a_ka_k
     \end{gather*}
-    donde en $y$ solo aparecen parejas de símbolos con distinto exponente (cada pareja). Además, usando el paso 2., es decir, eliminando las expresiones adyacentes en $y$, podemos suponer además que cada símbolo en $y$ con su pareja no son adyacentes.
+    donde en $y$ solo aparecen parejas de símbolos con distinto exponente (cada pareja). Además, usando el paso 2., es decir, eliminando las expresiones adyacentes en $y$, podemos suponer además que cada símbolo en $y$ con su pareja no son adyacentes. \\
+    
+    Podemos entonces hacer algunas transformaciones elementales para cambiar a una expresión $w'=y'a_1a_1...a_ka_k$ de forma que todos los vértices del polígono asociado a $w'$ son el mismo punto en el cociente (en $|\cc{P}|$).
+
+    \begin{proof}
+        Supongamos que existen vértices en el polígono asociado a $w$ que no son el mismo punto en el cociente y elegimos $v_0$ un vértice cualquiera y tenemos que en el conjunto $[v_0]$ hay al menos 2 vértices del polígono (ya que en otro caso tendremos que está entre un lado $a$ y otro $a^{-1}$ y podríamos doblar).\\
+
+        Veamos que se pueden hacer transformaciones elementales para quitarle un vértice a $[v_0]$. De esta forma, en una cantidad finita de pasos $[v_0]$ solo tendrá un representante y así estaremos en la situación mencionada previamente y podremos doblar.\\
+
+        Para ello tomamos un lado $a$ cuyo vértice inicial $v_1$ esté en $[v_0]$ y el final $v_2$ no lo esté ($v_1\in [v_0]$, $v_2\notin[v_0]$). Tenemos entonces una situación como la siguiente
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \shorthandoff{>}
+                \begin{scope}[shift={(0,0)}]
+                    % Cuadrado
+                    \draw[thick] (0,1.5) -- (0,0); %1
+                    \draw[thick] (0,0) -- (1.5,0); %2
+                    \draw[thick] (1.5,0) -- (1.5,1.5); %3
+                    % \draw[thick] (1.5,1.5) -- (0,1.5); %4
+
+                    % Leyenda
+                    \node[label=left:{$y_1$}] at (0, 0.75) {}; %1
+                    \node[label=below:{$b^{-1}$}] at (0.75, 0) {}; %2
+                    \node[label=right:{$y_2$}] at (1.5, 0.75) {}; %3
+                    % \node[label=above:{$a$}] at (0.75, 1.5) {}; %4
+
+                    % Flechas
+                    \draw[->, thick] (0,0.75) ++(0, 0.01) -- ++(0,-0.01); %1
+                    \draw[<-, thick] (0.75,0) ++(-0.01,0) -- ++(0.01,0); %2
+                    \draw[->, thick] (1.5,0.75) ++(0, -0.01) -- ++(0,0.01); %3
+                    % \draw[->, thick] (0.75,1.5) ++(0.01, -0.01) -- ++(-0.01,0); %4
+                \end{scope}
+            \end{tikzpicture}
+        \end{figure}
+
+        En este proceso para el nuevo polígono hay un vértice menos en $[v_0]$. 
+        
+        Con todo esto tendríamos la siguiente situación:
+        \begin{gather*}
+            w=ya_1a_1...a_ka_k
+        \end{gather*}
+        donde solo hay un vértice en el cociente.
+        \begin{itemize}
+            \item Si $y=\emptyset$, entonces tendríamos $|\cc{P}|\overset{homeo.}{\cong} \bb{R}\bb{P}^2_k$.
+            \item Si $y\neq \emptyset$, entonces en $y$ aparecen aristas con un exponente y su opuesto y, además de forma no adyacente. Debe ocurrir entonces que 
+            \begin{gather*}
+                y=...\ b\ ...\ c\ ...\ b^{-1}...\ c^{-1}...
+            \end{gather*}
+        \end{itemize}
+    \end{proof}
+    \item Si tenemos una expresión del tipo 
+    \begin{gather*}
+        w = y_1by_2cy_3b^{-1}y_4c^{-1}y_5a_1a_1...a_ka_k
+    \end{gather*}
+    entonces, cortando y pegando podemos pasar a una expresión del tipo
+    \begin{gather*}
+        w'=ybcb^{-1}c^{-1}a_1a_1...a_ka_k
+    \end{gather*}
+    En un proceso finito nos quedará:
+    \begin{gather*}
+        w''=b_1c_1b_1^{-1}c_1^{-1}...\ b_lc_lb_l^{-1}c_l^{-1}a_1a_1...a_ka_k
+    \end{gather*}
+
+    \item Las expresiones del tipo $ybcb^{-1}c^{-1}aa$ las podemos cambiar por transformaciones elementales por 
+    \begin{gather*}
+        y'aabbcc
+    \end{gather*}
 \end{enumerate}
 
+Como conclusión final, la expresión inicial se puede alterar haciendo transformaciones elementales del tipo
+\begin{enumerate}
+    \item $aa^{-1}b^{-1} \equiv \bb{S}^2$ 
+    \item $aa^{-1}bb \equiv \bb{R}\bb{P}^2$
+    \item $a_1a_1...a_ka_k \equiv \bb{R}\bb{P}_k^{2}$ para $k\geq 2$
+    \item $b_1c_1b_1^{-1}c_1^{-1}...\ b_lc_lc_l^{-1}c_l^{-1} \equiv $ $l$-toro
+\end{enumerate}
+
+\begin{coro}
+    Si $S$ es una superficie compacta (y conexa) entonces $S$ es homeomorfa a $\bb{S}^2$, al $n$-toro o al $k$-plano proyectivo (para $k\geq 1$).
+\end{coro}
+
+Veamos ahora que todas esas superficies son distintas calculando su grupo fundamental. Ya conocemos los siguientes:
+\begin{gather*}
+    \begin{array}{c c c c}
+        \bb{S}^2 & \longrightarrow & \pi_1(\bb{S}^2) & \equiv \text{trivial}\\
+        \bb{R}\bb{P}^2 & \longrightarrow & \pi_1(\bb{R}\bb{P}^2) & \equiv \bb{Z}_2
+    \end{array}
+\end{gather*}
+Calculemos el grupo fundamental del $n$-toro. Este será $P_0$ bajo la reslación de equivalencia $R$ que identifica a los lados con igual nombre, es decir
+\begin{gather*}
+    \bb{T}_n = \frac{P_0}{R}
+\end{gather*}
+Buscamos aplicar Seifert-van Kampen y tomamos 
+\begin{gather*}
+    U=\bb{T}_n \setminus \{x_0\}\\
+    V \equiv \text{ disco abierto centrado en $x_0$ que no toque las aristas}
+\end{gather*}
+Es claro que $\pi_1(V)$ es trivial por ser un disco. Para calcular el grupo fundamental de $U$ comenzamos considerando un retracto de deformación suyo. Es fácil ver que el borde (en el cociente) es retracto de deformación de $U$. Además, todos los vértices del borde tendrán la misma clase de equivalencia bajo $R$ por lo que nos quedará algo como 
+
+por lo que $\pi_1(U)\cong F(a_1,b_1,a_2,b_2,...,a_n,b_n)$. Además el grupo de la intersección es claro que es $\pi_1(U\cap V) \cong \bb{Z}$ generado por $[\alpha]$.
+
+Aplicando Seifert-van Kampen tenemos que 
+\begin{gather*}
+    \pi_1(\bb{T}_n) = \frac{F(a_1,b_1,...,a_n,b_n)}{\langle i_{U*}([\alpha])\rangle_N} = \frac{F(a_1,b_1,...,a_n,b_n)}{\langle ab_1a_1^{-1}...a_nb_na_n^{-1}b_n^{-1} \rangle_N}
+\end{gather*}
 
 
 
