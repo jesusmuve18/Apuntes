@@ -141,7 +141,7 @@
                 H(0,t) = \alpha(0)=x \hspace{1cm} H(1,t) = \alpha(1) = y
             \end{gather*}
 
-            \item[(ii)] Dados $\alpha, \beta\in \Omega(X;x,y)$ tales que existe $H:[0,1]\times [0,1]\to X$ continua tal que 
+            \item[(ii)] Dados $\alpha, \beta\in \Omega(X;x,y)$ tales que existe $H:[0,1]\times [0,1]\to X$ continua verificando
             \begin{align*}
                 H(s,0) = \alpha(s) \hspace{0.5cm} &\text{ y } \hspace{0.5cm} H(s,1) = \beta(x) \ \ \ &\forall s\in [0,1]\\
                 H(0,t) = x  \hspace{0.5cm} &\text{ y } \hspace{0.5cm} H(1,t) = y \ \ \ &\forall t \in [0,1]
@@ -151,7 +151,14 @@
                 \tilde{H}(s,0) = \beta(s) \hspace{0.5cm} &\text{ y } \hspace{0.5cm} \tilde{H}(s,1) = \alpha(x) \ \ \ &\forall s\in [0,1]\\
                 \tilde{H}(0,t) = x  \hspace{0.5cm} &\text{ y } \hspace{0.5cm} \tilde{H}(1,t) = y \ \ \ &\forall t \in [0,1]
             \end{align*}
-            Tomando $\tilde{H}(s,t):=H(s, 1-t)$ cumple claramente con lo que buscamos.
+            Tomando $\tilde{H}(s,t):=H(s, 1-t)$ cumple claramente con lo que buscamos:
+            \begin{gather*}
+                \tilde{H}(s,0) = H(s, 1-0) = H(s,1) = \beta(x)\\
+                \tilde{H}(s, 1) = H(s, 1-1) = H(s,0) = \alpha(x)\\
+                \tilde{H}(0,t) = H(0, 1-t) = x\\
+                \tilde{H}(1,t) = H(1, 1-t) = y
+            \end{gather*}
+            $\forall s \in [0,1]$, $\forall t \in [0,1]$.
 
             \item[(iii)] Dado $\alpha, \beta, \gamma\in \Omega(X;x,y)$ y $H_1,H_2:[0,1]\times[0,1]\to X$ continuas tales que 
             \begin{gather*}
@@ -203,7 +210,7 @@
 
 \begin{ejemplo}\
     \begin{enumerate}
-        \item Sean $X$ un e.t. y $f,g:X \to \bb{R}^n$ aplicaciones continuas, entonces vamos a ver que $f$ y $g$ son homotópicas.
+        \item Sean $X$ un e.t. y $f,g:X \to \bb{R}^n$ aplicaciones continuas entonces se tiene que $f$ y $g$ son homotópicas.
         \begin{proof}
             Vamos a definir la aplicación
             \begin{align*}
@@ -332,13 +339,13 @@
                     \node[draw, circle, fill=black, inner sep=0.5pt, label=below:$w$] at (12,1) {};
 
                     % Arcos
-                    \draw[blue] plot[smooth, tension=1] coordinates {
+                    \draw[blue, thick] plot[smooth, tension=1] coordinates {
                         (0,0) (2,1) (4,1)
                     };
-                    \draw[red] plot[smooth, tension=1] coordinates {
+                    \draw[red, thick] plot[smooth, tension=1] coordinates {
                         (4,1) (6,0.6) (8,0.8)
                     };
-                    \draw[green!60!black] plot[smooth, tension=1] coordinates {
+                    \draw[green!60!black, thick] plot[smooth, tension=1] coordinates {
                         (8,0.8) (9,1) (10.6,0.6) (12,1)
                     };
 
@@ -356,8 +363,8 @@
                     \node at (12,-1.2) {$s=1$};
 
                     % Leyenda colores
-                    \draw[violet] (13,2)--(13.5,2);
-                    \draw[orange!90!black] (13,0)--(13.5,0);
+                    \draw[violet, thick] (13,2)--(13.5,2);
+                    \draw[orange!90!black, thick] (13,0)--(13.5,0);
                     \node[anchor=west, text width=2.2cm, align=center] at (13.7,2) {Tiempos de \\$(\alpha\ast\beta)\ast\gamma$};
                     \node[anchor=west, text width=2.2cm, align=center] at (13.7,0) {Tiempos de \\$\alpha\ast(\beta\ast\gamma)$};
 
@@ -439,7 +446,7 @@
             \end{gather*}
             De nuevo del ejemplo 2 se tiene que son homotópicas
 
-            \item[(iii)] Tendremos que ver en este caso que $\alpha\ast\tilde{\alpha}$ es homotópico por arcos a $\veps_x$. Describamos ambas curvas.
+            \item[(iii)] Tendremos que ver en este caso que $\displaystyle \alpha\ast\tilde{\alpha}$ es homotópico por arcos a $\veps_x$. Describamos ambas curvas.
             \begin{gather*}
                 (\alpha \ast \tilde{\alpha}) = \left\{
                     \begin{array}{l c c}
