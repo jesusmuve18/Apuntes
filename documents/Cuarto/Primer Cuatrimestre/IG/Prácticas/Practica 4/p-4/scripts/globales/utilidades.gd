@@ -93,10 +93,10 @@ static func calcUV(vertices: PackedVector3Array) -> PackedVector2Array:
 			max_y = vert.y
 	
 	for v in vertices:
-		# 1. Calcular el valor del parámetro u
+		#Calcular el valor del parámetro u
 		var phi = atan2(v.z, v.x)
 		var u = max_u*((phi / (2*PI)+0.5))
-		# 2. Calcular el valor del parámetro v
+		#  Calcular el valor del parámetro v
 		#Inserta tu código aquí
 		#Puedes calcularlo en función del desplazaniento en el perfil
 		# o de forma aproximada en función de y
@@ -104,3 +104,62 @@ static func calcUV(vertices: PackedVector3Array) -> PackedVector2Array:
 		var uv_coords = Vector2(1-u,1-v_coord)
 		uvs.append(uv_coords)
 	return uvs
+
+# Carga una textura 
+func CargarTextura( arch : String ) -> ImageTexture :
+	## crear un objeto 'Image' con la imgen
+	var imagen := Image.new()
+	assert( imagen.load(arch) == OK, "Error cargando '"+arch+"'." )
+	
+	## crear un objeto 'ImageTexture' a partir del objeto 'Image'
+	var textura := ImageTexture.create_from_image( imagen )
+	print("Textura cargada desde archivo: '",arch,"'.")
+	
+	## devolver la textura
+	return textura
+
+# Crea un cubo de 24 vertices de tamaño size con coordenadas uv
+func ArrayMeshCubo24_CCT(size: float = 1) -> ArrayMesh:
+	## crear las tablas de vértices y triángulos de un cubo de 8 vertices 
+	var vertices := PackedVector3Array([])
+
+	for x in [-size/2, size/2]:
+		for y in [-size/2, size/2]:
+			for z in [-size/2, size/2]:
+				for k in range (3): # Triplico los vertices
+					vertices.append(Vector3(x, y, z))
+				
+	
+	var triangulos := PackedInt32Array([
+		0,6,11, 0,11,3,
+		5,10,21, 5,21,16,
+		15,23,18, 15,18,14,
+		12,20,7, 12,7,1,
+		9,8,19, 9,19,22,
+		2,4,17, 2,17,13
+	])
+	
+	var normales := calcNormales( vertices, triangulos )
+	
+	var uvs := PackedVector2Array([
+		Vector2(1,1), Vector2(0,1), Vector2(1,1), Vector2(0,1),
+		Vector2(1,0), Vector2(1,1), Vector2(1,0), Vector2(0,0),
+		Vector2(1,0), Vector2(1,1), Vector2(1,0), Vector2(0,0),
+		Vector2(1,1), Vector2(0,1), Vector2(0,1), Vector2(1,1),
+		Vector2(0,1), Vector2(0,0), Vector2(0,0), Vector2(0,0),
+		Vector2(1,0), Vector2(0,0), Vector2(0,1), Vector2(1,0)
+	])
+	
+	## inicializar el array con las tablas
+	var tablas : Array = []   ## tabla vacía incialmente
+	tablas.resize( Mesh.ARRAY_MAX ) ## redimensionar al tamaño adecuado
+	tablas[ Mesh.ARRAY_VERTEX ] = vertices
+	tablas[ Mesh.ARRAY_INDEX  ] = triangulos
+	tablas[ Mesh.ARRAY_NORMAL ] = normales
+	tablas[ Mesh.ARRAY_TEX_UV ] = uvs
+	
+	## crear e inicialzar el objeto a devolver
+	var mesh := ArrayMesh.new() ## crea malla en modo diferido, vacía
+	mesh.add_surface_from_arrays( Mesh.PRIMITIVE_TRIANGLES, tablas )
+	
+	return mesh

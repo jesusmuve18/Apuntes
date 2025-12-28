@@ -9,7 +9,7 @@ var vertices := PackedVector3Array([])
 var normales := PackedVector3Array([])
 
 func _init() -> void:
-	## crear las tablas de vértices y triángulos de un cubo de 8 vertices 
+	## crear las tablas de vértices y triángulos de un cubo de 24 vertices 
 	var size: float = 2
 	
 	for x in [-size/2, size/2]:

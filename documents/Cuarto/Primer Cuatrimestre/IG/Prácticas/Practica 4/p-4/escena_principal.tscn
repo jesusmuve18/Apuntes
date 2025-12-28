@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://divq67slfuf5q"]
+[gd_scene load_steps=28 format=3 uid="uid://divq67slfuf5q"]
 
 [ext_resource type="Script" uid="uid://nklo8ccmt1q2" path="res://scripts/nodos/script_raiz.gd" id="1_1xgag"]
 [ext_resource type="Script" uid="uid://dqpxbsfp12s2s" path="res://scripts/nodos/ejes3D.gd" id="1_jdg2m"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://bhgkwkrw6j2mu" path="res://scripts/nodos/Pared2/pared_2.gd" id="5_0or06"]
 [ext_resource type="Texture2D" uid="uid://lh78ta844l8d" path="res://textures/ea-textura-cuadricula.jpeg" id="5_iupgd"]
 [ext_resource type="Texture2D" uid="uid://b1umr6fvd4q4p" path="res://textures/text-madera.jpg" id="7_lhnnm"]
+[ext_resource type="Script" uid="uid://ctfloae4w4g4h" path="res://cubo_texture.gd" id="12_awcrs"]
+[ext_resource type="Script" uid="uid://vppodkwwwmso" path="res://piramide_texture.gd" id="13_34kg7"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_hcujj"]
 
@@ -71,6 +73,9 @@ roughness = 0.26
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_34kg7"]
 albedo_texture = ExtResource("4_hgi0t")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_el456"]
+albedo_texture = ExtResource("4_5e3jd")
+
 [node name="Escena Principal" type="Node3D"]
 script = ExtResource("1_1xgag")
 
@@ -84,10 +89,12 @@ script = ExtResource("3_rftnj")
 
 [node name="Suelo" type="MeshInstance3D" parent="Objetos_P4"]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -0.5, 0)
+visible = false
 mesh = SubResource("PlaneMesh_hcujj")
 surface_material_override/0 = SubResource("StandardMaterial3D_hcujj")
 
 [node name="ObjetosRevolucion" type="Node3D" parent="Objetos_P4"]
+visible = false
 
 [node name="ObjetoRevolucion1" type="MeshInstance3D" parent="Objetos_P4/ObjetosRevolucion"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.4999999, 0, -1.5)
@@ -177,6 +184,7 @@ spot_range = 6.718608
 
 [node name="Paredes" type="Node3D" parent="Objetos_P4"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+visible = false
 
 [node name="Pared1" type="Node3D" parent="Objetos_P4/Paredes"]
 script = ExtResource("4_rftnj")
@@ -185,3 +193,13 @@ textura = ExtResource("5_iupgd")
 [node name="Pared2" type="Node3D" parent="Objetos_P4/Paredes"]
 script = ExtResource("5_0or06")
 textura = ExtResource("7_lhnnm")
+
+[node name="cubo-texture" type="MeshInstance3D" parent="Objetos_P4"]
+visible = false
+material_override = SubResource("StandardMaterial3D_el456")
+script = ExtResource("12_awcrs")
+
+[node name="piramide-texture" type="MeshInstance3D" parent="Objetos_P4"]
+material_override = SubResource("StandardMaterial3D_el456")
+skeleton = NodePath("../cubo-texture")
+script = ExtResource("13_34kg7")
