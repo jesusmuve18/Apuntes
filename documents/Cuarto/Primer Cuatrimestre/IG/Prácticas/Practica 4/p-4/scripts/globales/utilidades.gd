@@ -163,3 +163,30 @@ func ArrayMeshCubo24_CCT(size: float = 1) -> ArrayMesh:
 	mesh.add_surface_from_arrays( Mesh.PRIMITIVE_TRIANGLES, tablas )
 	
 	return mesh
+
+# Crea las tablas de vertices, triangulos y normales para una circunferencia de 
+# n*m triangulos
+func crear_circunferencia(n: int, m:int, 
+						  vertices: PackedVector3Array, 
+						  triangulos: PackedInt32Array, 
+						  normales: PackedVector3Array):
+	assert(n>2 && m>0)
+	
+	var angulo :float = 2*PI/n
+	
+	for i in range(n):
+		var rot = Transform3D(Basis(Vector3(0,0,-1), i*angulo), Vector3.ZERO)
+		for j in range(m+1):
+			vertices.append(rot * ((float(j)/m) * Vector3(0,1.0,0)))
+	
+	for i in range(n):
+		for j in range(m):
+			var a : int = (i*(m+1)+j)
+			var b : int = (i*(m+1)+(j+1))
+			var c : int = (((i+1)%n)*(m+1)+j)
+			var d : int = (((i+1)%n)*(m+1)+(j+1))
+			
+			triangulos.append_array([a, d, c])
+			triangulos.append_array([a, b, d])
+	
+	normales.append_array(Utilidades.calcNormales(vertices, triangulos))

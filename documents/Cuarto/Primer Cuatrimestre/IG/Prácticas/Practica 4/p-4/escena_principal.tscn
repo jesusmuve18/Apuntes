@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://divq67slfuf5q"]
+[gd_scene load_steps=31 format=3 uid="uid://divq67slfuf5q"]
 
 [ext_resource type="Script" uid="uid://nklo8ccmt1q2" path="res://scripts/nodos/script_raiz.gd" id="1_1xgag"]
 [ext_resource type="Script" uid="uid://dqpxbsfp12s2s" path="res://scripts/nodos/ejes3D.gd" id="1_jdg2m"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://b1umr6fvd4q4p" path="res://textures/text-madera.jpg" id="7_lhnnm"]
 [ext_resource type="Script" uid="uid://ctfloae4w4g4h" path="res://cubo_texture.gd" id="12_awcrs"]
 [ext_resource type="Script" uid="uid://vppodkwwwmso" path="res://piramide_texture.gd" id="13_34kg7"]
+[ext_resource type="Script" uid="uid://wet0uqnxjku0" path="res://circunferencia_v_1.gd" id="14_sskua"]
+[ext_resource type="Script" uid="uid://c3t5qkv06rh0" path="res://circunferencia_v_2.gd" id="15_el456"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_hcujj"]
 
@@ -76,10 +78,14 @@ albedo_texture = ExtResource("4_hgi0t")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_el456"]
 albedo_texture = ExtResource("4_5e3jd")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kw5jj"]
+albedo_texture = ExtResource("5_iupgd")
+
 [node name="Escena Principal" type="Node3D"]
 script = ExtResource("1_1xgag")
 
 [node name="Ejes3D" type="Node3D" parent="."]
+visible = false
 script = ExtResource("1_jdg2m")
 
 [node name="Camera3DOrbital" type="Camera3D" parent="."]
@@ -200,6 +206,17 @@ material_override = SubResource("StandardMaterial3D_el456")
 script = ExtResource("12_awcrs")
 
 [node name="piramide-texture" type="MeshInstance3D" parent="Objetos_P4"]
+visible = false
 material_override = SubResource("StandardMaterial3D_el456")
 skeleton = NodePath("../cubo-texture")
 script = ExtResource("13_34kg7")
+
+[node name="circunferencia-v1" type="MeshInstance3D" parent="Objetos_P4"]
+visible = false
+material_override = SubResource("StandardMaterial3D_kw5jj")
+script = ExtResource("14_sskua")
+
+[node name="circunferencia-v2" type="MeshInstance3D" parent="Objetos_P4"]
+visible = false
+material_override = SubResource("StandardMaterial3D_kw5jj")
+script = ExtResource("15_el456")
