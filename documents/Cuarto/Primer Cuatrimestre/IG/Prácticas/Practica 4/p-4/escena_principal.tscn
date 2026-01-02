@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://divq67slfuf5q"]
+[gd_scene load_steps=35 format=3 uid="uid://divq67slfuf5q"]
 
 [ext_resource type="Script" uid="uid://nklo8ccmt1q2" path="res://scripts/nodos/script_raiz.gd" id="1_1xgag"]
 [ext_resource type="Script" uid="uid://dqpxbsfp12s2s" path="res://scripts/nodos/ejes3D.gd" id="1_jdg2m"]
@@ -11,10 +11,14 @@
 [ext_resource type="Script" uid="uid://bhgkwkrw6j2mu" path="res://scripts/nodos/Pared2/pared_2.gd" id="5_0or06"]
 [ext_resource type="Texture2D" uid="uid://lh78ta844l8d" path="res://textures/ea-textura-cuadricula.jpeg" id="5_iupgd"]
 [ext_resource type="Texture2D" uid="uid://b1umr6fvd4q4p" path="res://textures/text-madera.jpg" id="7_lhnnm"]
-[ext_resource type="Script" uid="uid://ctfloae4w4g4h" path="res://cubo_texture.gd" id="12_awcrs"]
-[ext_resource type="Script" uid="uid://vppodkwwwmso" path="res://piramide_texture.gd" id="13_34kg7"]
-[ext_resource type="Script" uid="uid://wet0uqnxjku0" path="res://circunferencia_v_1.gd" id="14_sskua"]
-[ext_resource type="Script" uid="uid://c3t5qkv06rh0" path="res://circunferencia_v_2.gd" id="15_el456"]
+[ext_resource type="Script" uid="uid://ctfloae4w4g4h" path="res://scripts/nodos/CuboTexture/cubo_texture.gd" id="12_awcrs"]
+[ext_resource type="Script" uid="uid://vppodkwwwmso" path="res://scripts/nodos/PiramideTexture/piramide_texture.gd" id="13_34kg7"]
+[ext_resource type="Script" uid="uid://wet0uqnxjku0" path="res://scripts/nodos/CircunferenciaEsferica/circunferencia_esferica.gd" id="14_sskua"]
+[ext_resource type="Script" uid="uid://c3t5qkv06rh0" path="res://scripts/nodos/CircunferenciaLineal/circunferencia_lineal.gd" id="15_el456"]
+[ext_resource type="Script" uid="uid://pj2jx5gayn3b" path="res://scripts/nodos/DonutMadera/donut_madera.gd" id="16_nwgaw"]
+[ext_resource type="Script" uid="uid://wfsu0xcfvv3m" path="res://scripts/nodos/DonutXY/donut_xy.gd" id="17_3aicl"]
+[ext_resource type="Script" uid="uid://docebca4vrbax" path="res://scripts/nodos/DonutXZ/donut_xz.gd" id="18_ecv3s"]
+[ext_resource type="Script" uid="uid://bmatbxm2cty8i" path="res://scripts/nodos/LataCocaCola/lata_cocal_cola.gd" id="19_3aicl"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_hcujj"]
 
@@ -85,7 +89,6 @@ albedo_texture = ExtResource("5_iupgd")
 script = ExtResource("1_1xgag")
 
 [node name="Ejes3D" type="Node3D" parent="."]
-visible = false
 script = ExtResource("1_jdg2m")
 
 [node name="Camera3DOrbital" type="Camera3D" parent="."]
@@ -211,12 +214,29 @@ material_override = SubResource("StandardMaterial3D_el456")
 skeleton = NodePath("../cubo-texture")
 script = ExtResource("13_34kg7")
 
-[node name="circunferencia-v1" type="MeshInstance3D" parent="Objetos_P4"]
+[node name="circunferencia-esferica" type="MeshInstance3D" parent="Objetos_P4"]
 visible = false
 material_override = SubResource("StandardMaterial3D_kw5jj")
 script = ExtResource("14_sskua")
 
-[node name="circunferencia-v2" type="MeshInstance3D" parent="Objetos_P4"]
+[node name="circunferencia-lineal" type="MeshInstance3D" parent="Objetos_P4"]
 visible = false
 material_override = SubResource("StandardMaterial3D_kw5jj")
 script = ExtResource("15_el456")
+
+[node name="donut-madera" type="MeshInstance3D" parent="Objetos_P4"]
+visible = false
+script = ExtResource("16_nwgaw")
+
+[node name="donut-XY" type="MeshInstance3D" parent="Objetos_P4"]
+visible = false
+skeleton = NodePath("../donut-madera")
+script = ExtResource("17_3aicl")
+
+[node name="donut-XZ" type="MeshInstance3D" parent="Objetos_P4"]
+visible = false
+skeleton = NodePath("../donut-madera")
+script = ExtResource("18_ecv3s")
+
+[node name="lataCocalCola" type="MeshInstance3D" parent="Objetos_P4"]
+script = ExtResource("19_3aicl")

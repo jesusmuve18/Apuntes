@@ -66,7 +66,7 @@ func _input( event : InputEvent ):
 			MOUSE_BUTTON_WHEEL_UP:   
 				dz = max( dz/1.05, 0.1 )
 			MOUSE_BUTTON_LEFT:
-				if event.pressed:
+				if event.pressed and (ray.visible): # solo reconoce el rayCast si es visible en la escena
 					ray.global_position = from
 					ray.look_at(to)
 					ray.target_position = Vector3(0, 0, -1000) # Apunta en su -Z local
