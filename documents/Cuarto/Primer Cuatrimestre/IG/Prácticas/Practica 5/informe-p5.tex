@@ -1,0 +1,181 @@
+\documentclass[12pt]{article}
+
+\input{../../../../../_assets/preambulo.tex}
+\input{../../../../../_assets/portada.tex}
+
+\usepackage{makecell}
+
+\definecolor{LightGray}{rgb}{0.95,0.95,0.92}
+\setminted{
+    linenos=true,
+    stepnumber=5,
+    numberfirstline=true,
+    autogobble,
+    breaklines=true,
+    breakautoindent=true,
+    breaksymbolleft=,
+    breaksymbolright=,
+    breaksymbolindentleft=0pt,
+    breaksymbolindentright=0pt,
+    breaksymbolsepleft=0pt,
+    breaksymbolsepright=0pt,
+    fontsize=\footnotesize,
+    bgcolor=LightGray,
+    numbersep=10pt
+}
+
+\begin{document}
+    \portada[%
+        titulo=Informática Gráfica,
+        subtitulo=Informe Práctica 5,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2025-2026]
+        
+    \section{Interacción con el modelo}
+
+    En primer lugar se ha añadido a cada pieza móvil del modelo los siguientes elementos:
+
+    \begin{enumerate}
+        \item Variable \verb|seleccionada|. Esta variable booleana indica si el modelo está seleccionado o no. Inicialmente tendrá el valor \verb|false|.
+        \item Variable \verb|seleccionar|. Esta cadena (\verb|String|) estará definida para cada pieza móvil con un nombre diferente y servirá para identificarla con una acción definida en el mapa de entrada que se asociará a una tecla (para seleccionar la pieza con el teclado). Se ha seguido la siguiente configuración:
+        
+        \begin{center}
+            \begin{tabular}{|ccccc|}
+                \hline
+                \textbf{Pieza} & \textbf{Acción mover} & \makecell[c]{\textbf{Tecla}\\ \textbf{mover}} & \textbf{Acción seleccionar} & \makecell[c]{\textbf{Tecla}\\ \textbf{seleccionar}}\\
+                \hline
+                Brazo\_derecho & \verb|mover_brazos| & \verb|1| & \verb|seleccionar_brazos| & \verb|A|\\
+                Brazo\_izquierdo & \verb|mover_brazos| & \verb|1| & \verb|seleccionar_brazos| & \verb|A|\\
+                Cabeza& \verb|asentir_cabeza| & \verb|2| & \verb|seleccionar_cabeza| & \verb|S|\\
+                Ojos & \verb|mover_ojos| & \verb|3| & \verb|seleccionar_ojos| & \verb|D|\\
+                boca & \verb|escalar_boca| & \verb|4| & \verb|seleccionar_boca| & \verb|F|\\
+                ojo\_derecho & \verb|guinar_ojo| & \verb|5| & \verb|seleccionar_ojo| & \verb|G|\\
+                \hline
+            \end{tabular}
+        \end{center}
+
+        \item Código de activación de movimiento. Se ha modificado el esquema en cada pieza siguiendo el siguiente modelo:
+        \begin{minted}{python3}
+func _process(delta):
+	if Input.is_action_just_pressed(activar):
+		activa = !activa
+	if Input.is_action_just_pressed(seleccionar):
+		select()
+	
+	if activa and seleccionada:
+		## Activar movimiento
+        \end{minted}
+
+        \item Función de selección. Además se ha añadido a cada pieza la siguiente función que cambia el material para identificar visualmente la pieza seleccionada:
+        \begin{minted}{python3}
+func select() -> void:
+	seleccionada = !seleccionada
+	
+	if(seleccionada==true):
+		material_override = Utilidades.selectedMaterial()
+	else:
+		material_override=null	
+        \end{minted}
+        Donde en \verb|utilidades.gd| se ha añadido el siguiente código:
+        \begin{minted}{python3}
+var selected_material: StandardMaterial3D = StandardMaterial3D.new()
+
+func _ready() -> void:
+	selected_material.albedo_color = Color.ORANGE_RED
+	selected_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	selected_material.metallic = 0.0      
+	selected_material.roughness = 0.5
+	selected_material.specular = 0.5 
+	selected_material.emission_enabled = true
+	selected_material.emission = Color(1, 0, 0)
+	selected_material.emission_energy = 2.0
+
+func selectedMaterial() -> StandardMaterial3D :
+	return selected_material
+        \end{minted}
+        que únicamente establece un material para la selección con cierto brillo.
+
+        5. \verb|StaticBody3D| y \verb|CollisionShape3D|. Para cada una de las piezas móviles se ha establecido la siguiente jerarquía en el árbol:
+        \begin{minted}{text}
+<nombre_pieza>
+ |-StaticBody3D
+    |-CollisionShape3D
+        \end{minted}
+        esto se ha hecho con la opción automática de Godot que es seleccionar el \verb|MeshInstance3D| y en el editor 3D entrar al menú \verb|Malla| y seleccionar la opción \verb|Crear Forma de Colisión...|. En este menú establecemos los siguientes parámetros:
+
+        \begin{center}
+            \includegraphics[width=4cm]{./images/img1.png}
+        \end{center}
+
+        y automáticamente se generará la estructura necesaria para reconocer colisiones.
+    \end{enumerate}
+
+    Una vez hecho todo esto en cada una de las piezas móviles que ya se han mencionado se ha modificado ligeramente el código de la cámara que se adjuntó en la práctica:
+
+    \begin{minted}{python3}
+if event.pressed and (ray.visible): # solo reconoce el rayCast si es visible en la escena
+    ray.global_position = from
+    ray.look_at(to)
+    ray.target_position = Vector3(0, 0, -1000) # Apunta en su -Z local
+    ray.force_raycast_update()
+    if ray.is_colliding():
+        var objeto = ray.get_collider()
+        var padre : Node = objeto.get_parent()
+        if padre and padre.visible:
+            print("Seleccionado:", padre.name)
+            # Mantengo la utilidad de clicar en el suelo cuando es
+            if padre.name == "Suelo":
+                Utilidades.crear_cubo_en(ray.get_collision_point())
+                print("Creado cubo en:", ray.get_collision_point())
+        seleccionar(padre)
+    else:
+        print("Ningun objeto seleccionado")
+    \end{minted}
+
+    Además de añadir la siguiente función:
+    \begin{minted}{python3}
+func seleccionar(selected : Node) -> void:
+	if(selected!=null and selected.has_method("select")): selected.select()
+    \end{minted}
+
+    De esta forma solo se pueden seleccionar los objetos que sean visibles y solo cuando el \verb|RayCast| esté visible (para poder desactivarlo en los ejercicios adicionales). Finalmente para que los objetos invisibles no interfieran con el resto del proyecto se ha añadido el siguiente script a cada uno de los objetos colisionables (con \verb|StaticBody3D| y \verb|CollisionShape3D|):
+
+    \begin{minted}{python3}
+extends MeshInstance3D
+
+## Hago que no se lean las colisiones de objetos ocultos
+var col
+
+func _ready() -> void:
+	col = $StaticBody3D/CollisionShape3D
+
+func _process(_delta):
+	col.disabled = not visible
+    \end{minted}
+
+    y en el caso del modelo jerárquico se ha hecho un poco más complejo pero con la misma idea:
+
+    \begin{minted}{python3}
+extends Node3D
+
+## Hago que no se lean las colisiones de objetos ocultos
+var hijos : Array = []
+
+func _ready() -> void :
+	hijos=[
+		$Cabeza/Cara/boca/StaticBody3D/CollisionShape3D,
+		$Cabeza/Cara/Ojos/ojo_derecho/StaticBody3D/CollisionShape3D,
+		$Cabeza/Cara/Ojos/StaticBody3D/CollisionShape3D,
+		$Cabeza/StaticBody3D/CollisionShape3D,
+		$Cuerpo/Brazo_derecho/Brazo_derecho/CollisionShape3D,
+		$Cuerpo/Brazo_izquierdo/Brazo_izquierdo/CollisionShape3D]
+
+func _process(_delta):
+	for hijo in hijos:
+		hijo.disabled = not visible
+    \end{minted}
+
+   
+
+
+\end{document}

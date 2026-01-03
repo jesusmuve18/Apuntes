@@ -103,7 +103,6 @@ mesh = SubResource("PlaneMesh_hcujj")
 surface_material_override/0 = SubResource("StandardMaterial3D_hcujj")
 
 [node name="ObjetosRevolucion" type="Node3D" parent="Objetos_P4"]
-visible = false
 
 [node name="ObjetoRevolucion1" type="MeshInstance3D" parent="Objetos_P4/ObjetosRevolucion"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.4999999, 0, -1.5)
@@ -239,4 +238,5 @@ skeleton = NodePath("../donut-madera")
 script = ExtResource("18_ecv3s")
 
 [node name="lataCocalCola" type="MeshInstance3D" parent="Objetos_P4"]
+visible = false
 script = ExtResource("19_3aicl")

@@ -140,36 +140,36 @@ func calcNormales( verts : PackedVector3Array,
 	return normales
 
 ## -----------------------------------------------------------------------------
-## Función que calcula las normales promedio de los vértices de una malla, 
-## a partir de la tabla de posiciones de vértices y la tabla de triángulos
+## Función que calcula las coordenadas de textura a partir de un vector de 
+## vertices de textura
 ##
-##    verts = tabla de posiciones de vertices
-##    tris = tabla de posiciones de triangulos
+##    vertices = tabla de posiciones de vertices
 ##
 static func calcUV(vertices: PackedVector3Array) -> PackedVector2Array:
 	var uvs := PackedVector2Array()
 	var max_u = 1.0
 	var max_v = 1.0
 	
-	# Calcular min y max de Y para normalizar v
-	var min_y = vertices[0].y
-	var max_y = vertices[0].y
+	# Calcular extremos de y
+	var min_y : float = vertices[0].y
+	var max_y : float = vertices[0].y
 	for vert in vertices:
 		if vert.y < min_y:
 			min_y = vert.y
 		if vert.y > max_y:
 			max_y = vert.y
 	
+	var altura := max_y - min_y
+	
 	for v in vertices:
 		#Calcular el valor del parámetro u
 		var phi = atan2(v.z, v.x)
 		var u = max_u*((phi / (2*PI)+0.5))
-		#  Calcular el valor del parámetro v
-		#Inserta tu código aquí
-		#Puedes calcularlo en función del desplazaniento en el perfil
-		# o de forma aproximada en función de y
-		var v_coord =  (v.y - min_y) / (max_y - min_y) * max_v
+		
+		#  Calcular el valor del parámetro v de forma aproximada en función de y
+		var v_coord = max_v * ((min_y - v.y) / altura)
 		var uv_coords = Vector2(1-u,1-v_coord)
+		
 		uvs.append(uv_coords)
 	return uvs
 
