@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyjtciw83b76y"]
+
+[ext_resource type="Script" uid="uid://nklo8ccmt1q2" path="res://scripts/nodos/script_raiz.gd" id="1_5e3jd"]
+[ext_resource type="Script" uid="uid://dqpxbsfp12s2s" path="res://scripts/nodos/ejes3D.gd" id="1_jdg2m"]
+[ext_resource type="Script" uid="uid://3gkmlwsmgkfs" path="res://scripts/nodos/Teclado/teclado.gd" id="2_rftnj"]
+[ext_resource type="Script" uid="uid://i02ohha2s4em" path="res://scripts/nodos/camara_3d_orbital_simple.gd" id="3_rftnj"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rftnj"]
+
+[node name="Escena Principal" type="Node3D"]
+script = ExtResource("1_5e3jd")
+
+[node name="Teclado" type="Node3D" parent="."]
+script = ExtResource("2_rftnj")
+
+[node name="Ejes3D" type="Node3D" parent="."]
+script = ExtResource("1_jdg2m")
+
+[node name="Camera3DOrbital" type="Camera3D" parent="."]
+script = ExtResource("3_rftnj")
+
+[node name="DirectionalLight3D_1" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.6622499, -0.28060535, 0.69475585, 0.03132768, 0.9367862, 0.34849718, -0.7486278, -0.20902714, 0.62917733, 3.1915045, 2.5505667, 3.232916)
+light_energy = 1.824
+shadow_enabled = true
+
+[node name="DirectionalLight3D_2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.5063896, -0.50648814, 0.69788206, -0.117664404, 0.8423379, 0.52594864, -0.85423917, 0.18421906, -0.48614684, 3.7431002, 2.5505667, -2.5410423)
+light_energy = 1.824
+shadow_enabled = true
+
+[node name="CuadradoBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -1, 0)
+mesh = SubResource("PlaneMesh_rftnj")
+skeleton = NodePath("")
