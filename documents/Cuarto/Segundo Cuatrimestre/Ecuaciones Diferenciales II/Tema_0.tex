@@ -1,0 +1,98 @@
+Será importante repasar conceptos como la convergencia uniforme.
+
+\chapter*{Introducción}
+
+Consideramos un fluido dentro de una región del espacio, por ejemplo, el agua del mar Mediterráneo. Esta región tiene que ser un abierto $\Omega\subset \bb{R}^3$ conexeo. Tendremos una serie de puntos que denotaremos por $p\in \Omega$ donde $p=(x,y,z)$. Este fluido está en movimiento y por tanto tiene una dirección y una velocidad, es decir, para cada $p\in \Omega$ tendremos un vector $V$, que no tiene que ser constante, luego $V=V(t,p)$ (dependerá del tiempo). De esta forma tendremos 
+\Func{V}{\bb{R}\times \Omega}{\bb{R}^3}{(t,p)}{V(t,p)}
+La partícula seguirá entonces una trayectoria y la recorrerá a una cierta velocidad. Las leyes del movimiento seguirán la siguiente relación:
+\begin{gather*}
+    \dot{p}(t) = V(t,p(t))
+\end{gather*}
+Lo cual me dice que en cada punto de la trayectoria, el punto seguirá un vector tangente a la misma. Lo que queremos estudiar en esta asignatura será, según hagamos hipótesis sobre $V$, cómo afectará a la trayectoria de la partícula. Si vemos $V$ dentro de $\bb{R}^3$ como $V = (u,v,w)$ podremos desglosar la relación anterior en el siguiente sistema:
+\begin{gather*}
+    \left\{
+        \begin{array}{l}
+            \dot{x} = u(t,x,y,z)\\
+            \dot{y} = v(t,x,y,z)\\
+            \dot{z} = w(t,x,y,z)
+        \end{array}
+    \right.
+\end{gather*}
+
+En física se habla de movimientos estacionarios y no estacionarios y en Ecuaciones Diferenciales se habla de sistemas autónomos o no autónomos.
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Consideramos $\Omega = \bb{R}^3$ y el vector $V(t,x,y,z) = (0,1,0)$. Tendríamos en este caso el siguiente sistema:
+        \begin{gather*}
+            \left.
+                \begin{array}{l}
+                    \dot{x} = 0\\
+                    \dot{y} = 1\\
+                    \dot{z} = 0
+                \end{array}
+            \right\} \Rightarrow
+            \left\{
+                \begin{array}{l}
+                    x(t) = c_1\\
+                    y(t) = c_2 + t, \ \ \ t\in \bb{R}\\
+                    z(t) = c_3
+                \end{array}
+            \right.
+        \end{gather*}
+
+        \item Estudiamos ahora el caso de un vórtice lineal. De nuevo tenemos $\Omega = \bb{R}^3$ y el campo de velocidades será estacionario pero no constante, dado por $V(t,x,y,z) = (y, -x, 0)$. Nos quedará entonces
+        \begin{gather*}
+            \left.
+                \begin{array}{l}
+                    \dot{x} = y\\
+                    \dot{y} = -x\\
+                    \dot{z} = 0
+                \end{array}
+            \right\} \Rightarrow \ddot{x} + x = 0 \Rightarrow
+            \left\{
+                \begin{array}{l}
+                    x(t) = c_1 \cos(t) + c_2 \sen(t)\\
+                    y(t) = -c_1\sen(t) + c_2\cos(t), \ \ \ t\in \bb{R}\\
+                    z(t) = c_3
+                \end{array}
+            \right.
+        \end{gather*}
+        Las soluciones serán por tanto circunferencias concéntricas.
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{notacion}
+    A partir de ahora notaremos $x = (x_1,...,x_d)\in \bb{R}^d$. Al campo lo notaremos por $X = X(t,x)$ donde $X=(X_1,...,X_d)$. Consideramos además $D\subset \bb{R}\times \bb{R}^d$ abierto y conexo y el campo de velocidades\footnote{puede ser de velocidades, de fuerzas, etc, pero lo llamaremos así} estará definido como
+    \Func{X}{D}{\bb{R}^d}{(t,x)}{X(t,x)}
+    Buscaremos entonces resolver
+    \begin{gather*}
+        \dot{x} = X(t,x)
+    \end{gather*}
+    que resultará en el siguiente sistema
+    \begin{gather*}
+        \left\{
+            \begin{array}{l}
+                \dot{x_1} = X_1(t,x_1,...,x_d)\\
+                ...\\
+                \dot{x_d} = X_d(t,x_1, ... ,x_d)
+            \end{array}
+        \right.
+    \end{gather*}
+
+    Por ejemplo, en $\bb{R}^2$, dado un punto $(t_0,x_0)\in D$ nuestro problema consistirá en resolver el PVI dado por 
+    \begin{gather*}
+        \left\{
+            \begin{array}{l}
+                \dot{x} = X(t,x)\\
+                x(t_0) = x_0
+            \end{array}
+        \right.
+    \end{gather*}
+\end{notacion}
+
+\begin{teo}[Cauchy-Peano]
+    
+\end{teo}
+
+
