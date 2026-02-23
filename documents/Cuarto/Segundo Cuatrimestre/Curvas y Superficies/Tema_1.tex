@@ -1,0 +1,39 @@
+% El comienzo de esta rama de estudio de las matemáticas surge en el siglo XVII, motivado por problemas de geometría como el siguiente:
+
+En Grecia se estudiaban problemas como el siguiente: si tengo una rueda con un punto en el borde y giro la rueda sobre una superficie plana resultará en la curva epicicloide. Sin embargo, esta solución se describía heurísticamente. Es por esto que tal y como la vamos a estudiar, el estudio de curvas y superficies surge en el siglo XVII con los dos autores más importantes de este siglo (y litigadores) Leibniz y Newton. En el siglo XVIII podemos estudiar a Euler y Monge. En el siglo XIX tenemos a Jean Frenet, Pauino Senet y autores de la Escuela Francesa, de entre ellos el más conocido, Cauchy. Por último del siglo XX tenemos a Jean Gaston Darboux y a Élie Cartan.
+
+\chapter{Curvas en el plano y en el espacio}
+
+\section{Definición. Curva Regular. Longitud de arco}
+
+\begin{definicion}[Curva]
+    Una \textbf{curva} en el espacio es una aplicación $\alpha: I \to \bb{R}^3$ diferenciable, donde $I\subseteq\bb{R}$ es un intervalo abierto. Normalmente, si queremos señalar las componentes de $\alpha$ escribiremos
+    \begin{gather*}
+        \alpha(t) = (x(t), y(t), z(t))
+    \end{gather*}
+    En realidad a un geómetra solo le interesa la llamada \textbf{traza de la curva}, definida como
+    \begin{gather*}
+        tr (\alpha) = img (\alpha) = \alpha(I)
+    \end{gather*}
+\end{definicion}
+
+\begin{ejemplo}
+    Sea $a\in \bb{R}^3$ un punto y $v\in \bb{R}^3$ un vector\footnote{Lo de llamar punto o vector solo sirve para facilitar el lenguaje y nuestro aprendizaje}. Definimos 
+    \Func{\alpha}{\bb{R}}{\bb{R}^3}{t}{a+tv}
+    Si estudiamos la traza de $\alpha$ veremos que tenemos que hacer una distinción de casos:
+
+    \begin{itemize}
+        \item Si $v=0$ tendremos que $img(\alpha) = \{a\}$ por lo que será un único punto y según nuestra definición esta será una recta.
+        \item Si $v\neq 0$ tendremos ahora que $tr(\alpha)$ es la recta que pasa por $a$ y que tiene como vector de dirección el vector $v$, que escribiremos como 
+        \begin{gather*}
+            R_{a,v} = a + \langle v \rangle
+        \end{gather*}
+    \end{itemize}
+
+    \begin{definicion}[Curva plana]
+        Una curva $\alpha: I \to \bb{R}^3$ la llamaremos \textbf{curva plana} si existe un plano $P\subset \bb{R}^3$ tal que $tr(\alpha)\subset P$.
+    \end{definicion}
+    
+    
+\end{ejemplo}
+
