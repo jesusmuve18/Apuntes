@@ -29,11 +29,149 @@ En Grecia se estudiaban problemas como el siguiente: si tengo una rueda con un p
             R_{a,v} = a + \langle v \rangle
         \end{gather*}
     \end{itemize}
-
-    \begin{definicion}[Curva plana]
-        Una curva $\alpha: I \to \bb{R}^3$ la llamaremos \textbf{curva plana} si existe un plano $P\subset \bb{R}^3$ tal que $tr(\alpha)\subset P$.
-    \end{definicion}
-    
-    
 \end{ejemplo}
+
+\begin{definicion}[Curva plana]
+    Una curva $\alpha: I \to \bb{R}^3$ la llamaremos \textbf{curva plana} si existe un plano $P\subset \bb{R}^3$ tal que $tr(\alpha)\subset P$.
+
+    Como $P$ y $P(\{z=0\})$ son equivalentes por un movimiento rígido\footnote{recordemos que es una transformación afín que conserva la métrica, o una isometría} de $\bb{R}^3$ podemos considerar que la curva $\alpha$ está definida como 
+    \begin{gather*}
+        \alpha: I \to P(\{z=0\})\subset \bb{R}^3
+    \end{gather*}
+    Por lo que podremos estudiar sus componentes como 
+    \begin{gather*}
+        \alpha(t) = (x(t), y(t), 0) \equiv (x(t),y(t))
+    \end{gather*}
+    De nuevo podemos abstraer y pensar que una curva plana es una aplicación diferenciable $\alpha: I \to \bb{R}^2$, donde $I\subset \bb{R}$ es un intervalo abierto.
+\end{definicion}
+
+\begin{observacion} % parametrizadas, diferenciable
+    Diremos que las curvas son \textbf{parametrizadas} si dependen de un parámetro (normalmente el tiempo\footnote{Se nos anima a buscar un software que nos permita pintar una curva}) y las llamaremos \textbf{diferenciables} ya que por su propia definición las componentes son diferenciables.
+\end{observacion}
+
+\begin{ejemplo}
+
+    \begin{enumerate}\
+        \item Consideramos la curva $\alpha(t) = a + tv$, con $a\in \bb{R}^2$, $v\in \bb{R}^2$ (la estudiada anteriormente). Si estudiamos su velocidad tendremos que pensar en su derivada obteniendo
+        \begin{gather*}
+            \alpha'(t) = v
+        \end{gather*}
+        lo que nos dice que la velocidad es constante (tanto celeridad como direccional). Esto nos dice que la curva $\alpha$ describe un MRU\footnote{Movimiento Rectilíneo Uniforme}, lo que nos recuerda a la Primera Ley de Newton\footnote{Todo cuerpo permanece en reposo o se mueve a velocidad constante en línea recta a menos que una fuerza externa neta actúe sobre él}. Si ahora estudiamos la aceleración tenemos 
+        \begin{gather*}
+            \alpha''(t) = 0
+        \end{gather*}
+        Lo que nos confirma que estamos ante un MRU (y no un MRUA\footnote{Movimiento Rectilíneo Uniformemente Acelerado}).
+
+        \item Consideramos ahora $a\in \bb{R}^2$, $v\in \bb{R}^2\setminus\{0\}$ y la curva
+        \Func{\beta}{\bb{R}}{\bb{R}^2}{t}{a+t^2v}
+        Tenemos que $tr(\beta) = \beta(I)\subset tr(\alpha)=R_{a,v}$. Si estudiamos su velocidad tendremos 
+        \begin{gather*}
+            \beta'(t)=2tv
+        \end{gather*}
+        y estaremos ante un Movimiento Rectilíneo (no uniforme). Estudiando su aceleración tendremos
+        \begin{gather*}
+            \beta''(t) = 2v
+        \end{gather*}
+        Por lo que la aceleración será constante y estamos ante un MRUA. Normalmente escribiremos
+        \begin{gather*}
+            tr(\beta) = R_0^+(a,v)
+        \end{gather*}
+
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{ejercicio}
+    Estudiar la curva $\gamma(t) = a + t^3v$ con $a\in \bb{R}^2$ y $v\in \bb{R}^2\setminus \{0\}$.
+\end{ejercicio}
+
+\begin{ejemplo}
+    Supongamos que tenemos la curva
+    \Func{\delta}{\bb{R}}{\bb{R}^2}{t}{(t^3-4t, t^2-4)}
+
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                % --- CONFIGURACIÓN DE LOS EJES ---
+                axis lines = middle,      % Los ejes se cruzan en el (0,0)
+                xlabel = {$x$},           % Etiqueta del eje X
+                ylabel = {$y$},           % Etiqueta del eje Y
+                grid = none,              % Muestra la cuadrícula principal y secundaria
+                minor tick num = 1,       % Líneas de cuadrícula intermedias
+                enlargelimits = true,     % Añade un pequeño margen a los bordes
+                axis line style={-, thick},     % Flechas en los extremos de los ejes
+                %
+                % Opcional: Esto asegura que si usas sin(t) o cos(t) en el futuro, 
+                % LaTeX asuma que 't' está en radianes y no en grados.
+                trig format plots=rad,    
+            ]
+            
+            % --- DEFINICIÓN DE LA CURVA PARAMÉTRICA ---
+            \addplot [
+                domain=-2.5:2.5, % 1. RANGO DE 't': Modifica esto según tu curva
+                samples=100,     % 2. SUAVIDAD: Aumenta este número (ej. 200) si la curva tiene picos raros
+                variable=\t,     % Definimos que nuestra variable paramétrica es 't'
+                thick,           % Grosor de la línea
+                blue,            % Color de la línea
+            ]
+            % 3. ECUACIONES
+            % Importante: Usa las llaves { } para agrupar cada componente
+            ({t^3 - 4*t}, {t^2 - 4});
+            
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    Este ejemplo nos permite ver que existen curvas con autointersecciones.
+\end{ejemplo}
+
+\begin{ejemplo}
+    Consideramos ahora la curva definida como
+    \Func{\veps}{I}{\bb{R}^2}{t}{(t^3, t^2)}
+
+    Si estudiamos sus derivadas tenemos
+    \begin{gather*}
+        \veps'(t) = (3t^2, 2t)\\
+        \veps''(t) = (0,0)
+    \end{gather*}
+    y obtenemos la siguiente gráfica
+
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                % --- CONFIGURACIÓN DE LOS EJES ---
+                axis lines = middle,      % Los ejes se cruzan en el (0,0)
+                xlabel = {$x$},           % Etiqueta del eje X
+                ylabel = {$y$},           % Etiqueta del eje Y
+                grid = none,              % Muestra la cuadrícula principal y secundaria
+                minor tick num = 1,       % Líneas de cuadrícula intermedias
+                enlargelimits = true,     % Añade un pequeño margen a los bordes
+                axis line style={-, thick},     % Flechas en los extremos de los ejes
+                %
+                % Opcional: Esto asegura que si usas sin(t) o cos(t) en el futuro, 
+                % LaTeX asuma que 't' está en radianes y no en grados.
+                trig format plots=rad,    
+            ]
+            
+            % --- DEFINICIÓN DE LA CURVA PARAMÉTRICA ---
+            \addplot [
+                domain=-2.5:2.5, % 1. RANGO DE 't': Modifica esto según tu curva
+                samples=100,     % 2. SUAVIDAD: Aumenta este número (ej. 200) si la curva tiene picos raros
+                variable=\t,     % Definimos que nuestra variable paramétrica es 't'
+                thick,           % Grosor de la línea
+                blue,            % Color de la línea
+            ]
+            % 3. ECUACIONES
+            % Importante: Usa las llaves { } para agrupar cada componente
+            ({t^3}, {t^2});
+            
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+
+    Este ejemplo nos demuestra que aunque $\veps$ sea diferenciable, $tr(\veps)$ tiene ``picos''. Tenemos que 
+    \begin{gather*}
+        img(\veps) = Gr\{y=x^{\frac{2}{3}}\}
+    \end{gather*}
+\end{ejemplo}
+
+
 
