@@ -130,7 +130,7 @@ En Grecia se estudiaban problemas como el siguiente: si tengo una rueda con un p
     Si estudiamos sus derivadas tenemos
     \begin{gather*}
         \veps'(t) = (3t^2, 2t)\\
-        \veps''(t) = (0,0)
+        \veps''(t) = (6t,2)
     \end{gather*}
     y obtenemos la siguiente gráfica
 
@@ -167,8 +167,85 @@ En Grecia se estudiaban problemas como el siguiente: si tengo una rueda con un p
         \end{tikzpicture}
     \end{center}
 
-    Este ejemplo nos demuestra que aunque $\veps$ sea diferenciable, $tr(\veps)$ tiene ``picos''. Tenemos que $img(\veps) = Gr\{y=x^{\frac{2}{3}}\}$, es decir, la traza de $\veps$ coincide con la gráfica de una función no diferenciable.
+    Este ejemplo nos demuestra que aunque $\veps$ sea diferenciable, $tr(\veps)$ tiene ``picos''. Tenemos que $img(\veps) = Gr\{y=x^{\nicefrac{2}{3}}\}$, es decir, la traza de $\veps$ coincide con la gráfica de una función no diferenciable.
 \end{ejemplo}
+
+\begin{ejemplo} Consideramos la siguiente curva
+    \Func{\zeta}{\bb{R}}{\bb{R}^3}{t}{a+r(e_1\cos(\frac{t}{r}) + e_2(\sen(\frac{t}{r})))}
+    donde $r>0$, $a\in \bb{R}^3$, $e_1,e_2\in \bb{R}^3$ tal que $|e_1|=|e_2|=1$ y $\langle e_1,e_2 \rangle = 0$.
+
+    Como tenemos 2 vectores ortogonales en el espacio, estos generarán un plano, por lo que $\zeta(t)\in P = a + \langle \{e_1,e_2\}\rangle$ $\forall t \in \bb{R}$. Por tanto
+    \begin{gather*}
+        img(\zeta) = tr(\zeta) \subset P \Rightarrow \zeta \text{ es una curva plana}
+    \end{gather*}
+    Además, se verifica que 
+    \begin{gather*}
+        |\zeta(t) - a | = r \ \ \forall t\in \bb{R}
+    \end{gather*}
+    lo que nos dice que todos los puntos de la traza equidistan al punto $a$, llegando a la conclusión de que $tr(\zeta)$ es una circunferencia centrada en $a$. A esta curva la llamaremos \underline{la} circunferencia de centro $a$ y radio $r>0$ en $P$.\\
+
+    Podemos ver también que esta curva no se recorre de una forma aleatoria:
+    \begin{gather*}
+        \zeta'(t) = -e_1\left(\sen\left(\frac{t}{r}\right)\right) + e_2\left(\cos\left(\frac{t}{r}\right)\right) \Rightarrow \text{ no es un MRU}\\
+        \zeta''(t) \text{ no es constante} \Rightarrow \text{ no es un movimiento rectilíneo acelerado}
+    \end{gather*}
+    Si estudiamos un poco más esta curva veremos que la aceleración es solo centrífuga ya que $|\zeta''(t)|=1$. Esta es la traza de un MCU\footnote{Movimiento Circular Uniforme}.
+\end{ejemplo}
+
+\begin{ejemplo}
+    Definimos la siguiente curva
+    \Func{\eta}{I}{\bb{R}^2}{t}{\left(\frac{3t}{1+t^3}, \frac{3t^2}{1+t^3} \right)}
+    donde $I=]-1, +\infty[$. La gráfica será algo como\footnote{a esta curva se le conoce como Hoja de Descartes}
+
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                % --- CONFIGURACIÓN DE LOS EJES ---
+                axis lines = middle,      % Los ejes se cruzan en el (0,0)
+                xlabel = {$x$},           % Etiqueta del eje X
+                ylabel = {$y$},           % Etiqueta del eje Y
+                grid = none,              % Muestra la cuadrícula principal y secundaria
+                minor tick num = 1,       % Líneas de cuadrícula intermedias
+                enlargelimits = true,     % Añade un pequeño margen a los bordes
+                axis line style={-, thick},     % Flechas en los extremos de los ejes
+                %
+                % Opcional: Esto asegura que si usas sin(t) o cos(t) en el futuro, 
+                % LaTeX asuma que 't' está en radianes y no en grados.
+                trig format plots=rad,    
+            ]
+            
+            % --- DEFINICIÓN DE LA CURVA PARAMÉTRICA ---
+            \addplot [
+                domain=-0.85:50, % 1. RANGO DE 't'
+                samples=500,     % 2. SUAVIDAD: Aumenta este número (ej. 200) si la curva tiene picos raros
+                variable=\t,     % Definimos que nuestra variable paramétrica es 't'
+                thick,           % Grosor de la línea
+                blue,            % Color de la línea
+            ]
+            % 3. ECUACIONES
+            % Importante: Usa las llaves { } para agrupar cada componente
+            ({(3*t)/(1+t^3)}, {(3*t^2)/(1+t^3)});
+            
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+
+    Tendremos que ver que $\eta$ es inyectiva (o lo que es lo mismo, no tiene autointersecciones). Observamos también que $\eta'(t)\neq 0$ $\forall t \in I$. Nos preguntamos si $I\cong tr(\eta)$ es un homeomorfismo y llegamos a la conclusión de que no lo es (si quitamos el punto $(0,0)$ en la $tr(\zeta)$ obtenemos una única componente conexa, ya que $\overline{(tr(\zeta)\setminus\{(0,0)\})} = tr(\zeta)$, pero al quitar cualquier punto en $I$ obtendremos dos componentes).
+\end{ejemplo}
+
+\begin{definicion}
+    Sea $I\subset \bb{R}$ un intervalo, $\alpha: I \to \bb{R}^3$ una curva, definimos la recta tangente a $\alpha$ en el instante $t\in I$ como la recta afín $\alpha(t) + \langle \alpha'(t) \rangle$ y la representamos como $R_{\alpha(t), \alpha'(t)}\equiv R_t$.
+\end{definicion}
+
+\begin{observacion}
+    Si $\alpha'(t)=0$, entonces la recta tangente será $\alpha(t) + \langle 0 \rangle = \alpha(t)$ que no será una recta, sino un punto. Por tanto, en los puntos $t\in I$ con $\alpha'(t)=0$ no existirá recta tangente. Esto nos dará motivos para intentar evitar esta situación.
+\end{observacion}
+
+\begin{definicion}
+    Sea $I\subset \bb{R}$ un intervalo, $\alpha: I \to \bb{R}^3$ una curva. Los puntos $\alpha(t)\in tr(\alpha)$ tales que $\alpha'(t)\neq 0$ se llaman \textbf{regulares}. A los puntos que no verifican esta condición los llamaremos \textbf{singulares}.\\
+
+    La curva $\alpha$ se dice \textbf{regular} si $\alpha'(t)\neq 0$ $\forall t \in I$, es decir, si todos los puntos $t\in I$ son regulares.
+\end{definicion}
 
 
 
