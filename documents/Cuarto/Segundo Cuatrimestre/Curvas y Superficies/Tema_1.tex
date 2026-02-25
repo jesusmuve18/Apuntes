@@ -49,14 +49,13 @@ En Grecia se estudiaban problemas como el siguiente: si tengo una rueda con un p
     Diremos que las curvas son \textbf{parametrizadas} si dependen de un parámetro (normalmente el tiempo\footnote{Se nos anima a buscar un software que nos permita pintar una curva}) y las llamaremos \textbf{diferenciables} ya que por su propia definición las componentes son diferenciables.
 \end{observacion}
 
-\begin{ejemplo}
-
-    \begin{enumerate}\
-        \item Consideramos la curva $\alpha(t) = a + tv$, con $a\in \bb{R}^2$, $v\in \bb{R}^2$ (la estudiada anteriormente). Si estudiamos su velocidad tendremos que pensar en su derivada obteniendo
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Consideramos la curva $\alpha(t) = a + tv$, con $a\in \bb{R}^2$, $v\in \bb{R}^2$ (la estudiada anteriormente). Si estudiamos su \textbf{velocidad} tendremos que pensar en su derivada obteniendo
         \begin{gather*}
             \alpha'(t) = v
         \end{gather*}
-        lo que nos dice que la velocidad es constante (tanto celeridad como direccional). Esto nos dice que la curva $\alpha$ describe un MRU\footnote{Movimiento Rectilíneo Uniforme}, lo que nos recuerda a la Primera Ley de Newton\footnote{Todo cuerpo permanece en reposo o se mueve a velocidad constante en línea recta a menos que una fuerza externa neta actúe sobre él}. Si ahora estudiamos la aceleración tenemos 
+        lo que nos dice que la velocidad es constante (tanto celeridad como direccional). Esto nos dice que la curva $\alpha$ describe un MRU\footnote{Movimiento Rectilíneo Uniforme}, lo que nos recuerda a la Primera Ley de Newton\footnote{Todo cuerpo permanece en reposo o se mueve a velocidad constante en línea recta a menos que una fuerza externa neta actúe sobre él}. Si ahora estudiamos la \textbf{aceleración} tenemos 
         \begin{gather*}
             \alpha''(t) = 0
         \end{gather*}
@@ -120,7 +119,8 @@ En Grecia se estudiaban problemas como el siguiente: si tengo una rueda con un p
             \end{axis}
         \end{tikzpicture}
     \end{center}
-    Este ejemplo nos permite ver que existen curvas con autointersecciones.
+
+    Este ejemplo nos permite ver que existen curvas con \textbf{autointersecciones}.
 \end{ejemplo}
 
 \begin{ejemplo}
@@ -182,7 +182,48 @@ En Grecia se estudiaban problemas como el siguiente: si tengo una rueda con un p
     \begin{gather*}
         |\zeta(t) - a | = r \ \ \forall t\in \bb{R}
     \end{gather*}
-    lo que nos dice que todos los puntos de la traza equidistan al punto $a$, llegando a la conclusión de que $tr(\zeta)$ es una circunferencia centrada en $a$. A esta curva la llamaremos \underline{la} circunferencia de centro $a$ y radio $r>0$ en $P$.\\
+    lo que nos dice que todos los puntos de la traza equidistan al punto $a$, llegando a la conclusión de que $tr(\zeta)$ es una circunferencia centrada en $a$. A esta curva la llamaremos \underline{la} circunferencia de centro $a$ y radio $r>0$ en $P$.
+
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width = 8cm,   % Ajusta el ancho total
+                height = 8cm,  % Ajusta el alto total
+                % --- CONFIGURACIÓN DE LA VISTA 3D ---
+                view={60}{30},            % Ángulo de cámara {azimut}{elevación}
+                axis lines = center,      % Ejes cruzándose en el origen
+                axis line style={-, thick}, % Ejes gruesos y con flecha (como pediste antes)
+                xlabel = {$x$},
+                ylabel = {$y$},
+                zlabel = {$z$},           % ¡Añadimos la etiqueta para Z!
+                % xmin = -3, xmax = 3,
+                % ymin = -3, ymax = 3,
+                plot box ratio = 1 1 1, % Proporción de X, Y y Z.
+                grid = major,
+                enlargelimits = true,
+                trig format plots=rad,    % Usamos radianes
+                % --- DEFINICIÓN DE CONSTANTES ---
+                declare function={
+                    a=1; 
+                    b=2;
+                    c=1;
+                    r=1;
+                }
+            ]
+            % --- DEFINICIÓN DE LA CURVA 3D ---
+            \addplot3 [
+                domain=-20:20, % Rango de 't' (lo he hecho amplio para ver varias vueltas)
+                samples=300,   % En 3D se necesitan bastantes puntos para que sea suave
+                samples y=0,   % Truco vital: Evita que LaTeX intente dibujar una superficie
+                variable=\t,
+                thick,
+                blue,           % Color de la hélice
+            ]
+            % LAS ECUACIONES
+            ({a+r*cos(\t/r)}, {b+r*sin(\t/r)}, {c});
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
 
     Podemos ver también que esta curva no se recorre de una forma aleatoria:
     \begin{gather*}
@@ -195,7 +236,7 @@ En Grecia se estudiaban problemas como el siguiente: si tengo una rueda con un p
 \begin{ejemplo}
     Definimos la siguiente curva
     \Func{\eta}{I}{\bb{R}^2}{t}{\left(\frac{3t}{1+t^3}, \frac{3t^2}{1+t^3} \right)}
-    donde $I=]-1, +\infty[$. La gráfica será algo como\footnote{a esta curva se le conoce como Hoja de Descartes}
+    donde $I=]-1, +\infty[$. La gráfica será algo como\footnote{a esta curva se le conoce como Folium (Hoja) de Descartes. Se suele tomar la simetría sobre el eje $y=x$.}
 
     \begin{center}
         \begin{tikzpicture}
@@ -246,6 +287,144 @@ En Grecia se estudiaban problemas como el siguiente: si tengo una rueda con un p
 
     La curva $\alpha$ se dice \textbf{regular} si $\alpha'(t)\neq 0$ $\forall t \in I$, es decir, si todos los puntos $t\in I$ son regulares.
 \end{definicion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item La gráfica de una función real de variable real es la traza de una curva (parametrizada diferenciable\footnote{a veces lo notaremos como p.df}).\\
+        
+        Normalmente, en bachiller, la solución de un ejercicio de análisis de una función $f:I\to \bb{R}$ venía dada al estudiar la gráfica de $f$ dada por
+        \begin{gather*}
+            Gr(f) = \{(x,y)\in \bb{R}^2 : x\in I,\ y=f(x)\}
+        \end{gather*}
+        Tenemos que definir de una curva $\alpha_f:I\to \bb{R}^2$ tal que
+        \begin{gather*}
+            tr(\alpha_f) = \alpha_f(I) \overset{queremos}{\equiv} Gr(f)
+        \end{gather*}
+        Para ello definimos $\alpha_f(t) = (t,f(t))$. Esto nos dice que todas las funciones que hemos estudiado en análisis a lo largo de nuestra vida describen curvas p.df. Sin embargo, esto no es al revés, es decir, existen curvas cuya traza no es gráfica de ninguna función. Por ejemplo, la ya estudiada
+        \begin{gather*}
+            \delta(t) = (t^3-4t, t^2-4)
+        \end{gather*}
+        ya que su proyección sobre cualquier recta que pase por el origen no es inyectiva: existen valores de $x$ a los que les corresponde más de una imagen en $y$.
+
+        \item Definimos\footnote{Se pronuncia con la \textit{z} española (no es tita de nadie y no tiene connotaciones sexuales)}  la curva $\theta : \bb{R} \to \bb{R}^3$ dada por
+        \begin{gather*}
+            \theta(t) = \left(a\cos\left(\frac{t}{\sqrt{a^2+ b^2}}\right), a\sen\left(\frac{t}{\sqrt{a^2+ b^2}}\right), \frac{bt}{\sqrt{a^2 + b^2}}\right)
+        \end{gather*}
+        con $a,b\in \bb{R}$, $a^2 +b^2\neq 0$. Haremos una distinción de casos según los valores de $a$ y $b$.
+        \begin{itemize}
+            \item Si $a=0$, entonces $b\neq 0$ y la curva queda como 
+            \begin{gather*}
+                \theta(t) = (0,0,t)
+            \end{gather*}
+            que se corresponde al eje $Z$ por lo que $tr(\theta) $.
+
+            \item Si $b=0$, entonces $a\neq 0$ y como se anula la tercera componente tendremos que $tr(\theta)\subset P(\{z=0\})$. Además tendremos que la curva es una circunferencia centrada en $(0,0,0)$ y de radio $|a|$, lo que se ve fácilmente al sustituir en la definición de la curva:
+            \begin{gather*}
+                \theta(t) = \left(a\cos\left(\frac{t}{|a|}\right), a\sen\left(\frac{t}{|a|}\right), 0\right)
+            \end{gather*}
+            
+            \item Si $ab\neq 0$. Tenemos que $x(t)^2 + y(t)^2 = a^2$ lo que nos dice que $\forall t \in \bb{R}$, se tiene que
+            \begin{gather*}
+                \theta(t) \in \{(x,y,z)\in \bb{R}^3 : x^2 + y^2 = a^2\}
+            \end{gather*}
+            Es fácil ver que esto es un cilindro circular recto de radio $|a|$. Estudiando la curva $\theta$ veremos que es una hélice circular recta con eje el eje $Z$ y de radio $|a|$.\\
+
+            Estudiamos dos casos dentro de este:
+            \begin{itemize}
+                \item Si $ab>0$ la hélice gira hacia la izquierda (sentido contrario a las agujas del reloj) y diremos que es \textbf{levógira}.
+                
+                \begin{center}
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            width = 10cm,   % Ajusta el ancho total
+                            height = 10cm,  % Ajusta el alto total
+                            % --- CONFIGURACIÓN DE LA VISTA 3D ---
+                            view={60}{30},            % Ángulo de cámara {azimut}{elevación}
+                            axis lines = center,      % Ejes cruzándose en el origen
+                            axis line style={-, thick}, % Ejes gruesos y con flecha (como pediste antes)
+                            xlabel = {$x$},
+                            ylabel = {$y$},
+                            zlabel = {$z$},           % ¡Añadimos la etiqueta para Z!
+                            xmin = -3, xmax = 3,
+                            ymin = -3, ymax = 3,
+                            plot box ratio = 1 1 1, % Proporción de X, Y y Z.
+                            grid = major,
+                            enlargelimits = true,
+                            trig format plots=rad,    % Usamos radianes
+                            % --- DEFINICIÓN DE CONSTANTES ---
+                            % Cambia los valores de 'a' y 'b' aquí mismo. 
+                            % 'c' calcula el denominador automáticamente para no ensuciar el código.
+                            declare function={
+                                a=1; 
+                                b=1; 
+                                c=sqrt(a^2+b^2);
+                            }
+                        ]
+                        % --- DEFINICIÓN DE LA CURVA 3D ---
+                        \addplot3 [
+                            domain=-20:20, % Rango de 't' (lo he hecho amplio para ver varias vueltas)
+                            samples=300,   % En 3D se necesitan bastantes puntos para que sea suave
+                            samples y=0,   % Truco vital: Evita que LaTeX intente dibujar una superficie
+                            variable=\t,
+                            thick,
+                            blue,           % Color de la hélice
+                        ]
+                        % LAS ECUACIONES
+                        ({a*cos(\t/c)}, {a*sin(\t/c)}, {b*\t/c});
+                        
+                        \end{axis}
+                    \end{tikzpicture}
+                \end{center}
+
+                \item Si $ab<0$ la hélice gira hacia la derecha (sentido horario) y diremos que es \textbf{dextrógira}.
+                
+                \begin{center}
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            width = 10cm,   % Ajusta el ancho total
+                            height = 10cm,  % Ajusta el alto total
+                            % --- CONFIGURACIÓN DE LA VISTA 3D ---
+                            view={60}{30},            % Ángulo de cámara {azimut}{elevación}
+                            axis lines = center,      % Ejes cruzándose en el origen
+                            axis line style={-, thick}, % Ejes gruesos y con flecha (como pediste antes)
+                            xlabel = {$x$},
+                            ylabel = {$y$},
+                            zlabel = {$z$},           % ¡Añadimos la etiqueta para Z!
+                            xmin = -3, xmax = 3,
+                            ymin = -3, ymax = 3,
+                            plot box ratio = 1 1 1, % Proporción de X, Y y Z.
+                            grid = major,
+                            enlargelimits = true,
+                            trig format plots=rad,    % Usamos radianes
+                            % --- DEFINICIÓN DE CONSTANTES ---
+                            % Cambia los valores de 'a' y 'b' aquí mismo. 
+                            % 'c' calcula el denominador automáticamente para no ensuciar el código.
+                            declare function={
+                                a=-1; 
+                                b=1; 
+                                c=sqrt(a^2+b^2);
+                            }
+                        ]
+                        % --- DEFINICIÓN DE LA CURVA 3D ---
+                        \addplot3 [
+                            domain=-20:20, % Rango de 't' (lo he hecho amplio para ver varias vueltas)
+                            samples=300,   % En 3D se necesitan bastantes puntos para que sea suave
+                            samples y=0,   % Truco vital: Evita que LaTeX intente dibujar una superficie
+                            variable=\t,
+                            thick,
+                            blue,           % Color de la hélice
+                        ]
+                        % LAS ECUACIONES
+                        ({a*cos(\t/c)}, {a*sin(\t/c)}, {b*\t/c});
+                        
+                        \end{axis}
+                    \end{tikzpicture}
+                \end{center}
+
+            \end{itemize}
+        \end{itemize}
+    \end{enumerate}
+\end{ejemplo}
 
 
 
