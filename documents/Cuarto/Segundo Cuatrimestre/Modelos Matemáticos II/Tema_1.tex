@@ -1,3 +1,59 @@
-\chapter{Optimización en dimensión finita}
+\chapter{Condiciones necesarias de extremo}
 
-A espabilar
+\section{Variación de una función. Condiciones necesarias de extremo}
+\begin{definicion}[Derivada de Gateaux]
+    Sea $X$ un espacio normado, $D\subset X$ y sea $\cc{F}:D \to \bb{R}$ un funcional. Fijado $y\in D$, diremos que $\varphi\in X$ con $\varphi\neq 0$ es una \textbf{dirección admisible} para $y$ en $D$ si 
+    \begin{gather*}
+        \exists\veps_0>0 \text{ tal que } y+\veps \varphi \in D\ \ \ \forall\veps \in ]-\veps_0, \veps_0[
+    \end{gather*}
+    Por tanto, está definida la correspondencia 
+    \begin{gather*}
+        \veps \mapsto \cc{F}[y+\veps\varphi]
+    \end{gather*}
+    Si esta asignación es derivable diremos que $\cc{F}$ es \textbf{derivable en el sentido de Gateaux en $y$ a lo largo de $\varphi$}. La correspondiente \textbf{derivada de Gateaux} se define como
+    \begin{gather*}
+        \delta_\varphi \cc{F}[y] := \frac{\partial}{\partial \veps} \cc{F}[y+\veps\varphi]_{|_{\veps=0}} = \lim_{\veps\to 0} \frac{\cc{F}[y+\veps\varphi] - \cc{F}[y]}{\veps} \in \bb{R}
+    \end{gather*}
+    Diremos que $y_*\in D$ es un \textbf{punto crítico o estacionario} de $\cc{F}$ si $\delta_\varphi \cc{F}[y_*] = 0$ para cualquier dirección admisible.
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Consideremos por ejemplo $D=\{C^1[-1,1] : y(-1)=y(1)=1\}\subset C^1[-1,1]$ y $y(x)=x^2\in D$. Nos planteamos estudiar ahora cuáles de las siguientes direcciones son admisibles:
+        \begin{itemize}
+            \item $\varphi_1(x) = x^2$. Definimos $y_\veps(x):= y(x) + \veps x^2$ y queremos ver si existe algún entorno de $\veps$ tal que $y_\veps(x)\in D$. Tenemos que 
+            \begin{gather*}
+                y_\veps(-1) = 1 + \veps \neq 1\ \ \ \forall \veps\neq 0
+            \end{gather*}
+            por lo que no existirá dicho entorno y esta dirección no será admisible.
+            \item $\varphi_2(x) = 1-x^2$. Definimos ahora $y_\veps(x):= y(x) + \veps (1 - x^2)$ y queremos ver de nuevo si existe algún entorno de $\veps$ tal que $y_\veps(x)\in D$. Ahora tenemos
+            \begin{gather*}
+                y_\veps(-1) = 1 + \veps(1-1) = 1\\
+                y_\veps(1) = 1 + \veps(1-1) = 1
+            \end{gather*}
+            Como la continuidad y la diferenciabilidad se mantiene tendremos que esta dirección sí será admisible.
+        \end{itemize}
+        Podemos concluir que cualquier $\varphi\in C^1[-1,1]$ tal que $\varphi(-1)=\varphi(1)=0$ será dirección admisible y además no habrá más.
+
+        \item Consideramos ahora $C_0^1([a,b]) = \{y\in C^1([a,b]) : y(a)=y(b)=0\}$.
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{prop}
+    Sea $X$ un espacio normado, $D\subset X$ y sea $\cc{F}:D \to \bb{R}$ un funcional. Si $y_0\in D$ es extremo relativo de $\cc{F}$, entonces $y_0$ es un punto crítico.
+
+    \begin{proof}
+        Denotamos las bolas abiertas por $B(c,R)=\{y\in X : \|y-c\| > R\}$. Digamos que $\cc{F}$ alcanza un mínimo local\footnote{la demostración será análoga si es un máximo local, y en cualquier caso no hay pérdida de generalidad.} en $y_0$. Entonces tendremos que existe un entorno de $y_0$ tal que $\cc{F}[y_0] \leq \cc{F}[y]$ para cualquier $y$ en el entorno. Podemos suponer sin pérdida de generalidad que este entorno es de la forma $D\cap B(y_0, \delta)$ para cierto $\delta>0$. Dado $\varphi \in X\setminus\{0\}$ dirección admisible, podemos definir
+        \begin{gather*}
+            y_\veps = y_0 + \veps\varphi
+        \end{gather*}
+        y tendremos que $\exists \veps_0>0$ tal qe $y_\veps\in D$ para todo $\veps \in ]-\veps_0, \veps_0[$. Observamos que
+        \begin{gather*}
+            \|y_0 - y_\veps\| = |\veps| \|\varphi\| \Rightarrow y_\veps \in B(y_0, \delta) \text{ para } \veps \in \left] \frac{-\delta}{\|\varphi\|}, \frac{\delta}{\|\varphi\|} \right[
+        \end{gather*}
+        Sea $\bar{\veps} = \min\left(\veps_0, \nicefrac{\delta}{\|\varphi\|}\right)$, entonces, la correspondencia $\veps \mapsto \cc{F}[y_0+\veps\varphi]$ está definida en $]-\bar{\veps}, \bar{\veps}[$ y tiene un mínimo local en $\veps=0$. Concluimos que 
+        \begin{gather*}
+            \frac{\partial}{\partial \veps} \cc{F}[y+\veps\varphi]_{|_{\veps=0}} = 0 = \delta_\varphi\cc{F}[y_0]
+        \end{gather*}
+    \end{proof}
+\end{prop}
