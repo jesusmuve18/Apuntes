@@ -323,15 +323,15 @@ En Grecia se estudiaban problemas como el siguiente: si tengo una rueda con un p
                 \theta(t) = \left(a\cos\left(\frac{t}{|a|}\right), a\sen\left(\frac{t}{|a|}\right), 0\right)
             \end{gather*}
             
-            \item Si $ab\neq 0$. Tenemos que $x(t)^2 + y(t)^2 = a^2$ lo que nos dice que $\forall t \in \bb{R}$, se tiene que
+            \item Si $b\neq 0$. Tenemos que $x(t)^2 + y(t)^2 = a^2$ lo que nos dice que $\forall t \in \bb{R}$, se tiene que
             \begin{gather*}
                 \theta(t) \in \{(x,y,z)\in \bb{R}^3 : x^2 + y^2 = a^2\}
             \end{gather*}
-            Es fácil ver que esto es un cilindro circular recto de radio $|a|$. Estudiando la curva $\theta$ veremos que es una hélice circular recta con eje el eje $Z$ y de radio $|a|$.\\
+            Es fácil ver que esto es un cilindro circular recto de radio $|a|$. Estudiando la curva $\theta$ veremos que es una \textbf{hélice circular recta} con eje el eje $Z$ y de radio $|a|$.\\
 
             Estudiamos dos casos dentro de este:
             \begin{itemize}
-                \item Si $ab>0$ la hélice gira hacia la izquierda (sentido contrario a las agujas del reloj) y diremos que es \textbf{levógira}.
+                \item Si $b>0$ la hélice gira hacia la izquierda (sentido contrario a las agujas del reloj) y diremos que es \textbf{levógira}.
                 
                 \begin{center}
                     \begin{tikzpicture}
@@ -376,7 +376,7 @@ En Grecia se estudiaban problemas como el siguiente: si tengo una rueda con un p
                     \end{tikzpicture}
                 \end{center}
 
-                \item Si $ab<0$ la hélice gira hacia la derecha (sentido horario) y diremos que es \textbf{dextrógira}.
+                \item Si $b<0$ la hélice gira hacia la derecha (sentido horario) y diremos que es \textbf{dextrógira}.
                 
                 \begin{center}
                     \begin{tikzpicture}
@@ -400,7 +400,7 @@ En Grecia se estudiaban problemas como el siguiente: si tengo una rueda con un p
                             % Cambia los valores de 'a' y 'b' aquí mismo. 
                             % 'c' calcula el denominador automáticamente para no ensuciar el código.
                             declare function={
-                                a=-1; 
+                                a=1; 
                                 b=-1; 
                                 c=sqrt(a^2+b^2);
                             }
@@ -423,6 +423,105 @@ En Grecia se estudiaban problemas como el siguiente: si tengo una rueda con un p
 
             \end{itemize}
         \end{itemize}
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{definicion}
+    Sea $\alpha: I \to \bb{R}^3$ una curva, definimos la \textbf{longitud de $\alpha$ entre $a$ y $b$ correspondiente a la partición $P=\{t_0=a<t_1<...<t_n=b\}$} de la siguiente forma:
+    \begin{align*}
+        L_a^b(\alpha, P) &= |\alpha(t_1) - \alpha(t_0)| + |\alpha(t_2) - \alpha(t_1)| + ... + |\alpha(t_n) - \alpha(t_{n-1})| \\
+        &= \sum_{i=0}^{n-1} |\alpha(i+1) - \alpha(i)|
+    \end{align*}
+\end{definicion}
+
+\begin{observacion}
+    Podemos aplicar ahora la desigualdad triangular $n$ veces a la expresión anterior y obtenemos
+    \begin{align*}
+        L_a^b(\alpha, P)  &= \sum_{i=0}^{n-1} |\alpha(i+1) - \alpha(i)| \geq |\alpha(t_n) - \alpha(t_0)| = |\alpha(b)-\alpha(a)|
+    \end{align*}
+    La igualdad se dará cuando todos los puntos de $P$ estén alineados. Además, esta propiedad nos dice que la longitud de una curva está acotada inferiormente, independientemente de la partición $P$ que tomemos, por la distancia entre $\alpha(a)$ y $\alpha(b)$, es decir, el camino más corto entre dos puntos es el segmento que los une.\\
+    
+    Nos interesará ver ahora si esta longitud está acotada superiormente. Para ello consideramos la misma definición anterior, pero escrita en forma integral:
+    \begin{align*}
+        L_a^b(\alpha, P) &= \left|\int_{t_0}^{t_1} \alpha'(t) dt\right| + \left|\int_{t_1}^{t_2} \alpha'(t) dt\right| + ... + \left|\int_{t_{n-1}}^{t_n} \alpha'(t) dt\right| \leq \\
+        &\leq \int_{t_0}^{t_1} |\alpha'(t)| dt + \int_{t_1}^{t_2} |\alpha'(t)| dt + ... + \int_{t_{n-1}}^{t_n} |\alpha'(t)| dt =\\
+        &= \int_{t_0}^{t_n} |\alpha'(t)| dt = \int_{a}^{b} |\alpha'(t)| dt
+    \end{align*}
+    y ya tenemos una cota superior a esta longitud. Tenemos entonces, para toda partición $P$ de $[a,b]$:
+    \begin{gather*}
+        |\alpha(b)-\alpha(a)| \leq L_a^b(\alpha, P) \leq \int_{a}^{b} |\alpha'(t)| dt \overset{def}{=} L_a^b(\alpha)
+    \end{gather*}
+
+    Si consideramos ahora las componentes de $\alpha$ podemos definir la siguiente aplicación:
+    \Func{f}{[a,b]\times [a,b] \times [a,b]}{\bb{R}}{(\delta, \beta, \gamma)}{\sqrt{x'(\delta)^2 + y'(\beta)^2 + z'(\gamma)^2}}
+    que será continua (por ser $\alpha$ diferenciable) y está definida en un compacto, lo que nos dice que $f$ es uniformemente continua, es decir, dado $\veps>0$, entonces $\exists \delta > 0$ tal que si
+    \begin{gather*}
+        \begin{array}{c}
+            t_1,t_2,t_3\\
+            t_1',t_2',t_3'
+        \end{array} \in [a,b] \text{ con }
+        \begin{array}{c}
+            |t_1-t_1'| < \delta \\
+            |t_2-t_2'| < \delta \\
+            |t_3-t_3'| < \delta 
+        \end{array} \Rightarrow |f(t_1,t_2,t_3) - f(t_1', t_2', t_3')| < \frac{\veps}{b-a}
+    \end{gather*}
+    Sea $P$ una partición de $[a,b]$ con\footnote{es decir, la distancia entre cualesquiera dos puntos consecutivos de la partición $P$ sea menor que $\delta$} $|P| < \delta$, tenemos que
+    \begin{align*}
+        \left| L_a^b(\alpha, P) - \int_{a}^{b} |\alpha'(t)| dt\right| &=
+        \left|\sum_{i=1}^{n}\left( |\alpha(t_i) - \alpha(t_{i-1})| - \int_{t_{i-1}}^{t_i} |\alpha'(t)| dt \right)\right| \leq\\
+        &\leq \sum_{i=1}^{n}\left| |\alpha(t_i) - \alpha(t_{i-1})| - \int_{t_{i-1}}^{t_i} |\alpha'(t)| dt \right| \overset{(\ast)}{=} \\
+        &= \sum_{i=1}^{n}\left| |f(\delta_i, \beta_i, \gamma_i)|(t_i-t_{i-1}) - f(\veps_i, \veps_i, \veps_i)(t_i-t_{i-1}) \right| =\\
+        &= \sum_{i=1}^{n} |f(\delta_i, \beta_i, \gamma_i) - f(\veps_i, \veps_i, \veps_i)|(t_i-t_{i-1}) <\\
+        &< \sum_{i=1}^{n} \frac{\veps}{b-a} (t_i-t_{i-1})
+        = \frac{\veps}{b-a} \sum_{i=1}^{n} (t_i-t_{i-1}) =\\
+        &= \frac{\veps}{b-a} (b-a) = \veps
+    \end{align*}
+    Donde en $(\ast)$ hemos aplicado el Teorema de Cauchy del valor intermedio y el Teorema de Cacuhy del valor intermedio integral, donde $\delta_i, \beta_i, \gamma_i, \veps_i \in [t_{i-1}, t_i]$. Acabamos de probar por tanto la siguiente proposición y posteriormente la definición de longitud de un arco.
+\end{observacion}
+
+\begin{prop}
+    Sea $\alpha: I \to \bb{R}^3$ una curva, $[a,b]\subset I \subset \bb{R}$ y $P$ una partición de $[a,b]$, entonces $\forall \veps >0$ se tiene que si $\exists \delta >0$ con $|P|<\delta$, entonces se tiene que 
+    \begin{gather*}
+        \left| L_a^b(\alpha, P) - \int_{a}^{b} |\alpha'(t)| dt\right| < \veps
+    \end{gather*}
+    O equivalentemente
+    \begin{gather*}
+        \exists \lim_{|P|\to 0} L_a^b(\alpha, P) = \int_a^b |\alpha'(t)| dt
+    \end{gather*}
+\end{prop}
+
+\begin{definicion}[Longitud de arco]
+    Sea $\alpha: I \to \bb{R}^3$ una curva, $[a,b]\subset I \subset \bb{R}$, definimos la \textbf{longitud de $\alpha$ entre $a$ y $b$} (``entre $\alpha(a)$ y $\alpha(b)$'') como 
+    \begin{gather*}
+        L_a^b(\alpha) = \int_a^b |\alpha'(t)| dt
+    \end{gather*}
+\end{definicion}
+
+\begin{ejercicio}
+    Probar que $L_a^b(\alpha) = \sup_P L_a^b (\alpha, P)$.
+\end{ejercicio}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Tomamos $p\in \bb{R}^3$, $v\in \bb{R}^3$ y consideramos la curva $\alpha(t) = p +tv$ con $t\in \bb{R}$. Tomamos $[a,b]\subset \bb{R}$ y tenemos
+        \begin{gather*}
+            L_a^b(\alpha) = \int_a^b |\alpha'(t)| dt = \int_a^b |v| dt = |v| \int_a^b 1 dt = |v|(b-a)
+        \end{gather*}
+        Por tanto podemos concluir
+        \begin{itemize}
+            \item Si $v=0 \Rightarrow L_a^b(\alpha) = 0$.
+            \item Si $v\neq 0$ entonces recuperamos la fórmula del MRU, $e = |v| t$ (pensando en que $b-a$ es una diferencia de tiempos).
+        \end{itemize}
+
+        \item Consideramos ahora $\beta : \bb{R} \to \bb{R}^2$ la curva tal que $tr(\beta) = C(a,r)$ con $a=(a_1, a_2)\in \bb{R}^2$, $r>0$. La definimos en el plano $P(\{z=0\})$ de la siguente forma
+        \begin{gather*}
+            \beta(t) = (a_1,a_2) + r\left(\cos\left(\frac{t}{r}\right), \sin\left(\frac{t}{r}\right)\right)
+        \end{gather*}
+        Consideramos ahora el hecho de ``dar una vuelta'', que observamos que ocurre en el intervalo $[0, 2\pi r]$, es decir,
+        \begin{gather*}
+            L_0^{2\pi r} = \int_0^{2\pi r} |\beta'(t)| dt = \int_0^{2\pi r} 1 dt = 2\pi r
+        \end{gather*}
     \end{enumerate}
 \end{ejemplo}
 
