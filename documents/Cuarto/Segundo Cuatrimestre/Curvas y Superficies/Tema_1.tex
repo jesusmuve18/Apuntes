@@ -522,6 +522,58 @@ En Grecia se estudiaban problemas como el siguiente: si tengo una rueda con un p
         \begin{gather*}
             L_0^{2\pi r} = \int_0^{2\pi r} |\beta'(t)| dt = \int_0^{2\pi r} 1 dt = 2\pi r
         \end{gather*}
+
+        \item Calculemos la longitud de la siguiente curva
+        \Func{\gamma}{\bb{R}}{\bb{R}^2}{t}{(e^{-t}\cos(t), e^{-t}\sin(t)) = e^{-t}(\cos(t), \sin(t))}
+        en el intervalo $[a,b]\subset \bb{R}$. En primer lugar nos haremos una idea de la forma de la curva gráficamente:
+
+        \begin{center}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    % --- CONFIGURACIÓN DE LOS EJES ---
+                    axis lines = middle,      % Los ejes se cruzan en el (0,0)
+                    xlabel = {$x$},           % Etiqueta del eje X
+                    ylabel = {$y$},           % Etiqueta del eje Y
+                    grid = none,              % Muestra la cuadrícula principal y secundaria
+                    minor tick num = 1,       % Líneas de cuadrícula intermedias
+                    enlargelimits = true,     % Añade un pequeño margen a los bordes
+                    axis line style={-, thick},     % Flechas en los extremos de los ejes
+                    %
+                    % Opcional: Esto asegura que si usas sin(t) o cos(t) en el futuro, 
+                    % LaTeX asuma que 't' está en radianes y no en grados.
+                    trig format plots=rad,    
+                ]
+                
+                % --- DEFINICIÓN DE LA CURVA PARAMÉTRICA ---
+                \addplot [
+                    domain=-10:100, % 1. RANGO DE 't'
+                    samples=1000,     % 2. SUAVIDAD: Aumenta este número (ej. 200) si la curva tiene picos raros
+                    variable=\t,     % Definimos que nuestra variable paramétrica es 't'
+                    thick,           % Grosor de la línea
+                    blue,            % Color de la línea
+                ]
+                % 3. ECUACIONES
+                ({(e^(-t))*cos(t)}, {(e^(-t))*sin(t)});
+                
+                \end{axis}
+            \end{tikzpicture}
+        \end{center}
+
+        A esta curva la llamamos \textbf{espiral logarítmica}. Pasamos al cálculo:
+        \begin{gather*}
+            L_a^b(\gamma) = \int_a^b |\gamma'(t)| dt\\
+            \gamma'(t) = e^{-t}(\cos(t), \sin(t)) + e^{-t}(-\sin(t), \cos(t))\Rightarrow\\
+            \Rightarrow |\gamma'(t)|^2 = e^{-2t}+e^{-2t} = 2e^{-2t}
+        \end{gather*}
+        Podemos ver en nuestro estudio que $\gamma$ es regular. Podemos concluir también que
+        \begin{gather*}
+            |\gamma'(t)| = \sqrt{2}e^{-t} \Rightarrow L_a^b(\gamma) = \int_a^b \sqrt{2}e^{-t} dt = \sqrt{2}[-e^{-t}]_a^b = \sqrt{2}(-e^{-b}+e^{-a})
+        \end{gather*}
+        Además, en este caso concreto podemos estudiar una propiedad interesante:
+        \begin{gather*}
+            \lim_{b\to \infty} L_a^b(\gamma) = \sqrt{2}e^{-a}
+        \end{gather*}
+        Lo que nos dice que podríamos recorrer una distancia infinita con recursos finitos. Este ejemplo nos permite calcular la velocidad de forma muy sencilla. Lo normal es que el cálculo de la longitud sea complicado ya que las primitivas a calcular no serán tan sencillas.
     \end{enumerate}
 \end{ejemplo}
 

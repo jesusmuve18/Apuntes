@@ -1,0 +1,71 @@
+\chapter{Curvas a partir de curvas}
+
+En este capítulo se estudian las transformaciones que permiten obtener nuevas representaciones o formas geométricas a partir de una curva dada, analizando bajo qué condiciones se preservan propiedades fundamentales como la regularidad y la longitud.
+
+\section{Reparametrizaciones}
+
+Intuitivamente, una reparametrización será una variación del parámetro temporal de una curva, es decir, recorrerla a distinta velocidad sin alterar su traza.
+
+\begin{definicion}
+    Consideramos una curva $\alpha:I \to \bb{R}^3$ y una aplicación $h:J\to I$. Podemos definir entonces una nueva curva $\beta:J \to \bb{R}^3$ como $\beta = \alpha\circ h$. Estaríamos en la siguiente situación:
+    \begin{gather*}
+        \xymatrix{
+            J \ar[r]^h \ar@/_{5mm}/[rr]_{\beta=\alpha\circ h} & I \ar[r]^{\alpha} & \bb{R}^3
+        }
+    \end{gather*}
+    A esta nueva curva $\beta$ la llamaremos \textbf{reparametrización} de $\alpha$ por medio de $h$. Además, aplicando la regla de la cadena tenemos que
+    \begin{gather*}
+        \beta'(t) = (\alpha \circ h)'(t) = h'(t)\alpha'(h(t))\ \ \ \forall t \in J
+    \end{gather*}
+\end{definicion}
+
+\subsection{Conservación de la regularidad}
+
+Si $\alpha:I\to \bb{R}^3$ es regular y queremos que $\beta$ también lo sea, tendremos que imponer $h'(t)\neq 0$ $\forall t \in J$. Tenemos entonces dos posibles situaciones:
+
+\begin{itemize}
+    \item Si $h'(t)>0\ \ \ \forall t \in J$, entonces $h:J\to I$ es un difeomorfismo creciente (preserva la orientación)
+    \item Si $h'(t)<0\ \ \ \forall t \in J$, entonces $h:J\to I$ es un difeomorfismo decreciente (invierte la orientación)
+\end{itemize}
+
+\begin{observacion}
+    Para que la traza sea idéntica, es decir, $tr(\beta) = tr(\alpha)$ necesitaremos imponer que $h$ sea sobreyectiva, ya que en dicho caso tendremos que $h(J)=I$ y entonces
+    \begin{gather*}
+        tr(\beta) = \beta(J) = (\alpha\circ h (J)) = \alpha(h(J)) = \alpha(I) = tr(\alpha)
+    \end{gather*}
+\end{observacion}
+
+\subsection{Invarianza de la longitud}
+
+Queremos ver ahora que la longitud de arco es una propiedad intrínseca de la curva y no depende de cómo se recorra. Para verlo calculamos la longitud de la curva en un compacto $[a,b]\subset I$.
+\begin{gather*}
+    L_a^b(\beta) = \int_a^b|\beta'(t)| dt = \int_a^b |h'(t)||\alpha'(h(t))| dt \overset{(\ast)}{=} \int_{h(a)}^{h(b)} |\alpha'(u)| du = L_{h(a)}^{h(b)}(\alpha)
+\end{gather*}
+donde en $(\ast)$ hemos aplicado el Teorema de Cambio de Variable ($u=h(t)$). Podemos concluir finalmente que la longitud es invariante por reparametrizaciones.
+
+\section{Deformaciones}
+
+A diferencia de la reparametrización, una deformación aplica una transformación geométrica a la curva, modificando posiblemente su traza.
+
+\begin{definicion}
+    Sea $\alpha: I \to \bb{R}^3$ una curva y $\phi:\bb{R}^3 \to \bb{R}^3$ una aplicación (normalmente un difeomorfismo), definimos la curva $\beta:I \to \bb{R}^3$ como $\beta = \phi \circ \alpha$. Estaremos en la siguiente situación:
+    \begin{gather*}
+        \xymatrix{
+            I \ar[r]^{\alpha} \ar@/_{5mm}/[rr]_{\beta=\phi\circ \alpha} & \bb{R}^3 \ar[r]^{\phi} & \bb{R}^3
+        }
+    \end{gather*}
+    A esta curva $\beta$ la llamaremos una \textbf{deformación} de $\alpha$ por medio de $\phi$. Su vector tangente viene dado por la aplicación lineal asociada (el diferencial):
+    \begin{gather*}
+        \beta'(t) = (\phi \circ \alpha)'(t) = d\phi_{\alpha(t)}(\alpha'(t))
+    \end{gather*}
+\end{definicion}
+
+\subsection{Condición de regularidad}
+
+Si queremos que la deformación de una curva regular siga siendo regular, necesitamos asegurar que el vector tangente no se anule. Si $\alpha$ es regular ($\alpha'(t) \neq 0$), entonces $\beta'(t)$ será distinto de cero si y solo si el diferencial $d\phi_{\alpha(t)}$ es inyectivo para todo $t\in I$, es decir, que su núcleo sea trivial. Por tanto, $\beta$ será regular si y solo si
+\begin{gather*}
+    \det(J\phi(\alpha(t))) \neq 0\ \ \ \forall t \in I
+\end{gather*}
+Podemos conlcuir entonces que si queremos que la regularidad de las curvas se conserve por deformaciones debemos usar difeomorfismos locales. Por ello, $\phi$ siempre será un difeomorfismo (tal y como se indica en la definición).
+
+
