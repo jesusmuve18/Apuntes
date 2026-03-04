@@ -134,5 +134,86 @@ Usaremos los convenios
     \begin{gather*}
         \int_{x_0}^{x_1} f(x) \varphi(x) dx = 0 \ \ \ \forall \varphi \in C_0(I)
     \end{gather*}
-    entonces $f(x) = 0$ $\ \ \forall x \in I$.
+    entonces $f(x) = 0$ para todo $x \in I$.
+    \begin{proof}
+        Veámoslo por contradicción. Sin pérdida de generalidad podemos suponer que existe un cierto $\bar{x}\in ]x_0, x_1[$ tal que $f(\bar{x}) > 0$. Tenemos entonces que existe un entorno de $\bar{x}$ tal que $f(x)>0$ para todo $x\in ]\overline{x_0}, \overline{x_1}[$. Podemos encontrar por tanto un $\varphi\in C_0(I)$ tal que
+        \begin{gather*}
+            \int_{x_0}^{x_1} f(x) \varphi(x) dx >0
+        \end{gather*}
+        Podemos construir $\varphi$ por ejemplo a partir de 
+        \begin{gather*}
+            \rho(x) = \left\{
+                \begin{array}{l c l}
+                    e^{\frac{1}{|x|^2 - 1}} & \text{ si } & |x| < 1\\
+                    0 & \text{ si } & |x| \geq 1
+                \end{array}
+            \right.
+        \end{gather*}
+        Observamos que $\rho \in C_0^\infty([-1,1])$
+    \end{proof}
 \end{lema}
+
+\begin{observacion}\
+    \begin{enumerate}
+        \item En el lema fundamental se puede cambiar $C_0(I)$ por $C_0^1(I)$, $C_0^k(I)$ y hasta $C_0^\infty(I)$ (de hecho, $C_c^\infty(I^\circ)$).
+        \item Cuando los candidatos no son de clase 2 hay que trabajar de una forma distinta. Una posibilidad es operar a partir de la expresión obtenida durante la demostración del teorema anterior (antes de aplicar la integración por partes):
+        \begin{gather*}
+            \delta_y \cc{F}[y] = \int_{x_0}^{x_1} F_y\varphi + F_p \varphi' dx
+        \end{gather*}
+        Y aplicar otras propiedades para llegar a una solución.
+        \item Podemos considerar la siguiente versión alternativa del lema: Sea $I=]x_0, x_1[$, $f\in L_{loc}^1(I)$. Si
+        \begin{gather*}
+            \int_{x_0}^{x_1} f(x)\varphi(x) dx = 0 \ \ \ \forall \varphi \in C_c(I)
+        \end{gather*}
+        Entonces $f(x)=0$ para casi todo $x\in I$.
+    \end{enumerate}
+\end{observacion}
+
+\begin{ejemplo}
+    Estudiar las curvas planas que unes dos puntos dados con mínima longitud. Pongamos los puntos $A=(x_0, y_0), B(x_0, y_0)\in \bb{R}^2$ tal que $x_0<x_1$.\\
+
+    Consideramos curvas descritas como gráficas $x\mapsto (x, y(x))$ con $y\in D$ donde
+    \begin{gather*}
+        D=\{f\in C^1([x_0, x_1]) : f(x_0)=y_0, f(x_1)=y_1\}
+    \end{gather*}
+    Para este tipo de curvas, la longitud se calcula como 
+    \begin{gather*}
+        L[y] = \int_{x_0}^{x_1} \sqrt{1+(y'(x))^2} dx
+    \end{gather*}
+    Tenemos que $F=F(p) = \sqrt{1+p^2}$. La ecuación de Euler-Lagrange será 
+    \begin{gather*}
+        F_y - \frac{d}{dx}(F_p) = 0
+    \end{gather*}
+    Calculamos $F_p = \frac{p}{\sqrt{1+p^2}}$. Por tanto, los puntos críticos $y(x)$ de $L$ satisfacen
+    \begin{gather*}
+        -\frac{d}{dx} \left(\frac{y'(x)}{\sqrt{1+(y'(x))^2}}\right) = 0\ \ \ \forall x \in [x_0, x_1]
+    \end{gather*}
+    Los puntos críticos $y(x)$ cumplen 
+    \begin{gather*}
+        \frac{y'(x)}{\sqrt{1+(y'(x))^2}} = cte
+    \end{gather*}
+    Existe un $c_1\in \bb{R}$ tal que 
+    \begin{gather*}
+        y'(x) = c_1 \sqrt{1+y'(x)^2}
+    \end{gather*}
+    Existe un $c_2\in \bb{R}$ tal que 
+    \begin{gather*}
+        (y'(x)^2) = c_2\ \ \ \forall x \in [x_0, x_1]
+    \end{gather*}
+    Como $y\in C^1(I)$, entonces $y'(x)$ es constante $\forall x \in [x_0, x_1]$ de modo que $y(x) = c_3 + c_4x$ para ciertos $c_3, c_4\in \bb{R}$. Ahora $c_3$ y $c_4$ se determinan forzando a que $y(x_0)=y_0$ y $y(x_1)=y_1$ y obtendremos finalmente que el camino más corto será el segmento recto entre $A$ y $B$. No hay una forma fácil de ver que es un mínimo en general
+\end{ejemplo}
+
+\begin{definicion}
+    Diremos que $y\in X$ es un \textbf{extremal} del funcional $\cc{F}$ si resuelve la ecuación de Euler-Lagrange asociada (no se exige que $y\in D$).
+\end{definicion}
+
+\section{Problemas con frontera libre}
+
+En condiciones como las del resultado anterior, supongamos que
+\begin{gather*}
+    D = \{y\in C^1([x_0, x_1]) : y(x_0) = y_0\}
+\end{gather*}
+con $y_0\in \bb{R}$ dado. Todo punto crítico $y_*\in D\cap C^2(I)$, además de verificar la ecuación de Euler-Lagrange, cumple también que 
+\begin{gather*}
+    F_p(x_1, y_*(x_1, y_*'(x_1))) = 0
+\end{gather*} 
