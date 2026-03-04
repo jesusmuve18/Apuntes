@@ -12,7 +12,7 @@
     \end{gather*}
     Si esta asignación es derivable diremos que $\cc{F}$ es \textbf{derivable en el sentido de Gateaux en $y$ a lo largo de $\varphi$}. La correspondiente \textbf{derivada de Gateaux} se define como
     \begin{gather*}
-        \delta_\varphi \cc{F}[y] := \frac{\partial}{\partial \veps} \cc{F}[y+\veps\varphi]_{|_{\veps=0}} = \lim_{\veps\to 0} \frac{\cc{F}[y+\veps\varphi] - \cc{F}[y]}{\veps} \in \bb{R}
+        \delta_\varphi \cc{F}[y] := \frac{d}{d \veps} \cc{F}[y+\veps\varphi]_{|_{\veps=0}} = \lim_{\veps\to 0} \frac{\cc{F}[y+\veps\varphi] - \cc{F}[y]}{\veps} \in \bb{R}
     \end{gather*}
     Diremos que $y_*\in D$ es un \textbf{punto crítico o estacionario} de $\cc{F}$ si $\delta_\varphi \cc{F}[y_*] = 0$ para cualquier dirección admisible.
 \end{definicion}
@@ -40,7 +40,7 @@
 \end{ejemplo}
 
 \begin{prop}
-    Sea $X$ un espacio normado, $D\subset X$ y sea $\cc{F}:D \to \bb{R}$ un funcional. Si $y_0\in D$ es extremo relativo de $\cc{F}$, entonces $y_0$ es un punto crítico.
+    Sea $X$ un espacio normado, $D\subset X$ y sea $\cc{F}:D \to \bb{R}$ un funcional derivable en el sentido de Gateaux. Si $y_0\in D$ es extremo relativo de $\cc{F}$, entonces $y_0$ es un punto crítico.
 
     \begin{proof}
         Denotamos las bolas abiertas por $B(c,R)=\{y\in X : \|y-c\| > R\}$. Digamos que $\cc{F}$ alcanza un mínimo local\footnote{la demostración será análoga si es un máximo local, y en cualquier caso no hay pérdida de generalidad.} en $y_0$. Entonces tendremos que existe un entorno de $y_0$ tal que $\cc{F}[y_0] \leq \cc{F}[y]$ para cualquier $y$ en el entorno. Podemos suponer sin pérdida de generalidad que este entorno es de la forma $D\cap B(y_0, \delta)$ para cierto $\delta>0$. Dado $\varphi \in X\setminus\{0\}$ dirección admisible, podemos definir
@@ -51,9 +51,88 @@
         \begin{gather*}
             \|y_0 - y_\veps\| = |\veps| \|\varphi\| \Rightarrow y_\veps \in B(y_0, \delta) \text{ para } \veps \in \left] \frac{-\delta}{\|\varphi\|}, \frac{\delta}{\|\varphi\|} \right[
         \end{gather*}
-        Sea $\bar{\veps} = \min\left(\veps_0, \nicefrac{\delta}{\|\varphi\|}\right)$, entonces, la correspondencia $\veps \mapsto \cc{F}[y_0+\veps\varphi]$ está definida en $]-\bar{\veps}, \bar{\veps}[$ y tiene un mínimo local en $\veps=0$. Concluimos que 
+        Sea $\bar{\veps} = \min\left(\veps_0, \nicefrac{\delta}{\|\varphi\|}\right)$, entonces, la correspondencia $\veps \mapsto \cc{F}[y_0+\veps\varphi]$ está bien definida en $]-\bar{\veps}, \bar{\veps}[$, es derivable y alcanza un mínimo local en $\veps=0$. Concluimos que 
         \begin{gather*}
-            \frac{\partial}{\partial \veps} \cc{F}[y+\veps\varphi]_{|_{\veps=0}} = 0 = \delta_\varphi\cc{F}[y_0]
+            \frac{d}{d \veps} \cc{F}[y+\veps\varphi]_{|_{\veps=0}} = 0 = \delta_\varphi\cc{F}[y_0]
         \end{gather*}
     \end{proof}
 \end{prop}
+
+\section{Estudio de funcionales integrales}
+
+Tomaremos $X=C^1(I)$, con $I=[x_0, x_1]$. Usaremos
+\begin{gather*}
+    \|y\|_{C^1} = \|y\|_\infty + |y'\|_\infty = \max_{x\in I}|y(x)| + \max_{x\in I}|y'(x)|
+\end{gather*}
+Consideraremos funcionales dados por 
+\begin{gather*}
+    \cc{F}[y] = \int_{x_0}^{x_1} F(x, y(x), y'(x)) dx
+\end{gather*}
+Típicamente $F:I \times \bb{R} \times \bb{R} \to \bb{R}$ (o adecuados subconjuntos). Digamos que $F=F(x,y,p)$.
+Usaremos los convenios
+\begin{gather*}
+    F_y \equiv \frac{\partial F}{\partial y},\ \ \ F_p \equiv \frac{\partial F}{\partial p},\ \ \ F_{yp} \equiv \frac{\partial F}{\partial yp},\ \ ... 
+\end{gather*}
+
+\begin{teo}
+    Sea $I=[x_0, x_1]$, $F\in C^2(I\times \bb{R} \times \bb{R})$. Consideramos el funcional
+    \begin{gather*}
+        \cc{F}[y] = \int_{x_0}^{x_1} F(x, y(x), y'(x)) dx
+    \end{gather*}
+    definido sobre
+    \begin{gather*}
+        D = \{y \in C^1([x_0, x_1]) : y(x_0) =y_0,\ \ y(x_1) = y_1\}
+    \end{gather*}
+    con $y_0,\ y_1\in \bb{R}$ dados. Dado $y_*\in D\cap C^2(I)$ punto crítico, satisface la ecuación de Euler-Lagrange:
+    \begin{gather*}
+        F_y(x, y_*(x), y_*'(x)) - \frac{d}{dx} [ F_p(x, y_*(x), y_*'(x))] = 0 \ \ \ \forall x \in I
+    \end{gather*}
+
+    \begin{proof}
+        Dado $y\in D$, dada $\varphi\in X$, $\varphi\neq 0$, calculemos $\delta_\varphi \cc{F}[y]$. Introducimos $y_\veps = y + \veps \varphi$. Vemos que 
+        \begin{gather*}
+            y'_\veps = y' + \veps \varphi'\\\\
+            \frac{dy_\veps}{d\veps} = \varphi \ \ \ \frac{dy'_\veps}{d\veps} = \varphi'
+        \end{gather*}
+        Tenemos entonces que 
+        \begin{align*}
+            \frac{d}{d\veps}\cc{F}[y_\veps] &= \frac{d}{d\veps} \int_{x_0}^{x_1} F(x, y_\veps(x), y_\veps'(x)) dx =\\
+            &= \int_{x_0}^{x_1} F_y(x, y_\veps(x), y_\veps'(x))\frac{dy_\veps}{d\veps} + F_p(x, y_\veps(x), y_\veps'(x))\frac{dy'\veps}{d\veps} dx =\\
+            &= \int_{x_0}^{x_1} F_y(x, y_\veps(x), y_\veps'(x)) \varphi(x) + F_p(x, y_\veps(x), y_\veps'(x))\varphi'(x) dx
+        \end{align*}
+        Evaluando ahora en $\veps=0$ nos queda
+        \begin{align*}
+            \frac{d}{d\veps} \cc{F}[y_\veps]_{|_{\veps = 0}} = \int_{x_0}^{x_1} F_y(x, y(x), y'(x)) \varphi(x) + F_p(x, y(x), y'(x))\varphi'(x) dx
+        \end{align*}
+        Aplicamos la integración por partes sobre el segundo sumando llegando a que 
+        \begin{gather*}
+            \int_{x_0}^{x_1} F_p(x, y_\veps(x), y_\veps'(x))\varphi'(x) dx =\\ - \int_{x_0}^{x_1} \frac{d}{dx}[F_p(x, y_\veps(x), y_\veps'(x))] \varphi(x) dx + F_p(x_1, y_\veps(x_1), y_\veps'(x_1))\varphi(x_1) dx \\
+            - F_p(x_0, y_\veps(x_0), y_\veps'(x_0))\varphi(x_0) dx
+        \end{gather*}
+        Sustituyendo en la expresión anterior concluimos que
+        \begin{gather*}
+            \delta_y \cc{F}[y] = \int_{x_0}^{x_1} \left(F_y - \frac{d}{dx} F_p\right)\varphi dx + [F_p \varphi]_{x=x_0}^{x= x_1}
+        \end{gather*}
+        Nos preguntamos ahora cuáles son las direcciones admiibles. Dada $y\in D$ pensamos en qué condiciones tiene que cumplir $\varphi$ para que $y_\veps = t+\veps\varphi \in D$. Estudiando el extremo del intervalo tenemos
+        \begin{gather*}
+            y_\veps(x_0) = y(x_0) + \veps \varphi(x_0) = y_0 + \veps \varphi(x_0) \overset{?}{=} y_0
+        \end{gather*}
+        Necesitamos entonces que $\varphi(x_0)=0$. Análogamente pediremos $\varphi(x_1) = 0$. Por tanto, las direcciones admisibles son $\varphi \in C_0^1(I)$. Entonces 
+        \begin{gather*}
+            \delta_y \cc{F}[y] = \int_{x_0}^{x_1} \left(F_y - \frac{d}{dx} F_p\right)\varphi dx
+        \end{gather*}
+        para cualquier $\varphi$ admisible. Como $y_*$ es punto crítico tendremos que
+        \begin{gather*}
+            \int_{x_0}^{x_1} \left(F_y(x, y_*(x), y_*'(x)) - \frac{d}{dx} [F_p(x, y_*(x), y_*'(x))] \right)\varphi(x) dx = 0
+        \end{gather*}
+        para todo $\varphi\in C_0^1(I)$.
+    \end{proof}
+\end{teo}
+
+\begin{lema}[Lema fundamental del cálculo de variaciones]
+    Sea $I=[x_0, x_1]$, $f\in C(I)$. Si
+    \begin{gather*}
+        \int_{x_0}^{x_1} f(x) \varphi(x) dx = 0 \ \ \ \forall \varphi \in C_0(I)
+    \end{gather*}
+    entonces $f(x) = 0$ $\ \ \forall x \in I$.
+\end{lema}
