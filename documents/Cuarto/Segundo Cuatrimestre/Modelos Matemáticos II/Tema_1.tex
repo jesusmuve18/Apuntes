@@ -74,7 +74,7 @@ Usaremos los convenios
     F_y \equiv \frac{\partial F}{\partial y},\ \ \ F_p \equiv \frac{\partial F}{\partial p},\ \ \ F_{yp} \equiv \frac{\partial F}{\partial yp},\ \ ... 
 \end{gather*}
 
-\begin{teo}
+\begin{teo} % Teorema 2.2 del libro (pág. 25)
     Sea $I=[x_0, x_1]$, $F\in C^2(I\times \bb{R} \times \bb{R})$. Consideramos el funcional
     \begin{gather*}
         \cc{F}[y] = \int_{x_0}^{x_1} F(x, y(x), y'(x)) dx
@@ -209,11 +209,81 @@ Usaremos los convenios
 
 \section{Problemas con frontera libre}
 
-En condiciones como las del resultado anterior, supongamos que
-\begin{gather*}
-    D = \{y\in C^1([x_0, x_1]) : y(x_0) = y_0\}
-\end{gather*}
-con $y_0\in \bb{R}$ dado. Todo punto crítico $y_*\in D\cap C^2(I)$, además de verificar la ecuación de Euler-Lagrange, cumple también que 
-\begin{gather*}
-    F_p(x_1, y_*(x_1, y_*'(x_1))) = 0
-\end{gather*} 
+% En condiciones como las del resultado anterior, supongamos que
+\begin{teo}
+    Consideremos $I=[x_0, x_1]$, $F\in C^2(I\times \bb{R} \times \bb{R})$ el funcional dado por 
+    \begin{gather*}
+        \cc{F}[y] = \int_{x_0}^{x_1} F(x,y(x, y'(x))) dx
+    \end{gather*}
+    definido en $D = \{y\in C^1([x_0, x_1]) : y(x_0) = y_0\}$ con $y_0\in \bb{R}$ dado. Todo punto crítico $y_*\in D\cap C^2(I)$, además de verificar la ecuación de Euler-Lagrange, cumple también que 
+    \begin{gather*}
+        F_p(x_1, y_*(x_1, y_*'(x_1))) = 0
+    \end{gather*} 
+    \begin{proof}
+        Sabemos que
+        \begin{gather*}
+            \delta_\varphi \cc{F}[y] = \int_{x_0}^{x_1} \left(F_y(x,y(x, y'(x))) -\frac{d}{dx}[F_p(x,y(x), y'(x))]\right)\varphi(x) dx +\\
+            + F_p(x_1, y(x), y'(x))\varphi(x_1) - F_p(x_0, y(x), y'(x))\varphi(x_0)
+        \end{gather*}
+        En esta caso, las direcciones admisibles son
+        \begin{gather*}
+            \{\varphi \in C^1(I) : \varphi(x_0)=0\}
+        \end{gather*}
+        Si nos restringimos a usar $\varphi\in C_0^1(I)$ deducimos que se cumple la ecuación de Euler-Lagrange para\footnote{Se podría usar $C_c^1(I^\circ)$} $y_*$. Por tanto, resulta que 
+        \begin{gather*}
+            \delta_\varphi \cc{F}[y_*] = F_p(x_1, y_*(x), y_*'(x))\varphi(x_1) - F_p(x_0, y_*(x), y_*'(x))\varphi(x_0)
+        \end{gather*}
+        Para $y_*$, se tiene que 
+        \begin{gather*}
+            F_y - \frac{d}{dx}(F_p) = 0 \ \ \ \forall x \in I
+        \end{gather*}
+        Además, para toda $\varphi$ admisible tenemos que $\varphi(x_0)=0$. Como $\delta_\varphi\cc{F}[y_*] = 0$ obtenemos que 
+        \begin{gather*}
+            F_p(x_1, y_*(x), y_*'(x_1)) = \varphi(x_1) = 0 \ \ \ \text{ para toda $\varphi$ admisible}
+        \end{gather*}
+        Tomamos entonces $\varphi$ tal que $\varphi(x_1)=1$ y deducimos la condición extra:
+        \begin{gather*}
+            F_p(x_1, y_*(x_1), y_*'(x_1)) = 0
+        \end{gather*}
+    \end{proof}
+\end{teo}
+
+\begin{definicion}
+    A las condiciones de la proposición anterior las llamaremos \textbf{condiciones de contorno naturales}.
+\end{definicion}
+
+\begin{ejemplo}
+    Consideramos $I=[x_0, x_1]$, fijamos un valor $y_0\in \bb{R}$ y buscamos determinar las curvas de menor longitud que unen el punto $(x_0, y_0)$ con algún punto con abscisa $x_1$.\\
+
+    Consideramos igual que en ejemplos anteriores que las curvas serán descritas mediante gráficas $x\mapsto (x,y(x))$. De nuevo queremos optimizar la longitud:
+    \begin{gather*}
+        L[y] = \int_{x_0}^{x_1} \sqrt{1+(y'(x))^2} dx
+    \end{gather*}
+    sobre el dominio $D=\{y\in C^1([x_0, x_1]) : y(x_0)=y_0\}$. En este caso es fácil ver que 
+    \begin{gather*}
+        F=F(p)= \sqrt{1+(y'(x))^2}
+    \end{gather*}
+    La ecuación de Euler-Lagrange nos dice que
+    \begin{gather*}
+        -\frac{d}{dx} \left(\frac{y'(x)}{\sqrt{1+(y'(x))^2}}\right) = 0
+    \end{gather*}
+    ecuación que ya resolvimos en ejemplos anteriores y obteníamos que los extremales son de la forma 
+    \begin{gather*}
+        y(x) = c_3 + c_4x
+    \end{gather*}
+    para algún $c_3, c_4\in \bb{R}$. Si imponemos la condición del dominio $y(x_0)=y_0$ y la condición de contorno:
+    \begin{gather*}
+        \frac{y'(x_1)}{\sqrt{1+(y'(x_1))^2}} = 0
+    \end{gather*}
+    Llegamos a que $y'(x_1) = 0$ lo que nos dice que $c_4=0$ y además $c_3=y_0$. De forma que $y(x) = y_0$ para todo $x\in I$ es el único candidato a mínimo.
+\end{ejemplo}
+
+\begin{ejemplo}
+    Buscar las curvas de longitud mínima que unen un punto con abscisa $x_0$ con otro con abscisa $x_1$ (con alturas no especificadas).\\
+
+    Como ahora no hay condiciones en los extremos, el problema fuerza las condiciones
+    \begin{gather*}
+        \frac{y'(x_0)}{\sqrt{1+(y'(x_0))^2}} = 0 = \frac{y'(x_1)}{\sqrt{1+(y'(x_1))^2}}
+    \end{gather*}
+    Deducimos que $y'(x_0) = 0 = y'(x_1)$. Por tanto $c_4=0$ y así $y(x)=c_3$ para $c_3\in \bb{R}$ y cualquier elección de $c_3$ nos da un candidato a mínimo.
+\end{ejemplo}
