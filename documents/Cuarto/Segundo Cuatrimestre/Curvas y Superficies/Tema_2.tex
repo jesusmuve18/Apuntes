@@ -4,7 +4,7 @@ En este capítulo se estudian las transformaciones que permiten obtener nuevas r
 
 \section{Reparametrizaciones}
 
-Intuitivamente, una reparametrización será una variación del parámetro temporal de una curva, es decir, recorrerla a distinta velocidad sin alterar su traza.
+Intuitivamente, una reparametrización será una variación del parámetro temporal de una curva, es decir, recorrerla a distinta velocidad sin alterar su traza, conservando así su geometría.
 
 \begin{definicion}
     Consideramos una curva $\alpha:I \to \bb{R}^3$ y una aplicación $h:J\to I$. Podemos definir entonces una nueva curva $\beta:J \to \bb{R}^3$ como $\beta = \alpha\circ h$. Estaríamos en la siguiente situación:
@@ -66,6 +66,73 @@ Si queremos que la deformación de una curva regular siga siendo regular, necesi
 \begin{gather*}
     \det(J\phi(\alpha(t))) \neq 0\ \ \ \forall t \in I
 \end{gather*}
-Podemos conlcuir entonces que si queremos que la regularidad de las curvas se conserve por deformaciones debemos usar difeomorfismos locales. Por ello, $\phi$ siempre será un difeomorfismo (tal y como se indica en la definición).
+Podemos concluir entonces que si queremos que la regularidad de las curvas se conserve por deformaciones debemos usar difeomorfismos locales. Por ello, $\phi$ siempre será un difeomorfismo (tal y como se indica en la definición).\\
 
+\begin{observacion}
+    Hay difeomorfismos $\phi : \bb{R}^3 \to \bb{R}^3$ que conservan la ``geometría''. Estos son los ya estudiados movimientos rígidos. Estos serán difeomorfismos $M$ de la forma
+    \Func{M}{\bb{R}^3}{\bb{R}^3}{x}{Mx = Ax + b}
+    donde\footnote{$O(3)$ es el conjunto de matrices ortogonales de dimensión 3, es decir, matrices cuya inversa coincide con su transpuesta.} $A\in O(3)$, $b\in \bb{R}^3$.\\
 
+    Si tomamos $\phi = M$ movimiento rígido, entonces al estudiar la traza de la curva deformada tenemos:
+    \begin{gather*}
+        tr(\beta) = M (tr(\alpha)) \equiv tr(\alpha)
+    \end{gather*}
+    es decir, la traza no es igual pero es equivalente (conserva la ``geometría''). Estudiando la longitud tenemos:
+    \begin{gather*}
+        L_a^b (\beta) = \int_a^b |\beta'(t)| dt \overset{(\ast)}{=} \int_a^b |A\alpha'(t)| dt = \int_a^b |\alpha'(t)| dt = L_a^b (\alpha)
+    \end{gather*}
+    donde en $(\ast)$ hemos aplicado que $\beta'(t)=A\alpha'(t)$. Tenemos entonces que los movimientos rígidos conservan la longitud.
+\end{observacion}
+
+\section{Longitud orientada de una curva}
+
+\begin{definicion}
+    Sea $\alpha : I \to \bb{R}^3$ una curva, $a\in I$. Definimos\footnote{La $S$ hace referencia a espacio, \textit{space} en inglés.} la siguiente aplicación
+    \Func{S_a}{I}{\bb{R}}{t}{S_a(t) = \int_a^t |\alpha'(u)| du }
+    Si estudiamos esta aplicación tendremos
+    \begin{gather*}
+        S_a(t) = 
+        \left\{
+            \begin{array}{r c c}
+                L_a^t(\alpha) & \text{ si }& a\leq t\\\\
+                -L_t^a(\alpha) & \text{ si } & t \leq a
+            \end{array}
+        \right.
+    \end{gather*}
+    A esta aplicación la llamaremos la \textbf{longitud orientada} de $\alpha$ respecto del instante $a\in I$.
+\end{definicion}
+
+\begin{propiedades}\
+    \begin{itemize}
+        \item $S_a$ es derivable y $S'_a(t) = |\alpha'(t)|$.
+        \item Si $\alpha$ es regular, de la propiedad anterior podemos concluir que 
+        \begin{enumerate}
+            \item $S_a: I \to S_a(I)=J$ es un difeomorfismo entre intervalos abiertos.
+            \item Sea $h=(S_a)^{-1} : J\to I$, teníamos $\alpha : I \to \bb{R}^3$ podemos reparametrizar $\alpha$\footnote{estamos usando la propia curva para reparametrizar la curva}. Definimos así $\beta = \alpha \circ h : J \to \bb{R}^3$ que es la reparametrización de $\alpha$ por medio del difeomorfismo $h = (S_a)^{-1}$. Sabemos además por la regla de la cadena que para todo $s \in J$ se tiene que
+            \begin{gather*}
+                S_a(h(s)) = s \Rightarrow 1 = h'(s)S_a'(h(s)) \Rightarrow 1 = h'(s)|\alpha(h(s))|
+            \end{gather*}
+            De donde concluimos que 
+            \begin{gather*}
+                h'(s) = \frac{1}{|\alpha'(h(s))|}
+            \end{gather*}
+            De esta forma, para $s\in J$ tenemos que
+            \begin{gather*}
+                \beta'(s) = (\alpha \circ h)'(s) = h'(s) \alpha'(h(s)) = \frac{\alpha'(h(s))}{|\alpha'(h(s))|}
+            \end{gather*}
+            Concluimos que 
+            \begin{gather*}
+                |\beta'(s)| = 1 \ \ \ \forall s \in J
+            \end{gather*}
+            Por tanto toda curva regular admite una reparametrización con celeridad constantemente $1$. Estas curvas verifican
+            \begin{gather*}
+                L_a^b(\beta) =  \int_a^b 1 dt = b-a
+            \end{gather*}
+            A este tipo de curvas se les llama \textbf{curvas parametrizadas por el arco}\footnote{lo notaremos por p.p.a. (no es el partido popular andaluz ni nada de eso).}
+        \end{enumerate}
+    \end{itemize}
+\end{propiedades}
+
+\begin{ejercicio}
+    Si $\alpha : I \to \bb{R}^3$ es una curva p.p.a., ¿cuántas reparametrizaciones por el arco admite?
+\end{ejercicio}
