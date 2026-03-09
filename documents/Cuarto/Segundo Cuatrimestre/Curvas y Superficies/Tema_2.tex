@@ -128,7 +128,7 @@ Podemos concluir entonces que si queremos que la regularidad de las curvas se co
             \begin{gather*}
                 L_a^b(\beta) =  \int_a^b 1 dt = b-a
             \end{gather*}
-            A este tipo de curvas se les llama \textbf{curvas parametrizadas por el arco}\footnote{lo notaremos por p.p.a. (no es el partido popular andaluz ni nada de eso).}
+            A este tipo de curvas se les llama \textbf{curvas parametrizadas por el arco}\footnote{lo notaremos por p.p.a. (no es el partido popular andaluz ni nada de eso).}.
         \end{enumerate}
     \end{itemize}
 \end{propiedades}
@@ -136,3 +136,109 @@ Podemos concluir entonces que si queremos que la regularidad de las curvas se co
 \begin{ejercicio}
     Si $\alpha : I \to \bb{R}^3$ es una curva p.p.a., ¿cuántas reparametrizaciones por el arco admite?
 \end{ejercicio}
+
+\begin{ejercicio}
+    Si $\alpha : I \to \bb{R}^2$ es una curva regular, llamamos \textbf{curva normal} a la curva $\alpha$ en el instante $t$ a la recta que pasa por $\alpha(t)$ y es perpendicular a la recta tangente en este instante. Se pide estudiar las rectas normales de una recta y de una circunferencia. ¿Hay alguna otra curva que satisfaga las mismas propiedades que estas curvas?
+\end{ejercicio}
+
+\section{Teoría local de curvas planas. Diedro de Frenet. Curvatura}
+
+\begin{notacion}
+    A partir de ahora todas las curvas  $\alpha: I \to \bb{R}^2$ serán planas y regulares excepto que se especifique lo contrario. Podemos considerarla por tanto p.p.a. ya que lo que nos interesa es la forma de la traza y nos va a ayudar conocer la celeridad de la curva. Representamos el vector tangente $\alpha'(s)$ de $\alpha$ en el instante $s\in I$ por
+    \begin{gather*}
+        \alpha'(s) = T(s) \in \bb{R}^2
+    \end{gather*}
+    y por las curvas que estamos considerando tenemos que 
+    \begin{gather*}
+        |T(s)| = 1\ \ \ \forall s \in I
+    \end{gather*}
+\end{notacion}
+
+\begin{definicion}
+    Definimos el \textbf{vector normal} de $\alpha$ en $s\in I$ como
+    \begin{gather*}
+        N(s) = JT(s)
+    \end{gather*}
+    donde $J$ está dada por 
+    \Func{J}{\bb{R}^2}{\bb{R}^2}{(x,y)}{J(x,y)=(-y,x)}
+    es decir, $J$ es un giro de $90^\circ$ en sentido antihorario.
+\end{definicion}
+
+\begin{propiedades}\
+    \begin{enumerate}
+        \item $|N(s)| = |JT(s)| = |T(s)| = 1$ para todo $s\in I$.
+        \item $\langle T(s), N(s) \rangle = \langle T(s), JT(s) \rangle = 0$.
+        \item Dado $s\in I$ podemos considerar $\{T(s), N(s)\}$ que será una base ortonormal de $\bb{R}^2$ positivamente orientada que depende diferencialmente de $s$. A esta base la llamaremos \textbf{diedro de Frenet-(Serret)} de $\alpha$ en el instante $s\in I$.
+        \item Si estudiamos el cambio del diedro de Frenet a lo largo de la curva tendremos que estudiar $T'(s)$ y $S'(s)$. Tenemos que 
+        \begin{gather*}
+            \langle T(s), T(s) \rangle = 1 \ \ \ \forall s\in I\\
+            2\langle T'(s), T(s) \rangle = 0 \ \ \ \forall s \in I
+        \end{gather*}
+        Tenemos entonces que, como $T'(s)\in \bb{R}^2$ necesariamente 
+        $T'(s) = \lambda_s T(s) + \mu_s N(s)$ y del producto escalar anterior concluimos que $\lambda_s = 0$. Por tanto 
+        \begin{gather*}
+            T'(s) = \mu_s N(s)
+        \end{gather*}
+        A partir de ahora notaremos a este $\mu_s$ como $k(s)\in \bb{R}$ y lo llamaremos la \textbf{curvatura} de $\alpha$ en $s\in I$. Dicha aplicación verifica
+        \begin{gather*}
+            T'(s) = k(s)N(s)
+        \end{gather*}
+        Análogamente tenemos 
+        \begin{gather*}
+            \langle N(s), N(s) \rangle = 1 \ \ \ \forall s\in I\\
+            2\langle N'(s), N(s) \rangle = 0 \ \ \ \forall s \in I
+        \end{gather*}
+        Lo que, con el razonamiento anterior nos lleva a que $N'(s)=\nu_s T(s)$. Como tenemos que $\langle T(s), N(s) \rangle = 0$ podemos derivar y obtenemos 
+        \begin{gather*}
+            \langle T'(s), N(s)\rangle + \langle T(s), N'(s)\rangle = 0 \sii\\
+            \sii k(s) \langle N(s), N(s) \rangle + \nu_s \langle T(s), T(s) \rangle = k(s) + \nu_s = 0
+        \end{gather*}
+        de donde $\nu_s = -k(s)$. Concluimos finalmente que 
+        \begin{gather*}
+            \left\{
+                \begin{array}{c}
+                    T'(s) = k(s)N(s)\\
+                    N'(s) = -k(s)T(s)
+                \end{array}
+            \right.
+        \end{gather*}
+    \end{enumerate}
+\end{propiedades}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Consideramos la curva dada por 
+        \Func{\alpha}{\bb{R}}{\bb{R}^2}{s}{p + sv}
+        con $p\in \bb{R}^2$, $v\in \bb{R}^2$ tal que $v\neq 0$ y $|v| = 1$. De esta forma tendremos que 
+        \begin{gather*}
+            T(s) = v\\
+            T'(s) = 0
+        \end{gather*}
+        para todo $s\in \bb{R}$. De las expresiones anteriores deducimos que 
+        \begin{gather*}
+            k(s) = 0\ \ \ \forall s \in \bb{R}
+        \end{gather*}
+        por lo que una recta no tendrá curvatura (como podríamos esperar).
+
+        \item Estudiamos ahora el caso de la curva definida como
+        \Func{\beta}{\bb{R}}{\bb{R}^2}{s}{(a_1 + r\cos(\frac{s}{r}, a_2 + r\sin (\frac{s}{r})))}
+        Al derivar esta curva obtenemos 
+        \begin{gather*}
+            \beta'(s) = \left(-\sin\left(\frac{s}{r}\right), \cos\left(\frac{s}{r}\right)\right)
+        \end{gather*}
+        Estudiamos ahora el vector tangente y normal obteniendo
+        \begin{gather*}
+            \left\{
+                \begin{array}{c}
+                    T_\beta(s) = \left(-\sin\left(\dfrac{s}{r}\right), \cos\left(\dfrac{s}{r}\right)\right)\\\\
+                    N_\beta(s) =  \left(-\cos\left(\dfrac{s}{r}\right), -\sin\left(\dfrac{s}{r}\right)\right)
+                \end{array}
+            \right.
+        \end{gather*}
+        Al derivar el vector tangente obtenemos 
+        \begin{gather*}
+            T_\beta'(s) = \frac{1}{r}\left(-\cos\left(\frac{s}{r}\right), -\sin\left(\frac{s}{r}\right)\right)
+        \end{gather*}
+        de donde $k(s) = \frac{1}{r}$, es decir, la curvatura a lo largo de una circunferencia es constante y depende del radio de la misma.
+    \end{enumerate}
+\end{ejemplo}
