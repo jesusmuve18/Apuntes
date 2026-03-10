@@ -287,3 +287,13 @@ Usaremos los convenios
     \end{gather*}
     Deducimos que $y'(x_0) = 0 = y'(x_1)$. Por tanto $c_4=0$ y así $y(x)=c_3$ para $c_3\in \bb{R}$ y cualquier elección de $c_3$ nos da un candidato a mínimo.
 \end{ejemplo}
+
+\section{Estudio de extremos locales de funcionales}
+
+Supongamos que $y_*$ es mínimo local para $\cc{F}$. Entonces existe un entorno tal que $\cc{F}[y_*] \leq \cc{F}[y]$ para todo $y$ en el entorno. Bassta estudiar $\cc{F}[y_*+\veps\varphi]$ para $\varphi$ dirección admisible y $|\veps << 1$. \\
+
+Desarrollando por Taylor en $\veps$ tenemos 
+\begin{gather*}
+    \cc{F}[y_*+\veps\varphi] = \cc{F}[y_*] + \veps \frac{d}{d\veps} \cc{F}[y_*+\veps\varphi]_{|_{\veps=0}} + \frac{\veps^2}{2} \frac{d^2}{d\veps^2}\cc{F}[y_*+\veps\varphi]_{|_{\veps=0}} + O(\veps^3) 
+\end{gather*}
+Si $y_*$ es un punto crítico, entonces $\veps \frac{d}{d\veps} \cc{F}[y_*+\veps\varphi]_{|_{\veps=0}} = 0$ y por tanto querremos estudiar $\frac{\veps^2}{2} \frac{d^2}{d\veps^2}\cc{F}[y_*+\veps\varphi]_{|_{\veps=0}}$ en todas las direcciones admisibles para estudiar si efectivamente el punto que estamos considerando es un mínimo local.
