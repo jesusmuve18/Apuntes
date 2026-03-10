@@ -138,7 +138,59 @@ Podemos concluir entonces que si queremos que la regularidad de las curvas se co
 \end{ejercicio}
 
 \begin{ejercicio}
-    Si $\alpha : I \to \bb{R}^2$ es una curva regular, llamamos \textbf{curva normal} a la curva $\alpha$ en el instante $t$ a la recta que pasa por $\alpha(t)$ y es perpendicular a la recta tangente en este instante. Se pide estudiar las rectas normales de una recta y de una circunferencia. ¿Hay alguna otra curva que satisfaga las mismas propiedades que estas curvas?
+    Si $\alpha : I \to \bb{R}^2$ es una curva regular, llamamos \textbf{curva normal} a la curva $\alpha$ en el instante $t$ a la recta que pasa por $\alpha(t)$ y es perpendicular a la recta tangente en este instante. Se pide estudiar las rectas normales de una recta y de una circunferencia. ¿Hay alguna otra curva que satisfaga las mismas propiedades que estas curvas?\\
+
+    Tener todas las rectas normales paralelas es equivalente a decir que todas las rectas tangentes son paralelas. Sea $s\in I$, su recta tangente será 
+    \begin{gather*}
+        \alpha(s) + \langle \alpha'(s) \rangle
+    \end{gather*}
+    Sabemos además que 
+    \begin{gather*}
+        \alpha'(s) = \lambda(s)v\ \ \ v\in \bb{R}^2\setminus\{0\},\ \ \lambda(s)\neq 0 \ \ \forall s \in I
+    \end{gather*}
+    Para ver que $\lambda(s)$ es diferenciable, como $\alpha'(s)$ lo es tendremos que $\lambda(s)v$ también lo será. Podemos considerar ahora 
+    \begin{gather*}
+        \langle \lambda(s)v, v \rangle
+    \end{gather*}
+    que es diferenciable y además $\langle \lambda(s)v, v \rangle = \lambda(s)|v^2|$. Podemos dividir ahora entre $|v^2|$ y obtendremos que $\lambda(s)$ es diferenciable. Al ser en particular continua tendremos que, o bien $\lambda(s)>0$ o bien $\lambda(s)<0$ para todo $s\in I$. Fijamos $s_0\in I$ y tenemos
+    \begin{gather*}
+        \int_{s_0}^s \alpha'(u)du = \left(\int_{s_0}^s \lambda(u)du\right)v\\
+    \end{gather*}
+    Si notamos por $f(s)=\int_{s_0}^s \lambda(u)du$ y aplicamos el teorema fundamental del cálculo en el término izquierdo obtenemos
+    \begin{gather*}
+        \alpha(s)-\alpha(s_0) = f(s)v
+    \end{gather*}
+    De forma que despejando obtenemos
+    \begin{gather*}
+        \alpha(s) = \alpha(s_0) + f(s)v\in R_{\alpha(s_0),v}
+    \end{gather*}
+    Por tanto, $tr(\alpha)$ está contenida en una recta. Obtenemos finalmente que $tr(\alpha)$ es un segmento de recta.\\
+
+    Nos planteamos ahora el caso de que todas las rectas normales pasen por un mismo punto. La recta normal en un punto $t\in I$ será aquella recta que pasa por $\alpha(t)$ y con dirección perpendicular a $\alpha'(t)$, o equivalentemente con dirección $J\alpha'(t)$. De esta forma, la recta normal en $t$ será 
+    \begin{gather*}
+        \alpha(t) + \lambda J \alpha'(t)\ \ \ \lambda \in \bb{R}
+    \end{gather*}
+    Tenemos entonces que existe un punto $c\in \bb{R}^2$ tal que $c$ pertenece a todas las rectas normales. De esta forma tenemos 
+    \begin{gather*}
+        \forall t \in I\ \ \exists \lambda(t) : \alpha(t) + \lambda(t)J\alpha'(t) = c\ \ \ \lambda:I\to \bb{R}
+    \end{gather*}
+    Con un argumento análogo al anterior, para ver que $\lambda(t)$ es diferenciable consideramos
+    \begin{gather*}
+        \langle \lambda(t)J\alpha'(t), J\alpha'(t)\rangle = \lambda(t)|\alpha'(t)|^2
+    \end{gather*}
+    Dividimos ahora entre $|\alpha'(t)|^2$ y llegamos a que $\lambda$ es diferenciable. Además
+    \begin{gather*}
+        \alpha(t)-c = -\lambda(t)J\alpha'(t)
+    \end{gather*}
+    Multiplicamos escalarmente por $\alpha'(t)$ y obtenemos
+    \begin{gather*}
+        \langle \alpha(t)-c, \alpha'(t) \rangle = 0 \ \ \ \forall t \in I
+    \end{gather*}
+    Además, esto es igual a $\frac{1}{2}(|\alpha(t)-c|^2)'=0$. Esto nos dice que 
+    \begin{gather*}
+        |\alpha(t)-c|^2 = r > 0\ \ \ \forall t \in \bb{R}
+    \end{gather*}
+    Esto nos lleva a que $\alpha(t)\in C(c,r)$ por lo que $tr(\alpha)\subset C(c,r)$ y tendremos que $tr(\alpha)$ es un arco de circunferencia.
 \end{ejercicio}
 
 \section{Teoría local de curvas planas. Diedro de Frenet. Curvatura}
@@ -221,7 +273,7 @@ Podemos concluir entonces que si queremos que la regularidad de las curvas se co
         por lo que una recta no tendrá curvatura (como podríamos esperar).
 
         \item Estudiamos ahora el caso de la curva definida como
-        \Func{\beta}{\bb{R}}{\bb{R}^2}{s}{(a_1 + r\cos(\frac{s}{r}, a_2 + r\sin (\frac{s}{r})))}
+        \Func{\beta}{\bb{R}}{\bb{R}^2}{s}{(a_1 + r\cos(\frac{s}{r}), a_2 + r\sin (\frac{s}{r}))}
         Al derivar esta curva obtenemos 
         \begin{gather*}
             \beta'(s) = \left(-\sin\left(\frac{s}{r}\right), \cos\left(\frac{s}{r}\right)\right)
@@ -242,3 +294,48 @@ Podemos concluir entonces que si queremos que la regularidad de las curvas se co
         de donde $k(s) = \frac{1}{r}$, es decir, la curvatura a lo largo de una circunferencia es constante y depende del radio de la misma.
     \end{enumerate}
 \end{ejemplo}
+
+\begin{ejercicio}
+    Estudiar las curvas de $\bb{R}^2$ p.p.a. con curvatura constante.\\
+
+    Sea $\alpha:I\to \bb{R}^2$ una curva p.p.a. y consideramos $k(s)=k_0$ para todo $s\in I$. Haremos una distinción de casos:
+    \begin{itemize}
+        \item Si $k_0=0$ para todo $s\in I$, entonces de las ecuaciones de Frenet deducimos que 
+        \begin{gather*}
+            T'(s) = k(s)N(s) = k_0N(s)=0 \Rightarrow \alpha''(s)=0 \ \ \ \forall s \in I
+        \end{gather*}
+        Como la aceleración es nula, necesariamente la velocidad es constante por lo que 
+        \begin{gather*}
+            \alpha'(s) = v \ \ \ \forall s \in I,\ \ v\in \bb{R}^2\ \ |v|=1
+        \end{gather*}
+        Fijando $s_0\in I$ podemos integrar obteniendo
+        \begin{gather*}
+            \int_{s_0}^s \alpha'(u)du= \left(\int_{s_0}^sdu\right)v
+        \end{gather*}
+        De donde, aplicando la regla de Barrow y el TFC
+        \begin{gather*}
+            \alpha(s) - \alpha(s_0) = (s-s_0)v \Rightarrow \alpha(s)=\alpha(s_0) + (s-s_0)v
+        \end{gather*}
+        y de nuevo $\alpha$ está dentro de una recta, y por tanto será un segmento de recta p.p.a.
+
+        \item Si $k_0\neq 0$ para todo $s\in I$, puedo definir la siguiente aplicación
+        \Func{f}{I}{\bb{R}^2}{s}{\alpha(s) + \frac{1}{k_0}N(s)}
+        que es diferenciable. Derivando y aplicando las ecuaciones de Frenet obtenemos 
+        \begin{gather*}
+            f'(s) = T(s) + \frac{1}{k_0}(-k_0T(s)) = 0
+        \end{gather*}
+        Por tanto tenemos que 
+        \begin{gather*}
+            \alpha(s) + \frac{1}{k_0}N(s) = c\in \bb{R}^2
+        \end{gather*}
+        De esta forma 
+        \begin{gather*}
+            \alpha(s) - c = -\frac{1}{k_0}N(s) \Rightarrow |\alpha(s)-c|^2 = \frac{1}{k_0^2}
+        \end{gather*}
+        Lo que nos dice que $tr(\alpha)\subset C(c, \frac{1}{|k_0|})$.
+    \end{itemize}
+\end{ejercicio}
+
+\begin{observacion}
+    Del ejercicio anterior se puede concluir que las únicas curvas p.p.a. con curvatura constante son los arcos de recta y de circunferencia.
+\end{observacion}
