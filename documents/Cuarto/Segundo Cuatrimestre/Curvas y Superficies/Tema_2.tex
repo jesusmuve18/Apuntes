@@ -254,6 +254,7 @@ Podemos concluir entonces que si queremos que la regularidad de las curvas se co
                 \end{array}
             \right.
         \end{gather*}
+        A estas expresiones las llamaremos \textbf{ecuaciones de Frenet}.
     \end{enumerate}
 \end{propiedades}
 
@@ -339,3 +340,85 @@ Podemos concluir entonces que si queremos que la regularidad de las curvas se co
 \begin{observacion}
     Del ejercicio anterior se puede concluir que las únicas curvas p.p.a. con curvatura constante son los arcos de recta y de circunferencia.
 \end{observacion}
+
+\begin{ejercicio}
+    Supongamos que $\alpha:I\to \bb{R}^2$ es una curva plana regular. Tomamos una reparametrización de $\alpha$ por el arco. Fijamos $a\in I$ y tenemos
+    \begin{gather*}
+        \xymatrix{
+            J  \ar[r]^{S_a^{-1}} & I \ar[r]^\alpha &\bb{R}^2 
+        }
+    \end{gather*}
+    Podemos considerar entonces $\beta = \alpha \circ S_a^{-1}$ una p.p.a. (creciente). Definimos la curvatura de $\alpha$ en un instante $t\in I$ como 
+    \begin{gather*}
+        k_\alpha(t) = k_{\alpha \circ S_a^{-1}}(S_a(t))
+    \end{gather*}
+    Demostrar que esta definición no depende del punto $a\in I$ elegido para la reparametrización.\\
+
+    De la definición de $\beta$ tenemos que $\beta \circ S_a(t) = \alpha(t)$ para todo $t\in I$. Derivando con la regla de la cadena obtenemos
+    \begin{gather*}
+        S_a'(t)T_\beta(S_a(t)) = \alpha'(t)
+    \end{gather*}
+    Aplicando $J$ el giro de $90^\circ$ en sentido antiohorario tenemos
+    \begin{gather*}
+        S_a'(t)N_\beta(S_a(t)) = J\alpha'(t)
+    \end{gather*}
+    Derivamos la expresión previa a aplicar $J$ aplicando la regla de Leibnitz y la regla de la cadena
+    \begin{gather*}
+        S_a''(t)T_\beta(S_a(t)) + S_a'(t)^2k_\beta(S_a(t))N_\beta(S_a(t)) = \alpha''(t)
+    \end{gather*}
+    Multiplicamos ahora escalarmente estas dos últimas ecuaciones lo que nos dice que 
+    \begin{gather*}
+        \langle J\alpha'(t), \alpha''(t)\rangle = S_a'(t)^3 k_\beta(S_a(t)) = |\alpha'(t)|^3 k_\alpha(t)
+    \end{gather*}
+    Si expresamos $\alpha'(t)=(a_1, a_2)$ y $\alpha''(t)=(b_1, b_2)$ tenemos que 
+    \begin{gather*}
+        \langle J\alpha'(t), \alpha''(t)\rangle = \langle (-a_2, a_1), (b_1, b_2) \rangle = -a_2b_1 + a_1b_2 = 
+        \begin{vmatrix}
+            a_1 & a_2 \\ b_1 & b_2
+        \end{vmatrix} = det(\alpha'(t), \alpha''(t))
+    \end{gather*}
+    Por lo que podemos despejar la expresión anterior concluyendo que 
+    \begin{gather*}
+        k_\alpha(t) = \frac{det(\alpha'(t), \alpha''(t))}{|\alpha'(t)|^3}
+    \end{gather*}
+    Nos preguntamos ahora qué hubiese ocurrido si hubiésemos tomado una reparametrización decreciente. Para ello consideramos $\alpha:(-a,a) \to \bb{R}$ regular y $\beta:(-a,a) \to \bb{R}$ donde $\beta(t)=\alpha(-t)$. En este caso tendremos
+    \begin{gather*}
+        \beta'(t) = -\alpha'(-t)\\
+        \beta''(t) = \alpha''(-t)
+    \end{gather*}
+    Por lo que con el razonamiento anterior llegamos a que 
+    \begin{gather*}
+        k_\beta(t) = \frac{det(\beta'(t), \beta''(t))}{|\beta'(t)|^3} = \frac{-det(\alpha'(-t), \alpha''(-t))}{|\alpha'(-t)|^3} = -k_\alpha(-t)
+    \end{gather*}
+    Por lo que podemos concluir que la curvatura cambia de signo bajo reparametrizaciones decrecientes.
+\end{ejercicio}
+
+\begin{ejercicio}
+    Calcular la curvatura de la espiral logarítmica.
+\end{ejercicio}
+
+\begin{ejercicio}
+    Estudiar longitud y curvatura para las gráficas de funciones derivables $f: I \to \bb{R}$.\\
+
+    Hay una curva parametrizada correspondiente a $f$, $\alpha_f$ tal que $tr(\alpha_f) = Gr(f)$. Recordamos que $\alpha_f$ está definida como
+    \Func{\alpha_f}{I}{\bb{R}^2}{t}{\alpha_f(t)=(t,f(t))}
+    Si estudiamos el vector tangente asociado a esta curva obtenemos
+    \begin{gather*}
+        \alpha'(t) = (1,f'(t)) \neq (0,0) \ \ \ \forall t\in I
+    \end{gather*}
+    por lo que estas curvas son siempre regulares. Podemos por tanto calcular la longitud en un compacto $[a,b]\subset I$.
+    \begin{gather*}
+        L_a^b(\alpha_f) = \int_a^b \sqrt{1+f'(t)^2} dt
+    \end{gather*}
+    Queremos ahora calcular la curvatura. Para ello tenemos que 
+    \begin{gather*}
+        \alpha_f''(t) = (0,f''(t))
+    \end{gather*}
+    Según la expresión obtenida de un ejercicio previo tenemos que 
+    \begin{gather*}
+        k_{\alpha_f}(t) = \frac{\begin{vmatrix}
+            1 & f'(t) \\ 0 & f''(t)
+        \end{vmatrix}}{\sqrt{1+f'(t)^2}^3} = \frac{f''(t)}{\sqrt{1+f'(t)^2}^3}
+    \end{gather*}
+\end{ejercicio}
+
