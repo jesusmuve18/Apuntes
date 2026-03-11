@@ -1,0 +1,68 @@
+\chapter{Tema 1}
+
+\begin{definicion}
+    Sean $h_1, h_2$ dos heurísticas admisibles. Decimos que $h_2$ está \textbf{más informada} que $h_1$ si $h_2(n)>h_1(n)$ para cualquier nodo $n$.
+\end{definicion}
+
+\begin{teo}
+    Si $A_2^*$ está más informado que $A_1^*$ entonces $A_2^*$ domina a $A_1^*$.
+\end{teo}
+
+\section{Heurísticas monótonas}
+
+Por la desigualdad triangular tenemos que $k(s,\gamma) \leq k(s,n) + k(n, \gamma)$ para cualquier nodo $n$, cualquier nodo inicial $s$ y final $\gamma$. Tenemos por tanto que 
+\begin{gather*}
+    h^*(s) \leq k(s,n) + h^*(n) \Rightarrow h^*(n) \leq k(n,n') + h^*(n') \ \ \ \ \forall n,n' \ \text{ nodos}
+\end{gather*}
+\begin{definicion}
+    Diremos que $h$ es \textbf{consistente} si se verifica que 
+    \begin{gather*}
+        h^*(n) \leq k(n,n') + h^*(n') \ \ \ \ \forall n,n' \ \text{ nodos}
+    \end{gather*}
+\end{definicion}
+
+\begin{definicion}
+    % Si consideramos la desigualdad anterior entre un nodo padre y sus hijos llegamos a la siguiente expresión:
+    Diremos que $h$ es \textbf{monótona} si
+    \begin{gather*}
+        h(n)\leq c(n,n')+h(u) \ \ \ \ \forall n,\ \ \forall n'\in suc(u)
+    \end{gather*}
+\end{definicion}
+
+\begin{prop}
+    Una heurística $h$ es consistente si y solo si es monótona.
+\end{prop}
+
+\begin{teo}
+    Toda heurística consistente es admisible
+    \begin{proof}
+        Por ser $h$ consistente se tiene que verificar la desigualdad
+        \begin{gather*}
+            h^*(n) \leq k(n,n') + h^*(n') \ \ \ \ \forall n,n' \ \text{ nodos}
+        \end{gather*}
+        Si tomamos $n'=\gamma \in \Gamma^*$ se tiene que 
+        \begin{gather*}
+            h(n) \leq k(n,\gamma) + h(\gamma) \Rightarrow h(n) \leq h^*(n) + 0 = h^*(n)
+        \end{gather*}
+        para cualquier nodo $n$ lo cual nos dice que $h$ es admisible.
+    \end{proof}
+\end{teo}
+
+\begin{teo}
+    Un algoritmo $A^*$ guiado por una heurística monótona alcanza el camino óptimo a todos los nodos expandidos, es decir, 
+    \begin{gather*}
+        g(n) = g^*(n)\ \ \ \ \forall n \in \text{CERRADOS}
+    \end{gather*}
+    \begin{proof}
+        $A^*$ selecciona como mejor nodo $n$. Supongamos que $g(n)>g^*(u)$, entonces 
+        \begin{equation*}
+            \text{ABIERTOS} = \{... n ...\}
+        \end{equation*}
+        Por el lema uno tenemos que $\exists n'\in$ABIERTOS tal que $u'\in P$ óptimo $s-n$, en cuyo caso, $g(n')=g^*(n')$. Tenemos entonces
+        \begin{gather*}
+            f(n) = g(n') + h(n') \overset{\text{lema 1}}{=} g^*(n') + h(n') \overset{consist.}{\leq} g^*(n') + k(n',n) + h(n) \\
+            \overset{opt.}{=} g^*(u)+h(n) \overset{hip.}{<} g(n)+h(n)=f(n)
+        \end{gather*}
+        y llegamos a contradicción ya que $f(n)<f(n)$.
+    \end{proof}
+\end{teo}
