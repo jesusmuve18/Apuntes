@@ -1,5 +1,113 @@
 \chapter{Tema 1}
 
+\section{Algoritmos. Árbol de Estados.}
+
+\begin{definicion}
+    Un algoritmo $A$ es una secuencia ordenada, finita y bien definida de pasos o instrucciones lógicas que permiten resolver un problema. 
+\end{definicion}
+
+\begin{definicion}
+    Diremos que un algoritmo $A$ es \textbf{completo} si encuentra una solución al problema en caso de que exista en un tiempo finito.
+\end{definicion}
+
+\begin{definicion}
+    Diremos que un algoritmo $A$ es \textbf{admisible} si, en caso de encontrar solución a un problema, esta es óptima.
+\end{definicion}
+
+\begin{definicion}
+    Dados dos algoritmos $A_1$ y $A_2$, diremos que $A_2$ \textbf{domina} a $A_1$ si todo nodo $n$ extendido por $A_1$ es también expandido por $A_2$. En el caso de que $A_2$ domine tendremos que será más eficiente en el tiempo de búsqueda.
+\end{definicion}
+
+\begin{notacion}
+    A continuación describiremos la notación que usaremos a lo largo de estos apuntes:
+    \begin{center}
+        \begin{tabular}{c | l}
+            $n$ & \textbf{Nodo} cualquiera.\\
+            $s$ & \textbf{Estado inicial}. \\
+            $\gamma$ & Nodo \textbf{objetivo}.\\
+            $\Gamma$ & \textbf{Conjunto de objetivos}.\\
+            $\Gamma^*$ & Conjunto de nodos a los que se puede llegar con un camino óptimo.\\
+            $P_{n_i-n_j}$ & \textbf{Camino arbitrario} del nodo $n_i$ al nodo $n_j$.\\
+            $P^*_{n_i-n_j}$ & \textbf{Camino óptimo} del nodo $n_i$ al nodo $n_j$.\\
+            $P_{n_i-\Gamma}$ & \textbf{Camino arbitrario de $n_i$ a un objetivo}.\\
+            $c^*$ & \textbf{Costo óptimo} de $s$ a una solución admisible.
+        \end{tabular}
+    \end{center}
+    Definimos además las funciones que más utilizaremos:
+    \begin{center}
+        \begin{tabular}{c | l}
+            $k(n_i, n_j)$ & \textbf{Coste óptimo} entre $n_i$ y $n_j$ \\
+            $g(n)$ & \textbf{Costo actual} desde $s$ hasta $n$.\\
+            $g^*(n)$ & \textbf{Costo óptimo} entre $s$ y $n$, es decir, $g^*(n) = k(s,n)$ para todo $n$.\\
+            $g_P(n)$ & \textbf{Costo} desde $s$ hasta $n$ por el camino $P$.\\
+            $h(n)$ & \textbf{Costo estimado} del nodo $n$ al objetivo $\gamma$.\\
+            $h_P(n)$ & \textbf{Costo estimado} del nodo $n$ al obtetivo $   \gamma$ por el camino $P$.\\
+            $f(n)$ & \textbf{Costo total estimado} al objetivo $\gamma$ pasando por el nodo $n$ ($f(n)=g(n)+h(n)$).
+        \end{tabular}
+    \end{center}
+\end{notacion}
+
+% Árbol de Estados
+
+\begin{propiedades}
+    Hay dos propiedades de los árboles de estados que están siempre presentes:
+    \begin{enumerate}
+        \item El grafo es \textbf{localmente finito}, es decir, el número de sucesores de cada nodo es finito.
+        \item Se verifica que $c(n_i, n_j) \geq \delta > 0$ para cualesquiera $n_i,n_j$ nodos, es decir, el costo de cambiar de nodo es siempre positivo. 
+    \end{enumerate}
+\end{propiedades}
+
+\begin{observacion}
+    Un árbol de estados puede tener varios nodos iniciales $s_1, ..., s_n$. Para simplificar el problema lo que se hace es crear un estado inicial artificial $s$ y se conecta a cada uno de los estados iniciales $s_1, ..., s_n$.\\
+
+    También puede haber varios nodos objetivo $\gamma_1, ..., \gamma_m\in \Gamma$, sin embargo, en este caso no se puede simplificar a un único estado final.\\
+
+    El problema por tanto será ir de un único estado inicial $s$ a alguno de los estados finales $\gamma\in \Gamma$.
+\end{observacion}
+
+\section{Algoritmo $A^*$}
+Este algoritmo utiliza como función de estimación $f(n)=g(n)+h(n)$ para todo nodo $n$. Por la naturaleza del problema se verificará que $g(s)=0$ y $h(\gamma)=0$. Además, se verifica que 
+\begin{gather*}
+    f^*(n) = g^*(n) + h^*(n)
+\end{gather*}
+Donde se verificará también
+\begin{gather*}
+    f^*(s)=h^*(s) = g^*(\gamma) = f^*(\gamma) = c^* \ \ \ \ \forall \gamma \in \Gamma
+\end{gather*}
+En general, por la optimalidad se tendrá que, para cualquier camino $P$ se tiene que
+\begin{gather*}
+    g_P(n)\geq g^*(n)\\
+    h_P(n) \geq h^*(n)
+\end{gather*}
+
+\begin{propiedades}
+    Queremos estudiar ahora 2 propiedades del algoritmo $A^*$:
+    \begin{enumerate}
+        \item $f^*(n) = c^*$ para todo $n\in P^*_{s-\Gamma}$.
+        \begin{proof}
+            Sea $n\in P^*_{s-\Gamma}$, entonces tenemos que existe un camino $P$ tal que
+            \begin{gather*}
+                g_P(n) + h_P(n) = c^*
+            \end{gather*}
+            Por la optimalidad se tendrá que 
+            \begin{gather*}
+                g^*(n) + h^*(n) \leq c^*
+            \end{gather*}
+            y necesariamente se tendrá que dar la igualdad, ya que en caso contrario $c^*$ no sería óptimo y llegaríamos a contradicción.
+        \end{proof}
+        \item $f^*(n) > c^*$ para todo $n\notin P^*_{s-\Gamma}$.
+        \begin{proof}
+            Supongamos que $f^*(n)\leq c^*$. Entonces tendremos que 
+            \begin{gather*}
+                g^*(n) + h^*(n) \leq c^*
+            \end{gather*}
+            luego existe un camino $P'$ tal que $g_P(n) + h_P(n) \leq c^*$. En caso de que se de la igualdad tendremos que $P'$ sería óptimo y tendríamos que $n\in P^*_{s-\Gamma}$. En caso de ser menor tendríamos que $c^*$ no es el coste mínimo, lo que también nos llevaría a contradicción.
+        \end{proof}
+    \end{enumerate}
+\end{propiedades}
+
+% Heurísticas
+
 \begin{definicion}
     Sean $h_1, h_2$ dos heurísticas admisibles. Decimos que $h_2$ está \textbf{más informada} que $h_1$ si $h_2(n)>h_1(n)$ para cualquier nodo $n$.
 \end{definicion}
@@ -54,15 +162,15 @@ Por la desigualdad triangular tenemos que $k(s,\gamma) \leq k(s,n) + k(n, \gamma
         g(n) = g^*(n)\ \ \ \ \forall n \in \text{CERRADOS}
     \end{gather*}
     \begin{proof}
-        $A^*$ selecciona como mejor nodo $n$. Supongamos que $g(n)>g^*(u)$, entonces 
+        $A^*$ selecciona como mejor nodo $n$. Supongamos que $g(n)>g^*(n)$, entonces 
         \begin{equation*}
             \text{ABIERTOS} = \{... n ...\}
         \end{equation*}
-        Por el lema uno tenemos que $\exists n'\in$ABIERTOS tal que $u'\in P$ óptimo $s-n$, en cuyo caso, $g(n')=g^*(n')$. Tenemos entonces
+        Por el lema 1 tenemos que $\exists n'\in$ABIERTOS tal que $u'\in P^*_{s-n}$, en cuyo caso, $g(n')=g^*(n')$. Tenemos entonces
         \begin{gather*}
             f(n) = g(n') + h(n') \overset{\text{lema 1}}{=} g^*(n') + h(n') \overset{consist.}{\leq} g^*(n') + k(n',n) + h(n) \\
             \overset{opt.}{=} g^*(u)+h(n) \overset{hip.}{<} g(n)+h(n)=f(n)
         \end{gather*}
-        y llegamos a contradicción ya que $f(n)<f(n)$.
+        y llegamos a contradicción.
     \end{proof}
 \end{teo}
