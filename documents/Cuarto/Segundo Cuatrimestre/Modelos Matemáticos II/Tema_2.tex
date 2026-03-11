@@ -1,0 +1,179 @@
+\chapter{Estudio de extremos locales. Condiciones suficientes}
+
+Dado $\cc{F}:D \to \bb{R}$, dado $y_*\in D$ un punto crítico, estudiar su carácter de máximo o mínimo local se reduce a estudiar
+\begin{gather*}
+    \veps \mapsto \cc{F}[y_* + \veps \varphi] \ \ \text{ para cualquier $\varphi$ admisible}
+\end{gather*}
+De hecho, 
+\begin{gather*}
+    \cc{F}[y_*+\veps\varphi] = \cc{F}[y_*] + \frac{\veps^2}{2} \frac{d^2}{d\veps^2} \cc{F}[y_* + \veps\varphi]_{|_{\veps = 0}} + O(\veps^3)
+\end{gather*}
+Solamente consideramos el siguiente caso:\\
+
+$I=[x_0, x_1]$, $F\in C^3(I \times \bb{R} \times \bb{R})$ dada por 
+\begin{gather*}
+    \cc{F}[y] = \int_{x_0}^{x_1} F(x, y(x), y'(x)) dx
+\end{gather*}
+definido sobre
+\begin{gather*}
+    D = \{y\in C^1(I) : y(x_0)=y_0,\ y(x_1=y_1)\}
+\end{gather*}
+con $y_0,y_1\in \bb{R}$ dados. Las direcciones admoisibles son $\varphi\in C_0^1(I)$.\\
+
+Dado $y\in D$, $\varphi$ admisible, formamos
+\begin{gather*}
+    y_\veps := y +\veps \varphi
+\end{gather*}
+Una vez hecho eso calculamos la derivada segunda
+\begin{gather*}
+    \frac{d^2}{d\veps^2}\cc{F}[y_\veps] = \frac{d}{d\veps} \int_{x_0}^{x_1} \frac{d}{d\veps} [F(x, y_\veps(x), y_\veps'(x))] dx
+\end{gather*}
+Utilizaremos la notación que venimos usando en el tema anterior:
+\begin{gather*}
+    F=F(x,y,p),\ \ \ \ F_y=\frac{\partial F}{\partial y},\ \ \ \ F_p = \frac{\partial F}{\partial p}
+\end{gather*}
+y la expresión anterior quedará como 
+\begin{align*}
+    \frac{d^2}{d\veps^2}\cc{F}[y_\veps] &= \frac{d}{d\veps} \int_{x_0}^{x_1} F_y(x,y_\veps(x), y_\veps'(x))\varphi(x) + F_p(x,y_\veps(x), y_\veps'(x))\varphi'(x)dx = \\
+    &= \int_{x_0}^{x_1} F_{yy}(x,y_\veps(x), y_\veps'(x)) \varphi^2(x) + F_{yp}(x,y_\veps(x), y_\veps'(x))\varphi'(x)\varphi(x) + \\
+    &+ F_{py}(x,y_\veps(x), y_\veps'(x))\varphi(x)\varphi'(x) + F_{pp}(x,y_\veps(x), y_\veps'(x))\varphi'(x)^2 dx
+\end{align*}
+Como $F\in C^3(I\times \bb{R} \times \bb{R})$ tendremos que $F_{yp}=F_{py}$. Además
+\begin{gather*}
+    2\int_{x_0}^{x_1} F_{yp}(x,y_\veps(x), y_\veps'(x)) \varphi(x)\varphi'(x) dx = \int_{x_0}^{x_1} F_{yp}(x,y_\veps(x), y_\veps'(x)) \frac{d}{dx}(\varphi(x))^2 dx
+\end{gather*}
+Si integramos ahora por partes tenemos que 
+\begin{gather*}
+    \int_{x_0}^{x_1} F_{yp}(x,y_\veps(x), y_\veps'(x)) \frac{d}{dx}(\varphi(x))^2 dx = -\int_{x_0}^{x_1} \frac{d}{dx} [F_{yp}(x,y_\veps(x), y_\veps'(x))] \varphi(x)^2 dx
+\end{gather*}
+Si ahora unimos esto a la expresión anterior llegamos a 
+\begin{align*}
+    \frac{d^2}{d\veps^2}\cc{F}[y_\veps] &= \int_{x_0}^{x_1} F_{pp}(x,y_\veps(x), y_\veps'(x)) \varphi'(x)^2 +\\
+    &+ \left(-\frac{d}{dx}[F_{yp}(x,y_\veps(x), y_\veps'(x)) ] + F_{yy}(x,y_\veps(x), y_\veps'(x))\right)\varphi(x)^2 dx
+\end{align*}
+Por tanto, al evaluar en $\veps = 0$ tenemos
+\begin{gather*}
+    \frac{d^2}{d\veps^2}\cc{F}[y_\veps]_{|_{\veps=0}} =\\
+    \int_{x_0}^{x_1} F_{pp}(x,y(x), y'(x)) \varphi'(x)^2 + \left(-\frac{d}{dx}[F_{yp}(x,y(x), y'(x)) ] + F_{yy}(x,y(x), y'(x))\right)\varphi(x)^2 dx
+\end{gather*}
+En varias fuentes podremos encontrar la siguiente noctación:
+\begin{gather*}
+    P = F_{pp}(x,y(x), y'(x)),\ \ \ \ Q = -\frac{d}{dx}[F_{yp}(x,y(x), y'(x)) ] + F_{yy}(x,y(x), y'(x))
+\end{gather*}
+
+\begin{definicion}[Condición necesaria de Legendre]
+    Diremos que el punto crítico $y_*\in D$ satisface la \textbf{condición necesaria de Legendre} para minimalidad si 
+    \begin{gather*}
+        P \geq 0\ \ \ \forall x \in  I
+    \end{gather*}
+    Si esto no se cumple, entonces $y_*$ no será un mínimo\footnote{no veremos la prueba pero se puede encontrar en la bibliografía}. Diremos que es estricta si 
+    \begin{gather*}
+        P > 0\ \ \ \forall x \in  I
+    \end{gather*}
+\end{definicion}
+
+De forma sintética escribiremos
+\begin{gather*}
+    \frac{d^2}{d\veps^2}\cc{F}[y_\veps]_{|_{\veps=0}} = \int_{x_0}^{x_1} P(\varphi')^2 + Q\varphi^2 dx
+\end{gather*}
+Observamos que 
+\begin{gather*}
+    \int_{x_0}^{x_1} (P\varphi')\varphi' dx = -\int_{x_0}^{x_1} \frac{d}{dx} (P\varphi'(x)) \varphi(x) dx
+\end{gather*}
+Por tanto,
+\begin{gather*}
+    \frac{d^2}{d\veps^2}\cc{F}[y_\veps]_{|_{\veps=0}} = \int_{x_0}^{x_1} \left( -\frac{d}{dx} (P\varphi') + Q\varphi \right) \varphi dx
+\end{gather*}
+
+\begin{definicion}[Ecuación de Jacobi]
+    Dado $y\in D$ punto crítico, diremos que su \textbf{ecuación de Jacobi asociada} es 
+    \begin{gather*}
+        -\frac{d}{dx}(P\varphi') + Q\varphi = 0 \ \ \text{ en } [x_0, x_1]
+    \end{gather*}
+    La incógnita en esta ecuación es $\varphi\in C^2([x_0, x_1])$.
+\end{definicion}
+
+\begin{definicion}[Punto conjugado]
+    Diremos que un cierto punto $\bar{x}\in ]x_0, x_1]$ es un \textbf{punto conjugado} al $x_0$ si podemos encontrar una solución $\varphi$ de la ecuación de Jacobi tal que  se verifiquen las siguientes condiciones
+    \begin{itemize}
+        \item $\varphi \not\equiv 0$
+        \item $\varphi(x_0)=0$
+        \item $\varphi(\bar{x})=0$
+    \end{itemize}
+\end{definicion}
+
+\begin{teo}[Condición de Jacobi]
+    Sea $I=[x_0,x_1]$, $F\in C^3(I \times \bb{R} \times \bb{R})$. Consideramos 
+    \begin{gather*}
+        \cc{F}[y] = \int_{x_0}^{x_1} F(x,y(x),y'(x))dx
+    \end{gather*}
+    definido sobre $D = \{y\in C^1(I) : y(x_0)=y_0,\ y(x_1=y_1)\}$ con $y_0, y_1\in \bb{R}$ dados. Sea $y\in D$ un punto crítico que verifique la condición de Legendre estricta, es decir, $P>0$ para todo $x\in I$. Entonces:
+    \begin{itemize}
+        \item (Condición necesaria) Si $y$ es mínimo local estricto, entonces no existen puntos conjugados a $x_0$ en el intervalo $]x_0, x_1[$.
+        \item (Condición suficiente) Si $x_0$ no tiene puntos conjugados en $]x_0,x_1]$, entonces $y$ es un mínimo local estricto.
+    \end{itemize}
+\end{teo}
+
+\begin{coro}
+    Bajo estas circunstancias, si $[x_0,x_1]$ es suficientemente pequeño\footnote{dependerá de cada problema concreto.}, se cumple la condición de Jacobi.
+\end{coro}
+
+\begin{ejemplo}
+    Es espacio ambiente es $X=C^1(I)$ con la norma $\|u\|_{C^1} = \|u\|_\infty + \|u'\|_\infty$. Estudiamos $\cc{F}[y] = \int_0^1 (y'(x))^3dx$ sobre
+    \begin{gather*}
+        D=\{y\in C^1([0,1]) : y(0)=0,\ y(1)=1\}
+    \end{gather*}
+    Notaremos $x_0=0$ y $x_1=1$ (para adaptar el enunciado a nuestra notación). Como el funcional solo depende de $p$ tendremos $F=F(p)=p^3$. La ecuación de Euler-Lagrange queda
+    \begin{gather*}
+        -\frac{d}{dx}(F_p) = 0 \Rightarrow \frac{d}{dx} [3(y'(x))^2] = 0
+    \end{gather*}
+    lo que nos dice que $y'(x)^2 = cte$, luego $y'(x)=cte$. Por tanto, como $y\in D$ tendremos que los extremales son de la forma
+    \begin{gather*}
+        y(x)=c_1 + c_2x,\ \ c_1,c_2\in \bb{R}
+    \end{gather*}
+    De la condición $y\in D$ llegamos a que la única extremal es $y(x)=x$. Ahora nos podríamos preguntar si esto es un máximo o un mínimo local. Tenemos que 
+    \begin{gather*}
+        F_{pp} = 6p
+    \end{gather*}
+    Para $y(x)=x$ tenemos $y'(x)=1$ y por tanto $P=6>0$ para todo $x\in [x_0, x_1]$ (se cumple la condición de Legendre estricta). Estamos en condiciones de comprobar la condición de Jacobi. La ecuación de Jacobi que es
+    \begin{gather*}
+        -\frac{d}{dx}(P\varphi') + Q\varphi = 0
+    \end{gather*}
+    Como en este caso $Q=0$ tendremos que la ecuación de Jacobi será
+    \begin{gather*}
+        -6\varphi''=0
+    \end{gather*}
+    Buscamos soluciones de la forma $\varphi(x_0)=0$ y $\varphi(\bar{x})=0$ para algún $x_0<\bar{x}\leq x_1$. De nuevo, la solución general es $\varphi(x)=c_1+c_2x$ con $c_1,c_2\in \bb{R}$. Al imponer $\varphi(x_0)=0$ llegamos a que $c_1=0$, de forma que $\varphi(x)=c_2x$ para $c_2\in \bb{R}$. Nos preguntamos ahora si existe algún $\bar{x}>0$ tal que $\varphi(\bar{x})=0$. La respuesta es que independientemente del valor de $c_2\in \bb{R}$ no existe un tal $\bar{x}$ ($\varphi$ es lineal). Por tanto, no hay puntos conjugados, lo que nos dice que la condición de Jacobi se cumple. Por tanto $y(x)=x$ es un mínimo local estricto.
+\end{ejemplo}
+
+\begin{ejemplo}
+    Estudiamos $\cc{F}[y] = \int_0^a (y')^2 - y^2 dx$ en $D=C_0^1([0,a])$.\\
+
+    Al aplicar la notación estudiada tenemos 
+    \begin{gather*}
+        F=p^2 - y^2,\ \ \ \ F_p=2p,\ \ \ \ F_{y}=-2y,\ \ \ \ F_{pp}=2,\ \ \ \ F_{yy}=-2,\ \ \ \ F_{py}=0
+    \end{gather*}
+    La ecuación de Euler-Lagrange es en este caso 
+    \begin{gather*}
+        -2y(x) - \frac{d}{dx}(2y'(x)) = 0
+    \end{gather*}
+    Lo que nos lleva a la ecuación diferencial
+    \begin{gather*}
+        y''(x)+y(x)=0
+    \end{gather*}
+    Por lo que las extremales serán de la forma 
+    \begin{gather*}
+        y(x) = A\sin(x) + B\cos(x),\ \ \ A,B\in \bb{R}
+    \end{gather*}
+    Como $y(0)=0$ llegamos a que $B=0$. Por tanto $y(x)= A\sin(x)$. O bien $A=0$ o bien $a=u\pi$ para $u\in \bb{Z}$. Es decir, en general el único punto crítico es $y(x)=0$. Para cualquier punto $y\in D$ tenemos que $P=2>0$ por lo que se cumple la ecuación de Legendre estricta (para mínimo local). Nos preguntamos ahora si hay puntos conjugados para $x_0=0$, cuestión que nos lleva a calcular la Ecuación de Jacobi
+    \begin{gather*}
+        -2\varphi''-2\varphi = 0
+    \end{gather*}
+    La solución general es $\varphi(x) = C\cos(x) + D\sin(x)$ con $C,D\in \bb{R}$. Si $\varphi(0)=0$, entonces $D=0$, por lo que $\varphi(x) = C\cos(x)$. Buscamos ahora la posibilidad de que exista un $0<\bar{x}\leq a$ tal que $\varphi(\bar{x})=0$, entonces o bien $C=0$, lo cual no aporta información, o bien $\bar{x}=n\pi$ con $n\in \bb{N}$. Si $a\geq \pi$, entonces podemos encontrar algún $\bar{x}\leq a$ en esas circunstancias. Cabe hacer una distinción de casos:
+    \begin{itemize}
+        \item Si $a<\pi$, no hay puntos conjugados por lo que $y(x)=0$ es un mínimo local estricto.
+        \item Si $a>\pi$, la función $y(x)=0$ no es un mínimo local estricto (se viola la condición de Jacobi) 
+    \end{itemize}
+    En el caso de que se dé la igualdad es más complicado extraer una conclusión.
+\end{ejemplo}
+
