@@ -48,3 +48,39 @@ Después se asignan a las Comisiones de Evaluación, que convocarán la defensa.
 
 Se entrega en la **Plataforma de TFG** y como tarea en **PRADO** con control de plagio, **en un único documento pdf** que tiene que incluir la declaración de originalidad (conviene llamarlo **Apellidos.pdf**).
 
+## Convocatoria especial (noviembre-diciembre)
+Mismo año, pero distinto curso y nueva matrícula.
+
+Estudiantes con el Grado, salvo un número máximo de 30 créditos, sin tener en cuenta en este cómputo el TFG.
+
+De momento, ver Sede Electrónica, es la única asignatura que no requiere haber estado matriculado en el curso anterior.
+
+## Requisitos de la Memoria (ver modelo en la página del Grado)
+
+Debe realizarse con un procesador de texto científico (LaTeX).
+
+La portada debe incluir el logo de la UGR, el título del TFG, el nombre del estudiante y especificar el grado, la facultad y el curso actual (El nombre y departamento del responsable de tutorización en la portada o después).
+
+La memoria debe incluir:
+- Declaración de originalidad firmada.
+- Un índice detallado de capítulos y secciones.
+- Un resumen amplio en inglés del trabajo realizado (entre 800 y 1500 palabras).
+- Una introducción en la que se describan los objetivos previstos, (indicando si se han alcanzado o no), los antecedentes importantes, los resultados obtenidos y las principales fuentes consultadas.
+- Una bibliografía final que incluya todas las referencias utilizadas.
+
+Se recomienda que la extensión de la memoria sea sobre unas 50 páginas, sin incluir posibles apéndices.
+
+El TFG se puede hacer en inglés en su totalidad (si resulta interesante para solicitudes de trabajo futuras). 
+
+Durante la realización del TFG se podrá cambiar ligeramente el tema del TFG si durante la realización del mismo se descubre un campo más interesante y en el que se quiere ahondar más (siempre que esté relacionado con el tema propuesto y haya surgido del estudio del mismo).
+
+### Interesante
+
+Desde la Biblioteca se ofrecen orientaciones para ayudar a elaborar un buen TFG, mostrando pautas y herramientas de apoyo a su diseño confección:
+- Recomendaciones para su elaboración
+- Presentación del TFG
+- Normativa de la UGR y directrices de la Facultad
+- Trabajos publicados en Digibug
+
+La Casa del estudiante ofrece un Taller semestral de elaboración de TFG.
+
