@@ -274,23 +274,23 @@ Podemos concluir entonces que si queremos que la regularidad de las curvas se co
         por lo que una recta no tendrá curvatura (como podríamos esperar).
 
         \item Estudiamos ahora el caso de la curva definida como
-        \Func{\beta}{\bb{R}}{\bb{R}^2}{s}{(a_1 + r\cos(\frac{s}{r}), a_2 + r\sin (\frac{s}{r}))}
+        \Func{\beta}{\bb{R}}{\bb{R}^2}{s}{(a_1 + r\cos(\frac{s}{r}), a_2 + r\sen (\frac{s}{r}))}
         Al derivar esta curva obtenemos 
         \begin{gather*}
-            \beta'(s) = \left(-\sin\left(\frac{s}{r}\right), \cos\left(\frac{s}{r}\right)\right)
+            \beta'(s) = \left(-\sen\left(\frac{s}{r}\right), \cos\left(\frac{s}{r}\right)\right)
         \end{gather*}
         Estudiamos ahora el vector tangente y normal obteniendo
         \begin{gather*}
             \left\{
                 \begin{array}{c}
-                    T_\beta(s) = \left(-\sin\left(\dfrac{s}{r}\right), \cos\left(\dfrac{s}{r}\right)\right)\\\\
-                    N_\beta(s) =  \left(-\cos\left(\dfrac{s}{r}\right), -\sin\left(\dfrac{s}{r}\right)\right)
+                    T_\beta(s) = \left(-\sen\left(\dfrac{s}{r}\right), \cos\left(\dfrac{s}{r}\right)\right)\\\\
+                    N_\beta(s) =  \left(-\cos\left(\dfrac{s}{r}\right), -\sen\left(\dfrac{s}{r}\right)\right)
                 \end{array}
             \right.
         \end{gather*}
         Al derivar el vector tangente obtenemos 
         \begin{gather*}
-            T_\beta'(s) = \frac{1}{r}\left(-\cos\left(\frac{s}{r}\right), -\sin\left(\frac{s}{r}\right)\right)
+            T_\beta'(s) = \frac{1}{r}\left(-\cos\left(\frac{s}{r}\right), -\sen\left(\frac{s}{r}\right)\right)
         \end{gather*}
         de donde $k(s) = \frac{1}{r}$, es decir, la curvatura a lo largo de una circunferencia es constante y depende del radio de la misma.
     \end{enumerate}
@@ -421,4 +421,123 @@ Podemos concluir entonces que si queremos que la regularidad de las curvas se co
         \end{vmatrix}}{\sqrt{1+f'(t)^2}^3} = \frac{f''(t)}{\sqrt{1+f'(t)^2}^3}
     \end{gather*}
 \end{ejercicio}
+
+\subsection{Invarianza de la curvatura por movimientos rígidos}
+
+Nos preguntamos ahora qué ocurre con la curvatura y los movimientos rígidos. Recordamos que un movimiento rígido es una función $M:\bb{R}^2\to \bb{R}^2$ que viene dado por 
+\begin{gather*}
+    Mx = Ax + b
+\end{gather*}
+donde $A\in O(2)$, $b\in \bb{R}^2$. Definimos la deformación $\beta = M\circ \alpha$ y calculamos
+\begin{gather*}
+    k_\beta(t) = \frac{det(\beta'(t), \beta''(t))}{|\beta'(t)|^3}
+\end{gather*}
+Calculamos cada derivada por separado:
+\begin{align*}
+    \beta(t) &= M(\alpha(t)) = A\alpha(t)+b\\
+    \beta'(t) &= A\alpha'(t)\\
+    \beta''(t) &= A\alpha''(t)
+\end{align*}
+Por lo que nos queda
+\begin{gather*}
+    k_\beta(t) = \frac{det(A\alpha'(t), A\alpha''(t))}{|A\alpha'(t)|^3} = \frac{det(A) \cdot det(\alpha'(t),\alpha''(t))}{|\alpha'(t)|^3} = det(A) k_\alpha(t)
+\end{gather*}
+Por lo que, al ser $M$ un movimiento rígido tenemos 
+\begin{gather*}
+    k_\beta(t) = \left\{
+        \begin{array}{r c l}
+            k_\alpha(t) & \text{ si } & M \text{ es directo}\\
+            -k_\alpha(t) & \text{ si } & M \text{ es inverso}\\
+        \end{array}
+    \right.
+\end{gather*}
+
+\subsection{Teorema Fundamental de la Teoría Local de Curvas Planas}
+\begin{teo}[Teorema Fundamental de la Teoría Local de Curvas Planas]
+    Sea $I\subset \bb{R}$ un intervalo abierto y $k_0:\to \bb{R}$ una función diferenciable ($k_0\in C^\infty(I)$). Entonces existe una curva p.p.a. $\alpha:I \to \bb{R}^2$ tal que 
+    \begin{gather*}
+        k_\alpha(s) = k_0(s)\ \ \ \ \forall s\in I
+    \end{gather*}
+    Además, $\alpha$ es única salvo movimiento rígido directo.
+    \begin{proof}
+        En primer lugar probaremos la existencia de forma constructiva. Para ello definimos $\theta : I \to \bb{R}$ dada por 
+        \begin{gather*}
+            \theta(s) = \int_{s_0}^{s} k_0(t) dt \ \ \ \ \forall s \in I
+        \end{gather*}
+        para un $s_0\in I$ arbitrario. Por su definición tenemos que $\theta$ es diferenciable. Definimos de esta forma $\alpha : I \to \bb{R}^2$ como 
+        \begin{gather*}
+            \alpha(s) = \left( \int_{s_1}^{s} \cos(\theta(t)) dt, \int_{s_2}^s \sen(\theta(t)) \right)
+        \end{gather*}
+        con $s_1,s_2\in I$ arbitrarios. Según su definición tenemos que $\alpha$ es una curva. Además, tenemos que 
+        \begin{gather*}
+            \alpha'(s) = (\cos(\theta(s)), \sen(\theta(s))) \Rightarrow
+            |\alpha'(t)| = 1 \ \ \ \ \forall s \in I
+        \end{gather*}
+        por lo que $\alpha$ es una curva p.p.a. Calculamos ahora el vector normal y el tangente:
+        \begin{gather*}
+            N_\alpha(s) = JT_\alpha(s) = (-\sen(\theta(s)), \cos(\theta(s)))\\
+            T_{\alpha'}(s) = \theta(s)(-\sen(\theta(s), \cos(\theta(s))))
+        \end{gather*}
+        Por lo que la curvatura nos queda
+        \begin{gather*}
+            k(s) = \theta'(s) = k_0(s)\ \ \ \forall s \in I
+        \end{gather*}
+        por lo que ya tendríamos probada su existencia.\\
+
+        % Se nos anima a hacer un programa al que, dándole la curvatura y los grados de libertad (pueden ser iguales) sea capaz de dibujar la curva.
+
+        Veamos ahora la unicidad. Supongamos que tenemos dos curvas $\alpha, \beta : I \to \bb{R}^2$ p.p.a. tales que 
+        \begin{gather*}
+            k_\alpha(s) = k_\beta(s) = k_0(s)\ \ \ \ \forall s \in I
+        \end{gather*}
+        Sea $s_0\in I$, $\alpha(s_0),\beta(s_0)\in \bb{R}^2$, $b=\alpha(s_0)-\beta(s_0)$. Sean 
+        \begin{gather*}
+            \{T_{\alpha(s_0)}, N_{\alpha(s_0)}\}\\
+            \{T_{\beta(s_0)}, N_{\beta(s_0)}\}
+        \end{gather*}
+        los diedros de Frenet correspondientes a $\alpha$ y $\beta$ respectivamente. Sea $A\in O(2)$ con $det(A)=1$ tal que 
+        \begin{gather*}
+            AT_{\beta(s_0)} = T_{\alpha(s_0)}\\
+            AN_{\beta(s_0)} = N_{\alpha(s_0)}
+        \end{gather*}
+        Defino $M:\bb{R}^2\to \bb{R}^2$ por $Mx=Ax+b$. Denotamos $\gamma = M\beta$ (nos olvidamos de $\beta$ porque difiere de $\gamma$ en un movimiento rígido directo). Ahora comparamos $\alpha$ y $\gamma$. Tenemos que 
+        \begin{gather*}
+            k_\gamma(s) = k_\beta(s) = k_\alpha(s) = k_0(s)\\
+            \gamma(s_0) = A\beta(s_0) + b = \alpha(s_0)
+        \end{gather*}
+        Debíamos haber elegido primero $A$ para que el tangente en $\beta$ vaya al tangente en $\alpha$ y para que el normal en $\beta$ vaya al normal en $\alpha$. Una vez hecho esto defino $b=\alpha(s_0) - A\beta(s_0)$ para que cuadren los cálculos. Además, 
+        \begin{gather*}
+            T_\gamma(s_0) = AT_\beta(s_0) = T_\alpha(s_0)\\
+            N_\gamma(s_0) = N_\alpha(s_0)
+        \end{gather*}
+        Defino $f:I\to \bb{R}$ dado por 
+        \begin{gather*}
+            f(s) = \frac{1}{2}(|T_\alpha(s)-T_\gamma(s)|^2 + |N_\alpha(s)-N_\gamma(s)|^2)
+        \end{gather*}
+        Así, tenemos que 
+        \begin{align*}
+            f'(s) &= \langle T_\alpha'(s) - T_\gamma'(s), T_\alpha(s)-T_\gamma(s) \rangle + \langle N_\alpha'(s) - N_\gamma'(s), N_\alpha(s)-N_\gamma(s) \rangle = \\
+            &= k_0(s) \langle N_\alpha(s) - N_\gamma(s), T_\alpha(s)-T_\gamma(s) \rangle - k_0(s) \langle N_\alpha(s) - N_\gamma(s), T_\alpha(s)-T_\gamma(s) \rangle =\\
+            &= 0
+        \end{align*}
+        Por lo que $f(s)=c\in \bb{R}$. Por la condición:
+        \begin{gather*}
+            f(s_0) = 0
+        \end{gather*}
+        Tenemos que $c=0$ por lo que 
+        \begin{gather*}
+            T_\alpha(s) = T_\gamma(s)\ \ \ \ \forall s \in I
+        \end{gather*}
+        Lo que nos dice que 
+        \begin{gather*}
+            \alpha'(s) = \gamma'(s)
+        \end{gather*}
+        Lo que además nos dice que $\alpha'(s) = \gamma'(s) + d$ con $d\in \bb{R}^2$ para todo $d\in \bb{R}^2$. De nuevo, como se tiene que verificar
+        \begin{gather*}
+            \alpha(s_0) = \gamma(s_0)
+        \end{gather*}
+        Tenemos que $d=0$ lo que finalmente nos dice que $\alpha = \gamma$, o equivalentemente, $\alpha$ difiere de $\beta$ en un movimiento rígido directo.        
+    \end{proof} 
+\end{teo}
+
 

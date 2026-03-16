@@ -177,3 +177,90 @@ Por tanto,
     En el caso de que se dé la igualdad es más complicado extraer una conclusión.
 \end{ejemplo}
 
+\section{Funcionales integrales definidos sobre curvas}
+Dado $I\subset \bb{R}$ un intervalo, digamos $I=[x_0, x_1]$, nos interesan las curvas parametrizadas $y:I \to \bb{R}^N$. Entendemos que $y=(y_1,y_2,...,y_n)$, con $y_i:I\to \bb{R}$ para cada $1\leq i \leq N$. Definimos 
+\begin{gather*}
+    C(I;\bb{R}^N):= \{y:I\to \bb{R}^N : y\in C(I,\bb{R})\text{ para } 1\leq i \leq N\}\\
+    C^1(I;\bb{R}^N):= \{y:I\to \bb{R}^N : y\in C^1(I,\bb{R})\text{ para } 1\leq i \leq N\}\\
+    C_0^1(I;\bb{R}^N):= \{y:I\to \bb{R}^N : y\in C^1(I,\bb{R})\text{ para } 1\leq i \leq N,\ y(x_0) = \vec{0},\ y(x_1) = \vec{0}\}
+\end{gather*}
+Si el contexto lo deja claro podremos escribir $C(I)$, $C^1(I)$, etc.\\
+
+Dada $y:I \to \bb{R}^N$ nos interesarán funcionales de la forma
+\begin{gather*}
+    \cc{F} = \int_{x_0}^{x_1} F(x, y(x), y'(x)) dx
+\end{gather*}
+Se entiende que $y':I \to \bb{R}^N$ viene dado por 
+\begin{gather*}
+    y'(x) = (y_1'(x), y_2'(x), ..., y_N'(x)) \ \ \ \ \forall x \in I
+\end{gather*}
+y además por su definición se entiende que $F:I\times \bb{R}^N \times \bb{R}^N \to \bb{R}$.\\
+
+\begin{notacion}
+    Digamos que $F=F(x,y,p)$ donde $y=(y_1, y_2,...,y_N)$ y $p = (p_1,p_2,...,p_N)$ donde $p_i = y_i'$ para cada $1\leq i \leq N$. Introduciremos de nuevo los atajos de notación que introducíamos para el caso escalar
+    \begin{gather*}
+        F_y := \left(\frac{\partial F}{\partial y_1}, \frac{\partial F}{\partial y_2}, ..., \frac{\partial F}{\partial y_N}\right),\ \ \ \
+        F_p := \left(\frac{\partial F}{\partial p_1}, \frac{\partial F}{\partial p_2}, ..., \frac{\partial F}{\partial p_N}\right)
+    \end{gather*}
+\end{notacion}
+
+El caso que trabajaremos típicamente será un $F\in C^2(I\times \bb{R}^N \times \bb{R}^N)$ dado por un funcional $\cc{F}$ definido sobre
+\begin{gather*}
+    D = \{y\in C^1(I;\bb{R}^N) : y(x_0) = y_0,\ y(x_1)=y_1\}
+\end{gather*}
+con $y_0, y_1\in \bb{R}^N$ dados.\\
+
+Dado $y_*\in C^2(I;\bb{R}^N)\cap D$, si es punto crítico verifica la ecuación de Euler-Lagrange, es decir, 
+\begin{gather*}
+    F_y(x,y_*(x), y_*'(x)) - \frac{d}{dx} [F_p(x,y_*(x), y_*'(x))] = \vec{0}\ \ \ \ \forall x \in I
+\end{gather*}
+que será un sistema de $N$ ecuaciones diferenciales ordinarias. Al calcular $\delta_y\cc{F}[y]$ se obtiene 
+ \begin{gather*}
+    \delta_y\cc{F}[y] = \int_{x_0}^{x_1} F_y(x,y(x), y'(x)) \varphi(x) + F_p(x,y(x, y'(x))) \varphi'(x) dx
+ \end{gather*}
+ Las direcciones admisibles son $\varphi \in C_0^1(I:\bb{R}^N)$ donde seguimos definiendo $y_\veps := y + \veps \varphi$.
+ \begin{align*}
+    \int_{x_0}^{x_1} \frac{d}{d\veps}(F(x,y_\veps, y'_\veps)) dx &= \int_{x_0}^{x_1} \frac{\partial F(x,y_\veps, y'_\veps)}{y_1} \frac{d(y_\veps)_1}{d \veps} + \frac{\partial F(x,y_\veps, y'_\veps)}{y_2} \frac{d(y_\veps)_2}{d \veps} + ... = \\
+    &= \int_{x_0}^{x_1} \frac{\partial F(x,y_\veps, y'_\veps)}{y_1} \varphi_1 + \frac{\partial F(x,y_\veps, y'_\veps)}{y_2} \varphi_2 + ... = \\
+    &= \int_{x_0}^{x_1} F_y(x,y(x), y'(x)) \varphi(x)
+ \end{align*}
+ Queremos ahora integrar por partes en el término
+ \begin{gather*}
+    F_p(x,y(x, y'(x))) \varphi'(x) = \sum_{i=1}^{N}F_{p_i}(x, y(x), y'(x))\varphi'_i
+ \end{gather*}
+ Véase que 
+ \begin{gather*}
+    \int_{x_0}^{x_1} F_{p_1}(x, y(x), y'(x)) \varphi'_1(x) dx = \\
+    - \int_{x-0}^{x_1} \frac{d}{dx} [F_{p_1}(x,y(x), y'(x))]\varphi_1(x) dx + \left[ F_{p_1}(x,y(x), y'(x)) \varphi_1(x)\right]_{x=x_0}^{x=x_1} 
+ \end{gather*}
+ Recordemos que $\varphi(x_0) = \vec{0} = \varphi(x_1)$ por lo que 
+ \begin{gather*}
+    \int_{x_0}^{x_1} F_{p_1}(x, y(x), y'(x)) \varphi'_1(x) dx =
+    - \int_{x-0}^{x_1} \frac{d}{dx} [F_{p_1}(x,y(x), y'(x))]\varphi_1(x) dx
+ \end{gather*}
+ y por tanto 
+ \begin{align*}
+    \int_{x_0}^{x_1} F_p(x, y(x), y'(x)) \varphi'(x) dx &= - \int_{x_0}^{x_1} \sum_{i=1}^N \frac{d}{dx} [F_{p_i}(x, y(x), y'(x))] \varphi_i(x) dx =\\
+    &= -\int_{x_0}^{x_1} \frac{d}{dx} [F_p(x, y(x), y'(x))]\varphi(x) dx
+ \end{align*}
+
+ Al unir todos estos resultados nos quedará que si $y\in I$ es punto crítico, entonces
+ \begin{gather*}
+    \int_{x_0}^{x_1} [F_y(x, y(x), y'(x)) - \frac{d}{dx}F_p(x, y(x), y'(x))] \varphi(x)dx = 0\ \ \ \ \forall \varphi\in C_0^1(I;\bb{R}^N)
+ \end{gather*}
+
+ \begin{lema}[Lema fundamental. Versión para curvas]
+    Dada $f\in C([x_0, x_1]; \bb{R}^N)$, si 
+    \begin{gather*}
+        \int_{x_0}^{x_1} f \cdot \varphi \ dx = 0 \ \ \ \ \forall \varphi \in C_c^\infty(]x_0, x_1[; \bb{R}^N)
+    \end{gather*}
+    entonces $f=\vec{0}$ para todo $x\in [x_0, x_1]$.
+    \begin{proof}
+        Tenemos que 
+        \begin{gather*}
+            f\cdot \varphi = f_1 \cdot \varphi_1 + f_2 \cdot \varphi_2 + ... + f_N\cdot \varphi_N
+        \end{gather*}
+        Escojo $\varphi = (\varphi_1, 0, 0, ..., 0) \in C_c^\infty(]x_0, x_1[;\bb{R}^N)$ y deducimos que $f_1(x) = 0$ para todo $x\in I$. Si repetimos este razonamiento de forma análoga para los restantes $f_i$ obtenemos el resultado del lema.
+    \end{proof}
+ \end{lema}
+

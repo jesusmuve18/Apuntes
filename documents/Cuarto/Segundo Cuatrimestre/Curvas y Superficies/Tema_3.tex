@@ -1,0 +1,51 @@
+\chapter{Teoría local de las curvas en el espacio}
+
+Vamos a trabajar ahora con curvas $\alpha: I \to \bb{R}^3$ p.p.a. con
+\begin{gather*}
+    \alpha'(s) = T_\alpha(s),\ \ \ |\alpha'(s)| = 1\ \ \ \ \forall s \in I
+\end{gather*}
+En el caso de curvas planas seguíamos la siguiente secuencia:
+\begin{gather*}
+    \xymatrix{
+        \alpha \ar[r] & T_\alpha \ar[r] & N_\alpha \ar[r] & k_\alpha
+    }
+\end{gather*}
+Sin embargo, para curvas en el espacio no podemos hacer el paso $T_\alpha \to N_\alpha$. Seguiremos entonces la siguiente secuencia:
+\begin{gather*}
+    \xymatrix{
+        \alpha \ar[r] & T_\alpha \ar[r] & k_\alpha
+    }
+\end{gather*}
+Definimos así la curvatura de $\alpha$ en un punto $s\in I$ como
+\begin{gather*}
+    k_\alpha(s) = |T_\alpha'(s)| \ \ \ \ \forall s \in I
+\end{gather*} 
+y se verifica que $k_\alpha(s) \geq 0$ para todo $s\in I$, por lo que por definición no habrá curvas en el espacio con curvatura negativa.\\
+
+Defino $N_\alpha(s)$ el vector normal a $\alpha$ en el instante $s$ como 
+\begin{gather*}
+    N_\alpha(s) = \frac{T'_\alpha(s)}{k_\alpha(s)} = \frac{T'_\alpha(s)}{|T'_\alpha(s)|}
+\end{gather*}
+A partir de ahora supondremos $k_\alpha(s)>0$ para todo $s\in I$ por lo que siempre estará definido el vector normal 
+\begin{gather*}
+    s\in I \mapsto \{T_\alpha(s), N_\alpha(s)\}
+\end{gather*}
+Esto ya no es una base de $\bb{R}^3$ (como ocurría en las curvas planas). Estudiemos las características del espacio que define esta base. Por un lado tenemos que 
+\begin{gather*}
+    |T_\alpha(s)| = 1 = |N_\alpha(s)|\ \ \ \ \forall s \in I
+\end{gather*}
+por lo que esta base es normal. Por otro lado tenemos que 
+\begin{gather*}
+    \langle T_\alpha(s), T'_\alpha(s)\rangle = 0
+\end{gather*}
+lo que nos dice que esta base es ortogonal. Por tanto $\{T_\alpha(s), N_\alpha(s)\}$ es una base ortonormal de un plano. \\
+
+Sea $B_\alpha:I\to \bb{R}^3$ la función vectorial dada por 
+\begin{gather*}
+    B_\alpha(s) = T_\alpha(s) \wedge N_\alpha(s)
+\end{gather*} 
+
+Hemos construido para todo $s\in I$ un triedro de Frenet
+\begin{gather*}
+    s \mapsto \{T_\alpha(s), N_\alpha(s), \beta_\alpha(s)\}
+\end{gather*}
