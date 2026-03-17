@@ -264,3 +264,187 @@ que será un sistema de $N$ ecuaciones diferenciales ordinarias. Al calcular $\d
     \end{proof}
  \end{lema}
 
+ \begin{ejemplo}
+    Calculemos los extremales de 
+    \begin{gather*}
+        \cc{F}[y] = \int_0^{\frac{\pi}{2}} (y_1'(x))^2 + (y_2'(x))^2 + 2y_1(x)y_2(x) dx
+    \end{gather*}
+    definido sobre
+    \begin{gather*}
+        D = \left\{y\in C^1\left(\left[0,\frac{\pi}{2}\right];\bb{R}^2\right) : y(0) = 
+        \begin{pmatrix}
+            0\\ 0
+        \end{pmatrix}
+        , y\left(\frac{\pi}{2}\right) = 
+        \begin{pmatrix}
+            1 \\ -1
+        \end{pmatrix}
+        \right\}
+    \end{gather*}
+ \end{ejemplo}
+%  Podemos escribir equivalentemente
+%  \begin{gather*}
+%     \cc{F}[y,z] = \int_0^{\frac{\pi}{2}} (y')^2 + (z')^2 + 2yz dx
+%  \end{gather*}
+%  definido sobre
+%  \begin{gather*}
+%     D = \left\{(y,z)\in \left\{y\in C^1\left(\left[0,\frac{\pi}{2}\right]\right) : y(0) = 
+%         \begin{pmatrix}
+%             0\\ 0
+%         \end{pmatrix}
+%         , y\left(\frac{\pi}{2}\right) = 
+%         \begin{pmatrix}
+%             1 \\ -1
+%         \end{pmatrix}
+%         \right\}\right\}
+%  \end{gather*}
+
+Tenemos
+\begin{gather*}
+    F = F(x,y_1,y_2,p_1,p_2) = p_1^2 + p_2^2 + 2y_1y_2
+\end{gather*}
+Aplicando la notación adecuada tenemos 
+\begin{gather*}
+    F_y = (2y_2, 2y_1)^T\\
+    F_p = (2p_1, 2p_2)^T\\
+\end{gather*}
+Escribimos ahora la ecuación de Euler-Lagrange:
+\begin{gather*}
+    \begin{pmatrix}
+        2y_2(x)\\
+        2y_1(x)
+    \end{pmatrix}
+    - \frac{d}{dx}
+    \begin{pmatrix}
+        2y_1'(x)\\
+        2y_2'(x)
+    \end{pmatrix} = 
+    \begin{pmatrix}
+        0 \\
+        0
+    \end{pmatrix}
+    \ \ \ \ \forall x \in \left[0, \frac{\pi}{2}\right]
+\end{gather*}
+Y nos quedaría el sistema de ecuaciones diferenciales
+\begin{gather*}
+    \left\{
+        \begin{array}{l}
+            y_1''(x) - y_2(x) = 0\\
+            y_2''(x) - y_1(x) = 0
+        \end{array}
+    \right.
+\end{gather*}
+De aquí tenemos que 
+\begin{gather*}
+    y_2^{iv)} (x) - y_1''(x) = 0 \Rightarrow y_2^{iv)}(x) -y_2(x) = 0
+\end{gather*}
+La solución general sería 
+\begin{gather*}
+    y_2(x) = Ae^x + Be^{-x} + C\sen(x) + D\cos(x)
+\end{gather*}
+para $A,B,C,D\in \bb{R}$. Forzando que $y(0)=\vec{0}$ y $y(\nicefrac{\pi}{2}) = (1,-1)^T$, se obtiene que 
+\begin{gather*}
+    y_2(x) = -\sen(x),\ \ \ y_1(x) = \sen(x)
+\end{gather*}
+
+\section{Nociones de convexidad}
+\begin{definicion}[Convexidad de un subconjunto]
+    Sea $X$ un espacio vectorial (real), un subconjunto $U\subset X$ diremos que es \textbf{convexo} si, para cualquiera vectores $u,v\in U$, su combinación convexa se mantiene dentro de $U$, es decir,
+    \begin{gather*}
+        \theta u + (1-\theta)v\in U \ \ \ \ \forall \theta \in [0,1]
+    \end{gather*}
+\end{definicion}
+
+\begin{observacion}
+    Los siguientes conjuntos son convexos:
+    \begin{itemize}
+        \item El conjunto vacío $\emptyset$.
+        \item El propio conjunto $X$.
+        \item Cualquier subespacio vectorial o afín de $X$.
+        \item Las bolas de un espacio normado (las esferas no lo son).
+    \end{itemize}
+\end{observacion}
+
+\begin{ejemplo}
+    El conjunto $A=\{y\in L^2([0,1]): \|y\|^2=1\}$ no es convexo.\\
+    
+    Para verlo tomamos $z\in A$, por lo que tendremos que $-z\in A$. Sin embargo, tenemos que 
+    \begin{gather*}
+        0 = \frac{1}{2}z + \frac{1}{2}(-z) \notin A
+    \end{gather*}
+\end{ejemplo}
+
+\begin{ejemplo}
+    Estudiar la convexidad de $C_0^1([x_0, x_1])$.\\
+
+    Dados $u,v\in C_0^1([x_0, x_1])$ vemos que 
+    \begin{gather*}
+        \theta u + (1-\theta)v \in C^1([x_0, x_1])\\
+        (\theta u + (1-\theta)v)(x_0) = \theta u(x_0) + (1-\theta)v(x_0) = \theta \cdot 0 + (1-\theta) \cdot 0 = 0\\
+        (\theta u + (1-\theta)v)(x_1) = \theta u(x_1) + (1-\theta)v(x_1) = \theta \cdot 0 + (1-\theta) \cdot 0 = 0
+    \end{gather*}
+    Por lo que efectivamente $C_0^1([x_0, x_1])$ es convexo.
+\end{ejemplo}
+
+\begin{observacion}
+    Cualquier conjunto de la forma
+    \begin{gather*}
+        \{y\in C^1([x_0, x_1];\bb{R}^N) : y(x_0) = y_0,\ y(x_1) = y_1\}
+    \end{gather*}
+    es convexo.
+\end{observacion}
+
+\begin{definicion}[Convexidad de funcionales]
+    Dado $U\subset X$ convexo, diremos que $\cc{F}:U\to \bb{R}$ es \textbf{convexo} si 
+    \begin{gather*}
+        \cc{F}[\theta u + (1-\theta)v] \leq \varphi \cc{F}[u] + (1-\theta)\cc{F}[v],\ \ \ \ \forall u,v\in U,\ \ \theta \in [0,1]
+    \end{gather*}
+    Diremos que $\cc{F}$ es \textbf{estrictamente convexo} si
+    \begin{gather*}
+        \cc{F}[\theta u + (1-\theta)v] < \varphi \cc{F}[u] + (1-\theta)\cc{F}[v],\ \ \ \ \forall u,v\in U,\ \text{ con } u\neq v,\ \ \theta \in ]0,1[
+    \end{gather*}
+    Diremos que $\cc{F}$ es \textbf{cóncavo} si se da la otra desigualdad, es decir, si
+    \begin{gather*}
+        \cc{F}[\theta u + (1-\theta)v] \geq \varphi \cc{F}[u] + (1-\theta)\cc{F}[v],\ \ \ \ \forall u,v\in U,\ \ \theta \in [0,1]
+    \end{gather*}
+    y análogamente para \textbf{estrictamente cóncavo}.
+\end{definicion}
+
+\begin{lema}
+    Dado $S$ espacio vectorial, $U\subset X$ un subconjunto convexo y $\cc{F}:U\to \bb{R}$ un funcional convexo, entonces $argmin_U\cc{F}$ es convexo.
+
+    \begin{proof}
+        Si $argmin_U \cc{F}$ es vacío o solo tiene un elemento no hace falta demostrar nada. En otro caso podemos considerar $z_1,z_2\in argmin_U\cc{F}$ con $z_1\neq z_2$. Digamos que el mínimo del funcional $\cc{F}$ vale una cierta cantidad $\alpha\in \bb{R}$. Véase que
+        \begin{gather*}
+            \cc{F}[z_1] = \alpha = \cc{F}[z_2]
+        \end{gather*}
+        Dado un $\theta \in [0,1]$ evaluamos $\cc{F}[\theta z_1 + (1-\theta)z_2]$. A priori no puedo saber su valor pero por la convexidad del funcional tenemos que
+        \begin{gather*}
+            \cc{F}[\theta z_1 + (1-\theta)z_2] \leq \theta \cc{F}[z_1] + (1-\theta)\cc{F}[z_2] = \theta \alpha + (1-\theta) \alpha = \alpha
+        \end{gather*} 
+        Como $\alpha$ es el valor del mínimo global tendremos que se dará la igualdad, es decir, que 
+        \begin{gather*}
+            \cc{F}[\theta z_1 + (1-\theta)z_2] = \alpha
+        \end{gather*} 
+        Por tanto, $\theta z_1 + (1-\theta) z_2 \in argmin_U \cc{F}$ para cualquier $\theta \in [0,1]$. Como $z_1, z_2$ son arbitrarios tendremos la condición requerida, es decir, $argmin_U \cc{F}$ es convexo.
+    \end{proof} 
+\end{lema}
+
+\begin{coro}
+    Dados $X$ espacio vectorial, $U\subset X$ un subconjunto convexo y $\cc{F}:U \to \bb{R}$ un funcional estrictamente convexo. Entonces $argmin_U \cc{F}$ tiene a lo sumo un elemento.
+    \begin{proof}
+        Supongamos que existen dos elementos $z_1,z_2\in argmin_U\cc{F}$ con $z_1\neq z_2$. De nuevo, consideramos que el mínimo del funcional $\cc{F}$ vale una cierta cantidad $\alpha\in \bb{R}$. Se dará que
+        \begin{gather*}
+            \cc{F}[z_1] = \alpha = \cc{F}[z_2]
+        \end{gather*}
+        Dado un $\theta \in [0,1]$ se tiene que
+        \begin{gather*}
+            \cc{F}[\theta z_1 + (1-\theta)z_2] < \theta \cc{F}[z_1] + (1-\theta)\cc{F}[z_2] = \theta \alpha + (1-\theta) \alpha = \alpha
+        \end{gather*} 
+        Habremos encontrado entonces un elemento $z_3 = \theta z_1 + (1-\theta)z_2 \in U$ por la convexidad de $U$ tal que $\cc{F}[z_3]<\alpha$ lo que nos llevaría a contradicción.
+    \end{proof}
+\end{coro}
+
+\begin{prop}
+    Sea $X$ un espacio normado, $D \subset X$ convexo y $\cc{F}:D \to \bb{R}$ un funcional convexo. Si $y_*\in D$ es un mínimo local, entonces es un mínimo global.
+\end{prop}
