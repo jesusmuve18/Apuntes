@@ -10,13 +10,13 @@ En el caso de curvas planas seguíamos la siguiente secuencia:
         \alpha \ar[r] & T_\alpha \ar[r] & N_\alpha \ar[r] & k_\alpha
     }
 \end{gather*}
-Sin embargo, para curvas en el espacio no podemos hacer el paso $T_\alpha \to N_\alpha$. Seguiremos entonces la siguiente secuencia:
+Sin embargo, para curvas en el espacio no podemos hacer el paso $T_\alpha \to N_\alpha$. Seguiremos entonces la siguiente secuencia (iremos viendo qué son cada uno de estos conceptos):
 \begin{gather*}
     \xymatrix{
-        \alpha \ar[r] & T_\alpha \ar[r] & k_\alpha
+        \alpha \ar[r] & T_\alpha \ar[r] & k_\alpha \ar[r] & N_\alpha \ar[r] & B_\alpha \ar[r] & \tau_\alpha
     }
 \end{gather*}
-Definimos así la curvatura de $\alpha$ en un punto $s\in I$ como
+Definimos así la curvatura de $\alpha$ en un punto $s\in I$ a partir de $T_\alpha$ como
 \begin{gather*}
     k_\alpha(s) = |T_\alpha'(s)| \ \ \ \ \forall s \in I
 \end{gather*} 
@@ -44,8 +44,110 @@ Sea $B_\alpha:I\to \bb{R}^3$ la función vectorial dada por
 \begin{gather*}
     B_\alpha(s) = T_\alpha(s) \wedge N_\alpha(s)
 \end{gather*} 
+A esta función la llamaremos el \textbf{vector binormal} de $\alpha$ en el instante $s\in I$.
 
-Hemos construido para todo $s\in I$ un triedro de Frenet
+Hemos construido para todo $s\in I$ un \textbf{triedro de Frenet}
 \begin{gather*}
     s \mapsto \{T_\alpha(s), N_\alpha(s), \beta_\alpha(s)\}
 \end{gather*}
+
+Buscamos ahora construir las {ecuaciones de Frenet}. Obtenemos los siguientes resultados:
+\begin{gather*}
+    T'_\alpha(s) = k_\alpha N_\alpha(s)\\
+    B'_\alpha = (T_\alpha(s) \wedge N_\alpha(s))' = \cancel{T'_\alpha(s)\wedge N_\alpha(s)} + T_\alpha(s)\wedge N'_\alpha(s) = T_\alpha(s)\wedge N'_\alpha(s)
+\end{gather*}
+Si desarrollamos ahora 
+\begin{gather*}
+    |B_\alpha(s)|^2 = 1 \ \ \ \ \forall s \in I \Rightarrow \langle B_\alpha'(s), B_\alpha(s) \rangle = 0 \ \ \ \ \forall s \in I
+\end{gather*}
+por lo que $B'_\alpha(s)$ no tiene componentes en $B_\alpha(s)$. Como $\langle T_\alpha(s) \wedge N'_\alpha(s), T_\alpha(s)\rangle = 0$ podemos concluir que
+\begin{gather*}
+    \langle B'_\alpha(s), T_\alpha(s) \rangle = 0
+\end{gather*}
+Por lo que $B'_\alpha(s)$ tampoco tiene componentes en $T_\alpha(s)$ y podemos concluir que 
+\begin{gather*}
+    B'_\alpha(s) = \tau_\alpha(s) N_\alpha(s)
+\end{gather*}
+a dicha $\tau_\alpha$ la llamaremos \textbf{torsión} de $\alpha$ en el instante $s\in I$. Nos faltará ver cómo varía el vector normal. Sabemos que 
+\begin{gather*}
+    \langle N_\alpha(s), T_\alpha(s) \rangle = 0 \ \ \ \ \forall s \in I
+\end{gather*}
+Al derivar esta expresión obtenemos 
+\begin{gather*}
+    \langle N'_\alpha(s), T_\alpha(s) \rangle + \langle N_\alpha(s), T'_\alpha(s) \rangle = 0 \Rightarrow \\
+    \Rightarrow \langle N'_\alpha(s), T_\alpha(s) \rangle = - \langle N_\alpha(s), T'_\alpha(s) \rangle = -k_\alpha(s)
+\end{gather*}
+y ya conocemos la componente de $N'_\alpha$ en $T_\alpha$. Nos acordamos también de que teníamos una base ortonormal por lo que
+\begin{gather*}
+    \langle N_\alpha(s), B_\alpha(s) \rangle = 0
+\end{gather*}
+Derivamos esta expresión y tenemos que 
+\begin{gather*}
+    \langle N'_\alpha (s), B_\alpha(s) \rangle + \langle N_\alpha(s), B'_\alpha(s) \rangle = 0 \Rightarrow \\
+    \Rightarrow \langle N'_\alpha (s), B_\alpha(s) \rangle = -\langle N_\alpha(s), B'_\alpha(s) \rangle = -\tau_\alpha(s)
+\end{gather*}
+y ya tenemos la componente de $N'_\alpha$ en $B_\alpha$. Nos faltaría solo conocer la componente de $N'_\alpha$ en $N_\alpha$. Para ello sabemos que 
+\begin{gather*}
+    |N_\alpha(s)|^2 = 1
+\end{gather*}
+y al derivar obtenemos 
+\begin{gather*}
+    \langle N'_\alpha(s), N_\alpha(s) \rangle = 0
+\end{gather*}
+y ya tenemos todas sus componentes. Tendremos finalmente:
+\begin{gather*}
+    N'_\alpha(s) = -k_\alpha(s) T_\alpha(s) - \tau_\alpha(s) B_\alpha(s)
+\end{gather*}
+
+De esta forma las \textbf{ecuaciones de Frenet} de una curva p.p.a $\alpha$ serán:
+\begin{gather*}
+    \left\{
+        \begin{array}{l}
+            T'_\alpha(s) = k_\alpha N_\alpha(s)\\
+            N'_\alpha(s) = -k_\alpha(s) T_\alpha(s) - \tau_\alpha(s) B_\alpha(s)\\
+            B'_\alpha(s) = \tau_\alpha(s) N_\alpha(s)
+        \end{array}
+    \right.
+\end{gather*}
+
+\begin{ejercicio}
+    \begin{enumerate}
+        \item Supongamos que $\alpha : I \to \bb{R}^3$ es una curva plana p.p.a. Entonces la curvatura de $\alpha$ en cada instante en el espacio coincide con el valor absoluto de la curvatura en cada instante de $\alpha$ considerada como curva plana (considerando $tr(\alpha)\subset P$), es decir, 
+        \begin{gather*}
+            k^{\bb{R}^3}_\alpha(s) = |k_\alpha^P(s)|
+        \end{gather*}
+
+        Comenzamos tomando las ecuaciones de Frenet de $\alpha$ como curva plana:
+        \begin{gather*}
+            T_\alpha'(s) = k_\alpha^P(s)N_\alpha^P(s)
+        \end{gather*}
+        Tomamos módulo y nos queda para todo $s\in I$
+        \begin{gather*}
+            |T'_\alpha (s)| = |k_\alpha^P(s)| \Rightarrow k^{\bb{R}^3}_\alpha(s) = |k_\alpha^P(s)|
+        \end{gather*}
+
+        \item Si $\alpha:I\to \bb{R}^3$ es una recta\footnote{o un segmento de recta}, entonces $k_\alpha^{\bb{R}^3} = 0$ (como consecuencia del ejercicio anterior) y no podremos hablar del diedro de Frenet ni de la torsión.
+        
+        \item Si $\beta : I \to \bb{R}^3$ es una circunferencia\footnote{o un arco de circunferencia} de radio $r$, entonces 
+        \begin{gather*}
+            k_\beta^{\bb{R}^3}(s) = \frac{1}{r} \ \ \ \ \forall s \in I
+        \end{gather*}
+        La circunferencia $\beta$ es una curva plana, es decir, que existe un único plano $P\subset \bb{R}^3$ de forma que $tr(\beta)\subset P$. Supongamos que la ecuación del plano $P$ es 
+        \begin{gather*}
+            \langle x, a \rangle = b ,\ \ \ a\in \bb{R
+            }^3\setminus\{0\},\ \ b\in \bb{R}
+        \end{gather*}
+        Por tanto tendríamos que $\langle \beta(s), a \rangle = b$ para todo $s\in I$. Derivando esta expresión tendremos que para todo $s\in I$
+        \begin{gather*}
+            \langle T_\beta(s), a\rangle = 0\\
+            k_\beta(s)\langle N_\beta(s), a \rangle = 0 \Rightarrow \langle N_\beta(s), a \rangle = 0\\
+            \langle N'_\beta(s), a \rangle = 0\\
+            \tau_\beta(s) \langle \beta_\alpha(s),a \rangle = 0
+        \end{gather*}
+        De aquí obtenemos que o bien $B_\beta(s) = a$ o bien $B_\beta(s) = -a$ para todo $s\in I$ lo que nos dice que 
+        \begin{gather*}
+            \tau_\beta(s) = 0 \ \ \ \ \forall s \in I
+        \end{gather*}
+    \end{enumerate}
+    
+\end{ejercicio}
