@@ -446,5 +446,171 @@ para $A,B,C,D\in \bb{R}$. Forzando que $y(0)=\vec{0}$ y $y(\nicefrac{\pi}{2}) = 
 \end{coro}
 
 \begin{prop}
-    Sea $X$ un espacio normado, $D \subset X$ convexo y $\cc{F}:D \to \bb{R}$ un funcional convexo. Si $y_*\in D$ es un mínimo local, entonces es un mínimo global.
+    Sea $X$ un espacio normado, $D \subset X$ convexo y $\cc{F}:D \to \bb{R}$ un funcional convexo. Si $y_*\in D$ es un mínimo local, entonces es un mínimo global (de hecho, si es mínimo local estricto, entonces es mínimo global estricto).
+
+    \begin{proof}
+        Como $y_*$ es mínimo local, entonces tenemos que existe un entorno $E \subset D$ tal que $y_*\in E$ y 
+        \begin{gather*}
+            \cc{F}[y_*] \leq \cc{F}[y]\ \ \ \ \forall y \in E
+        \end{gather*}
+        Dado ahora $y\in D$ formamos la combinación convexa $\theta y + (1-\theta)y_*$ para $\theta\in[0,1]$. Observamos que existirá algún $0 < \theta \ll 1$ tal que que dicha combinación convexa queda dentro de $E$ (se puede ver usando la norma del espacio ambiente). Por tanto
+        \begin{gather*}
+            \cc{F}[y_*] \leq \cc{F}[\theta y + (1-\theta)y_*] \ \ \ \ 0 <\theta \ll1
+        \end{gather*}
+        Usando que el funcional es convexo tenemos que para dichos valores de $\theta$ tendremos
+        \begin{gather*}
+            \cc{F}[y_*] \leq \theta \cc{F}[y] + (1-\theta)\cc{F}[y_*] \Rightarrow \theta \cc{F}[y_*] \leq \theta \cc{F}[y] \Rightarrow \cc{F}[y_*] \leq \cc{F}[y]
+        \end{gather*}
+        Como $y$ era arbitrario en $D$ tendremos el resultado buscado. La demostración para estricto es análoga.
+    \end{proof}
 \end{prop}
+
+Para tratar con funcionales integrales utilizamos $F:I\times \bb{R}^N \times \bb{R}^N \to \bb{R}$ donde $I=[x_0,x_1]$ (o bien sobre adecuados subconjuntos convexos de $\bb{R}^N \times \bb{R}^N$).
+
+\begin{lema}
+    Supongamos que $F(x,\cdot,\cdot):\bb{R}^N \times \bb{R}^N \to \bb{R}$ es convexa para cualquier $x\in I$. Entonces el funcional dado por 
+    \begin{gather*}
+        \cc{F}[y] = \int_{x_0}^{x_1} F(x,y(x),y'(x)) dx
+    \end{gather*}
+    es convexo en cualquier subconjunto convexo de $C^1(I;\bb{R})$
+    \begin{proof}
+        Fijado $x\in I$ y dadas $y_1,y_2$ en el dominio del funcional $D\subset C^1(I;\bb{R}^N)$ tenemos que 
+        \begin{gather*}
+            (y_1(x), y_1'(x)) \in \bb{R}\times \bb{R}\\
+            (y_2(x), y_2'(x)) \in \bb{R}\times \bb{R}
+        \end{gather*}
+        Por la convexidad que nos da la hipótesis tenemos que 
+        \begin{gather*}
+            F(x, \theta y_1(x) + (1-\theta) y_2(x), \theta y'_1(x) + (1-\theta) y'_2(x)) \leq\\
+            \leq \theta F(x, y_1(x), y_2(x)) + (1-\theta) F(x, y_2(x), y'_2(x)) \ \ \ \ \forall  \theta \in [0,1]
+        \end{gather*}
+        Como esto se pede hacer para cualquier $x\in I$ podemos integrar la desigualdad entre $x_0$ y $x_1$. y por el crecimiento de la integral tenemos que 
+        \begin{gather*}
+            \int_{x_0}^{x_1} F(x, \theta y_1(x) + (1-\theta) y_2(x), \theta y'_1(x) + (1-\theta) y'_2(x)) dx \leq\\
+            \leq \int_{x_0}^{x_1} \theta F(x, y_1(x), y_2(x))dx + \int_{x_0}^{x_1}(1-\theta) F(x, y_2(x), y'_2(x)) dx\ \ \ \ \forall  \theta \in [0,1]
+        \end{gather*}
+        De donde podemos deducir
+        \begin{gather*}
+            \cc{F}[\theta y_1(x) + (1-\theta) y_2(x)] \leq \theta \cc{F}[y_1(x)] + (1-\theta) \cc{F}[y_2(x)] \ \ \ \ \forall \theta \in [0,1],\ y_1,y_2\in D
+        \end{gather*}
+        Por tanto $\cc{F}$ es convexo en $D$.
+    \end{proof}
+\end{lema}
+
+\begin{observacion}\
+    \begin{enumerate}
+        \item Si $F$ es estrictamente convexa, en muchos casos tendremos que $\cc{F}$ será estrictamente convexo (pero no en todos).
+        \item Esto no es una condición necesaria (hay casos de $\cc{F}$ convexo que no cumplen lo anterior)
+    \end{enumerate}
+\end{observacion}
+
+\begin{prop}
+    Sea $I=[x_0,x_1]$, $F:I\times \bb{R}^N\times \bb{R}^N\to \bb{R}^N$, $D\subset C^1(I;\bb{R})$ convexo. Supongamos que el funcional dado por 
+    \begin{gather*}
+        \cc{F}[y] = \int_{x_0}^{x_1} F(x,y(x),y'(x)) dx
+    \end{gather*}
+    es convexo sobre $D$. Si $y_*$ es un punto crítico, entonces $y_*$ es un mínimo global.
+
+    \begin{proof}
+        Dado $y\in D$, formamos la combinación convexa $\theta y + (1-\theta) y_*$ para $\theta\in [0,1]$ que podremos escribir como 
+        \begin{gather*}
+            y_* + \theta(y-y_*) \ \ \ \ \forall \theta \in [0,1]
+        \end{gather*}
+        Por la convexidad del funcional tenemos que 
+        \begin{gather*}
+            \cc{F}[y_* + \theta(y-y_*)] = \cc{F}[\theta y + (1-\theta)y_*] \leq \theta \cc{F}[y] + (1-\theta)\cc{F}[y_*] = \cc{F}[y_*] + \theta(\cc{F}[y] - \cc{F}[y_*])
+        \end{gather*}
+        para cualquier $\theta \in [0,1]$. Si tomamos ahora $\theta \in ]0,1]$ obtenemos 
+        \begin{gather*}
+            \frac{\cc{F}[y_* + \theta(y-y_*)] - \cc{F}[y_*]}{\theta} \leq \cc{F}[y] - \cc{F}[y_*] \ \ \ \ \forall y\in D
+        \end{gather*}
+        Como $y-y_*$ es dirección admisible, tomando límite cuando $\theta\to 0$ obtenemos 
+        \begin{gather*}
+            0 = \delta_{y-y_*} \cc{F}[y_*] \leq F[y] - F[y_*]
+        \end{gather*}
+        ya que $y_*$ es punto crítico. Por tanto $\cc{F}[y_*]\leq \cc{F}[y]$ para todo $y\in D$.
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}
+    Consideramos 
+    \begin{gather*}
+        \cc{F}[y] = \int_{0}^{1} (y'(x))^2 + (y(x))^2 + 2xy(x) dx
+    \end{gather*}
+    Sobre $D = \left\{ y\in C^2([0,1]) : y(0) = 0, y(1) = 1 \right\}$.\\
+
+    Tenemos que $D$ es convexo. Veamos ahora si $\cc{F}$ es convexo. Véase que 
+    \begin{gather*}
+        F(x,y,p) = p^2 + y^2 + 2xy
+    \end{gather*}
+    Para ver que $F(x,\cdot, \cdot)$ es convexa sobre $\bb{R}^2$, calculamos
+    \begin{gather*}
+        F_y = 2y+2x\\
+        F_p = 2p
+    \end{gather*}
+    Para $x\in [0,1]$ fijado tenemos 
+    \begin{gather*}
+        Hess(F)(x,\cdot,\cdot) = 
+        \begin{pmatrix}
+            \dfrac{\partial^2F}{\partial y^2} & \dfrac{\partial^2F}{\partial y \partial p}\\\\
+            \dfrac{\partial^2F}{\partial p\partial y} & \dfrac{\partial^2F}{\partial p^2}
+        \end{pmatrix}(x,y,p)
+    \end{gather*}
+    En este caso tenemos que 
+    \begin{gather*}
+        Hess(F) = D^2 F = \begin{pmatrix}
+            2 & 0 \\ 
+            0 & 2
+        \end{pmatrix}
+    \end{gather*}
+    Como $Hess(F)$ es definida positiva, tenemos que $F(x,\cdot,\cdot):\bb{R}^2 \to \bb{R}$ es estrictamente convexa, lo que nos dice que $\cc{F}$ es convexo. \\
+
+    Veamos ahora si es estrictamente convexo. Tomamos $y_1,y_2\in D$ con $y_1\neq y_2$. Tenemos entonces que existe un cierto intervalo $]a,b[\subset [0,1]$ tal que 
+    \begin{gather*}
+        y_1(x) \neq y_2(x) \ \ \ º \forall x \in ]a,b[
+    \end{gather*}
+    Dado $x\in ]a,b[$, vemos que $(y_1(x), y'_1(x)) \neq (y_2(x), y'_2(x))$ como vectores de $\bb{R}^2N$. Usando la convexidad estricta de $F(x,\cdot,\cdot)$ tenemos que 
+    \begin{gather*}
+        F(x, \theta y_1(x)+ (1-\theta) y_2(x), \theta y'_1(x)+ (1-\theta) y'_2(x)) < \theta F(x,y_1(x),y'_1(x)) + (1-\theta) F(x,y_2(x),y'_2(x))
+    \end{gather*}
+    y bastaría integrar obteniendo 
+    \begin{gather*}
+        (\theta y'_1(x) + (1-\theta)y'_2(x))^2 + (\theta y_1(x) + (1-\theta)y_2(x))^2 + 2x (\theta y_1(x) + (1-\theta) y_2(x)) <\\
+        < \theta[(y'_1(x))^2 + (y_1(x))^2 + 2xy_1(x) ] + (1-\theta)[(y'_2(x))^2 + (y_2(x))^2 + 2xy_2(x) ]
+    \end{gather*}
+    donde $D=\{C^1([x_0, x_1]) : y'(x_0) = 0 = y'(x_1)\}$ y obtenemos que el funcional es estrictamente convexo en dicho $D$.\\
+
+    La ecuación de Euler-Lagrange queda
+    \begin{gather*}
+        2y(x) + 2x - \frac{d}{dx}(2y'(x)) = 0\\
+        y''(x) - y(x) = x \ \ \ \ x\in[0,1]
+    \end{gather*}
+    La solución general a esta ecuación diferencial será
+    \begin{gather*}
+        y(x) = -x + c_1e^x + c_2 e^{-x} \ \ \ \ c_1,c_2\in \bb{R}
+    \end{gather*}
+    Se escogen $c_1$ y $c_2$ para cumplir $y(0)=0$ y $y(1)=1$. Resulta que el único punto crítico de $\cc{F}$ en $D$ es 
+    \begin{gather*}
+        y(x) = -x + \frac{2}{e - \frac{1}{e}} (e^x - e^{-x})
+    \end{gather*}
+    Concluimos que $\cc{F}$ alcanza su mínimo y solo lo hace en $y(x)$.
+\end{ejemplo}
+
+\begin{ejemplo}
+    Consideramos 
+    \begin{gather*}
+        \cc{F}[y] = \int_{0}^{\frac{\pi}{2}} (y_1'(x))^2 + (y_2(x))^2 + 2xy_1(x)y_2(x) dx
+    \end{gather*}
+    definido sobre
+    \begin{gather*}
+        D = \left\{y\in C^1\left(\left[0,\frac{\pi}{2}\right];\bb{R}^2\right) : y(0) = 
+        \begin{pmatrix}
+            0\\ 0
+        \end{pmatrix}
+        , y\left(\frac{\pi}{2}\right) = 
+        \begin{pmatrix}
+            1 \\ -1
+        \end{pmatrix}
+        \right\}
+    \end{gather*} 
+\end{ejemplo}

@@ -19,7 +19,7 @@ cd "$REPO_DIR" || { echo "No se pudo entrar al repo"; exit 1; }
 # --- Paso 1: asegurarse de tener upstream ---
 if ! git remote | grep -q "$UPSTREAM_REMOTE"; then
     echo "Agregando remoto upstream..."
-    git remote add upstream https://github.com/UsuarioOriginal/LosDelDGIIM.github.io.git
+    git remote add upstream https://github.com/LosDelDGIIM/LosDelDGIIM.github.io.git
 fi
 
 # --- Paso 2: traer cambios del upstream ---
