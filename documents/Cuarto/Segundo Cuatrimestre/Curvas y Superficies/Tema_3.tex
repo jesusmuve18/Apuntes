@@ -110,7 +110,7 @@ De esta forma las \textbf{ecuaciones de Frenet} de una curva p.p.a $\alpha$ ser�
     \right.
 \end{gather*}
 
-\begin{ejercicio}
+\begin{ejercicio}\
     \begin{enumerate}
         \item Supongamos que $\alpha : I \to \bb{R}^3$ es una curva plana p.p.a. Entonces la curvatura de $\alpha$ en cada instante en el espacio coincide con el valor absoluto de la curvatura en cada instante de $\alpha$ considerada como curva plana (considerando $tr(\alpha)\subset P$), es decir, 
         \begin{gather*}
@@ -144,10 +144,103 @@ De esta forma las \textbf{ecuaciones de Frenet} de una curva p.p.a $\alpha$ ser�
             \langle N'_\beta(s), a \rangle = 0\\
             \tau_\beta(s) \langle \beta_\alpha(s),a \rangle = 0
         \end{gather*}
-        De aquí obtenemos que o bien $B_\beta(s) = a$ o bien $B_\beta(s) = -a$ para todo $s\in I$ lo que nos dice que 
+        De aquí obtenemos que o bien $B_\beta(s) = a$ o bien $B_\beta(s) = -a$ para todo $s\in I$ lo que (a partir de la tercera ecuación de Frenet) nos dice que 
         \begin{gather*}
             \tau_\beta(s) = 0 \ \ \ \ \forall s \in I
         \end{gather*}
+
+        \item Ahora querremos ver si la condición de $\tau(s)=0$ para todo $s\in I$ se verifica para todas las curvas planas p.p.a. de la forma $\gamma:I \to \bb{R}^3$ tales que $\exists P \subset \bb{R}^3$ con $tr(\gamma)\subset P$ y tales que $k(s)>0$ para todo $k>0$. \\
+         
+        Sabemos que $T = \gamma'\in \vec{P}$ y por tanto $T'\in \vec{P}$. Como $T$ y $N$ son colineales tendremos que 
+        \begin{gather*}
+            T,N\in \vec{P} \text{ fijo }
+        \end{gather*}
+        Lo que nos dice que $B$ es constante y de nuevo tendremos que 
+        \begin{gather*}
+            B' = \tau N \Rightarrow \tau = 0
+        \end{gather*}
+
+        \item[4\ bis.] Consideramos $\alpha :I\to \bb{R}^3$ una curva p.p.a con curvatura $k>0$. Supongamos que $\tau \equiv 0$. Entonces 
+        \begin{gather*}
+            B'=\tau N \Rightarrow B' \equiv 0 \Rightarrow B \text{ es constante}
+        \end{gather*}
+        Consideramos $B=v\in \bb{R}^3$ y sabemos que $|v|=1$. Estudiamos ahora la relación entre $T$ y $B$ y llegamos a la conclusión de que son perpendiculares, es decir,
+        \begin{gather*}
+            \langle T, v \rangle = 0 \Rightarrow \langle \alpha'(s), v \rangle = 0 \ \ \ \forall s \in I
+        \end{gather*}
+        Notamos que $\langle \alpha'(s), v \rangle = \langle \alpha(s), v \rangle'$ lo que nos dice que
+        \begin{gather*}
+            \langle \alpha(s), v \rangle = c \ \ \ \ c\in \bb{R}
+        \end{gather*}
+        Si desarrollamos este producto escalar obtenemos
+        \begin{gather*}
+            v_1x(s) + v_2y(s) + v_3z(s) = c \ \ \ \ \forall s\in I \text{ donde } (v_1,v_2,v_3)\neq (0,0,0)
+        \end{gather*}
+        que es la expresión de un plano. Llegamos finalmente a que la traza de $\alpha$ está contenida en un plano.
+
+        \item Veamos ahora el caso de la hélice circular recta. Recordemos que la definíamos como 
+        \begin{gather*}
+            \alpha(t) = \left(a\cos\left(\frac{t}{\sqrt{a^2+ b^2}}\right), a\sen\left(\frac{t}{\sqrt{a^2+ b^2}}\right), \frac{bt}{\sqrt{a^2 + b^2}}\right)
+        \end{gather*}
+        con $ab\neq 0$. Sabemos que esta curva no es plana. Comenzamos calculando el vector tangente
+        \begin{gather*}
+            T(s) = \alpha'(s) = \frac{1}{\sqrt{a^2 + b^2}} \left(-a\sen\left(\frac{t}{\sqrt{a^2+ b^2}}\right), a\cos\left(\frac{t}{\sqrt{a^2+ b^2}}\right), b\right)
+        \end{gather*}
+        Además, tenemos que 
+        \begin{gather*}
+            |\alpha'(s)|^2 = \frac{1}{\sqrt{a^2 + b^2}} (a^2 + b^2) = 1 \Rightarrow \text{ p.p.a}
+        \end{gather*}
+        Si seguimos operando tenemos que 
+        \begin{gather*}
+            T'(s) = \frac{1}{a^2 + b^2} \left(-a\cos\left(\frac{t}{\sqrt{a^2+ b^2}}\right), -a\sen\left(\frac{t}{\sqrt{a^2+ b^2}}\right), 0\right)
+        \end{gather*}
+        A partir de esto podemos calcular la curvatura
+        \begin{gather*}
+            k(s) = |T'(s)| = \frac{|a|}{a^2 + b^2} > 0 \Rightarrow k(s)\text{ es constante}
+        \end{gather*}
+        Como esta curvatura es positiva podremos calcular el vector normal:
+        \begin{gather*}
+            N(s) = \frac{T'(s)}{k(s)} = \frac{-a}{|a|} \left(\cos\left(\frac{t}{\sqrt{a^2+ b^2}}\right), \sen\left(\frac{t}{\sqrt{a^2+ b^2}}\right), 0\right)
+        \end{gather*}
+        Estamos pues en condiciones de calcular el vector binormal.
+        \begin{align*}
+            B(s) &= T(s) \wedge N(s) = 
+            \frac{-a}{|a|(a^2 + b^2)} \begin{vmatrix}
+                \vec{i} & \vec{j} & \vec{k}\\
+                -a\sen\left(\frac{t}{\sqrt{a^2+ b^2}}\right) & a\cos\left(\frac{t}{\sqrt{a^2+ b^2}}\right) & b\\
+                \cos\left(\frac{t}{\sqrt{a^2+ b^2}}\right) & \sen\left(\frac{t}{\sqrt{a^2+ b^2}}\right) & 0
+            \end{vmatrix} = \\
+            &=\frac{-sgn(a)}{(a^2 + b^2)} \left(-b \sen \left(\frac{t}{\sqrt{a^2+ b^2}}\right), b\cos \left(\frac{t}{\sqrt{a^2+ b^2}}\right), -a\right) 
+        \end{align*}
+        Derivamos el vector binormal en vistas de calcular la torsión
+        \begin{gather*}
+            B'(s) = \frac{-sgn(a)b}{a^2 + b^2} \left(- \cos \left(\frac{t}{\sqrt{a^2+ b^2}}\right), -\sen \left(\frac{t}{\sqrt{a^2+ b^2}}\right), 0\right) 
+        \end{gather*}
+        y llegamos a que $B\| N$, es decir que son colineales y en concreto 
+        \begin{gather*}
+            \tau_\alpha(s) = \frac{-b}{a^2 + b^2}
+        \end{gather*}
+        que nos dice que es constante no nula y además nos confirma que la dirección del giro solo depende de $b$.
+
+        \item Sea $\alpha: I \to \bb{R}^3$ p.p.a con $k(s)>0$. Supongamos que $k(s)=k_0$ (constante) y $\tau(s) = \tau_0$ (constante también) para todo $s\in I$. Queremos ver que entonces que $tr(\alpha)$ está contenida en una hélice circular recta.\\
+        
+        Defino $a,b \in \bb{R}$ tales que 
+        \begin{gather*}
+            k_0 = \frac{|a|}{a^2 + b^2},\ \ \ \
+            \tau_0 = \frac{-b}{a^2 + b^2}
+        \end{gather*}
+        Tendremos que ver que existen soluciones a estas ecuaciones. Elevando al cuadrado tenemos 
+        \begin{gather*}
+            k_0^2 = \frac{a^2}{(a^2 + b^2)^2},\ \ \ \
+            \tau_0^2 = \frac{b^2}{(a^2 + b^2)^2}
+        \end{gather*}
+        Uniendo estas expresiones llegamos a que 
+        \begin{gather*}
+            a^2 + b^2 = \frac{1}{k_0^2 + \tau_0^2}
+        \end{gather*}
+        Despejando ahora de las ecuaciones iniciales tenemos 
+        \begin{gather*}
+            |a| = \frac{k_0}{k_0^2 + \tau_0^2},\ \ \ \ b = - \frac{\tau_0}{k_0^2 + \tau_0^2}
+        \end{gather*}
     \end{enumerate}
-    
 \end{ejercicio}
