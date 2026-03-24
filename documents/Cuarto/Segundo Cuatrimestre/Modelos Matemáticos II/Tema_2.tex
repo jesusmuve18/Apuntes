@@ -614,3 +614,119 @@ Para tratar con funcionales integrales utilizamos $F:I\times \bb{R}^N \times \bb
         \right\}
     \end{gather*} 
 \end{ejemplo}
+
+\section{Conexión entre el cálculo de variaciones y la mecánica}
+
+Supongamos que dada una partícula de masa $m>0$ puntual, que se mueve en una línea bajo la acción una fuerza $F$ que supondremos que solo depende de la posición de la partícula.\\
+
+La trayectoria se describe mediante una función $x(t)$ deefinida sobre
+\begin{gather*}
+    x:[t_0,t_1] \to \bb{R}
+\end{gather*}
+La segunda ley de Newton nos dice que $F=m\cdot a$. Consideramos entonces 
+\begin{gather*}
+    x':[t_0,t_1] \to \bb{R} \ \ \ \ \text{(velocidad)}\\
+    x'':[t_0,t_1] \to \bb{R} \ \ \ \ \text{(aceleración)}
+\end{gather*}
+la fuerza $F$ deriva de un potencial $\cc{U}:\bb{R} \to \bb{R}$, tal que 
+\begin{gather*}
+    F(x) = -\cc{U}'(x)
+\end{gather*}
+Determinamos la trayectoria resolviendo la ecuación anterior:
+\begin{gather*}
+    mx''(t) = -\cc{U}'(x(t))
+\end{gather*}
+que es una ecuación diferencial ordinaria de orden 2. Multiplicando por $x'(t)$ se obtiene
+\begin{gather*}
+    mx'(t)x''(t) = -x'(t) \cc{U}'(x(t))
+\end{gather*}
+que podremos escribir como 
+\begin{gather*}
+    \frac{m}{2} \frac{d}{dt}\left[ (x'(t))^2 \right] = -\frac{d}{dt}[\cc{U}(x(t))]
+\end{gather*}
+y le pondremos nombre a cada uno de estos términos:
+\begin{gather*}
+    E_{pot}(x(t)) = \cc{U}(x(t)),\ \ \ E_{kin}(x'(t)) = \frac{m}{2}(x'(t))^2
+\end{gather*}
+que llamaremos \textbf{energía potencial} y \textbf{energía cinética} respectivamente. De esta forma podremos reescribir dicha ecuación como 
+\begin{gather*}
+    \frac{d}{dt}(E_{kin} + E_{pot}) = 0
+\end{gather*}
+lo que llamaremos \textbf{conservación de la energía}. A partir de esta propiedad se podría estudiar la \textbf{mecánica Hamiltoniana} pero nosotros no entraremos en detalle. Lo que sí estudiaremos será la \textbf{Mecánica Lagrangiana}.\\
+
+\subsection{Mecánica Lagrangiana}
+Formamos el funcional
+\begin{gather*}
+    A[x] = \int_{t_0}^{t_1} E_{kin}(x'(t)) - E_{pot}(x(t)) dt
+\end{gather*}
+que con la notación descrita anteriormente será
+\begin{gather*}
+    A[x] = \int_{t_0}^{t_1} \frac{m}{2} (x'(t))^2 - U(x(t)) dt
+\end{gather*}
+Podemos calcular la ecuación de Euler-Lagrange de $A$ y nos quedará
+\begin{gather*}
+    -U'(x(t)) - \frac{d}{dt} (mx'(t)) = 0
+\end{gather*}
+es decir, $mx''(t) = -U'(x(t))$, la misma expresión a la que habíamos llegado antes. Esto significa que podemos describir el movimiento de una partícula estudiando su energía cinética y potencial, y construyendo el funcional recién definido.\\
+
+Consideramos ahora que estamos en un espacio de dimensión arbitraria y queremos describir el movimiento de una partícula puntual, de masa $m>0$, que se desplaza en $\bb{R}^N$ bajo la acción de un potencial $\cc{U}:\bb{R}^N \to \bb{R}$. De esta forma, tendremos que la trayectoria vendrá dada por una función $x:[t_0,t_1] \to \bb{R}^N$, de donde podremos calcular la velocidad y la aceleración como 
+\begin{gather*}
+    x':[t_0,t_1] \to \bb{R}^N \ \ \ \ \text{(velocidad)}\\
+    x'':[t_0,t_1] \to \bb{R}^N \ \ \ \ \text{(aceleración)}
+\end{gather*}
+Estamos en condiciones de definir para este caso la energía cinética y la energía potencial que adquiere la partícula
+\Func{E_{kin}}{\bb{R}^N}{\bb{R}_0^+}{p}{\frac{m}{2}|p|^2}
+\Func{E_{pot}}{\bb{R}^N}{\bb{R}}{x}{\cc{U}(x)}
+Podemos formar el \textbf{Lagrangiano} asociado:
+\Func{L}{\bb{R}^N\times \bb{R}^N}{\bb{R}}{(x,p)}{E_{kin}(p) - E_{pot}(x)}
+A partir de este construimos la acción mecánica:
+\begin{gather*}
+    A[x] = \int_{t_0}^{t_1} L(x(t), x'(t)) dt = \int_{t_0}^{t_1} \frac{m}{2} |x'(t)|^2 - U(x(t)) dt
+\end{gather*}
+Nos planteamos ahora cuáles son los puntos críticos de este funcional, para lo cual escribimos la ecuación de Euler-Lagrange:
+\begin{gather*}
+    -\nabla U(x(t)) -\frac{d}{dt} (mx'(t)) = \vec{0} \ \ \text{ en } [t_0, t_1]
+\end{gather*}
+Llegamos a 
+\begin{gather*}
+    mx''(t) = -\nabla U(x(t))
+\end{gather*}
+que son las ecuaciones del movimiento de la partícula. Esta es la expresión de Newton de la fuerza y nos dice que el campo de fuerzas que guía la trayectoria de la partícula es $-\nabla U$.
+
+\section{Principio de mínima acción}
+
+Consideramos una partícula puntual de masa $m>0$, que se mueve en el seno de un potencial regular $\cc{U}$ de forma que pasa por la posición $x_0\in \bb{R}^N$ en el instante $t_0$ y por la posición $x_1\in \bb{R}^N$ en el instante $t_1$. \\
+
+En esta situación se tiene que 
+\begin{itemize}
+    \item La trayectoria que sigue la partícula es un punto estacionario (punto crítico) del funcional acción ($A$) sobre el dominio
+    \begin{gather*}
+        D = \{x\in C([t_0, t_1];\bb{R}^N) : x(t_0) = x_0,\ x(t_1) = x_1\}
+    \end{gather*}
+
+    \item Si tomamos $\Delta t>0$ lo suficientemente pequeño (depende de las características del potencial), la restricción de $x(t)$ al intervalo $[t_0, t_0+\Delta t]$ es un mínimo local de la acción.
+\end{itemize}
+Si queremos describir muchas partículas, digamos 
+\begin{gather*}
+    \left.
+        \begin{array}{r}
+            x_1:[t_0,t_1] \to \bb{R}^3\\
+            x_2:[t_0,t_1] \to \bb{R}^3\\
+            ...\\
+            x_N:[t_0,t_1] \to \bb{R}^3\\
+        \end{array}
+    \right\} N \text{ trayectorias individuales}
+\end{gather*}
+definimos entonces la \textbf{trayectoria conjunta} $x:[t_0, t_1]\to \bb{R}^3N$ como 
+\begin{gather*}
+    x(t) = (x_1(t), x_2(t), ..., x_N(t))
+\end{gather*}
+
+\subsection{Problema de los $N$ cuerpos en gravitación}
+
+Si cada cuerpo tiene masa $m_i>0$ podemos considerar
+\begin{gather*}
+    E_{kin}(x'(t)) = \sum_{i=1}^N \frac{m_i}{2} |x_i'(t)|^2\\
+    E_{pot}(x(t)) = -G \sum_{1=1<j \leq N} \frac{m_i m_j}{|x_i(t)-x_j(t)|}
+\end{gather*}
+

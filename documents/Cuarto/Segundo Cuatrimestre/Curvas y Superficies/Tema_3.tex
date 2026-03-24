@@ -242,5 +242,62 @@ De esta forma las \textbf{ecuaciones de Frenet} de una curva p.p.a $\alpha$ ser�
         \begin{gather*}
             |a| = \frac{k_0}{k_0^2 + \tau_0^2},\ \ \ \ b = - \frac{\tau_0}{k_0^2 + \tau_0^2}
         \end{gather*}
+        Sea $h:I\to \bb{R}^3$ una hélice circular recta con parámetros $a$ y $b$. Entonces, del ejemplo anterior tenemos que 
+        \begin{gather*}
+            k_h(s) = \frac{a}{a^2 + b^2} = k_0\ \ \ \ \forall s \in I\\
+            t_h(s) = - \frac{b}{a^2 + b^2}\ \ \ \ \forall s \in I
+        \end{gather*}
+        Ahora $\alpha$ y $h$ son dos curvas p.p.a. con 
+        \begin{gather*}
+            k_\alpha = k_h = k_0,\ \ \ \ \tau_\alpha = \tau_h = \tau_0
+        \end{gather*}
+        Sea $s_0\in I$ e impongo las siguientes condiciones:
+        \begin{gather*}
+            \alpha(s_0)=h(s_0)\\
+            T_\alpha(s_0) = T_h(s_0),\ \ \ \ N_\alpha(s_0) = N_h(s_0),\ \ \ \ B_\alpha(s) = B_h(s_0)
+        \end{gather*}
+        Defino $f:I\to \bb{R}$ dada por 
+        \begin{gather*}
+            f(s) = \frac{1}{2} \{|T_\alpha(s) - T_h(s)|^2 + |N_\alpha(s) - N_h(s)|^2 + |B_\alpha(s) - B_h(s)|^2\}
+        \end{gather*}
+        Además, por las condiciones impuestas tenemos que $f(s_0)=0$. Al derivar $f$ obtenemos 
+        \begin{align*}
+            f' &= \langle T'_\alpha - T'_h, T_\alpha - T_h\rangle + \langle N'_\alpha - N'_h, N_\alpha - N_h\rangle + \langle B'_\alpha - B'_h, B_\alpha - B_h\rangle = \\
+            &= k_0 \langle N_\alpha - N_h , T_\alpha - T_h\rangle - k_0\langle T_\alpha - T_h, N_\alpha-N_h\rangle - \tau_0 \langle B_\alpha - B_h, N_\alpha-N_h \rangle + \tau_0\langle N_\alpha - N_h, B_\alpha - B_h \rangle =\\
+            &= 0
+        \end{align*}
+        Obtenemos por tanto que $f(s_0)=0$ y $f'(s)=0$ para todo $s\in I$ lo que nos dice que $f(s)=0$ para todo $s\in I$. Por la construcción de $f$ tenemos que 
+        \begin{gather*}
+            \alpha' = T_\alpha = T_h = h' \Rightarrow (\alpha - h)'(s) = 0\ \ \ \ \forall s \in I
+        \end{gather*}
+        Con la condición de $\alpha(s_0)=h(s_0)$ tenemos que $\alpha(s)=h(s)$ para todo $s\in I$.
+
+        \item (Siempre lo pone en los exámenes) Consideramos la curva $\alpha:I\to \bb{R}^3$ p.p.a con $k(s)>0$ y $\tau(s)>0$ para todo $s\in I$. Si $tr(\alpha)$ está contenida en una esfera $S^2(a,R)$ con $a\in \bb{R}^3$ y $R>0$. Nos preguntamos si existe alguna relación entre $k$ y $\tau$.\\
+        
+        Dado un $s\in I$ tenemos que $\alpha(s)\in S^2(a,R)$ si y solo si $|\alpha(s) - a|^2 = R^2$. Tenemos por tanto
+        \begin{gather*}
+            \langle T, \alpha - a \rangle = 0
+        \end{gather*}
+        Derivando obtenemos 
+        \begin{gather*}
+            k\langle N , \alpha - a\rangle + 1 = 0 \Rightarrow \langle N, \alpha - a \rangle = - \frac{1}{k}\\
+            \langle N', \alpha - a \rangle = - \left(\frac{1}{k}\right)' \Rightarrow \tau \langle B, \alpha -a \rangle = \left(\frac{1}{k}\right)'
+        \end{gather*}
+        Por lo que llegamos a que
+        \begin{gather*}
+            \langle B, \alpha -a \rangle = \frac{1}{\tau} \left(\frac{1}{k}\right)'
+        \end{gather*}
+        Tenemos las tres componentes del vector $\alpha -a$ respecto de la base ortonormal $\{T,N,B\}$:
+        \begin{gather*}
+            \alpha - a = - \frac{1}{k} N + \frac{1}{\tau} \left(\frac{1}{k}\right)'B
+        \end{gather*}
+        Tomándo módulo 
+        \begin{gather*}
+            |\alpha - a|^2 = \left(\frac{1}{k}\right)^2 + \frac{1}{\tau^2} \left[\left(\frac{1}{k}\right)'\right]^2
+        \end{gather*} 
+        Finalmente llegamos a que 
+        \begin{gather*}
+            R^2 = \left(\frac{1}{k}\right)^2 + \frac{1}{\tau^2} \left[\left(\frac{1}{k}\right)'\right]^2
+        \end{gather*}
     \end{enumerate}
 \end{ejercicio}
