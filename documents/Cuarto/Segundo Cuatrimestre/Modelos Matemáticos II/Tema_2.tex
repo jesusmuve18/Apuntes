@@ -732,4 +732,37 @@ Si cada cuerpo tiene masa $m_i>0$ podemos considerar
 
 % Hemos estudiado la braquistócrona
 
+\begin{ejemplo}
+    Estudiemos 
+    \begin{gather*}
+        \cc{F}[y] = \int_{0}^{1} (y'(x))^2 dx
+    \end{gather*}
+    deefinida sobre 
+    \begin{gather*}
+        D = \left\{ y\in C_0^2([0,1]) : \int_{0}^{1} y(x) dx = 2,\ \int_{0}^{1} xy(x) dx = \frac{1}{2} \right\}
+    \end{gather*}
+
+    El conjunto de direcciones admisibles $\varphi$ no cubre todo $C_0^2([0,1])$ por lo que no podremos usar el lema fundamental y no podremos forzar a que se cumpla la ecuación de Euler-Lagrange.\\
+
+    Lo que hay que hacer (método/receta) es buscar las extremales de un funcional modificado:
+    \begin{gather*}
+        \cc{F}^*[y] := \cc{F}[y] + \lambda \int_{0}^{1} y(x) dx + \mu \int_{0}^{1} xy(x) dx = \frac{1}{2}
+    \end{gather*}
+    con $\lambda, \mu\in \bb{R}$ los ``multiplicadores de Lagrange''. La ecuación de Euler-Lagrange para $\cc{F}^*$ donde $F^*(x,y,p) = p^2 + \lambda y + \mu xy$ quedaría
+    \begin{gather*}
+        \lambda + \mu x - \frac{d}{dx}(2y'(x)) = 0 \equiv 2y''(x) = \lambda + \mu x \Rightarrow y(x) = \frac{\mu}{12}x^3 + \frac{\lambda}{4}x^2 + Ax + B
+    \end{gather*}
+    donde $\lambda, \mu, A, B$ están por determinar y se fijan con la condición $y\in D$, es decir, 
+    \begin{gather*}
+        \left.
+            \begin{array}{l}
+                y(0)=0\\
+                y(1)=0\\
+                \int_{0}^{1} y(x) dx = 2\\
+                \int_{0}^{1} xy(x) dx = \frac{1}{2}
+            \end{array}
+        \right\} \Rightarrow y(x) = 60x^3 - 102x^2 + 42x
+    \end{gather*}
+    tenemos que es el único punto crítico en $D$.
+\end{ejemplo}
 

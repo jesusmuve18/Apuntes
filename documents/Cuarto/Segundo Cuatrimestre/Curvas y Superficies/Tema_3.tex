@@ -299,5 +299,50 @@ De esta forma las \textbf{ecuaciones de Frenet} de una curva p.p.a $\alpha$ ser�
         \begin{gather*}
             R^2 = \left(\frac{1}{k}\right)^2 + \frac{1}{\tau^2} \left[\left(\frac{1}{k}\right)'\right]^2
         \end{gather*}
+
+        \item[7 bis.] Nos preguntamos ahora si esta condición es suficiente para determinar que la traza de una curva está contenida en una circunferencia. Sea $\alpha: I \to \bb{R}^3$ una curva p.p.a con $k(s)>0$, $\tau(s)>0$ y $k'(s)>0$ para todo $s\in I$ (esta última condición es \textit{ad-hoc}). Supongamos que se verifica
+        \begin{gather*}
+            \left(\frac{1}{k}\right)^2 + \left[\frac{1}{\tau}\left(\frac{1}{k}\right)'\right]^2 = C \in \bb{R}
+        \end{gather*}
+        Entonces la traza de $\alpha$ está contenida en una esfera.\\
+
+        Si $C>0$ tenemos que existe un $R>0$ tal que $C = R^2$. Podemos traducir la condición en 
+        \begin{gather*}
+            \left(\frac{1}{k}\right)^2 + \left[\frac{1}{\tau}\left(\frac{1}{k}\right)'\right]^2 = R^2
+        \end{gather*}
+        Del apartado anterior tenemos que definir una función
+        \Func{f}{I}{\bb{R}}{s}{\alpha + \frac{1}{k}N - \frac{1}{\tau}\left(\frac{1}{k}\right)'B}
+        Veamos ahora que esta función es constante. Para ello calculamos 
+        \begin{align*}
+            f' &= T + \left(\frac{1}{k}\right)' N + \frac{1}{k}(-k T - \tau B) - \left(\frac{1}{\tau}\left(\frac{1}{k}\right)'\right)'B - \left(\frac{1}{k}\right)' N =\\
+            &= - \left[ \frac{\tau}{k} + \left(\frac{1}{\tau}\left(\frac{1}{k}\right)'\right)' \right]B
+        \end{align*}
+        Derivamos ahora la condición del enunciado buscando seguir desarrollando la derivada de $f$:
+        \begin{gather*}
+            2 \left(\frac{1}{k}\right) \left(\frac{1}{k}\right)' + 2 \left[\frac{1}{\tau} \left(\frac{1}{k}\right)'\right]\left[\frac{1}{\tau} \left(\frac{1}{k}\right)'\right]' = 0
+        \end{gather*}
+        Multiplicando por $\frac{\tau}{2}$ tenemos 
+        \begin{gather*}
+            \frac{\tau}{k} \left(\frac{1}{k}\right)' +  \left(\frac{1}{k}\right)'\left[\frac{1}{\tau} \left(\frac{1}{k}\right)'\right]' = \\
+            = \left(\frac{1}{k}\right)' \left(\frac{\tau}{k} + \left[\frac{1}{\tau} \left(\frac{1}{k}\right)' \right]'\right) = 0
+        \end{gather*}
+        Como $(\frac{1}{k})' = -\frac{k'}{k^2} < 0$ por la condición \textit{ad-hoc} del enunciado nos queda que necesariamente
+        \begin{gather*}
+            \frac{\tau}{k} + \left[\frac{1}{\tau} \left(\frac{1}{k}\right)' \right]' = 0
+        \end{gather*}
+        Lo que finalmente, al sustituir en $f'$ nos dice $f'\equiv 0$, o equivalentemente, $f(s) = a$ para todo $s\in I$, es decir
+        \begin{align*}
+            a &= \alpha + \frac{1}{k}N - \frac{1}{\tau}\left(\frac{1}{k}\right)'B\\
+            a-\alpha &= \frac{1}{k}N - \frac{1}{\tau}\left(\frac{1}{k}\right)'B\\
+            |\alpha - a|^2 &= \frac{1}{k^2} - \left[\frac{1}{\tau}\left(\frac{1}{k}\right)'\right]^2 = R^2
+        \end{align*}
+        Lo que nos dice que $tr(\alpha)\subset S^2(a, R)$.
+
+        \item Sea $\alpha : I \to \bb{R}^3$ una curva p.p.a con $k(s)>0$. Entonces $\alpha$ es un arco de circunferencia si y solo si tiene $k$ constante y $tr(\alpha)$ contenida en una esfera.
+        
+        \item Sea $\alpha:I\to \bb{R}^3$ una curva p.p.a con $k(s)>0$. Si $tr(\alpha)$ está contenida en una esfera y tiene torsión constante $a\in \bb{R}$, probar que existen $b,c\in \bb{R}$ tales que 
+        \begin{gather*}
+            k(s) = \frac{1}{b\cos(as) + c\cos(as)}
+        \end{gather*}
     \end{enumerate}
 \end{ejercicio}
