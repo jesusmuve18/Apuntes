@@ -344,5 +344,145 @@ De esta forma las \textbf{ecuaciones de Frenet} de una curva p.p.a $\alpha$ ser�
         \begin{gather*}
             k(s) = \frac{1}{b\cos(as) + c\cos(as)}
         \end{gather*}
+
+        \item Sea $ \alpha : I \to \bb{R}^3$ una curva regular. Consideramos 
+        \begin{gather*}
+            \xymatrix{
+                I \ar@<1ex>[r]^{S_a} & J \ar@<1ex>[l]^{h=S_a^{-1}}
+            }\ \ \ \ \beta = \alpha \circ h \text{ reparametrización de }\alpha
+        \end{gather*}
+        Definimos la curvatura de $\alpha$ por 
+        \begin{gather*}
+            k_\alpha(t) = k_\beta(S_a(t))
+        \end{gather*}
+        Y si $k_\alpha(t)>0$ para todo $t\in I$, definimos su torsión por 
+        \begin{gather*}
+            \tau_\alpha(t) = \tau_\beta(S_a(t))
+        \end{gather*}
+        Demostrar que 
+        \begin{gather*}
+            k_\alpha(t) = \frac{|\alpha'(t) \wedge \alpha''(t)|^2}{|\alpha'(t)|^3}\ \ \ \ \ \ \ \tau_\alpha(t) = - \frac{\det(\alpha(t), \alpha'(t), \alpha''(t))}{|\alpha'(t) \wedge \alpha''(t)|^2}
+        \end{gather*}
     \end{enumerate}
 \end{ejercicio}
+
+\section{Teorema Fundamental de la Teoría Local de Curvas en el Espacio}
+\begin{teo}[Teorema Fundamental de la Teoría Local de Curvas en el Espacio]
+    Sean $k_0, \tau_0:I\to \bb{R}$ las funciones derivables con $k_0>0$. Entonces existe una curva $\alpha:I\to \bb{R}^3$ p.p.a. y tal que 
+    \begin{gather*}
+        k_\alpha(s) = k_0(s)\ \ \ \ \tau_\alpha(s)=\tau_0(s)\ \ \ \ \forall s \in I
+    \end{gather*}
+    Además, $\alpha$ es única salvo movimiento rígido directo
+    \begin{proof}
+        Defino $A_0:I\to M_9(\bb{R})$ como 
+        \begin{gather*}
+            A_0 = \left(\begin{array}{c|c|c}
+                0_3 & k_0I_3 & 0_3\\
+                \hline
+                -k_0I_3 & 0_3 & -\tau_0I_3\\
+                \hline
+                0_3 & \tau_0I_3 & 0_3
+            \end{array}\right)
+        \end{gather*}
+        Como esa función $A_0$ planteo la siguiente EDO\footnote{Ecuación Diferencial Ordinaria (no es ordinaria porque diga palabrotas, es porque solo tiene una derivada).}
+        \begin{gather*}
+            x'=A_0x
+        \end{gather*}
+        donde $x:I\to \bb{R}^9$. Sabemos que si $a\in \bb{R}^9$, entonces existe una única solución $f$ de la EDO tal que $f(s_0)=a$ para cierto $s_0\in I$ y $f$ está definida en todo $I$. \\
+
+        Elijo $a=(a_1, a_2, a_3, a_4, a_5, a_6, a_7, a_8, a_9)$ de forma que 
+        \begin{gather*}
+            t_0 = \begin{pmatrix}
+                a_1 \\
+                a_2\\
+                a_3
+            \end{pmatrix} \ \ \ \ \ \ 
+            n_0 = \begin{pmatrix}
+                a_4 \\
+                a_5\\
+                a_6
+            \end{pmatrix} \ \ \ \ \ \ 
+            b_0 = \begin{pmatrix}
+                a_7 \\
+                a_8\\
+                a_9
+            \end{pmatrix}
+        \end{gather*}
+        sea una base ortonormal positivamente orientada de $\bb{R}^3$. Para cada $s\in I$ defino 
+        \begin{gather*}
+            t(s) = \begin{pmatrix}
+                f_1 \\
+                f_2\\
+                f_3
+            \end{pmatrix}(s) \ \ \ \ \ \ 
+            n(s) = \begin{pmatrix}
+                f_4 \\
+                f_5\\
+                f_6
+            \end{pmatrix}(s) \ \ \ \ \ \ 
+            b(s) = \begin{pmatrix}
+                f_7 \\
+                f_8\\
+                f_9
+            \end{pmatrix}(s)
+        \end{gather*}
+        Entonces 
+        \begin{gather*}
+            \begin{pmatrix}
+                t'\\
+                n'\\
+                b'
+            \end{pmatrix} = f' = A_0f = A_0 \begin{pmatrix}
+                t\\
+                n\\
+                b
+            \end{pmatrix}
+        \end{gather*}
+        Nos quedarán las siguientes ecuaciones junto con las condiciones iniciales
+        \begin{gather*}
+            \left\{
+                \begin{array}{l}
+                    t'=k_0n\\
+                    n'=-k_0t - \tau_0 b \\
+                    b' = \tau n
+                \end{array}
+            \right. \ \ \ \ \ \ 
+            \left\{
+                \begin{array}{l}
+                    t(s_0) = t_0\\
+                    n(s_0) = n_0\\
+                    b(s_0) = b_0
+                \end{array}
+            \right.
+        \end{gather*}
+        Defino $M:I \to M_3(\bb{R})$ por 
+        \begin{gather*}
+            M = \begin{pmatrix}
+                |t|^2 & \langle t,n \rangle & \langle t,b \rangle \\
+                \langle n,t \rangle & |n|^2 & \langle n,b \rangle \\
+                \langle b,t \rangle & \langle b,n \rangle & |b|^2
+            \end{pmatrix}
+        \end{gather*}
+        Se deja como ejercicio demostrar que 
+        \begin{gather*}
+            M' = AM - MA
+        \end{gather*}
+        que es de nuevo una EDO distinta donde $A$ está definida por 
+        \begin{gather*}
+            A = \begin{pmatrix}
+                0 & k & 0\\
+                -k_0 & 0 & -\tau_0\\
+                0 & \tau_0 & 0
+            \end{pmatrix}
+        \end{gather*}
+        Tenemos entonces que $M$ es solución de la segunda EDO con condición inicial
+        \begin{gather*}
+            M(s_0) = I_3
+        \end{gather*}
+        pero hay otra solución de la segunda EDO con la misma condición inicial, $M_0(s) = I_3$ para todo $s$. Por la unicidad de soluciones de EDOs para misma ecuación y condición inicial necesariamente tendremos que 
+        \begin{gather*}
+            M(s) = I_3 \ \ \ \forall s \in I
+        \end{gather*}
+        Entonces $t(s)$, $n(s)$, $b(s)$ es una base ortonormal de $\bb{R}^3$ para todo $s\in I$ por lo que $det(t(s), n(s), b(s)) = \pm 1$. Como $det(t(s_0), n(s_0), b(s_0)) = 1$ y el determinante no puede saltar, necesariamente $t(s)$, $n(s)$ y $b(s)$ forman una base ortonormal positivamente orientada de $\bb{R}^3$ para todo $s\in I$.
+    \end{proof}
+\end{teo}
