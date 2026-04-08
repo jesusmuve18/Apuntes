@@ -368,7 +368,7 @@ De esta forma las \textbf{ecuaciones de Frenet} de una curva p.p.a $\alpha$ ser�
 
 \section{Teorema Fundamental de la Teoría Local de Curvas en el Espacio}
 \begin{teo}[Teorema Fundamental de la Teoría Local de Curvas en el Espacio]
-    Sean $k_0, \tau_0:I\to \bb{R}$ las funciones derivables con $k_0>0$. Entonces existe una curva $\alpha:I\to \bb{R}^3$ p.p.a. y tal que 
+    Sean $k_0, \tau_0:I\to \bb{R}$ funciones derivables con $k_0>0$. Entonces existe una curva $\alpha:I\to \bb{R}^3$ p.p.a. y tal que 
     \begin{gather*}
         k_\alpha(s) = k_0(s)\ \ \ \ \tau_\alpha(s)=\tau_0(s)\ \ \ \ \forall s \in I
     \end{gather*}
@@ -444,7 +444,7 @@ De esta forma las \textbf{ecuaciones de Frenet} de una curva p.p.a $\alpha$ ser�
                 \begin{array}{l}
                     t'=k_0n\\
                     n'=-k_0t - \tau_0 b \\
-                    b' = \tau n
+                    b' = \tau_0 n
                 \end{array}
             \right. \ \ \ \ \ \ 
             \left\{
@@ -483,6 +483,36 @@ De esta forma las \textbf{ecuaciones de Frenet} de una curva p.p.a $\alpha$ ser�
         \begin{gather*}
             M(s) = I_3 \ \ \ \forall s \in I
         \end{gather*}
-        Entonces $t(s)$, $n(s)$, $b(s)$ es una base ortonormal de $\bb{R}^3$ para todo $s\in I$ por lo que $det(t(s), n(s), b(s)) = \pm 1$. Como $det(t(s_0), n(s_0), b(s_0)) = 1$ y el determinante no puede saltar, necesariamente $t(s)$, $n(s)$ y $b(s)$ forman una base ortonormal positivamente orientada de $\bb{R}^3$ para todo $s\in I$.
+        Entonces $t(s)$, $n(s)$, $b(s)$ es una base ortonormal de $\bb{R}^3$ para todo $s\in I$ por lo que $det(t(s), n(s), b(s)) = \pm 1$. Como $det(t(s_0), n(s_0), b(s_0)) = 1$ y el determinante no puede saltar, necesariamente $t(s)$, $n(s)$ y $b(s)$ forman una base ortonormal positivamente orientada de $\bb{R}^3$ para todo $s\in I$.\\
+
+        Definimos ahora $\alpha:I\to \bb{R}^3$ como 
+        \begin{gather*}
+            \alpha(s)=\int_{s_0}^{s} t(u) du \ \ \ s_0\in I
+        \end{gather*}
+        y vemos que $\alpha$ es una curva (es diferenciable por ser integral de una solución de un sistema de ecuaciones diferenciables). Además, como 
+        \begin{gather*}
+            |\alpha'(s)| = |t(s)|=1\ \ \ \forall s \in I
+        \end{gather*}
+        Entonces $\alpha$ está p.p.a. Tenemos también que 
+        \begin{gather*}
+            k_\alpha(s) = |\alpha''(s)| = |t'(s)| = |k_0(s)n(s)| = k_0(s)>0
+        \end{gather*}
+        Si consideramos el vector tangente tenemos que 
+        \begin{gather*}
+            T_\alpha(s) = \alpha'(s) = t(s)
+        \end{gather*}
+        y como la curvatura es estrictamente positiva podemos considerar 
+        \begin{gather*}
+            N_\alpha(s) = \frac{T'_\alpha(s)}{k_\alpha(s)} = \frac{t'(s)}{k_0(s)} = \frac{\cancel{k_0(s)}n(s)}{\cancel{k_0(s)}} = n(s)
+        \end{gather*}
+        Y por tanto tenemos finalmente
+        \begin{gather*}
+            B_\alpha(s) = T_\alpha(s) \wedge N_\alpha(s) = t(s) \wedge n(s) = b(s)
+        \end{gather*}
+        Para calcular la torsión utilizamos las ecuaciones de Frenet y tenemos que 
+        \begin{gather*}
+            \tau_\alpha(s)N_\alpha(s) = B_\alpha'(s) = b'(s) = \tau_0(s)n(s) = \tau_0(s)N_\alpha(s)
+        \end{gather*}
+        y necesariamente $\tau_\alpha(s)=\tau_0(s)$ por lo que habremos demostrado la existencia de una curva $\alpha$ con curvatura $k_0$ y torsión $\tau_0$. La unicidad se demuestra de forma totalmente análoga a como se hizo en el caso de las curvas planas.
     \end{proof}
 \end{teo}
