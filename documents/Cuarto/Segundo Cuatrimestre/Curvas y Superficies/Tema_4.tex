@@ -1,0 +1,103 @@
+\chapter{Superficies en el espacio}
+
+\begin{definicion}
+    Una \textbf{superficie} en $\bb{R}^3$ es un subconjunto $S\subset \bb{R}^3$ no vacío tal que $\forall p \in S$ existe\footnote{cada uno de estos elementos deberían tener subíndice $p$ porque dependen del punto pero por simplificar la notación no lo pondremos}
+    \begin{enumerate}
+        \item $U\subset \bb{R}^2$ abierto.
+        \item un entorno abierto $V$ de $p$ en $S$.
+        \item una aplicación $X:U \to \bb{R}^3$ diferenciable.
+    \end{enumerate}
+    que cumplen:
+    \begin{enumerate}
+        \item $X(U)=V$
+        \item $X:U\to V$ es un homeomorfismo.
+        \item $(dX)_q : \bb{R}^2 \to \bb{R}^3$ inyectiva $\forall q=(u,v) \in U$.
+    \end{enumerate}
+    Normalmente notaremos
+    \Func{X}{U}{V}{(u,v)}{(x(u,v), y(u,v), z(u,v))}
+    donde $x,y,z:U\to \bb{R}$ son diferenciables.
+\end{definicion}
+
+\begin{observacion}
+    Con esta definición no puede haber superficies con autointersecciones (ya que en ese caso $X$ no sería biyectivo)\footnote{Realmente sí existen pero no las vamos a estudiar este año.}.
+\end{observacion}
+
+\begin{notacion}
+    Hemos escrito $(dX)_q$, lo cual hasta ahora habremos notado como $(DX)(q,v)$ que es la derivada direccional en la dirección del vector $v$ del punto $q$. En este caso no especificamos la dirección $v$ porque se considera en todas las direcciones (sticker de shrek).
+\end{notacion}
+
+\begin{observacion}
+    Otra condición equivalente a que $(dX)_q$ sea inyectiva para todo $q\in U$ sería que para todo $q\in U$ se tenga que
+    \begin{gather*}
+        \frac{\partial X}{\partial u}(q),\ \ \ \frac{\partial X}{\partial v}(q)\ \ \ \text{ son linealmente independientes}.
+    \end{gather*}
+    Lo cual además sería equivalente a decir que 
+    \begin{gather*}
+        \left(\frac{\partial X}{\partial u}(q) \wedge \frac{\partial X}{\partial v}(q)\right) \neq 0\ \ \ \ \forall q\in U
+    \end{gather*}
+\end{observacion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Cualquier plano $P\subset \bb{R}^3$ se puede escribir como
+        \begin{gather*}
+            P = \{(x,y,z)\in \bb{R}^3 : ax+by+cz+d=0\}\ \ \ (a,b,c)\neq (0,0,0),\ \ d\in \bb{R}
+        \end{gather*}
+        Supongamos que $c\neq 0$, entonces 
+        \begin{gather*}
+            P=\{(x,y,z)\in \bb{R}^3 : z=Ax+By+C\}\ \ \ A,B,C \in \bb{R}
+        \end{gather*}
+        Veamos que $P$ es una superficie. Para ello, para cada $p\in P$ tenemos que encontrar $U\subset \bb{R}^2$, $V\subset \bb{R}^3$ y $X:U\to V$ que cumplan las condiciones de la definición. Sea $p\in P$ elegimos
+        \begin{gather*}
+            U=\bb{R}^2, \ \ \ \ V=P
+        \end{gather*}
+        \Func{X}{U}{\bb{R}^3}{(u,v)}{(u,v,Au+Bv+C)}
+        que vemos que no dependen del punto $p$ (ya que estamos en un caso muy sencillo). Además, claramente $X$ es diferenciable. Veamos que se verifican las condiciones para ser una superficie con estos elementos seleccionados:
+        \begin{enumerate}
+            \item $X(U)=X(\bb{R}^2) = \{(x,y,z)\in \bb{R}^3 : (x,y)\in U, z=Ax+By+C\} = P = V$.
+            
+            \item Veamos que $X: U=\bb{R}^2 \to V=P$ es un homeomorfismo. Es claramente continua y sobreyectiva, nos falta ver que es inyectiva, lo cual se tiene ya mirando las dos primeras componentes. Podemos considerar su inversa $\pi: P \to \bb{R}^2$ dada por 
+            \begin{gather*}
+                \pi(x,y,z) = (x,y) \ \ \ \ \forall (x,y,z)\in P
+            \end{gather*}
+            que es claramente continua. Confirmamos que $X$ es un homeomorfismo.
+
+            \item Se tiene para todo $(u,v)\in U$:
+            \begin{gather*}
+                X_u(u,v) = (1,0,A)\\
+                X_v(u,v) = (0,1,B)
+            \end{gather*}
+            y es fácil ver que son linealmente independientes (mirando las 2 primeras componentes de cada derivada parcial).
+        \end{enumerate}
+        \item Veamos que los grafos de funciones son superficies. Para ello consideramos $O\subset \bb{R}^2$, $f:O\to \bb{R}$ diferenciable y tendremos
+        \begin{gather*}
+            Grafo(f) = \{(x,y,z)\in \bb{R}^3:(x,y)\in O,\ \ z=f(x,y)\}
+        \end{gather*}
+        Tomamos $p\in Grafo(f)$ y elegimos
+        \begin{gather*}
+            U=O,\ \ \ \ V=Grafo(f)
+        \end{gather*}
+        \Func{X}{U}{\bb{R}^3}{(u,v)}{(u,v,f(u,v))}
+        donde $X$ es diferenciable por serlo la identidad y $f$. Veamos que cumple las condiciones para ser una superficie:
+        \begin{enumerate}
+            \item $X(O) = \{(u,v,z)\in \bb{R}^3 : (u,v)\in O,\ \ z=f(u,v)\} = Grafo(f) = V$.
+            \item En topología vimos que todo grafo es homeomorfo a su dominio (con la proyección como inversa) por lo que $X$ es un homeomorfismo.
+            \item $X_u(u,v) = (1,0,f_u)(u,v)$ y $X_v(u,v)=(0,1,f_v)(u,v)$ que con las dos primeras componentes ya vemos que son linealmente independientes.
+        \end{enumerate}
+        En este caso vemos de nuevo que estos elementos no dependen del punto $p$ escogido.
+
+        \item Consideramos el siguiente problema:
+        \begin{gather*}
+            \begin{array}{l}
+                X(u,v) = (x,y,z)\\
+                X(q) = p
+            \end{array}
+        \end{gather*}
+        \begin{itemize}  
+            \item A $(u,v)$ lo llamaremos \textbf{coordenadas} de $p$.
+            \item A $X$ lo llamaremos \textbf{parametrización} (local).
+            \item A $V$ lo llamaremos \textbf{entorno parametrizado}.
+            \item A $U$ lo llamaremos \textbf{dominio de la parametrización}.
+        \end{itemize}
+    \end{enumerate}
+\end{ejemplo}
