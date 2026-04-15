@@ -132,6 +132,50 @@
                 (dX')_q = d(\phi \circ X)_{q'}
             \end{gather*}
         \end{enumerate}
+
+        \item Consideramos las esferas $S^2(c, R)$ con $c\in \bb{R}^3$, $R>0$. Supongamos $c=0$ y $R=1$ (sin pérdida de generalidad). Entonces tenemos que $S^2(c, R) = S^2$. Sea $N=(0,0,1)\in S^2$ y elijo 
+        \begin{gather*}
+            U=\{(u,v)\in \bb{R}^2 : u^2 + v^2 <1\}
+        \end{gather*}
+        que es abierto en $\bb{R}^2$. Elegimos $V$ como el hemisferio abierto de centro $N$ en $S^2$, es decir,
+        \begin{gather*}
+            V = H_N^+ = \{(x,y,z)\in S^2 : z>0\}
+        \end{gather*}
+        y tenemos que $N\in H_N^+$, por lo que $V$ es entorno abierto de $N$. Elegimos además la aplicación dada por 
+        \Func{X}{U}{\bb{R}^3}{(u,v)}{(u,v,\sqrt{1-u^2 - v^2})}
+        que es diferenciable. Tenemos entonces
+        \begin{enumerate}
+            \item \begin{align*}
+                X(U)&=\{(x,y,z)\in \bb{R}^3 : (x,y)\in U, z=\sqrt{1-u^2-v^2}\} =\\
+                &= \{(x,y,z)\in S^2 : z>0\} = H_N^+ = V
+            \end{align*}
+
+            \item Vemos que $X:U\to V$ y además 
+            \Func{X^{-1}}{V}{U}{(x,y,z)}{(x,y)}
+            \item Tenemos 
+            \begin{gather*}
+                X_u(u,v) = (1,0,\ast)(u,v)\\
+                X_v(u,v) = (0,1,\ast)(u,v)
+            \end{gather*}
+            Por lo que $X_u$ y $X_v$ son linealmente independientes en cada $(u,v)\in U$.
+        \end{enumerate}
+        Con esto habríamos probado que se cumplen las condiciones para $N$ pero tenemos que ver que se cumplen para todo $p\in S^2$. Para ello consultamos ejemplos anteriores y vemos que dado $p\in S^2$ existe un giro $\phi_p : \bb{R}^3 \to \bb{R}^3$ difeomorfismo tal que $\phi_p(N)=p$. Entonces $\phi_p(H_N^+) = H_p^+$ por lo que $H_p^+$ es una superficie.\\
+
+        Sea $S=S^2(c, R)$, entonces existen una traslación $T$ y una homotecia $H$ de $\bb{R}^3$ tales que 
+        \begin{gather*}
+            (H\circ T)(S^2) = S^2(c,R)
+        \end{gather*}
+        por lo que $S^2(c, R)$ es una superficie. Con este razonamiento llegamos a que las elipsoides también son superficies.
+
+        \item Superficies en forma implícita. Sea $O\subset \bb{R}^3$ abierto $f:O\to \bb{R}$ diferenciable. Tenemos que $a\in \bb{R}$ se llama \textbf{valor regular} de $f$ cuando
+        \begin{gather*}
+            (df)_p = (\nabla f)_p \neq 0 \ \ \ \ \forall p\in f^{-1}(\{a\})
+        \end{gather*}
+        Consideramos $S=f^{-1}(\{a\})\subset O \subset \bb{R}^3$ con $a$ un valor regular y queremos ver si $S$ es o no una superficie. Recordamos que el Teorema de la Función implícita dice que para cada punto $p_0 = (x_0, y_0, z_0)\in S$ sabemos que $(\nabla f)_{p_0}\neq 0$. Suponemos sin pérdida de generalidad que $f_x(p_0)\neq 0$. Entonces tenemos que existe un entorno abierto $U$ de $(x_0,y_0)$ en $\bb{R}^2$, un entorno abierto $V$ de $a$ en $\bb{R}$ y una aplicación $g:U\to \bb{R}$ diferenciable tales que 
+        \begin{gather*}
+            S \cap (U\times V) = Grafo(g)
+        \end{gather*}
+        Por tanto $S$ es unión de grafos abiertos en $S$
     \end{enumerate}
 \end{ejemplo}
 
