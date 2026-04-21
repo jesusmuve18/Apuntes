@@ -300,3 +300,74 @@
     Para ver que $U\setminus\{p\}$ solo tiene una componente conexa tenemos que ver que al ser $U$ abierto existirá un abierto básico $A_p$ para todo $p\in U$ tal que $p\in A_p\subset U$. Además $A_p=B(p,\veps)$ con $\veps>0$ por lo que $A_p\setminus\{p\}$ seguirá siendo conexo. En consecuencia $U\setminus\{p\}$ será conexo.
 \end{ejercicio}
 
+\section{Aplicaciones diferenciables}
+
+% PEDIR A DANI
+
+\begin{definicion}
+    Sean $S,S'\subset \bb{R}^3$ superficies y $O\subset \bb{R}^3$ un abierto. Dada $f$ una aplicación definida de alguna de estas formas:
+    \begin{enumerate}
+        \item[a)] $f:S\to \bb{R}^m$ con $m\geq 1$.
+        \item[b)] $f:O\subset \bb{R}^3 \to S$.
+        \item[c)] $f:S \to S'$
+    \end{enumerate}
+    Diremos que $f$ es \textbf{diferenciable} si verifica
+    \begin{enumerate}
+        \item[a)] $f \circ X$ es diferenciable en el sentido de análisis para toda parametrización $X:U\to S$ (se tendrá $f \circ X: U\to \bb{R}^m$).
+        \item[b)] $i \circ f: O\to \bb{R}^3$ es diferenciable en el sentido de análisis.
+        \item[c)] $i' \circ f$ es diferenciable en el sentido de a)
+    \end{enumerate}
+\end{definicion}
+
+\begin{propiedades}\
+    \begin{enumerate}
+        \item \textbf{Topológica:} Si $f$ es diferenciable en sentido a),b) o c), entonces $f$ es continua. 
+        \begin{proof}
+            Demostración
+        \end{proof}
+        \item \textbf{Algebraicas:} Sean $f,g:S\to \bb{R}^m$ con $m\geq 1$, $\lambda: S\to \bb{R}$ diferenciables (en el sentido a)). Entonces tendremos
+        \begin{itemize}
+            \item $f+g, \lambda f: S\to \bb{R}^m$ son diferenciables.
+            \item $\langle f,g \rangle: S\to \bb{R}$ es diferenciable
+            \item Además, si $m=3$ se tiene que $f \wedge g:S \to \bb{R}^3$ es diferenciable.
+        \end{itemize}
+        \begin{proof}
+            Demostración
+        \end{proof}
+    \end{enumerate}
+\end{propiedades}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Restricciones
+        \item Constantes
+        \item[$a_2$)] Distancias. Tomamos $p_0\in \bb{R}^3$, $O=\bb{R}^3$ y $F:\bb{R}^3 \to \bb{R}$ dada por 
+        \begin{gather*}
+            F(p) = |p-p_0|^2
+        \end{gather*}
+        que es la distancia al cuadrado en el punto $p_0$. Tenemos que $F$ es diferenciable en $O=\bb{R}^3$. Si tomamos la restricción $F_{|_S}:S \to \bb{R}$ sabemos por lo anterior que es diferenciable.\\
+
+        Si definimos ahora $F(p)=|p-p_0|$ con $p_0\in \bb{R}^3$ tendremos que es diferenciable en $O = \bb{R}^3\setminus \{p_0\}$ por lo que necesitaremos $S\subset O \subset \bb{R}^3 \setminus \{p_0\}$, es decir, $p_0\notin S$. En este caso tendremos $F_{|_S}=f:S\to \bb{R}$ dada por $f(p)=|p-p_0|$ $\forall p \in S$ es diferenciable.\\
+
+        Si tenemos $R\subset \bb{R}^3$ una recta, $p_0\in R\subset \bb{R}^3$ y $v\in \bb{R}^3\setminus\{0\}$ con $|v|=1$. Dado un punto $p\in \bb{R}^3$ queremos calcular la distancia de $p$ a $R$. Tendremos
+        \begin{gather*}
+            dist(p,R)^2 = |p-p_0| - \langle p-p_0, v \rangle^2
+        \end{gather*}\\
+
+        Sea $P\subset \bb{R}^3$ el plano que pasa por $p_0\in \bb{R}^3$ y tiene un vector unitario normal $v\in \bb{R}^3$ con $|v|=1$. Consideramos 
+        \Func{F}{O=\bb{R}^3}{\bb{R}}{p}{F(p)=\langle p-p_0,v \rangle}
+        que será la función \textbf{distancia orientada a $P$}. Tenemos que $F$ es diferenciable en el sentido de análisis. Consideramos $S\subset \bb{R}^3$ dada por $p\in S \mapsto \langle p-p_0, v\rangle$ que será la función \textbf{distancia orientada de los puntos de la superficie $S$ al plano $P$}.
+
+        \item[a)] Es fácil o difícil de determinar si una función es diferenciable. Es claramente difícil porque intervienen \underline{todas} las parametrizaciones de la superficie. Consideramos el siguiente resultado:\\
+        
+        Dada $S\subset \bb{R}^3$ una superficie consideramos $X_i:U_i\to S$ con $i=1,2$ dos parametrizaciones de $S$ tales que 
+
+        Suponemos que $X_1(U_1)\cap X_2(U_2) \neq \emptyset$
+        \begin{gather*}
+            \xymatrix{
+                X_1^{-1} (X_1(U_1)\cap X_2(U_2)) \ar[r]^{X_2^{-1}\circ X_1} & X_2^{-1} (X_1(U_1)\cap X_2(U_2))
+            }
+        \end{gather*}
+        Esta composición es un homeomorfismo entre abiertos de $\bb{R}^2$. Esta aplicación se llama \textbf{cambio de parámetros} o \textbf{cambio de coordenadas} (estamos haciendo 2 representaciones del mismo trozo de mapa). 
+    \end{enumerate}
+\end{ejemplo}
