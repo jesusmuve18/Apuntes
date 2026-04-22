@@ -311,12 +311,13 @@
         \item[b)] $f:O\subset \bb{R}^3 \to S$.
         \item[c)] $f:S \to S'$
     \end{enumerate}
-    Diremos que $f$ es \textbf{diferenciable} si verifica
+    Diremos que $f$ es \textbf{diferenciable} si verifica respectivamente según su definición:
     \begin{enumerate}
         \item[a)] $f \circ X$ es diferenciable en el sentido de análisis para toda parametrización $X:U\to S$ (se tendrá $f \circ X: U\to \bb{R}^m$).
         \item[b)] $i \circ f: O\to \bb{R}^3$ es diferenciable en el sentido de análisis.
         \item[c)] $i' \circ f$ es diferenciable en el sentido de a)
     \end{enumerate}
+    donde $i:S \to \bb{R}^3$, $i':S' \to \bb{R}^3$ denotan la inclusión.
 \end{definicion}
 
 \begin{propiedades}\
@@ -368,6 +369,54 @@
                 X_1^{-1} (X_1(U_1)\cap X_2(U_2)) \ar[r]^{X_2^{-1}\circ X_1} & X_2^{-1} (X_1(U_1)\cap X_2(U_2))
             }
         \end{gather*}
-        Esta composición es un homeomorfismo entre abiertos de $\bb{R}^2$. Esta aplicación se llama \textbf{cambio de parámetros} o \textbf{cambio de coordenadas} (estamos haciendo 2 representaciones del mismo trozo de mapa). 
+        Esta composición es un homeomorfismo entre abiertos de $\bb{R}^2$. Esta aplicación se llama \textbf{cambio de parámetros} o \textbf{cambio de coordenadas} (estamos haciendo 2 representaciones del mismo trozo de mapa). \\
+
+        \textbf{Pequeño lema técnico}\footnote{``técnico'' significa que no lo explica (del griego \textit{techne})}\textbf{:} El cambio de parámetros es un difeomorfismo entre abiertos de $\bb{R}^2$.\\
+
+        Una consecuencia de esto es la siguiente: Sea $f:S\to \bb{R}^m$ donde $S \bb{R}^3$ es una superficie. Supongamos que $\forall p \in S$ existe una parametrización $X_p:U_p\to S$ tal que $p\in X_p(U_p)$ y $f\circ X_p$ es diferenciable en el sentido de análisis, entonces $f$ es diferenciable en el sentido a).
+        \begin{proof}
+            Sea $X:U\to S$ una parametrización arbitraria. Hay que ver que $f\circ X$ es diferenciable (en el sentido de análisis). Tenemos que $f\circ X : U \to \bb{R}^m$. Tomamos un $q\in U$ y le aplicamos la parametrización denotando $X(q)=p\in S$. Para dicho $p\in S$ existe por hipótesis una parametrización $X_p:U_p\to S$ tal que $p\in X_p(U_p)$ y tal que $f\circ X_p$ es diferenciable (AN\footnote{Usaremos esta notación para referirnos a ``en el sentido del análisis''.}). Para poder aplicar un cambio de cartas entre $X$ y $X_p$ necesitamos que se solapen las imágenes pero sabemos que 
+            \begin{gather*}
+                p\in (X_p(U_p)\cap X(U))=O \neq \emptyset
+            \end{gather*}
+            Tenemos entonces que $X_p^{-1}\circ X: X^{-1}(O)\to X_p^{-1}(O)$ es un difeomorfismo y además
+            \begin{gather*}
+                f\circ X_{|_{X^{-1}(O)}} = f_{|_O}\circ X_{|_{X^{-1}(O)}} = (f_{|_O}\circ X_p) \circ (X_p^{-1} \circ X_{|_{X^{-1}(O)}})
+            \end{gather*}
+            Sabíamos ya que $(X_p^{-1} \circ X_{|_{X^{-1}(O)}})$ es difeomorfismo (AN) y además, por hipótesis tenemos que $(f_{|_O}\circ X_p)$ es diferenciable (AN), por tanto llegamos a que $f\circ X_{|_{X^{-1}(O)}}$ es diferenciable. Además, como $q\in X^{-1}(O)$ tendremos que $f\circ X$ es diferenciable en $q$ para todo $q\in U$. Podemos concluir que $f\circ X$ es diferenciable (AN) para toda parametrización $X$.
+        \end{proof}
+
+        Una consecuencia de esto es que solo necesitaremos demostrar la diferenciabilidad en el sentido a) para un recubrimiento, en lugar de para toda parametrización.
+
+        \item Supongamos que $S\subset \bb{R}^3$ es una superficie y $X:U\to S$ una parametrización. Queremos ver si las siguientes aplicaciones son diferenciables:
+        \begin{enumerate}
+            \item $X:U\to X(U)$. Es diferenciable en sentido b). Como $U\subset \bb{R}^2$ tendremos que $X(U)\subset \bb{R}^3$ superficie es diferenciable (AN). Por tanto sí es diferenciable.
+            \item $X^{-1}:X(U)\to U$. Tenemos que esta aplicación sale de una superficie de $\bb{R}^3$ (al igual que en el apartado anterior) y llega a un abierto de un euclídeo por lo que estamos en la situación a). En este caso tenemos que $\forall p \in X(U)$ sirve como $X_p=X$, ya que $X$ es una parametrización que recubre a $X(U)$. Componemos entonces $X_p\circ f = X^{-1}\circ X = 1_U$ que es diferenciable (AN) por lo que concluimos que $X^{-1}$ sí es diferenciable.
+        \end{enumerate}     
     \end{enumerate}
 \end{ejemplo}
+
+\subsection{Propiedades y ejemplos suplementarios}
+\begin{enumerate}
+    \item Una curva diferenciable en una superficie $S$ es una curva $\alpha:I\to \bb{R}^3$ diferenciable tal que su traza $\alpha(I)\subset S$. 
+    
+    \item Consideramos $S_1, S_2, S_3$  y $f_1, f_2$ dos aplicaciones diferenciables tales que 
+    \begin{gather*}
+        \xymatrix{
+            S_1 \ar[r]^{f_1} & S_2 \ar[r]^{f_2} & S_3
+        }
+    \end{gather*}
+    Si $S_1, S_2, S_3$ son superficies o abiertos de un euclídeo, entonces $f_2\circ f_1: S_1 \to S_3$ es diferenciable.
+
+    \item Sea $S\subset \bb{R}^3$ una superficie y $O\subset S$ un abierto suyo. Supongamos que $f:S\to S'$ es diferenciable donde $S'$ es una superficie o un abierto de un euclídeo. Entonces $f_{|_O}:O\to S'$ es diferenciable.
+    
+    \item Consideramos $f:S\to S'$ donde $S\subset \bb{R}^3$ es una superficie y $S'$ es una superficie o un abierto de un euclídeo. Supongamos que podemos escribir
+    \begin{gather*}
+        S=\bigcup\limits_{i\in I} S_i\ \ \ \ S_i\subset S \text{ abierto }\ \ \ f_{|_{S_i}}:S_i\to S\ \ \text{ diferenciable}
+    \end{gather*}
+    Entonces $f:S\to S'$ también es diferenciable.
+
+    \item Supongamos que $S,S'\subset \bb{R}^3$ son superficies y consideramos $f:S\to S'$. Si $f$ es diferenciable en el sentido c), es biyectiva, y su inversa $f^{-1}:S'\to S$ es diferenciable, diremos que $f$ es un \textbf{difeomorfismo}. \\
+    
+    La identidad de una superficie en sí misma y la composición de difeomorfismos también son difeormorfismos. Por eso $S$ es difeomorfa a $S'$ es una relación de equivalencia en la colección de todas las superficies.
+\end{enumerate}
