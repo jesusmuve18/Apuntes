@@ -457,3 +457,89 @@
     \end{gather*}
     Al \underline{conjunto} de vectores tangentes a la superficie $S$ en el punto $p$ lo representaremos como $T_pS \subset \bb{R}^3$.
 \end{definicion}
+
+\begin{observacion}
+    Consideramos una superficie $S\subset \bb{R}^3$, $p\in S$ y $X:U\to S$ una parametrización de $S$ tal que $p\in X(U)$. En este caso tendríamos $X^{-1}(p)\in U \subset \bb{R}^2$. Consideramos $w\in \bb{R}^2$ arbitrario y podemos ver $t \mapsto X^{-1}(p)+tw$ para todo $t\in \bb{R}$, es decir, consideramos la aplicación $\beta: \bb{R} \to \bb{R}^3$ dada por 
+    \begin{gather*}
+        \beta(t) = X^{-1}(p) + tw
+    \end{gather*}
+    que verificará
+    \begin{itemize}
+        \item $\beta(0)=X^{-1}(p)$.
+        \item $\beta'(0) = w$
+    \end{itemize}
+    Pero $tr(\beta)$ no tiene por qué estar contenida en $U$, de hecho lo más frecuente es que $tr(\beta)\not\subset U$ pero lo que sí se dará es que como $\beta$ es continuo, $\beta(0)=X^{-1}(p)$ y $U$ es un entorno abierto de $X^{-1}(p)$ tendremos que existirá un $\veps >0$ tal que 
+    \begin{gather*}
+        \beta (-\veps, \veps) \subset U
+    \end{gather*}
+    Sea $\alpha = X \circ \beta : (-\veps, \veps) \to S$ tendremos que será diferenciable y verificará 
+    \begin{gather*}
+        \alpha(0)=X(\beta(0)) = X(X^{-1}(p)) = p\\
+        T_pS \owns \alpha'(0) = (X \circ \beta)'(0) \overset{(\ast)}{=} (dX)_{X^{-1}(p)}(\beta'(0)) = (dX)_{X^{-1}(p)}(w)
+    \end{gather*}
+    donde en $(\ast)$ hemos aplicado la regla de la cadena del análisis. Hemos probado que $\forall w \in \bb{R}^2$ tendremos que
+    \begin{gather*}
+        (dX)_{X^{-1}(p)}(w)\in T_pS
+    \end{gather*}
+    como $(dX)_{X^{-1}(p)} : \bb{R}^2 \to \bb{R}^3$ tendremos que $(dX)_{X^{-1}(p)}(\bb{R}^2)\subset T_pS$. Lo ideal es que se diera la igualdad (se va a dar). \\
+    
+    Para verlo tomemos $v\in T_pS$, o equivalentemente, un $v$ tangente a $S$ en $p$, es decir, tal que
+    \begin{gather*}
+        \exists \veps > 0,\ \ \exists \alpha:(-\veps, \veps) \to S\text{ diferenciable con }\ \ \alpha(0)=p,\ \ \alpha'(0)=v
+    \end{gather*}
+    Tenemos $X:U\to S$ una parametrización con $p\in X(U)$. Sabemos que $\alpha(-\veps, \veps)$ no tiene por qué estar dentro de $X(U)$ pero por la continuidad de $\alpha$ y sus propiedades tendremos que existirá un $0 < \delta \leq \veps$ tal que 
+    \begin{gather*}
+        \alpha : (-\delta, \delta) \to X(U)\subset S
+    \end{gather*}
+    Definimos $\beta = X^{-1} \circ \alpha : (-\delta, \delta) \to U\subset \bb{R}^2$ que verificará
+    \begin{gather*}
+        \beta(0) = X^{-1}(\alpha(0)) = X^{-1}(p)
+    \end{gather*}
+    Podemos escribir además $\alpha = X \circ \beta$ (despejando, lo que nos ayudará a derivar). Sabemos que
+    \begin{gather*}
+        v = \alpha'(0) \overset{(\ast)}{=} (dX)_{X^{-1}(p)}(\beta'(0))
+    \end{gather*}
+    donde en $(\ast)$ hemos vuelto a aplicar la regla de la cadena del análisis. Como $\beta'(0)\in \bb{R}^2$ tendremos que 
+    \begin{gather*}
+        v \in (dX)_{X^{-1}(p)}(\bb{R}^2)
+    \end{gather*}
+    por lo que tendremos la igualdad buscada.\\
+
+    Hemos demostrado que si tenemos una superficie $S\subset \bb{R}^3$, $p\in S$, $X:U\to S$ una parametrización con $p\in X(U)$, entonces 
+    \begin{gather*}
+        T_pS = (dX)_{X^{-1}(p)}(\bb{R}^2) = img(dX)_{X^{-1}(p)}
+    \end{gather*}
+    Esto nos dará las siguientes consecuencias:
+    \begin{enumerate}
+        \item Como $(dX)_{X^{-1}(p)}$ es lineal e inyectiva tenemos que $T_pS$ es un subespacio vectorial de $\bb{R}^3$ de dimensión 2, es decir, $T_pS$ es un plano vectorial de $\bb{R}^3$ para todo $p\in S$. Normalmente se representará gráficamente como $p + \langle T_pS \rangle$ (el plano afín).
+        
+        \item $(dX)_{X^{-1}(p)}(\bb{R}^2) = img(dX)_{X^{-1}(p)}$, es decir, no depende de la parametrización $X$ elegida.
+        
+        \item $T_pS = img(dX)_{X^{-1}(p)} = (dX)_{X^{-1}(p)}(\bb{R}^2)$. Elegimos $\{(1,0), (0,1)\}$ la base canónica de $\bb{R}^2$. Entonces tendremos que 
+        \begin{gather*}
+            \{(dX)_{X^{-1}(p)}(1,0),\ (dX)_{X^{-1}(p)}(0,1)\} \text{ base de } T_pS
+        \end{gather*}
+        o equivalentemente
+        \begin{gather*}
+            \{X_u(X^{-1}(p)), X_v(X^{-1}(p))\} \text{ base de } T_pS
+        \end{gather*}
+        para toda parametrización $X$.
+    \end{enumerate}
+\end{observacion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Sea $O\subset \bb{R}^3$ un abierto, $f:O\to \bb{R}$ diferenciable (AN), $a$ un valor regular de $f$. Suponemos $\emptyset \neq f^{-1}(\{a\}) = S$ y $p\in S$. Tenemos 
+        \begin{gather*}
+            \alpha : (-\veps, \veps) \to S\text{ con } \alpha(0)=p\ \ \text{ y } \ \ \alpha'(0)=v\in T_pS
+        \end{gather*}
+        Además $\alpha(t)\in S$ para todo $|t|<\veps$ por lo que $f(\alpha(t)) = a$ para todo $|t| < \veps$. Tenemos que 
+        \begin{gather*}
+            (df)_p(v) = 0 \Rightarrow v \in \ker(df)_p\ \ \ \forall v \in T_pS
+        \end{gather*}
+        Tenemos que $T_pS \subset \ker(df)_p$ y como ambos espacios tienen dimensión 2 se dará la igualdad, es decir,
+        \begin{gather*}
+            T_pS = \ker(df)_p = \langle \nabla f_p \rangle^{\bot}
+        \end{gather*}
+    \end{enumerate}
+\end{ejemplo}
