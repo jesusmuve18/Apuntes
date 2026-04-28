@@ -450,6 +450,8 @@
     \end{itemize}
 \end{ejercicio}
 
+\section{Vector tangente a una Superficie}
+
 \begin{definicion}
     Consideramos $S\subset \bb{R}^3$ una superficie, $p\in S$ y un vector $v\in \bb{R}^3$. Diremos que $v$ es \textbf{tangente} a $S$ en $p$ si existe una curva diferenciable $\alpha : (-\veps, \veps) \to S$ con $\veps > 0$ tal que
     \begin{gather*}
@@ -541,5 +543,74 @@
         \begin{gather*}
             T_pS = \ker(df)_p = \langle \nabla f_p \rangle^{\bot}
         \end{gather*}
+
+        \begin{enumerate}
+            \item Consideramos un plano $P$, un punto $p_0\in P$ y $a$ el vector normal unitario de $P$. De esta forma podemos escribir:
+            \begin{gather*}
+                P = \{p\in \bb{R}^3 : \langle p - p_0, a\rangle = 0\} = f^{-1}(\{0\})
+            \end{gather*}
+            y definimos 
+            \Func{f}{\bb{R}^3}{\bb{R}}{p}{f(p)=\langle p -p_0, a\rangle}
+            Se deja como ejercicio comprobar que $0$ es valor regular de $f$.
+            De esta forma, dado un $p\in P$ tenemos que 
+            \begin{gather*}
+                T_pP = \langle (\nabla f)_p \rangle^{\bot} = \ker(df)_p
+            \end{gather*}
+            donde
+            \Func{(df)_p}{\bb{R}^3}{\bb{R}}{v}{(df)_p(v)}
+            Recordemos que $(df)_p(v)=(DF)(p,v)$ (con la notación del análisis\footnote{Es la última vez que lo pone de verdad, lo jura por Snoopy}). Calculemos dicha diferencial:
+            \begin{align*}
+                (df)_p(v)&= \frac{d}{dt}|_{t=0} f(p+tv) = \frac{d}{dt}|_{t=0} \langle p + tv - p_0, a \rangle = \langle v,a \rangle\\
+                (\nabla f)_p &= a \ \ \ \forall p \in P
+            \end{align*}
+            De esta forma podemos asegurar que 
+            \begin{gather*}
+                T_pP = \langle a \rangle^{\bot}
+            \end{gather*}
+
+            \item \begin{definicion}
+                Dada una superficie $S\subset \bb{R}^3$ y un punto $p\in S$ llamamos \textbf{recta normal} a $S$ en $p$ a la recta afín que pasa por $p$ y es perpendicular a $T_pS$.
+            \end{definicion}
+
+            De esta forma hemos probado que todas las rectas normales a un plano son paralelas. Esto deja abierta la pregunta de si una superficie con todas sus rectas normales paralelas es necesariamente un plano (o un trozo abierto de plano). Probablemente esto sea verdad.
+        \end{enumerate}
+        \item Dado $p_0\in \bb{R}^3$, $R>0$ y consideramos la superficie $S$ dada por 
+        \begin{gather*}
+            S = \{p\in \bb{R}^3 : |p-p_0|^2 = R^2\} = S^2(p_0, S)
+        \end{gather*}
+        Podemos definir la aplicación 
+        \Func{g}{\bb{R}^3}{\bb{R}}{p}{g(p)=|p-p_0|^2}
+        y podemos así ver la superficie como $S=g^{-1}(\{R^2\})$. Ya estudiamos que $R^2$ es un valor regular de $g$ (una función diferenciable). Tenemos entonces que $S$ es una superficie y acabamos de ponerla en forma implícita. Sabemos que 
+        \begin{gather*}
+            T_pS^2(p_0, R) = \ker(dg)_p = \langle \nabla g_p \rangle^{\bot}
+        \end{gather*}
+        consideramos la diferencial:
+        \Func{(dg)_p}{\bb{R}^3}{\bb{R}}{v}{(dg)_p(v)=2\langle p -p_0, v\rangle}
+        Con lo que tendremos 
+        \begin{gather*}
+            (\nabla g)_p = 2(p-p_0) \Rightarrow T_pS^2(p_0, S) = \langle p-p_0\rangle ^{\bot}
+        \end{gather*}
+        Nos planteamos ahora cómo son las rectas normales a la esfera $S^2(p_0, S)$ en un punto $p\in S^2(p_0, S)$. Tendrán que pasar por $p$ y llevar la dirección $p-p_0$ por lo que podríamos escribir la ecuación paramétrica
+        \begin{gather*}
+            p+ \lambda (p-p_0) \ \ \ \lambda \in \bb{R}
+        \end{gather*}
+        Tenemos por tanto que $\forall p \in S^2(p_0, R)$ existe un $\lambda(p)=-1$ tal que $p-(p-p_0) = p_0$ lo que nos dice que todas las rectas normales a una esfera son \textbf{concurrentes} (todas pasan por un mismo punto, el origen). \\
+
+        De nuevo se plantea la cuestión de que si todas las rectas normales a una superficie son concurrentes, entonces necesariamente será un trozo abierto de esfera (sospechamos que sí).
+
+        \item Consideramos ahora $S\subset \bb{R}^3$ una superficie, un subconjunto abierto $S'\subset S \subset \bb{R}^3$ y un punto $p'\in S'\subset S$. Sabemos que $S'$ es una superficie y queremos comparar $T_{p'}S'$ y $T_pS$. Sabemos que para cada $v\in T_{p'}S'$ existe una aplicación $\alpha: (-\veps, \veps) \to S'\subset S$ con 
+        \begin{gather*}
+            \alpha(0) = p'\ \ \text{ y } \ \ \alpha'(0) = v
+        \end{gather*}
+        lo que nos dice que $v\in T_pS$ por lo que tendremos que $T_{p'}S'\subset T_pS$ lo que finalmente (con un razonamiento simétrico) nos dará la igualdad:
+        \begin{gather*}
+            T_{p'}S' = T_pS
+        \end{gather*}
+
+        \begin{enumerate}
+            \item Consideramos la aplicación $f:S\to \bb{R}^m$ diferenciable. Sabemos que para cada $v\in T_pS$ existe una aplicación $\alpha: (-\veps, \veps) \to S$ tal que $\alpha(0)=p$ y $\alpha'(0)=v$.  Definimos así $(df)_p$ como 
+            \Func{(df)_p}{T_pS}{\bb{R}^m}{v}{(df)_p(v) = \frac{d}{dt}|_{t=0}(f(\alpha(t))) = (f\circ \alpha)'(0)}
+            Hay que ver que esta función está bien definida, en concreto ver que $(f\circ \alpha)'(0)$ no depende de $\alpha$, sino de $\alpha'(0)=v$.
+        \end{enumerate}
     \end{enumerate}
 \end{ejemplo}
