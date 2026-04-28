@@ -1,0 +1,18 @@
+title: Mi Repositorio de Documentos
+theme: jekyll-theme-primer
+
+# Importante: Jekyll no debe intentar "procesar" los PDFs, solo copiarlos
+keep_files: [pdf, png, jpg, jpeg, gif]
+
+# Excluimos carpetas de configuración que NO contienen PDFs ni imágenes
+exclude:
+  - "**/grafana_data/"
+  - "**/node_modules/"
+  - "**/vendor/"
+  - "**/.git/"
+  - "**/.github/"
+  - "**/progra/" # Si aquí solo hay código y no recursos web
+  - "**/logs/"
+
+# Obligamos a que la carpeta documents sea visible
+include: [documents]
