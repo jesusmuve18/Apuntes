@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/libGameSelector.a CMakeFiles/GameSelector.dir/src/controller/GameSelector.cpp.o
+/usr/bin/ranlib lib/libGameSelector.a

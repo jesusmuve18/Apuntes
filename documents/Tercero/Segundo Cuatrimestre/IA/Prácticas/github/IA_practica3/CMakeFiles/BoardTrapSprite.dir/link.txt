@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/libBoardTrapSprite.a CMakeFiles/BoardTrapSprite.dir/src/gui/BoardTrapSprite.cpp.o
+/usr/bin/ranlib lib/libBoardTrapSprite.a

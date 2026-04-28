@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/libSpecialItemSprite.a CMakeFiles/SpecialItemSprite.dir/src/gui/SpecialItemSprite.cpp.o
+/usr/bin/ranlib lib/libSpecialItemSprite.a

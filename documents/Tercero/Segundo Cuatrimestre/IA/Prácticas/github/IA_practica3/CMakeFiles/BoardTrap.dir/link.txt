@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/libBoardTrap.a CMakeFiles/BoardTrap.dir/src/model/BoardTrap.cpp.o
+/usr/bin/ranlib lib/libBoardTrap.a

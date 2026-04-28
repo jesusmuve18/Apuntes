@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/libSpriteAnimator.a CMakeFiles/SpriteAnimator.dir/src/gui/SpriteAnimator.cpp.o
+/usr/bin/ranlib lib/libSpriteAnimator.a

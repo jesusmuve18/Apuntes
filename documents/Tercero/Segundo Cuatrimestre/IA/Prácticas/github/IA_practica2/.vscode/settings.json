@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "vector": "cpp",
+        "ostream": "cpp",
+        "chrono": "cpp",
+        "unordered_map": "cpp",
+        "random": "cpp",
+        "span": "cpp",
+        "compare": "cpp",
+        "sstream": "cpp",
+        "array": "cpp",
+        "string_view": "cpp"
+    }
+}
