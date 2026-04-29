@@ -2,9 +2,15 @@ title: Apuntes
 theme: jekyll-theme-primer
 
 exclude:
-  - documents
   - node_modules
   - scripts
   - code
   - "**/grafana_data"
   - "**/*.db"
+
+defaults:
+  -
+    scope:
+      path: "documents"
+    values:
+      layout: null
