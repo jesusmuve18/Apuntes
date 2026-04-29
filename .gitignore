@@ -1,6 +1,10 @@
 # Grafana / datos generados
 **/grafana_data/
 
+# Archivos grandes
 documents/primero/primer_cuatrimestre/fft/teoria/libro/libro_completo/
 
+# Enlaces simbólicos
 documents/cuarto/segundo_cuatrimestre/tsi/tsi-practicas
+documents/cuarto/segundo_cuatrimestre/aa/aa-practicas
+documents/cuarto/segundo_cuatrimestre/metaheuristicas/mh-practicas
