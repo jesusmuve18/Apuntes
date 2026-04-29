@@ -635,6 +635,53 @@
                 (df)_p(v) = d(f\circ X)_{X^{-1}(p)}[(dX)_{X^{-1}(p)}]^{-1}(v)
             \end{gather*}
             y llegamos a que no depende de $\alpha$ sino solo de $v$ y además lo hace linealmente.
+
+            \item Consideramos $f:O\subset \bb{R}^n \to S$ con $O$ abierto y un punto $x\in O$. Si repetimos la definición tendremos 
+            \begin{gather*}
+                (df)_X ; \bb{R}^n \to T_{f(x)S\subset \bb{R}^3}
+            \end{gather*}
+
+            \item Supongamos ahora $f:S\to S'$, $p\in S$. Si repetimos la definición 
+            \begin{gather*}
+                (df)_p : T_pS \to T_{f(p)}S'
+            \end{gather*}
         \end{enumerate}
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Restricciones. Consideramos $F:O\subset \bb{R}^3$ diferenciable (AN) y $S\subset O$. Si llamamos $f=F_{|S}:S\to \bb{R}^m$ sabemos ya que es diferenciable por lo que podemos tomar $p\in S$ y existe la diferencial que será una aplicación $(df)_p: T_pS\to \bb{R}^m$. Aplicando la definición tendremos
+        \begin{gather*}
+            (df)_p(v)=(f \circ \alpha)'(0)
+        \end{gather*}
+        donde $\alpha:(-\veps, \veps) \to S$ con $\alpha(0)=p$ y $\alpha'(0)=v$. Además en este caso $f$ y $F$ actúan igual en el dominio por lo que 
+        \begin{gather*}
+            (df)_p(v)=(F \circ \alpha)'(0) = (dF)_p(v)
+        \end{gather*}
+        y esto ocurre para todo $v\in T_pS$. Esto nos dice que ante restricciones las diferenciales actúan iguales pero no son iguales el todo ya que $(df)_p : T_pS \to \bb{R}^m$ y $(dF)_p : \bb{R}^3 \to \bb{R}^m$ por lo que concluímos que 
+        \begin{gather*}
+            (dF_{|S})_p = (dF)_{|T_pS}
+        \end{gather*}
+        es decir, la diferencial de la restricción es la restricción de la diferencial en el plano tangente.
+        
+        \item Teníamos la aplicación $F:\bb{R}^3\to \bb{R}$ dada por $F(p)=\langle p -p_0, u\rangle$ con $|u|^2=1$, $p_0\in \bb{R}^3$. Notamos $h=F_{|S}$. Queremos calcular $(dh)_p(v)$ y aplicando lo recién visto para restricciones
+        \begin{gather*}
+            (dh)_p(v) = (dF)_p(v) = \langle v,u \rangle
+        \end{gather*}
+
+        \item Consideramos ahora la distancia a un punto, es decir, $F:\bb{R}^3\to \bb{R}$ dada por $F(p)=|p-p_0|^2$. Notamos $f=F_{|S}$ con $S\subset \bb{R}^3$.
+        \begin{gather*}
+            (df)_p(v) = (dF)_p(v) = 2\langle p-p_0, v \rangle
+        \end{gather*}
+
+        \item Definimos $F:\bb{R}^3 \setminus \{p_0\} \to \bb{R}$ dada por $F(p)=|p-p_0|$. Sabemos que $p_0\notin S$ y además, notando $f= F_{|S}:S\to \bb{R}$ tenemos 
+        \begin{gather*}
+            (df)_p(v)=\frac{2\langle p-p_0,v\rangle}{2|p-p_0|} = \frac{\langle p-p_0,v\rangle}{|p-p_0|}
+        \end{gather*}
+        de esta forma tendremos también
+        \begin{gather*}
+            (d\ dist^2_{|S})_p(v) = 2\langle p-p_0,v\rangle - 2 \langle p-p_0, u\rangle \langle v,u\rangle
+        \end{gather*}
     \end{enumerate}
 \end{ejemplo}

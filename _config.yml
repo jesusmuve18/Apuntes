@@ -1,12 +1,10 @@
-title: Mi Repositorio de Documentos
+title: Apuntes
 theme: jekyll-theme-primer
 
-# Importante: Jekyll no debe intentar "procesar" los PDFs, solo copiarlos
-keep_files: [pdf, png, jpg, jpeg, gif]
-
-# Excluimos carpetas de configuración que NO contienen PDFs ni imágenes
 exclude:
-  - documents/Tercero/Segundo Cuatrimestre/ISE/Prácticas
-
-# Obligamos a que la carpeta documents sea visible
-include: [documents]
+  - documents
+  - node_modules
+  - scripts
+  - code
+  - "**/grafana_data"
+  - "**/*.db"
