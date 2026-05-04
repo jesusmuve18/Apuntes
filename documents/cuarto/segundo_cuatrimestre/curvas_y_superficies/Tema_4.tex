@@ -683,5 +683,148 @@
         \begin{gather*}
             (d\ dist^2_{|S})_p(v) = 2\langle p-p_0,v\rangle - 2 \langle p-p_0, u\rangle \langle v,u\rangle
         \end{gather*}
+
+        \item Inclusiones. Consideramos una superficie $S\subset \bb{R}^3$ y la aplicación inclusión $i:S \to \bb{R}^3$. Dado un punto $p\in S$ podemos considerar $(df)_p : T_pS \to \bb{R}^3$. Podemos considerar $i=I_{3|_S}=i_S$ y por tanto
+        \begin{gather*}
+            (di)_p = (dI_{3|_S})_p = (dI_3)_p = I_3 \Rightarrow (di)_p = I_{3|_{T_pS}} = i_{T_pS}
+        \end{gather*}
+
+        \item Aplicaciones constantes. Consideramos la superficie $S\subset \bb{R}^3$ y la aplicación $f:S\to S'$ (superficie o abierto de $\bb{R}^n$). Si $f$ es constante entonces existe un $a\in S'$ tal que $f(p)=a$ para todo $p\in S$. De esta forma, para un cierto $p\in S$ tendremos que $(df)_p : T_pS \to T_aS'$ donde aplicando la definición existirá un $\alpha:(-\veps, \veps) \to S$ con $\alpha(0)=p$ y $\alpha'(0)=v$ de forma que
+        \begin{gather*}
+            (df)_p(v) = (f\circ \alpha)'(0) = 0 \ \ \ \forall v\in T_pS
+        \end{gather*}
+        ya que $\forall t \in (-\veps, \veps)$ tendremos que $(f\circ \alpha)(t) = f(\alpha(t)) = a$ por lo que $f\circ \alpha$ será constante. Por tanto 
+        \begin{gather*}
+            f:S \to S' \ \text{ es constante } \Rightarrow (df)_p = 0 \ \ \ \forall p \in S
+        \end{gather*}
     \end{enumerate}
 \end{ejemplo}
+
+\begin{propiedades}
+    Algunas propiedades importantes que podemos destacar son las siguientes:
+    \begin{enumerate}
+        \item \textbf{Regla de la cadena.} Si estamos en la siguiente situación
+        \begin{gather*}
+            \xymatrix{
+                S \ar[r]^f & S' \ar[r]^g & S''
+            }
+        \end{gather*}
+        donde $S,S',S''\subset \bb{R}^3$ son superficies o abiertos de un espacio euclídeo y $f,g$ son aplicaciones diferenciables. Entonces $\forall p \in S$ se tiene que 
+        \begin{gather*}
+            d(g\circ f)_p = (dg)_{f(p)}\circ (df)_p
+        \end{gather*}
+        \begin{proof}
+            Tenemos que pensar en el siguiente diagrama
+            \begin{gather*}
+                \xymatrix{
+                    T_pS \ar[rr]^{d(g\circ f)_p} \ar[dr]_{(df)_p} && T_{g(f(p))}S''\\
+                    & T_{f(p)}S' \ar[ur]_{(dg)_{f(p)}}
+                }
+            \end{gather*}
+            y queremos ver que conmuta. Aplicando la definición tenemos que para todo $v\in T_pS$ existirá un $\alpha: (-\veps, \veps) \to S$ con $\alpha(0)=p$ y $\alpha'(0)=v$. Tendremos entonces 
+            \begin{gather*}
+                (f\circ \alpha):(-\veps,\veps) \ \ \text{ con }\ (f\circ \alpha)(0) = f(p) \ \ ,\ \ (f\circ \alpha)'(0) = (df)_p(v)
+            \end{gather*}
+            Si aplicamos ahora la definición de diferencial a $g$ tendremos 
+            \begin{align*}
+                d(g\circ f)_p(v) &= ((g\circ f)\circ \alpha)'(0) = (g\circ(f\circ \alpha))'(0) = (dg)_{f(p)}((df)_p(v))\\
+                &= [(dg)_{f(p)} \circ (df)_p](v)\ \ \ \ \forall v \in T_pS
+            \end{align*}
+            Por lo que podemos concluir que 
+            \begin{gather*}
+                d(g\circ f)_p = (dg)_{f(p)} \circ (df)_p
+            \end{gather*}
+        \end{proof}
+
+        \item \textbf{Extremos locales de una función.} Consideramos $S\subset \bb{R}^3$ una superficie y $f:S\to \bb{R}$ diferenciable. Suponemos que $f$ tiene un extremo local en $p_0\in S$. Entonces 
+        \begin{gather*}
+            (df)_{p_0} = 0
+        \end{gather*}
+        \begin{proof}
+            Aplicando la definición a $(df)_{p_0} : T_{p_0}S \to \bb{R}$ tenemos que para $v\in T_{p_0}S$ existe un $\alpha:(-\veps, \veps) \to S$ con $\alpha(0)=p_0$ y $\alpha'(0)=v$. Además,
+            \begin{gather*}
+                (df)_{p_0}(v) = (f\circ \alpha)'(0)
+            \end{gather*}
+            Si $p_0$ es extremo local (por ejemplo un máximo local, sin pérdida de generalidad), entonces tenemos que $\exists V$ entorno abierto de $p_0$ en $S$ de forma que 
+            \begin{gather*}
+                f(p) \leq f(p_0)\ \ \ \ \forall p \in V
+            \end{gather*}
+            Podemos suponer que $\alpha(t)\in V$ para todo $|t|<\veps$ y entonces
+            \begin{gather*}
+                (f\circ \alpha)(t)= f(\alpha(t)) \leq f(p_0)=(f\circ \alpha)(0)
+            \end{gather*}
+            por lo que tenemos $f\circ \alpha : \bb{R}\to \bb{R}$ que tiene un máximo local en $t=0$. Del análisis sabemos que su derivada ha de anularse luego
+            \begin{gather*}
+                (f\circ \alpha)'(0)=0 \Rightarrow (df)_{p_0}(v)=0 \ \ \ \forall v \in T_{p_0}S
+            \end{gather*}
+        \end{proof}
+
+        \item[2.bis.] Sea $S\subset \bb{R}^3$ una superficie conexa y $f:S\to S'$ (superficie o abierto de un euclídeo) diferenciable. Si $(df)_p=0$ para todo $p\in S$, entonces $f$ es constante.
+        
+        \begin{proof}
+            Dado $a\in Im(f)$ podemos definir
+            \begin{gather*}
+                A=\{p\in S : f(p)=a\} = f^{-1}(\{a\}) \subset S
+            \end{gather*}
+            Sabemos que $A\neq \emptyset$ porque $a\in Im(f)$ y además es cerrado por ser imagen inversa de un cerrado en $\bb{R}$. Basta ver que $A$ es abierto en $S$. Dado un $p\in A$ podemos considerar una parametrización $X:U \subset \bb{R}^2 \to S$ tal que $p\in X(U)$. Tenemos que 
+            \begin{gather*}
+                f_{|X(U)} = (f\circ X) \circ X^{-1}
+            \end{gather*}
+            Aplicando la regla de la cadena recién probada tenemos que 
+            \begin{gather*}
+                0 = (df)_q = d((f\circ X)\circ X^{-1})_q = d(f\circ X)_{X^{-1}(q)} \circ (dX^{-1})_q
+            \end{gather*}
+            Como $(dX^{-1})_q$ es un isomorfismo, necesariamente tenemos que 
+            \begin{gather*}
+                d(f\circ X)_{X^{-1}(q)}=0
+            \end{gather*}
+            Aplicando propiedades de análisis sabemos que $f\circ X : U\subset \bb{R}^2 \to \bb{R}^m$ con diferencial cero en cada punto por lo que $f\circ X$ es constante lo que nos dice que 
+            \begin{gather*}
+                f_{|X(U)} = a \ \ \ \text{ constante} \Rightarrow p\in X(U)\subset A
+            \end{gather*}
+            Finalmente hemos probado que $A$ contiene un entorno abierto para cada $p\in A$, luego $A$ es abierto.
+        \end{proof}
+
+        \item \textbf{Teorema de la función inversa.} Consideramos $f:S\to S'$ donde $S,S'$ son superficies o abiertos de $\bb{R}^2$ diferenciable. Sea $p_0\in S$ donde $T_{p_0}S \to T_{f(p_0)}S'$ es regular (isomorfismo, rango 2, inyectiva). Entonces existe un entorno abierto $V$ de $p_0$ en $S$ y un entorno abierto $W$ de $f(p_0)$ en $S'$ tales que 
+        \begin{gather*}
+            f(V)=W \ \ \ \ f_{|V}: V \to W \ \ \text{ es un difeomorfismo}
+        \end{gather*}
+        Consecuencias
+        \begin{enumerate}
+            \item Si $(df)_p$ es regular para todo $p\in S$ entonces $f$ es un difeomorfismo local. Por tanto, $f$ es abierta y así $f(S)$ es abierto en $S'$.
+            
+            \begin{ejemplo}
+                Sean $S'\overset{i}{\subset}S \subset \bb{R}^3$ superficies, $p'\in S'$ con $(di)_{p'} = \restr{i}{T_{p'}S'}$ donde $(di)_p'(T_{p'}S')\subset T_{p'}S$ y además tienen la misma dimensión, luego $(di)_p'$ es regular para todo $p'\in S'$. Si aplicamos la consecuencia recién vista, en particular $i(S')=S'\subset S$ es abierto. 
+            \end{ejemplo}
+        \end{enumerate}
+    \end{enumerate}
+\end{propiedades}
+
+\begin{ejercicio}\
+    \begin{enumerate}
+        \item Consideramos $A\in M_3(\bb{R})$ con $A=A^t$. Definimos 
+        \Func{f}{S^2}{\bb{R}}{p}{f(p)=\langle Ap, p \rangle}
+        que es diferenciable por ser restricción de una aplicación diferenciable ne $\bb{R}^3$ por lo que en particular es continua. Topológicamente además sabemos que $S^2$ es compacta. Sabemos que $f$ alcanza su máximo en algún punto $p_M\in S^2$ y su mínimo en un punto $p_m\in S^2$. Hagamos ahora una distinción de casos:
+        \begin{enumerate}
+            \item Si $f(p_M)=f(p_m)$, entonces $f$ es constante y tendremos para cada $p\in S^2$:
+            \begin{gather*}
+                0=(df)_p : T_pS^2 \to \bb{R}
+            \end{gather*}
+            Ahora para cada $v\in T_pS^2$ tendremos que 
+            \begin{gather*}
+                0 = (df)_p(v) = \langle Av, p \rangle + \langle Ap, v \rangle = 2 \langle Ap, v \rangle
+            \end{gather*}
+            lo que nos dice que $\forall p \in S^2$ se tiene que
+            \begin{gather*}
+                \langle Ap, v \rangle = 0 \ \ \ \ \forall v \in T_pS^2 = \langle p \rangle^{\bot}
+            \end{gather*}
+            por lo que $Ap \bot v$ para todo $v\in \langle p \rangle^\bot$. Para todo $p$ existirá un cierto $\lambda(p)$ tal que 
+            \begin{gather*}
+                Ap=\lambda(p)p
+            \end{gather*}
+            Además, $\lambda = cte = f(p) = \lambda(p)$ lo que significa que hemos podido diagonalizar la matriz (hemos obtenido los valores propios de $A$).
+
+            \item Si $f(p_M)\neq f(p_m)$, entonces necesariamente $p_M\neq p_m$.
+        \end{enumerate}
+    \end{enumerate}
+\end{ejercicio}
