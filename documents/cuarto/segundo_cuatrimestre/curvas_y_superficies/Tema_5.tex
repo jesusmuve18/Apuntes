@@ -12,4 +12,104 @@ La igualdad no se puede dar ya que $u,v,n$ son linealmente independientes. Adem�
     \begin{gather*}
         \forall p \in S \ \ \ N(p)\bot T_pS\ \ \wedge\ \ |N(p)|=1
     \end{gather*}
+    Muchas veces representaremos $N_p=N(p)$. Si $S$ es orientable, diremos que está \textbf{orientada} si se ha elegido una aplicación $N$ con las características anteriores.
 \end{definicion}
+
+\begin{propiedades}
+    Algunas propiedades que podemos extraer de estas definiciones son las siguientes:
+    \begin{enumerate}
+        \item Si $S\subset \bb{R}^3$ es una superficie conexa y orientable, entonces existen exactamente 2 orientaciones sobre $S$.
+        \begin{proof}
+            Por ser orientable tenemos que existe $N:S\to \bb{R}^3$ que cumple $N_p\bot T_pS$ y $|N_p|=1$. Fijamos $N$ y supongamos que tenemos otra orientación $N':S\to \bb{R}^3$. Podemos considerar el producto escalar de $N$ y $N'$.
+            \Func{\langle N, N' \rangle}{S}{\bb{R}}{p}{\langle N_p, N'_p \rangle = \pm 1}
+            Como $S$ es conexa, necesariamente se tendrá
+            \begin{gather*}
+                \langle N, N' \rangle (p) = \left\{
+                \begin{array}{r c c l l}
+                    1 & \forall p \in S & \Rightarrow & N_p=N'_p & \forall p \in S\\
+                    -1 & \forall p \in S & \Rightarrow & N_p=-N'_p & \forall p \in S
+                \end{array}
+                \right.
+            \end{gather*}
+        \end{proof}
+        \item Toda superficie es localmente orientable, es decir, para todo $p\in S$ va a existir un entorno abierto $V$ de $p$ en $S$ tal que $V$ (visto como superficie) es orientable.
+        \begin{proof}
+            Sea $X:U\to \bb{R}^3$ una parametrización de $S$ tal que $p\in X(U)=V$. Tomamos $(u,v)\in U$ y podemos considerar $T_{X(u,v)}S$. $X$ proporciona una base de $T_{X(u,v)}S$, que recordemos que será 
+            \begin{gather*}
+                \{X_u(u,v), X_v(u,v)\}
+            \end{gather*}
+            Para simplificar la notación notaremos $\{X_u,X_v\}$ base de $T_XS$. Definimos así $N^X:U \to \bb{R}^3$ dada por 
+            \begin{gather*}
+                N^X = \frac{X_u \wedge X_v}{|X_u \wedge X_v|}\bot X_u,\ X_v
+            \end{gather*}
+            que está bien definida ya que $X_u$ y $X_v$ son linealmente independientes. Por tanto tendremos $N^X \bot T_XS$ y además $|N^X| = 1$. Defino finalmente $N:V \to \bb{R}^3$ como 
+            \begin{gather*}
+                N = N^X \circ X^{-1}
+            \end{gather*}
+            que será diferenciable y cumplirá las condiciones para orientar a $V$ por lo que $V$ es orientable.
+        \end{proof}
+    \end{enumerate}
+\end{propiedades}
+
+\begin{notacion}
+    A una orientación $N$ sobre una superficie $S$ orientable se le llama también \textbf{campo normal unitario} y también \textbf{aplicación de Gau\ss}\footnote{Así se escribe Gauss en Alemán}.
+\end{notacion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Planos. Sea $P\subset \bb{R}^3$ un plano afín dado por 
+        \begin{gather*}
+            \{p\in \bb{R}^3 : \langle p-p_0, a \rangle = 0\}
+        \end{gather*}
+        y teníamos que $T_pP = \vec{P}=\langle a \rangle^{\bot}$ donde $a\bot T_pP$ y $|a| = 1$. Definimos $N:P \to \bb{R}^3$ dado por $N_p=a$ para todo $p\in P$y tenemos que es una orientación.
+
+        \item Esferas. Consideramos ahora $S^2(p_0, R)$ con $p_0\in \bb{R}^3$, $R>0$. Para todo punto $S^2(p_0, R)$ tenemos que 
+        \begin{gather*}
+            T_pS^2(p_0, R) = \{v\in \bb{R}^3 : v \bot p-p_0\} = \langle p-p_0\rangle^{\bot}
+        \end{gather*}
+        Por tanto definimos una aplicación de Gau\ss~ como $N:S^2(p_0, R)\to \bb{R}^3$ dada por 
+        \begin{gather*}
+            N_p = \frac{p-p_0}{|p-p_0|} = \frac{1}{R}(p-p_0)
+        \end{gather*}
+
+        \item Grafos. Todos los grafos son orientables porque existe una parametrización que los cubre por completo. Consideramos la aplicación $h:U\subset \bb{R}^2 \to \bb{R}$ y tenemos 
+        \begin{gather*}
+            Grafo(h)=S=\{(x,y,z)\in \bb{R}^3 : (x,y)\in \bb{R}^2, \ z=h(x,y)\}
+        \end{gather*}
+        Consideramos la parametrización $X:U \to Grafo(h)$ dada por 
+        \begin{gather*}
+            X(u,v) = (u,v,h(v))
+        \end{gather*}
+        Y tendremos que $X(U)=S$. Además, 
+        \begin{gather*}
+            X_u = (1,0,h_u)\ \ ,\ \ X_v=(0,1,h_v)
+        \end{gather*}
+        Consideramos $N^X:U \to \bb{R}^3$ dado por
+        \begin{gather*}
+            N^X = \frac{(-h_u, -h_v, 1)}{\sqrt{1 + h_u^2 + h_v^2}} = \frac{1}{\sqrt{1+|\nabla h|^2}} (-h_u, -h_v, 1)
+        \end{gather*}
+        Con dicho $N^X$ se define la correspondiente aplicación de Gauss $N=N^X \circ X^{-1}$
+
+        \item Imágenes inversas de un valor regular. Consideramos $f: O \subset \bb{R}^3 \to \bb{R}$ y $a\in \bb{R}$ valor regular de $f$ con $f^{-1}(\{a\})\neq \emptyset$. Teníamos que 
+        \begin{gather*}
+            S = \{(x,y,z)\in \bb{R}^3 : f(x,y,z)=a\}
+        \end{gather*}
+        es una superficie. Para todo punto $(x,y,z)\in S$ podemos considerar $T_{x,y,z}S=\langle \nabla f_{(x,y,z)} \rangle ^{\bot}$. Definimos una aplicación de Gau\ss~ $N$ dada por 
+        \Func{N}{S}{\bb{R}^3}{(x,y,z)}{N(x,y,z)=\frac{\nabla f}{|\nabla f|}(x,y,z) = \frac{1}{\sqrt{f_x^2 + f_y^2 + f_z^2}}(f_x, f_y, f_z)}
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{teo}[Teorema de Brouwer-Samelson]
+    Toda superficie $S\subset \bb{R}^3$ compacta (cerrada en $\bb{R}^3$) es orientable
+\end{teo}
+
+\begin{ejercicio}\
+    \begin{enumerate}
+        \item Supongamos $S=S_1 \cup S_2$ con $S_i$ superficie orientable para $i=1,2$. Si $S_1\cap S_1$ es conexa, entonces $S$ es orientable.
+        \item Supongamos que $S=S_1\cup S_2$ con $S_i$ superficie orientable y conexa para $i=1,2$ y que $S_1\cap S_2$ tiene exactamente dos componentes conexas $A$ y $B$. Si $S_1$ y $S_2$ se pueden orientar de forma que las orientaciones inducidas en $A$ y en $B$ son opuestas, entonces $S$ no es orientable. Aplicarlo a la cinta de Möbius dada por $M = im(X)$ donde
+        \begin{gather*}
+            X(u,v) = \left(\left(2 - v \sen\left(\frac{u}{2}\right)\right)\sen(u), \left(2 - v \sen \left(\frac{u}{2}\right)\right)\cos(u), v \cos \left(\frac{u}{2}\right)\right)
+        \end{gather*}
+        para todo $(u,v)\in \bb{R}$.
+    \end{enumerate}
+\end{ejercicio}
