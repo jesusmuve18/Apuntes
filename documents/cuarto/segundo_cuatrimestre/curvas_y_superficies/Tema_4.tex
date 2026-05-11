@@ -818,13 +818,130 @@
             \begin{gather*}
                 \langle Ap, v \rangle = 0 \ \ \ \ \forall v \in T_pS^2 = \langle p \rangle^{\bot}
             \end{gather*}
-            por lo que $Ap \bot v$ para todo $v\in \langle p \rangle^\bot$. Para todo $p$ existirá un cierto $\lambda(p)$ tal que 
+            por lo que $Ap \bot v$ para todo $v\in \langle p \rangle^\bot$. Es decir, que para todo $p$ existirá un cierto $\lambda(p)$ tal que 
             \begin{gather*}
                 Ap=\lambda(p)p
             \end{gather*}
-            Además, $\lambda = cte = f(p) = \lambda(p)$ lo que significa que hemos podido diagonalizar la matriz (hemos obtenido los valores propios de $A$).
+            Además, $\lambda = cte = f(p) = \lambda(p)$ lo que significa que hemos podido diagonalizar la matriz (hemos obtenido los valores propios de $A$). Además, tendremos
+            \begin{gather*}
+                A = \lambda I_3 \ \ \ \ \lambda \in \bb{R}
+            \end{gather*}
+            y todas las bases ortonormales de $\bb{R}^3$ diagonalizan $A$ y sus valores propios son $\lambda, \lambda, \lambda$.
 
-            \item Si $f(p_M)\neq f(p_m)$, entonces necesariamente $p_M\neq p_m$.
+            \item Si $f(p_M)\neq f(p_m)$ (es claro que entonces $f(p_M)>f(p_m)$), entonces necesariamente $p_M\neq p_m$. Además, en particular $p_M$ y $p_m$ serán extremos locales (y de hecho globales) de $f$ por lo que, por las propiedades vistas anteriormente tendremos
+            \begin{gather*}
+                (df)_{p_M} = (df)_{p_m} = 0
+            \end{gather*}
+            Veamos lo que podemos deducir de esto:
+            \begin{gather*}
+                (df)_{p_M} = 0 \Rightarrow (df)_{p_M}(v) = 0 \ \ \forall v \in T_{p_M}S^2 
+            \end{gather*}
+            Siguiendo el razonamiento del caso anterior tendremos
+            \begin{gather*}
+                \langle Ap_M, v\rangle = 0 \ \ \forall v \in T_{p_M}S^2= \langle p_M \rangle^\bot
+            \end{gather*}
+            lo que nos dice que 
+            \begin{gather*}
+                Ap_M = \lambda p_M\ \ \text{ para cierto } \lambda\in \bb{R} \Rightarrow f(p_M)= \langle Ap_M, p_M \rangle = \lambda |p_M|^2 = \lambda
+            \end{gather*}
+            Tendremos entonces
+            \begin{gather*}
+                Ap_M = f(p_M)p_M
+            \end{gather*}
+            por lo que $p_M$ es un vector propio para $A$ con valor propio $f(p_M)$. \\
+            
+            Análogamente llegaríamos a que 
+            \begin{gather*}
+                Ap_m = f(p_m)p_m
+            \end{gather*}
+            por lo que $p_m$ es un vector propio para $A$ con valor propio $f(p_m)$.\\
+            
+            Veamos que forman una base ortonormal. Es claro que tienen módulo 1 ya que están en la esfera de radio 1. Veamos entonces que son ortogonales. Consideramos 
+            \begin{align*}
+                (f(p_M)-f(p_m))\langle p_M, p_m\rangle &= f(p_M)\langle p_M, p_m \rangle - f(p_m)\langle p_M, p_m \rangle = \\
+                &= \langle f(p_M)p_M \rangle - \langle p_M, f(p_m)p_m\rangle = \\
+                &= \langle Ap_M, p_m \rangle - \langle p_M, Ap_m \rangle =\\
+                &= 0
+            \end{align*}
+            Ya que $\langle Ap_M, p_m \rangle=\langle p_M, Ap_m \rangle$ (la matriz es autoadjunta). Como teníamos $(f(p_M)-f(p_m))\neq 0$, necesariamente se dará $\langle p_M, p_m\rangle=0$, por lo que efectivamente son ortogonales. Por tanto, $\{p_M, p_m\}$ son dos vectores propios para $A$ unitarios y perpendiculares. Nos falta uno para tener una base ortonormal. Elegimos así un $p_0\in S^2$ tal que $p_0\bot p_M$ y $p_0\bot p_m$. Tendremos
+            \begin{gather*}
+                \langle Ap_0, p_M \rangle = \langle p_0, Ap_M \rangle = f(p_M) \langle p_0, p_M \rangle = 0\\
+                \langle Ap_0, p_m \rangle = \langle p_0, Ap_m \rangle = f(p_m) \langle p_0, p_m \rangle = 0
+            \end{gather*}
+            luego el vector $Ap_0$ no tiene componente ni en $p_M$ ni en $p_m$, luego solo tendrá componente en $p_0$. Esto implica que 
+            \begin{gather*}
+                Ap_0 = f(p_0)
+            \end{gather*}
+            por lo que $p_0$ es propio para $A$ con valor propio $f(p_0)$. Tendremos finalmente que $\{p_M, p_m, p_0\}$ es una base ortonormal de $\bb{R}^3$ formada por vectores propios para $A$ con valores propios $\{f(p_M), f(p_m), f(p_0)\}$, base que diagonaliza a $A$.
         \end{enumerate}
+
+        \item Dada $S\subset \bb{R}^3$ veamos que $S^\circ = \emptyset$. Veámoslo por reducción al absurdo. Si $p\in S^\circ$, entonces $\exists \veps > 0$ tal que $B(p,\veps)\subset S$. Tomemos $\{e_1, e_2, e_3\}$ la base canónica de $\bb{R}^3$ y consideramos para $i\in\{1,2,3\}$ las aplicaciones
+        \Func{\alpha_i}{\bb{R}}{\bb{R}^3}{t}{\alpha_i(t)=p+te_i}
+        Entonces si $|t|<\veps$ tendremos que $\alpha_i(t)\in B(p,\veps)\subset S$ (los vectores de la base son unitarios por lo que no se saldrán de la bola). Además tendremos que para cada $i\in \{1,2,3\}$
+        \begin{gather*}
+            \alpha_i(0)=p, \ \ \ \alpha_i'(0)=e_i\in T_pS
+        \end{gather*}
+        por lo que habremos encontrado tres vectores linealmente independientes en un plano, lo cual es imposible. Llegamos a contradicción.
+
+        \item Consideramos $S\subset \bb{R}^3$ una superficie y un punto $p_0\in \bb{R}^3$. Se nos pide estudiar los puntos críticos de la función distancia al cuadrado a $p_0$ y extraer todas las consecuencias geométricas que se puedan.
+        
+        \begin{definicion}
+            Un punto crítico $p\in S$ para la función $f:S\to \bb{R}$ es un punto donde $(df)_p = 0$.
+        \end{definicion}
+
+        Consideramos entonces $f(p)=|p-p_0|^2$ para todo $p\in S$. Tendremos entonces que $p$ es punto crítico si y solo si
+        \begin{align*}
+            (df)_p = 0 &\sii (df)_p(v) = 0 \ \ \ \forall v \in T_pS \sii
+            \langle p-p_0, v \rangle = 0 \ \ \forall v\in T_pS \\
+            &\sii p_0-p \bot v \ \ \forall v \in T_pS 
+        \end{align*}
+        lo cual ocurrirá si y solo si $p_0$ está en la recta normal a $S$ en $p$. Si $S$ es compacta, entonces hay al menos un punto crítico. Por $p_0$ se puede trazar una recta perpendicular a $S$.\\
+
+        Si $S$ es conexa, entonces todas las rectas normales a $S$ son concurrentes (pasan por un mismo punto). Sea $p_0$ el punto común a todas las rectas normales. Consideramos la función distancia al cuadrado a $p_0$, $f$. Sabemos que $p_0$ está en la recta normal a $S$ en $p$ para todo $p\in S$. Además, $p$ es crítico para $f$ para todo $p\in S$ por lo que 
+        \begin{gather*}
+            (df)_p = 0 \ \ \ \forall p \in S
+        \end{gather*}
+        Esto nos dice que $f$ es constante, luego se verificará
+        \begin{gather*}
+            |p-p_0|^2 = R^2\ \ \ \forall p\in S,\ \ R \geq 0
+        \end{gather*}
+        Si $R=0$, tendríamos que $S=\{p_0\}$ pero esto no puede ser, por lo que $R>0$. Esto nos dice que $S\subset S^2(p_0, R)$, es decir, $S$ es un abierto de una esfera de $\bb{R}^3$.
+
+        \item Buena pregunta (solo Dios sabe qué ejercicio va aquí).
+        
+        \item Consideramos $S\subset \bb{R}^3$ una superficie cerrada, un punto $a\in \bb{R}^3$ arbitrario. Demostrar que la distancia de $S$ al punto $a$ alcanza un mínimo.\\
+        
+        Consideramos el siguiente conjunto
+        \begin{gather*}
+            A=\{|p-a| : p\in S\}\subset \bb{R}
+        \end{gather*}
+        Sabemos que $A$ está acotado inferiormente por $0$. Por el axioma del supremo (del ínfimo) tendremos que
+        \begin{gather*}
+            \exists r = \inf_{p\in S} |p-a| \Rightarrow \exists \{p_n\}_{n\in \bb{N}}\subset S \text{ tal que } r=\lim_{n\to \infty} |p_n-a|
+        \end{gather*}
+        Podemos considerar la sucesión $\{|p_n-a|\}_{n\in \bb{N}}\subset \bb{R}$ que estará acotada. Por tanto existirá un $C\in \bb{R}$ tal que $|p_n-a|\leq C$ lo que nos dice que $\{p_n\}_{n\in \bb{N}}\subset B(a,R)$ para un radio $R>0$. Por tanto $\{p_n\}$ está acotada y por el teorema de Bolzano-Weierstrass existirá una parcial ${p_{n_k}}_{k\in \bb{N}}$ de $\{p_n\}_{n\in \bb{N}}$ convergente, es decir,
+        \begin{gather*}
+            \exists \lim_{k\to \infty} p_{n_k} = p \in \bar{S} = S
+        \end{gather*}
+        Donde en la última igualdad hemos aplicado que $S$ es cerrada. Por la unicidad del límite tendremos
+        \begin{gather*}
+            r = \lim_{n\to \infty} |p_n-a| = \lim_{k\to \infty} |p_{n_k}-a| \overset{(\ast)}{=} \left|\lim_{k\to \infty} p_{n_k}-a \right| = |p-a|,\ \ \ p\in S
+        \end{gather*}
+        Donde en $(\ast)$ hemos aplicado que la función distancia es continua. Tendremos entonces que $r$ es un mínimo en $S$ que se alcanza en $p$. Esto no funciona para el máximo.
+
+        \item Sea $S\subset \bb{R}^3$ una superficie compacta. Probar que existe una recta $R$ de $\bb{R}^3$ que corta a $S$ perpendicularmente en al menos dos puntos suyos.\\
+        
+        Definimos la aplicación
+        \Func{f}{S\times S}{\bb{R}}{(p,q)}{f(p,q)=|p-q|^2}
+        que es continua. Como $S\times S$ es compacto tendremos que $f$ alcanza su máximo en algún punto $(a,b)\in S\times S$, lo que significa que 
+        \begin{gather*}
+            |p-q|^2 \leq |a-b|^2 \ \ \forall p,q\in S
+        \end{gather*}
+        Además, si $a=b$ significa que $|p-q|^2 = 0$ para todo $p,q\in S$, lo que implicaría que $S=\{p_0\}$ lo que nos llevaría a contradicción. Por tanto $a\neq b$ y podemos considerar $R$ la única recta de $\bb{R}^3$ que pasa por $a$ y $b$. Tenemos también
+        \begin{gather*}
+            |p-b| \leq |a-b|^2 \ \ \forall p \in S \Rightarrow dist^2(b) \ \ \text{ alcanza su máximo en }a\\
+            |a-q| \leq |a-b|^2 \ \ \forall q \in S \Rightarrow dist^2(a) \ \ \text{ alcanza su máximo en }b
+        \end{gather*}
+        Por tanto $a$ está en la recta normal a $S$ que pasa por $b$ y $b$ está en la recta normal a $S$ que pasa por $a$ (tal y como lo hemos visto en ejemplos anteriores).
     \end{enumerate}
 \end{ejercicio}

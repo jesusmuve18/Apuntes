@@ -217,7 +217,7 @@ Usaremos los convenios
     \end{gather*}
     definido en $D = \{y\in C^1([x_0, x_1]) : y(x_0) = y_0\}$ con $y_0\in \bb{R}$ dado. Todo punto crítico $y_*\in D\cap C^2(I)$, además de verificar la ecuación de Euler-Lagrange, cumple también que 
     \begin{gather*}
-        F_p(x_1, y_*(x_1, y_*'(x_1))) = 0
+        F_p(x_1, y_*(x_1), y_*'(x_1)) = 0
     \end{gather*} 
     \begin{proof}
         Sabemos que
@@ -225,7 +225,7 @@ Usaremos los convenios
             \delta_\varphi \cc{F}[y] = \int_{x_0}^{x_1} \left(F_y(x,y(x, y'(x))) -\frac{d}{dx}[F_p(x,y(x), y'(x))]\right)\varphi(x) dx +\\
             + F_p(x_1, y(x), y'(x))\varphi(x_1) - F_p(x_0, y(x), y'(x))\varphi(x_0)
         \end{gather*}
-        En esta caso, las direcciones admisibles son
+        En este caso, las direcciones admisibles son
         \begin{gather*}
             \{\varphi \in C^1(I) : \varphi(x_0)=0\}
         \end{gather*}
@@ -290,7 +290,7 @@ Usaremos los convenios
 
 \section{Estudio de extremos locales de funcionales}
 
-Supongamos que $y_*$ es mínimo local para $\cc{F}$. Entonces existe un entorno tal que $\cc{F}[y_*] \leq \cc{F}[y]$ para todo $y$ en el entorno. Bassta estudiar $\cc{F}[y_*+\veps\varphi]$ para $\varphi$ dirección admisible y $|\veps << 1$. \\
+Supongamos que $y_*$ es mínimo local para $\cc{F}$. Entonces existe un entorno tal que $\cc{F}[y_*] \leq \cc{F}[y]$ para todo $y$ en el entorno. Basta estudiar $\cc{F}[y_*+\veps\varphi]$ para $\varphi$ dirección admisible y $\veps << 1$. \\
 
 Desarrollando por Taylor en $\veps$ tenemos 
 \begin{gather*}

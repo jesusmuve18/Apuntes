@@ -1,0 +1,15 @@
+\chapter{Segunda forma fundamental. Curvaturas}
+
+Consideramos una superficie $S\subset \bb{R}^3$ y un punto $p\in S$. Consideramos su plano tangente $T_pS$ y vemos que no podemos ``derivarlo''. Nos planteamos entonces cuántos vectores $n\in \bb{R}^3$ verifican $n\bot T_pS$ y $|n|=1$ y llegamos a la conclusión de que existen exactamente 2. Si elijo uno de ellos, oriento $T_pS$ porque divido las bases $\{u,v\}$ de $T_pS$ en dos clases:
+\begin{itemize}
+    \item Positivamente orientadas: Si $det(u,v,n)>0$.
+    \item Negativamente orientadas: Si $det(u,v,n)<0$
+\end{itemize}
+La igualdad no se puede dar ya que $u,v,n$ son linealmente independientes. Además, un cambio de $n$ a $-n$ invierte la orientación en $T_pS$.
+
+\begin{definicion}
+    Diremos que una superficie $S$ es \textbf{orientable}\footnote{no orientada, orientable} si se pueden orientar todos sus planos tangentes mediante una aplicación diferenciable, es decir, si existe una aplicación $N: S \to \bb{R}^3$ diferenciable tal que 
+    \begin{gather*}
+        \forall p \in S \ \ \ N(p)\bot T_pS\ \ \wedge\ \ |N(p)|=1
+    \end{gather*}
+\end{definicion}
