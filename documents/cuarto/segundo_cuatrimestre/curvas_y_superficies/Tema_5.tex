@@ -113,3 +113,57 @@ La igualdad no se puede dar ya que $u,v,n$ son linealmente independientes. Adem�
         para todo $(u,v)\in \bb{R}$.
     \end{enumerate}
 \end{ejercicio}
+
+\begin{observacion}
+    Sea $S\subset \bb{R}^3$ una superficie orientable. Consideramos entonces la aplicación de Gau\ss~ $N:S \to \bb{R}^3$ tal que 
+    \begin{gather*}
+        N_p\bot T_pS\ \ \wedge\ \ |N_p| = 1
+    \end{gather*}
+    Por tanto se puede considerar que $N:S\to S^2$ diferenciable tal que $N_p\bot T_pS$. Tomamos $p\in S$ y tenemos 
+    \begin{gather*}
+        (dN)_p : T_pS \to T_{N_p}S^2 = \langle N_p\rangle^\bot = T_pS
+    \end{gather*}
+    Por lo que $(dN)_p$ es un endomorfismo de $T_pS$ y tiene, por tanto, dos invariantes: el determinante y la traza.
+\end{observacion}
+
+\begin{definicion}
+    Al determinante $det(dN)_p$ lo notaremos por $K(p)$ y lo llamaremos \textbf{curvatura de Gau\ss}.
+\end{definicion}
+\begin{definicion}
+    A la media de la traza, $-\frac{1}{2}tr(dN)_p$ la notaremos\footnote{La H viene de \textit{half} en inglés (mitad).} por $H(p)$ y la llamaremos \textbf{curvatura media}.
+\end{definicion}
+\begin{notacion}
+    Es fácil ver que la curvatura de Gau\ss~ no depende de la orientación mientras que la curvatura media cambia de signo frente a cambios de orientación.
+\end{notacion}
+
+\begin{observacion}
+    No sabemos si $K,H:S\to \bb{R}$ son continuas. Sin embargo, sabemos que hay una forma bilineal asociada a $(dN)_p$. La definimos como 
+    \Func{\sigma_p}{T_pS\times T_pS}{\bb{R}}{(v,w)}{\sigma_p(v,w)=\langle (dN)_p(v), w \rangle}
+    A esta aplicación la llamaremos la \textbf{segunda forma fundamental} de $S$ en $p$ (para la orientación N).\\
+
+    (La \textbf{primera forma fundamental} $g_p$ de $S$ en $p$ no es más que el producto escalar de $\bb{R}^3$ restringido a $T_pS$, es decir, 
+    \Func{g_p}{T_pS\times T_pS}{\bb{R}}{(v,w)}{g_p(v,w)=\langle v, w\rangle}
+    Es natural que llamemos a esto primera forma fundamental ya que es mucho más primitiva y venimos usándola sin haberle puesto nombre).
+\end{observacion}
+
+\begin{definicion}
+    A la aplicación $-(dN)_p$ la notaremos por \textbf{endomorfismo de Weingarten}\footnote{Weingarten viene del alemán, \textit{wein} (vino) y \textit{garten} (jardín), haciendo referencia a un viñedo o bodega.}. Además, se verificará
+    \begin{gather*}
+        K(p) = \det(A_p)\\
+        H(p) = \frac{1}{2}tr(A_p)
+    \end{gather*}
+\end{definicion}
+
+Consideramos una superficie $S\subset \bb{R}^3$ orientada, con su respectiva aplicación de Gau\ss~ $N:S\to S^2$. Consideramos $p\in S$ y podemos tomar $v\in T_pS$ con $|v|=1$. Al ser ortogonales tendremos que $p + \langle \{v, N_p \}\rangle$ es un plano, al que llamaremos $P_v$. Tendremos así que $P_v$ con $v\in T_pS$ es un haz de planos con eje la recta normal a $S$ en $p$. Nos vamos a creer que $P_v\cap S$ es la traza de una curva regular, es decir, que
+\begin{gather*}
+    \exists \alpha:(-\veps, \veps) \to S\cap P_v \text{ tal que } \alpha(0)=p\ \ \wedge \ \ \alpha'(0)=v
+\end{gather*}
+Consideramos $\langle N_{\alpha(s), \alpha'(s)} \rangle = 0$ para todo $s$ ya que $\alpha'(s)\in T_{\alpha(s)}S$. Derivamos en $s=0$ y obtenemos
+\begin{gather*}
+    \langle (dN)_p(v), v\rangle + \langle N_p, \alpha''(0) \rangle = 0
+\end{gather*}
+y llegamos a que 
+\begin{gather*}
+    \sigma_p(v,v) = \langle \alpha''(0),N_p \rangle
+\end{gather*}
+de esta forma nos damos cuenta de que $\sigma_p$ mide la curvatura de las secciones normales a $S$ en $p$ (vistas como curvas planas).
