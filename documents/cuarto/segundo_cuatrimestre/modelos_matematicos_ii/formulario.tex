@@ -10,7 +10,7 @@
     \portada[%
         titulo=Modelos Matemáticos II,
         subtitulo=Resumen Parcial 1,
-        autor=Jesús Muñoz Velasco,
+        autor=Jesús Muñoz Velasco\\Daniel Morán Sánchez\\José Manuel Sánchez Varbas,
         año=Curso 2025-2026]
         
     \thispagestyle{empty}
@@ -348,6 +348,42 @@
     \end{observacion}
 
     \section{Problemas de Sturm-Liouville}
+    Consideramos el problema
+    \begin{gather*}
+        \left\{
+            \begin{array}{l}
+                (p(x)y'(x))' + q(x)y(x) + \lambda r(x)y(x) = 0,\ \ \ x\in I\\
+                y(x_0) = y(x_1) = 0
+        \end{array}
+        \right.
+    \end{gather*}
+    donde $p\in C^1(I)$, $q,r\in C(I)$ y $p,r>0$. Además $\lambda$ es un parámetro real.\\
+
+    Nuestro objetivo es caracterizar variacionalmente los valores propios y las funciones propias.
+
+    \begin{definicion}
+        Consideramos la \textbf{primera función propia} dada por 
+        \begin{gather*}
+            \cc{F}[y] = \int_I \left(p(x)(y'(x))^2 - q(x)(y(x))^2\right) dx
+        \end{gather*}
+        definido en 
+        \begin{gather*}
+            \cc{D}_1 = \left\{ y\in C^1_0(I) : \int_I r(x)(y(x))^2dx = 1 \right\}
+        \end{gather*}
+        Su mínimo será la primera función propia y su valor será el primer valor propio.
+    \end{definicion}
+
+    \begin{definicion}
+        En general, la \textbf{n-ésima función propia} $\Phi_n$ se obtiene al minimizar el funcional 
+        \begin{gather*}
+            \cc{F}[y] = \int_I \left(p(x)(y'(x))^2 - q(x)(y(x))^2\right) dx
+        \end{gather*}
+        sobre el dominio
+        \begin{gather*}
+            \cc{D}_n = \left\{ y\in C^1_0(I) : \int_I r(x)(y(x))^2dx = 1,\ \ \int_I r(x)\Phi_1(x)y(x)dx = ... = \int_Ir(x)\Phi_{n-1}(x)y(x)dx = 0 \right\}
+        \end{gather*}
+        y su mínimo será el \textbf{n-ésimo valor propio} del problema considerado.
+    \end{definicion}
 
     \section{Problema de Cauchy para la ecuación de ondas}
     Consideramos el siguiente problema:
@@ -493,12 +529,11 @@
                 f(x) \sim \sum_{n=0}^{\infty} c_n f_n = \frac{1}{2} - \frac{2}{\pi} \sum_{n=1}^{\infty} \frac{\sen((2n-1)x)}{2n-1}
             \end{gather*}
 
+            
+
         \end{itemize}
     \end{ejemplo}
     
-
-
-
     \section{Problema mixto para la ecuación de ondas.}
 
     Tenemos el problema:
