@@ -9,11 +9,14 @@
 \begin{document} 
     \portada[%
         titulo=Modelos Matemáticos II,
-        subtitulo=,
+        subtitulo=Resumen Parcial 1,
         autor=Jesús Muñoz Velasco,
         año=Curso 2025-2026]
         
     \thispagestyle{empty}
+    \tableofcontents
+    \thispagestyle{empty}
+    \newpage
 
     % os recuerdo que tendremos la primera prueba de clase el próximo miércoles
     % 13 de Mayo, en horario de clase. Durante la semana os envío un documento
@@ -343,6 +346,76 @@
         \end{gather*}
         que tendrá como ecuación de Euler-Lagrange la ecuación diferencial que tenía el problema homogéneo. Si conseguimos demostrar que el funcional es estrictamente convexo y que la solución trivial es solución habríamos probado que es la única posible.
     \end{observacion}
+
+    \section{Problemas de Sturm-Liouville}
+
+    \section{Problema de Cauchy para la ecuación de ondas}
+    Consideramos el siguiente problema:
+    \begin{gather*}
+        \left\{
+            \begin{array}{l c l}
+                u_{tt} - c^2u_{xx} = 0 & \text{ en } & [0,\infty[\times \bb{R}\\
+                u(t=0, x) = \varphi(x) & \text{ en } & \bb{R}\\
+                u_t(t=0, x) = \psi(x) & \text{ en } & \bb{R}
+            \end{array}
+        \right.
+    \end{gather*}
+    La solución general para resolver este problema es la \textbf{fórmula de d'Alembert}:
+    \begin{enumerate}
+        \item Existen $\Phi_+, \Phi_-:\bb{R} \to \bb{R}$ tales que 
+        \begin{gather*}
+            u(t,x) = \Phi_+(x+ct) + \Phi_-(x-ct)
+        \end{gather*}
+        \item Y tenemos:
+        \begin{gather*}
+            \boxed{u(t,x) = \frac{\varphi(x+ct) + \varphi(x-ct)}{2} + \frac{1}{2c} \int_{x-ct}^{x+ct} \psi(s) ds}
+        \end{gather*}
+    \end{enumerate}
+    Son relevantes los dominios de influencia y los de dependencia
+
+    \section{Series de Fourier}
+    \begin{definicion}
+        En $L^2(I)$ consideramos la \textbf{serie de Fourier} de $f$ respecto del sistema ortonormal $\{f_k\}\subset L^2(I)$ como 
+        \begin{gather*}
+            \sum_{k=0}^{\infty} c_k f_k, \ \text{ donde }\ \ c_k = \langle f, f_k \rangle_{L^2(I)}
+        \end{gather*}
+        los números $c_k$ se llaman \textbf{coeficientes de Fourier}.
+    \end{definicion}
+
+    \begin{definicion}
+        Diremos que un sistema ortonormal es completo en $L^2(I)$ si 
+        \begin{gather*}
+            \sum_{k=0}^{\infty}c_k^2 = \| f \|^2_{L^2(I)}\ \ \ \forall f \in L^2(I)
+        \end{gather*}
+    \end{definicion}
+
+    \begin{lema}
+        Si el sistema ortonormal es completo, entonces la serie de Fourier de $f$ converge a $f$ para todo $f\in L^2(I)$.
+    \end{lema}
+    
+    En nuestros problemas consideraremos el intervalo $I=[0,L]$ y nuestro sistema ortonormal y completo $\{f_k\}$ formado por 
+    \begin{gather*}
+        \left\{
+        \begin{array}{l}
+            f_0(x) = \frac{1}{\sqrt{L}}\\
+            f_{2n-1}(x) = \sqrt{\frac{2}{L}} \cos \left(\frac{2\pi n x}{L}\right)\\
+            f_{2n-1}(x) = \sqrt{\frac{2}{L}} \sen \left(\frac{2\pi n x}{L}\right)
+        \end{array}
+        \right.
+    \end{gather*}
+    A este sistema lo llamaremos \textbf{sistema trigonométrico}.
+
+    La serie de Fourier de $f\in L^2(I)$ se podrá escribir como 
+    \begin{gather*}
+        f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty}\left( a_n \cos \left(\frac{2\pi n x}{L}\right) + b_n \sen \left(\frac{2\pi n x}{L}\right)  \right)
+    \end{gather*}
+    con 
+    \begin{gather*}
+        a_n = \frac{2}{L} \int_0^L f(x) \cos \left(\frac{2\pi n x}{L}\right) dx,\ \ n\in \bb{N}\cup \{0\}\\
+        b_n = \frac{2}{L} \int_0^L f(x) \sen \left(\frac{2\pi n x}{L}\right) dx,\ \ n\in \bb{N}\\
+    \end{gather*}
+    y la llamaremos \textbf{Serie de Fourier trigonométrica}
+
 
     \section{Problema mixto para la ecuación de ondas.}
 
