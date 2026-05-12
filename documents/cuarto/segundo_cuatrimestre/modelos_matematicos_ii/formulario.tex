@@ -1,0 +1,514 @@
+\documentclass[12pt]{article}
+
+\input{../../../_assets/preambulo.tex}
+\input{../../../_assets/portada.tex}
+
+\usepackage[all]{xy}
+\usepackage{ stmaryrd }
+
+\begin{document} 
+    \portada[%
+        titulo=Modelos Matemáticos II,
+        subtitulo=,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2025-2026]
+        
+    \thispagestyle{empty}
+
+    % os recuerdo que tendremos la primera prueba de clase el próximo miércoles
+    % 13 de Mayo, en horario de clase. Durante la semana os envío un documento
+    % con una convocatoria y os detallo instrucciones para el día de la prueba.
+
+    % A modo de resumen, los contenidos tratados son los siguientes:
+
+    % - Nociones sobre optimización en dimensión finita y programación lineal.
+
+    % - Optimización de funcionales: el método directo; derivadas direccionales.
+
+    % - Condiciones necesarias: ecuación de Euler-Lagrange (casos de funciones escalares de una y varias variables, y caso de curvas).
+
+    % - Condiciones suficientes: ecuación de Jacobi.
+
+    % - Nociones de convexidad/concavidad.
+
+    % - Lagrangianos y principio de mínima acción.
+
+    % - Optimización con ligaduras integrales.
+
+    % - Problemas de valores en la frontera. Teorema de Fredholm.
+
+    % - Problemas de Sturm-Liouville.
+
+    % - Problema de Cauchy para la ecuación de ondas.
+
+    % - Series de Fourier.
+
+    % - Problema mixto para la ecuación de ondas.
+
+    % Para cualquier consulta al respecto poneos en contacto conmigo. Un saludo,
+
+    % Juan
+    
+    \section{Nociones sobre optimización en dimensión finita y programación lineal}
+
+    \subsection{Weierstrass}
+    Si $D\subset\mathbb R^n$ es compacto y $f:D\to\mathbb R$ es continua,
+    entonces $f$ alcanza máximo y mínimo global.
+
+    \subsection{Puntos críticos}
+    Si $D$ es abierto y $f\in C^1(D)$ alcanza un extremo local en $x_0\in D$,
+    entonces
+    \[
+    \nabla f(x_0)=0.
+    \]
+
+    \subsection{Multiplicadores de Lagrange en dimensión finita}
+    Para optimizar $f(x)$ sujeto a $g(x)=0$, se resuelve
+    \[
+    \nabla f(x)=\lambda \nabla g(x),\qquad g(x)=0.
+    \]
+
+    \subsection{Programación lineal}
+    En programación lineal, si el óptimo existe y el conjunto admisible es un poliedro,
+    se alcanza en un vértice. Si el conjunto no está acotado, hay que comprobar si el
+    máximo/mínimo existe.
+
+    \section{Optimización de funcionales: el método directo; derivadas direccionales}
+
+    \subsection{Método Directo}
+    \begin{enumerate}
+        \item Ver si el funcional está acotado
+        \item En caso de estar acotado hallar la mejor cota posible y demostrar que se alcanza o que hay una sucesión que tiende a dicha cota en $D$ (si el límite no esta en $D$ entonces no se alcanza dicha cota).
+    \end{enumerate}
+
+    \subsection{Derivadas direccionales (Derivada de Gateaux)}
+    \begin{gather*}
+        \delta_\varphi \cc{F}[y] = [d_\veps \cc{F}[y+\veps \varphi]]_{|_{\veps = 0}}
+    \end{gather*}
+    \begin{enumerate}
+        \item Perturbar $\varphi$ en una dirección admisible (genérica).
+        \item Derivar con respecto a $\veps$.
+        \item Evaluar en $\veps=0$.
+    \end{enumerate}
+    Si $y$ es extremo de $\mathcal F$, entonces
+    \begin{align*}
+        \delta_\varphi \mathcal F[y]=0
+    \end{align*}
+    para toda dirección admisible $\varphi$
+
+    \section{Condiciones necesarias: ecuación de Euler-Lagrange (casos de funciones escalares de una y varias variables, y caso de curvas)}
+
+    % D=[x_0, x_1]
+
+    \subsection{Una variable}
+    Consideramos el funcional dado por 
+    \begin{gather*}
+        \cc{F}[y] = \int_{x_0}^{x_1} F(x,y,p) dx
+    \end{gather*}
+    donde $y:[x_0, x_1]\to \bb{R}$. La Ecuación de Euler-Lagrange queda
+    \begin{gather*}
+        F_y -\frac{d}{dx}(F_p) = 0
+    \end{gather*}
+    Cuando los extremos no son fijos, a la ecuación de Euler-Lagrange hay que añadirle la condición
+    \begin{gather*}
+        F_p(x_0,y(x_0), y'(x_0)) = 0 = F_p(x_1,y(x_1), y'(x_1))
+    \end{gather*}
+    (si solo hubiera un extremo libre se aplicaría esta condición solo a dicho extremo).
+    Cuando la condición es de tipo periódica ($y(x_0)=y(x_1)$) añadimos la condición
+    \begin{gather*}
+        F_p(x_0,y(x_0), y'(x_0)) = F_p(x_1,y(x_1), y'(x_1))
+    \end{gather*}
+
+    \subsubsection{Funcionales dependientes de $y''$}
+    Si se tiene que el funcional está definido como 
+    \begin{gather*}
+        \mathcal F[y]=\int_{x_0}^{x_1}F(x,y,p,q)\,dx,
+    \end{gather*}
+    donde $p=y'$, $q=y''$ entonces la ecuación de Euler-Lagrange es
+    \begin{gather*}
+        F_y-\frac{d}{dx}F_{p}+\frac{d^2}{dx^2}F_{q}=0.
+    \end{gather*}
+
+    \subsection{Varias variables}
+    Consideramos el funcional dado por 
+    \begin{gather*}
+        \cc{F}[y] = \int_\Omega F(x,y,\nabla y) dx = \int_\Omega F(x_1,...,x_d,y,p_1,...,p_d) dx_1...dx_d
+    \end{gather*}
+    donde $y: \Omega \subset \bb{R}^d \to \bb{R}$. La Ecuación de Euler-Lagrange queda
+    \begin{gather*}
+        F_y - div_{(x_1,...,x_d)}(F_p) = 0
+    \end{gather*}
+    donde
+    \begin{gather*}
+        div_x(F_p) = \sum_{i=1}^d \frac{\partial F_{p_i}}{\partial x_i} =
+        \frac{\partial F_{p_1}}{\partial x_1} + ... + \frac{\partial F_{p_d}}{\partial x_d}
+    \end{gather*}
+
+    \subsection{Curvas}
+    Consideramos el funcional dado por 
+    \begin{gather*}
+        \cc{F}[y] = \int_{x_0}^{x_1} F(x,y,p) dx = \int_{x_0}^{x_1} F(x, y_1,...,y_d, p_1,...,p_d)dx
+    \end{gather*}
+    donde $y:[x_0, x_1]\to \bb{R}^d$. La Ecuación de Euler-Lagrange es un sistema de $d$ ecuaciones dado por
+    \begin{gather*}
+        F_{y_i} - \frac{d}{dx}(F_{p_i})=0\ \ \ i\in\{1,...,d\}
+    \end{gather*}
+
+    \subsection{Identidad de Beltrami}
+    Si $F$ no depende explícitamente de $x$, entonces
+    \[
+    F-y'F_p=C.
+    \]
+
+    \section{Condiciones suficientes: Ecuación de Jacobi}
+    Se haría la segunda derivada de Gateaux. Por simplicidad solo estudiamos esta ecuación cuando se tienen extremos fijos en un intervalo $[x_0, x_1]$. El procedimiento para comprobar si un extremal $y$ es mínimo sería el siguiente:
+    \begin{enumerate}
+        \item Calculamos $P$ y $Q$ dados por 
+        \begin{align*}
+            P &= F_{pp}\\
+            Q &= F_{yy}-\frac{d}{dx}(F_{yp})
+        \end{align*}
+        \item Comprobamos la \textbf{condición necesaria de Legendre} dada por 
+        \begin{gather*}
+            \begin{array}{l l l}
+                \text{Si } P\geq 0 & \Rightarrow & \text{ Se cumple la condición}\\
+                \text{Si } P > 0 & \Rightarrow & \text{ Se cumple la condición estricta}
+            \end{array}
+        \end{gather*}
+        Si no se cumple ninguna de estas condiciones no podemos concluir nada con la condición de Jacobi.
+        En caso contrario continuamos con el procedimiento.
+        \item Resolvemos la \textbf{ecuación de Jacobi} con incógnita $\varphi \in C^2([x_0, x_1])$ dada por
+        \begin{gather*}
+            -\frac{d}{dx}(P\varphi') + Q\varphi = 0
+        \end{gather*}
+
+        \item 
+        
+        \begin{definicion}[Punto conjugado]
+            Un punto $\bar x\in ]x_0,x_1]$ se dice \textbf{conjugado} de $x_0$ si existe una solución no trivial
+            $\varphi$ de la ecuación de Jacobi tal que
+            \begin{gather*}
+                \varphi(x_0)=0,\qquad \varphi(\bar x)=0.
+            \end{gather*}
+            \endsquare
+        \end{definicion}
+
+        Si no existen puntos conjugados en $]x_0,x_1]$ y se cumple Legendre estricta, el extremal es mínimo local estricto. Esto se comprobará imponiendo
+        \begin{gather*}
+            \varphi(x_0) = 0
+        \end{gather*}
+        y tendremos que demostrar que o bien $\varphi(x)\equiv 0$ o bien $\nexists \bar{x}\in]x_0, x_1]$ con
+        \begin{gather*}
+            \varphi(\bar{x})=0
+        \end{gather*}
+    \end{enumerate} 
+
+    \section{Nociones de convexidad/concavidad}
+
+    \begin{definicion}[Subconjunto convexo]
+        Tomamos un espacio vectorial real $X$, diremos que un subconjunto $U\subset X$ es convexo si para cualesquiera $u,v\in U$ se tiene que 
+        \begin{gather*}
+            \theta u + (1-\theta) v \in U \ \ \ \forall \theta \in[0,1]
+        \end{gather*}
+    \end{definicion}
+
+    Se ha estudiado ya que cualquier conjunto de la forma
+    \begin{gather}\label{def-dominio}
+        \cc{D}= \{y\in C^1([x_0, x_1],\bb{R}^N) : y(x_0)=y_0,\ y(x_1)=y_1\},\ \ \ y_0,y_1\in \bb{R}^N \text{ fijos}
+    \end{gather}
+    es convexo.
+
+    \begin{definicion}[Funcional convexo]
+        Diremos que un funcional $\cc{F} : \cc{D} \to \bb{R}$ es convexo si para cualesquiera $u,v\in D$ se tiene que
+        \begin{gather*}
+            \cc{F}[\theta u + (1-\theta) v] \leq \theta\cc{F}[u] + (1-\theta) \cc{F}[v] \ \ \ \forall \theta \in [0,1]
+        \end{gather*}
+    \end{definicion}
+
+    \begin{lema}
+        Para cada $x\in I$ definimos $F_x:\mathbb{R}^N\times\mathbb{R}^N\to \mathbb{R}$ dada por:
+        \begin{equation*}
+            F_x(y,p) = F(x,y,p), \qquad (y,p)\in \mathbb{R}^N\times\mathbb{R}^N
+        \end{equation*}
+        Si para cada $x\in I$ tenemos que esta aplicación es convexa, entonces el funcional $\cc{F}:I\times\mathbb{R}^N\times \mathbb{R}^N\to \mathbb{R}$ dado por:
+        \begin{equation*}
+            \cc{F}(y) = \int_{x_0}^{x_1} F(x,y(x),y'(x))~dx 
+        \end{equation*}
+        es convexo en cualquier subconjunto convexo de $C^1(I, \mathbb{R}^N)$.
+    \end{lema}
+
+    \begin{observacion}
+        Para ver que $F_x(y,p)$ es efectivamente convexo, lo que haremos será calcular
+        \begin{gather*}
+            Hess F_x(y,p) = 
+            \begin{pmatrix}
+                \dfrac{\partial^2 F_x}{\partial y^2} & \dfrac{\partial^2 F_x}{\partial y \partial p}\\
+                \dfrac{\partial^2 F_x}{\partial p \partial y} & \dfrac{\partial^2 F_x}{\partial p^2}
+            \end{pmatrix} (y,p)
+        \end{gather*}
+        Ahora haremos una distinción de casos:
+        \begin{itemize}
+            \item Si $Hess F_x(y,p)$ es semidefinida positiva, entonces el funcional $\cc{F}$ es convexo.
+            \item Si $Hess F_x(y,p)$ es definida positiva, entonces el funcional $\cc{F}$ es estrictamente convexo.
+            \item Si $Hess F_x(y,p)$ es semidefinida negativa, entonces el funcional $\cc{F}$ es cóncavo.
+            \item Si $Hess F_x(y,p)$ es definida negativa, entonces el funcional $\cc{F}$ es estrictamente cóncavo.
+        \end{itemize}
+        Para comprobar que la matriz es definida positiva (equivalentemente para negativa) bastará comprobar los menores principales líderes. \\
+
+        Para comprobar que la matriz es semidefinida positiva (equivalentemente para negativa) no basta siempre con mirar solo los menores principales líderes; hay que comprobar los menores principales.
+        En dimensión 2, para
+        \[
+        H=\begin{pmatrix}a&b\\ b&c\end{pmatrix},
+        \]
+        semidefinida positiva equivale a
+        \[
+        a\geq 0,\qquad c\geq 0,\qquad |H|\geq 0.
+        \]
+        
+        Las consecuencias sobre concavidad solo funcionarán en subconjuntos convexos de $C^1(I, \bb{R}^N)$, como indica el lema. Como la mayoría serán de la forma (\ref{def-dominio})
+    \end{observacion}
+
+    \begin{itemize}
+        \item Si $\cc{F}$ es estrictamente convexo, a lo sumo habrá un mínimo.
+        \item Si $\cc F$ es convexo y $y$ es punto crítico, entonces $y$ es mínimo global.
+        \item Si $\cc F$ es estrictamente convexo, dicho mínimo global es único
+    \end{itemize}
+
+    \section{Lagrangianos y principio de mínima acción.}
+
+    \section{Optimización con ligaduras integrales.}
+
+    Tenemos un problema consistente en calcular los extremales de un funcional $\cc{F}:\cc{D} \to \bb{R}$ dado por 
+    \begin{gather*}
+        \cc{F}[y] = \int_{x_0}^{x_1} F(x,y,p) dx
+    \end{gather*}
+    sobre un dominio de la forma 
+    \begin{gather*}
+        \cc{D} = \left\{ y\in C^1([x_0, x_1]) y(x_0)=y_0,\ y(x_1)=y_1,\ \int_{x_0}^{x_1} \Phi(x,y,p) dx = \varphi \right\}
+    \end{gather*}
+    En general, las condiciones del dominio pueden incluir otra condición integral y las condiciones de tipo Dirichlet pueden ser de otro tipo. \\
+
+    \begin{enumerate}
+        \item Introducimos el funcional corregido como 
+        \begin{gather*}
+            F^*(x,y,p) = F(x,y,p) - \lambda \Phi(x,y,p)
+        \end{gather*}
+
+        En caso de que haya varias condiciones integrales (supongamos que hay $n$), el funcional extendido será
+        \begin{gather*}
+            F^*(x,y,p) = F(x,y,p) - \lambda_1 \Phi_1(x,y,p) - ... - \lambda_n \Phi_n(x,y,p)
+        \end{gather*}
+        \item Le aplicamos Euler-Lagrange al funcional corregido y resolvemos la ecuación diferencial en función de $\lambda$ (o de los múltiples $\lambda$ en caso de haberlos). 
+        \item Imponemos las condiciones de contorno para obtener una solución, que seguirá en función de $\lambda$.
+        \item Aplicamos las condiciones integrales a la solución obtenida, llegando al valor de $\lambda$ (es posible que durante el proceso lleguemos a un problema de Sturm-Liouville).
+        \item Sustituimos el valor de $\lambda$ en la solución $y$ y esta será la solución del problema estudiado.
+    \end{enumerate}
+ 
+    \section{Problemas de valores en la frontera. Teorema de Fredholm}
+    Consideramos un problema de contorno de la forma 
+    \begin{gather*}
+        \left\{
+        \begin{array}{l}
+            (p(x)y'(x))' + q(x)y(x) = r(x)\\
+            y(x_0) = y(x_1) = 0
+        \end{array}
+        \right.
+    \end{gather*}   
+    donde $0<p\in C^1([x_0, x_1])$, $q,r\in C([x_0, x_1])$. 
+    Nuestro objetivo es estudiar cuántas soluciones puede tener el problema
+    \begin{enumerate}
+        \item Consideramos el problema homogéneo eliminando $r(x)$ de la siguiente forma:
+        \begin{gather*}
+            \left\{
+            \begin{array}{l}
+                (p(x)y'(x))' + q(x)y(x) = 0\\
+                y(x_0) = y(x_1) = 0
+            \end{array}
+            \right.
+        \end{gather*}  
+        \item Resolvemos el problema de contorno.
+        \begin{itemize}
+            \item Si solo existe una solución y es trivial, entonces el problema original tiene una única solución y habremos terminado el estudio.
+            \item En otro caso el problema completo tendrá solución si y solo si todo $\psi$ solución del problema homogéneo es ortogonal a $r$, es decir,
+            \begin{gather*}
+                \langle r, \psi \rangle = \int_{x_0}^{x_1} r(x)\psi(x)dx = 0
+            \end{gather*}
+            En este caso el problema completo tendrá infinitas soluciones. En caso de que no sean ortogonales el problema original no tendrá ninguna solución.
+        \end{itemize}
+    \end{enumerate}
+    \begin{observacion}
+        Una forma fácil de ver que el problema homogéneo solo admite la solución trivial es construir el funcional asociado
+        \begin{gather*}
+            \cc{F}[y] = \int_{x_0}^{x_1} p \frac{y'^2}{2} - q \frac{y^2}{2} dx
+        \end{gather*}
+        que tendrá como ecuación de Euler-Lagrange la ecuación diferencial que tenía el problema homogéneo. Si conseguimos demostrar que el funcional es estrictamente convexo y que la solución trivial es solución habríamos probado que es la única posible.
+    \end{observacion}
+
+    \section{Problema mixto para la ecuación de ondas.}
+
+    Tenemos el problema:
+    \begin{equation*}
+        \left\{\begin{array}{ll}
+                u_{tt} - c^2 u_{xx} = 0 , & \text{en\ } \left[0,\infty\right[\times [0,L] \\
+                    u(0,x) = \varphi(x) , &\text{en\ } [0,L] \\
+                    u_t(0,x) = \psi(x) , &\text{en\ } [0,L] \\
+                    u(t,0) = 0 = u(t,L) , & \text{en\ } \left[0,\infty\right[
+        \end{array}\right.
+    \end{equation*}
+
+    La estrategia de resolución es la siguiente:
+    \begin{enumerate}
+        \item Primero resolvemos por variables separadas $u(t,x) = T(t) X(x)$, y expresamos
+        $u_{tt} - c^2 u_{xx} = 0$ con la nueva descomposición como dos cocientes iguales, 
+        uno dependiendo solo de $t$ y otro solo de $x$, por lo que ambos deben ser constantes,
+        pongamos a $\lm \in \mathbb{R}$. 
+        \item Distinguimos casos comparando $\lm$ con $0$:
+        \begin{itemize}
+            \item Si $\lm < 0$ obtenemos combinación de exponenciales, imponemos condiciones de contorno y vemos qué solución queda.
+            \item Si $\lm = 0$ resolvemos $X_0'' = 0$, luego $X_0(x) = ax+b$, para $a,b\in \mathbb{R}$ y obtenemos imponiendo las condiciones de contorno la solución correspondiente.
+            \item Si $\lm > 0$ obtenemos combinación de senos y cosenos de la misma frecuencia, cosa que se desarrollará en el cálculo a continuación.
+        \end{itemize}
+        \item Se obtendrán, para cada $n \in \mathbb{N}$, soluciones $T_n(t)$ y $X_n(x)$, y a partir de estas dos, $u_n(t,x)$. Así, la solución más general posible (puesto que la ecuación es lineal) es:
+        \begin{equation*}
+            u(t,x) = \sum_{n=1}^{\infty} u_n(t,x)
+        \end{equation*} 
+        \item Finalmente se imponen las condiciones de contorno $$u(0,x) = \varphi(x) \quad u_t(0,x) = \psi(x))$$
+        para ciertas $\varphi, \psi$ dadas, y se identifican los sumandos no nulos, obteniendo así la solución final.
+    \end{enumerate}
+
+    Veamos un ejemplo detallado siguiendo este esquema: \\
+
+    Por variables separadas, $u(t,x) = T(t) X(x)$. Sustituimos la condición primera del problema, 
+    $$u_{tt} - c^2 u_{xx} = 0 \iff T''(t) X(x) - c^2 T(t) X''(x) = 0 \iff T''(x) X(x) = c^2 T(t) X''(x) \iff$$$$\dfrac{T''(t)}{c^2 T(t)} = \dfrac{X''(x)}{X(x)} = - \lm \quad \lm \in \mathbb{R}$$
+
+    Ahora, buscamos resolver:
+    \begin{equation*}
+        \left\{\begin{array}{l}
+            X'' + \lm X = 0 \qquad \text{en\ } [0,L] \\
+            X(0) = 0  \\
+            X(L) = 0 
+        \end{array}\right.
+    \end{equation*}
+    de donde $X(0)=X(L)=0$ viene de $u(t,0) = 0 = u(t,L)$ para todo $t\in[0,\infty[$, ya que $u(t,0)=T(t)X(0)=T(t)X(L)=u(t,L)=0$ y $T(t)\neq 0$ en general (no para todo valor de $t$) por lo que $X(0)=X(L)=0$ (puede que haya otras condiciones de contorno pero se traducen de la misma forma).\\
+
+    Tenemos entonces un problema de tipo Sturm-Liouville. El polinomio característico asociado es $p(r) = r^2 + \lm$, y sus raíces salen de la ecuación 
+    $$p(r) = 0 \iff r^2 + \lm = 0 \iff r^2 = - \lm$$
+
+    Ahora distinguimos, los dos primeros casos, y seguiremos con el restante:
+    \begin{enumerate}
+        \item Si $\lm < 0$, entonces $r^2 = \lm \iff r = \pm \sqrt{-\lm} = \pm \mu$, para cierto $\mu > 0$.
+        La solución general es entonces $X(x) = A e^{\mu x} + B e^{- \mu x}$. Imponiendo $X(0) = 0 = X(L)$:
+        \begin{enumerate}
+            \item $\boxed{X(0) = 0} \Longrightarrow A + B = 0 \Longrightarrow B = - A$, luego $X(x) = A(e^{\mu x} - e^{- \mu x})$.
+            \item $\boxed{X(L) = 0} \Longrightarrow A(e^{\mu L} - e^{- \mu L}) = 0 \stackrel{\mu, L > 0}{\Longrightarrow} A = 0$, luego $X \equiv 0$.
+        \end{enumerate}
+        \item Si $\lm = 0$, entonces resolvemos $X'' = 0 \Longrightarrow X(x) = mx + n$, para ciertos $m,n \in \mathbb{R}$. Imponemos nuevamente las mismas condiciones de contorno: 
+        \begin{enumerate}
+            \item $\boxed{X(0) = 0} \Longrightarrow n = 0$, luego $X(x) = mx$.
+            \item $\boxed{X(L) = 0} \Longrightarrow mL = 0 \stackrel{L > 0}{\Longrightarrow} m = 0$, luego $X \equiv 0$.
+        \end{enumerate}
+    \end{enumerate}
+
+    En lo que sigue podemos suponer que $\lm > 0$. En tal caso, la solución general es de la forma 
+
+    \begin{equation*}
+        X(x) = c_1\cos(\mu x) + c_2\sen(\mu x), \qquad c_1,c_2\in \mathbb{R}
+    \end{equation*}
+
+    Imponemos que $X(0) = 0$, y obtenemos que $c_1 = 0$, luego $X(x) = c_2 \sen (\mu x)$. Ahora, imponemos $X(L) = 0$, de donde
+    $$X(L) = c_2 \sen(\mu L) = 0 \stackrel{c_2 > 0}{\Longrightarrow} \sen (\mu L) = 0 \Longrightarrow \mu L = n \pi \stackrel{\mu = \sqrt{\lm}}{\Longrightarrow} \sqrt{\lm} = \dfrac{n \pi}{L} \Longrightarrow \lm_n = \left( \dfrac{n \pi}{L} \right)^2 \quad n \in \mathbb{N}$$
+    Entonces, para cada $n \in \mathbb{N}$, tenemos que $X_n(x) = c_2 \sen \left( \dfrac{n \pi x}{L} \right)$. \\
+
+    Pasamos a resolver:
+    \begin{equation*}
+        \begin{array}{l}
+            \dfrac{T_n''(t)}{c^2 T_n(t)} = - \dfrac{n^2 \pi^2}{L^2} \qquad \text{en\ } [0,L]
+        \end{array}
+    \end{equation*}
+
+    Vemos que:
+
+    $$\dfrac{T_n''(t)}{c^2 T_n(t)} = - \dfrac{n^2 \pi^2}{L^2} \iff T_n''(t) = -  \dfrac{c^2 n^2 \pi^2}{L^2} T_n(t) \iff T_n''(t) + \dfrac{c^2 n^2 \pi^2}{L^2} T_n(t) = 0$$
+
+    El polinomio característico asociado es $q(r) = r^2 + \frac{c^2 n^2 \pi^2}{L^2}$, y sus raíces vienen dadas como las soluciones de
+
+    $$q(r) = 0 \iff r^2 = - \dfrac{c^2 n^2 \pi^2}{L^2} \iff r = \pm i \dfrac{c n \pi}{L}$$
+
+    La solución general es entonces 
+
+    $$T_n(t) = a_n \cos \left( \dfrac{c n \pi t}{L} \right) + b_n \sen \left( \dfrac{c n \pi t}{L} \right) \quad a_n, b_n \in \mathbb{R} \text{ para cada } n \in \mathbb{N}$$
+
+    La solución más general posible, usando que la ecuación es lineal, sabemos que es, llamando $a_n c_1 = A_n$ y $b_n c_1 = B_n$ para cada $n \in \mathbb{N}$, la siguiente:
+    $$u(t,x) = \sum_{n=1}^{\infty} u_n(t,x) = \sum_{n=1}^{\infty} \left[A_n \cos \left( \dfrac{c n \pi t}{L} \right) + B_n \sen \left( \dfrac{c n \pi t}{L} \right) \right] \sen \left( \dfrac{n \pi x}{L} \right)$$
+
+    Imponemos condiciones de contorno, y trabajamos con un ejemplo (sencillo) concreto para que se vea más claro:
+    
+    $$\varphi(x) = \sen \left(\dfrac{2 \pi x}{L} \right) + 2 \sen \left(\dfrac{5 \pi x}{L} \right)$$
+    
+    de donde
+    
+    $$u(0,x) = \varphi(x) \iff \sum_{n=1}^{\infty} A_n \sen \left( \dfrac{n \pi x}{L} \right) =  \sen \left(\dfrac{2 \pi x}{L} \right) + 2 \sen \left(\dfrac{5 \pi x}{L} \right) \iff$$$$ A_2 = 1 \quad A_5 = 2 \quad A_n = 0 \quad \forall n \in \mathbb{N} \setminus \{2,5\}$$
+
+    Análogamente, para $\psi(x) = 3 \sen \left( \dfrac{3 \pi x}{L} \right)$ se tiene que:
+
+    $$u_t(t,x) = \sum_{n=1}^{\infty} \left[- \dfrac{c n \pi}{L} A_n \sen \left( \dfrac{c n \pi t}{L} \right) + \dfrac{c n \pi}{L} B_n \cos \left( \dfrac{c n \pi t}{L} \right) \right] \sen \left( \dfrac{n \pi x}{L} \right)$$
+
+    y 
+
+    $$u_t(0,x) = \sum_{n=1}^{\infty} \dfrac{c n \pi}{L} B_n \sen \left( \dfrac{n \pi x}{L} \right) = 3 \sen \left( \dfrac{3 \pi x}{L} \right)$$
+
+    deducimos que, para $n = 3$, $$\dfrac{c 3 \pi}{L} B_3 = 3 \iff B_3 = \dfrac{L}{c \pi}$$
+
+    y además $B_n = 0 \quad \forall n \in \mathbb{N} \setminus \{3\}$. Sustituyendo todo, llegamos a la solución final:
+    $$\boxed{u(t,x) = \cos \left( \dfrac{2 c \pi t}{L} \right) \sen \left( \dfrac{2 \pi x}{L} \right) + \dfrac{L}{c \pi} \sen \left( \dfrac{3 c \pi t}{L} \right) \sen \left( \dfrac{3 \pi x}{L} \right) + 2 \cos \left( \dfrac{5 c \pi t}{L} \right) \sen \left( \dfrac{5 \pi x}{L} \right)}$$
+
+    \section*{Anexo. Resolución de Ecuaciones Diferenciales}
+
+    \subsection{Ecuaciones lineales homogéneas}
+    Se supone una ecuación de la forma 
+    \begin{gather*}
+        \sum_{i=0}^n a_i y^{i)} = a_ny^{n)} + ... + a_1 y' + a_0y = 0
+    \end{gather*}
+    Calculamos el polinomio característico como 
+    \begin{gather*}
+        \sum_{i=0}^n a_i x^i = a_nx^n + ... + a_1x + a_0
+    \end{gather*}
+    y extraeremos la raíces de este polinomio. Supongamos que encontramos una raíz $r\in \bb{C}$ que podemos escribir como $r=\alpha + i\beta$ con $\alpha, \beta \in \bb{R}$. De esta forma la solución general de $y$ para esta raíz será:
+    \begin{gather*}
+        y_r = e^{\alpha x} \left[ C_1 \cos(\beta x) + C_2 \sin(\beta x) \right],\ \ \ C_1,C_2\in \bb{R}
+    \end{gather*}
+    La solución general $y$ será la combinación lineal de todas estas $y_r$ para cada raíz del polinomio (la suma de ellas valdrá).
+
+    Si obtenemos una raíz real doble $r$, la fórmula general de $y$ (para dicha raíz) será:
+    \begin{gather*}
+        y_r = C_1 e^{rx} + C_2 x e^{rx}, \ \ \ C_1, C_2\in \bb{R}
+    \end{gather*}
+
+    \subsection{Ecuaciones tipo Euler}
+    Se supone una ecuación de la forma 
+    \begin{gather*}
+        \sum_{i=0}^n a_i x^i y^{i)} = a_nx^ny^{n)} + ... + a_1x y' + a_0y = 0
+    \end{gather*}
+    Suponemos que la solución es de la forma $y(x)=x^r$. De esta forma, tendremos que 
+    \begin{gather*}
+        y^{i)} = r(r-1)...(r-i+1)x^{r-i} = r_ix^{r-i}\ \ \ \ \forall i \in \{0,...,n\}
+    \end{gather*}
+    Al sustituir en la ecuación general obtendremos
+    \begin{gather*}
+        \sum_{i=0}^n a_i x^i y^{i)} = \sum_{i=0}^n a_i x^i r_ix^{r-i} =  \sum_{i=0}^n a_i r_ix^{r} = x^r \sum_{i=0}^n a_i r_i = 0
+    \end{gather*}
+    Por lo que tendremos que resolver 
+    \begin{gather*}
+        \sum_{i=0}^n a_i r_i = 0
+    \end{gather*}
+    ya que $x^r \neq 0$ para cualquier $x\neq 0$. Al resolver esto obtendremos raíces $r\in \bb{C}$ que podemos escribir como $r=\alpha + i\beta$ con $\alpha, \beta \in \bb{R}$. De esta forma la solución general de $y$ para esta raíz será:
+    \begin{gather*}
+        y_r = x^\alpha [C_1 \cos(\beta \ln x) + C_2 \sin(\beta \ln x)],\ \ \ C_1, C_2\in \bb{R}
+    \end{gather*}
+    La solución general $y$ será la combinación lineal de todas estas $y_r$ para cada raíz del polinomio (la suma de ellas valdrá).
+
+    Si obtenemos una raíz real doble $r$, la fórmula general de $y$ (para dicha raíz) será:
+    \begin{gather*}
+        y_r = C_1 x^r + C_2 \ln(x) x^r , \ \ \ C_1, C_2\in \bb{R}
+    \end{gather*} 
+\end{document}
