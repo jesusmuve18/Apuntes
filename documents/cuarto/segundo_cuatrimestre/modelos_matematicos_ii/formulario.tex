@@ -414,7 +414,89 @@
         a_n = \frac{2}{L} \int_0^L f(x) \cos \left(\frac{2\pi n x}{L}\right) dx,\ \ n\in \bb{N}\cup \{0\}\\
         b_n = \frac{2}{L} \int_0^L f(x) \sen \left(\frac{2\pi n x}{L}\right) dx,\ \ n\in \bb{N}\\
     \end{gather*}
-    y la llamaremos \textbf{Serie de Fourier trigonométrica}
+    y la llamaremos \textbf{serie de Fourier trigonométrica}.
+
+    \subsection{Desarrollo en serie de senos y en serie de cosenos}
+
+    Sea $f \in C(I)$, con $f'$ continua a trozos en $I$. Si la condición de $L$-periocidad $(f(0) = f(L)$), podemos construir una serie de Fourier convergente con la extensión par de $f$:
+
+    $$f_p = \begin{cases}
+        f(x) \quad& \text{si } 0 \leq x \leq L \\
+        f(-x) \quad& \text{si } -L \leq x \leq 0 \\
+    \end{cases}$$
+
+    La serie de Fourier trigonométrica de $f_p$ converge uniformemente en $I$. \\
+
+    Para el desarrollo en serie de cosenos disponemos del siguiente resultado:
+
+    \begin{teo}
+        Sea $I = [0,L]$, $f \in C(I)$ y $f'$ continua a trozos en $I$, entonces el desarrollo 
+        \begin{gather}
+            \frac{A_0}{2} + \sum_{n=1}^{\infty} A_n \cos \left(\frac{\pi n x}{L}\right)
+        \end{gather}
+        con
+        \begin{gather}
+            A_n = \frac{2}{L} \int_0^L f(x) \cos \left(\frac{\pi n x}{L}\right) dx,\ \ n\in \bb{N}\cup \{0\}
+        \end{gather}
+        converge uniformemente hacia $f$ en $I$.
+    \end{teo}
+
+    El resultado análogo para senos es el que sigue:
+
+    \begin{teo}
+        Sea $I = [0,L]$, $f \in C(I)$ y $f'$ continua a trozos en $I$, 
+        $f(0) = f(L)$ (es \textbf{L-periódica}) entonces el desarrollo 
+        \begin{gather}
+            \sum_{n=1}^{\infty} B_n \sen \left(\frac{\pi n x}{L}\right)
+        \end{gather}
+        con
+        \begin{gather}
+            B_n = \frac{2}{L} \int_0^L f(x) \sen \left(\frac{\pi n x}{L}\right) dx,\ \ n\in \bb{N}
+        \end{gather}
+        converge uniformemente hacia $f$ en $I$.
+    \end{teo}
+
+    \begin{ejemplo}
+        Se considera la función $f: [0, 2 \pi] \to \mathbb{R}$ definida por
+        $$f(x) = \begin{cases}
+            0, \quad& 0 \leq x \leq \pi \\
+            1, \quad& \pi \leq x \leq 2\pi \\
+        \end{cases}$$
+        \begin{itemize}
+            \item Demuestra que $f \in L^2([0,2\pi])$. Se tiene  
+            \begin{gather*}
+                \|f\|^2_{L^2(0,2\pi)} = \int_{\pi}^{2\pi} dx = \pi < \infty
+            \end{gather*}
+
+            \item Calcula la serie de Fourier de $f$ respecto del sistema ortonormal
+            \begin{gather*}
+                \left\{
+                \begin{array}{l}
+                    \displaystyle f_0(x) = \frac{1}{\sqrt{2 \pi}}\\\\
+                    \displaystyle f_{2n-1}(x) = \sqrt{\frac{1}{\pi}} \cos(nx)\\\\
+                    \displaystyle f_{2n}(x) = \sqrt{\frac{1}{\pi}} \sen(nx)
+                \end{array}
+                \right.
+            \end{gather*}
+            Los coeficientes de Fourier vienen dados por 
+            \begin{gather*}
+                \left\{
+                \begin{array}{l}
+                    \displaystyle c_0 = \langle f, f_0 \rangle = \frac{1}{\sqrt{2 \pi}}\int_{\pi}^{2\pi} dx = \sqrt{\frac{\pi}{2}}\\\\
+                    \displaystyle c_{2n-1} = \langle f, f_{2n-1} \rangle = \sqrt{\frac{1}{\pi}} \int_{\pi}^{2\pi} \cos(nx) dx = 0\\\\
+                    \displaystyle c_{2n} = \langle f, f_{2n} \rangle = \sqrt{\frac{1}{\pi}} \int_{\pi}^{2\pi} \sen(nx) dx = \frac{1}{n\sqrt{\pi}} (\cos(n\pi) - 1)
+                \end{array}
+                \right.
+            \end{gather*}
+            luego
+            \begin{gather*}
+                f(x) \sim \sum_{n=0}^{\infty} c_n f_n = \frac{1}{2} - \frac{2}{\pi} \sum_{n=1}^{\infty} \frac{\sen((2n-1)x)}{2n-1}
+            \end{gather*}
+
+        \end{itemize}
+    \end{ejemplo}
+    
+
 
 
     \section{Problema mixto para la ecuación de ondas.}
