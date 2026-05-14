@@ -80,7 +80,7 @@
 
     \subsection{Método Directo}
     \begin{enumerate}
-        \item Ver si el funcional está acotado
+        \item Ver si el funcional está acotado. Si buscamos mínimo, comprobar si el funcional está acotado inferiormente. Si buscamos máximo, comprobar si está acotado superiormente.
         \item En caso de estar acotado hallar la mejor cota posible y demostrar que se alcanza o que hay una sucesión que tiende a dicha cota en $D$ (si el límite no esta en $D$ entonces no se alcanza dicha cota).
     \end{enumerate}
 
@@ -277,7 +277,31 @@
         \item Si $\cc F$ es estrictamente convexo, dicho mínimo global es único
     \end{itemize}
 
-    \section{Lagrangianos y principio de mínima acción.}
+    \section{Lagrangianos y principio de mínima acción}
+    Dado un Lagrangiano
+    \[
+    L(t,q,\dot q)=T(\dot q)-V(q),
+    \]
+    la acción asociada es
+    \[
+    \mathcal A[q]=\int_{t_0}^{t_1}L(t,q(t),\dot q(t))\,dt.
+    \]
+
+    El principio de acción estacionaria dice que las trayectorias físicas son puntos críticos de $\mathcal A[q]$, por lo que satisfacen las ecuaciones de Euler-Lagrange:
+    \[
+    \frac{\partial L}{\partial q_i}
+    -
+    \frac{d}{dt}\left(\frac{\partial L}{\partial \dot q_i}\right)=0.
+    \]
+
+    Para una partícula con
+    \[
+    L=\frac12m|\dot q|^2-V(q),
+    \]
+    se obtiene
+    \[
+    m\ddot q=-\nabla V(q).
+    \]
 
     \section{Optimización con ligaduras integrales.}
 
@@ -370,7 +394,11 @@
         \begin{gather*}
             \cc{D}_1 = \left\{ y\in C^1_0(I) : \int_I r(x)(y(x))^2dx = 1 \right\}
         \end{gather*}
-        Su mínimo será la primera función propia y su valor será el primer valor propio.
+        El mínimo del funcional será el primer valor propio y se alcanzará sobre una primera función propia normalizada. Más concretamente
+        \begin{gather*}
+            \min_{\cc{D}_1}\cc{F} = \lambda_1
+        \end{gather*}
+        y se alcanza en $\Phi_1$.
     \end{definicion}
 
     \begin{definicion}
@@ -407,13 +435,22 @@
             \boxed{u(t,x) = \frac{\varphi(x+ct) + \varphi(x-ct)}{2} + \frac{1}{2c} \int_{x-ct}^{x+ct} \psi(s) ds}
         \end{gather*}
     \end{enumerate}
-    Son relevantes los dominios de influencia y los de dependencia
+    Son relevantes los dominios de influencia y los de dependencia. El valor \(u(t,x)\) depende únicamente de los datos iniciales en
+    \[
+    [x-ct,x+ct].
+    \]
+    Este intervalo es el dominio de dependencia del punto \((t,x)\).
+
+    Si los datos iniciales están soportados en \([a,b]\), su dominio de influencia queda delimitado por las rectas características
+    \[
+    x+ct=a,\qquad x-ct=b.
+    \]
 
     \section{Series de Fourier}
     \begin{definicion}
         En $L^2(I)$ consideramos la \textbf{serie de Fourier} de $f$ respecto del sistema ortonormal $\{f_k\}\subset L^2(I)$ como 
         \begin{gather*}
-            \sum_{k=0}^{\infty} c_k f_k, \ \text{ donde }\ \ c_k = \langle f, f_k \rangle_{L^2(I)}
+            \sum_{k=0}^{\infty} c_k f_k, \ \text{ donde }\ \ c_k = \langle f, f_k \rangle_{L^2(I)} = \int_I f(x)f_k(x)dx
         \end{gather*}
         los números $c_k$ se llaman \textbf{coeficientes de Fourier}.
     \end{definicion}
@@ -435,7 +472,7 @@
         \begin{array}{l}
             f_0(x) = \frac{1}{\sqrt{L}}\\
             f_{2n-1}(x) = \sqrt{\frac{2}{L}} \cos \left(\frac{2\pi n x}{L}\right)\\
-            f_{2n-1}(x) = \sqrt{\frac{2}{L}} \sen \left(\frac{2\pi n x}{L}\right)
+            f_{2n}(x) = \sqrt{\frac{2}{L}} \sen \left(\frac{2\pi n x}{L}\right)
         \end{array}
         \right.
     \end{gather*}
@@ -454,7 +491,7 @@
 
     \subsection{Desarrollo en serie de senos y en serie de cosenos}
 
-    Sea $f \in C(I)$, con $f'$ continua a trozos en $I$. Si la condición de $L$-periocidad $(f(0) = f(L)$), podemos construir una serie de Fourier convergente con la extensión par de $f$:
+    Sea $f \in C(I)$, con $f'$ continua a trozos en $I$. Si la condición de $L$-periodicidad falla $(f(0) \neq f(L)$), podemos construir una serie de Fourier convergente con la extensión par de $f$:
 
     $$f_p = \begin{cases}
         f(x) \quad& \text{si } 0 \leq x \leq L \\
@@ -481,7 +518,7 @@
 
     \begin{teo}
         Sea $I = [0,L]$, $f \in C(I)$ y $f'$ continua a trozos en $I$, 
-        $f(0) = f(L)$ (es \textbf{L-periódica}) entonces el desarrollo 
+        $f(0) = f(L) = 0$ entonces el desarrollo 
         \begin{gather}
             \sum_{n=1}^{\infty} B_n \sen \left(\frac{\pi n x}{L}\right)
         \end{gather}
@@ -529,8 +566,6 @@
                 f(x) \sim \sum_{n=0}^{\infty} c_n f_n = \frac{1}{2} - \frac{2}{\pi} \sum_{n=1}^{\infty} \frac{\sen((2n-1)x)}{2n-1}
             \end{gather*}
 
-            
-
         \end{itemize}
     \end{ejemplo}
     
@@ -562,14 +597,14 @@
         \begin{equation*}
             u(t,x) = \sum_{n=1}^{\infty} u_n(t,x)
         \end{equation*} 
-        \item Finalmente se imponen las condiciones de contorno $$u(0,x) = \varphi(x) \quad u_t(0,x) = \psi(x))$$
+        \item Finalmente se imponen las condiciones iniciales $$u(0,x) = \varphi(x) \quad u_t(0,x) = \psi(x)$$
         para ciertas $\varphi, \psi$ dadas, y se identifican los sumandos no nulos, obteniendo así la solución final.
     \end{enumerate}
 
     Veamos un ejemplo detallado siguiendo este esquema: \\
 
     Por variables separadas, $u(t,x) = T(t) X(x)$. Sustituimos la condición primera del problema, 
-    $$u_{tt} - c^2 u_{xx} = 0 \iff T''(t) X(x) - c^2 T(t) X''(x) = 0 \iff T''(x) X(x) = c^2 T(t) X''(x) \iff$$$$\dfrac{T''(t)}{c^2 T(t)} = \dfrac{X''(x)}{X(x)} = - \lm \quad \lm \in \mathbb{R}$$
+    $$u_{tt} - c^2 u_{xx} = 0 \iff T''(t) X(x) - c^2 T(t) X''(x) = 0 \iff T''(t) X(x) = c^2 T(t) X''(x) \iff$$$$\dfrac{T''(t)}{c^2 T(t)} = \dfrac{X''(x)}{X(x)} = - \lm \quad \lm \in \mathbb{R}$$
 
     Ahora, buscamos resolver:
     \begin{equation*}
@@ -661,7 +696,7 @@
     \end{gather*}
     Calculamos el polinomio característico como 
     \begin{gather*}
-        \sum_{i=0}^n a_i x^i = a_nx^n + ... + a_1x + a_0
+        P(r) = \sum_{i=0}^n a_i r^i = a_nr^n + ... + a_1r + a_0
     \end{gather*}
     y extraeremos la raíces de este polinomio. Supongamos que encontramos una raíz $r\in \bb{C}$ que podemos escribir como $r=\alpha + i\beta$ con $\alpha, \beta \in \bb{R}$. De esta forma la solución general de $y$ para esta raíz será:
     \begin{gather*}
@@ -681,7 +716,7 @@
     \end{gather*}
     Suponemos que la solución es de la forma $y(x)=x^r$. De esta forma, tendremos que 
     \begin{gather*}
-        y^{i)} = r(r-1)...(r-i+1)x^{r-i} = r_ix^{r-i}\ \ \ \ \forall i \in \{0,...,n\}
+        y^{i)} = r(r-1)...(r-i+1)x^{r-i} = r_ix^{r-i}\ \ \ \ \forall i \in \{1,...,n\}
     \end{gather*}
     Al sustituir en la ecuación general obtendremos
     \begin{gather*}
