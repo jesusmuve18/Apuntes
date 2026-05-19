@@ -9,6 +9,13 @@
 </head>
 
 <body>
+    <script>
+        if('serviceWorker' in navigator) {
+            navigation.serviceWorker.getRegistrations().then(regs => {
+                regs.forEach(reg => reg.unregister());
+            });
+        }
+    </script>
     <h1>Archivos</h1>
 
     <h2>Segundo</h2>
