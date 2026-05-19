@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <script>
+    <script> // Desactivar la caché en la página web para cargar la última versión disponible
         if('serviceWorker' in navigator) {
             navigation.serviceWorker.getRegistrations().then(regs => {
                 regs.forEach(reg => reg.unregister());
