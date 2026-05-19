@@ -314,9 +314,194 @@ de esta forma nos damos cuenta de que $\sigma_p$ mide la curvatura de las seccio
                 H(x,y,z) = - \frac{1}{2R}
             \end{equation*}
             Sin embargo vemos que esta curvatura nos indica que ha dejado de ser un plano (claramente un cilindro no es un plano así que alguna diferencia debía hacer).
-
     \end{enumerate}
 \end{ejemplo}
+
+\begin{ejercicio}\
+    \begin{enumerate}
+        \item Calcular $A_p$, $\sigma_p$, $k_1$, $k_2$, $H$ y $K$ para la superficie
+        \begin{equation*}
+            S = \{(x,y,z)\in \bb{R}^3 : z = \frac{1}{2}(x^2 - y^2)\}
+        \end{equation*}
+        (Como mínimo estudiarlas en el punto $(0,0,0)\in S$)
+
+        \item Sea $S\subset \bb{R}^3$ conexa y totalmente umbilical orientada. Entonces $k_1(p)=k_2(p)=\lambda(p)$ para todo $p\in S$. Entonces 
+        \begin{equation*}
+            A_p = \lambda(p)I_{T_pS}\ \ \ \forall p \in S
+        \end{equation*}
+        Tenemos entonces $\lambda : S\to \bb{R}$ y nos preguntamos si es diferenciable. Para ello consideramos una parametrización $X:U\to S\subset \bb{R}^3$ y nos preguntamos si $\lambda \circ X$ es diferenciable. Para verlo tomamos $(u,v)\in U$ de forma que $X(u,v)\in S$. Tenemos
+        \begin{gather*}
+            (dN)_{X(u,v)} X_u(u,v) = - \lambda(X(u,v))X_u(u,v) = -(\lambda \circ X) X_u(u,v)\\
+            (dN)_{X(u,v)} X_v(u,v) = \lambda(X(u,v))X_v(u,v) = -(\lambda \circ X) X_v(u,v)
+        \end{gather*}
+        Observamos que esto es equivalente (por la regla de la cadena) a  
+        \begin{equation*}
+            (N\circ X)_u = -(\lambda \circ X) X_u\\
+            (N\circ X)_v = -(\lambda \circ X) X_v
+        \end{equation*}
+        En la primera ecuación podemos aplicar el producto escalar por $X_u$ obteniendo
+        \begin{equation*}
+            \langle (N \circ X)_u, X_u \rangle = - (\lambda \circ X) |X_u|^2
+        \end{equation*}
+        de donde
+        \begin{equation*}
+            \lambda \circ X = - \frac{\langle (N\circ X)_u, X_u \rangle}{|X_u|^2}
+        \end{equation*}
+        por lo que $\lambda$ es diferenciable y no solo eso. Si seguimos desarrollando las 2 ecuaciones obtenidas anteriormente, derivando la primera con respecto a $v$ y la segunda con respecto a $u$ (sabiendo ya que $\lambda$ es derivable) obtenemos
+        \begin{gather*}
+            (N \circ X)_{uv} = -(\lambda \circ X)_v X_u - (\lambda \circ X) X_{uv}\\
+            (N \circ X)_{vu} = -(\lambda \circ X)_u X_v - (\lambda \circ X) X_{vu}
+        \end{gather*}
+        por el teorema de Schwarz tendremos que 
+        \begin{gather*}
+            (\lambda \circ X)_v X_u = (\lambda \circ X)_u X_v
+        \end{gather*}
+        tenemos una combinación lineal de dos elementos de una base igualada a $0$ por lo que ambos elementos deben de ser nulos, es decir
+        \begin{gather*}
+            (\lambda \circ X)_u = (\lambda \circ X)_v = 0 \ \ \ \text{ en }U
+        \end{gather*}
+        Sabemos que $\lambda \circ X : U \to \bb{R}$ por lo que necesariamente $\lambda \circ X$ es constante (ambas derivadas parciales son nulas), lo que además nos dice que $\lambda_{\|X(U)}$
+        es constante para toda parametrización $X$. Por tanto, finalmente tenemos que $\lambda : S \to \bb{R}$ es constante. Concluimos que 
+        \begin{gather*}
+            (dN)_p = -\lambda I_{T_pS}
+        \end{gather*}
+        Distinguimos dos casos posibles:
+        \begin{enumerate}
+            \item Supongamos que $\lambda = 0$. Entonces tendremos que 
+            \begin{gather*}
+                (dN)_p = 0 \ \ \ \forall p\in S
+            \end{gather*}
+            donde $S$ era conexa. Por tanto tendremos que 
+            \begin{gather*}
+                N_p = a \ \ \ \forall p \in S
+            \end{gather*}
+            Lo que nos dice que todas las rectas normales son paralelas, lo que ya hemos trabajado llegando a la conclusión de que $S$ es un abierto de un plano (posiblemente el plano entero).
+
+            \item Supongamos ahora que $\lambda \neq 0$. Definimos $f:S\to \bb{R}^3$ dada por 
+            \begin{gather*}
+                f(p) = \frac{1}{\lambda}N_p + p\ \ \ \forall p \in S
+            \end{gather*}
+            que será diferenciable por su definición (suma y producto de funciones diferenciables). Calculamos su diferencial $(df)_p : T_pS \to \bb{R}^3$, 
+            \begin{gather*}
+                (df)_p = \frac{1}{\lambda}(dN)_p + I_{\bb{R}^3} = \frac{1}{\lambda}(-\lambda I) + I = 0\ \ \ \forall p \in S
+            \end{gather*}
+            por lo que tendremos que $f$ será constante y llamaremos $f(p)=p_0\in \bb{R}^3$ para todo $p\in S$. Si recordamos la definición de $f$ con esta nueva información tendremos
+            \begin{gather*}
+                f(p) = \frac{1}{\lambda}N_p + p = p_0 \Rightarrow p - p_0 = - \frac{1}{\lambda} N(p)
+            \end{gather*}
+            Tomando módulo al cuadrado
+            \begin{gather*}
+                | p - p_0 |^2 = \frac{1}{\lambda^2} \ \ \forall p \in S
+            \end{gather*}
+            lo que nos dice que $S\subset S^2(p_0, \frac{1}{|\lambda|})$ siendo un abierto suyo
+        \end{enumerate}
+        Este resultado lo podemos enunciar como:
+
+        Las únicas superficies conexas, orientables y totalmente umbilicales con los dominios de un plano y los dominios de una esfera. En particular, si la superficie es cerrada, entonces será o un plano o una esfera entera y si fuera compacta solo podría ser una esfera (los únicos compactos totalmente umbilicales son las esferas). A este resultado lo llamaremos \textbf{clasificación de las superficies totalmente umbilicales}.
+
+        \item Sea $S\subset \bb{R}^3$ la superficie dada por 
+        \begin{gather*}
+            S = \{p \in \bb{R}^3 : (1,p^t)A \begin{pmatrix}
+                1 \\ p
+            \end{pmatrix} = 0\}
+        \end{gather*}
+        donde $p\in \bb{R}^3$ es un vector columna y $A\in M_4(\bb{R})$ tal que $A=A^t$. Tenemos que $S$ será una superficie si $(1,p^t)A\neq 0$ para todo $p\in S$. De esta forma podemos escribir 
+        \begin{gather*}
+            A = \left(
+                \begin{array}{c|c}
+                    c & a^t\\
+                    \hline
+                    a & B
+                \end{array}
+            \right)
+        \end{gather*}
+        donde $c\in \bb{R}$, $a\in \bb{R}^3$ y $B\in M_3(\bb{R})$ con $B=B^t$. Tendremos entonces
+        \begin{gather*}
+            (1,p^t)\left(
+                \begin{array}{c|c}
+                    c & a^t\\
+                    \hline
+                    a & B
+                \end{array}
+            \right) = (c+\langle p , a \rangle, a^t + p^t B) \begin{pmatrix}
+                1 \\ p
+            \end{pmatrix}
+        \end{gather*}
+        por lo que otra forma de escribir la superficie será 
+        \begin{gather*}
+            S = \{p\in \bb{R}^3 : c +2\langle p,a \rangle + p^tBp = 0\}
+        \end{gather*}
+        y el plano tangente será 
+        \begin{align*}
+            T_pS &= \{v\in \bb{R}^3 : 2 \langle v,a \rangle + v^tVp + 2p^tBv = 0\} = \\
+            &= \{v\in \bb{R}^3 : \langle a,v \rangle + p^tBv = 0\} =\\
+            &= \{v\in \bb{R}^3 : \langle a,v \rangle + \langle Bp, v \rangle = 0\} =\\
+            &= \{v\in \bb{R}^3 : \langle a +Bp, v \rangle = 0\} =\\
+            &= \langle a + Bp \rangle^{\bot}
+        \end{align*}
+        y como la cuádrica no tiene puntos singulares (están todos en el infinito) tendremos que $a + Bp \neq 0$ (lo que excluye a los conos y a los pares de planos secantes). Esto nos dice que $S$ es orientable e inmediatamente la podemos orientar con la aplicación de Gau\ss~ siguiente\footnote{también podríamos haber considerado su opuesta}:
+        \Func{N}{S}{S^2}{p}{N_p = \frac{a + Bp}{|a + Bp|}} 
+        Podemos considerar entonces su diferencial
+        \Func{(dN)_p}{T_pS}{T_pS}{v}{(dN)_p(v) = \frac{Bv}{|a+Bp|} + \lambda(p,v)(a + Bp)}
+        donde hemos llamado $\lambda(p,v) = (|a+Bp|^{-1})'$, ya que lo importantes es que está multiplicado por $(a+Bp)$. Pasamos a calcular directamente su segunda forma fundamental, en concreto su forma cuadrática asociada a la forma bilineal:
+        \Func{\sigma_p}{T_pS}{\bb{R}}{v}{\sigma_p(v) = \sigma_p(v,v) = -\langle (dN)_p(v), v \rangle} 
+        por lo que, como ya hemos calculado la diferencial tenemos 
+        \begin{align*}
+            \sigma_p(v) &= - \langle \frac{Bv}{|a+Bp|} + \lambda(p,v)(a+Bp), v \rangle = \\
+            &= - \frac{\langle Bv,v\rangle}{|a+Bp|}\ \ \ \ \forall p \in S,\ \ \forall v \in T_pS
+        \end{align*}
+        donde como vemos no importa el valor de $\lambda(p,v)$, razón por la que no lo habíamos calculado. Nos planteamos ahora cómo serán las curvaturas. Realizamos el siguiente estudio, teniendo en cuenta el estudio de valores propios que ya deberíamos de conocer: 
+        \begin{gather*}
+            S \text{ elipsoide } \sii B \text{ es definida } \Rightarrow \sigma_p \text{ es definida } \Rightarrow K_p > 0\\
+            S \text{ paraboloide elíptico } \sii B \text{ semidefinida no definida} \Rightarrow \sigma_p \text{ semidefinida } \Rightarrow K_p \geq 0\\
+            S \text{ cilindro } \Rightarrow K_p = 0
+        \end{gather*}
+
+        \item Consideramos $S\subset \bb{R}^3$ orientable. La orientamos con $N:S\to S^2$ una aplicación de Gau\ss. Consideramos además $X:U\to S\subset \bb{R}^3$ una parametrización \textbf{compatible} con $N$, es decir, tal que 
+        \begin{gather*}
+            N \circ X = N^X = \frac{X_u \wedge X_v}{|X_u \wedge X_v|}
+        \end{gather*}
+        Como base de $T_XS$ elegimos $\{X_u, X_v \}$. Tenemos con la primera forma fundamental que existe una matriz $M$ asociada respecto de $B$ donde\footnote{La $M$ es de \textit{métrica}.} 
+        \begin{gather*}
+            M = \begin{pmatrix}
+                |X_u|^2 & \langle X_u, X_v \rangle \\
+                \langle X_u, X_v \rangle & |X_v|^2
+            \end{pmatrix} = \begin{pmatrix}
+                E & F\\
+                F & G
+            \end{pmatrix}
+        \end{gather*}
+        donde $E,F,G : U \to \bb{R}$. Consideramos la segunda forma fundamental que será también una forma bilineal simétrica que tendrá una matriz $\Sigma$ respecto de $B$:
+        \begin{gather*}
+            \Sigma = \begin{pmatrix}
+                \sigma_X(X_u, X_u) & \sigma_x(X_u, X_v)\\
+                \sigma_X(X_u, X,v) & \sigma_X(X_v, X_v)
+            \end{pmatrix} = \begin{pmatrix}
+                e & f \\
+                f & g
+            \end{pmatrix}
+        \end{gather*}
+        Así escrito no podemos ver a primera vista si son diferenciables. Trabajaremos con una y el resto serán análogas:
+        \begin{align*}
+            \sigma_X(X_u, X_u) &= - \langle (dN)_X X_u, X_u \rangle = - \langle (N \circ X)_u, X_u \rangle \overset{(\ast)}{=} \langle N\circ X, X_{uu} \rangle =\\
+            &= \langle N^X, X_{uu} \rangle = \langle \frac{X_u \wedge X_v}{|X_u \wedge X_v|}, X_uu \rangle = \frac{1}{|X_u \wedge X_v|} \langle X_u \wedge X_v, X_uu \rangle =\\
+            &= \frac{\det(X_u, X_v, X_{uu})}{|X_u \wedge X_v|} = e
+        \end{align*}
+        donde en $(\ast)$ hemos aplicado que 
+        \begin{gather*}
+            (\langle N \circ X, X_u \rangle)_u = \langle (N \circ X)_u, X_u \rangle + \langle N \circ X, X_{uu} \rangle
+        \end{gather*}
+        Análogamente tendremos que 
+        \begin{gather*}
+            \sigma_X(X_v, X_v) = \frac{\det(X_u, X_v, X_{vv})}{|X_u \wedge X_v|} = g\\\\
+            \sigma_X(X_u, X_v) = \frac{\det(X_u, X_v, X_{uv})}{|X_u \wedge X_v|} = f
+        \end{gather*}
+        Llamaremos $A_X$ a la matriz del enformorfismo de Weingarten respecto de $B$:
+        \begin{gather*}
+            A_X = M^{-1}\Sigma
+        \end{gather*}
+    \end{enumerate}
+\end{ejercicio}
 
 
 
