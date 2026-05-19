@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[12pt]{book}
 
 \input{../../../_assets/preambulo.tex}
 \input{../../../_assets/portada.tex}
@@ -17,6 +17,8 @@
     \tableofcontents
     \thispagestyle{empty}
     \newpage
+
+    \chapter{Primer Parcial}
 
     % os recuerdo que tendremos la primera prueba de clase el próximo miércoles
     % 13 de Mayo, en horario de clase. Durante la semana os envío un documento
@@ -736,4 +738,294 @@
     \begin{gather*}
         y_r = C_1 x^r + C_2 \ln(x) x^r , \ \ \ C_1, C_2\in \bb{R}
     \end{gather*} 
+
+    \chapter{Segundo Parcial}
+
+    % // TODO: Contenido del parcial 2:
+    % - Derivada débil, espacios de Sobolev, ecuaciones tipo Poisson
+    % - Ecuación del calor y transformada de Fourier
+    % - Cinética química
+
+    \section{Derivada débil, espacios de Sobolev, ecuaciones tipo Poisson}
+
+    \subsection{Derivada débil}
+
+    \begin{definicion}
+        Sea $f\in L_{loc}^1(a,b)$, decimos que $f'\in L_{loc}^1(a,b)$ es su \textbf{derivada débil} si 
+        \begin{gather*}
+            \int_{a}^{b} f(x)\varphi'(x) dx = - \int_a^b f'(x)\varphi(x) dx \ \ \ \forall \varphi \in C_c^1(a,b)
+        \end{gather*}
+    \end{definicion}
+    \begin{propiedades}\
+        \begin{enumerate}
+            \item De existir es única en el sentido de $L_{loc}^1(a,b)$.
+            \item Si $f\in C^1(a,b)$, su derivada débil es la $f'$ usual.
+            \item La derivada débil es lineal
+            \item En general no se cumplen la regla del producto ni la regla de la cadena.
+        \end{enumerate}
+    \end{propiedades}
+
+    \subsubsection{Multiíndices}
+
+    \begin{definicion}
+        Consideramos $\alpha = (\alpha_1, ..., \alpha_d)\in \bb{N}^d$, definimos
+        \begin{gather*}
+            |\alpha| := \alpha_1 + ... + \alpha_d,\ \ \ D^\alpha\varphi := \frac{\partial^{|\alpha|}}{\partial x_1^{\alpha_1}\dots \partial x_d^{\alpha_d}}
+        \end{gather*}
+        Dado $\Omega \subseteq \bb{R}^d$ abierto, sean $f\in L_{loc}^1(\Omega)$ y $\alpha \in \bb{N}^d$. Decimos que $f'\in L_{loc}^1(\Omega)$ es su $\alpha$-derivada débil si
+        \begin{gather*}
+                \int_{a}^{b} f(x)D^{\alpha}\varphi(x) dx = (-1)^{|\alpha|} \int_a^b f'(x)\varphi(x) dx \ \ \ \forall \varphi \in C_c^{|\alpha|}(a,b)
+        \end{gather*}
+    \end{definicion}
+
+    \subsection{Espacios de Sobolev}
+
+    \begin{definicion}
+        Se define el \textbf{espacio de Sobolev} $H^m(\Omega)$ como el espacio vectorial formado por $L^2(\Omega)$ que tienen derivadas débiles hasta el $m$-ésimo orden acotadas en $L^2(\Omega)$, esto es:
+        \begin{gather*}
+            H^m = \left\{f\in L^2 (\Omega) :  D^\alpha f \in L^2(\Omega)\ \ \ \forall |\alpha| \leq m \right\}
+        \end{gather*}
+    \end{definicion}
+
+    % TODO: ver si hace falta poner la norma y el producto escalar
+
+    \subsection{Teorema de Lax-Milgram}
+
+    \begin{definicion}
+        Sea $H$ un espacio de Hilbert diremos que una función $a: H\times H \to \bb{R}$ es 
+        \begin{itemize}
+            \item \textbf{bilineal} si para todo $u,v,w\in H$, $\lambda \in \bb{R}$ se verifican las siguientes condiciones:
+            \begin{align*}
+                &a(u+v, w) = a(u, w) + a(v, w)\\
+                &a(\lambda u, w) = \lambda a(u,w)\\
+                &a(u, v+w) = a(u, v) + a(u, w)\\
+                &a(u, \lambda w) = \lambda a(u,w)
+            \end{align*}
+
+            \item \textbf{continua} si $\exists C>0$ tal que 
+            \begin{gather*}
+                |a(u,v)| \leq C\|u\|_H\|v\|_H\ \ \ \forall u,v\in H
+            \end{gather*}
+            
+            \item \textbf{coerciva} si $\exists \alpha >0$ tal que 
+            \begin{gather*}
+                a(v,v) \geq \alpha \|v\|^2_H\ \ \ \forall v \in H
+            \end{gather*}
+        \end{itemize}
+    \end{definicion}
+
+    \begin{teo}[Lax-Milgram]
+        Sean $H$ un espacio de Hilbert y $a: H \times H \to \bb{R}$ una aplicación bilineal, continua y coerciva y $F\in H^*$. Entonces existe un único elemento $u\in H$ tal que 
+        \begin{gather}\label{teo:lax-mig-1}
+            a(u, \varphi) = F(\varphi) \ º \ \forall \varphi \in H
+        \end{gather}
+        y la aplicación lineal $F\mapsto u$ es continua de $H^*$ en $H$. En el caso de que $a : H\times H \to \bb{R}$ es también simétrica, el problema (\ref{teo:lax-mig-1}) equivale al siguiente problema variacional:
+        \begin{gather} \label{teo:lax-mig-2}
+            J[u] = \min_{\varphi\in H}\{J[\varphi]\}
+        \end{gather}
+        con $J[\varphi] = \frac{1}{2}a(\varphi, \varphi) - F(\varphi)$. En otras palabras, el problema (\ref{teo:lax-mig-2}) admite una única solución que no es otra que la que resuelve el problema (\ref{teo:lax-mig-1}).
+    \end{teo}
+
+    \begin{ejemplo}
+        Tenemos el problema:
+        \begin{equation}\label{eq:problema_ejm2}
+            \left\{\begin{array}{l}
+                    -u''(x) + u(x) = f(x), \quad \text{en\ } [0,1] \\
+                    u'(0) = 0 = u'(1)
+            \end{array}\right.
+        \end{equation}
+        Dada $u\in C^2([0,1])$ que satisface~\eqref{eq:problema_ejm2}, podemos multiplicar por $\varphi \in C^1([0,1])$ e interpretar:
+        \begin{equation*}
+            -\int_{0}^{1} u''\varphi~dx  + \int_{0}^{1} u\varphi~dx  = \int_{0}^{1} f\varphi~dx 
+        \end{equation*}
+        Integrando por partes:
+        \begin{equation*}
+            \int_{0}^{1} u'\varphi'~dx -\cancelto{0}{u'(1)\varphi(1)} + \cancelto{0}{u'(0)\varphi(0)} + \int_{0}^{1} u\varphi~dx  = \int_{0}^{1} f\varphi~dx  \qquad \forall \varphi \in C^1([0,1])
+        \end{equation*}
+        Y a partir de aquí podemos montarnos la ``formulación débil'' del problema~\eqref{eq:problema_ejm2}: diremos que $u\in H^1(0,1)$ es solución débil de~\eqref{eq:problema_ejm2} si cumple que:
+        \begin{equation*}
+            \int_{0}^{1} u'\varphi'+u\varphi~dx  = \int_{0}^{1} f\varphi~dx  \qquad \forall \varphi \in H^1(0,1)
+        \end{equation*}
+        Introducimos ahora con vistas a aplicar el Teorema de Lax-Milgram, tomamos la forma bilineal $a:H^1(0,1)\times H^1(0,1)\to\mathbb{R}$ dada por:
+        \begin{equation*}
+            a(u,v)=\int_{0}^{1} u'v'+uv~dx 
+        \end{equation*}
+        y la forma lineal $F:H^1(0,1)\to\mathbb{R}$ dada por:
+        \begin{equation*}
+            F(v) = \int_{0}^{1} f(x)v(x)~dx 
+        \end{equation*}
+        son claramente lineales y continuas:
+        \begin{align*}
+            |F(v)| &\leq \|f\|_2 \|v\|_2 \leq \|f\|_2 \|v\|_{H^1} \\
+            |a(u,v)| &\leq 2\|u\|_{H^1}\|v\|_{H^1}
+        \end{align*}
+        La coercividad de $a$ la tenemos gratis por la estructura de la ecuación, ya que:
+        \begin{equation*}
+            a(v,v) = \int_{0}^{1} {(v')}^{2}+v^2~dx = \lvert\!\lvert\!\lvert v\rvert\!\rvert\!\rvert_{H^1}^2
+        \end{equation*}
+        siendo esta última norma equivalente a $\|\cdot \|_{H^1}$, por lo que existe $C>0$ de manera que:
+        \begin{equation*}
+            a(v,v) \geq C\|v\|^2_{H_1}
+        \end{equation*}
+        Aplicando el Teorema de Lax-Milgram, $\exists_1 u\in H^1(0,1)$ solución débil de~\eqref{eq:problema_ejm2}. Además, como $a(\cdot ,\cdot )$ es simétrica, la $u$ se recupera minimizando:
+        \begin{equation*}
+            J[u] = \frac{1}{2}\int_{0}^{1} {(u')}^{2}+u^2~dx  - \int_{0}^{1} f(x)u(x)~dx 
+        \end{equation*}
+        sobre $H^1(0,1)$. El integrando de $J$ lo podemos representar como:
+        \begin{equation*}
+            F(x,u,p) = \frac{p^2}{2} + \frac{u^2}{2} - fu
+        \end{equation*}
+        La ecuación de Euler-Lagrange queda:
+        \begin{equation*}
+            0 = F_u - \frac{d}{dx}(F_p) = u - f - u'' \quad\Longleftrightarrow\quad -u''(x) +u(x)-f(x) = 0 \quad \text{en\ }[0,1]
+        \end{equation*}
+        con condiciones de contorno:
+        \begin{align*}
+            0 &= F_p(x=0,u(0),u'(0)) \quad\Longrightarrow\quad u'(0) = 0 \\
+            0 &= F_p(x=1,u(1),u'(1)) \quad\Longrightarrow\quad u'(1) = 0
+        \end{align*}
+        % Vemos que recuperamos la ecuación~\eqref{eq:problema_ejm2}:
+    \end{ejemplo}
+
+    \begin{observacion}
+        Según las condiciones que tengamos iniciales tendremos:
+        \begin{itemize}
+            \item \textbf{Condiciones tipo Dirichlet}: Tendríamos $u\in H_0^1(\Omega)$ en lugar de $H^1(\Omega)$.
+            \item \textbf{Condiciones tipo Neumann}: Tendremos que tomar $u\in H^1(\Omega)$.
+        \end{itemize}
+    \end{observacion}
+
+    \subsection{Desigualdad de Poincaré}
+    \begin{definicion}
+        Sea $H$ un espacio de Hilbert definimos
+        \begin{gather*}
+            H_0^1 := \text{ clausura de } C_c^\infty(\Omega) \text{ con respecto a } \|\cdot\|_{H^1(\Omega)}
+        \end{gather*}
+        Si $\partial \Omega$ es acotado y regular entonces
+        \begin{gather*}
+            H_0^1(\Omega) = \{f\in H^1 (\Omega) : f_{|\partial \Omega} = 0\}
+        \end{gather*}
+    \end{definicion}
+
+    \begin{lema}
+        Si $\Omega$ es acotado, entonces existe una constante $C = C(\Omega) > 0$ tal que 
+        \begin{gather*}
+            \|f\|_2 \leq C \|\nabla f\|_2 \ \ \ \forall f \in H_0^1(\Omega)
+        \end{gather*}
+        por tanto, para $f\in H_0^1(\Omega)$, $f\mapsto \|\nabla f\|_2$ es una norma equivalente a $\|f\|_{H^1}$ donde 
+        \begin{gather*}
+            \|f\|_{H^1(\Omega)} = \|f\|_2 + \|\nabla f\|_2 = \|f\|_2 + \sum_{i=1}^d \left\| \frac{\partial f}{\partial x_i} \right\|
+        \end{gather*}
+        Otra norma equivalente que se suele usar es
+        \begin{gather*}
+            \|f\|_{H^1(\Omega)}^2 = (\|f\|^2_{L^2(\Omega)} + \|\nabla f \|^2_{L^2(\Omega)})^{\nicefrac{1}{2}}
+        \end{gather*}
+    \end{lema}
+
+    \subsection{Ecuaciones de tipo Poisson}
+
+    % Estudiaremos ecuaciones del estilo $-\Delta u = \rho$ donde 
+    % \begin{gather*}
+    %     \Delta u = \nabla^2 u = div(\nabla u) = \sum_{i=1}^d \frac{\partial^2 u}{\partial x_i^2} = tr(D^2u)
+    % \end{gather*}
+    % donde $x\in \bb{R}^d$ y $u:\bb{R}^d \to \bb{R}$. A esta función $\Delta u:\bb{R}^d \to \bb{R}^d$ \textbf{laplaciano} de $u$.
+
+    \begin{definicion}
+        Dado $x\in \bb{R}^d$ y $u:\bb{R}^d \to \bb{R}$ podemos considerar el \textbf{laplaciano} de $u$, que será una función $\Delta u :\bb{R}^d \to \bb{R}^d$ dada por 
+        \begin{gather*}
+            \Delta u = \nabla^2 u = div(\nabla u) = \sum_{i=1}^d \frac{\partial^2 u}{\partial x_i^2} = tr(D^2u)
+        \end{gather*}
+    \end{definicion}
+
+    Típicamente, $\Omega\subset\mathbb{R}^n$ abierto para $n\in \{2,3\}$. La ecuación de Poisson es:
+    \begin{equation*}
+        -\Delta u = \rho \quad \text{en\ } \Omega
+    \end{equation*}
+    Si imponemos condiciones Dirichlet cero ($u\big|_{\partial \Omega=0}$), la formulación débil es:
+    \begin{equation*}
+        \int_\Omega \Delta u \cdot \Delta \varphi~dx = \int_{\Omega}\rho \varphi ~dx \qquad \forall \varphi \in H^1_0(0,1)
+    \end{equation*}
+    Y buscaremos $u\in H^1_0(\Omega)$.\\
+
+    \noindent
+    Los únicos problemas que nos podemos encontrar es exigir la coercitividad de $a$, donde vamos a tener:
+    \begin{equation*}
+        a(v,v) = \int_\Omega |\Delta u|^2~dx \stackrel{(?)}{\geq} C\|v\|_{H^1}
+    \end{equation*}
+    De nuevo, se puede razonar por la deigualdad de Poincaré, que nos dice que:
+    \begin{equation*}
+        \|u\|_2 \leq C\|\nabla u\|_2 
+    \end{equation*}
+    para $u\in H^1_0(\Omega)$ para $\Omega$ acotado, donde $C$ depende del tamaño de $\Omega$.
+
+    \section{Ecuación del calor y transformada de Fourier}
+
+    \subsection{Ecuación del calor}
+
+    \subsection{Transformada de Fourier}
+    \begin{definicion}[Clase de Schwartz] Se define la \textbf{clase de Schwartz} como el espacio funcional 
+        \begin{gather*}
+            \cc{S}(\bb{R}) = \left\{ f\in C^\infty(\bb{R}, \bb{C}) : \sup_{x\in \bb{R}}\{|x|^k|f^{(l)}(x)|\} < \infty,\ \ \forall k,l\geq 0 \right\}
+        \end{gather*}
+        esto es, el formado por todas las funciones complejas infinitamente diferencaibles tales que tanto ellas como todas sus derivadas decrecen en infinito más rápido que cualquier polinomio.
+    \end{definicion}
+
+    \begin{propiedades}
+        Algunas propiedades destacables son:
+        \begin{enumerate}
+            \item $C_c^\infty(\bb{R}) \subset \cc{S}(\bb{R})$.
+            \item Todas las funciones de $\cc{S}(\bb{R})$ están acotadas.
+            \item $\cc{S}(\bb{R})$ es cerrado para las operaciones de diferenciación y de multiplicación por polinomios.
+            \item $\cc{S}(\bb{R}) \subset L^1(\bb{R})$
+            \item Si $f\in \cc{S}(\bb{R})$, entonces $\cc{F}[f]\in \cc{S}(\bb{R})$.
+        \end{enumerate}
+    \end{propiedades}
+
+    \begin{definicion}[Transformada de Fourier] Sea $f\in \cc{S}(\bb{R})$. Se define la \textbf{transformada de Fourier} de $f$ (y se denota $\cc{F}[f] : \bb{R} \to \cc{C}$) como 
+        \begin{gather*}
+            \cc{F}[f](y) := \int_{-\infty}^{+\infty} f(x) e^{-2\pi i xy} dx
+        \end{gather*}
+    \end{definicion}
+
+    \begin{observacion}
+        Consideramos la función $g(y)= e^{-\pi y^2}$ (una gaussiana) y verificará
+        \begin{gather*}
+            \cc{F}[g] = g
+        \end{gather*}
+        
+    \end{observacion}
+
+    \begin{definicion}[Transformada inversa de Fourier]
+        Sea $f\in \cc{S}(\bb{R})$. Se define la \textbf{transformada inversa de Fourier} de $f$ (y se denota $\cc{F}^{-1}[f] : \bb{R} \to \cc{C}$) como 
+        \begin{gather*}
+            \cc{F}^{-1}[f](x) := \int_{-\infty}^{+\infty} f(y) e^{2\pi i xy} dy
+        \end{gather*}
+    \end{definicion}
+
+    \subsubsection{Producto de convolución}
+    \begin{definicion}
+        Dada $f,g: \bb{R}\to \cc{C}$ se define $(f\ast g) : \bb{R}\to \bb{C}$ como 
+        \begin{gather*}
+            (f\ast g)(x) := \int_{-\infty}^{+\infty} f(x-y)g(y)dy = \int_{-\infty}^{+\infty} g(x-y)f(y) dy
+        \end{gather*}
+        y lo llamaremos \textbf{producto de convolución}
+    \end{definicion}
+
+    \begin{propiedades}
+        Algunas propiedades destacables son 
+        \begin{enumerate}
+            \item Es bilineal en $(f,g)$.
+            \item Es conmutativo
+            \item Siempre que tenga sentido
+            \begin{gather*}
+                \frac{d}{dx}(f\ast g)(x) = \left(\frac{df}{dx}\ast g\right)(x) = \left(f \ast \frac{dg}{dx}\right)(x)
+            \end{gather*}
+            La clase de Schwartz es cerrada para la convolución. Además 
+            \begin{gather*}
+                \cc{F}[f\ast g](y) = \cc{F}[f](y) \cdot \cc{F}[g](y)
+            \end{gather*}
+        \end{enumerate}
+    \end{propiedades}
+
+    \section{Cinética química}
 \end{document}
