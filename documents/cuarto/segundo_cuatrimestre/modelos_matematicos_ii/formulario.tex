@@ -9,7 +9,7 @@
 \begin{document} 
     \portada[%
         titulo=Modelos Matemáticos II,
-        subtitulo=Resumen Parcial 1,
+        subtitulo=Resumen Parciales,
         autor=Jesús Muñoz Velasco\\Daniel Morán Sánchez\\José Manuel Sánchez Varbas,
         año=Curso 2025-2026]
         
@@ -967,7 +967,7 @@
         \begin{gather*}
             \cc{S}(\bb{R}) = \left\{ f\in C^\infty(\bb{R}, \bb{C}) : \sup_{x\in \bb{R}}\{|x|^k|f^{(l)}(x)|\} < \infty,\ \ \forall k,l\geq 0 \right\}
         \end{gather*}
-        esto es, el formado por todas las funciones complejas infinitamente diferencaibles tales que tanto ellas como todas sus derivadas decrecen en infinito más rápido que cualquier polinomio.
+        esto es, el formado por todas las funciones complejas infinitamente diferenciables tales que tanto ellas como todas sus derivadas decrecen en infinito más rápido que cualquier polinomio.
     \end{definicion}
 
     \begin{propiedades}
@@ -976,7 +976,7 @@
             \item $C_c^\infty(\bb{R}) \subset \cc{S}(\bb{R})$.
             \item Todas las funciones de $\cc{S}(\bb{R})$ están acotadas.
             \item $\cc{S}(\bb{R})$ es cerrado para las operaciones de diferenciación y de multiplicación por polinomios.
-            \item $\cc{S}(\bb{R}) \subset L^1(\bb{R})$
+            \item $\cc{S}(\bb{R}) \subset L^1(\bb{R})$.
             \item Si $f\in \cc{S}(\bb{R})$, entonces $\cc{F}[f]\in \cc{S}(\bb{R})$.
         \end{enumerate}
     \end{propiedades}
@@ -1004,18 +1004,18 @@
 
     \subsubsection{Producto de convolución}
     \begin{definicion}
-        Dada $f,g: \bb{R}\to \cc{C}$ se define $(f\ast g) : \bb{R}\to \bb{C}$ como 
+        Dadas $f,g: \bb{R}\to \cc{C}$ se define $(f\ast g) : \bb{R}\to \bb{C}$ como 
         \begin{gather*}
             (f\ast g)(x) := \int_{-\infty}^{+\infty} f(x-y)g(y)dy = \int_{-\infty}^{+\infty} g(x-y)f(y) dy
         \end{gather*}
-        y lo llamaremos \textbf{producto de convolución}
+        y lo llamaremos \textbf{producto de convolución}.
     \end{definicion}
 
     \begin{propiedades}
         Algunas propiedades destacables son 
         \begin{enumerate}
             \item Es bilineal en $(f,g)$.
-            \item Es conmutativo
+            \item Es conmutativo.
             \item Siempre que tenga sentido
             \begin{gather*}
                 \frac{d}{dx}(f\ast g)(x) = \left(\frac{df}{dx}\ast g\right)(x) = \left(f \ast \frac{dg}{dx}\right)(x)
