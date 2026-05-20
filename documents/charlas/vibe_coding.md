@@ -78,3 +78,8 @@ Por ello necesitaremos leer más libros y menos tutoriales. Estudiar más teorí
 Antes, una decisión que no era buena del todo permitía modificarse sin afectar mucho (ya que se programaba más lento). Sin embargo ahora se desarrolla tan rápido que un error de 3 días atrás afectará a todo el sistema y necesitará una refactorización completa. 
 
 Vienen años de software mal hecho y se demandará el que sepa arreglarlo. 
+
+
+## Recomendaciones
+
+Los recién salidos de la carrera tienen muy asequible el decir "no tengo el criterio o la experiencia pero sí puedo tener más criterio que un niño de 17 años". Investigar en Claude soberana, Amazon cursos, etc. Investigar en las áreas nuevas, librerías y estándares nuevos de la industria. 
