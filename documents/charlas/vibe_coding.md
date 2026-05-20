@@ -79,7 +79,10 @@ Antes, una decisión que no era buena del todo permitía modificarse sin afectar
 
 Vienen años de software mal hecho y se demandará el que sepa arreglarlo. 
 
-
 ## Recomendaciones
 
 Los recién salidos de la carrera tienen muy asequible el decir "no tengo el criterio o la experiencia pero sí puedo tener más criterio que un niño de 17 años". Investigar en Claude soberana, Amazon cursos, etc. Investigar en las áreas nuevas, librerías y estándares nuevos de la industria. 
+
+Se vuelve a los fundamentos de la **Ingeniería del Software** y de la **toma de decisiones**. El ingeniero va a pasar a una capa de decisión.
+
+Cómo no perder el contexto. En una carpeta del proyecto se guardan todos los md y al orientarse a microfuncionalidades extrayendo el contexto del contexto global la IA va a ayudar de mejor manera sin perder el contexto. Así podremos trabajar con sesiones independientes, pero que funcionen perfectamente para proyectos grandes.
