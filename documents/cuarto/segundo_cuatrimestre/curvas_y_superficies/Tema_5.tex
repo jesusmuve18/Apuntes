@@ -608,5 +608,42 @@ de esta forma nos damos cuenta de que $\sigma_p$ mide la curvatura de las seccio
     \end{gather*}
 \end{ejercicio}
 
+\begin{ejercicio}
+    Calcular las curvaturas del grafo de la función $h:U\subset \bb{R}^2 \to \bb{R}$. Definimos asi
+    \begin{gather*}
+        S = Grafo(h) = \{(x,y,z)\in \bb{R}^3 : (x,y)\in U, \ z=h(x,y)\}
+    \end{gather*}
+    La cubre un solo entorno coordenado. Consideramos entonces
+    \Func{X}{U}{S\subset \bb{R}^3}{(u,v)}{X(u,v) = (u, v, h(u,v))}
+    De esta forma tendremos
+    \begin{gather*}
+        X_u = (1,0,h_u),\ \ \ \ X_v = (0,1,h_v)\\
+        X_{uu} = (0,0,h_{uu}),\ \ \ \ X_{uv} = (0,0,h_{uv}),\ \ \ \ X_{vv} = (0,0,h_{vv})
+    \end{gather*}
+    Y si calculamos los coeficientes tenemos
+    \begin{align*}
+        E &= 1+h_u^2\\
+        G &= 1+h_v^2\\
+        F &= h_uh_v\\
+        EG - F^2 &= 1+h_u^2 + h_v^2 = 1 + |\nabla h|^2
+    \end{align*}
+    De esta forma calculando los de la segunda forma tendremos 
+    \begin{align*}
+        e& = \frac{
+        \begin{vmatrix}
+            1 & 0 & h_u\\
+            0 & 1 & h_v\\
+            0 & 0 & h_{uu}
+        \end{vmatrix}}{|X_u \wedge X_v|} = \frac{h_{uu}}{\sqrt{1 + |\nabla h|^2}}\\\\
+        f &= \frac{h_{uv}}{\sqrt{1 + |\nabla h|^2}}\\\\
+        g &= \frac{h_{vv}}{\sqrt{1 + |\nabla h|^2}}
+    \end{align*}
+    Y de esta forma podemos calcular finalmente
+    \begin{gather*}
+        K = \frac{h_{uu}h_{vv} - h^2_{uv}}{(1 + |\nabla h|^2)^2}\\\\
+        H = \frac{h_{uu}(1+h_v^2) + h_{vv}(1+h_u^2) - 2 h_{uv}h_{u}h_{v}}{(1 + |\nabla h|^2)^{\frac{3}{2}}}
+    \end{gather*}
+\end{ejercicio}
+
 
 
