@@ -503,5 +503,110 @@ de esta forma nos damos cuenta de que $\sigma_p$ mide la curvatura de las seccio
     \end{enumerate}
 \end{ejercicio}
 
+%TODO: Falté a clase aquí
+
+\begin{ejercicio}
+    Calcular las curvaturas de la superficie\footnote{Como viene de una superficie se llama \textit{elicoide} (es una especie de escalera de caracol si se piensa geométricamente)}
+    \begin{gather*}
+        H = \{X(u,v) = (v\cos(u), v\sen(u), au) : u,v\in \bb{R}^2,\ a\in \bb{R}^*\}
+    \end{gather*}
+    Previamente demostrar que $H$ es una superficie cubierta por una sola parametrización y por tanto es orientable. 
+    \begin{proof}
+        Comenzaremos calculando los coeficientes de la primera y segunda forma fundamentales para calcular
+        \begin{gather*}
+            K \circ X = \frac{eg - f^2}{EG-F^2}\ \ \ \ H\circ X = \frac{1}{2} \cdot \frac{eG - 2fF + gE}{EG-F^2}
+        \end{gather*}
+        Tenemos entonces que los coeficientes de la primera forma fundamental son 
+        \begin{align*}
+            E &= |X_u|^2 = |(-v\sen(u), v\cos(u), a)|^2 = a^2 + v^2\\
+            G &= |X_v|^2 = |(\cos(u), \sen(u), 0)|^2 = 1\\
+            F &= \langle X_u, X_v \rangle = \langle (-v\sen(u), v\cos(u), a), (\cos(u), \sen(u), 0) \rangle = 0
+        \end{align*}
+        Pasamos a calcular los denominadores:
+        \begin{gather*}
+            EG - F^2 = a^2 + v^2
+        \end{gather*}
+        Estudiemos ahora los coeficientes de la segunda forma fundamental
+        \begin{align*}
+            e &= \frac{det(X_u, X_v, X_{uu})}{|X_u \wedge X_v|} = \frac{
+            \begin{vmatrix}
+                -v\sen(u) & v\cos(u) & a\\
+                \cos(u) & \sen(u) & 0\\
+                -v\cos(u) & -v\sen(u) & 0
+            \end{vmatrix}}{\sqrt{EG - F^2}} = 0\\\\
+            %
+            f &= \frac{det(X_u, X_v, X_{uv})}{|X_u \wedge X_v|} = \frac{
+            \begin{vmatrix}
+                -v\sen(u) & v\cos(u) & a\\
+                \cos(u) & \sen(u) & 0\\
+                -\sen(u) & \cos(u) & 0
+            \end{vmatrix}}{\sqrt{EG - F^2}} = \frac{a}{\sqrt{a^2 + v^2}}\\\\
+            %
+            g &= \frac{det(X_u, X_v, X_{vv})}{|X_u \wedge X_v|} = 0
+        \end{align*}
+        Así podemos calcular ya las composiciones del principio
+        \begin{align*}
+            K \circ X &= -\frac{\frac{a^2}{a^2+v^2}}{a^2 + v^2} = - \frac{a^2}{(a^2 + v^2)^2} < 0\\\\
+            %
+            H \circ X &= \frac{eG - 2dF + gE}{EG - F^2} = 0
+        \end{align*}
+        Para las superficies que tienen curvatura media nula en todos los puntos se llaman \textbf{superficies mínimas} (o minimales\footnote{viene del inglés}). La curvatura media mide en cada punto la \textbf{tensión superficial} de una superficie.
+    \end{proof}b de una superficie
+\end{ejercicio}
+
+\begin{observacion}
+    Se puede demostrar que para cualquiera $a,b\in \bb{R}^3$ se tiene que 
+    \begin{gather*}
+        |a \wedge b| = \sqrt{|a|^2|b|^2 - (a \cdot b)^2}
+    \end{gather*}
+\end{observacion}
+
+\begin{ejercicio}
+    Ver que $K, H, k_1$ y $k_2$ son invariantes por movimientos rígidos de $\bb{R}^3$.\\
+
+    Basta ver que la segunda forma fundamental es invariante por movimientos rígidos. Para ello tomamos $S\subset \bb{R}^3$ una superficie orientada mediante la aplicación $N : S \to S^2$. Consideramos también el movimiento rígido
+    \Func{\phi}{\bb{R}^3}{\bb{R}^3}{x}{\phi(x) = Ax+b}
+    donde $A\in M_3(\bb{R})$, $b\in \bb{R}^3$ y $AA^t = Id$. Además, si consideramos
+    \begin{gather*}
+        S' = \phi(S)
+    \end{gather*}
+    tendremos que $S'$ es otra superficie. Queremos ver que tiene la misma forma que la primera (misma curvatura de gauss, misma curvatura media y mismas curvaturas principales). Para ello vamos a considerar un punto $p'\in S'$ y podemos tomar $T_{p'}S'$. Como $p'\in S'$ ha de existir un $p\in S$ tal que $p'=\phi(p)$. De esta forma tendremos 
+    \begin{gather*}
+        T_{p'}S' = (d\phi)_p(T_pS)
+    \end{gather*}
+    Sabemos que $T_pS \bot N_p$. Como es una aplicación lineal tendremos
+    \begin{gather*}
+        T_{p'}S' = (d\phi)_p(T_pS) = A(T_pS) \bot AN_p = N'_{p'}
+    \end{gather*}
+    Podemos definir entonces $N': S'\to S^2$ dada por
+    \begin{gather*}
+        N' = A \circ N \circ A
+    \end{gather*}
+    que a poco que lo pensemos está bien definida. Además es diferenciable y se tiene que 
+    \begin{gather*}
+        N'_{p'} \bot T_{p'}S'
+    \end{gather*}
+    Hemos visto que $S'=\phi(S)$ también es orientable y la hemos orientado en función de la orientación $N$ de $S$. Se tiene 
+    \begin{gather*}
+        N' = AN\circ \phi^{-1} \Rightarrow N'\circ \phi = AN\ \ \ \text{ en }S
+    \end{gather*}
+    Tenemos por tanto que existe un $\alpha: (-\veps, \veps) \to S$ tal que $\alpha(0)=p$ y $\alpha'(0)=v$. Tenemos la igualdad
+    \begin{gather*}
+        (N' \circ \phi)(\alpha(s)) = AN(\alpha(s))
+    \end{gather*}
+    derivamos respecto de $s$ en $s=0$ y obtenemos
+    \begin{gather*}
+        (dN')_{\phi(p)}(d\phi)_p(v) = A(dN)_p(v) \ \ \ \forall p \in S\ \ \forall v \in T_pS
+    \end{gather*}
+    Podemos escribir ya la segunda f.f. (de la segunda superficie):
+    \begin{gather*}
+        \sigma'_{\phi(p)}((d\phi)_p(v)) = \sigma'_{\phi(p)}(Av) = - \langle (dN')_{\phi(p)}(Av), Av \rangle = -\langle A(dN)_p(v), Av \rangle = - \langle (dN)_p(v), v \rangle
+    \end{gather*}
+    De ahí se obtiene que $k_i' \circ \phi = k_i$ para $i=1,2$ por lo que 
+    \begin{gather*}
+        K'\circ \phi = K \ \ \ \text{ y } \ \ \ H'\circ \phi = H
+    \end{gather*}
+\end{ejercicio}
+
 
 
