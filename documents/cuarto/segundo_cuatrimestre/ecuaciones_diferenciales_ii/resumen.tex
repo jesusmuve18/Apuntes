@@ -1,0 +1,188 @@
+\documentclass[12pt]{book}
+
+\input{../../../_assets/preambulo.tex}
+\input{../../../_assets/portada.tex}
+
+\usepackage[all]{xy}
+\usepackage{ stmaryrd }
+
+
+\begin{document}
+    \portada[%
+        titulo=Ecuaciones Diferenciales,
+        subtitulo=,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2025-2026]
+        
+    \thispagestyle{empty}
+    \tableofcontents
+    \newpage
+    \thispagestyle{empty}
+
+    \setcounter{chapter}{2}
+
+\chapter{Ecuaciones de un péndulo y mov. armónico simple}
+
+\section{Dependencia continua respecto a cond. iniciales}
+
+\begin{teo}[de la Dependencia Continua]\label{teo:dep_cont}
+    Sea $X:D\to \mathbb{R}^d$ un campo continuo con $D\subset \mathbb{R}\times \mathbb{R}^d$ un conjunto abierto y conexo de forma que tenemos unicidad de soluciones para toda condición inicial $(t_0,x_0)\in D$. Dadas dos sucesiones $\{t_{0n}\}\to t_0$ y $\{x_{0n}\}\to x_0$ para cierto punto $(t_0,x_0)\in D$ siendo $x:[a,b]\to \mathbb{R}^d$ solución del PVI
+    \begin{equation*}
+        \dot{x} = X(t,x), \qquad x(t_0) = x_0
+    \end{equation*}
+    Entonces:
+    \begin{itemize}
+        \item $\exists N\in \mathbb{N}$ de manera que si $n\geq N$ entonces podemos encontrar $x_n:[a,b]\to \mathbb{R}^d$ solución del PVI
+            \begin{equation*}
+                \dot{x} = X(t,x), \qquad x(t_{0n}) = x_{0n}
+            \end{equation*}
+        \item Además, $\{x_n\}$ converge uniformemente a $x$ en $[a,b]$.
+    \end{itemize}
+\end{teo}
+
+
+\begin{lema}\label{lema:Ascoli}
+    Tenemos una sucesión de funciones $f_n:[a,b]\to \mathbb{R}^d$ de manera que:
+    \begin{enumerate}
+        \item $\{f_n\}$ es uniformemente acotada y equicontinua.
+        \item Existe $f:[a,b]\to \mathbb{R}^d$ de manera que para cada parcial $\{f_{\sigma(n)}\}$ que converge uniformemente se tiene que $\{f_{\sigma(n)}\}\to f$ uniformemente.
+    \end{enumerate}
+    Entonces $\{f_n\}\to f$ convergente uniformemente en $[a,b]$.
+\end{lema}
+
+\begin{lema}
+    Sea $(X,d)$ un espacio métrico, tenemos una sucesión $\{x_n\}$ de puntos de $X$ de manera que:
+    \begin{enumerate}
+        \item Existe $K\subset X$ compacto tal que $x_n\in K\quad \forall n\in \mathbb{N}$.
+        \item Existe $x\in X$ de manera que para cada parcial $\{x_{\sigma(n)}\}$ que converge, se tiene que $\{x_{\sigma(n)}\} \to x$.
+    \end{enumerate}
+    Entonces $\{x_n\}\to x$.
+\end{lema}
+
+\section{Ecuaciones diferenciales con parámetros}\label{sec:dep_parametros}
+
+\begin{teo}[dependencia continua respecto a parámetros]
+    Sea un campo que depende de $m$ parámetros, es decir, una aplicación continua $X:D\times\Lambda\to \mathbb{R}^d$ donde $\Omega\subset\mathbb{R}\times\mathbb{R}^d$ y $\Lambda\subset\mathbb{R}^m$ ambos abiertos y conexos, tenemos la ecuación:
+    \begin{equation*}
+        \dot{x} = X(t,x,\lm)
+    \end{equation*}
+    Suponemos que $\forall \lm\in \Lambda$ hay unicidad para toda condición inicial $(t_\ast,x_\ast)\in D$.\\
+
+    \noindent
+    Sea $(t_0,x_0)\in D$ una condición inicial fija, denotaremos para cada $\lm\in \Lambda$ a la solución del PVI para esta condición inicial por $x(t,\lm)$.\\
+
+    \noindent
+    Sea $\lm_\ast\in \Lambda$, suponemos que $x(t,\lm_\ast)$ está definida en un intervalo $[a,b]$. Si tenemos $\{\lm_n\}\subset\Lambda$ con $\{\lm_n\}\to \lm_\ast$, entonces:
+    \begin{itemize}
+        \item $\exists N\in \mathbb{N}$ de manera que si $n\geq N$ entonces podemos encontrar $x_n:[a,b]\to \mathbb{R}^d$ solución del PVI
+            \begin{equation*}
+                \dot{x}= X(t,x,\lm_n), \qquad x(t_0) = x_0
+            \end{equation*}
+        \item $\{x(t,\lm_n)\}$ converge uniformemente a $x(t,\lm_\ast)$ en $[a,b]$.
+    \end{itemize}
+\end{teo}
+
+\section{Solución general de una ecuación diferencial}
+
+\begin{teo}\label{teo:sol_general}
+    Si tenemos una ecuación diferencial~\eqref{eq:eq_dif} con un campo continuo y unicidad respecto a condiciones iniciales, entonces $\cc{D}$ es abierto\footnote{Es una hipótesis que necesitaremos comprobar, pues queremos derivar $x$ respecto a condiciones iniciales.} en $\mathbb{R}\times\mathbb{R}\times\mathbb{R}^d$ y $x:\cc{D}\to \mathbb{R}^d$ es continua.
+\end{teo}
+ç
+
+\subsection{Demostración del Teorema de solución general}
+
+\begin{lema}[Caratheodory]\label{lema:caratheodory}
+    Si tenemos una sucesión de funciones $f_n:[a,b]\to \mathbb{R}^d$ continuas y $f:[a,b]\to \mathbb{R}^d$ de forma que $\{f_n\}\to f$ uniformemente en $[a,b]$. Si tenemos una sucesión $\{t_n\}$ verificando que $t_n \in [a,b]\quad \forall n\in \mathbb{N}$ y $\{t_n\}\to t_\ast$, entonces:
+    \begin{equation*}
+        \{f_n(t_n)\} \to f(t_\ast)
+    \end{equation*}
+\end{lema}
+
+\chapter{Derivando ecuaciones diferenciales}
+
+\begin{teo}[de diferenciabilidad respecto a condiciones iniciales]\label{teo:dif_cond}~\\
+    \noindent
+    Tenemos la ecuación diferencial:
+    \begin{equation*}
+        \dot{x} = X(t,x)
+    \end{equation*}
+    donde $X:D\subset\mathbb{R}\times\mathbb{R}^d\to \mathbb{R}^d$ es un campo continuo con $D$ un abierto conexo y de manera\footnote{Observemos que es la misma hipótesis que exigíamos en el Teorema de unicidad de soluciones.} que:
+    \begin{equation*}
+        \exists \frac{\partial X}{\partial x}(t,x) \qquad \forall (t,x)\in D
+    \end{equation*}
+    y además la aplicación $(t,x)\in D\longmapsto \frac{\partial X}{\partial x}(t,x)\in \mathbb{R}^{d\times d}$ es continua.\\
+
+    \noindent
+    Como tenemos existencia y unicidad de soluciones, podemos considerar la solución general de la ecuación:
+    \Func{x}{\cc{D}}{\bb{R}^d}{(t;t_0,x_0)}{x(t;t_0,x_0)}
+    de la que sabemos que $\cc{D}$ es abierto y $x:\cc{D}\to\mathbb{R}^d$ es continua.\\
+
+    \noindent
+    Bajo estas hipótesis, se tiene que $x\in C^1(\cc{D},\mathbb{R}^d)$.
+\end{teo}
+
+
+\begin{teo}[del Valor Medio]
+Tenemos $f:G\subset\mathbb{R}^n\to\mathbb{R}^m$ de clase $C^1(G,\mathbb{R}^m)$. Suponemos que tenemos $x,y\in G$ tal que $[x,y]\subset G$. Entonces\footnote{Donde hemos denotado $f'$ a la matriz jacobiana}:
+\begin{equation*}
+    f(x) - f(y) = \left[\int_{0}^{1} f'(\lm x +(1-\lm)y)~d\lm \right](x-y)
+\end{equation*}
+\end{teo}
+
+\begin{lema}\label{lema:1ddir}
+    Existen $\varepsilon>0$ y una función continua 
+    \Func{A}{[a,b]\times [-\varepsilon,\varepsilon]}{\bb{R}^{d\times d}}{(t,h)}{A(t,h)}
+    tal que si $h\neq 0$ y $|h|\leq \varepsilon$, entonces $\Delta_h(t)$ cumple:
+    \begin{equation*}
+        \dot{\Delta}_h(t) = A(t,h)\Delta_h(t)
+    \end{equation*}
+    Además:
+    \begin{equation*}
+        A(t,0) = \frac{\partial X}{\partial x}(t,x(t;t_0,x_0))
+    \end{equation*}
+\end{lema}
+
+\section{Diferenciabilidad respecto parámetros} % // TODO: ENunciar bien teorema
+\begin{teo}
+    Consideraremos una ecuación:
+    \begin{equation*}
+        \dot{x} = X(t,x,\lm)
+    \end{equation*}
+    donde tenemos un campo $X:G\subset \mathbb{R}\times\mathbb{R}^d\times\mathbb{R}^m\to \mathbb{R}^d$ continuo con $G$ un abierto conexo. Será habitual fijar ciertos valores de $\lm$  y considerar:
+    \begin{equation*}
+        G_\lm = \{(t,x)\in \mathbb{R}\times\mathbb{R}^d : (t,x,\lm)\in G\}
+    \end{equation*}
+    Por ser $G$ abierto tendremos que $G_\lm$ será también abierto. Fijado $\lm$ pensaremos que $D$ es una componente conexa de $G_\lm$ y estamos en las condiciones que venimos manejando en el curso.\\
+
+    \noindent
+    Para $(t_0,x_0)\in \mathbb{R}\times\mathbb{R}^d$ fijados tendremos el problema de valores iniciales:
+    \begin{equation}\label{eq:PVI_param}
+        \dot{x} = X(t,x,\lm), \qquad x(t_0) = x_0
+    \end{equation}
+    Tomamos:
+    \begin{equation*}
+        \cc{G} = \{(t,\lm)\in \mathbb{R}\times\mathbb{R}^m : (t_0,x_0)\in G_\lm,\ \alpha(\lm)<t<\omega(\lm)\}
+    \end{equation*}
+    Y consideraremos la aplicación $x:\cc{G}\to \mathbb{R}^d$ que a cada $(t,\lm)$ se asigna $x(t,\lm)$, la solución del PVI~\eqref{eq:PVI_param}. Puede probarse que $x(t,\lm)$ es continuo. Queremos buscar diferenciabilidad de $x(t,\lm)$, por lo que el primer paso a probar es demostrar que $\cc{G}$ es abierto.\\
+
+
+\noindent
+Trabajaremos con las hipótesis de que existen:
+\begin{equation*}
+    \frac{\partial X}{\partial x}(t,x,\lm), \frac{\partial X}{\partial \lm}(t,x,\lm)\qquad \forall (t,x,\lm)\in G
+\end{equation*}
+Así como que las aplicaciones:
+\begin{equation*}
+    (t,x,\lm)\in G \longmapsto \frac{\partial X}{\partial x}(t,x,\lm)\in \mathbb{R}^{d\times d},\quad  \frac{\partial X}{\partial \lm}(t,x,\lm)\in \mathbb{R}^{d\times m}
+\end{equation*}
+son continuas. Estas hipótesis nos aseguran que la aplicación $x(t,\lm)$ está bien definida, puesto que tenemos unicidad de soluciones.\\
+
+\noindent
+Como conclusión tenemos que $\cc{G}$ es abierto en $\mathbb{R}\times\mathbb{R}^m$, $x\in C^1(\cc{G},\mathbb{R}^d)$ y además $\frac{\partial x}{\partial \lm}(t,\lm)\in \mathbb{R}^{d\times m}$, si tomamos $y(t) = \frac{\partial x}{\partial \lm}(t,\lm)$ esta función cumplirá:
+\begin{equation*}
+    \dot{y} = \frac{\partial X}{\partial x}(t,x(t,\lm),\lm)\ y + \frac{\partial X}{\partial \lm}(t,x(t,\lm),\lm), \qquad y(t_0) = 0
+\end{equation*}
+Donde la condición inicial es $y(t_0) = 0$ porque $x(t_0,\lm) = x_0$ y estamos derivando respecto $\lm$. Obtenemos ahora una ecuación lineal completa, donde la homogénea es la variacional que antes obteníamos.\\
+
+\end{teo}
+\end{document}

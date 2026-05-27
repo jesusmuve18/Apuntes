@@ -1028,4 +1028,83 @@
     \end{propiedades}
 
     \section{Cinética química}
+
+    % En cuanto tenemos claro 4 o 5 ejemplos de cinética química entenderemos cómo funciona
+
+    % Nosotros no estamos usando corchetes para las concentraciones
+
+    % Trabajaremos siempre con coeficientes enteros
+
+    \begin{ejemplo}
+        Consideramos 
+        \begin{gather*}
+            A+A+B+B \overset{k}{\longrightarrow} 3C
+        \end{gather*}
+        que podemos escribir también (simplificando el problema) como 
+        \begin{gather*}
+            2A + 2 B \overset{k}{\longrightarrow} 3C
+        \end{gather*}
+        Nos dejamos llevar sin pensar demasiado y nos queda
+        \begin{gather*}
+            \left\{
+                \begin{array}{l}
+                    \dfrac{dA}{dt} = -2 k A^2B^2\\\\
+                    \dfrac{dB}{dt} = -2 k A^2B^2\\\\
+                    \dfrac{dC}{dt} = 3 k A^2B^2 
+                \end{array}
+            \right.
+        \end{gather*}
+    \end{ejemplo}
+
+    \begin{ejemplo}
+        Consideramos 
+        \begin{gather*}
+            A+A \overset{k}{\longrightarrow} A
+        \end{gather*}
+        No tiene sentido químico pero matemáticamente lo podemos plantear y nos queda una única ecuación
+        \begin{gather*}
+            \frac{dA}{dt} = -kA^2
+        \end{gather*}
+
+        Si ahora 
+        \begin{gather*}
+            A+A \overset{k}{\longrightarrow} 3A
+        \end{gather*}
+        Nos quedaría
+        \begin{gather*}
+            \frac{dA}{dt} = kA^2
+        \end{gather*}
+    \end{ejemplo}
+
+    \begin{ejemplo}
+        Consideramos un ratio de nacimientos $b>0$ de forma que
+        \begin{gather*}
+            N \overset{b}{\longrightarrow} N + N
+        \end{gather*}
+        y un ratio de muertes $d>0$ de forma que 
+        \begin{gather*}
+            N \overset{d}{\longrightarrow} \emptyset
+        \end{gather*}
+        Si nos dejamos llevar por la ley de acción de masas tendremos
+        \begin{gather*}
+            \frac{dN}{dt} = bN - dN = (b-d) N
+        \end{gather*}
+        esto nos dará el \textbf{Modelo de Malthus de poblaciones} con un \textbf{ratio de proliferación efectiva} de $(b-d)$.
+    \end{ejemplo}
+
+    \begin{ejemplo}
+        Consideramos un ratio de proliferación $\rho>0$ de forma que
+        \begin{gather*}
+            N \overset{\rho}{\longrightarrow} N + N
+        \end{gather*}
+        y un ratio de muertes $\frac{\rho}{2K}>0$, donde $K>0$ será la capacidad de carga\footnote{en inglés sería \textit{carrying capacity} (por si se lee en alguna biografía)} de forma que 
+        \begin{gather*}
+            N + N  \overset{\frac{\rho}{2K}}{\longrightarrow} \emptyset
+        \end{gather*}
+        Si nos dejamos llevar por la ley de acción de masas tendremos
+        \begin{gather*}
+            \frac{dN}{dt} = \rho N - 2 \frac{\rho}{2K} N^2 = \rho N \left(1 - \frac{N}{K}\right)
+        \end{gather*}
+        esto nos dará el \textbf{Modelo logístico de poblaciones}.
+    \end{ejemplo}
 \end{document}
