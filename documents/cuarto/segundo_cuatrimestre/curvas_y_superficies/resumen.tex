@@ -81,7 +81,12 @@ Estas reglas de derivación y propiedades del producto escalar, vectorial y del 
 \item $(|\alpha|^2)'=2\langle\alpha,\alpha'\rangle$, válida siempre; en cambio $|\alpha|'=\dfrac{\langle\alpha,\alpha'\rangle}{|\alpha|}$ solo si $\alpha\neq0$.
 \item Interpretación geométrica: $\langle u,v\rangle=|u||v|\cos\theta$ (si $|v|=1$, es la proyección de $u$ sobre $v$); $u\land v$ es el único vector perpendicular a $u$ y $v$ tal que $\{u,v,u\land v\}$ está positivamente orientada y $|u\land v|=|u||v|\sen\theta$ (área del paralelogramo); $\det(w,u,v)=\langle w,u\land v\rangle$ es el volumen orientado del paralelepípedo. En coordenadas:
 \[
-u\land v=(u_2v_3-u_3v_2,\ u_3v_1-u_1v_3,\ u_1v_2-u_2v_1).
+u\land v=(u_2v_3-u_3v_2,\ u_3v_1-u_1v_3,\ u_1v_2-u_2v_1) = 
+\begin{vmatrix}
+    i & j & k\\
+    u_1 & u_2 & u_3 \\
+    v_1 & v_2 & v_3
+\end{vmatrix}.
 \]
 \item Propiedades útiles, para $u,v,w\in\mathbb{R}^3$:
 \begin{itemize}
