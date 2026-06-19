@@ -77,7 +77,7 @@
 
 \section{Introducción y contexto}
 
-El \textbf{Sine Cosine Algorithm} (SCA) es una metaheurística poblacional propuesta por Seyedali Mirjalili en 2016 en el artículo \textit{``SCA: A Sine Cosine Algorithm for solving optimization problems''} (Knowledge-Based Systems, vol.~96, pp.~120--133). Su propuesta se enmarca dentro de la familia de algoritmos basados en modelos matemáticos, también denominados \textit{math-inspired}, en contraposición a los inspirados en fenómenos biológicos o físicos.
+El {Sine Cosine Algorithm} (SCA) es una metaheurística poblacional propuesta por Seyedali Mirjalili en 2016 en el artículo \textit{``SCA: A Sine Cosine Algorithm for solving optimization problems''} (Knowledge-Based Systems, vol.~96, pp.~120--133). Su propuesta se enmarca dentro de la familia de algoritmos basados en modelos matemáticos, también denominados \textit{math-inspired}, en contraposición a los inspirados en fenómenos biológicos o físicos.
 
 El SCA parte de la idea de que las funciones seno y coseno poseen propiedades geométricas naturalmente útiles para la búsqueda: oscilan de forma periódica, pueden tomar valores superiores o inferiores al rango $[-1,1]$ si se escalan convenientemente, y su comportamiento alternante facilita tanto la exploración global del espacio de búsqueda como la explotación local alrededor de soluciones prometedoras. Desde su publicación, el algoritmo ha atraído una atención considerable en la comunidad investigadora, siendo aplicado en campos tan diversos como la ingeniería eléctrica, el aprendizaje automático, el diagnóstico médico y la planificación de rutas.
 
@@ -300,63 +300,6 @@ $r_3 \in [0, 2]$ actúa como un peso estocástico sobre el punto destino. Si $r_
 
 $r_4 \in [0,1]$ selecciona con probabilidad $1/2$ entre la función seno y la función coseno. Ambas funciones tienen la misma amplitud máxima, pero sus ceros y máximos están desfasados $\pi/2$ radianes. Emplearlas con igual probabilidad garantiza que el muestreo de direcciones de movimiento sea más uniforme que si se usase una sola función, mejorando la isotropía de la búsqueda en el espacio.
 
-% \subsection{Geometría de la búsqueda}
-
-% La combinación de los cuatro parámetros genera cuatro regiones de movimiento posible para cada agente en cada dimensión, como ilustra la Figura~\ref{fig:geometry}. Dependiendo del signo de $\phi = r_1 \cdot f(r_2)$ y del valor de $r_3$, el nuevo punto puede caer en cualquiera de los cuatro cuadrantes definidos por los ejes que pasan por $X_i^t$ y $P_i^t$ (agente y destino respectivamente).
-
-% \begin{figure}[h!]
-% \centering
-% \begin{tikzpicture}[>=Stealth, thick, font=\small]
-%     %% Coordenadas clave
-%     \coordinate (X)  at (0,0);
-%     \coordinate (P)  at (5,0);
-
-%     %% Eje horizontal de referencia
-%     \draw[gray!50, thin] (-2.8,0) -- (7.2,0);
-%     \draw[gray!50, thin] (0,-2.3) -- (0,2.3);
-
-%     %% Distancia base |Delta|
-%     \draw[<->, gray!70, thin] (0,-1) -- (5,-1)
-%         node[midway, below, gray] {$|\Delta_i^t|$};
-%     \draw[dashed, gray!70] (5,0) -- (5,-1.5);
-
-%     %% --- Flecha R1: r1*f>0, en la dirección de P (dentro del segmento)
-%     \draw[->, thick, myyellow] (0,0) -- (3.2,0)
-%         node[above, myyellow] {\footnotesize $|\phi|\!<\!1$};
-
-%     %% --- Flecha R2: r1*f>0, sobrepasa P (exploración)
-%     \draw[->, thick, myblue] (0,0) -- (6.5, 1.25)
-%         node[right, myblue] {\footnotesize $\phi\!>\!1$};
-
-%     %% --- Flecha R3: r1*f<0 hacia atrás
-%     \draw[->, thick, teal!70!black] (0,0) -- (-2.1, 0)
-%         node[above, teal!70!black] {\footnotesize $\phi\!<\!-1$};
-
-%     %% Zona explotación (segmento X a P)
-%     \draw[myyellow!40, line width=6pt, opacity=0.5] (0,0) -- (5,0);
-%     \node[myyellow, font=\footnotesize] at (2.5, -0.5)
-%         {explotación};
-
-%     %% Zona exploración (fuera del segmento)
-%     \draw[mygreen!20, line width=6pt, opacity=0.4] (5,0) -- (6.8,0);
-%     \node[mygreen, font=\footnotesize] at (6, -0.5)
-%         {exploración};
-
-%     %% Punto destino P
-%   \filldraw[myred] (P) circle (3pt);
-%   \node[above, myred] at (P) {$P_i^t$};
-
-%   %% Punto actual X
-%   \filldraw[myblue] (X) circle (3pt);
-%   \node[above, myblue] at (X) {$X_i^t$};
-
-% \end{tikzpicture}
-% \caption{Posibles movimientos de un agente en una dimensión. La banda naranja representa el segmento $[X_i^t, P_i^t]$ (zona de explotación). Cuando $|\phi| < 1$, el agente aterriza dentro del segmento; cuando $|\phi| > 1$ (exploración), sobrepasa el destino. El signo negativo de $\phi$ permite moverse en sentido opuesto al destino, explorando el semiplano izquierdo.}
-% \label{fig:geometry}
-% \end{figure}
-
-% Desde una perspectiva probabilística, en cada iteración el valor esperado de $|\phi| = |r_1 \cdot f(r_2)|$ decrece con $t$ al hacerlo $r_1$. Esto convierte la dinámica colectiva de la población en un proceso de {enfriamiento implícito}: en las primeras iteraciones los agentes realizan saltos amplios y divergentes; conforme avanza la búsqueda, los pasos se acortan y la población converge gradualmente hacia el punto destino, refinando la solución con precisión creciente.
-
 \subsection{Geometría de la búsqueda}
 
 La ecuación~\eqref{eq:factored} actualiza cada dimensión de forma independiente. En una dimensión fija $j$, el nuevo valor del agente es:
@@ -364,7 +307,7 @@ La ecuación~\eqref{eq:factored} actualiza cada dimensión de forma independient
   X_j^{t+1} = X_j^t + \phi \cdot |\Delta_j^t|,
   \qquad |\Delta_j^t| = |r_3 P_j^t - X_j^t|, \qquad \phi = r_1 \cdot f(r_2)
 \]
-donde $|\Delta_j^t| \geq 0$ siempre. Por tanto, el signo y la magnitud del desplazamiento quedan determinados exclusivamente por $\phi$, que puede tomar cualquier valor real en $[-r_1,\, r_1]$. Esto da lugar a \textbf{cuatro regímenes de movimiento}, ilustrados en la Figura~\ref{fig:geometry}:
+donde $|\Delta_j^t| \geq 0$ siempre. Por tanto, el signo y la magnitud del desplazamiento quedan determinados exclusivamente por $\phi$, que puede tomar cualquier valor real en $[-r_1,\, r_1]$. Esto da lugar a cuatro regímenes de movimiento, representados en la Figura~\ref{fig:geometry}:
 
 \begin{itemize}
   \item $\phi \in (0,1)$: explotación positiva. El agente se desplaza hacia $P_j^t$ sin alcanzarlo.
