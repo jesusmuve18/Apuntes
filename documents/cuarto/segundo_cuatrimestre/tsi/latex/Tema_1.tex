@@ -34,8 +34,8 @@
         \end{tabular}
     \end{center}
     Definimos además las funciones que más utilizaremos:
-    \begin{center}
-        \begin{tabular}{c | l}
+    \begin{center}%
+        \begin{tabular}{c | l}%
             $k(n_i, n_j)$ & \textbf{Coste óptimo} entre $n_i$ y $n_j$ \\
             $g(n)$ & \textbf{Costo actual} desde $s$ hasta $n$.\\
             $g^*(n)$ & \textbf{Costo óptimo} entre $s$ y $n$, es decir, $g^*(n) = k(s,n)$ para todo $n$.\\
@@ -106,7 +106,118 @@ En general, por la optimalidad se tendrá que, para cualquier camino $P$ se tien
     \end{enumerate}
 \end{propiedades}
 
-% Heurísticas
+\subsection{Completitud de $A^*$}
+
+En esta sección probaremos que para un grafo localmente finito el algoritmo $A^*$ es completo. Para ello dividiremos la demostración en 3 etapas:
+\begin{itemize}
+    \item[\textbf{Etapa 1)}] Si suponemos que el grafo es finito\footnote{un grafo es finito si el número de caminos acíclicos es finito.} entonces el algoritmo $A^*$ termina. Esto se ve fácilmente, ya que si el algoritmo entrase en ciclos no finalizaría, sin embargo, al ser el coste positivo en cada paso, el algoritmo ignora los ciclos.
+    
+    De esta forma, cuando el algoritmo explora un nodo, realmente lo que explora es un camino distinto. Como el número de caminos es finito, el algoritmo termina.
+    
+    \item[\textbf{Etapa 2)}] Seguimos suponiendo que el grafo es finito, pero ahora queremos ver que $A^*$ es completo, es decir, que si existe una solución la encontrará.
+    \begin{proof}
+        La demostración la haremos por reducción al absurdo. Para ello, supongamos que $A^*$ no encuentra la solución. Entonces tendremos que 
+        \begin{gather*}
+            ABIERTOS = \emptyset
+        \end{gather*}
+        Esto ocurrirá si y solo si el nodo que se está explorando no tiene hijos, pero esto nos lleva a contradicción, ya que existe un camino $P_{s-\gamma}$ (existe la solución), luego todos los nodos tienen al menos un descendiente hasta llegar a $\gamma$.
+    \end{proof}
+
+    \item[\textbf{Etapa 3)}] Ahora ya estamos en condiciones de probar el siguiente teorema (asumiendo las 2 propiedades estudiadas previamente):
+    \begin{teo}[Completitud de $A^*$]
+        Si el grafo es localmente finito, entonces $A^*$ es completo.
+
+        \begin{proof}
+            De nuevo la demostración la haremos por reducción al absurdo. Supongamos así que existe un camino $P_{s-\Gamma}$ y $A^*$ no lo encuentra. En dicho caso, en $ABIERTOS$ siempre habrá un nodo de ese camino $n$, con un cierto $f(n)\in \bb{R}$. Como no encuentra la solución tendremos dos posibilidades:
+            \begin{itemize}
+                \item $A^*$ termina. Usando la demostración de las etapas 1 y 2 llegaremos a contradicción.
+                \item $A^*$ no termina. Este será el caso que seguiremos desarrollando.
+            \end{itemize}
+            En caso de que $A^*$ no termine significará que está infinitamente buscando. Usaremos ahora una propiedad muy útil: en un grafo localmente finito, el número de caminos de longitud finita es finito.\\
+
+            Por tanto, si no termina significará que se ha puesto a buscar caminos de longitud no finita, en cuyo caso
+            \begin{gather*}
+                g(n) \text{ no finito } \Rightarrow f(n) = g(n) + h(n) \text{ no finito }
+            \end{gather*}
+            Esto es contradictorio con que el nodo $n$ tenga $f(n)$ finito, ya que $A^*$ nunca exploraría nodos con $f$ no finita habiendo algún nodo $n \in ABIERTOS$ con $f(n)$ finito.
+        \end{proof}
+    \end{teo}
+\end{itemize}
+
+\subsection{Admisibilidad de $A^*$}
+\begin{definicion}
+    Una heurística $h$ se dice admisible si y solo si 
+    \begin{gather*}
+        h(n) \leq h^*(n) \forall n
+    \end{gather*}
+\end{definicion}
+
+En esta sección trataremos de probar que si $h$ es admisible entonces $A^*$ es admisible.
+
+\begin{lema}\label{lema:admisible_1}
+    Para cualquier nodo $n$ que no esté en $CERRADOS$ y para cualquier camino óptimo $P$ entre $s$ y $n$ siempre se puede seleccionar un nodo $n'$ perteneciente a $P$ y a $ABIERTOS$ tal que 
+    \begin{gather*}
+        g(n') = g^*(n')
+    \end{gather*}
+
+    \begin{proof}
+        Realizaremos una demostración constructiva. Para ello comenzamos tomando un nodo $n\notin CERRADOS$ y consideramos el camino recorrido hasta dicho nodo numerándolo de la siguiente forma:
+        \begin{gather*}
+            P = \{n_0=s,\ n_1,..., n_k = n\}
+        \end{gather*}
+        Tenemos entonces 2 casuísticas posibles: 
+        \begin{itemize}
+            \item Si $s\in ABIERTOS$, entonces $g(s) = g^*(s) = 0$ y se cumple.
+            \item Si $s\notin ABIERTOS$, entonces construímos
+            \begin{gather*}
+                \Delta = \{m\in (P\cap CERRADOS) : g(m) = g^*(m)\}
+            \end{gather*}
+            Tendremos que $\Delta \neq \emptyset$ ya que $s\in \Delta$. Tomamos $n^*\in \Delta$ con mayor subíndice. Sea $n'$ el sucesor de $n^*$ en $P$, se verificará que 
+            \begin{gather*}
+                g(n') \leq g(n^*) +c(n^*, n') = g^*(n^*) +c(n^*, n') = g^*(n')
+            \end{gather*}
+            Además, como en general $g^*(n') \leq g^(n')$ tendremos la igualdad. Además, como $n'\in ABIERTOS$ tendremos que $n'\notin \Delta$. Como $n^*\in CERRADOS$ tendremos que $n'\in P$.
+        \end{itemize}
+    \end{proof}
+\end{lema}
+
+\begin{lema}\label{lema:admisible_2}
+    Supongamos $h$ admisible y $A^*$ no ha terminado todavía. Entonces, para cualquier óptimo entre $s$ tendremos que 
+    \begin{gather*}
+        \exists n' \in (P \cap ABIERTOS) : f(n') \leq c
+    \end{gather*} 
+
+    \begin{proof}
+        Consideramos $P_{s-\gamma}$. Como el algoritmo no ha terminado tendremos $\gamma \notin CERRADOS$ por lo que podemos aplicar el lema \ref{lema:admisible_1}. Tomamos así $n'\in (P \cap ABIERTOS)$ con $g(n') = g^*(n')$. De esta forma
+        \begin{gather*}
+            f(n') = g(n') + h(n') = g^*(n') + h(n') \overset{(\ast)}{\leq} g^*(n') + h^*(n') = f^*(n') = c^*
+        \end{gather*}
+        donde en $(\ast)$ hemos aplicado que $h$ es admisible. Tenemos por tanto $f(n')\leq c^*$.
+    \end{proof}
+\end{lema}
+
+\begin{teo}
+    Si $h$ es admisible, entonces $A^*$ es admisible.
+    \begin{proof}
+        Lo haremos por reducción al absurdo, suponiendo que $A^*$ no es admisible. Entonces el algoritmo encuentra una solución $t\in \Gamma$ que no es óptima, es decir, 
+        \begin{gather*}
+            f(t) > c^*
+        \end{gather*} 
+        Nos colocamos en el paso anterior a que termine:
+        \begin{gather*}
+            t\in ABIERTOS \qquad t \text{ el mejor nodo, es decir, } f(t) \leq f(n) \quad \forall n \in ABIERTOS
+        \end{gather*}
+        Aplicando el lema \ref{lema:admisible_2} tendremos que existe un $n'\in ABIERTOS$ con $f(n')\leq c^*$ de donde
+        \begin{gather*}
+            f(n') \leq c^* < f(t)
+        \end{gather*}
+        lo que nos lleva a contradicción, ya que $t$ era el mejor nodo.
+    \end{proof}
+\end{teo}
+
+\subsection{Dominancia}
+
+Si consideramos $h \cong 0$ tendremos que $h$ será admisible y diremos que el algoritmo de búsqueda que use la heurística $h$ será no informado.
 
 \begin{definicion}
     Sean $h_1, h_2$ dos heurísticas admisibles. Decimos que $h_2$ está \textbf{más informada} que $h_1$ si $h_2(n)>h_1(n)$ para cualquier nodo $n$.
@@ -116,7 +227,24 @@ En general, por la optimalidad se tendrá que, para cualquier camino $P$ se tien
     Si $A_2^*$ está más informado que $A_1^*$ entonces $A_2^*$ domina a $A_1^*$.
 \end{teo}
 
-\section{Heurísticas monótonas}
+\begin{observacion}
+    Algunas observaciones que podemos extraer son las siguientes:
+    \begin{itemize}
+        \item Cuanto más se parezca $h$ a $h^*$ más eficiente va a ser la búsqueda.
+        \item Fuera del rango de la admisibilidad no hay garantías de encontrar la solución óptima.
+        \item La dominancia está relacionada con la eficiencia.
+    \end{itemize}
+\end{observacion}
+
+Una forma típica de implementar $A^*$ es dándole un peso a la función $h$, definiendo $f$ como 
+\begin{gather*}
+    f(n) = g(n) + wh(n)
+\end{gather*}
+donde $w\in \bb{R}$. Para $w=2$ le damos información de más (podemos perder la admisibilidad). 
+
+% Heurísticas
+
+\subsection{Heurísticas monótonas}
 
 Por la desigualdad triangular tenemos que $k(s,\gamma) \leq k(s,n) + k(n, \gamma)$ para cualquier nodo $n$, cualquier nodo inicial $s$ y final $\gamma$. Tenemos por tanto que 
 \begin{gather*}
@@ -142,7 +270,7 @@ Por la desigualdad triangular tenemos que $k(s,\gamma) \leq k(s,n) + k(n, \gamma
 \end{prop}
 
 \begin{teo}
-    Toda heurística consistente es admisible
+    Toda heurística consistente (monótona) es admisible
     \begin{proof}
         Por ser $h$ consistente se tiene que verificar la desigualdad
         \begin{gather*}
@@ -164,7 +292,7 @@ Por la desigualdad triangular tenemos que $k(s,\gamma) \leq k(s,n) + k(n, \gamma
     \begin{proof}
         $A^*$ selecciona como mejor nodo $n$. Supongamos que $g(n)>g^*(n)$, entonces 
         \begin{equation*}
-            \text{ABIERTOS} = \{... n ...\}
+            \text{ABIERTOS} = \{..., n, ...\}
         \end{equation*}
         Por el lema 1 tenemos que $\exists n'\in$ABIERTOS tal que $u'\in P^*_{s-n}$, en cuyo caso, $g(n')=g^*(n')$. Tenemos entonces
         \begin{gather*}
@@ -174,3 +302,7 @@ Por la desigualdad triangular tenemos que $k(s,\gamma) \leq k(s,n) + k(n, \gamma
         y llegamos a contradicción.
     \end{proof}
 \end{teo}
+
+\begin{observacion}
+    Si la heurística no es monótona no hay que revisar $CERRADOS$, alcanzamos eficiencia y el concepto de dominancia se basa en el tiempo.
+\end{observacion}

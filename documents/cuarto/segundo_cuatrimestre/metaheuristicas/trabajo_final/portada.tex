@@ -1,0 +1,51 @@
+\usepackage{xkeyval} % Para el paso de argumentos
+
+\usepackage{graphicx}
+
+% Definir la carpeta de las imágenes
+% \graphicspath{{../_assets}{../../_assets}{../../../_assets}{../../../../_assets}{../../../../../_assets}}
+
+% Definir el comando \portada
+\makeatletter
+\define@key{portada}{titulo}{\def\titulo{#1}}
+\define@key{portada}{subtitulo}{\def\subtitulo{#1}}
+\define@key{portada}{autor}{\def\autor{#1}}
+\define@key{portada}{dni}{\def\dni{#1}}
+\define@key{portada}{horario practicas}{\def\horariopracticas{#1}}
+\define@key{portada}{email}{\def\email{#1}}
+\define@key{portada}{año}{\def\año{#1}}
+\define@key{portada}{color página}{\def\colorpagina{#1}}
+\define@key{portada}{imagen}{\def\imagen{#1}}
+
+\newcommand*{\portada}[1][]{%
+  % Encabezado
+  \fancyhead[L]{\helv \titulo}
+  \fancyhead[R]{\helv \nouppercase{\leftmark}}
+
+    % Definimos las claves y sus valores por defecto
+  \setkeys{portada}{%
+    titulo=Sin Título,%
+    subtitulo=Sin Subtítulo,%
+    autor=Autor Desconocido,%
+    año=Sin Año,%
+    color página=white,%
+    imagen=Logo-UGR-Black.png, #1}%
+    \begin{titlepage}
+        \centering
+        \pagecolor{\colorpagina} % Cambia el color de fondo de la portada
+        {\includegraphics[width=0.2\textwidth]{\imagen}\par}
+        \vspace{1cm}
+        {\bfseries\LARGE Universidad de Granada \par}
+        \vspace{1cm}
+        {\scshape\Large Doble Grado en Ingeniería Informática y Matemáticas \par}
+        \vspace{3cm}
+        {\scshape\Huge \titulo \par}
+        \vspace{3cm}
+        {\itshape\Large \subtitulo \par}
+        \vfill
+        {\large Autor: \autor \par}
+        \vfill
+        {\Large \año \par}
+    \end{titlepage}%
+    \pagecolor{white}
+}
