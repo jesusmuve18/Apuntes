@@ -237,7 +237,7 @@
         \toprule
         \textbf{Param.} & \textbf{Rol} \\
         \midrule
-        $r_1$ & \hl{Amplitud}: exploración/explotación \\
+        $r_1$ & {Amplitud}: exploración/explotación \\
         $r_2$ & Ángulo: dirección y signo del paso \\
         $r_3$ & Peso de la distancia al destino \\
         $r_4$ & Selección equiprobable sin/cos \\
@@ -246,6 +246,7 @@
       \vspace{0.5em}
 
       \begin{exampleblock}{Separación magnitud/dirección}
+        \centering
         $|\Delta_j^t|$ fija la magnitud $(\geq 0)$\\
         $\phi$ fija signo y escala $\Rightarrow$ simetría
       \end{exampleblock}
@@ -285,13 +286,9 @@
       \end{alertblock}
   \end{columns}
 
-
-%   \vspace{0.5em}
-%   \begin{center}
-    \small
-    $r_1$ es el único parámetro \hl{determinista}.\\
-    $r_2, r_3, r_4$ son aleatorios $\Rightarrow$ el balance es \textbf{aleatorio pero dirigido}
-%   \end{center}
+    {\small
+    $r_1$ es el único parámetro \textbf{determinista}.\\
+    $r_2, r_3, r_4$ son aleatorios $\Rightarrow$ el balance es \textbf{aleatorio pero dirigido}}
 \end{frame}
 
 % --- 3.2  Figura r1 ---------------------------------------------
@@ -306,7 +303,7 @@
         axis line style={draw=black, line width=0.6pt},
         % --- Etiquetas y Texto ---
         xlabel={$t$},
-        ylabel={$r_1$},
+        ylabel={$r_1(t)$},
         label style={font=\small\sffamily, text=black!80},
         tick label style={font=\scriptsize\sffamily, text=black},
         % --- Límites y Ticks ---
@@ -331,6 +328,14 @@
         },
         legend cell align={left},         % Alinea el texto de la leyenda a la izquierda
         ]
+        %% Relleno zona exploración
+        \addplot[fill=mygreen!40, opacity=0.6, draw=none, forget plot]
+            coordinates {(0,2)(50,1)(50,1)(0,1)} \closedcycle;
+
+        %% Relleno zona explotación
+        \addplot[fill=myyellow!40, opacity=0.6, draw=none, forget plot]
+            coordinates {(50,1)(100,0)(100,1)(50,1)} \closedcycle;
+
         %% Línea r1 decreciente
         \addplot[very thick, myblue, domain=0:100, samples=200]
             {2*(1 - x/100)};
@@ -340,14 +345,6 @@
         \addplot[very thick, dashed, myred, domain=0:100, samples=2]
             {1};
         \addlegendentry{Umbral $r_1 = 1$}
-
-        %% Relleno zona exploración
-        \addplot[fill=mygreen!40, opacity=0.6, draw=none]
-            coordinates {(0,2)(50,1)(50,1)(0,1)} \closedcycle;
-
-        %% Relleno zona explotación
-        \addplot[fill=myyellow!40, opacity=0.6, draw=none]
-            coordinates {(50,1)(100,0)(100,1)(50,1)} \closedcycle;
 
         %% Etiquetas de zona
         \node[font=\small\bfseries, mygreen]  at (axis cs:18, 1.25) {Exploración};
@@ -367,7 +364,7 @@
   \end{columns}
   \begin{alertblock}{Umbral efectivo}
     \centering
-    ${E}[|\phi|] = r_1 \cdot \dfrac{2}{\pi}\Rightarrow$ transición real en $t^* \approx \mathbf{0.21\,T}$
+    ${E}[|\phi|] = r_1 \cdot \dfrac{2}{\pi}\Rightarrow$ transición real en $t^* \approx {0.21\,T}$
     \end{alertblock}
 \end{frame}
 
@@ -605,7 +602,7 @@
         width=\textwidth, height=5cm,
         axis lines*=left,
         axis line style={black, line width=0.6pt},
-        xlabel={$t/T$}, ylabel={$\mathbb{E}[|\phi|]$},
+        xlabel={$t/T$}, ylabel={${E}[|\phi|]$},
         label style={font=\small\sffamily},
         tick label style={font=\scriptsize\sffamily},
         xmin=0, xmax=1, ymin=0, ymax=1.38,
@@ -615,6 +612,7 @@
         yticklabels={$0$,$0.5$,$\frac{2}{\pi}$,$1$},
         tick align=outside,
         grid=both, grid style={line width=0.35pt, draw=gray!25},
+        legend cell align={left},
         legend style={font=\scriptsize\sffamily, at={(0.97,0.95)},
           anchor=north east, draw=none, fill=white,
           fill opacity=0.85, text opacity=1, row sep=2pt},
@@ -626,7 +624,7 @@
           coordinates{(0.215,0)(1,0)(1,0.637)(0.215,0.637)}\closedcycle;
         % Curva principal
         \addplot[very thick, myblue, domain=0:1, samples=200]{2*(1-x)*2/3.14159};
-        \addlegendentry{$\mathbb{E}[|\phi|] = r_1 \cdot \tfrac{2}{\pi}$}
+        \addlegendentry{${E}[|\phi|] = r_1 \cdot \tfrac{2}{\pi}$}
         % Umbral
         \addplot[dashed, myred, thick, domain=0:1]{0.637};
         \addlegendentry{Umbral efectivo $\frac{2}{\pi}$}
@@ -743,7 +741,7 @@
 Inicializar X = {X_1,...,X_N} aleatoriamente en [lb,ub]^d
 Evaluar f(X_i) para cada i;   P <- argmin f(X_i); t <- 1
 Mientras t <= T hacer
-    r1 <- 2*(1 - t/T)                      (* Ec. decaimiento *)
+    r1 <- 2*(1 - t/T)                      (* Ec. decrecimiento *)
     Para cada agente i = 1 hasta N hacer
         Para cada dimensión j = 1 hasta d hacer
             r2 <- U[0,2pi];  r3 <- U[0,2];  r4 <- U[0,1]

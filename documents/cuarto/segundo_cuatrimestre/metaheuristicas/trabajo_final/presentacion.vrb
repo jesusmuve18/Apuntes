@@ -7,7 +7,7 @@
 Inicializar X = {X_1,...,X_N} aleatoriamente en [lb,ub]^d
 Evaluar f(X_i) para cada i;   P <- argmin f(X_i); t <- 1
 Mientras t <= T hacer
-    r1 <- 2*(1 - t/T)                      (* Ec. decaimiento *)
+    r1 <- 2*(1 - t/T)                      (* Ec. decrecimiento *)
     Para cada agente i = 1 hasta N hacer
         Para cada dimensión j = 1 hasta d hacer
             r2 <- U[0,2pi];  r3 <- U[0,2];  r4 <- U[0,1]
