@@ -1,0 +1,28 @@
+\frametitle{Pseudocódigo del SCA}
+\vspace{-2pt}
+\begin{lstlisting}
+(* Parámetros: N (población), T (iteraciones máx.), a=2 *)
+Inicializar X = {X_1,...,X_N} aleatoriamente en [lb,ub]^d
+Evaluar f(X_i) para cada i;   P <- argmin f(X_i)
+
+t <- 1
+Mientras t <= T hacer
+    r1 <- 2*(1 - t/T)                      (* Ec. decaimiento *)
+    Para cada agente i = 1 hasta N hacer
+        Para cada dimensión j = 1 hasta d hacer
+            r2 <- U[0,2pi];  r3 <- U[0,2];  r4 <- U[0,1]
+            Si r4 < 0.5 entonces
+                X_i[j] <- X_i[j] + r1*sin(r2)*|r3*P[j]-X_i[j]|
+            Si_no
+                X_i[j] <- X_i[j] + r1*cos(r2)*|r3*P[j]-X_i[j]|
+            Fin Si
+            X_i[j] <- max(lb[j], min(ub[j], X_i[j]))  (* clamping *)
+        Fin Para
+        Si f(X_i) < f(P) entonces  P <- X_i  Fin Si
+    Fin Para
+    t <- t + 1
+Fin Mientras
+Retornar P       (* mejor solución encontrada *)
+\end{lstlisting}
+  \vspace{2pt}
+  \hfill{\small Complejidad: $\mathcal{O}(N \cdot d)$ por iteración \;—\; $N \times T$ evaluaciones totales}

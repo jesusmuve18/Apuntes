@@ -1,0 +1,861 @@
+\documentclass[aspectratio=169]{beamer}
+
+% ================================================================
+% TEMA: Trigon — moderno, limpio, geométrico
+% Requiere: texlive-fonts-extra  (sudo apt install texlive-fonts-extra)
+%           o en MiKTeX: instalar el paquete "beamertheme-trigon"
+%           y "sourcesanspro" desde el gestor de paquetes.
+% ================================================================
+\usetheme[
+  block=fill,
+  numbering=fraction,
+]{trigon}
+
+% ================================================================
+% PAQUETES
+% ================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, calc, patterns, decorations.pathreplacing, positioning}
+\usepackage{appendixnumberbeamer}
+
+% ================================================================
+% PALETA DE COLORES  (idéntica a memoria.tex)
+% ================================================================
+\definecolor{myblue}  {RGB}{94,  52, 235}
+\definecolor{myyellow}{RGB}{211, 121,  32}
+\definecolor{myred}   {RGB}{222,  75,  49}
+\definecolor{mygreen} {RGB}{ 23, 110,  63}
+\definecolor{mydark}  {RGB}{ 30,  30,  50}
+\definecolor{mylight} {RGB}{245, 244, 255}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+\definecolor{codegreen}{rgb}{0.13,0.55,0.13}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{codeblue}{rgb}{0.0,0.0,0.8}
+
+% --- Trigon acepta tPrim / tSec / tAccent como colores de la plantilla ---
+\colorlet{tPrim}  {myblue}
+\colorlet{tSec}   {myblue!75!black}
+\colorlet{tAccent}{myyellow}
+
+% ================================================================
+% PERSONALIZACIÓN DE BLOQUES (tcolorbox sobre trigon)
+% ================================================================
+\setbeamercolor{block title}        {bg=myblue!90,  fg=white}
+\setbeamercolor{block body}         {bg=myblue!8,   fg=black}
+\setbeamercolor{block title alerted}{bg=myred!90,   fg=white}
+\setbeamercolor{block body alerted} {bg=myred!7,    fg=black}
+\setbeamercolor{block title example}{bg=mygreen!80, fg=white}
+\setbeamercolor{block body example} {bg=mygreen!7,  fg=black}
+
+% ================================================================
+% FUENTES
+% ================================================================
+\setbeamerfont{title}        {size=\Large,  series=\bfseries}
+\setbeamerfont{subtitle}     {size=\normalsize, series=\normalfont}
+\setbeamerfont{frametitle}   {size=\large,  series=\bfseries}
+\setbeamerfont{section title}{size=\Large,  series=\bfseries}
+
+% ================================================================
+% LSTLISTING  — mismo estilo que memoria.tex
+% ================================================================
+\lstdefinestyle{modern}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen}\itshape,
+    keywordstyle=\color{codeblue}\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false, breaklines=true, captionpos=b,
+    keepspaces=true, numbers=left, numbersep=8pt,
+    showspaces=false, showstringspaces=false, showtabs=false,
+    tabsize=4, frame=single, rulecolor=\color{gray!50},
+    xleftmargin=12pt,
+    morekeywords={Mientras, hacer, Para, hasta, Si, entonces, Si_no,
+                  Fin, Retornar, Inicializar, Evaluar, de},
+    morecomment=[s]{(*}{*)},
+    sensitive=false,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1
+}
+\lstset{style=modern}
+
+% ================================================================
+% COMANDOS AUXILIARES
+% ================================================================
+\newcommand{\hl} [1]{\textcolor{myblue}  {\textbf{#1}}}
+\newcommand{\hr} [1]{\textcolor{myred}   {\textbf{#1}}}
+\newcommand{\hg} [1]{\textcolor{mygreen} {\textbf{#1}}}
+\newcommand{\hy} [1]{\textcolor{myyellow}{\textbf{#1}}}
+
+% Separador de sección con diseño trigon
+\AtBeginSection[]{
+  \begin{frame}[plain]
+    \sectionpage
+  \end{frame}
+}
+
+% ================================================================
+% METADATOS
+% ================================================================
+\title{Sine Cosine Algorithm}
+\subtitle{Una metaheurística basada en funciones trigonométricas}
+\author{Jesús Muñoz Velasco}
+\institute{Metaheurísticas \textbullet\ Trabajo Final}
+\date{Curso 2025--2026}
+
+% ================================================================
+\begin{document}
+
+% ---------------------------------------------------------------
+%  PORTADA
+% ---------------------------------------------------------------
+\maketitle
+
+% ---------------------------------------------------------------
+%  ÍNDICE
+% ---------------------------------------------------------------
+\begin{frame}{Contenido}
+  \tableofcontents
+\end{frame}
+
+% ===============================================================
+\section{Introducción}
+% ===============================================================
+
+\begin{frame}{¿Qué es el Sine Cosine Algorithm (SCA)?}
+  \begin{columns}[T, onlytextwidth]
+    \column{0.48\textwidth}
+      \begin{block}{Origen}
+        Propuesto por \textbf{Seyedali Mirjalili} en 2016\\
+        \textit{Knowledge-Based Systems}, vol.~96, pp.~120--133
+      \end{block}
+      \vspace{0.5em}
+      
+
+      \begin{exampleblock}{Idea central}
+        \centering
+        \begin{tikzpicture}[font=\small]
+          \begin{axis}[
+            width=5.8cm, height=3.6cm,
+            axis lines=center, axis line style={gray!60, thin},
+            xlabel={}, ylabel={},
+            xmin=-0.3, xmax=6.8, ymin=-2.3, ymax=2.3,
+            xtick=\empty, ytick={-1,1},
+            tick label style={font=\tiny, color=gray},
+            clip=false,
+          ]
+            \addplot[very thick, myblue, domain=0:6.283, samples=200]{2*sin(deg(x))};
+            \addplot[very thick, myyellow, dashed, domain=0:6.283, samples=200]{0.5*sin(deg(x))};
+            \draw[dashed, gray!60, thin] (axis cs:0,-1) -- (axis cs:6.5,-1);
+            \draw[dashed, gray!60, thin] (axis cs:0, 1) -- (axis cs:6.5, 1);
+            \node[myblue,   font=\tiny\bfseries, right] at (axis cs:3.5, 2.1) {$r_1=2$: exploración};
+            \node[myyellow, font=\tiny\bfseries, right] at (axis cs:3.5,-1.7) {$r_1=0.5$: explotación};
+          \end{axis}
+        \end{tikzpicture}
+      \end{exampleblock}
+
+    \column{0.5\textwidth}
+    \begin{itemize}
+        \setlength\itemsep{0.4em}
+        \item Metaheurística \hl{poblacional} de tipo \textit{math-inspired}
+        \item Sin inspiración biológica ni física: pura matemática
+        \item Aprovecha las propiedades geométricas de las funciones \hl{$\sen$} y \hl{$\cos$}
+        \item Competitivo frente a PSO, GA y GWO en benchmarks estándar
+      \end{itemize}
+  \end{columns}
+\end{frame}
+
+% ===============================================================
+\section{Fundamentos matemáticos}
+% ===============================================================
+
+\begin{frame}{Ecuación de actualización}
+  \begin{columns}[T, onlytextwidth]
+    \column{0.5\textwidth}
+      \begin{block}{Regla de movimiento}
+        \vspace{2pt}
+        \[
+          X_j^{t+1} =
+          \begin{cases}
+            X_j^t + r_1 \sin(r_2) |r_3 P_j^t - X_j^t|, & r_4 < \tfrac{1}{2}\\[4pt]
+            X_j^t + r_1 \cos(r_2) |r_3 P_j^t - X_j^t|, & r_4 \geq \tfrac{1}{2}
+          \end{cases}
+        \]
+        \vspace{2pt}
+      \end{block}
+      \vspace{0.4em}
+      Definiendo $\phi = r_1 \cdot f(r_2)$ y $|\Delta_j^t| = |r_3 P_j^t - X_j^t|$:
+      \vspace{0.3em}
+      \begin{block}{Notación abreviada}
+        \centering
+        $\displaystyle X_j^{t+1} = X_j^t + \phi \cdot |\Delta_j^t|$
+      \end{block}
+
+    \column{0.47\textwidth}
+      \vspace{0.3em}
+      {\small
+      \begin{tabular}{c p{5.1cm}}
+        \toprule
+        \textbf{Param.} & \textbf{Rol} \\
+        \midrule
+        $r_1$ & \hl{Amplitud}: exploración/explotación \\
+        $r_2$ & Ángulo: dirección y signo del paso \\
+        $r_3$ & Peso de la distancia al destino \\
+        $r_4$ & Selección equiprobable sin/cos \\
+        \bottomrule
+      \end{tabular}}
+      \vspace{0.5em}
+
+      \begin{exampleblock}{Separación magnitud/dirección}
+        $|\Delta_j^t|$ fija la magnitud $(\geq 0)$\\
+        $\phi$ fija signo y escala $\Rightarrow$ simetría
+      \end{exampleblock}
+  \end{columns}
+\end{frame}
+
+% ===============================================================
+\section{Exploración vs.\ Explotación}
+% ===============================================================
+
+
+
+% --- 3.1  Mapa de componentes -----------------------------------
+\begin{frame}{¿Qué componente provoca qué?}
+    \vspace{-0.5cm}
+  \begin{columns}[T, onlytextwidth]
+    \column{0.48\textwidth}
+      \begin{exampleblock}{Componentes exploratorios}
+        \begin{itemize}
+          \setlength\itemsep{0.35em}
+          \item \textbf{$r_1 > 1$}: posibilita $\phi\notin[-1,1]$ haciendo que el agente sobrepase el destino
+          \item \textbf{$r_3 > 1$}: aleja el destino efectivo aumentando $|\Delta_j^t|$
+          \item \textbf{$r_2 \in [0,2\pi]$}: cubre todas las direcciones, incluidas las de signo negativo
+          \item \textbf{$r_4$ aleatorio}: seno y coseno desfasados $\pi/2$ mejoran la isotropía
+        \end{itemize}
+      \end{exampleblock}
+
+    \column{0.48\textwidth}
+      \begin{alertblock}{Componentes explotadores}
+        \begin{itemize}
+          \setlength\itemsep{0.35em}
+          \item \textbf{$r_1 < 1$}: asegura $\phi\in(-1,1)$ por lo que el agente no sobrepasa $P_j^t$
+          \item \textbf{$r_3 < 1$}: acerca el destino efectivo reduciendo $|\Delta_j^t|$
+          \item \textbf{Destino global $P_j^t$}: único atractor compartido que concentra la población
+          \item \textbf{Decrecimiento de $r_1$}: garantiza convergencia progresiva
+        \end{itemize}
+      \end{alertblock}
+  \end{columns}
+
+
+%   \vspace{0.5em}
+%   \begin{center}
+    \small
+    $r_1$ es el único parámetro \hl{determinista}.\\
+    $r_2, r_3, r_4$ son aleatorios $\Rightarrow$ el balance es \textbf{aleatorio pero dirigido}
+%   \end{center}
+\end{frame}
+
+% --- 3.2  Figura r1 ---------------------------------------------
+\begin{frame}{$r_1$: el director del equilibrio}
+  \begin{columns}[T, onlytextwidth]
+    \column{0.58\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+        width=\textwidth, height=5.5cm,
+        % --- Estilo de Ejes Moderno ---
+        axis lines*=left,                 % Elimina las líneas superior y derecha (gráfico abierto)
+        axis line style={draw=black, line width=0.6pt},
+        % --- Etiquetas y Texto ---
+        xlabel={$t$},
+        ylabel={$r_1$},
+        label style={font=\small\sffamily, text=black!80},
+        tick label style={font=\scriptsize\sffamily, text=black},
+        % --- Límites y Ticks ---
+        xmin=0, xmax=100,
+        ymin=0, ymax=2.15,
+        xtick={0,25,50,75,100},
+        ytick={0,0.5,1,1.5,2},
+        tick align=outside,               % Ticks hacia afuera para no obstruir los datos
+        % --- Grilla Sutil ---
+        grid=both,
+        grid style={line width=0.4pt, draw=gray!30},
+        % --- Leyenda Limpia ---
+        legend style={
+            font=\scriptsize\sffamily, 
+            at={(0.95,0.95)}, 
+            anchor=north east,
+            draw=none,                      % Sin borde negro rígido
+            fill=white, 
+            fill opacity=0.85,              % Fondo ligeramente translúcido
+            text opacity=1,
+            row sep=3pt
+        },
+        legend cell align={left},         % Alinea el texto de la leyenda a la izquierda
+        ]
+        %% Línea r1 decreciente
+        \addplot[very thick, myblue, domain=0:100, samples=200]
+            {2*(1 - x/100)};
+        \addlegendentry{$r_1(t) = 2(1-t/T)$}
+
+        %% Umbral r1 = 1
+        \addplot[very thick, dashed, myred, domain=0:100, samples=2]
+            {1};
+        \addlegendentry{Umbral $r_1 = 1$}
+
+        %% Relleno zona exploración
+        \addplot[fill=mygreen!40, opacity=0.6, draw=none]
+            coordinates {(0,2)(50,1)(50,1)(0,1)} \closedcycle;
+
+        %% Relleno zona explotación
+        \addplot[fill=myyellow!40, opacity=0.6, draw=none]
+            coordinates {(50,1)(100,0)(100,1)(50,1)} \closedcycle;
+
+        %% Etiquetas de zona
+        \node[font=\small\bfseries, mygreen]  at (axis cs:18, 1.25) {Exploración};
+        \node[font=\small\bfseries, myyellow] at (axis cs:82, 0.75) {Explotación};
+
+        \end{axis}
+        \end{tikzpicture}
+
+    \column{0.39\textwidth}
+      \begin{itemize}
+        \setlength\itemsep{0.5em}
+        \item $r_1(t) = 2\!\left(1 - \dfrac{t}{T}\right)$
+        \item[\textcolor{mygreen}{\textbullet}] \hg{$r_1 \geq 1$}: exploración\\(primeras iteraciones)
+        \item[\textcolor{myyellow}{\textbullet}] \hy{$r_1 < 1$}: explotación\\(iteraciones tardías)
+        \item División \textbf{50/50} nominal con $a=2$
+      \end{itemize}
+  \end{columns}
+  \begin{alertblock}{Umbral efectivo}
+    \centering
+    $\mathbb{E}[|\phi|] = r_1 \cdot \dfrac{2}{\pi}\Rightarrow$ transición real en $t^* \approx \mathbf{0.21\,T}$
+    \end{alertblock}
+\end{frame}
+
+% --- 3.3  Factor trigonométrico ---------------------------------
+\begin{frame}{$r_2$: dirección y signo del movimiento}
+  \begin{columns}[T, onlytextwidth]
+    \column{0.5\textwidth}
+      \begin{tikzpicture}
+        \begin{axis}[
+        width=\textwidth, height=5.5cm,
+        % --- Estilo de Ejes Moderno ---
+        axis lines*=left,                 % Elimina las líneas superior y derecha (gráfico abierto)
+        x axis line style={draw=none},  % Eliminamos el eje X para ponerlo personalizado en y=0
+        y axis line style={draw=black, line width=0.6pt},
+        % --- Etiquetas y Texto ---
+        xlabel={$r_2$},
+        ylabel={$r_1 \cdot f(r_2)$},
+        label style={font=\small\sffamily, text=black!80},
+        tick label style={font=\scriptsize\sffamily, text=black},
+        % --- Límites y Ticks ---
+        xmin=0, xmax=6.2832,
+        ymin=-2.3, ymax=3.25,
+        xtick={0, 1.5708, 3.1416, 4.7124, 6.2832},
+        xticklabels={$0$, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $2\pi$},
+        ytick={-2,-1,0,1,2, 3},
+        tick align=outside,               % Ticks hacia afuera para no obstruir los datos
+        % --- Grilla Sutil ---
+        grid=both,
+        grid style={line width=0.4pt, draw=gray!30},
+        % --- Leyenda Limpia ---
+        legend style={
+            font=\scriptsize\sffamily, 
+            at={(0.95,0.95)}, 
+            anchor=north east,
+            draw=none,                      % Sin borde negro rígido
+            fill=white, 
+            fill opacity=0.85,              % Fondo ligeramente translúcido
+            text opacity=1,
+            row sep=3pt
+        },
+        legend cell align={left},         % Alinea el texto de la leyenda a la izquierda
+        ]
+
+            %% Eje X
+            \addplot[draw=black, line width=0.6pt, domain=0:6.2832, forget plot]
+            {0};
+
+            %% Zona de explotación: |valor| <= 1
+            \addplot[fill=myyellow!40, opacity=0.6, draw=none, domain=0:6.2832, samples=3, forget plot]
+                coordinates {(0,-1)(6.2832,-1)(6.2832,1)(0,1)} \closedcycle;
+
+            %% Zona de exploración: |valor| > 1
+            % \addplot[fill=mygreen!40, opacity=0.6, draw=none, domain=0:6.2832, samples=3, forget plot]
+            %     coordinates {(0,1)(6.2832,1)(6.2832,3.25)(0,3.25)} \closedcycle;
+            % \addplot[fill=mygreen!40, opacity=0.6, draw=none, domain=0:6.2832, samples=3, forget plot]
+            %     coordinates {(0,-1)(6.2832,-1)(6.2832,-2.3)(0,-2.3)} \closedcycle;
+
+            %% r1=2 (exploración): seno
+            \addplot[thick, myblue, domain=0:6.2832, samples=200]
+                { 2*sin(deg(x)) };
+            \addlegendentry{$r_1\!=\!2$: $r_1\sin(r_2)$}
+
+            %% r1=2: coseno (discontinuo azul)
+            \addplot[thick, myblue, dashed, domain=0:6.2832, samples=200]
+                { 2*cos(deg(x)) };
+            \addlegendentry{$r_1\!=\!2$: $r_1\cos(r_2)$}
+
+            %% r1=0.5 (explotación): seno
+            \addplot[thick, myyellow, domain=0:6.2832, samples=200]
+                { 0.5*sin(deg(x)) };
+            \addlegendentry{$r_1\!=\!0.5$: $r_1\sin(r_2)$}
+
+            %% r1=0.5: coseno
+            \addplot[thick, myyellow, dashed, domain=0:6.2832, samples=200]
+                { 0.5*cos(deg(x)) };
+            \addlegendentry{$r_1\!=\!0.5$: $r_1\cos(r_2)$}
+
+        \end{axis}
+        \end{tikzpicture}
+
+    \column{0.5\textwidth}
+      \vspace{0.6em}
+      \begin{itemize}
+        \setlength\itemsep{0.42em}
+        \item $r_2 \sim \mathcal{U}[0,2\pi]$ determina el \textbf{signo} de $\phi$
+        \item $f(r_2) > 0$ $\Rightarrow$ movimiento \textit{hacia} $P_j^t$
+        \item $f(r_2) < 0$ $\Rightarrow$ movimiento \textit{alejándose} de $P_j^t$
+        \item \hl{$r_1=2$}: $\phi$ sale de $[-1,1]$\\$\to$ exploración frecuente
+        \item \hy{$r_1=0.5$}: $\phi$ siempre en $[-1,1]$\\$\to$ explotación pura
+      \end{itemize}      
+  \end{columns}
+  \begin{block}{Isotropía}
+        $\sin$ y $\cos$ desfasados $\pi/2$ rad $\Rightarrow$ muestreo de direcciones más uniforme
+      \end{block}
+\end{frame}
+
+% --- 3.4  Cuatro regímenes 1D -----------------------------------
+\begin{frame}{Cuatro regímenes de movimiento (una dimensión)}
+    \begin{tikzpicture}[>=Stealth, thick, font=\small]
+
+        %% --- Coordenadas clave ---
+        \coordinate (X) at (0,0);
+        \coordinate (P) at (4,0);
+
+        %% --- Bandas de fondo (primero, para que queden detrás) ---
+        % Explotación: entre -|Delta| y +|Delta| alrededor de X
+        \fill[myyellow!40, opacity=0.6] (-4,-0.35) rectangle (4, 0.35);
+        % Exploración positiva (más allá de P)
+        \fill[mygreen!40, opacity=0.6]   ( 4,-0.35) rectangle (7, 0.35);
+        % Exploración negativa (más allá de -P)
+        \fill[mygreen!40, opacity=0.6]   (-4,-0.35) rectangle (-7,0.35);
+
+        %% --- Eje horizontal ---
+        \draw[gray!50, thin] (-6.8,0) -- (6.8,0);
+
+        %% --- Cota de distancia |Delta| ---
+        \draw[<->, gray!60, thin] (0,-0.75) -- (4,-0.75)
+            node[midway, below, gray!80] {\footnotesize $|\Delta_j^t|$};
+        \draw[dashed, gray!50, thin] (4, 0) -- (4,-0.9);
+        \draw[dashed, gray!50, thin] (0,0) -- (0,-0.9);
+        
+
+        %% --- Cuatro flechas de movimiento ---
+
+        % (3) Exploración positiva: phi > 1
+        \draw[->, thick, myblue] (0,0) -- (5.8, 0)
+            node[above] {\footnotesize $\phi\!>\!1$};
+
+        % (4) Exploración negativa: phi < -1
+        \draw[->, thick, teal!70!black] (0,0) -- (-5.5,-0)
+            node[above] {\footnotesize $\phi\!<\!-1$};
+
+        % (1) Explotación positiva: phi in (0,1)
+        \draw[->, very thick, myyellow!80!black] (0,0) -- (2.5, 0)
+            node[below] {\footnotesize $0 \!<\!\phi\!<1$};
+
+        % (2) Explotación negativa: phi in (-1,0)
+        \draw[->, very thick, myyellow] (0,0) -- (-2.0,0)
+            node[below] {\footnotesize $-1 \!<\!\phi\!<0$};
+
+        %% --- Etiquetas de zona ---
+        \node[myyellow, font=\footnotesize\bfseries] at ( 0,  1.1)
+            {Explotación};
+        \node[mygreen, font=\footnotesize\bfseries] at ( 5.5, 1.1)
+            {Exploración};
+        \node[mygreen, font=\footnotesize\bfseries] at (-5.5, 1.1)
+            {Exploración};
+
+        %% --- Puntos ---
+        \filldraw[myred]          (P) circle (3pt);
+
+        \node[above=4pt, myred]   at (P)  {$P_j^t$};
+
+        \filldraw[black]         (X) circle (3pt);
+        \node[above=4pt, black]  at (X) {$X_j^t$};
+
+    \end{tikzpicture}
+  \begin{columns}[T, onlytextwidth]
+    \column{0.45\textwidth}
+        \begin{tabular}{c l l}
+            \toprule
+            $\phi$ & Régimen & \\
+            \midrule
+            $(0,1)$    & \hy{Explot. positiva}  & \tikz\fill[myyellow!60](0,0)circle(4pt); \\
+            $(-1,0)$   & \hy{Explot. negativa}  & \tikz\fill[myyellow!40](0,0)circle(4pt); \\
+            $>\!1$     & \hg{Explor. positiva}  & \tikz\fill[myblue!50](0,0)circle(4pt); \\
+            $<\!-1$    & \hg{Explor. negativa}  & \tikz\fill[mygreen!50](0,0)circle(4pt); \\
+            \bottomrule
+        \end{tabular}
+    \column{0.50\textwidth}
+      \begin{itemize}
+        \setlength\itemsep{0.4em}
+        \item Simetría $\Rightarrow$ \textbf{sin sesgo} de dirección
+        \item Zona de explotación se \textit{estrecha} con $r_1$
+        \item Los 4 casos se dan en cada iteración por probabilidad
+      \end{itemize}
+  \end{columns}
+\end{frame}
+
+% --- 3.5  r3 y r4 -----------------------------------------------
+\begin{frame}{$r_3$ y $r_4$: modulación secundaria del equilibrio}
+  \begin{columns}[T, onlytextwidth]
+    \column{0.48\textwidth}
+      \begin{block}{$r_3 \in [0,2]$: destino efectivo}
+        \begin{equation*}%
+            |\Delta_j^t| = |{\color{myred}r_3} P_j^t - X_j^t|%
+        \end{equation*}%
+        \vspace{-0.5cm}
+        \begin{itemize}%
+          \setlength\itemsep{0.3em}%
+          \item $r_3 > 1$ $\Rightarrow$ aumenta $|\Delta_j^t|$\\
+                \hspace{1.5em}\hg{efecto exploratorio secundario}
+          \item $r_3 < 1$ $\Rightarrow$ reduce $|\Delta_j^t|$\\
+                \hspace{1.5em}\hy{efecto explotador secundario}
+          \item $r_3 = 1$ $\Rightarrow$ distancia real
+        \end{itemize}
+        \vspace{0.2em}
+        \textbf{Utilidad:} introduce diversidad {incluso cuando} $r_1 < 1$
+      \end{block}
+
+    \column{0.48\textwidth}
+      \begin{block}{$r_4 \in [0,1]$: selección sin/cos}
+        Probabilidad $\tfrac{1}{2}$ para cada función,
+        desfasadas $\tfrac{\pi}{2}$ rad $\Rightarrow$ cobertura más uniforme
+        \vspace{0.3em}
+        \begin{center}
+        \begin{tikzpicture}[scale=0.82]
+          \draw[gray!35, thin] (0,0) circle (1.55cm);
+          % Muestras de sin (separadas 30°)
+          \foreach \a in {0,30,...,330}{
+            \draw[myblue!55, ->, thin, line width=0.8pt]
+              (0,0) -- ({1.55*sin(\a)},{1.55*cos(\a)});
+          }
+          % Muestras de cos (desfasadas 15°)
+          \foreach \a in {15,45,...,345}{
+            \draw[myyellow!80, ->, thin, line width=0.8pt]
+              (0,0) -- ({1.55*sin(\a)},{1.55*cos(\a)});
+          }
+          \filldraw[black] (0,0) circle (2pt);
+          \node[font=\tiny, myblue]   at ( 2.0, 1.3) {$\sin$};
+          \node[font=\tiny, myyellow] at (-2.0, 1.3) {$\cos$};
+          \node[font=\tiny]           at (0,-0.27)   {$X_j^t$};
+        \end{tikzpicture}
+        \end{center}
+      \end{block}
+  \end{columns}
+\end{frame}
+
+% --- 3.6  Análisis cuantitativo ---------------------------------
+\begin{frame}{Análisis cuantitativo del equilibrio}
+  \begin{columns}[T, onlytextwidth]
+    \column{0.50\textwidth}
+      \begin{tikzpicture}
+      \begin{axis}[
+        width=\textwidth, height=5.6cm,
+        axis lines*=left,
+        axis line style={black, line width=0.6pt},
+        xlabel={$t/T$}, ylabel={$\mathbb{E}[|\phi|]$},
+        label style={font=\small\sffamily},
+        tick label style={font=\scriptsize\sffamily},
+        xmin=0, xmax=1, ymin=0, ymax=1.38,
+        xtick={0,0.21,0.5,1},
+        xticklabels={$0$,$0.21$,$0.5$,$1$},
+        ytick={0,0.5,0.637,1},
+        yticklabels={$0$,$0.5$,$\frac{2}{\pi}$,$1$},
+        tick align=outside,
+        grid=both, grid style={line width=0.35pt, draw=gray!25},
+        legend style={font=\scriptsize\sffamily, at={(0.97,0.95)},
+          anchor=north east, draw=none, fill=white,
+          fill opacity=0.85, text opacity=1, row sep=2pt},
+      ]
+        % Rellenos de zona
+        \addplot[fill=mygreen!28, opacity=0.6, draw=none]
+          coordinates{(0,0.637)(0.215,0.637)(0.215,1.28)(0,1.28)}\closedcycle;
+        \addplot[fill=myyellow!28, opacity=0.6, draw=none]
+          coordinates{(0.215,0)(1,0)(1,0.637)(0.215,0.637)}\closedcycle;
+        % Curva principal
+        \addplot[very thick, myblue, domain=0:1, samples=200]{2*(1-x)*2/3.14159};
+        \addlegendentry{$\mathbb{E}[|\phi|] = r_1 \cdot \tfrac{2}{\pi}$}
+        % Umbral
+        \addplot[dashed, myred, thick, domain=0:1]{0.637};
+        \addlegendentry{Umbral efectivo $\frac{2}{\pi}$}
+        % Línea vertical t*
+        \draw[dashed, gray!60, thin](axis cs:0.215,0)--(axis cs:0.215,0.637);
+        \node[font=\tiny, mygreen!70!black, font=\bfseries] at (axis cs:0.09,1.15){Exploración};
+        \node[font=\tiny, myyellow!80!black, font=\bfseries] at (axis cs:0.62,0.28){Explotación};
+      \end{axis}
+      \end{tikzpicture}
+
+    \column{0.47\textwidth}
+      \vspace{0.3em}
+      \begin{block}{Resultado clave}
+        \[
+          \mathbb{E}[|\phi|] = r_1 \cdot \underbrace{\mathbb{E}[|f(r_2)|]}_{= 2/\pi}
+        \]
+        El factor $\tfrac{2}{\pi} \approx 0.637$ adelanta la transición real al $\approx 21\%$ de las iteraciones
+      \end{block}
+
+      \vspace{0.4em}
+      {\small
+      \begin{tabular}{ll}
+        \toprule
+        \textbf{Condición} & \textbf{Efecto} \\
+        \midrule
+        $r_1 = 2$     & Exploración máxima \\
+        $r_1 = \pi/2$ & Umbral efectivo real \\
+        $r_1 = 1$     & Umbral nominal \\
+        $r_1 \to 0$   & Explotación total \\
+        \midrule
+        $r_3 > 1$ & +Exploración (secundario) \\
+        $r_3 < 1$ & +Explotación (secundario) \\
+        \bottomrule
+      \end{tabular}}
+  \end{columns}
+\end{frame}
+
+% --- 3.7  Diagrama de flujo del equilibrio ----------------------
+% Estilos definidos globalmente para evitar conflictos con # en beamer
+\tikzset{
+  sca@nodo@blue/.style={rounded corners=5pt, draw, thick, minimum width=2.9cm,
+                 minimum height=0.85cm, align=center,
+                 fill=myblue, text=white, text width=2.85cm},
+  sca@nodo@green/.style={rounded corners=5pt, draw, thick, minimum width=2.9cm,
+                 minimum height=0.85cm, align=center,
+                 fill=mygreen, text=white, text width=2.85cm},
+  sca@nodo@yellow/.style={rounded corners=5pt, draw, thick, minimum width=2.9cm,
+                 minimum height=0.85cm, align=center,
+                 fill=myyellow!80!black, text=white, text width=2.85cm},
+  sca@nodo@lgreen/.style={rounded corners=5pt, draw, thick, minimum width=2.9cm,
+                 minimum height=0.85cm, align=center,
+                 fill=mygreen!60!black, text=white, text width=2.85cm},
+  sca@nodo@lyellow/.style={rounded corners=5pt, draw, thick, minimum width=2.9cm,
+                 minimum height=0.85cm, align=center,
+                 fill=myyellow!60!black, text=white, text width=2.85cm},
+  sca@nodogray/.style={rounded corners=5pt, draw=gray!50, thick,
+                 minimum width=2.6cm, minimum height=0.78cm,
+                 align=center, fill=gray!15, text=black!70, text width=2.5cm},
+  sca@flecha/.style={->, thick, shorten >=2pt, shorten <=2pt},
+}
+
+\begin{frame}{Síntesis: flujo del equilibrio}
+  \begin{center}
+  \begin{tikzpicture}[>=Stealth, font=\small]
+    % Nodo central r1
+    \node[sca@nodo@blue] (r1) at (0,0)
+      {$r_1(t) = 2(1-t/T)$\\ \scriptsize decrece linealmente};
+
+    % Ramas exploración / explotación
+    \node[sca@nodo@green]  (exp)  at (-3.8,-2.0)
+      {\textbf{Exploración}\\ \scriptsize $|\phi|>1$};
+    \node[sca@nodo@yellow] (expl) at ( 3.8,-2.0)
+      {\textbf{Explotación}\\ \scriptsize $|\phi|<1$};
+
+    % Modulación secundaria
+    \node[sca@nodo@lgreen]  (r3e) at (-3.8,-3.8)
+      {\scriptsize $r_3>1$: agranda $|\Delta|$};
+    \node[sca@nodo@lyellow] (r3x) at ( 3.8,-3.8)
+      {\scriptsize $r_3<1$: reduce $|\Delta|$};
+
+    % Isotropía
+    \node[sca@nodogray] (r24) at (0,-2.0)
+      {$r_2$, $r_4$\\ \scriptsize Dirección / isotropía};
+    \node[sca@nodogray] (iso) at (0,-3.8)
+      {Cobertura uniforme\\ \scriptsize sin sesgo direccional};
+
+    % Conexiones principales
+    \draw[sca@flecha, mygreen!80!black]
+      (r1) -- node[left=2pt, black, font=\scriptsize]{$t \lesssim 0.21T$} (exp);
+    \draw[sca@flecha, myyellow!80!black]
+      (r1) -- node[right=2pt, black, font=\scriptsize]{$t \gtrsim 0.21T$} (expl);
+    \draw[sca@flecha, gray!60] (r1) -- (r24);
+
+    % Conexiones secundarias
+    \draw[sca@flecha, mygreen!60!black]  (exp)  -- (r3e);
+    \draw[sca@flecha, myyellow!60!black] (expl) -- (r3x);
+    \draw[sca@flecha, gray!50]           (r24)  -- (iso);
+
+    % Etiquetas de modulación
+    \node[font=\tiny, mygreen!70!black]   at (-1.9,-2.9) {+explor.};
+    \node[font=\tiny, myyellow!80!black]  at ( 1.9,-2.9) {+explot.};
+  \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+% ===============================================================
+\section{Pseudocódigo}
+% ===============================================================
+
+\begin{frame}[fragile]{Pseudocódigo del SCA}
+  \vspace{-2pt}
+\begin{lstlisting}
+(* Parámetros: N (población), T (iteraciones máx.), a=2 *)
+Inicializar X = {X_1,...,X_N} aleatoriamente en [lb,ub]^d
+Evaluar f(X_i) para cada i;   P <- argmin f(X_i)
+
+t <- 1
+Mientras t <= T hacer
+    r1 <- 2*(1 - t/T)                      (* Ec. decaimiento *)
+    Para cada agente i = 1 hasta N hacer
+        Para cada dimensión j = 1 hasta d hacer
+            r2 <- U[0,2pi];  r3 <- U[0,2];  r4 <- U[0,1]
+            Si r4 < 0.5 entonces
+                X_i[j] <- X_i[j] + r1*sin(r2)*|r3*P[j]-X_i[j]|
+            Si_no
+                X_i[j] <- X_i[j] + r1*cos(r2)*|r3*P[j]-X_i[j]|
+            Fin Si
+            X_i[j] <- max(lb[j], min(ub[j], X_i[j]))  (* clamping *)
+        Fin Para
+        Si f(X_i) < f(P) entonces  P <- X_i  Fin Si
+    Fin Para
+    t <- t + 1
+Fin Mientras
+Retornar P       (* mejor solución encontrada *)
+\end{lstlisting}
+  \vspace{2pt}
+  \hfill{\small Complejidad: $\mathcal{O}(N \cdot d)$ por iteración \;—\; $N \times T$ evaluaciones totales}
+\end{frame}
+
+% ===============================================================
+\section{Ventajas, limitaciones y aplicaciones}
+% ===============================================================
+
+\begin{frame}{Ventajas e inconvenientes}
+  \begin{columns}[T, onlytextwidth]
+    \column{0.49\textwidth}
+      \begin{exampleblock}{\hg{Ventajas}}
+        \begin{itemize}
+          \setlength\itemsep{0.35em}
+          \item Implementación simple: solo $a$, $N$, $T$
+          \item Balance explor./explot.\ \textbf{automático}
+          \item Competitivo frente a PSO, GA, GWO
+          \item Bajo coste: $\mathcal{O}(N \cdot d)$ por iteración
+          \item Fácilmente hibridable (PSO, DE, ABC, \ldots)
+        \end{itemize}
+      \end{exampleblock}
+
+    \column{0.49\textwidth}
+      \begin{alertblock}{\hr{Inconvenientes}}
+        \begin{itemize}
+          \setlength\itemsep{0.35em}
+          \item Convergencia prematura en funciones multimodales
+          \item Decaimiento lineal de $r_1$: no se adapta al paisaje
+          \item Baja diversidad en iteraciones avanzadas
+          \item Escasa memoria colectiva (solo $P_j^t$ compartido)
+          \item Pobre en espacios discretos sin adaptación previa
+        \end{itemize}
+      \end{alertblock}
+  \end{columns}
+
+  \vspace{0.5em}
+  \begin{block}{Cuándo funciona bien}
+    Problemas \hl{continuos} de dimensión baja/media ($d \leq 100$) \textbullet\
+    Funciones \hl{unimodales} o con pocos óptimos locales \textbullet\
+    Cuando evaluar $f$ es costoso (bajo overhead)
+  \end{block}
+\end{frame}
+
+\begin{frame}{Aplicaciones reales}
+  \begin{columns}[T, onlytextwidth]
+    \column{0.50\textwidth}
+      \begin{block}{Ingeniería eléctrica}
+        Flujo de potencia óptimo (OPF), ubicación de D-STATCOM, planificación hidrotérmica
+      \end{block}
+      \vspace{0.3em}
+      \begin{block}{Aprendizaje automático}
+        Selección de características (SCA binario), ajuste de SVR y redes neuronales
+      \end{block}
+      \vspace{0.3em}
+      \begin{block}{Imagen y diagnóstico médico}
+        Umbralización multinivel en RM/TC, diagnóstico de cáncer de pulmón
+      \end{block}
+
+    \column{0.47\textwidth}
+      \begin{block}{Ingeniería mecánica}
+        Perfiles aerodinámicos, engranajes, detección de daños estructurales
+      \end{block}
+      \vspace{0.3em}
+      \begin{block}{Robótica y redes}
+        Trayectorias de AUV, colocación de cámaras y sensores inalámbricos
+      \end{block}
+      \vspace{0.3em}
+      \begin{block}{Variantes destacadas}
+        {\small SCA-PSO, OBSCA, SCA caótico, MO-SCA,\\ SCA binario, EBSCA}
+      \end{block}
+  \end{columns}
+\end{frame}
+
+% ===============================================================
+\section{Conclusiones}
+% ===============================================================
+
+\begin{frame}{Conclusiones}
+  \begin{enumerate}
+    \setlength\itemsep{0.42em}
+    \item El SCA es \hl{matemáticamente elegante}: $\sin$ y $\cos$ proveen exploración e isotropía de forma natural.
+    \item \hl{$r_1$} es el director del equilibrio: su decaimiento convierte la búsqueda en un proceso de \textbf{enfriamiento implícito}.
+    \item El umbral efectivo de transición es $r_1^* = \pi/2$; la explotación predomina \textbf{desde} $t \approx 0.21\,T$.
+    \item \hl{$r_3$} modula secundariamente: introduce diversidad incluso durante la explotación.
+    \item Sus limitaciones (convergencia prematura, escasa memoria colectiva) han motivado una familia rica de variantes híbridas.
+    \item Como dicta el teorema \textit{No Free Lunch}: competitivo en funciones continuas suaves, pero no universalmente superior.
+  \end{enumerate}
+\end{frame}
+
+% ---------------------------------------------------------------
+%  FRAME FINAL
+% ---------------------------------------------------------------
+{
+\setbeamercolor{background canvas}{bg=mydark}
+\begin{frame}[plain]
+  \vspace{1.8em}
+  \begin{center}
+    {\Large\bfseries\color{white} Sine Cosine Algorithm}\\[0.4em]
+    {\color{white!70} Jesús Muñoz Velasco \quad\textbullet\quad Metaheurísticas · Curso 2025--2026}
+
+    \vspace{1.8em}
+    \begin{tikzpicture}
+    \begin{axis}[
+      width=10cm, height=3.8cm,
+      axis lines=none,
+      xmin=0, xmax=12.566, ymin=-2.3, ymax=2.3,
+    ]
+      \addplot[very thick, myblue!80,  domain=0:12.566, samples=300]{2*sin(deg(x))};
+      \addplot[very thick, myred!80,   domain=0:12.566, samples=300]{1.5*cos(deg(x))};
+      \addplot[very thick, mygreen!70, domain=0:12.566, samples=300]{sin(deg(2*x))};
+      \addplot[thick, myyellow!70, dashed, domain=0:12.566, samples=300]{1.2*cos(deg(1.5*x))};
+    \end{axis}
+    \end{tikzpicture}
+
+    \vspace{0.8em}
+    {\small\color{white!60}\itshape
+      ``SCA: A Sine Cosine Algorithm for solving optimization problems''\\
+      S.~Mirjalili, Knowledge-Based Systems, 2016}
+  \end{center}
+\end{frame}
+}
+
+\end{document}
