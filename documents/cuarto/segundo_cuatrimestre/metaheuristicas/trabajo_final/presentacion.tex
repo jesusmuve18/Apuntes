@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169, spanish]{beamer}
 
 % ================================================================
 % TEMA: Trigon — moderno, limpio, geométrico
@@ -49,6 +49,11 @@
 \colorlet{tSec}   {myblue!75!black}
 \colorlet{tAccent}{myyellow}
 
+% Definición de los colores para el código
+\definecolor{aimaGreen}{RGB}{0, 180, 90}       % El verde característico de los keywords
+\definecolor{aimaComment}{RGB}{100, 100, 100}  % Color gris/negro atenuado para comentarios
+\definecolor{aimaBlack}{RGB}{0, 0, 0}
+
 % ================================================================
 % PERSONALIZACIÓN DE BLOQUES (tcolorbox sobre trigon)
 % ================================================================
@@ -68,29 +73,50 @@
 \setbeamerfont{section title}{size=\Large,  series=\bfseries}
 
 % ================================================================
-% LSTLISTING  — mismo estilo que memoria.tex
+% LSTLISTING  — estilo del libro de Russel & Norvig
 % ================================================================
-\lstdefinestyle{modern}{
-    backgroundcolor=\color{backcolour},
-    commentstyle=\color{codegreen}\itshape,
-    keywordstyle=\color{codeblue}\bfseries,
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\scriptsize,
-    breakatwhitespace=false, breaklines=true, captionpos=b,
-    keepspaces=true, numbers=left, numbersep=8pt,
-    showspaces=false, showstringspaces=false, showtabs=false,
-    tabsize=4, frame=single, rulecolor=\color{gray!50},
-    xleftmargin=12pt,
+\lstdefinelanguage{pseudo}{
+    % Grupo 1: Palabras clave en verde
     morekeywords={Mientras, hacer, Para, hasta, Si, entonces, Si_no,
-                  Fin, Retornar, Inicializar, Evaluar, de},
-    morecomment=[s]{(*}{*)},
-    sensitive=false,
-    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
-             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
-             {ñ}{{\~n}}1 {Ñ}{{\~N}}1
+                  Fin, Retornar, de},
+    % Grupo 2: Funciones y Estructuras en Mayúsculas Negrita
+    morekeywords=[2]{Inicializar, Evaluar},
+    % Grupo 3: Operadores lógicos y preposiciones de texto plano (sin cursiva)
+    morekeywords=[3]{is, complete, consistent, with, according, to, add, remove, from},
+    sensitive=true,
+    morecomment=[l]{\%},
+    morecomment=[s]{(*}{*)}, % <-- Añadido para que te reconozca los comentarios (* ... *) en gris
 }
-\lstset{style=modern}
+
+\lstdefinestyle{aimaStyle}{
+    language=pseudo,
+    basicstyle=\normalfont\scriptsize,
+    columns=flexible,             
+    keepspaces=true,
+    tabsize=4,
+    showstringspaces=false,
+    extendedchars=true,
+    breaklines=true,
+    % Estilos por grupo
+    keywordstyle=\color{aimaGreen}\upshape,
+    keywordstyle=[2]\color{aimaBlack}\bfseries\upshape,
+    keywordstyle=[3]\color{aimaBlack}\upshape,
+    identifierstyle=\itshape,     
+    commentstyle=\color{aimaComment}\upshape,
+    % Mapeo de caracteres especiales y tildes en español
+    literate={←}{{\ensuremath{\leftarrow}}}1
+             {≠}{{\ensuremath{\neq}}}1
+             {\{}{{\fontfamily{cmr}\selectfont\{}}1
+             {\}}{{\fontfamily{cmr}\selectfont\}}}1 
+             {á}{{\'a}}1                             % <-- Soporte para tildes en el código
+             {é}{{\'e}}1
+             {í}{{\'i}}1
+             {ó}{{\'o}}1
+             {ú}{{\'u}}1
+             {¿}{{\textquestiondown}}1,
+    xleftmargin=10pt,
+}
+% \lstset{style=aimaStyle}
 
 % ================================================================
 % COMANDOS AUXILIARES
@@ -341,7 +367,7 @@
   \end{columns}
   \begin{alertblock}{Umbral efectivo}
     \centering
-    $\mathbb{E}[|\phi|] = r_1 \cdot \dfrac{2}{\pi}\Rightarrow$ transición real en $t^* \approx \mathbf{0.21\,T}$
+    ${E}[|\phi|] = r_1 \cdot \dfrac{2}{\pi}\Rightarrow$ transición real en $t^* \approx \mathbf{0.21\,T}$
     \end{alertblock}
 \end{frame}
 
@@ -576,7 +602,7 @@
     \column{0.50\textwidth}
       \begin{tikzpicture}
       \begin{axis}[
-        width=\textwidth, height=5.6cm,
+        width=\textwidth, height=5cm,
         axis lines*=left,
         axis line style={black, line width=0.6pt},
         xlabel={$t/T$}, ylabel={$\mathbb{E}[|\phi|]$},
@@ -594,9 +620,9 @@
           fill opacity=0.85, text opacity=1, row sep=2pt},
       ]
         % Rellenos de zona
-        \addplot[fill=mygreen!28, opacity=0.6, draw=none]
+        \addplot[fill=mygreen!28, opacity=0.6, draw=none, forget plot]
           coordinates{(0,0.637)(0.215,0.637)(0.215,1.28)(0,1.28)}\closedcycle;
-        \addplot[fill=myyellow!28, opacity=0.6, draw=none]
+        \addplot[fill=myyellow!28, opacity=0.6, draw=none, forget plot]
           coordinates{(0.215,0)(1,0)(1,0.637)(0.215,0.637)}\closedcycle;
         % Curva principal
         \addplot[very thick, myblue, domain=0:1, samples=200]{2*(1-x)*2/3.14159};
@@ -605,22 +631,14 @@
         \addplot[dashed, myred, thick, domain=0:1]{0.637};
         \addlegendentry{Umbral efectivo $\frac{2}{\pi}$}
         % Línea vertical t*
-        \draw[dashed, gray!60, thin](axis cs:0.215,0)--(axis cs:0.215,0.637);
-        \node[font=\tiny, mygreen!70!black, font=\bfseries] at (axis cs:0.09,1.15){Exploración};
+        \draw[dashed, gray, thin](axis cs:0.215,0)--(axis cs:0.215,0.637);
+        \node[font=\tiny, mygreen!70!black, rotate=60, font=\bfseries] at (axis cs:0.11,1){Exploración};
         \node[font=\tiny, myyellow!80!black, font=\bfseries] at (axis cs:0.62,0.28){Explotación};
       \end{axis}
       \end{tikzpicture}
 
     \column{0.47\textwidth}
-      \vspace{0.3em}
-      \begin{block}{Resultado clave}
-        \[
-          \mathbb{E}[|\phi|] = r_1 \cdot \underbrace{\mathbb{E}[|f(r_2)|]}_{= 2/\pi}
-        \]
-        El factor $\tfrac{2}{\pi} \approx 0.637$ adelanta la transición real al $\approx 21\%$ de las iteraciones
-      \end{block}
-
-      \vspace{0.4em}
+      \vspace{-0.3em}
       {\small
       \begin{tabular}{ll}
         \toprule
@@ -636,27 +654,33 @@
         \bottomrule
       \end{tabular}}
   \end{columns}
+  \begin{block}{Umbral efectivo}
+    \[
+        {E}[|\phi|] = r_1 \cdot E[|f(r_2)|] = r_1 \cdot \frac{2}{\pi}
+    \]
+    El factor $2/\pi \approx 0.637$ adelanta la transición real al $\approx 21\%$ de las iteraciones
+    \end{block}
 \end{frame}
 
 % --- 3.7  Diagrama de flujo del equilibrio ----------------------
 % Estilos definidos globalmente para evitar conflictos con # en beamer
 \tikzset{
-  sca@nodo@blue/.style={rounded corners=5pt, draw, thick, minimum width=2.9cm,
+  sca@nodo@blue/.style={rounded corners=5pt, thick, minimum width=2.9cm,
                  minimum height=0.85cm, align=center,
                  fill=myblue, text=white, text width=2.85cm},
-  sca@nodo@green/.style={rounded corners=5pt, draw, thick, minimum width=2.9cm,
+  sca@nodo@green/.style={rounded corners=5pt, thick, minimum width=2.9cm,
                  minimum height=0.85cm, align=center,
                  fill=mygreen, text=white, text width=2.85cm},
-  sca@nodo@yellow/.style={rounded corners=5pt, draw, thick, minimum width=2.9cm,
+  sca@nodo@yellow/.style={rounded corners=5pt, thick, minimum width=2.9cm,
                  minimum height=0.85cm, align=center,
                  fill=myyellow!80!black, text=white, text width=2.85cm},
-  sca@nodo@lgreen/.style={rounded corners=5pt, draw, thick, minimum width=2.9cm,
+  sca@nodo@lgreen/.style={rounded corners=5pt, thick, minimum width=2.9cm,
                  minimum height=0.85cm, align=center,
                  fill=mygreen!60!black, text=white, text width=2.85cm},
-  sca@nodo@lyellow/.style={rounded corners=5pt, draw, thick, minimum width=2.9cm,
+  sca@nodo@lyellow/.style={rounded corners=5pt, thick, minimum width=2.9cm,
                  minimum height=0.85cm, align=center,
                  fill=myyellow!60!black, text=white, text width=2.85cm},
-  sca@nodogray/.style={rounded corners=5pt, draw=gray!50, thick,
+  sca@nodogray/.style={rounded corners=5pt, thick,
                  minimum width=2.6cm, minimum height=0.78cm,
                  align=center, fill=gray!15, text=black!70, text width=2.5cm},
   sca@flecha/.style={->, thick, shorten >=2pt, shorten <=2pt},
@@ -677,7 +701,7 @@
 
     % Modulación secundaria
     \node[sca@nodo@lgreen]  (r3e) at (-3.8,-3.8)
-      {\scriptsize $r_3>1$: agranda $|\Delta|$};
+      {\scriptsize $r_3>1$: aumenta $|\Delta|$};
     \node[sca@nodo@lyellow] (r3x) at ( 3.8,-3.8)
       {\scriptsize $r_3<1$: reduce $|\Delta|$};
 
@@ -707,17 +731,17 @@
 \end{frame}
 
 % ===============================================================
-\section{Pseudocódigo}
+\section{Implementación}
 % ===============================================================
 
 \begin{frame}[fragile]{Pseudocódigo del SCA}
-  \vspace{-2pt}
-\begin{lstlisting}
+\begin{columns}[T, onlytextwidth]
+    \column{0.65\textwidth}
+    \vspace{-0.7cm}
+\begin{lstlisting}[style=aimaStyle, language=pseudo]
 (* Parámetros: N (población), T (iteraciones máx.), a=2 *)
 Inicializar X = {X_1,...,X_N} aleatoriamente en [lb,ub]^d
-Evaluar f(X_i) para cada i;   P <- argmin f(X_i)
-
-t <- 1
+Evaluar f(X_i) para cada i;   P <- argmin f(X_i); t <- 1
 Mientras t <= T hacer
     r1 <- 2*(1 - t/T)                      (* Ec. decaimiento *)
     Para cada agente i = 1 hasta N hacer
@@ -736,8 +760,13 @@ Mientras t <= T hacer
 Fin Mientras
 Retornar P       (* mejor solución encontrada *)
 \end{lstlisting}
-  \vspace{2pt}
-  \hfill{\small Complejidad: $\mathcal{O}(N \cdot d)$ por iteración \;—\; $N \times T$ evaluaciones totales}
+    \column{0.35\textwidth}
+    \begin{block}{Complejidad}
+        \centering
+        $\mathcal{O}(N \cdot d)$ por iteración\\
+        $N \times T$ evaluaciones totales
+    \end{block}
+  \end{columns}
 \end{frame}
 
 % ===============================================================
@@ -747,10 +776,10 @@ Retornar P       (* mejor solución encontrada *)
 \begin{frame}{Ventajas e inconvenientes}
   \begin{columns}[T, onlytextwidth]
     \column{0.49\textwidth}
-      \begin{exampleblock}{\hg{Ventajas}}
+      \begin{exampleblock}{{Ventajas}}
         \begin{itemize}
           \setlength\itemsep{0.35em}
-          \item Implementación simple: solo $a$, $N$, $T$
+          \item Implementación simple: los únicos parámetros son $a$, $N$, $T$
           \item Balance explor./explot.\ \textbf{automático}
           \item Competitivo frente a PSO, GA, GWO
           \item Bajo coste: $\mathcal{O}(N \cdot d)$ por iteración
@@ -759,7 +788,7 @@ Retornar P       (* mejor solución encontrada *)
       \end{exampleblock}
 
     \column{0.49\textwidth}
-      \begin{alertblock}{\hr{Inconvenientes}}
+      \begin{alertblock}{{Inconvenientes}}
         \begin{itemize}
           \setlength\itemsep{0.35em}
           \item Convergencia prematura en funciones multimodales
@@ -816,11 +845,11 @@ Retornar P       (* mejor solución encontrada *)
 \begin{frame}{Conclusiones}
   \begin{enumerate}
     \setlength\itemsep{0.42em}
-    \item El SCA es \hl{matemáticamente elegante}: $\sin$ y $\cos$ proveen exploración e isotropía de forma natural.
-    \item \hl{$r_1$} es el director del equilibrio: su decaimiento convierte la búsqueda en un proceso de \textbf{enfriamiento implícito}.
-    \item El umbral efectivo de transición es $r_1^* = \pi/2$; la explotación predomina \textbf{desde} $t \approx 0.21\,T$.
-    \item \hl{$r_3$} modula secundariamente: introduce diversidad incluso durante la explotación.
-    \item Sus limitaciones (convergencia prematura, escasa memoria colectiva) han motivado una familia rica de variantes híbridas.
+    \item El SCA es un algoritmo basado en matemáticas: $\sin$ y $\cos$ proveen exploración e isotropía de forma natural.
+    \item \hl{$r_1$} es el \textbf{director del equilibrio}: su decrecimiento convierte la búsqueda en un proceso de \textbf{enfriamiento implícito}.
+    \item El \textbf{umbral efectivo} de transición es $r_1^* = \pi/2$ lo que provoca que la explotación predomine desde $t \approx 0.21\,T$.
+    \item \hl{$r_3$} modula secundariamente: introduce \textbf{diversidad} incluso durante la explotación.
+    \item Sus limitaciones (convergencia prematura, escasa memoria colectiva) han motivado una familia rica de \textbf{variantes híbridas}.
     \item Como dicta el teorema \textit{No Free Lunch}: competitivo en funciones continuas suaves, pero no universalmente superior.
   \end{enumerate}
 \end{frame}

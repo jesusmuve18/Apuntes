@@ -1,11 +1,11 @@
 \frametitle{Pseudocódigo del SCA}
-\vspace{-2pt}
-\begin{lstlisting}
+\begin{columns}[T, onlytextwidth]
+    \column{0.65\textwidth}
+    \vspace{-0.7cm}
+\begin{lstlisting}[style=aimaStyle, language=pseudo]
 (* Parámetros: N (población), T (iteraciones máx.), a=2 *)
 Inicializar X = {X_1,...,X_N} aleatoriamente en [lb,ub]^d
-Evaluar f(X_i) para cada i;   P <- argmin f(X_i)
-
-t <- 1
+Evaluar f(X_i) para cada i;   P <- argmin f(X_i); t <- 1
 Mientras t <= T hacer
     r1 <- 2*(1 - t/T)                      (* Ec. decaimiento *)
     Para cada agente i = 1 hasta N hacer
@@ -24,5 +24,10 @@ Mientras t <= T hacer
 Fin Mientras
 Retornar P       (* mejor solución encontrada *)
 \end{lstlisting}
-  \vspace{2pt}
-  \hfill{\small Complejidad: $\mathcal{O}(N \cdot d)$ por iteración \;—\; $N \times T$ evaluaciones totales}
+    \column{0.35\textwidth}
+    \begin{block}{Complejidad}
+        \centering
+        $\mathcal{O}(N \cdot d)$ por iteración\\
+        $N \times T$ evaluaciones totales
+    \end{block}
+  \end{columns}
