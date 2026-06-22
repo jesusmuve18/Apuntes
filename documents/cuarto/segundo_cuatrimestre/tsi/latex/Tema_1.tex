@@ -36,12 +36,12 @@
     Definimos además las funciones que más utilizaremos:
     \begin{center}%
         \begin{tabular}{c | l}%
-            $k(n_i, n_j)$ & \textbf{Coste óptimo} entre $n_i$ y $n_j$ \\
+            $c(n_i, n_j)$ & \textbf{Coste óptimo} entre $n_i$ y $n_j$ \\
             $g(n)$ & \textbf{Costo actual} desde $s$ hasta $n$.\\
-            $g^*(n)$ & \textbf{Costo óptimo} entre $s$ y $n$, es decir, $g^*(n) = k(s,n)$ para todo $n$.\\
+            $g^*(n)$ & \textbf{Costo óptimo} entre $s$ y $n$, es decir, $g^*(n) = c(s,n)$ para todo $n$.\\
             $g_P(n)$ & \textbf{Costo} desde $s$ hasta $n$ por el camino $P$.\\
             $h(n)$ & \textbf{Costo estimado} del nodo $n$ al objetivo $\gamma$.\\
-            $h_P(n)$ & \textbf{Costo estimado} del nodo $n$ al obtetivo $   \gamma$ por el camino $P$.\\
+            $h_P(n)$ & \textbf{Costo estimado} del nodo $n$ al objetivo $   \gamma$ por el camino $P$.\\
             $f(n)$ & \textbf{Costo total estimado} al objetivo $\gamma$ pasando por el nodo $n$ ($f(n)=g(n)+h(n)$).
         \end{tabular}
     \end{center}
@@ -176,15 +176,15 @@ En esta sección trataremos de probar que si $h$ es admisible entonces $A^*$ es 
             \begin{gather*}
                 g(n') \leq g(n^*) +c(n^*, n') = g^*(n^*) +c(n^*, n') = g^*(n')
             \end{gather*}
-            Además, como en general $g^*(n') \leq g^(n')$ tendremos la igualdad. Además, como $n'\in ABIERTOS$ tendremos que $n'\notin \Delta$. Como $n^*\in CERRADOS$ tendremos que $n'\in P$.
+            Además, como en general $g^*(n') \leq g(n')$ tendremos la igualdad. Además, como $n'\in ABIERTOS$ tendremos que $n'\notin \Delta$. Como $n^*\in CERRADOS$ tendremos que $n'\in P$.
         \end{itemize}
     \end{proof}
 \end{lema}
 
 \begin{lema}\label{lema:admisible_2}
-    Supongamos $h$ admisible y $A^*$ no ha terminado todavía. Entonces, para cualquier óptimo entre $s$ tendremos que 
+    Supongamos $h$ admisible y $A^*$ no ha terminado todavía. Entonces, para cualquier óptimo entre $s$ y $\Gamma$ tendremos que 
     \begin{gather*}
-        \exists n' \in (P \cap ABIERTOS) : f(n') \leq c
+        \exists n' \in (P \cap ABIERTOS) : f(n') \leq c^*
     \end{gather*} 
 
     \begin{proof}
@@ -246,14 +246,14 @@ donde $w\in \bb{R}$. Para $w=2$ le damos información de más (podemos perder la
 
 \subsection{Heurísticas monótonas}
 
-Por la desigualdad triangular tenemos que $k(s,\gamma) \leq k(s,n) + k(n, \gamma)$ para cualquier nodo $n$, cualquier nodo inicial $s$ y final $\gamma$. Tenemos por tanto que 
+Por la desigualdad triangular tenemos que $c(s,\gamma) \leq c(s,n) + c(n, \gamma)$ para cualquier nodo $n$, cualquier nodo inicial $s$ y final $\gamma$. Tenemos por tanto que 
 \begin{gather*}
-    h^*(s) \leq k(s,n) + h^*(n) \Rightarrow h^*(n) \leq k(n,n') + h^*(n') \ \ \ \ \forall n,n' \ \text{ nodos}
+    h^*(s) \leq c(s,n) + h^*(n) \Rightarrow h^*(n) \leq c(n,n') + h^*(n') \ \ \ \ \forall n,n' \ \text{ nodos}
 \end{gather*}
 \begin{definicion}
     Diremos que $h$ es \textbf{consistente} si se verifica que 
     \begin{gather*}
-        h^*(n) \leq k(n,n') + h^*(n') \ \ \ \ \forall n,n' \ \text{ nodos}
+        h(n) \leq c(n,n') + h(n') \ \ \ \ \forall n,n' \ \text{ nodos}
     \end{gather*}
 \end{definicion}
 
@@ -261,7 +261,7 @@ Por la desigualdad triangular tenemos que $k(s,\gamma) \leq k(s,n) + k(n, \gamma
     % Si consideramos la desigualdad anterior entre un nodo padre y sus hijos llegamos a la siguiente expresión:
     Diremos que $h$ es \textbf{monótona} si
     \begin{gather*}
-        h(n)\leq c(n,n')+h(u) \ \ \ \ \forall n,\ \ \forall n'\in suc(u)
+        h(n)\leq c(n,n')+h(n') \ \ \ \ \forall n \text{ nodo },\ \ \forall n'\in suc(n)
     \end{gather*}
 \end{definicion}
 
@@ -274,11 +274,11 @@ Por la desigualdad triangular tenemos que $k(s,\gamma) \leq k(s,n) + k(n, \gamma
     \begin{proof}
         Por ser $h$ consistente se tiene que verificar la desigualdad
         \begin{gather*}
-            h^*(n) \leq k(n,n') + h^*(n') \ \ \ \ \forall n,n' \ \text{ nodos}
+            h(n) \leq c(n,n') + h(n') \ \ \ \ \forall n,n' \ \text{ nodos}
         \end{gather*}
         Si tomamos $n'=\gamma \in \Gamma^*$ se tiene que 
         \begin{gather*}
-            h(n) \leq k(n,\gamma) + h(\gamma) \Rightarrow h(n) \leq h^*(n) + 0 = h^*(n)
+            h(n) \leq c(n,\gamma) + h(\gamma) \Rightarrow h(n) \leq h^*(n) + 0 = h^*(n)
         \end{gather*}
         para cualquier nodo $n$ lo cual nos dice que $h$ es admisible.
     \end{proof}
@@ -294,15 +294,15 @@ Por la desigualdad triangular tenemos que $k(s,\gamma) \leq k(s,n) + k(n, \gamma
         \begin{equation*}
             \text{ABIERTOS} = \{..., n, ...\}
         \end{equation*}
-        Por el lema 1 tenemos que $\exists n'\in$ABIERTOS tal que $u'\in P^*_{s-n}$, en cuyo caso, $g(n')=g^*(n')$. Tenemos entonces
+        Por el lema 1 tenemos que $\exists n'\in$ABIERTOS tal que $n'\in P^*_{s-n}$, en cuyo caso, $g(n')=g^*(n')$. Tenemos entonces
         \begin{gather*}
-            f(n) = g(n') + h(n') \overset{\text{lema 1}}{=} g^*(n') + h(n') \overset{consist.}{\leq} g^*(n') + k(n',n) + h(n) \\
-            \overset{opt.}{=} g^*(u)+h(n) \overset{hip.}{<} g(n)+h(n)=f(n)
+            f(n') = g(n') + h(n') \overset{\text{lema 1}}{=} g^*(n') + h(n') \overset{consist.}{\leq} g^*(n') + c(n',n) + h(n) \\
+            \overset{opt.}{=} g^*(n)+h(n) \overset{hip.}{<} g(n)+h(n)=f(n)
         \end{gather*}
-        y llegamos a contradicción.
+        y llegamos a contradicción ya que $A^*$ no habría seleccionado como mejor nodo $n$ teniendo un $n'\in ABIERTOS$ con $f(n')<f(n)$.
     \end{proof}
 \end{teo}
 
 \begin{observacion}
-    Si la heurística no es monótona no hay que revisar $CERRADOS$, alcanzamos eficiencia y el concepto de dominancia se basa en el tiempo.
+    Si la heurística es monótona no hay que revisar $CERRADOS$, alcanzamos eficiencia y el concepto de dominancia se basa en el tiempo.
 \end{observacion}
