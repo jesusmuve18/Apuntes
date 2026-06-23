@@ -13,3 +13,11 @@ TARGET_LINK_LIBRARIES(testsolis "cec17_test_func")
 # ── Target: SCA ──────────────────────────────────────────────
 add_executable(sca sca.cpp)
 target_link_libraries(sca cec17_test_func)
+
+# ── Target: SCA-LS ───────────────────────────────────────────
+add_executable(sca_ls sca_ls.cpp)
+target_link_libraries(sca_ls cec17_test_func)
+
+# ── Target: ASCA ─────────────────────────────────────────────
+add_executable(asca asca.cpp)
+target_link_libraries(asca cec17_test_func)

@@ -49,4 +49,6 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/testsolis.dir/DependInfo.cmake"
   "CMakeFiles/cec17_test_func.dir/DependInfo.cmake"
   "CMakeFiles/sca.dir/DependInfo.cmake"
+  "CMakeFiles/sca_ls.dir/DependInfo.cmake"
+  "CMakeFiles/asca.dir/DependInfo.cmake"
   )

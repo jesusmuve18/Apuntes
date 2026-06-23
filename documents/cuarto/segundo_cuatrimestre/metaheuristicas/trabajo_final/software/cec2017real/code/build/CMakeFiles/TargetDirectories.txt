@@ -3,5 +3,7 @@
 /home/jesusmuve/Escritorio/Apuntes/documents/cuarto/segundo_cuatrimestre/metaheuristicas/trabajo_final/software/cec2017real/code/build/CMakeFiles/testsolis.dir
 /home/jesusmuve/Escritorio/Apuntes/documents/cuarto/segundo_cuatrimestre/metaheuristicas/trabajo_final/software/cec2017real/code/build/CMakeFiles/cec17_test_func.dir
 /home/jesusmuve/Escritorio/Apuntes/documents/cuarto/segundo_cuatrimestre/metaheuristicas/trabajo_final/software/cec2017real/code/build/CMakeFiles/sca.dir
+/home/jesusmuve/Escritorio/Apuntes/documents/cuarto/segundo_cuatrimestre/metaheuristicas/trabajo_final/software/cec2017real/code/build/CMakeFiles/sca_ls.dir
+/home/jesusmuve/Escritorio/Apuntes/documents/cuarto/segundo_cuatrimestre/metaheuristicas/trabajo_final/software/cec2017real/code/build/CMakeFiles/asca.dir
 /home/jesusmuve/Escritorio/Apuntes/documents/cuarto/segundo_cuatrimestre/metaheuristicas/trabajo_final/software/cec2017real/code/build/CMakeFiles/edit_cache.dir
 /home/jesusmuve/Escritorio/Apuntes/documents/cuarto/segundo_cuatrimestre/metaheuristicas/trabajo_final/software/cec2017real/code/build/CMakeFiles/rebuild_cache.dir

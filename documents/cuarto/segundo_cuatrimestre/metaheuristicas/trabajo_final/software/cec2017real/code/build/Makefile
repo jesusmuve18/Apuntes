@@ -181,6 +181,56 @@ sca/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sca.dir/build.make CMakeFiles/sca.dir/build
 .PHONY : sca/fast
 
+#=============================================================================
+# Target rules for targets named sca_ls
+
+# Build rule for target.
+sca_ls: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sca_ls
+.PHONY : sca_ls
+
+# fast build rule for target.
+sca_ls/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sca_ls.dir/build.make CMakeFiles/sca_ls.dir/build
+.PHONY : sca_ls/fast
+
+#=============================================================================
+# Target rules for targets named asca
+
+# Build rule for target.
+asca: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 asca
+.PHONY : asca
+
+# fast build rule for target.
+asca/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/asca.dir/build.make CMakeFiles/asca.dir/build
+.PHONY : asca/fast
+
+asca.o: asca.cpp.o
+.PHONY : asca.o
+
+# target to build an object file
+asca.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/asca.dir/build.make CMakeFiles/asca.dir/asca.cpp.o
+.PHONY : asca.cpp.o
+
+asca.i: asca.cpp.i
+.PHONY : asca.i
+
+# target to preprocess a source file
+asca.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/asca.dir/build.make CMakeFiles/asca.dir/asca.cpp.i
+.PHONY : asca.cpp.i
+
+asca.s: asca.cpp.s
+.PHONY : asca.s
+
+# target to generate assembly for a file
+asca.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/asca.dir/build.make CMakeFiles/asca.dir/asca.cpp.s
+.PHONY : asca.cpp.s
+
 cec17.o: cec17.c.o
 .PHONY : cec17.o
 
@@ -252,6 +302,30 @@ sca.s: sca.cpp.s
 sca.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sca.dir/build.make CMakeFiles/sca.dir/sca.cpp.s
 .PHONY : sca.cpp.s
+
+sca_ls.o: sca_ls.cpp.o
+.PHONY : sca_ls.o
+
+# target to build an object file
+sca_ls.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sca_ls.dir/build.make CMakeFiles/sca_ls.dir/sca_ls.cpp.o
+.PHONY : sca_ls.cpp.o
+
+sca_ls.i: sca_ls.cpp.i
+.PHONY : sca_ls.i
+
+# target to preprocess a source file
+sca_ls.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sca_ls.dir/build.make CMakeFiles/sca_ls.dir/sca_ls.cpp.i
+.PHONY : sca_ls.cpp.i
+
+sca_ls.s: sca_ls.cpp.s
+.PHONY : sca_ls.s
+
+# target to generate assembly for a file
+sca_ls.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sca_ls.dir/build.make CMakeFiles/sca_ls.dir/sca_ls.cpp.s
+.PHONY : sca_ls.cpp.s
 
 test.o: test.cc.o
 .PHONY : test.o
@@ -333,11 +407,16 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... asca"
 	@echo "... cec17_test_func"
 	@echo "... sca"
+	@echo "... sca_ls"
 	@echo "... test"
 	@echo "... testrandom"
 	@echo "... testsolis"
+	@echo "... asca.o"
+	@echo "... asca.i"
+	@echo "... asca.s"
 	@echo "... cec17.o"
 	@echo "... cec17.i"
 	@echo "... cec17.s"
@@ -347,6 +426,9 @@ help:
 	@echo "... sca.o"
 	@echo "... sca.i"
 	@echo "... sca.s"
+	@echo "... sca_ls.o"
+	@echo "... sca_ls.i"
+	@echo "... sca_ls.s"
 	@echo "... test.o"
 	@echo "... test.i"
 	@echo "... test.s"
