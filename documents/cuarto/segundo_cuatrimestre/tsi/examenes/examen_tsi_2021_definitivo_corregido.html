@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tests 2021 TSI - Definitivo</title>
+  <style>
+    :root {
+      --blue: #0055a4;
+      --blue-dark: #003d7a;
+      --bg: #f4f7f6;
+      --card: #ffffff;
+      --ok: #c8e6c9;
+      --ok-border: #4caf50;
+      --bad: #ffcdd2;
+      --bad-border: #f44336;
+      --warn: #fff3e0;
+      --warn-border: #ff9800;
+      --muted: #666;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: #333;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.45;
+    }
+    h1 {
+      color: var(--blue);
+      border-bottom: 2px solid var(--blue);
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+    .intro {
+      background: #e8f0fe;
+      border-left: 4px solid var(--blue);
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+    .intro p { margin: 6px 0; }
+    .question-card {
+      background: var(--card);
+      padding: 18px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.10);
+      margin-bottom: 18px;
+    }
+    .question-title {
+      font-weight: 700;
+      margin-bottom: 14px;
+      font-size: 1.05rem;
+    }
+    .options label {
+      display: block;
+      padding: 9px 10px;
+      margin-bottom: 7px;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .options label:hover { background: #eef4ff; }
+    .options input { margin-right: 10px; }
+    .blank-option { color: var(--muted); font-style: italic; }
+    .toolbar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 22px 0;
+      position: sticky;
+      bottom: 0;
+      background: rgba(244,247,246,0.95);
+      padding: 10px 0;
+      backdrop-filter: blur(4px);
+    }
+    button {
+      border: none;
+      padding: 14px 20px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 650;
+    }
+    .btn-submit { background-color: var(--blue); color: white; }
+    .btn-submit:hover { background-color: var(--blue-dark); }
+    .btn-secondary { background-color: #e0e0e0; color: #222; }
+    .btn-secondary:hover { background-color: #d2d2d2; }
+    #results {
+      display: none;
+      background: #e8f5e9;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      border: 1px solid #c8e6c9;
+    }
+    .feedback {
+      margin-top: 10px;
+      font-size: 0.92rem;
+      padding: 10px;
+      background: var(--warn);
+      border-left: 4px solid var(--warn-border);
+      display: none;
+      border-radius: 4px;
+    }
+    .correct-answer { background-color: var(--ok) !important; border-color: var(--ok-border) !important; }
+    .wrong-answer { background-color: var(--bad) !important; border-color: var(--bad-border) !important; }
+    .answer-key {
+      display: none;
+      margin-top: 18px;
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 14px;
+      border-radius: 6px;
+    }
+    .answer-key code { white-space: pre-wrap; }
+    .muted { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <h1>Tests 2021 - Técnicas de los Sistemas Inteligentes</h1>
+  <div class="intro">
+    <p><strong>Versión definitiva:</strong> 30 preguntas en el orden del PDF original.</p>
+    <p><strong>Reglas:</strong> acierto +1, fallo −1/3, blanco 0. La nota se escala sobre 10 y no baja de 0.</p>
+    <p class="muted">Plantilla contrastada con el HTML de Google Forms que me has pasado y corregida respecto a la versión anterior.</p>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <div class="toolbar">
+    <button class="btn-submit" onclick="calculateScore()">Entregar examen y ver nota</button>
+    <button class="btn-secondary" onclick="clearAnswers()">Reiniciar respuestas</button>
+    <button class="btn-secondary" onclick="toggleAnswerKey()">Mostrar/ocultar plantilla</button>
+  </div>
+
+  <div id="results">
+    <h2 id="final-score"></h2>
+    <p id="score-details"></p>
+  </div>
+
+  <div class="answer-key" id="answer-key"></div>
+
+  <script>
+    const questions = [
+      {
+            "q": "Si comparamos el algoritmo Descenso Iterativo A* con la Búsqueda Primero el Mejor Recursiva",
+            "options": [
+                  "no se pueden comparar en términos de memoria",
+                  "el segundo requiere almacenar menos nodos en memoria, pero podría necesitar regenerar más nodos",
+                  "el primero requiere almacenar menos nodos en memoria, pero podría necesitar regenerar más nodos"
+            ],
+            "correct": 2,
+            "reason": "Descenso Iterativo A* almacena muy poca memoria, pero puede regenerar nodos al aumentar la cota."
+      },
+      {
+            "q": "Cuál de las siguientes afirmaciones es cierta",
+            "options": [
+                  "El algoritmo A* no es un caso particular del algoritmo de búsqueda sobre agendas",
+                  "El algoritmo A* es un caso particular del algoritmo de búsqueda sobre agendas cuando no se considera el enlace al mejor padre",
+                  "El algoritmo A* es un caso particular del algoritmo de búsqueda sobre agendas cuando la combinación de las justificaciones se toma como el operador máximo sobre el coste del camino que llega al nodo",
+                  "El algoritmo A* es un caso particular del algoritmo de búsqueda sobre agendas cuando la combinación de las justificaciones se toma como el operador mínimo sobre el coste del camino que llega al nodo"
+            ],
+            "correct": 3,
+            "reason": "A* conserva el mejor coste conocido para llegar a un nodo; por tanto, combina caminos mediante el mínimo coste."
+      },
+      {
+            "q": "Selecciona la etapa que sea válida del algoritmo Y/O*",
+            "options": [
+                  "cuando se encuentra un nuevo camino a un nodo se actualiza la g del nodo si es necesario",
+                  "traza el mejor camino actual desde el inicio",
+                  "usa la lista de CERRADOS para almacenar los nodos explorados",
+                  "selecciona el mejor nodo"
+            ],
+            "correct": 1,
+            "reason": "YO*/AO* no selecciona simplemente el mejor nodo abierto como A*. Sigue o traza desde el inicio el mejor subgrafo/camino solución actualmente marcado hasta llegar a una hoja a expandir."
+      },
+      {
+            "q": "¿Cuál es el argumento principal usado en la demostración de que toda heurística obtenida por modelos simplificados es consistente?",
+            "options": [
+                  "que toda función consistente es admisible",
+                  "que toda función consistente es monótona",
+                  "que las funciones h* son siempre admisibles",
+                  "que las funciones h* son siempre consistentes"
+            ],
+            "correct": 3,
+            "reason": "La heurística de un modelo simplificado se interpreta como un coste óptimo h* dentro de ese modelo; las funciones h* cumplen consistencia."
+      },
+      {
+            "q": "El problema del marco está relacionado con",
+            "options": [
+                  "simplificar la complejidad del proceso de búsqueda en planificación",
+                  "determinar qué efectos debieran describirse en una acción en función del contexto",
+                  "tratar con las precondiciones no explícitamente descritas en la acción cuando ésta falla",
+                  "deducir de forma eficiente aquello que no cambia cuando se aplica una acción"
+            ],
+            "correct": 3,
+            "reason": "El problema del marco trata de representar eficientemente qué literales permanecen invariantes tras aplicar una acción."
+      },
+      {
+            "q": "¿Cómo gestiona el algoritmo Y/O* los nodos irresolubles?",
+            "options": [
+                  "mediante un mecanismo de propagación de nodos irresolubles",
+                  "mediante el uso de un valor constante mayor que cualquier valor de coste posible de una solución",
+                  "no contempla nodos irresolubles ya que estos no aparecen en problemas descomponibles"
+            ],
+            "correct": 1,
+            "reason": "En YO*/AO* los nodos irresolubles se tratan asignándoles un valor MAXIMO, mayor que cualquier coste posible de una solución. Ese valor se propaga hacia arriba; si llega a la raíz, el problema queda irresoluble."
+      },
+      {
+            "q": "La búsqueda por franjas",
+            "options": [
+                  "está basada en el algoritmo de descenso iterativo A* pero hace uso de una tabla de estados repetidos y una lista de nodos explorados en la iteración anterior para tenerlos en cuenta en la siguiente iteración",
+                  "está basada en el algoritmo de descenso iterativo A* pero hace uso de una tabla de estados repetidos y una lista de nodos con los que continuar la exploración en la siguiente iteración",
+                  "está basada en el algoritmo A* pero hace uso de una tabla de estados repetidos y una lista de nodos con los que continuar la exploración en la siguiente iteración"
+            ],
+            "correct": 1,
+            "reason": "Fringe Search mejora IDA* manteniendo estructuras para continuar la exploración entre iteraciones."
+      },
+      {
+            "q": "El modelo de representación de planes mediante tablas triangulares pretende",
+            "options": [
+                  "mejorar la eficiencia en el proceso de obtención de planes",
+                  "controlar inteligentemente la ejecución de un plan concreto",
+                  "disponer de un modelo homogéneo para representar los planes obtenidos por diferentes planificadores"
+            ],
+            "correct": 1,
+            "reason": "Las tablas triangulares se usan para representar un plan ya generado y controlar/reparar su ejecución."
+      },
+      {
+            "q": "Cuando tenemos dos heurísticas para un mismo problema y definimos una nueva como el valor máximo de las dos en cada nodo",
+            "options": [
+                  "la nueva heurística es peor que las otras dos, en cualquier caso",
+                  "la nueva heurística es mejor que las otras dos bajo ciertas circunstancias",
+                  "la nueva heurística es mejor que las otras dos, en cualquier caso"
+            ],
+            "correct": 1,
+            "reason": "Tomar max(h1,h2) domina punto a punto a ambas heurísticas, pero solo es estrictamente mejor bajo ciertas condiciones: por ejemplo, si ambas son admisibles/consistentes y cada una aporta información distinta. Si una ya domina a la otra, el máximo no mejora; y si alguna no es admisible, puede perder propiedades."
+      },
+      {
+            "q": "El algoritmo Theta* básico es una variación del algoritmo A* que",
+            "options": [
+                  "utiliza una estrategia retroactiva para almacenar menos nodos",
+                  "cuando expande un nodo n considera más de un camino para determinar el mejor padre de n",
+                  "utiliza un mecanismo de propagación de la heurística de los nodos hijos a los nodos padres"
+            ],
+            "correct": 1,
+            "reason": "Theta* permite caminos any-angle y comprueba alternativas de padre mediante línea de visión."
+      },
+      {
+            "q": "La Búsqueda Primero el Mejor Recursiva (BPMR) requiere de un mecanismo de propagación basado en el",
+            "options": [
+                  "promedio",
+                  "máximo",
+                  "mínimo"
+            ],
+            "correct": 2,
+            "reason": "BPMR/RBFS mantiene para cada nodo el mejor valor estimado de sus sucesores y lo propaga hacia arriba; por eso el mecanismo se basa en el mínimo entre alternativas."
+      },
+      {
+            "q": "Si h es admisible y decidimos usar como función heurística para un problema f(n) = g(n) + w · h(n) en un algoritmo A*, entonces se obtiene la solución óptima para los siguientes valores del parámetro w",
+            "options": [
+                  "w mayor que 1",
+                  "w menor o igual que 1",
+                  "w perteneciente al intervalo cerrado [0,1]",
+                  "para cualquier valor del parámetro w"
+            ],
+            "correct": 2,
+            "reason": "Para conservar admisibilidad al escalar h, se necesita 0 ≤ w ≤ 1. Con w > 1 puede sobreestimar."
+      },
+      {
+            "q": "En el modelo de regla tipo STRIPS la lista de supresión es",
+            "options": [
+                  "una lista de predicados con variables cuantificadas universalmente que se usa para construir el estado en el que se ha aplicado la regla",
+                  "una lista de predicados con variables cuantificadas existencialmente que se usa para construir el estado en el que se ha aplicado la regla",
+                  "una fórmula bien formada de la lógica para determinar cuando se puede aplicar una regla",
+                  "una lista de predicados con variables libres que se usa para construir el estado en el que se ha aplicado la regla"
+            ],
+            "correct": 3,
+            "reason": "La lista de supresión contiene literales del esquema de operador que se eliminan del estado resultante."
+      },
+      {
+            "q": "En el modelo de regla tipo STRIPS la fórmula de precondición es",
+            "options": [
+                  "una fórmula bien formada de la lógica en la que los predicados contienen tan solo variables cuantificadas existencialmente y que se usa para construir el estado en el que se ha aplicado la regla",
+                  "una fórmula bien formada de la lógica en la que los predicados contienen tan solo variables libres y que se usa para construir el estado en el que se ha aplicado la regla",
+                  "una fórmula bien formada de la lógica en la que los predicados contienen tan solo variables cuantificadas universalmente y que se usa para construir el estado en el que se ha aplicado la regla",
+                  "una fórmula bien formada de la lógica en la que los predicados contienen tan solo variables cuantificadas existencialmente y que se usa para determinar cuando se puede aplicar una regla"
+            ],
+            "correct": 3,
+            "reason": "La precondición sirve para determinar cuándo puede aplicarse un operador. En esquemas STRIPS se busca una instanciación que la satisfaga."
+      },
+      {
+            "q": "¿Cómo se trató el problema del marco en el sistema de Green (Cálculo de Situaciones)?",
+            "options": [
+                  "incluyendo un nuevo modelo de acción",
+                  "definiendo un nuevo proceso de razonamiento",
+                  "incluyendo axiomas del marco para los diferentes predicados"
+            ],
+            "correct": 2,
+            "reason": "El cálculo de situaciones resuelve explícitamente la persistencia mediante axiomas del marco."
+      },
+      {
+            "q": "¿En qué consiste la operación descomponer del planificador STRIPS?",
+            "options": [
+                  "Cuando se detecta que el objetivo de la parte superior de la pila es un objetivo compuesto, que no es cierto en el estado actual, añade los literales de ese objetivo en la parte superior de la pila, eliminando el objetivo compuesto",
+                  "Cuando se detecta que el objetivo de la parte superior de la pila es un objetivo compuesto, añade los literales de ese objetivo en la parte superior de la pila, eliminando el objetivo compuesto",
+                  "Cuando se detecta que el objetivo de la parte superior de la pila es un objetivo compuesto, que no es cierto en el estado actual, añade los literales de ese objetivo en la parte superior de la pila, manteniendo el objetivo compuesto",
+                  "Cuando se detecta que el objetivo de la parte superior de la pila es un objetivo compuesto, añade los literales de ese objetivo en la parte superior de la pila, manteniendo el objetivo compuesto"
+            ],
+            "correct": 3,
+            "reason": "Según la regla de descomposición de STRIPS, si el objetivo superior de la pila es compuesto, se añaden sus literales componentes en la parte superior y se mantiene el objetivo compuesto como comprobación posterior."
+      },
+      {
+            "q": "La heurística de los mínimos conflictos se aplica en",
+            "options": [
+                  "en problemas de satisfacción de restricciones para seleccionar variables usando la formulación incremental",
+                  "en problemas de satisfacción de restricciones para seleccionar variables usando la formulación completa en estados",
+                  "en problemas de satisfacción de restricciones para seleccionar valores usando la formulación completa en estados",
+                  "en problemas de satisfacción de restricciones para seleccionar valores usando la formulación incremental"
+            ],
+            "correct": 2,
+            "reason": "Mínimos conflictos trabaja con asignaciones completas y elige valores que minimizan las violaciones."
+      },
+      {
+            "q": "La comprobación hacia adelante permite",
+            "options": [
+                  "modificar los dominios de las variables para mantener tan solo los valores legales para las variables no asignadas",
+                  "seleccionar el valor más apropiado para el proceso de búsqueda de la variable elegida",
+                  "eliminar las variables irrelevantes para el problema entre las variables no asignadas",
+                  "seleccionar la variable más apropiada para el proceso de búsqueda entre las variables no asignadas"
+            ],
+            "correct": 0,
+            "reason": "Forward checking elimina de los dominios futuros los valores incompatibles con la asignación actual."
+      },
+      {
+            "q": "En problemas de satisfacción de restricciones una asignación se dice completa si",
+            "options": [
+                  "sí es monótona",
+                  "no viola ninguna restricción",
+                  "no se usa ese nombre en problemas de satisfacción de restricciones",
+                  "aparecen todas las variables"
+            ],
+            "correct": 3,
+            "reason": "Completa significa que todas las variables tienen valor. Si además no viola restricciones, es consistente."
+      },
+      {
+            "q": "Cuando un algoritmo A* usa una heurística monótona entonces",
+            "options": [
+                  "el algoritmo es admisible",
+                  "el algoritmo es monótono",
+                  "el algoritmo no tiene por qué alcanzar la solución óptima"
+            ],
+            "correct": 0,
+            "reason": "Una heurística monótona/consistente garantiza la optimalidad de A* bajo las condiciones habituales."
+      },
+      {
+            "q": "En el estudio de las propiedades formales del algoritmo A* ¿qué representa la función g* de un cierto nodo n?",
+            "options": [
+                  "el coste del camino mínimo entre el nodo n y un nodo objetivo al que se llega mediante un camino óptimo",
+                  "el coste del camino mínimo entre el nodo n y un nodo objetivo",
+                  "el coste del camino mínimo entre el nodo s y el nodo n"
+            ],
+            "correct": 2,
+            "reason": "g*(n) es el coste óptimo desde el estado inicial s hasta el nodo n."
+      },
+      {
+            "q": "El planificador STRIPS utilizó un algoritmo de resolución de problemas que no estaba basado directamente en progresión y esto fue debido a que",
+            "options": [
+                  "los modelos de progresión no estaban aún formalizados",
+                  "los autores vieron que la progresión no era eficiente",
+                  "los autores no descubrieron una forma para definir una heurística eficiente e independiente del dominio",
+                  "razonar hacia adelante siempre es más ineficiente que razonar hacia atrás"
+            ],
+            "correct": 2,
+            "reason": "La dificultad era disponer de una heurística eficiente e independiente del dominio para búsqueda hacia adelante."
+      },
+      {
+            "q": "La planificación de orden parcial está basada en",
+            "options": [
+                  "usar razonamiento hacia adelante y búsqueda en un espacio de estados",
+                  "usar razonamiento hacia atrás y búsqueda en un espacio de estados",
+                  "usar descomposición y una búsqueda en un espacio de planes"
+            ],
+            "correct": 2,
+            "reason": "POP busca en un espacio de planes incompletos, refinándolos mediante vínculos causales y restricciones."
+      },
+      {
+            "q": "Se dice que X es arco consistente con Y si existe una restricción entre X e Y y",
+            "options": [
+                  "para todo valor yi de Y hay algún valor xi de X permitido",
+                  "para algún valor xi de X todos los valores yi de Y están permitidos",
+                  "para algún valor yi de Y todos los valores xi de X están permitidos",
+                  "para todo valor xi de X hay algún valor yi de Y permitido"
+            ],
+            "correct": 3,
+            "reason": "X es arco-consistente respecto a Y si cada valor de X tiene al menos un valor compatible en Y."
+      },
+      {
+            "q": "¿Cuál es el supuesto básico que permite al algoritmo A* ignorar caminos con ciclos?",
+            "options": [
+                  "el suponer que el coste es estrictamente positivo por arco",
+                  "el tomar la función heurística para que verifique la propiedad de ser admisible",
+                  "el suponer que el grafo es localmente finito"
+            ],
+            "correct": 0,
+            "reason": "Si todo arco tiene coste positivo, añadir un ciclo solo aumenta el coste del camino y no puede mejorar una solución."
+      },
+      {
+            "q": "En el modelo de regla tipo STRIPS la lista de adición es",
+            "options": [
+                  "una lista de predicados con variables cuantificadas universalmente que se usa para construir el estado en el que se ha aplicado la regla",
+                  "una lista de predicados con variables cuantificadas existencialmente que se usa para construir el estado en el que se ha aplicado la regla",
+                  "una fórmula bien formada de la lógica para determinar cuando se puede aplicar una regla",
+                  "una lista de predicados con variables libres que se usa para construir el estado en el que se ha aplicado la regla"
+            ],
+            "correct": 3,
+            "reason": "La lista de adición contiene los literales que se añaden al estado tras aplicar el operador."
+      },
+      {
+            "q": "Se produce una amenaza a un vínculo causal cuando",
+            "options": [
+                  "hay una acción que elimina el literal protegido por el vínculo causal y dicha acción está ordenada antes de la primera acción del vínculo",
+                  "hay una acción que añade el literal protegido por el vínculo causal y dicha acción podría ordenarse entre las dos acciones del vínculo",
+                  "hay una acción que elimina el literal protegido por el vínculo causal y dicha acción está ordenada después de la última acción del vínculo",
+                  "hay una acción que elimina el literal protegido por el vínculo causal y dicha acción podría ordenarse entre las dos acciones del vínculo"
+            ],
+            "correct": 3,
+            "reason": "Una amenaza es una acción que puede situarse entre productor y consumidor y borrar el literal protegido."
+      },
+      {
+            "q": "La hipótesis del mundo cerrado",
+            "options": [
+                  "permite manejar un tipo de incertidumbre muy limitada",
+                  "permite manejar la incertidumbre usando disyunciones entre los literales",
+                  "no permite manejar ningún tipo de incertidumbre",
+                  "permite manejar la incertidumbre usando probabilidades"
+            ],
+            "correct": 2,
+            "reason": "La hipótesis de mundo cerrado considera falso todo lo que no se declara verdadero, por lo que no representa incertidumbre."
+      },
+      {
+            "q": "El problema de la cualificación en planificación está relacionado con",
+            "options": [
+                  "los efectos de las acciones",
+                  "las precondiciones de las acciones",
+                  "la eficiencia en el razonamiento sobre las acciones"
+            ],
+            "correct": 1,
+            "reason": "El problema de la cualificación trata de todas las condiciones/precondiciones necesarias para que una acción tenga éxito."
+      },
+      {
+            "q": "La diferencia entre usar el algoritmo A* sobre grafos de visibilidad frente a cuadrículas en problemas de planificación de caminos es que",
+            "options": [
+                  "para los grafos de visibilidad A* requiere menos complejidad y podría obtener una mejor solución",
+                  "para los grafos de visibilidad A* requiere más complejidad, aunque podría obtener una mejor solución",
+                  "para los grafos de visibilidad A* requiere más complejidad, aunque podría obtener una peor solución",
+                  "para los grafos de visibilidad A* requiere menos complejidad y podría obtener una peor solución"
+            ],
+            "correct": 1,
+            "reason": "El grafo de visibilidad suele implicar más coste de construcción y comprobaciones de visibilidad que una cuadrícula, pero permite movimientos rectos entre puntos visibles y por tanto puede encontrar caminos geométricamente mejores."
+      }
+];
+
+    const letters = ["a", "b", "c", "d"];
+    const container = document.getElementById("quiz-container");
+
+    function escapeHTML(text) {
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderQuiz() {
+      container.innerHTML = "";
+      questions.forEach((q, index) => {
+        const optionsHTML = q.options.map((opt, i) => `
+          <label id="label-${index}-${i}">
+            <input type="radio" name="q${index}" value="${i}"> ${letters[i]}) ${escapeHTML(opt)}
+          </label>
+        `).join("");
+
+        const html = `
+          <div class="question-card" id="q-card-${index}">
+            <div class="question-title">${index + 1}. ${escapeHTML(q.q)}</div>
+            <div class="options">
+              ${optionsHTML}
+              <label class="blank-option">
+                <input type="radio" name="q${index}" value="-1" checked> Dejar en blanco
+              </label>
+            </div>
+            <div class="feedback" id="feedback-${index}"><strong>Explicación:</strong> ${escapeHTML(q.reason)}</div>
+          </div>
+        `;
+        container.insertAdjacentHTML("beforeend", html);
+      });
+    }
+
+    function calculateScore() {
+      let correct = 0;
+      let incorrect = 0;
+      let blank = 0;
+
+      questions.forEach((q, index) => {
+        const selected = Number(document.querySelector(`input[name="q${index}"]:checked`).value);
+        const feedbackDiv = document.getElementById(`feedback-${index}`);
+
+        for (let i = 0; i < q.options.length; i++) {
+          const label = document.getElementById(`label-${index}-${i}`);
+          label.classList.remove("correct-answer", "wrong-answer");
+        }
+
+        document.getElementById(`label-${index}-${q.correct}`).classList.add("correct-answer");
+        feedbackDiv.style.display = "block";
+
+        if (selected === q.correct) {
+          correct++;
+        } else if (selected === -1) {
+          blank++;
+        } else {
+          incorrect++;
+          document.getElementById(`label-${index}-${selected}`).classList.add("wrong-answer");
+        }
+      });
+
+      const rawScore = correct - incorrect / 3;
+      const finalScore = Math.max(0, rawScore);
+      const scoreOutOf10 = (finalScore / questions.length) * 10;
+
+      document.getElementById("results").style.display = "block";
+      document.getElementById("final-score").innerText = `Tu nota: ${scoreOutOf10.toFixed(2)} / 10`;
+      document.getElementById("score-details").innerText = `Aciertos: ${correct} | Fallos: ${incorrect} | En blanco: ${blank} | Puntuación bruta: ${finalScore.toFixed(2)} / ${questions.length}`;
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    }
+
+    function clearAnswers() {
+      questions.forEach((q, index) => {
+        document.querySelector(`input[name="q${index}"][value="-1"]`).checked = true;
+        for (let i = 0; i < q.options.length; i++) {
+          const label = document.getElementById(`label-${index}-${i}`);
+          label.classList.remove("correct-answer", "wrong-answer");
+        }
+        document.getElementById(`feedback-${index}`).style.display = "none";
+      });
+      document.getElementById("results").style.display = "none";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function toggleAnswerKey() {
+      const box = document.getElementById("answer-key");
+      if (box.style.display === "block") {
+        box.style.display = "none";
+        return;
+      }
+      const key = questions.map((q, i) => `${String(i + 1).padStart(2, "0")}: ${letters[q.correct].toUpperCase()}`).join("\n");
+      box.innerHTML = `<strong>Plantilla:</strong><br><code>${escapeHTML(key)}</code>`;
+      box.style.display = "block";
+    }
+
+    renderQuiz();
+  </script>
+</body>
+</html>
