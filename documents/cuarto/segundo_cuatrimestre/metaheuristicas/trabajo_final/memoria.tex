@@ -74,7 +74,7 @@
     \thispagestyle{empty}
 
 % ----------------------------------------------------------------
-\part{Descripción}
+\part{Descripción}\label{part:descripcion}
 
 \section{Introducción y contexto}
 
@@ -541,13 +541,13 @@ La complejidad por iteración es $\mathcal{O}(N \cdot d)$, equivalente a la de o
  
 % ----------------------------------------------------------------
 
-\part{Implementación y estudio experimental}
+\part{Implementación y estudio experimental}\label{part:implementacion_estudio_experimental}
 
 \section{Implementación del SCA}
  
 La implementación del SCA se ha realizado en C++ sobre el \textit{benchmark} CEC2017~\cite{cec2017}, integrándola en el repositorio de Daniel Molina~\cite{molina_repo}. La API de evaluación ofrece una interfaz simplificada que gestiona internamente el conteo de evaluaciones y el almacenamiento de resultados en los milestones requeridos por el protocolo experimental.
  
-Los parámetros de la implementación se recogen en la Tabla~\ref{tab:parametros_impl}. Se ha optado por $N=30$ agentes, valor habitual en la literatura para CEC2017 a fin de facilitar la comparabilidad. El criterio de parada es $10\,000 \times d$ evaluaciones y el número de repeticiones se ha reducido a $T=10$ (frente al estándar de 50) para acotar los tiempos de cómputo, asumiendo que las tendencias generales se mantienen.
+Los parámetros de la implementación se recogen en la Tabla~\ref{tab:parametros_impl}. Se ha optado por $N=30$ agentes, que es el valor habitual que se suele usar para CEC2017 para mejorar la comparativa con los otros algoritmos. El criterio de parada establecido es $10\,000 \times d$ evaluaciones y el número de repeticiones se ha fijado a $T=10$ (frente al estándar de 50) para acotar los tiempos de ejecución.
  
 \begin{table}[H]
 \centering
@@ -576,12 +576,12 @@ En esta sección se analiza el comportamiento del SCA frente a dos algoritmos cl
  
 \subsection{Dimensión $d = 10$}
  
-\subsubsection{Resultados al 100\% del presupuesto}
+\subsubsection{Resultados al 100\% de evaluaciones}
  
-La Tabla~\ref{tab:resultados_final_d10} muestra los errores medios al agotar el presupuesto completo ($10^5$ evaluaciones para $d=10$). Las celdas corresponden al error medio sobre 10 ejecuciones; un valor menor es mejor.
+La Tabla~\ref{tab:resultados_final_d10} muestra los errores medios al usar el 100\% de las evaluaciones disponibles ($10^5$ evaluaciones para $d=10$). Las celdas corresponden al error medio sobre 10 ejecuciones (cuanto menor sea dicho valor mejor será el algoritmo).
  
 \begin{longtable}{lrrr}
-\caption{Error medio al 100\% del presupuesto de evaluaciones ($d=10$, $10^5$ evaluaciones). Mejor resultado por función destacado en negrita.}
+\caption{Error medio al 100\% de evaluaciones ($d=10$, $10^5$ evaluaciones). Mejor resultado por función destacado en negrita.}
 \label{tab:resultados_final_d10}\\
 \toprule
 \textbf{Función} & \textbf{DE} & \textbf{PSO} & \textbf{SCA} \\
@@ -631,11 +631,11 @@ F30  & \textbf{8.051e+04} & 6.352e+05 & 4.864e+05 \\
 \textbf{Mejor en} & \textbf{21} & \textbf{9} & \textbf{0} \\
 \end{longtable}
  
-El DE obtiene el mejor resultado en 21 de las 30 funciones, el PSO en 9, y el SCA en ninguna. Este resultado, aunque desfavorable para el SCA, es coherente con las limitaciones teóricas identificadas en la descripción (Parte~I): el decaimiento lineal de $r_1$ activa la explotación demasiado pronto, y la ausencia de memoria colectiva entre agentes dificulta la convergencia en funciones multimodales.
+El DE obtiene el mejor resultado en 21 de las 30 funciones, el PSO en 9, y el SCA en ninguna. Este resultado, aunque no beneficia a SCA, es coherente con las limitaciones teóricas identificadas en la descripción (Parte \ref{part:descripcion}): el decrecimiento lineal de $r_1$ activa la explotación demasiado pronto, y la ausencia de memoria colectiva entre agentes dificulta la convergencia en funciones multimodales.
  
 Conviene destacar, sin embargo, que en F03, F04, F19 y F27 el SCA se aproxima al rendimiento del PSO, lo que sugiere que en funciones con estructura geométrica favorable a los movimientos trigonométricos el algoritmo se defiende razonablemente.
  
-\subsection{Análisis de la convergencia a lo largo del presupuesto ($d=10$)}
+\subsubsection{Análisis de la convergencia a lo largo de las evaluaciones}
  
 \begin{figure}[H]
 \centering
@@ -696,15 +696,15 @@ Conviene destacar, sin embargo, que en F03, F04, F19 y F27 el SCA se aproxima al
  
 \end{axis}
 \end{tikzpicture}
-\caption{Evolución del número de funciones ganadas por cada algoritmo en función del porcentaje del presupuesto consumido ($d=10$, 30 funciones).}
+\caption{Evolución del número de funciones para las que cada algoritmo resulta mejor en función del porcentaje de las evaluaciones consumidas ($d=10$, 30 funciones).}
 \label{fig:convergencia_wins_d10}
 \end{figure}
  
-La Figura~\ref{fig:convergencia_wins_d10} revela una dinámica especialmente interesante que los resultados finales por sí solos ocultan. Al 1\% del presupuesto (los primeros $10^3$ de los $10^5$ evaluaciones disponibles), el SCA gana en \textbf{15 de las 30 funciones}, superando tanto al DE (4 victorias) como al PSO (11 victorias). Esta ventaja inicial refleja la alta capacidad exploratoria del SCA en las primeras iteraciones, cuando $r_1$ es próximo a $a=2$ y los agentes se dispersan ampliamente por el espacio de búsqueda.
+La Figura~\ref{fig:convergencia_wins_d10} revela una dinámica especialmente interesante que los resultados finales por sí solos ocultan. Al 1\% de las evaluaciones (los primeros $10^3$ de los $10^5$ evaluaciones disponibles), el SCA gana en 15 de las 30 funciones, superando tanto al DE (4 victorias) como al PSO (11 victorias). Esta ventaja inicial refleja la alta capacidad exploratoria del SCA en las primeras iteraciones, cuando $r_1$ es próximo a $a=2$ y los agentes se dispersan ampliamente por el espacio de búsqueda.
  
-Sin embargo, a partir del 5\% del presupuesto la situación se invierte drásticamente: el SCA pierde todas sus ventajas y al 30\% ya no gana en ninguna función. Este colapso es la manifestación directa de las limitaciones ya identificadas: el decaimiento lineal de $r_1$ reduce la amplitud de movimiento demasiado rápido, y sin un mecanismo de escape local, la población converge prematuramente a óptimos locales de los que ya no puede salir.
+Sin embargo, a partir del 5\% de las evaluaciones la situación se invierte: el SCA pierde todas sus ventajas y al 30\% ya no gana en ninguna función. Este colapso es la manifestación directa de las limitaciones ya identificadas: el decrecimiento lineal de $r_1$ reduce la amplitud de movimiento demasiado rápido, y sin un mecanismo de escape local, la población converge de forma prematura a óptimos locales (impidiéndole alcanzar óptimos globales).
  
-El DE, por el contrario, exhibe el patrón opuesto: arranca con pocas victorias (4 al 1\%) y va mejorando progresivamente hasta estabilizarse en torno a 21-23 victorias. Esto refleja su estrategia de intensificación gradual, basada en diferencias entre vectores de la población que son más informativas conforme los agentes convergen. El PSO ocupa una posición intermedia, con buena exploración inicial (11-15 victorias entre el 1\% y el 5\%) y una posición estable de 7-9 victorias al final.
+El DE, por el contrario, muestra un comportamiento opuesto: al principio cuenta con pocas victorias (4 al 1\%) y va mejorando progresivamente hasta estabilizarse en torno a 21-23 victorias. Esto refleja su estrategia de intensificación gradual, basada en diferencias entre vectores de la población que son más informativas conforme los agentes convergen. El PSO ocupa una posición intermedia, con buena exploración inicial (11-15 victorias entre el 1\% y el 5\%) y una posición estable de 7-9 victorias al final.
  
 \subsection{Análisis por tipo de función ($d=10$)}
  
@@ -715,9 +715,9 @@ El benchmark CEC2017 agrupa las 30 funciones en tres categorías que permiten ca
  
     \item \textbf{F04--F10: Funciones multimodales simples.} Es el grupo donde el SCA se comporta de forma más competitiva relativamente. En F05, F06 y F09 obtiene resultados cercanos al PSO, aunque sin superarlo. Destaca F09 (función de Schwefel modificada), donde el SCA ($8{,}65 \times 10^1$) supera al DE ($1{,}94 \times 10^2$), lo que sugiere que la oscilación sinusoidal es útil para navegar paisajes con muchos óptimos locales de magnitud comparable.
  
-    \item \textbf{F11--F20: Funciones híbridas.} El SCA muestra sus peores resultados relativos en este grupo. Las funciones híbridas combinan regiones con características muy dispares, lo que requiere tanto exploración global como explotación local precisa. La ausencia de búsqueda local en el SCA original hace que los agentes no puedan refinar las soluciones parciales encontradas en cada subcomponente. F12 y F18 son los casos más extremos, con errores del SCA entre 3 y 4 órdenes de magnitud superiores al DE.
+    \item \textbf{F11--F20: Funciones híbridas.} El SCA muestra sus peores resultados en este grupo al compararlos con los otros dos algoritmos. Las funciones híbridas combinan regiones con características muy dispares, lo que requiere tanto exploración global como explotación local precisa. La ausencia de búsqueda local en el SCA hace que los agentes no puedan refinar las soluciones parciales encontradas en cada subcomponente. F12 y F18 son los casos más extremos, con errores del SCA entre 3 y 4 órdenes de magnitud superiores al DE.
  
-    \item \textbf{F21--F30: Funciones de composición.} Son las que presentan el paisaje de aptitud más complejo, con múltiples óptimos globales de distinta cuenca de atracción. Aquí el SCA obtiene sus mejores resultados relativos de entre todas las categorías: en F27 ($4{,}01 \times 10^2$) supera al PSO ($4{,}13 \times 10^2$), y en F23, F29 se acerca a los valores del PSO. La diversidad mantenida por la oscilación trigonométrica ayuda a no quedar atrapado en la peor cuenca local.
+    \item \textbf{F21--F30: Funciones de composición.} Son las que presentan el paisaje de aptitud más complejo, con múltiples óptimos globales de distinta naturaleza. Aquí el SCA obtiene sus mejores resultados relativos de entre todas las categorías: en F27 ($4{,}01 \times 10^2$) supera al PSO ($4{,}13 \times 10^2$), y en F23, F29 se acerca a los valores del PSO. La diversidad mantenida por la oscilación trigonométrica ayuda a no quedar atrapado en la peor cuenca local.
 \end{itemize}
  
 \subsection{Resumen y motivación de las mejoras ($d=10$)}
@@ -755,9 +755,9 @@ Estas tres debilidades están directamente asociadas a las tres mejoras implemen
 % ----------------------------------------------------------------
 \subsection{Dimensión $d = 30$}
  
-Con el salto a $d=30$, el presupuesto de evaluaciones asciende a $3 \times 10^5$, pero el espacio de búsqueda crece exponencialmente. Este cambio de escala tiene un impacto cualitativo profundo en el comportamiento relativo de los tres algoritmos.
+Con el salto a $d=30$, el número disponible de evaluaciones asciende a $3 \times 10^5$, pero el espacio de búsqueda crece exponencialmente. Este cambio de escala tiene un impacto cualitativo importante en el comportamiento relativo de los tres algoritmos.
  
-\subsubsection{Resultados al 100\% del presupuesto}
+\subsubsection{Resultados al 100\% de evaluaciones}
  
 \begin{longtable}{lrrr}
 \caption{Error medio al 100\% del presupuesto de evaluaciones ($d=30$, $3\times10^5$ evaluaciones). Mejor resultado por función destacado en negrita.}
@@ -810,9 +810,9 @@ F30  & \textbf{3.657e+03} & 1.359e+07 & 7.415e+07 \\
 \textbf{Mejor en} & \textbf{27} & \textbf{3} & \textbf{0} \\
 \end{longtable}
  
-A $d=30$ la brecha con respecto a $d=10$ se amplía notablemente. El DE domina en 27 de las 30 funciones (frente a 21 en $d=10$), el PSO retiene solo 3 victorias, y el SCA no gana en ninguna. Pese a ello, en F03 el SCA ($3{,}33 \times 10^4$) se coloca entre el PSO ($5{,}45 \times 10^4$) y el DE ($3{,}48 \times 10^3$), y en F27 supera al PSO ($8{,}07 \times 10^2$ vs. $6{,}98 \times 10^2$), la única función de composición donde el SCA obtiene la segunda posición. F02 sigue siendo el caso donde el PSO arrasa al DE y al SCA gracias a su mecanismo de inercia, pero para el resto del benchmark el DE consolida su hegemonía con el aumento de dimensión.
+Se puede ver que para $d=30$, la brecha con respecto a $d=10$ se amplía notablemente. El DE domina en 27 de las 30 funciones (frente a 21 en $d=10$), el PSO retiene solo 3 victorias, y el SCA no gana en ninguna. Pese a ello, en F03 el SCA ($3{,}33 \times 10^4$) se coloca entre el PSO ($5{,}45 \times 10^4$) y el DE ($3{,}48 \times 10^3$), y en F27 supera al PSO ($8{,}07 \times 10^2$ vs. $6{,}98 \times 10^2$), la única función de composición donde el SCA obtiene la segunda posición. F02 sigue siendo el caso donde el PSO arrasa al DE y al SCA gracias a su mecanismo de inercia, pero para el resto del benchmark el DE consolida su hegemonía con el aumento de dimensión.
  
-\subsubsection{Análisis de la convergencia a lo largo del presupuesto ($d=30$)}
+\subsubsection{Análisis de la convergencia a lo largo de las evaluaciones}
  
 \begin{figure}[H]
 \centering
@@ -872,7 +872,7 @@ A $d=30$ la brecha con respecto a $d=10$ se amplía notablemente. El DE domina e
  
 \end{axis}
 \end{tikzpicture}
-\caption{Evolución del número de funciones ganadas por cada algoritmo en función del porcentaje del presupuesto consumido ($d=30$, 30 funciones).}
+\caption{Evolución del número de funciones ganadas por cada algoritmo en función del porcentaje de las evaluaciones consumidas ($d=30$, 30 funciones).}
 \label{fig:convergencia_wins_d30}
 \end{figure}
  
@@ -913,7 +913,7 @@ SCA &  3 &  1 &  0 &  0 &  0 &  0 \\
  
 En $d=50$ el presupuesto es de $5 \times 10^5$ evaluaciones, pero la maldición de la dimensionalidad pesa aún más. Los resultados confirman y amplifican las tendencias observadas en $d=30$.
  
-\subsubsection{Resultados al 100\% del presupuesto}
+\subsubsection{Resultados al 100\% de evaluaciones}
 
 \begin{longtable}{lrrr}
 \caption{Error medio al 100\% del presupuesto de evaluaciones ($d=50$, $5\times10^5$ evaluaciones). Mejor resultado por función destacado en negrita.}
@@ -970,7 +970,7 @@ El panorama a $d=50$ replica el de $d=30$ en cuanto a recuento de victorias: DE 
  
 Cabe destacar que a $d=50$ el PSO amplía ligeramente su posición competitiva en el grupo de funciones multimodales: F16 y F17 pasan a ser victorias del PSO (en $d=10$ y $d=30$ eran victorias del DE para F16 o del PSO para F17 respectivamente), lo que sugiere que la memoria de velocidad del PSO escala algo mejor que las diferencias vectoriales del DE en estas funciones específicas.
  
-\subsubsection{Análisis de la convergencia a lo largo del presupuesto ($d=50$)}
+\subsubsection{Análisis de la convergencia a lo largo de las evaluaciones}
  
 \begin{figure}[H]
 \centering
@@ -1086,12 +1086,12 @@ El análisis por milestones (Tablas~\ref{tab:resumen_victorias_d10}, \ref{tab:re
 % ================================================================
 %  PART III — Hibridación memética: SCA-LS
 % ================================================================
-\part{Hibridación memética: SCA + Solis-Wets (SCA-LS)}
+\part{Hibridación memética: SCA + Solis-Wets (SCA-LS)}\label{part:hibridacion_memetica}
 
 % ----------------------------------------------------------------
 \section{Motivación}
 
-El análisis experimental del SCA original (Parte~II) reveló un patrón claro: el algoritmo exhibe una buena capacidad exploratoria en las primeras iteraciones pero colapsa prematuramente en la fase de explotación, sin llegar a refinar las soluciones encontradas. La conclusión natural es hibridarlo con una búsqueda local que actúe precisamente cuando el SCA se estanca, redistribuyendo así el presupuesto de evaluaciones de forma más eficiente.
+El análisis experimental del SCA original (Parte \ref{part:implementacion_estudio_experimental}) reveló un patrón claro: el algoritmo exhibe una buena capacidad exploratoria en las primeras iteraciones pero colapsa prematuramente en la fase de explotación, sin llegar a refinar las soluciones encontradas. La conclusión natural es hibridarlo con una búsqueda local que actúe precisamente cuando el SCA se estanca, redistribuyendo así el presupuesto de evaluaciones de forma más eficiente.
 
 La estrategia elegida sigue el paradigma de los \textit{algoritmos meméticos} (MA, \textit{Memetic Algorithms}): una metaheurística poblacional como explorador global combinada con un método de búsqueda local como intensificador. En concreto, se propone el algoritmo \textbf{SCA-LS}, que integra el SCA con el método de \textbf{Solis-Wets} (SW)~\cite{solis1981} como intensificador local activado por estancamiento.
 
@@ -1179,7 +1179,7 @@ El valor $S_{\max}=10$ equivale a $10 \times N = 300$ evaluaciones sin mejora an
 
 \subsection{Dimensión $d = 10$}
 
-\subsubsection{Resultados al 100\% del presupuesto}
+\subsubsection{Resultados al 100\% de evaluaciones}
 
 \begin{longtable}{lrrrrr}
 \caption{Error medio al 100\% del presupuesto ($d=10$). Se comparan los cinco algoritmos: SCA, SCA-LS, ASCA, DE y PSO. Mejor resultado por función en negrita.}
@@ -1240,7 +1240,7 @@ A $d=10$, el SCA-LS no gana en ninguna función al finalizar el presupuesto, al 
   \item En \textbf{funciones multimodales} como F09 o F14, el SCA-LS empeora respecto al SCA, lo que sugiere que la búsqueda local de Solis-Wets puede quedar atrapada en óptimos locales de mayor atracción que los que el SCA encontraba, un efecto conocido en los algoritmos meméticos como \textit{local optima attraction}.
 \end{itemize}
 
-\subsubsection{Análisis de la convergencia a lo largo del presupuesto ($d=10$)}
+\subsubsection{Análisis de la convergencia a lo largo de las evaluaciones}
 
 \begin{figure}[H]
 \centering
@@ -1334,7 +1334,7 @@ SCA-LS  & 26 & 15 &  6 &  5 &  3 &  0 \\
 
 \subsection{Dimensión $d = 30$}
 
-\subsubsection{Resultados al 100\% del presupuesto}
+\subsubsection{Resultados al 100\% de evaluaciones}
 
 
 \begin{longtable}{lrrrrr}
@@ -1392,7 +1392,7 @@ A $d=30$ el SCA-LS gana en \textbf{4 funciones} (F03, F10, F23, F28), convirtié
 
 La dinámica en funciones híbridas (F11--F20) sigue siendo positiva: en F12, F13, F14, F15, F18, F19 y F30, el SCA-LS reduce el error del SCA en entre 2 y 3 órdenes de magnitud, quedando por debajo del PSO en todos ellos, aunque sin alcanzar al DE.
 
-\subsubsection{Análisis de la convergencia a lo largo del presupuesto ($d=30$)}
+\subsubsection{Análisis de la convergencia a lo largo de las evaluaciones}
 
 \begin{figure}[H]
 \centering
@@ -1486,7 +1486,7 @@ SCA-LS  & 27 & 22 & 14 &  7 &  4 &  4 \\
 
 \subsection{Dimensión $d = 50$}
 
-\subsubsection{Resultados al 100\% del presupuesto}
+\subsubsection{Resultados al 100\% de evaluaciones}
 
 
 \begin{longtable}{lrrrrr}
@@ -1603,7 +1603,7 @@ La principal limitación sigue siendo la saturación local en la segunda mitad d
 \section{Motivación y diseño de las mejoras}
 \label{sec:asca}
 
-Las conclusiones del análisis del SCA (Parte~II) y del SCA-LS (Parte~III) apuntan a tres limitaciones estructurales que la hibridación memética no resuelve completamente:
+Las conclusiones del análisis del SCA (Parte \ref{part:implementacion_estudio_experimental}) y del SCA-LS (Parte \ref{part:hibridacion_memetica}) apuntan a tres limitaciones estructurales que la hibridación memética no resuelve completamente:
 
 \begin{enumerate}
   \item El decaimiento lineal de $r_1$ reduce la exploración demasiado rápido, especialmente en funciones multimodales.
@@ -1615,7 +1615,7 @@ El \textbf{ASCA} (\textit{Adaptive Sine Cosine Algorithm}) propone una mejora es
 
 \subsection{Mejora 1: Decaimiento no lineal de $r_1$ (coseno cuadrático)}
 
-\subsubsection{Limitación atacada}
+\subsubsection{Limitación encontrada}
 
 El SCA original emplea $r_1(t) = a(1 - t/T)$, que divide el presupuesto exactamente por la mitad entre exploración y explotación. En funciones multimodales complejas, la explotación se activa antes de que los agentes hayan localizado regiones prometedoras.
 
@@ -1687,9 +1687,9 @@ Esta curva permanece cerca de $a$ durante la primera mitad del presupuesto y cae
 
 \subsection{Mejora 2: Topología de vecindario en anillo (\textit{ring lbest})}
 
-\subsubsection{Limitación atacada}
+\subsubsection{Limitación encontrada}
 
-En el SCA original, todos los agentes tienen el mismo punto destino: el mejor global $P$. Esto genera el efecto de \textit{imán}: toda la población converge hacia una única región, eliminando la diversidad de forma prematura e impidiendo la exploración simultánea de múltiples cuencas de atracción.
+En el SCA original, todos los agentes tienen el mismo punto destino: el mejor global $P$. Esto genera el efecto de atractor global: toda la población converge hacia una única región, eliminando la diversidad de forma prematura e impidiendo la exploración simultánea de múltiples cuencas de atracción.
 
 \subsubsection{Solución propuesta}
 
@@ -1699,7 +1699,7 @@ Esta topología (\textit{lbest ring}) es ampliamente conocida en el PSO: ralenti
 
 \subsection{Mejora 3: Reinicio parcial adaptativo basado en diversidad}
 
-\subsubsection{Limitación atacada}
+\subsubsection{Limitación encontrada}
 
 Cuando la diversidad de la población colapsa (todos los agentes en la misma región), el SCA queda atrapado sin mecanismo de escape. El SCA-LS alivia este problema con la búsqueda local, pero no reintroduce agentes nuevos en el espacio de búsqueda.
 
@@ -1786,13 +1786,13 @@ $T_{\max}$         & $10\,000 \times d$  & Presupuesto máximo de evaluaciones \
 
 \subsection{Dimensión $d = 10$}
 
-\subsubsection{Resultados al 100\% del presupuesto}
+\subsubsection{Resultados al 100\% de evaluaciones}
 
-Los resultados completos por función se encuentran en la Tabla~\ref{tab:resultados_sca_ls_d10} (columna ASCA), ya incluida en la Parte~III para facilitar la comparativa. El ASCA no obtiene ninguna victoria al final del presupuesto a $d=10$.
+Los resultados completos por función se encuentran en la Tabla~\ref{tab:resultados_sca_ls_d10} (columna ASCA), ya incluida en la Parte \ref{part:hibridacion_memetica} para facilitar la comparativa. El ASCA no obtiene ninguna victoria al final del presupuesto a $d=10$.
 
 Observando los valores función a función, el ASCA mejora al SCA en F05 ($5{,}63 \times 10^1$ vs. $4{,}86 \times 10^1$), F16 ($1{,}61 \times 10^2$ vs. $1{,}45 \times 10^2$) y F20 ($1{,}26 \times 10^2$ vs. $9{,}01 \times 10^1$), aunque en la mayoría de las funciones su rendimiento es igual o ligeramente inferior al SCA base. Este resultado a $d=10$ sugiere que las mejoras estructurales tienen un efecto neutro o incluso negativo en baja dimensión: la topología de vecindario ralentiza la convergencia sin añadir beneficio cuando el espacio es suficientemente pequeño como para que el destino global sea efectivo, y el reinicio parcial consume evaluaciones que podrían haberse invertido en explotación.
 
-\subsubsection{Análisis de la convergencia a lo largo del presupuesto ($d=10$)}
+\subsubsection{Análisis de la convergencia a lo largo de las evaluaciones}
 
 \begin{figure}[H]
 \centering
