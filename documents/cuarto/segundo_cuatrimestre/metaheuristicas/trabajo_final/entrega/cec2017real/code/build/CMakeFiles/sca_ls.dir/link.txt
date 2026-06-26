@@ -1,0 +1,1 @@
+/usr/bin/c++  -O2 -O3 -DNDEBUG -rdynamic CMakeFiles/sca_ls.dir/sca_ls.cpp.o -o sca_ls  -Wl,-rpath,/home/jesusmuve/Escritorio/Apuntes/documents/cuarto/segundo_cuatrimestre/metaheuristicas/trabajo_final/software/cec2017real/code/build libcec17_test_func.so 

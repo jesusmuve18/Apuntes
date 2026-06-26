@@ -1,5 +1,0 @@
-- Arreglar las referencias rotas a bibliografía (solis1981)
-- Unificar el Análisis por tipo de función (que no dependa de la dimensión sino simplemente un análisis por tipo de función tras analizar cada una de las dimensiones, justo después del análisis comparativo entre dimensiones).
-- Añadir unas conclusiones generales a la parte II (conclusiones sobre el SCA).
-- Mover el resumen y motivación de las mejoras (d=10 y d=30 en la parte II) al final de la sección de la comparativa experimental: SCA frente a DE y PSO ya que no depende de la dimensión d.
-- Documentar profesionalmente el código
