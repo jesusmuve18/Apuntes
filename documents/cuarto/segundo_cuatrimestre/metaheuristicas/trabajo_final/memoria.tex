@@ -43,6 +43,14 @@
   \raisebox{-0.15\height}{\includegraphics[height=0.9em]{icons/h.png}}%
 }
 
+\newcommand{\cmakelogo}{%
+  \raisebox{-0.15\height}{\includegraphics[height=0.9em]{icons/cmake.png}}%
+}
+
+\newcommand{\defaultlogo}{%
+  \raisebox{-0.15\height}{\includegraphics[height=0.9em]{icons/file.png}}%
+}
+
 % Definición de colores pastel y modernos
 \definecolor{backcolour}{rgb}{0.96,0.96,0.96}
 \definecolor{codegreen}{rgb}{0.13,0.55,0.13}
@@ -116,7 +124,7 @@ El SCA parte de la idea de que las funciones seno y coseno poseen propiedades ge
 \section{Fundamentos matemáticos}
 \subsection{Ecuaciones de actualización de posición}
 
-Cada candidato a solución (denominado \textit{agente de búsqueda}) se representa como un vector $\mathbf{X}^t \in \mathbb{R}^d$, donde $d$ es la dimensión del problema y $t$ el instante de iteración. En cada paso, el agente actualiza su posición {dimensión a dimensión} según:
+Cada candidato a solución (denominado agente de búsqueda) se representa como un vector $X^t \in \bb{R}^d$, donde $d$ es la dimensión del problema y $t$ el instante de iteración. En cada paso, el agente actualiza su posición {dimensión a dimensión} según:
 
 \begin{equation}
 X_i^{t+1} =
@@ -127,14 +135,14 @@ X_i^t + r_1 \cdot \cos(r_2) \cdot \left| r_3 P_i^t - X_i^t \right|, & \text{si }
 \label{eq:update}
 \end{equation}
 
-La ecuación puede factorizarse para visualizarla mejor. Definiendo el \textit{desplazamiento escalado} $\Delta_i^t = r_3 P_i^t - X_i^t$ (distancia ponderada al destino, con signo) y el \textit{factor trigonométrico} $\phi = r_1 \cdot f(r_2)$ donde $f \in \{\sin, \cos\}$, la actualización se reduce a:
+La ecuación puede factorizarse para entenderse mejor. Definiendo el \textbf{desplazamiento escalado} $\Delta_i^t = r_3 P_i^t - X_i^t$ (distancia ponderada al destino, con signo) y el \textbf{factor trigonométrico} $\phi = r_1 \cdot f(r_2)$ donde $f \in \{\sin, \cos\}$, la actualización anterior se reduce a:
 
 \begin{equation}
 X_i^{t+1} = X_i^t + \phi \cdot |\Delta_i^t|
 \label{eq:factored}
 \end{equation}
 
-El valor absoluto $|\Delta_i^t|$ garantiza que la {magnitud} del paso sea siempre positiva; el {signo} del movimiento queda determinado enteramente por $\phi$: si $\phi > 0$ el agente avanza hacia el destino (o más allá), si $\phi < 0$ retrocede. Esta separación entre magnitud y dirección es lo que confiere al SCA su capacidad para cubrir simétricamente el espacio alrededor del punto destino.
+El valor absoluto $|\Delta_i^t|$ garantiza que la magnitud del paso sea siempre positiva; el {signo} del movimiento queda determinado enteramente por $\phi$ (si $\phi > 0$ el agente avanza en dirección al destion y si $\phi < 0$ retrocede). Esta separación entre magnitud y dirección es lo que le da al SCA su capacidad para cubrir simétricamente el espacio alrededor del punto destino.
 
 Los cuatro parámetros tienen roles bien diferenciados:
 
@@ -162,7 +170,15 @@ r_1(t) = a \left(1 - \frac{t}{T}\right), \qquad a = 2
 \label{eq:r1}
 \end{equation}
 
-Como se puede ver comienza con el valor $a$ ($r_1(0)=a$) y va descendiendo linealmente hasta $0$ ($r_1(T)=0$) a lo largo de las iteraciones.
+Sustituyendo y derivando en esta ecuación obtenemos
+\begin{gather*}
+  \begin{array}{c}
+    r_1(0)=a\\[0.8em]
+    r_1(T)=0
+  \end{array} \qquad
+  r_1'(t) = - \frac{a}{T}
+\end{gather*}
+por lo que $r_1$ comienza con el valor $a$ y va descendiendo linealmente hasta $0$ a lo largo de las iteraciones.
 
 La Figura~\ref{fig:r1} muestra su trayectoria y el umbral $r_1 = 1$ que separa las dos regiones:
 
@@ -226,19 +242,19 @@ La Figura~\ref{fig:r1} muestra su trayectoria y el umbral $r_1 = 1$ que separa l
     coordinates {(50,1)(100,0)(100,1)(50,1)} \closedcycle;
 
   %% Etiquetas de zona
-  \node[font=\small\bfseries, mygreen]  at (axis cs:18, 1.55) {Exploración};
-  \node[font=\small\bfseries, myyellow] at (axis cs:78, 0.38) {Explotación};
+  \node[font=\small\bfseries, mygreen]  at (axis cs:18, 1.25) {Exploración};
+  \node[font=\small\bfseries, myyellow] at (axis cs:78, 0.75) {Explotación};
 
 \end{axis}
 \end{tikzpicture}
-\caption{Evolución de $r_1$ a lo largo de las iteraciones ($a=2$, $T=100$). La región azul corresponde a la fase de exploración ($r_1\geq 1$) y la naranja a la de explotación ($r_1 < 1$). El cruce ocurre exactamente en $t = T/2$.}
+\caption{Evolución de $r_1$ a lo largo de las iteraciones ($a=2$, $T=100$). La región verde corresponde a la fase de exploración ($r_1\geq 1$) y la naranja a la de explotación ($r_1 < 1$). El cruce ocurre exactamente en $t = T/2$.}
 \label{fig:r1}
 \end{figure}
 
 
 \subsubsection{El parámetro $r_2$: dirección del movimiento}
 
-$r_2$ es el ángulo de la función trigonométrica, muestreado uniformemente en $[0, 2\pi]$. Su efecto se aprecia analizando el signo de $\sin(r_2)$ y $\cos(r_2)$:
+$r_2$ es el ángulo de la función trigonométrica, que toma valores aleatorios uniformemente en $[0, 2\pi]$. Su efecto se aprecia analizando el signo de $\sin(r_2)$ y $\cos(r_2)$:
 
 \begin{itemize}
   \item Cuando $f(r_2) > 0$ el desplazamiento es positivo: el agente se mueve en la dirección de $P_i - X_i$ (hacia el destino o más allá).
@@ -570,12 +586,12 @@ La complejidad por iteración es $\mathcal{O}(N \cdot d)$, equivalente a la de o
 
  
 % ----------------------------------------------------------------
-
+\clearpage
 \part{Implementación y estudio experimental}\label{part:implementacion_estudio_experimental}
 
 \section{Implementación del SCA}
  
-La implementación del SCA se ha realizado en C++ sobre el \textit{benchmark} CEC2017~\cite{cec2017}, integrándola en el repositorio de Daniel Molina~\cite{molina_repo}. La API de evaluación ofrece una interfaz simplificada que gestiona internamente el conteo de evaluaciones y el almacenamiento de resultados en los milestones requeridos por el protocolo experimental.
+La implementación del SCA se ha realizado en C++ sobre el \textit{benchmark} CEC2017~\cite{cec2017}, integrándola en el repositorio de Daniel Molina~\cite{molina_repo}. La API de evaluación ofrece una interfaz simplificada que gestiona internamente el conteo de evaluaciones y el almacenamiento de resultados en los \textit{milestones} requeridos por el protocolo experimental.
  
 Los parámetros de la implementación se recogen en la Tabla~\ref{tab:parametros_impl}. Se ha optado por $N=30$ agentes, que es el valor habitual que se suele usar para CEC2017 para mejorar la comparativa con los otros algoritmos. El criterio de parada establecido es $10\,000 \times d$ evaluaciones y el número de repeticiones se ha fijado a $T=10$ (frente al estándar de 50) para acotar los tiempos de ejecución.
  
@@ -602,7 +618,7 @@ Dimensiones & 10, 30, 50    & Valores de $d$ evaluados \\
 \section{Comparativa experimental: SCA frente a DE y PSO}
 \label{sec:exp_sca}
  
-En esta sección se analiza el comportamiento del SCA frente a dos algoritmos clásicos de referencia: la \textit{Differential Evolution} (DE) y el \textit{Particle Swarm Optimization} (PSO). Ambos están disponibles en la base de datos de TacoLab~\cite{tacolab} con el mismo protocolo experimental. La comparativa se realiza sobre las 30 funciones del benchmark CEC2017 en tres dimensiones ($d \in \{10, 30, 50\}$), midiendo el error medio respecto al óptimo conocido en distintos milestones del presupuesto de evaluaciones ($10\,000 \times d$ en total).
+En esta sección se analiza el comportamiento del SCA frente a dos algoritmos clásicos de referencia: la \textit{Differential Evolution} (DE) y el \textit{Particle Swarm Optimization} (PSO). Ambos están disponibles en la base de datos de TacoLab~\cite{tacolab} con el mismo protocolo experimental. La comparativa se realiza sobre las 30 funciones del benchmark CEC2017 en tres dimensiones ($d \in \{10, 30, 50\}$), midiendo el error medio respecto al óptimo conocido en distintos \textit{milestones} del presupuesto de evaluaciones ($10\,000 \times d$ en total).
  
 \subsection{Dimensión $d = 10$}
  
@@ -661,7 +677,7 @@ F30  & \textbf{8.051e+04} & 6.352e+05 & 4.864e+05 \\
 \textbf{Mejor en} & \textbf{21} & \textbf{9} & \textbf{0} \\
 \end{longtable}
  
-El DE obtiene el mejor resultado en 21 de las 30 funciones, el PSO en 9, y el SCA en ninguna. Este resultado, aunque no beneficia a SCA, es coherente con las limitaciones teóricas identificadas en la descripción (Parte \ref{part:descripcion}): el decrecimiento lineal de $r_1$ activa la explotación demasiado pronto, y la ausencia de memoria colectiva entre agentes dificulta la convergencia en funciones multimodales.
+El DE obtiene el mejor resultado en 21 de las 30 funciones, el PSO en 9, y el SCA en ninguna. Este resultado, aunque no beneficia a SCA, es coherente con las limitaciones teóricas identificadas más adelante (Sección \ref{sec:resumen_motivacion}): el decrecimiento lineal de $r_1$ activa la explotación demasiado pronto, y la ausencia de memoria colectiva entre agentes dificulta la convergencia en funciones multimodales.
  
 Conviene destacar, sin embargo, que en F03, F04, F19 y F27 el SCA se aproxima al rendimiento del PSO, lo que sugiere que en funciones con estructura geométrica favorable a los movimientos trigonométricos el algoritmo se defiende razonablemente.
  
@@ -740,7 +756,7 @@ La Tabla~\ref{tab:resumen_victorias_d10} condensa la evolución de las victorias
 
 \begin{table}[H]
 \centering
-\caption{Número de funciones ganadas por algoritmo en milestones representativos ($d=10$).}
+\caption{Número de funciones ganadas por algoritmo en \textit{milestones} representativos ($d=10$).}
 \label{tab:resumen_victorias_d10}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{lrrrrrr}
@@ -812,7 +828,7 @@ F30  & \textbf{3.657e+03} & 1.359e+07 & 7.415e+07 \\
 \textbf{Mejor en} & \textbf{27} & \textbf{3} & \textbf{0} \\
 \end{longtable}
  
-Se puede ver que para $d=30$, la brecha con respecto a $d=10$ se amplía notablemente. El DE domina en 27 de las 30 funciones (frente a 21 en $d=10$), el PSO retiene solo 3 victorias, y el SCA no gana en ninguna. Pese a ello, en F03 el SCA ($3{,}33 \times 10^4$) se coloca entre el PSO ($5{,}45 \times 10^4$) y el DE ($3{,}48 \times 10^3$), y en F27 supera al PSO ($8{,}07 \times 10^2$ vs. $6{,}98 \times 10^2$), la única función de composición donde el SCA obtiene la segunda posición. F02 sigue siendo el caso donde el PSO arrasa al DE y al SCA gracias a su mecanismo de inercia, pero para el resto del benchmark el DE consolida su hegemonía con el aumento de dimensión.
+Se puede ver que para $d=30$, la brecha con respecto a $d=10$ se amplía notablemente. El DE domina en 27 de las 30 funciones (frente a 21 en $d=10$), el PSO retiene solo 3 victorias, y el SCA no gana en ninguna. Pese a ello, en F03 el SCA ($3{,}33 \times 10^4$) se coloca entre el PSO ($5{,}45 \times 10^4$) y el DE ($3{,}48 \times 10^3$), y en F27 supera al PSO ($8{,}07 \times 10^2$ vs. $6{,}98 \times 10^2$), la única función de composición donde el SCA obtiene la segunda posición. F02 sigue siendo el caso donde el PSO arrasa al DE y al SCA gracias a su mecanismo de inercia, pero para el resto del benchmark el DE consolida su superioridad con el aumento de dimensión.
  
 \subsubsection{Análisis de la convergencia a lo largo de las evaluaciones}
  
@@ -878,13 +894,13 @@ Se puede ver que para $d=30$, la brecha con respecto a $d=10$ se amplía notable
 \label{fig:convergencia_wins_d30}
 \end{figure}
  
-La Figura~\ref{fig:convergencia_wins_d30} muestra un patrón cualitativamente distinto al de $d=10$. Al 1\% del presupuesto el PSO domina con 23 victorias, el DE obtiene solo 4, y el SCA desciende a 3 victorias, perdiendo la ventaja exploratoria inicial que mostraba en baja dimensión. Este comportamiento refleja que, en $d=30$, el espacio de búsqueda es tan vasto que la dispersión trigonométrica del SCA resulta insuficiente para cubrir las regiones prometedoras en las primeras evaluaciones.
+La Figura~\ref{fig:convergencia_wins_d30} muestra un patrón cualitativamente distinto al de $d=10$. Al 1\% de las evaluaciones el PSO domina con 23 victorias, el DE obtiene solo 4, y el SCA desciende a 3 victorias, perdiendo la ventaja exploratoria inicial que mostraba en baja dimensión. Este comportamiento refleja que, en $d=30$, el espacio de búsqueda es tan amplio que la dispersión trigonométrica del SCA resulta insuficiente para cubrir las regiones prometedoras en las primeras evaluaciones.
  
-A partir del 5\% del presupuesto la situación se invierte bruscamente: el DE sube a 21 victorias y el PSO cae a 8, mientras que el SCA ya solo gana en 1 función. Desde el 10\% en adelante el SCA no gana en ninguna, confirmando que la convergencia prematura se adelanta a mayor dimensión. El PSO mantiene una cuota modesta (2--3 victorias) en la fase final gracias a su velocidad de partícula, que le confiere algo de inercia exploratoria residual.
+A partir del 5\% de las evaluaciones la situación se invierte bruscamente: el DE sube a 21 victorias y el PSO cae a 8, mientras que el SCA ya solo gana en una función. Desde el 10\% en adelante el SCA no gana en ninguna, confirmando que la convergencia prematura se adelanta a mayor dimensión. El PSO mantiene una cuota baja (2--3 victorias) en la fase final gracias a su velocidad de partícula, que le confiere algo de inercia exploratoria residual.
  
 \begin{table}[H]
 \centering
-\caption{Número de funciones ganadas por algoritmo en milestones representativos ($d=30$).}
+\caption{Número de funciones ganadas por algoritmo en \textit{milestones} representativos ($d=30$).}
 \label{tab:resumen_victorias_d30}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{lrrrrrr}
@@ -901,7 +917,7 @@ SCA &  3 &  1 &  0 &  0 &  0 &  0 \\
 % ----------------------------------------------------------------
 \subsection{Dimensión $d = 50$}
  
-En $d=50$ el presupuesto es de $5 \times 10^5$ evaluaciones, pero la maldición de la dimensionalidad pesa aún más. Los resultados confirman y amplifican las tendencias observadas en $d=30$.
+En $d=50$ el número de evaluaciones es de $5 \times 10^5$ evaluaciones, pero el problema de la dimensionalidad es más notable. Los resultados confirman y amplifican las tendencias observadas en $d=30$.
  
 \subsubsection{Resultados al 100\% de evaluaciones}
 
@@ -956,9 +972,9 @@ F30  & \textbf{2.386e+06} & 3.374e+08 & 4.810e+08 \\
 \textbf{Mejor en} & \textbf{27} & \textbf{3} & \textbf{0} \\
 \end{longtable}
  
-El panorama a $d=50$ replica el de $d=30$ en cuanto a recuento de victorias: DE gana en 27 funciones, PSO en 3 (F02, F16, F17) y el SCA en ninguna. Sin embargo, las magnitudes de los errores son cualitativamente distintas. En F15, el SCA alcanza un error de $3{,}29 \times 10^8$, frente a $5{,}09 \times 10^2$ del DE ---seis órdenes de magnitud de diferencia---. Del mismo modo, en F13 la brecha es de cinco órdenes ($2{,}77 \times 10^9$ vs. $2{,}73 \times 10^4$), y en F02 el error del SCA ($4{,}89 \times 10^{61}$) es literalmente astronómico. Estas cifras reflejan la inestabilidad numérica que surge cuando el decaimiento de $r_1$ no frena la explosión de valores en funciones mal condicionadas de alta dimensión.
+El panorama $d=50$ replica el de $d=30$ en cuanto a recuento de victorias: DE gana en 27 funciones, PSO en 3 (F02, F16, F17) y el SCA en ninguna. Sin embargo, las magnitudes de los errores son distintas. En F15, el SCA alcanza un error de $3{,}29 \times 10^8$, frente a $5{,}09 \times 10^2$ del DE (seis órdenes de magnitud de diferencia). Del mismo modo, en F13 la brecha es de cinco órdenes ($2{,}77 \times 10^9$ vs. $2{,}73 \times 10^4$), y en F02 el error del SCA ($4{,}89 \times 10^{61}$) es enorme. Estas cifras reflejan la inestabilidad numérica que surge cuando el decrecimiento de $r_1$ no frena la explosión de valores en funciones mal condicionadas de alta dimensión.
  
-Cabe destacar que a $d=50$ el PSO amplía ligeramente su posición competitiva en el grupo de funciones multimodales: F16 y F17 pasan a ser victorias del PSO (en $d=10$ y $d=30$ eran victorias del DE para F16 o del PSO para F17 respectivamente), lo que sugiere que la memoria de velocidad del PSO escala algo mejor que las diferencias vectoriales del DE en estas funciones específicas.
+Cabe destacar que para $d=50$ el PSO amplía ligeramente su posición competitiva en el grupo de funciones multimodales: F16 y F17 pasan a ser victorias del PSO (en $d=10$ y $d=30$ eran victorias del DE para F16 o del PSO para F17 respectivamente), lo que sugiere que la memoria de velocidad del PSO escala algo mejor que las diferencias vectoriales del DE en estas funciones específicas.
  
 \subsubsection{Análisis de la convergencia a lo largo de las evaluaciones}
  
@@ -1026,7 +1042,7 @@ Cabe destacar que a $d=50$ el PSO amplía ligeramente su posición competitiva e
  
 \begin{table}[H]
 \centering
-\caption{Número de funciones ganadas por algoritmo en milestones representativos ($d=50$).}
+\caption{Número de funciones ganadas por algoritmo en \textit{milestones} representativos ($d=50$).}
 \label{tab:resumen_victorias_d50}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{lrrrrrr}
@@ -1040,7 +1056,7 @@ SCA &  4 &  2 &  0 &  0 &  0 &  0 \\
 \end{tabular}
 \end{table}
  
-La dinámica de la Figura~\ref{fig:convergencia_wins_d50} reproduce a $d=50$ el mismo patrón cualitativo que a $d=30$: el PSO lidera al 1\% del presupuesto (21 victorias) gracias a su componente de velocidad que le permite explorar rápidamente en la fase inicial, el DE se impone a partir del 5\% y el SCA desaparece del ranking desde el 10\%. El SCA solo mantiene 2--4 victorias en el primer 5\% del presupuesto, evidenciando que incluso la exploración inicial se ve seriamente comprometida cuando la dimensión triplica la del escenario para el que el algoritmo original fue concebido.
+La dinámica de la Figura~\ref{fig:convergencia_wins_d50} reproduce en $d=50$ el mismo patrón cualitativo que en $d=30$: el PSO lidera al 1\% del presupuesto (21 victorias) gracias a su componente de velocidad que le permite explorar rápidamente en la fase inicial, el DE se impone a partir del 5\% y el SCA desaparece del ranking desde el 10\%. El SCA solo mantiene 2--4 victorias en el primer 5\% de las evaluaciones disponibles, demostrando que incluso la exploración inicial se ve seriamente comprometida cuando la dimensión triplica la del escenario para el que el algoritmo original fue concebido.
  
 % ----------------------------------------------------------------
 \subsection{Análisis comparativo entre dimensiones}
@@ -1066,12 +1082,12 @@ La Tabla~\ref{tab:comparativa_dims} condensa el efecto de la dimensión en el ba
 \begin{enumerate}
     \item \textbf{El DE escala mejor que PSO y SCA.} El número de victorias del DE crece de 21 a 27 al pasar de $d=10$ a $d=30$, y se mantiene en 27 a $d=50$. Esto indica que la mutación diferencial, basada en diferencias entre vectores de la población, extrae información estadística más útil conforme la población converge en espacios de mayor dimensión.
  
-    \item \textbf{El PSO sufre una caída severa.} Las 9 victorias a $d=10$ se reducen a 3 en ambas dimensiones superiores. Aunque la componente de velocidad del PSO permite una exploración inicial rápida (domina el 1\% del presupuesto a $d=30$ y $d=50$), su mecanismo de actualización centrado en el mejor global ($gbest$) induce convergencia prematura igual o peor que el SCA en el largo plazo.
+    \item \textbf{El PSO sufre una caída severa.} Las 9 victorias a $d=10$ se reducen a 3 en ambas dimensiones superiores. Aunque la componente de velocidad del PSO permite una exploración inicial rápida (domina al 1\% de las evaluaciones disponibles en $d=30$ y $d=50$), su mecanismo de actualización centrado en el mejor global ($gbest$) provoca convergencia temprana igual o peor que el SCA en el largo plazo.
  
-    \item \textbf{El SCA no escala.} Sus 0 victorias son constantes en las tres dimensiones. Si bien a $d=10$ el SCA mostraba potencial exploratorio real en las primeras iteraciones (15 victorias al 1\%), ese potencial desaparece a $d=30$ y queda reducido a 4 victorias al 1\% en $d=50$. La razón es estructural: el SCA actualiza cada dimensión de forma independiente usando el mismo punto destino global, sin ningún mecanismo de adaptación al paisaje de aptitud. En dimensiones altas, la probabilidad de que la actualización trigonométrica simultánea de todas las dimensiones produzca un movimiento útil decrece exponencialmente.
+    \item \textbf{El SCA no escala.} Sus 0 victorias son constantes en las tres dimensiones. Si bien en $d=10$ el SCA mostraba potencial exploratorio real en las primeras iteraciones (15 victorias al 1\%), ese potencial desaparece en $d=30$ y queda reducido a 4 victorias al 1\% en $d=50$. La razón es estructural: el SCA actualiza cada dimensión de forma independiente usando el mismo punto destino global, sin ningún mecanismo de adaptación al paisaje de aptitud. En dimensiones altas, la probabilidad de que la actualización trigonométrica simultánea de todas las dimensiones produzca un movimiento útil decrece notablemente como se puede ver.
 \end{enumerate}
  
-El análisis por milestones (Tablas~\ref{tab:resumen_victorias_d10}, \ref{tab:resumen_victorias_d30} y \ref{tab:resumen_victorias_d50}) revela un patrón consistente: a medida que aumenta $d$, el SCA pierde la ventaja exploratoria inicial de forma más pronunciada, colapsando desde el 10\% del presupuesto independientemente de la dimensión. Esto refuerza la conclusión de la Sección~\ref{sec:exp_sca}: la mejora prioritaria para el SCA es introducir un mecanismo de memoria colectiva o reinicio de diversidad que prevenga el colapso temprano, especialmente crítico en alta dimensión.
+El análisis por \textit{milestones} (Tablas~\ref{tab:resumen_victorias_d10}, \ref{tab:resumen_victorias_d30} y \ref{tab:resumen_victorias_d50}) revela un patrón consistente: a medida que aumenta $d$, el SCA pierde la ventaja exploratoria inicial de forma más pronunciada, colapsando desde el 10\% de las evaluaciones independientemente de la dimensión. Esto refuerza la conclusión de la Sección~\ref{sec:exp_sca}: la mejora prioritaria para el SCA es introducir un mecanismo de memoria colectiva o reinicio de diversidad que prevenga el colapso temprano, especialmente crítico en alta dimensión.
 
 % ----------------------------------------------------------------
 \subsection{Análisis por tipo de función}
@@ -1080,13 +1096,13 @@ El análisis por milestones (Tablas~\ref{tab:resumen_victorias_d10}, \ref{tab:re
 El benchmark CEC2017 agrupa las 30 funciones en cuatro categorías. El análisis de los resultados obtenidos en las tres dimensiones ($d \in \{10, 30, 50\}$) permite caracterizar el comportamiento del SCA con mayor granularidad, más allá del recuento global de victorias.
 
 \begin{itemize}
-    \item \textbf{F01--F03: Funciones unimodales.} El DE domina claramente en todas las dimensiones, alcanzando errores nulos o próximos a cero a $d=10$. El SCA muestra su mayor debilidad en este grupo: en F01 (esfera desplazada) el error a $d=10$ es 8 órdenes de magnitud mayor que el del DE, lo que evidencia que el mecanismo de explotación lineal es insuficiente para funciones convexas. Con todo, en F03 el SCA supera al PSO en $d=10$ ($6{,}77 \times 10^2$ vs. $1{,}99 \times 10^3$) y queda entre ambos competidores en $d=30$, sugiriendo que las funciones de Schwefel desplazadas tienen una estructura favorece la oscilación trigonométrica en baja dimensión. Al crecer la dimensión, la ventaja relativa en F03 se mantiene, aunque la brecha absoluta con el DE se amplía notablemente.
+    \item \textbf{F01--F03: Funciones unimodales.} El DE domina claramente en todas las dimensiones, alcanzando errores nulos o próximos a cero a $d=10$. El SCA muestra su mayor debilidad en este grupo: en F01 (esfera desplazada) el error en $d=10$ es 8 órdenes de magnitud mayor que el del DE, lo que evidencia que el mecanismo de explotación lineal es insuficiente para funciones convexas. Con todo, en F03 el SCA supera al PSO en $d=10$ ($6{,}77 \times 10^2$ vs. $1{,}99 \times 10^3$) y queda entre ambos competidores en $d=30$, sugiriendo que las funciones de Schwefel desplazadas tienen una estructura favorece la oscilación trigonométrica en baja dimensión. Al crecer la dimensión, la ventaja relativa en F03 se mantiene, aunque la brecha absoluta con el DE se amplía notablemente.
 
-    \item \textbf{F04--F10: Funciones multimodales simples.} Es el grupo donde el SCA se comporta de forma más competitiva en baja dimensión. En F09 (Schwefel modificada) a $d=10$, el SCA supera al DE ($8{,}65 \times 10^1$ vs. $1{,}94 \times 10^2$), indicando que la oscilación sinusoidal es útil para navegar paisajes con muchos óptimos locales de magnitud comparable. Sin embargo, este comportamiento no escala: a $d=30$, la brecha en F09 se amplía hasta que el SCA comete un error 73 veces mayor que el DE, y a $d=50$ esta diferencia llega a un factor de 5{,}6. La explicación es estructural: en alta dimensión, la probabilidad de que todos los componentes del vector de posición se actualicen favorablemente de forma simultánea decrece exponencialmente.
+    \item \textbf{F04--F10: Funciones multimodales simples.} Es el grupo donde el SCA se comporta de forma más competitiva en baja dimensión. En F09 (Schwefel modificada) a $d=10$, el SCA supera al DE ($8{,}65 \times 10^1$ vs. $1{,}94 \times 10^2$), indicando que la oscilación sinusoidal es útil para navegar paisajes con muchos óptimos locales de magnitud comparable. Sin embargo, este comportamiento no escala: en dimensión $d=30$, la brecha en F09 se amplía hasta que el SCA comete un error 73 veces mayor que el DE, y en $d=50$ esta diferencia llega a un factor de 5{,}6. La explicación es estructural: en alta dimensión, la probabilidad de que todos los componentes del vector de posición se actualicen favorablemente de forma simultánea decrece exponencialmente.
 
-    \item \textbf{F11--F20: Funciones híbridas.} El SCA muestra sus peores resultados relativos en este grupo en todas las dimensiones. Las funciones híbridas combinan regiones con características dispares, lo que requiere tanto exploración global como explotación local precisa. La ausencia de búsqueda local en el SCA impide refinar las soluciones parciales encontradas en cada subcomponente. A $d=10$, F12 y F18 presentan errores del SCA entre 3 y 4 órdenes de magnitud superiores al DE; a $d=30$ y $d=50$, estas brechas se amplifican aún más, alcanzando hasta 6 órdenes de magnitud en F15 y F19. La convergencia prematura atrapa a los agentes en la parte del paisaje de cada subcomponente que encuentran primero, impidiéndoles recomponerlo globalmente.
+    \item \textbf{F11--F20: Funciones híbridas.} El SCA muestra sus peores resultados relativos en este grupo en todas las dimensiones. Las funciones híbridas combinan regiones con características dispares, lo que requiere tanto exploración global como explotación local precisa. La ausencia de búsqueda local en el SCA impide refinar las soluciones parciales encontradas en cada subcomponente. En $d=10$, F12 y F18 presentan errores del SCA entre 3 y 4 órdenes de magnitud superiores al DE. En $d=30$ y $d=50$, estas brechas se amplifican aún más, alcanzando hasta 6 órdenes de magnitud en F15 y F19. La convergencia prematura atrapa a los agentes en la parte del paisaje de cada subcomponente que encuentran primero, impidiéndoles recomponerlo globalmente.
 
-    \item \textbf{F21--F30: Funciones de composición.} Son las que presentan el paisaje de aptitud más complejo, con múltiples óptimos globales de distinta naturaleza. El SCA obtiene sus mejores resultados relativos en este grupo: a $d=10$, supera al PSO en F27 y se aproxima en F23 y F29; a $d=30$, la única victoria absoluta del SCA es precisamente F27. La diversidad mantenida por la oscilación trigonométrica ayuda a evitar la peor cuenca local, aunque no es suficiente para explorar de forma eficiente cuando el número de cuencas crece con la dimensión. A $d=50$, el SCA ya no supera al PSO en ninguna función de este grupo, confirmando que la estrategia de destino global único no puede mantener múltiples frentes de búsqueda al crecer el espacio.
+    \item \textbf{F21--F30: Funciones de composición.} Son las que presentan el paisaje de aptitud más complejo, con múltiples óptimos globales de distinta naturaleza. El SCA obtiene sus mejores resultados relativos en este grupo: en $d=10$, supera al PSO en F27 y se aproxima en F23 y F29. En $d=30$, la única victoria absoluta del SCA es precisamente F27. La diversidad mantenida por la oscilación trigonométrica ayuda a evitar la peor cuenca local, aunque no es suficiente para explorar de forma eficiente cuando el número de cuencas crece con la dimensión. En $d=50$, el SCA ya no supera al PSO en ninguna función de este grupo, confirmando que la estrategia de destino global único no puede mantener múltiples frentes de búsqueda al crecer el espacio.
 \end{itemize}
 
 En resumen, el SCA afronta las distintas categorías con una eficacia decreciente a medida que aumentan la complejidad del paisaje y la dimensión: tolerable en funciones unimodales de baja dimensión, competitivo puntualmente en multimodales simples, y claramente insuficiente en híbridas y de composición a dimensiones medias o altas.
@@ -1100,14 +1116,14 @@ La Tabla~\ref{tab:resumen_victorias_d10} condensa la evolución de las victorias
 Del análisis conjunto de las tres dimensiones se extraen tres conclusiones que motivan directamente las propuestas de mejora desarrolladas en las secciones siguientes:
 
 \begin{enumerate}
-    \item \textbf{El SCA explora bien pero no explota.} La ventaja exploratoria inicial (15 victorias al 1\% del presupuesto a $d=10$, con el patrón repitiéndose análogamente en otras dimensiones) se pierde completamente en la fase de explotación. El decaimiento lineal de $r_1$ es demasiado agresivo para funciones multimodales y el algoritmo carece de un mecanismo de intensificación local.
+    \item \textbf{El SCA explora bien pero no explota.} La ventaja exploratoria inicial (15 victorias al 1\% de las evaluaciones disponibles en $d=10$, con el patrón repitiéndose análogamente en otras dimensiones) se pierde completamente en la fase de explotación. El decrecimiento lineal de $r_1$ es demasiado agresivo para funciones multimodales y el algoritmo carece de un mecanismo de intensificación local.
 
-    \item \textbf{La convergencia prematura es el problema principal.} A partir del 10\% del presupuesto el SCA prácticamente no mejora sus posiciones relativas en ninguna dimensión, indicando que la población colapsa hacia óptimos locales antes de haber agotado el presupuesto disponible. Este fenómeno se adelanta al crecer la dimensión.
+    \item \textbf{La convergencia prematura es el problema principal.} A partir del 10\% de las evaluaciones el SCA prácticamente no mejora sus posiciones relativas en ninguna dimensión, indicando que la población colapsa hacia óptimos locales antes de haber agotado el presupuesto disponible. Este fenómeno se adelanta al crecer la dimensión.
 
-    \item \textbf{La escasa memoria colectiva limita la cooperación.} Todos los agentes convergen al mismo punto destino $P$, lo que reduce la diversidad más rápido de lo deseable e impide la exploración simultánea de múltiples cuencas. Una topología de vecindario permitiría mantener múltiples frentes de búsqueda semi-independientes.
+    \item \textbf{La escasa memoria colectiva limita la cooperación.} Todos los agentes convergen al mismo punto destino $P$, lo que reduce la diversidad más rápido de lo deseado e impide la exploración simultánea de múltiples cuencas. Una topología de vecindario permitiría mantener múltiples frentes de búsqueda semi-independientes.
 \end{enumerate}
 
-Estas tres debilidades están directamente asociadas a las tres mejoras implementadas en el ASCA (Sección~\ref{sec:asca}): decaimiento no lineal de $r_1$, topología de vecindario en anillo, y reinicio parcial adaptativo basado en diversidad.
+Estas tres debilidades están directamente asociadas a las tres mejoras implementadas en el ASCA (Sección~\ref{sec:asca}): decrecimiento no lineal de $r_1$, topología de vecindario en anillo, y reinicio parcial adaptativo basado en diversidad.
 
 % ----------------------------------------------------------------
 \subsection{Conclusiones generales sobre el SCA}
@@ -1116,17 +1132,18 @@ Estas tres debilidades están directamente asociadas a las tres mejoras implemen
 El estudio experimental presentado en esta parte permite extraer un conjunto de conclusiones sólidas sobre el comportamiento del SCA en el benchmark CEC2017:
 
 \begin{enumerate}
-    \item \textbf{Buen explorador, mal explotador.} El SCA destaca en la fase inicial de la búsqueda gracias a los amplios movimientos trigonométricos que permiten cubrir rápidamente el espacio de búsqueda cuando $r_1$ es grande. Sin embargo, el decaimiento lineal de $r_1$ activa la explotación demasiado pronto y sin la precisión necesaria, lo que impide refinar las soluciones encontradas.
+    \item \textbf{Buen explorador, mal explotador.} El SCA destaca en la fase inicial de la búsqueda gracias a los amplios movimientos trigonométricos que permiten cubrir rápidamente el espacio de búsqueda cuando $r_1$ es grande. Sin embargo, el decrecimeitno lineal de $r_1$ activa la explotación demasiado pronto y sin la precisión necesaria, lo que impide refinar las soluciones encontradas.
 
     \item \textbf{Convergencia prematura sistemática.} En las tres dimensiones estudiadas, el SCA colapsa a partir del 10\% del presupuesto de evaluaciones. Este comportamiento es independiente de la dimensión y refleja una limitación estructural del algoritmo: una vez que $r_1$ cae por debajo de 1, la amplitud de movimiento es insuficiente para escapar de los óptimos locales en los que la población ha convergido.
 
-    \item \textbf{Mala escalabilidad dimensional.} La ventaja exploratoria inicial, que a $d=10$ se traduce en 15 victorias al 1\% del presupuesto, desaparece casi completamente a $d=30$ (3 victorias al 1\%) y a $d=50$ (4 victorias). El mecanismo de actualización independiente por dimensiones, sin ninguna correlación entre ellas, no es capaz de producir movimientos útiles en espacios de alta dimensionalidad.
+    \item \textbf{Mala escalabilidad dimensional.} La ventaja exploratoria inicial, que en $d=10$ se traduce en 15 victorias al 1\% del presupuesto, desaparece casi completamente en $d=30$ (3 victorias al 1\%) y en $d=50$ (4 victorias). El mecanismo de actualización independiente por dimensiones, sin ninguna correlación entre ellas, no es capaz de producir movimientos útiles en espacios de alta dimensionalidad.
 
     \item \textbf{Comportamiento diferenciado por tipo de función.} El SCA se defiende razonablemente en funciones unimodales sencillas y puntualmente en algunas multimodales con estructura favorable (F09, F27), pero fracasa de forma sistemática en funciones híbridas y de composición, que son precisamente las más representativas de problemas reales complejos.
 
-    \item \textbf{Potencial de mejora mediante hibridación.} Los resultados de esta parte sugieren claramente que el SCA puede beneficiarse de: (a) un mecanismo de búsqueda local que intensifique la explotación cuando la exploración se agota, y (b) modificaciones estructurales que preserven la diversidad a lo largo del presupuesto completo. Estas dos líneas de mejora se desarrollan respectivamente en la Parte~\ref{part:hibridacion_memetica} (SCA-LS) y la Parte~\ref{part:asca} (ASCA).
+    \item \textbf{Potencial de mejora mediante hibridación.} Los resultados de esta parte sugieren claramente que el SCA puede beneficiarse de un mecanismo de búsqueda local que intensifique la explotación cuando la exploración se agota, además de modificaciones estructurales que preserven la diversidad a lo largo del presupuesto completo. Estas dos líneas de mejora se desarrollan respectivamente en la Parte~\ref{part:hibridacion_memetica} (SCA-LS) y la Parte~\ref{part:asca} (ASCA).
 \end{enumerate}
 
+\clearpage
 % ================================================================
 %  PART III — Hibridación memética: SCA-LS
 % ================================================================
@@ -1355,13 +1372,13 @@ A $d=10$, el SCA-LS no gana en ninguna función al finalizar el presupuesto, al 
 \label{fig:convergencia_wins_sca_ls_d10}
 \end{figure}
 
-La Figura~\ref{fig:convergencia_wins_sca_ls_d10} muestra la dinámica más reveladora de este estudio. El SCA-LS domina aplastantemente en los primeros milestones: al \textbf{1\% del presupuesto} gana en \textbf{26 de las 30 funciones}, lo que representa la mejor exploración inicial observada en cualquier algoritmo de los estudiados. Este resultado tiene una explicación directa: con un presupuesto de solo 1.000 evaluaciones ($d=10$), el SCA explorador tiene tiempo de dispersarse por el espacio y el Solis-Wets ya ha podido activarse una o dos veces sobre las mejores posiciones encontradas, refinando soluciones iniciales de calidad.
+La Figura~\ref{fig:convergencia_wins_sca_ls_d10} muestra la dinámica más reveladora de este estudio. El SCA-LS domina aplastantemente en los primeros \textit{milestones}: al \textbf{1\% del presupuesto} gana en \textbf{26 de las 30 funciones}, lo que representa la mejor exploración inicial observada en cualquier algoritmo de los estudiados. Este resultado tiene una explicación directa: con un presupuesto de solo 1.000 evaluaciones ($d=10$), el SCA explorador tiene tiempo de dispersarse por el espacio y el Solis-Wets ya ha podido activarse una o dos veces sobre las mejores posiciones encontradas, refinando soluciones iniciales de calidad.
 
 Sin embargo, esta ventaja desaparece con rapidez: al 5\% el SCA-LS baja a 15 victorias, al 10\% a 6, y al 80\% ya no gana en ninguna función. La causa es la \textit{saturación local}: una vez que Solis-Wets ha explorado el entorno del mejor actual hasta que no puede mejorar más, y el SCA no consigue abandonar esa cuenca (pues ha perdido diversidad), el presupuesto restante se consume sin progreso. El DE, que arranca lento (2 victorias al 1\%), va escalando progresivamente y toma el liderazgo definitivo desde el 10\%.
 
 \begin{table}[H]
 \centering
-\caption{Número de funciones ganadas por algoritmo en milestones representativos ($d=10$).}
+\caption{Número de funciones ganadas por algoritmo en \textit{milestones} representativos ($d=10$).}
 \label{tab:resumen_victorias_sca_ls_d10}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{lrrrrrr}
@@ -1513,7 +1530,7 @@ A partir del 10\% el DE toma el relevo con 13 victorias, y la ventaja del SCA-LS
 
 \begin{table}[H]
 \centering
-\caption{Número de funciones ganadas por algoritmo en milestones representativos ($d=30$).}
+\caption{Número de funciones ganadas por algoritmo en \textit{milestones} representativos ($d=30$).}
 \label{tab:resumen_victorias_sca_ls_d30}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{lrrrrrr}
@@ -1588,7 +1605,7 @@ A $d=50$ el SCA-LS alcanza \textbf{6 victorias}, su mejor resultado absoluto en 
 
 \begin{table}[H]
 \centering
-\caption{Número de funciones ganadas por algoritmo en milestones representativos ($d=50$).}
+\caption{Número de funciones ganadas por algoritmo en \textit{milestones} representativos ($d=50$).}
 \label{tab:resumen_victorias_sca_ls_d50}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{lrrrrrr}
@@ -1631,7 +1648,7 @@ El patrón de victorias del SCA-LS es el inverso del PSO: mientras el PSO pierde
 La hibridación con Solis-Wets mejora sustancialmente el SCA en tres aspectos:
 
 \begin{enumerate}
-  \item \textbf{Exploración inicial excepcional}: el SCA-LS domina los primeros milestones en todas las dimensiones, siendo el mejor algoritmo en el corto plazo con diferencia. Esto lo hace especialmente adecuado cuando el presupuesto de evaluaciones es muy limitado.
+  \item \textbf{Exploración inicial excepcional}: el SCA-LS domina los primeros \textit{milestones} en todas las dimensiones, siendo el mejor algoritmo en el corto plazo con diferencia. Esto lo hace especialmente adecuado cuando el presupuesto de evaluaciones es muy limitado.
   \item \textbf{Mejor comportamiento en funciones híbridas}: la capacidad de refinamiento local reduce el error en F12, F13, F15, F18, F19 y F30 en entre 2 y 4 órdenes de magnitud respecto al SCA original.
   \item \textbf{Mejora progresiva con la dimensión}: a diferencia de la mayoría de algoritmos, el SCA-LS obtiene más victorias finales a $d=50$ que a $d=10$, lo que refleja una sinergia favorable entre la escala del presupuesto y la capacidad de Solis-Wets para refinar en alta dimensión.
 \end{enumerate}
@@ -1909,7 +1926,7 @@ Observando los valores función a función, el ASCA mejora al SCA en F05 ($5{,}6
 
 \begin{table}[H]
 \centering
-\caption{Número de funciones ganadas por algoritmo en milestones representativos ($d=10$, con ASCA).}
+\caption{Número de funciones ganadas por algoritmo en \textit{milestones} representativos ($d=10$, con ASCA).}
 \label{tab:resumen_victorias_asca_d10}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{lrrrrrr}
@@ -1953,7 +1970,7 @@ Los resultados completos figuran en la Tabla~\ref{tab:resultados_sca_ls_d50} (co
 
 \begin{table}[H]
 \centering
-\caption{Número de funciones ganadas por algoritmo en milestones representativos ($d=50$, con ASCA).}
+\caption{Número de funciones ganadas por algoritmo en \textit{milestones} representativos ($d=50$, con ASCA).}
 \label{tab:resumen_victorias_asca_d50}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{lrrrrrr}
@@ -2019,7 +2036,7 @@ Este estudio ha presentado el análisis completo del Sine Cosine Algorithm y dos
 
 \begin{enumerate}
   \item El SCA original tiene una excelente exploración inicial pero colapsa prematuramente en la fase de explotación, especialmente en alta dimensión.
-  \item La hibridación con Solis-Wets (SCA-LS) mejora sustancialmente el refinamiento local y la robustez en funciones híbridas, siendo especialmente competitivo en los primeros milestones del presupuesto.
+  \item La hibridación con Solis-Wets (SCA-LS) mejora sustancialmente el refinamiento local y la robustez en funciones híbridas, siendo especialmente competitivo en los primeros \textit{milestones} del presupuesto.
   \item Las mejoras estructurales del ASCA (decaimiento coseno, topología de anillo, reinicio adaptativo) tienen justificación teórica individual pero su interacción en el benchmark CEC2017 con presupuesto limitado no produce las mejoras esperadas, siendo la calibración de hiperparámetros y la interferencia entre componentes los factores limitantes.
   \item La elección entre SCA-LS y ASCA depende del contexto de uso: el SCA-LS es preferible cuando se dispone de un presupuesto acotado y se busca la mejor solución en tiempo real; el ASCA podría resultar más competitivo en escenarios con mayor presupuesto o con hiperparámetros calibrados por función.
 \end{enumerate}
@@ -2032,40 +2049,40 @@ En primer lugar se puede ver que la estructura de carpetas es la siguiente:
 \vspace{0.5cm}
 
 \dirtree{%
-.1 \folderlogo cec2017real/.
-.2 \folderlogo code/.
-.3 \folderlogo build/.
-.3 \folderlogo input\_data/.
-.3 \folderlogo {\bfseries results\_asca/}.
-.3 \folderlogo {\bfseries results\_sca/}.
-.3 \folderlogo {\bfseries results\_sca\_ls/}.
-.3 \folderlogo wrappers/.
-.3 {\bfseries asca}.
-.3 \cpplogo {\bfseries asca.cpp}.
-.3 \hlogo {\bfseries cec17\_common.h}.
-.3 \clogo cec17\_test\_func.c.
-.3 \clogo cec17.c.
-.3 \hlogo cec17.h.
-.3 CMakeLists.txt.
-.3 \shlogo {\bfseries compile.sh}.
-.3 \pylogo extract.py.
-.3 \pylogo {\bfseries merge\_tacolab.py}.
-.3 \shlogo {\bfseries run\_all.sh}.
-.3 \shlogo {\bfseries run.sh}.
-.3 {\bfseries sca}.
-.3 {\bfseries sca\_ls}.
-.3 \cpplogo {\bfseries sca\_ls.cpp}.
-.3 \cpplogo {\bfseries sca.cpp}.
-.3 \pylogo solis.py.
-.3 \xlsxlogo {\bfseries tacolab\_10.xlsx}.
-.3 \xlsxlogo {\bfseries tacolab\_30.xlsx}.
-.3 \xlsxlogo {\bfseries tacolab\_50.xlsx}.
-.3 \clogo test.cc.
-.3 \clogo testrandom.cc.
-.3 \clogo testsolis.cc.
+.1 \folderlogo \ cec2017real/.
+.2 \folderlogo \ code/.
+.3 \folderlogo \ build/.
+.3 \folderlogo \ input\_data/.
+.3 \folderlogo \ {\bfseries results\_asca/}.
+.3 \folderlogo \ {\bfseries results\_sca/}.
+.3 \folderlogo \ {\bfseries results\_sca\_ls/}.
+.3 \folderlogo \ wrappers/.
+.3 \defaultlogo \ {\bfseries asca}.
+.3 \cpplogo \ {\bfseries asca.cpp}.
+.3 \hlogo \ {\bfseries cec17\_common.h}.
+.3 \clogo \ cec17\_test\_func.c.
+.3 \clogo \ cec17.c.
+.3 \hlogo \ cec17.h.
+.3 \cmakelogo \ CMakeLists.txt.
+.3 \shlogo \ {\bfseries compile.sh}.
+.3 \pylogo \ extract.py.
+.3 \pylogo \ {\bfseries merge\_tacolab.py}.
+.3 \shlogo \ {\bfseries run\_all.sh}.
+.3 \shlogo \ {\bfseries run.sh}.
+.3 \defaultlogo \ {\bfseries sca}.
+.3 \defaultlogo \ {\bfseries sca\_ls}.
+.3 \cpplogo \ {\bfseries sca\_ls.cpp}.
+.3 \cpplogo \ {\bfseries sca.cpp}.
+.3 \pylogo \ solis.py.
+.3 \xlsxlogo \ {\bfseries tacolab\_10.xlsx}.
+.3 \xlsxlogo \ {\bfseries tacolab\_30.xlsx}.
+.3 \xlsxlogo \ {\bfseries tacolab\_50.xlsx}.
+.3 \clogo \ test.cc.
+.3 \clogo \ testrandom.cc.
+.3 \clogo \ testsolis.cc.
 }
 
-Donde los archivos principales creados son \texttt{cec17\_common.h}, \texttt{sca.cpp}, \texttt{sca\_ls.cpp} y \texttt{asca.cpp}. Estos contienen el código desarrollado. El resto de scripts y archivos que se han añadido son auxiliares para realizar tareas sobre los resultados de ejecución. Para compilar un algoritmo se deberá hacer
+Donde los archivos principales creados son \texttt{cec17\_common.h}, \texttt{sca.cpp}, \texttt{sca\_ls.cpp} y \texttt{asca.cpp}. Estos contienen el código desarrollado. El resto de scripts y archivos que se han añadido son auxiliares para realizar tareas sobre los resultados de ejecución. Además todos los comandos que se especifican en esta sección se deben ejecutar desde el directorio \folderlogo \ \texttt{code/}. Para compilar un algoritmo se deberá ejecutar
 \begin{lstlisting}
   ./compile.sh <algorithm>
 \end{lstlisting}
