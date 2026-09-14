@@ -1,0 +1,29 @@
+\documentclass[12pt]{book}
+
+\input{../../../_assets/preambulo.tex}
+\input{../../../_assets/portada.tex}
+
+
+\usepackage[all]{xy}
+\usepackage{ stmaryrd }
+\usepackage{pgfplots}
+
+% Usamos la versión más reciente de pgfplots para evitar problemas de compatibilidad
+\pgfplotsset{compat=newest}
+
+
+\begin{document}
+    \portada[%
+        titulo=Geometría Global de Curvas y Superficies,
+        subtitulo=,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2026-2027]
+        
+    \thispagestyle{empty}
+    \tableofcontents
+    \newpage
+    \thispagestyle{empty}
+
+    \input{Tema_1.tex}
+    
+\end{document}
