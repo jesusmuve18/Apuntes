@@ -3,9 +3,9 @@
 \begin{definicion}
     Una \textbf{curva simple} es un subconjunto $C\subset \bb{R}^2$ no vacío tal que $\forall p\in C$ se tiene que 
     \begin{itemize}
-        \item $\exists V$ entorno abierto de $p$ en $C$.
-        \item $\exists I\subset \bb{R}$ intervalo abierto.
-        \item $\exists \alpha:I \to \bb{R}^2$ curva parametrizada regular
+        \item $\exists\ V$ entorno abierto de $p$ en $C$.
+        \item $\exists\ I\subset \bb{R}$ intervalo abierto.
+        \item $\exists\ \alpha:I \to \bb{R}^2$ curva parametrizada regular
     \end{itemize} 
     de forma que $\alpha(I)=V$, y la aplicación $\alpha:I\to V$ es un homeomorfismo.
 \end{definicion}
@@ -14,9 +14,29 @@
 
 % En cierta forma estamos copiando la definición de superficies pero para R^2.
 
-\begin{observacion}
+\begin{observacion}\
     \begin{enumerate}
         \item La aplicación $\alpha$ la llamaremos \textbf{parametrización local} de $C$.
-        \item 
+        \item $C$ no puede tener ``esquinas'' (o ``picos'') ya que $\alpha$ es regular.
+        \item $C$ no puede tener autointersecciones. Ni siquiera el Folium de Descartes puede ser una curva simple, a pesar de que en este caso $\alpha$ es inyectiva.
+        \item Los entornos $V$ son todos de la forma
+        \begin{gather*}
+            V = U\cap C
+        \end{gather*}
+        donde $U$ es un entorno abierto de $p$ en $\bb{R}^2$.
+        \item Los entornos $V$ son todos conexos.
     \end{enumerate}
 \end{observacion}
+
+\begin{ejemplo}
+    Supongamos que tenemos una curva simple $C\subset \bb{R}^2$ y consideramos las parametrizaciones $\alpha: I \to C$ y $\beta:J \to C$ de forma que $W = \alpha(I)\cap \beta(J)\neq \emptyset$.\\
+
+    Tenemos que $\alpha^{-1}(W)\subset I$ y que $\beta^{-1}(W)=J$. Además, como $W$ es abiertos, tendremos que $\alpha^{-1}(W)$ es abierto en $I$ y $\beta^{-1}(W)$ es abierto en $J$ y por ser abiertos de un abierto, ambos serán abiertos en $\bb{R}$.\\
+
+    Además, podemos considerar
+    \begin{gather*}
+        \varphi = \beta^{-1}\circ \alpha : \alpha^{-1}(W) \to \beta^{-1}(W)\\
+        \psi = \alpha^{-1}\circ \beta : \beta^{-1}(W) \to \circ^{-1}(W)
+    \end{gather*}
+    Veamos que $\varphi$ y $\psi$ son \textbf{difeomorfismos}.
+\end{ejemplo}
