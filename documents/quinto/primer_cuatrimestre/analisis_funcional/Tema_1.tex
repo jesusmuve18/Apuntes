@@ -1,0 +1,48 @@
+\chapter{Álgebra Conmutativa}
+
+\section{Anillos Conmtativos}
+
+Consideramos $A$ un conjunto, luego un grupo abeliano $(A,+)$ y finalmente añadimos una multiplicación 
+\Func{\cdot}{A\times A}{A}{(a, a')}{a \cdot a'}
+asociativa, conmutativa y un elemento neutro, $1_A$. Además, se verifica la propiedad distributiva.
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item El primer ejemplo que vamos a tener en cuenta es
+        \begin{gather*}
+            \bb{Z}\subset \bb{Q} \subset \bb{R} = \bar{\bb{Q}} \subset \bb{C} \subset \bb{H} \subset \bb{O}
+        \end{gather*}
+        Estos son ejemplos clásicos y a partir de ellos podremos construir más.
+
+        \item Consideramos un cuerpo $\bb{K}$ y un conjunto $X\neq \emptyset$. Si tomamos todas las aplicaciones de $X$ en $\bb{K}$ que será un conjunto isomorfo a $\bb{k}^I = \Pi_{i\in I} \bb{K}_i$.\\
+        
+        Supongamos ahora $X=\bb{N}$ y $Maps(\bb{N}, \bb{K}) \supseteq \bb{K}^{(\bb{N})}$ donde podemos considerar el producto de Hurwitz.
+        \begin{gather*}
+            (a_0, ..., a_n) \cdot (b_0, ..., b_n) = \sum_{k=0}^{n} \binom{n}{k} a_k \cdot b_{n\cdot k}
+        \end{gather*}
+
+        % Si queremos considerar ahora $l\geq 1$ y tomar $X=\bb{N}^l$ 
+
+        Si consideramos $A$ un anillo conmutativo, nos planteamos si podemos hacer esta construcción. Sabemos ya que hay un morfismo inyectivo $\bb{Z} \to A$, por lo que será una $\bb{Z}$-Álgebra.
+
+        Sean $A$ y $B$ dos anillos conmutativos. Se dice que $B$ es una $A$-Álgebra si existe un morfismo $A\to B$ de anillos.
+
+        % Buscar definición de morfismo de anillos 
+
+        Nos planteamos ahora las siguientes relaciones
+        \begin{gather*}
+            \xymatrix{
+                A[X] & \cong & A \otimes \bb{Z}[X]\\
+                \bb{Z}[X]
+            }
+        \end{gather*}
+
+        %buscar definición de producto \otimes_{\bb{K}} tensor g
+
+        Si yo cojo $V$ tal que $dim_{\bb{K}}(V)<\infty$ y consideramos su dual
+        \begin{gather*}
+            V^* = Hom(V, \bb{K})
+        \end{gather*}
+    \end{itemize}
+\end{ejemplo}
+

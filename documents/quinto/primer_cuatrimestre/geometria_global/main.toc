@@ -1,2 +1,0 @@
-\babel@toc {spanish}{}\relax 
-\contentsline {chapter}{\numberline {1}Curvas Simples. Clasificación. Teorema de la Curva de Jordan. Teorema de la Divergencia}{5}{chapter.1}%
