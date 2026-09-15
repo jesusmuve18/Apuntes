@@ -68,7 +68,7 @@
 % Se recuperarán el día 9 y el 16 de 12:00-14:00.
 % Se recuperarán el día 23 de 13:00-14:00.
 
-Del ejemplo anterior podemos concluir la siguiente proposición:
+Del ejemplo anterior podemos concluir la siguiente proposición:\\
 \begin{prop}
     Sean $C\subset \bb{R}^2$ una curva simple y $\alpha:I \to C$, $\beta: J \to C$ dos parametrizaciones suyas cuyas imágenes se solapan, es decir, tal que 
     \begin{gather*}
@@ -81,3 +81,36 @@ Del ejemplo anterior podemos concluir la siguiente proposición:
     \end{align*}
     son \underline{difeomorfismos} entre abiertos de $\bb{R}$ (de $I$ y $J$ respectivamente).
 \end{prop}
+
+\begin{definicion}
+    Sea $C\subset \bb{R}^2$ una curva simple y un punto $p\in C$. Definimos la \textbf{recta tangente} a la curva $C$ en el punto $p$ como la recta afín $T_pC$ que pasa por $p$ y tiene dirección $\alpha'(t_0)$, es decir,
+    \begin{gather*}
+        T_pC = p + \langle \alpha'(t_0) \rangle
+    \end{gather*}
+    donde $\alpha: I \to C$ es una parametrización con $\alpha(t_0)=p$.
+\end{definicion}
+
+\begin{observacion}
+    En primer lugar es fácil ver que $T_pC$ es una recta, ya que $\alpha'(t_0)\neq 0$ por ser una curva regular. \\
+    
+    Nos planteamos además, qué ocurre si tomamos una parametrización distinta. Para ello consideramos $\beta: J \to C$ otra parametrización con $\beta(u_0)=p$, donde $u_0\in J$ y queremos ver la relación entre $\alpha'(t_0)$ y $\beta(u_0)$.\\
+
+    Sabemos que $\phi = \beta^{-1} \circ \alpha$ es un difeomorfismo. Además, esto podemos aplicarlo porque sabemos que se solapan, ya que 
+    \begin{gather*}
+        \left.
+        \begin{array}{l}
+            p = \alpha(t_0) \in \alpha (I)\\
+            p = \beta(u_0) \in \beta(J)
+        \end{array}
+        \right\} \Rightarrow \alpha(I) \cap \beta(J) \neq \emptyset,\quad \phi(t_0) = u_0
+    \end{gather*} 
+    Además $\alpha = \beta \circ \phi$ y estamos en condiciones de derivar en $t_0$ aplicando la regla de la cadena.
+    \begin{gather*}
+        \alpha'(t_0) = (\beta \circ \phi)'(t_0) = \phi'(t_0)\beta'(\phi(t_0)) = \phi'(t_0)\beta'(u_0) \neq 0
+    \end{gather*}
+    Por colinealidad tenemos que 
+    \begin{gather*}
+        \langle \alpha'(t_0) \rangle = \langle \beta'(t_0) \rangle
+    \end{gather*}
+    lo que nos confirma que la definición anterior está bien hecha y no depende de la parametrización escogida.
+\end{observacion}
