@@ -1,0 +1,33 @@
+---
+- name: Instalar Apache Httpd y crear página
+  hosts: apache_httpd
+  vars_files:
+    - ../vars.yaml
+  tasks:
+    - name: Habilitar el puerto HTTP en el firewall
+      ansible.posix.firewalld:
+        service: http
+        permanent: true # para que se guarde al reiniciar
+        state: enabled
+        immediate: true
+      become: true
+    
+    - name: Instalar Apache Httpd
+      ansible.builtin.package:
+        name: httpd
+        state: present
+      become: true
+    
+    - name: Activar el servicio HTTP 
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+      become: true
+    
+    - name: Crear el archivo index.html
+      ansible.builtin.copy:
+        dest: "/var/www/html/index.html"
+        src: "../index.html"
+        mode: preserve # conservar los permisos
+      become: true

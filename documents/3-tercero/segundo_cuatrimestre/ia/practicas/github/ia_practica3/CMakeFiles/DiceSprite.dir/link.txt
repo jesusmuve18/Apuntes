@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/libDiceSprite.a CMakeFiles/DiceSprite.dir/src/gui/DiceSprite.cpp.o
+/usr/bin/ranlib lib/libDiceSprite.a

@@ -1,0 +1,50 @@
+\section{Trabajo de clase del martes 24 de Septiembre de 2024}
+
+\begin{ejercicio}
+    Hallar la función generatriz de momentos de la distribución de Poisson, la esperanza y la varianza\\
+
+    La función masa de Probabilidad es $P[X=x] = e^{-\lambda} \cdot \frac{\lambda^x}{x!}$
+
+    \begin{align*}
+        \Phi(t) &= E[e^{tX}] = \sum\limits_{n\geq 0} e^{tn}\cdot P[X=x] = \sum\limits_{n\geq 0} e^{tn} \cdot e^{-\lambda} \cdot \frac{\lambda^n}{n!} = e^{-\lambda} \sum\limits_{n\geq 0} \frac{(e^t\lambda)^n}{n!} = \\
+        &= e^{-\lambda} \cdot e^{e^t \lambda} = e^{\lambda(e^t-1)},\ \ t \in \bb{R}\\
+        M_x(t) &= e^{\lambda(e^t-1)}\\
+        E[X] &= \frac{d'}{dt}e^{\lambda(e^t-1)}_{|_{t=0}} = e^{\lambda (e^t-1)}\cdot \lambda e^t _{|_{t=0}} = \lambda\\
+        E[X^2] &= \frac{d^2}{dt} e^{\lambda(e^t-1)}_{|_{t=0}} = e^{\lambda (e^t-1)} \cdot (\lambda e^t)^2 + e^{\lambda (e^t-1)}\cdot \lambda e^t _{|_{t=0}} = \lambda^2 - \lambda\\
+        Var[X] &= E[X^2] - E[X]^2 = \lambda^2 + \lambda - \lambda ^2 = \lambda
+    \end{align*}
+
+    
+\end{ejercicio}
+
+\begin{ejercicio}
+    Hallar la función generatriz de momentos de la distribución Binomial.\\
+
+    La función masa de Probabilidad es $P[X=x]=\frac{n!}{x!(n-x)}p^x (1-p)^{n-x},\ \ x=0,1,2,\dots,n$
+
+    \begin{align*}
+        M_X(t) = E[e^{tX}] = \sum\limits_{x=0}^n e^{tx} \binom{n}{x} p^x (1-p)^{n-x} = 
+        % (1-p)^n \sum\limits_{x=0}^n \binom{n}{x} \left(\frac{e^tp}{1-p}\right)^x
+        \sum\limits_{x=0}^n\binom{n}{x} (e^t p)^x (1-p)^{n-x} = (e^tp+(1-p))^n
+    \end{align*}
+\end{ejercicio}
+
+\begin{ejercicio}
+    Demostrar la propiedad de falta de memoria de la distribución Geométrica.\\
+    
+    Teniendo en cuenta que la expresión de la función de distribución es $F_X(x)=0$, para $x<0$ y $F_X(x)=1-(1-p)^{x+1}$ para $x\geq 0$ y que la propiedad de falta de memoria es $P(X\geq h+k/X\geq h) = P(X\geq k)$,\ \ $\forall h,k \in \bb{N}\cup \{0\}$. Desarrollemos esto último con la propiedad condicionada:
+
+    \begin{gather*}
+        P(X\geq h+k/X\geq h) = \frac{P[X\geq h+k, X \geq h]}{P[X=h]} = \frac{P[X\geq h+k]}{P[X \geq h]}
+    \end{gather*}
+    Calculemos a partir de la función de distribución la probabilidad de $X\geq x$
+    \begin{gather*}
+        P[X\geq x] = 1-P[X<x] = 1-F(x-1) = 1-(1-(1-p)^x) = (1-p)^x
+    \end{gather*}
+    Aplicando esto tenemos que 
+    \begin{gather*}
+        \frac{P[X\geq h+k]}{P[X \geq h]} = \frac{(1-p)^{h+k}}{(1-p)^h} = (1-p)^k=P[X\geq k]
+    \end{gather*}
+
+\end{ejercicio}
+

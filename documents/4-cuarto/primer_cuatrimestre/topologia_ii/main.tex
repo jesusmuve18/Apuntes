@@ -1,0 +1,58 @@
+\documentclass[12pt]{book}
+
+\input{../../../_assets/preambulo.tex}
+\input{../../../_assets/portada.tex}
+
+\usepackage[all]{xy}
+\usepackage{ stmaryrd }
+
+
+\usepackage{scalerel,stackengine}
+\stackMath % necesario para \ThisStyle
+
+\makeatletter
+\renewcommand{\tilde}[1]{%
+  \mathchoice%
+    {\@smarttilde\displaystyle{#1}}%
+    {\@smarttilde\textstyle{#1}}%
+    {\@smarttilde\scriptstyle{#1}}%
+    {\@smarttilde\scriptscriptstyle{#1}}%
+}
+
+\newcommand{\@smarttilde}[2]{%
+  \sbox0{$#1#2$}%
+  \dimen0=\wd0%
+  \ifdim\dimen0<1.6ex
+    \mathaccent"0365{#2}% tilde pequeña estándar
+  \else\ifdim\dimen0<3.5ex
+    \widetilde{#2}% tilde normal
+  \else
+    % tilde escalada y MÁS PEGADA
+    \ThisStyle{%
+      \stackengine{0.05ex}{#2}{\stretchto{\widetilde{\phantom{#2}}}{1.07\ht\strutbox}}{O}{c}{F}{F}{L}%
+    }%
+  \fi\fi
+}
+\makeatother
+
+
+\begin{document}
+    \portada[%
+        titulo=Topología II,
+        subtitulo=,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2025-2026]
+        
+    \thispagestyle{empty}
+    \tableofcontents
+    \newpage
+    \thispagestyle{empty}
+
+    \input{Tema_0.tex}
+
+    \input{Tema_1.tex}
+
+    \input{Tema_2.tex}
+
+    \input{Tema_3.tex}
+\end{document}

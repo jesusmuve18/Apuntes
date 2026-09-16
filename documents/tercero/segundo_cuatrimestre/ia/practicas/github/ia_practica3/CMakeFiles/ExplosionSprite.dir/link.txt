@@ -1,2 +1,0 @@
-/usr/bin/ar qc lib/libExplosionSprite.a CMakeFiles/ExplosionSprite.dir/src/gui/ExplosionSprite.cpp.o
-/usr/bin/ranlib lib/libExplosionSprite.a

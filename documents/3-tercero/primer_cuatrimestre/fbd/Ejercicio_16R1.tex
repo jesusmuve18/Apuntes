@@ -1,0 +1,117 @@
+\documentclass[12pt]{article}
+
+\input{../../../_assets/preambulo.tex}
+\input{../../../_assets/portada.tex}
+
+\begin{document}
+
+\portada[%
+        titulo=Fundamentos de Bases de Datos,
+        subtitulo=Ejercicio 16 de la Relación 1,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2024-2025]
+
+\setcounter{ejercicio}{15}
+
+\begin{ejercicio}
+    En una base de datos hay información sobre proveedores (de los que se almacena el código de proveedor, nombre y dirección) y productos (de los que se almacena código del producto, nombre, precio y descripción). En general los proveedores suministran varios productos. Un producto puede ser suministrado por más de un proveedor. ¿Cómo cambia el diseño si se quiere registrar el precio al que cada proveedor suministra el producto?
+    \endsquare
+
+    Comencemos con el diseño asociado a la primera parte del enunciado (antes de la cuestión final). El diseño E/R propuesto ha sido el siguiente:
+
+    \begin{center}
+        \begin{tikzpicture}
+            
+            % Proveedor
+            \draw[thick] (0,0) rectangle (3,-1);
+            \node at (1.5, -0.5) {Proveedor};
+
+            % Productos
+            \draw[thick] (10,0) rectangle (13,-1);
+            \node at (11.5, -0.5) {Producto};
+
+            % Relación
+            \draw[thick] (5, -0.5) -- (6.5, 0) -- (8, -0.5) -- (6.5, -1) -- cycle ;
+            \node at (6.5, -0.5) {suministra};
+
+            % Líneas
+            \draw[thick] (3,-0.5) -- (5, -0.5);
+            \draw[thick] (8, -0.5) -- (10, -0.5);
+
+            % Atributos Proveedor
+            \draw (0.5, 0) -- (0.5, 0.5);
+            \filldraw (0.5, 0.5) circle (2pt) node[above] {Código};
+
+            \draw (2.5, 0) -- (2.5, 0.5);
+            \filldraw[fill=white] (2.5, 0.5) circle (2pt) node[above] {Nombre\phantom{g}};
+
+            \draw (1.5, -1) -- (1.5, -1.5);
+            \filldraw[fill=white] (1.5, -1.5) circle (2pt) node[below] {Dirección};
+
+            % Atributos Producto
+            \draw (10.5, 0) -- (10.5, 0.5);
+            \filldraw (10.5, 0.5) circle (2pt) node[above] {Código};
+
+            \draw (12.5, 0) -- (12.5, 0.5);
+            \filldraw[fill=white] (12.5, 0.5) circle (2pt) node[above] {Nombre\phantom{g}};
+
+            \draw (10.5, -1) -- (10.5, -1.5);
+            \filldraw[fill=white] (10.5, -1.5) circle (2pt) node[below] {Precio};
+
+            \draw (12.5, -1) -- (12.5, -1.5);
+            \filldraw[fill=white] (12.5, -1.5) circle (2pt) node[below] {Descripción};
+
+        \end{tikzpicture}
+    \end{center}
+
+    En caso de querer registrar el precio al que cada proveedor suministra el producto deberíamos modificar dónde se ubica el Precio del producto y colocarlo en la relación. El diagrama propuesto quedaría de la siguiente manera:
+
+\end{ejercicio} 
+
+\begin{center}
+    \begin{tikzpicture}
+        
+        % Proveedor
+        \draw[thick] (0,0) rectangle (3,-1);
+        \node at (1.5, -0.5) {Proveedor};
+
+        % Productos
+        \draw[thick] (10,0) rectangle (13,-1);
+        \node at (11.5, -0.5) {Producto};
+
+        % Relación
+        \draw[thick] (5, -0.5) -- (6.5, 0) -- (8, -0.5) -- (6.5, -1) -- cycle ;
+        \node at (6.5, -0.5) {suministra};
+
+        % Líneas
+        \draw[thick] (3,-0.5) -- (5, -0.5);
+        \draw[thick] (8, -0.5) -- (10, -0.5);
+
+        % Atributos Proveedor
+        \draw (0.5, 0) -- (0.5, 0.5);
+        \filldraw (0.5, 0.5) circle (2pt) node[above] {Código};
+
+        \draw (2.5, 0) -- (2.5, 0.5);
+        \filldraw[fill=white] (2.5, 0.5) circle (2pt) node[above] {Nombre\phantom{g}};
+
+        \draw (1.5, -1) -- (1.5, -1.5);
+        \filldraw[fill=white] (1.5, -1.5) circle (2pt) node[below] {Dirección};
+
+        % Atributos Producto
+        \draw (10.5, 0) -- (10.5, 0.5);
+        \filldraw (10.5, 0.5) circle (2pt) node[above] {Código};
+
+        \draw (12.5, 0) -- (12.5, 0.5);
+        \filldraw[fill=white] (12.5, 0.5) circle (2pt) node[above] {Nombre\phantom{g}};
+
+        \draw (11.5, -1) -- (11.5, -1.5);
+        \filldraw[fill=white] (11.5, -1.5) circle (2pt) node[below] {Descripción};
+
+        % Atributos relación
+        \draw (6.5, 0) -- (6.5, 0.5);
+        \filldraw[fill=white] (6.5, 0.5) circle (2pt) node[above] {Precio\phantom{g}};
+
+    \end{tikzpicture}
+\end{center}
+
+\end{document}

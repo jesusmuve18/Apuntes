@@ -1,2 +1,0 @@
-/usr/bin/ar qc lib/libDice.a CMakeFiles/Dice.dir/src/model/Dice.cpp.o
-/usr/bin/ranlib lib/libDice.a

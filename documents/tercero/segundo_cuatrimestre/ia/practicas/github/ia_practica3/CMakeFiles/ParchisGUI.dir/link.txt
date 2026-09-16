@@ -1,2 +1,0 @@
-/usr/bin/ar qc lib/libParchisGUI.a CMakeFiles/ParchisGUI.dir/src/gui/ParchisGUI.cpp.o
-/usr/bin/ranlib lib/libParchisGUI.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/libNodeCounter.a CMakeFiles/NodeCounter.dir/src/model/NodeCounter.cpp.o
+/usr/bin/ranlib lib/libNodeCounter.a

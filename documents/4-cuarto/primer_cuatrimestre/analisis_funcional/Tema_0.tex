@@ -1,0 +1,1204 @@
+\chapter*{Repaso}
+
+\begin{definicion}[Espacio normado]
+    $E$ un espacio vectorial y $\|\cdot\|: E \to \bb{R}$ una función que verifica:
+    \begin{enumerate}
+        \item $\|x\| \geq 0$ $\forall x \in E$
+        \item $\|x\| = 0 \sii x=0$
+        \item $\|x + y\| \leq \|x\| + \|y\|$
+        \item $\|\lambda x\| = |\lambda|$ $\forall x,y\in E$, $\lambda \in \bb{R}$
+    \end{enumerate} 
+
+    A esta función la llamaremos \textbf{norma} y diremos que $E$ es un \textbf{espacio normado}
+
+    Podemos definir además una función $d:E\times E \to \bb{R}$ dada por $d(x,y) = \|x-y\|$ $\forall x,y \in E$ a la que llamaremos \textbf{distancia}.
+
+    Decimos que un espacio $E$ es \textbf{completo} si toda sucesión de Cauchy es convergente.
+
+    Si $E$ es un espacio normado completo, entonces $(E, \|.\|)$ es un \textbf{espacio de Banach}.
+\end{definicion}
+
+\begin{definicion}[Espacio prehilbertiano]
+    Sea $H$ es un espacio vectorial, un \textbf{producto escalar} es una función $(\cdot,\cdot):H\times H \to \bb{R}$ tal que verifica las siguientes propiedades:
+    \begin{enumerate}
+        \item \textbf{Bilineal:} para todo $x,y,z\in H$, $\alpha, \beta \in \bb{R}$ se verifica que 
+        \begin{align*}
+            (\alpha x + \beta y, z) = \alpha(x,z) + \beta(y,z)\\
+            (x, \alpha y + \beta z) = \alpha(x,y) + \beta(x,z)
+        \end{align*}
+
+        \item \textbf{Simétrica:} $(x,y) = (y,x) \ \ \ \forall x,y\in H$
+         
+        \item \textbf{Positiva:} $(x,x)\geq 0  \ \ \ \forall x \in H$
+
+        \item \textbf{Definida positiva:} $(x,x) > 0 \ \ \ \forall x \in H\setminus\{0\}$
+    \end{enumerate}
+
+    Las dos últimas propiedades se pueden resumir en $(x,x) = 0 \sii x=0$.
+    
+    Diremos que $(H, (\cdot, \cdot))$ es un \textbf{espacio prehilbertiano}.
+
+    Todo espacio prehilbertiano es en particular un espacio normado, ya que podemos definir $\|x\| = \sqrt{(x,x)}$ que es claramente una norma.\\
+
+    Si $\|\cdot\|$ es completa, diremos que $(H, (\cdot,\cdot))$ es un \textbf{espacio de Hilbert}.
+\end{definicion}
+
+\begin{ejemplo}Los siguientes espacios son de Banach:\\
+    \begin{enumerate}
+        \item $(\bb{R}, |\cdot|)$.
+        \item $(\bb{R}^N, |\cdot|)$, donde $|x| = |(x_1, x_2, \dots, x_N)| = \sqrt{x_1^2 + x_2^2 + \dots + x_N^2}$. Además es de Hilbert ya que $(x,y) = \sum_{i=1}^N x_i y_i$ es un producto escalar.
+        \item  Dado\footnote{la $b$ de $\cc{C}_b$ viene de \textit{bounded} (acotado en inglés)} $A\subset \bb{R}^N$ tomamos $\cc{C}_b(A) = \{f: A \to \bb{R} : f \text{ es continua y acotada en } A \}$. Podemos definir una norma en este espacio como 
+        \begin{align*}
+            \|f\|_{\cc{C}_b(A)} = \sup\{|f(x)| : x\in A\}
+        \end{align*}
+
+        \item Tomamos $K\subset \bb{R}^N$ compacto. Consideramos el conjunto de las funciones continuas en $K$ denotado por $\cc{C}(K)$ y el espacio $(K, (\cdot,\cdot))$, donde 
+        \begin{gather*}
+            (f,g) = \int_K f(x)g(x) dx
+        \end{gather*}
+        es un producto escalar que hace a este un espacio prehilbertiano. Tendríamos 
+        \begin{gather*}
+            \|f\| = \left(\displaystyle\int_K f(x)^2 dx\right)^{1/2}
+        \end{gather*}
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{ejemplo}[El espacio del punto 4 No es de Hilbert]
+
+    Veámoslo con un contraejemplo.
+
+    Tomamos $K = [0,1]\subset \bb{R}$ y podemos definir $\forall n \in \bb{N}$ la función  $f_n : [0,1] \to \bb{R}^+$ tal que $f_n^2$ viene dada por la siguiente gráfica:
+
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=left,
+                xlabel={$x$},
+                ylabel={$f_n^2(x)$},
+                ylabel style={rotate=-90}, % asegura que esté vertical recto
+                height=5cm, width=7cm,
+                xmin=0, xmax=3,
+                ymin=0, ymax=1.2,
+                xtick={0,1,3},
+                xticklabels={$0$,$\nicefrac{1}{n}$},
+                ytick={1},
+                yticklabels={$1$},
+                grid=none
+            ]
+                % Línea descendente desde (0,1) hasta (1/n,0)
+                \addplot[very thick,red!60!black] coordinates {(0,1) (1,0)};
+                % Línea horizontal en 0 desde (1/n,0) hasta (3,0)
+                \addplot[very thick,red!60!black] coordinates {(1,0.01) (3,0.01)};
+            \end{axis}
+        \end{tikzpicture}
+    \end{figure}
+
+    De esta forma tenemos que
+    \begin{gather*}
+        \|f_n\|^2 = \int_0^1 f_n^2(x) dx = \frac{1}{n} \cdot \frac{1}{2} = \frac{1}{2n} \Rightarrow \|f_n\| = \frac{1}{\sqrt{2n}} \to 0
+    \end{gather*}
+
+    y vemos que
+
+    \begin{gather*}
+        \left\{
+        \begin{array}{c  c}
+            \{f_n(x)\} \to 0 & \forall x\in (0,1]\\
+            \{f_n(0) = 1\} \to 1 &\\
+        \end{array}
+        \right.
+    \end{gather*}
+
+    Con esto tenemos que la sucesión $\{f_n\} \to 0$ en $(\cc{L}([0,1]), (\cdot,\cdot))$ (ya que la norma converge a 0).\\
+
+    PARA MAÑANA RESOLVER QUÉ ES LO QUE NO ESTÁ CLARO (la contradicción para ser espacio de Hilbert).\\
+\end{ejemplo}
+
+\begin{ejemplo}
+    Consideramos $\emptyset \neq \Omega \subset \bb{R}^N$ medible, entonces podemos definir
+    \begin{gather*}
+        L^2(\Omega) = \cc{L}^2(\Omega)/\sim = \{f:\Omega \to \bb{R} \text{ medible } : \int_\Omega f(x)^2 dx < \infty\}
+    \end{gather*}
+    $L^2(\Omega)$ con la norma definida anteriormente (en el punto 4) es un espacio de Hilbert (teorema de Fischer)
+\end{ejemplo}
+
+\begin{ejemplo}
+    Sea $1 \leq p < \infty$. Consideramos el conjunto
+    \begin{gather*}
+        L^p(\Omega) = \left\{f: \Omega \to \bb{R} \text{ medibles } : \int_\Omega |f|^p dx < \infty\right\}
+    \end{gather*}
+    Entonces tenemos que con la norma definida como 
+    \begin{gather*}
+        \|f\|_{L^p(\Omega)} = \left(\int_\Omega |f|^p dx \right)^{1/p}
+    \end{gather*}
+    es un espacio de Banach. Recordemos para este resultado la desigualdad de Hölder y Minkowski. Definimos para ello el conjugado de $p$ de la siguiente forma\footnote{donde asumimos que $\nicefrac{1}{\infty} = 0$}:
+    \begin{gather*}
+        p' = \left\{
+        \begin{array}{c c l}
+            \frac{p}{p-1} & \text{ si } & 1<p<\infty\\\\
+            \infty & \text{ si } & p=1
+        \end{array}
+        \right\} \Rightarrow \frac{1}{p} + \frac{1}{p'} = 1 \ \ \ \forall p \in [1, \infty)
+    \end{gather*}
+    Con esto tendremos que 
+    \begin{gather*}
+        \left.
+            \begin{array}{c}
+                f\in L^p(\Omega)\\
+                g \in L^{p'}(\Omega)
+            \end{array}
+        \right\} \Rightarrow fg \in L^1(\Omega)
+    \end{gather*}
+    Además, se tiene que 
+    \begin{gather*}
+        \int |f(x)g(x)| dx \leq \left(\int |f|^p dx\right)^{\nicefrac{1}{p}} \left(\int |f|^{p'} dx\right)^{\nicefrac{1}{p'}} = \|f\|_{L^p} \|g\|_{L^{p'}}
+    \end{gather*}
+\end{ejemplo}
+
+\begin{ejemplo}\ \\
+    \begin{enumerate}
+        \item $(\bb{R}^N, \|\cdot\|_ p)$ con $\|x\|_p = (\sum_{i=1}^N |x_i|^p)^{1/p}(x,y) = \sum_{i=1}^N x_i y_i$.
+        \item $(\bb{R}^N, \|\cdot\|_\infty)$ con $\|x\|_\infty = \max \{|x_i|: i=1,\dots,N\}$
+        \item Sea $p=\infty$. Tenemos
+        \begin{gather*}
+            L^{\infty} = \{f:\Omega \to \bb{R} \text{ medible } : \sup\{|f(x)| : x\in \Omega\}< \infty\}
+        \end{gather*}
+        A este supremo lo llamaremos \textbf{supremo esencial}, que se define de la siguiente forma\footnote{\textit{a.e} viene de \textit{almost everywhere} (casi por doquier en inglés)}:
+        \begin{gather*}
+            \sup_{\Omega}|f| = \inf \{M \geq 0 : |f(x)| \leq M \ \ a.e. \ x\in \Omega\}
+        \end{gather*}        
+        En algunos libros se denota por $ess\sup$.
+
+        Podremos reescribir lo anterior como
+        \begin{gather*}
+            L^{\infty} = \{f:\Omega \to \bb{R} \text{ medible } : \sup_\Omega |f|< \infty\}
+        \end{gather*}
+        Entonces el espacio $(L^\infty, \|\cdot\|_\infty)$ con $\|f\|_\infty = \sup_\Omega |f|$ es un espacio de Banach.
+
+        La desigualdad de Hölder con $p=\infty$, $p'=1$ nos dice que para $f \in L^\infty(\Omega)$, $g\in L^1(\Omega)$ entonces $fg \in L^1(\Omega)$ y $\|fg\|_{L^1}\leq \|f\|_{L^\infty} \|g\|_{L^{1}}$ es una norma en $H$.
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{ejemplo}
+    Consideramos $1\leq p < \infty$ y definimos el conjunto de sucesiones.
+    \begin{gather*}
+        \cc{L}^p = \{ x : \bb{N} \to \bb{R} : \sum_{n=1}^{\infty}|x(n)|^p < \infty\}
+    \end{gather*}
+    Si definimos ahora
+    \begin{gather*}
+        \|x\|_{\cc{L}^p} = \left(\sum_{n=1}^{\infty}|x(n)|^p\right)^{\nicefrac{1}{p}}
+    \end{gather*}
+    entonces $(\cc{L}^p, \|\cdot\|_p)$ es un espacio de Banach. Para verlo podemos tomar $x\in \cc{L}^p$, $y\in \cc{L}^{p'}$ y tenemos que 
+    \begin{gather*}
+        xy\in \cc{L}^1 \text{\ \  y\ \  } \|xy\|_{\cc{L}^1} \leq \|x\|_{\cc{L}^p} \|y\|_{\cc{L}^{p'}}
+    \end{gather*} de la que se deduce la desigualdad de Mikowsky.\\
+
+    Para $p=2$ tenemos que $(\cc{L}^2, \|\cdot\|_2)$ es un espacio de Hilbert.     Para $p=\infty$ podemos definir $\cc{L}^{\infty} = \{x : \bb{N} \to \bb{R} : x \text{ sucesión acotada}\}$ y con $\|x\|_\infty = \sup\{|x(n)| : n\in \bb{N}\}$ es un espacio de Banach.
+\end{ejemplo}
+
+\begin{ejemplo} Podemos considerar los siguientes subespacios que seguirán siendo espacios de Banach:
+    \begin{enumerate}
+        \item Tomamos $C = \{x\in \cc{L}^{\infty} : x \text{ es convergente}\}$ y es un subespacio de $\cc{L}^\infty$. 
+        \item Podemos tomar otro subespacio de este, $C_0 = \{x\in C : x \text{ es convergente a } 0\}$ que de nuevo es un subespacio de $\cc{L}^{\infty}$.
+    \end{enumerate}    
+\end{ejemplo}
+
+\section{Espacios de Hilbert}
+
+Recordemos que un espacio de Hilbert es un par $(H, (\cdot, \cdot))$ donde $H$ es un espacio vectorial y $(\cdot, \cdot)$ es una función bilineal simétrica y definida positiva.
+
+\begin{prop}
+    Si $H$ es prehilbertiano entonces se tiene:
+    \begin{enumerate}
+        \item Se cumple la Desigualdad de Cauchy-Schwarz, es decir
+        \begin{gather*}
+            |(u,v)| \leq \|u\| \cdot \|v\|, \ \ \ \forall u,v\in H
+        \end{gather*}
+        \item Se verifica la desigualdad del paralelogramo
+        \begin{gather*}
+            \left\| \frac{u+v}{2} \right\|^2 + \left\| \frac{u-v}{2} \right\|^2 = \frac{1}{2}\left(\|u\|^2 + \|v\|^2\right), \ \ \ \forall u,v\in H
+        \end{gather*}
+    \end{enumerate}
+\end{prop}
+
+\begin{teo}[Teorema de la Proyección]
+    Supongamos que $H$ es un espacio Hilbertiano y $\emptyset \neq K \subset H$ un conjunto convexo y cerrado, entonces $\forall f\in H$ $\exists_1 u\in K$ tal que $\|f-u\|=dist(f,K)$. Además, dicho $u$ está caracterizado por:
+    \begin{gather*}
+        \left\{
+            \begin{array}{l}
+                u\in K\\
+                (f-u, v-u)\leq 0$ \ \ $\forall v \in K
+            \end{array}
+        \right.
+    \end{gather*}
+    Notaremos a dicho $u$ por $P_Kf$ y \textbf{diremos que es la proyección de $f$ sobre $K$}
+
+    \begin{proof}
+        En primer lugar tendremos que ver que $d(f,K)=\inf\{\|f-v\|: v\in K\}$ existe y se alcanza. Al ser un ínfimo de cantidades positivas sabemos que existe y nos quedará ver que se alcanza.
+
+        Por definición de ínfimo tenemos que 
+        \begin{gather*}
+            \exists\{v_n\}\subset K \text{ tal que } \|f-v_n\|\to d
+        \end{gather*}
+        Aplicando la desigualdad del paralelogramo para $u=f-v_n$ y $v=f-v_m$, con $n,m\in \bb{N}$
+        \begin{gather*}
+            \left\| \frac{f-v_n + f-v_m}{2} \right\|^2 + \left\| \frac{f-v_n-(f-v_m)}{2} \right\|^2 = \frac{1}{2}\left(\|f-v_n\|^2 + \|f-v_m\|^2\right)\\
+            \left\| f - \frac{v_n+v_m}{2} \right\|^2 + \left\| \frac{v_m - v_n}{2} \right\|^2 = \frac{1}{2}\left(\|f-v_n\|^2 + \|f-v_m\|^2\right)\\
+            \frac{\left\| v_m-v_n \right\|^2}{4} = \frac{1}{2}\left(\|f-v_n\|^2 + \|f-v_m\|^2\right) - \left\| f - \frac{v_n+v_m}{2} \right\|^2\\
+            \left\| v_m-v_n \right\|^2 = 2\left(\|f-v_n\|^2 + \|f-v_m\|^2\right) - 4\left\| f - \frac{v_n+v_m}{2} \right\|^2
+        \end{gather*}
+        Como $K$ es convexo y $v_n,v_m\in K$ tendremos que $d\frac{v_n+v_m}{2}\in K$ y además $\left\|f - \dfrac{v_n+v_m}{2}\right\|\geq d$ por lo que tenemos 
+        \begin{gather*}
+            \left\| v_m-v_n \right\|^2 = 2\left(\|f-v_n\|^2 + \|f-v_m\|^2\right) - 4d^2
+        \end{gather*}
+        Cuando $n\to \infty$ tenemos que $\|f-v_n\|\to d$ y $\|f-v_m\|\to d$ por lo que el término de la derecha tenderá a 0 cuando $n,m\to\infty$. Esto significa que la sucesión $\{v_n\}$ es de Cauchy.
+
+        Como $H$ es de Hilbert, en particular es completo por lo que sabemos que $\{v_n\}\to u$ en $(H, (\cdot, \cdot))$.
+
+        Como además $\{v_n\}\subset K$ y $K$ es cerrado, el límite $u\in K$. Tendremos que
+        \begin{gather*}
+            d = \lim_{n\to \infty} \|f-v_n\| = \|f-u\|
+        \end{gather*}
+        Y tendremos probada la existencia de $u$.\\
+
+        Veamos ahora la equivalencia entre la primera y la segunda parte del teorema, es decir
+        \begin{gather*}
+            \left.
+            \begin{array}{l}
+                u\in K\\
+                \|f-u\|=dist(f,K)
+            \end{array}
+            \right\} \sii
+            \left\{
+            \begin{array}{l}
+                u\in K\\
+                (f-u, v-u)\leq 0$ \ \ $\forall v \in K
+            \end{array}
+            \right.
+        \end{gather*}
+        Veamos las dos implicaciones:
+        \begin{itemize}
+            \item[$\Rightarrow$)] Supongamos que $u\in K$ y sabemos que $\|f-u\|\leq \|f-v\|$ para todo $v\in K$. Tomamos ahora $w\in K$ y consideramos el segmento que une $u$ con $w$. Entonces $\forall w\in K$ y $\forall t \in [0,1]$, al ser $K$ convexo tendremos que
+            \begin{gather*}
+                (1-t)u + tw \in K\ \  \text{ y }\ \ \|f-u\|^2 \leq \|f-(1-t)u-tw\|^2
+            \end{gather*}
+            Aplicando la bilinealidad podemos reescribir esta última expresión como 
+            \begin{align*}
+                \|f-(1-t)u-tw\|^2 &= (f-(1-t)u-tw,f-(1-t)u-tw) =\\
+                &=\|f-u\|^2 + t^2\|w-u\|^2-2t(f-u,w-u)
+            \end{align*}
+            Sustituyendo en la expresión que teníamos anteriormente nos queda que:
+            \begin{gather*}
+                0\leq t^2\|w-u\|^2-2t(f-u,w-u) \ \ \ \forall t \in (0,1]
+            \end{gather*}
+            Al dividir entre $t$ nos queda
+            \begin{gather*}
+                0\leq t\|w-u\|^2-2(f-u,w-u) \ \ \ \forall t \in (0,1]
+            \end{gather*}
+            y tomando ahora el límite  cuando $t$ tiende a $0$ por la derecha queda que
+            \begin{gather*}
+                0\leq -2(f-u,w-u) \Rightarrow (f-u,w-u) \leq 0
+            \end{gather*}
+        \end{itemize}
+        Se deja como ejercicio demostrar la otra implicación y la unicidad de $u$.
+    \end{proof}
+\end{teo}
+
+% 19 de septiembre
+\begin{prop}
+    La aplicación dada por
+    \begin{align*}
+        P_K: H &\to H\\
+        f &\mapsto P_Kf
+    \end{align*}
+    es Lipschitziana, es decir, $\|P_Kf_1 - P_Kf_2\| \leq \|f_1-f_2\|$ para todo $f_1,f_2\in H$.
+
+    \begin{proof}
+        Tomamos $f_1,f_2\in H$ y consideramos $u_1 = P_Kf_1$, $u_2 = P_Kf_2$ y tenemos que 
+        \begin{gather*}
+            (f_1-u_1, v-u_1) \leq 0 \ \ \ \forall v \in K\\
+            (f_2-u_2, v-u_2) \leq 0 \ \ \ \forall v \in K
+        \end{gather*}
+        De aquí obtenemos que 
+        \begin{gather*}
+            (f_1-u_1, u_2-u_1) \leq 0\\
+            (f_2-u_2, u_1-u_2) \leq 0
+        \end{gather*}
+        Aprovechando la bilinealidad tenemos que
+        \begin{gather*}
+            (f_2-u_2, u_2-u_1) \geq 0 \Rightarrow ((f_1-u_1)-(f_2-u_2), u_2-u_1) \leq 0
+        \end{gather*}
+        Y además
+        \begin{gather*}
+            ((f_1-u_1)-(f_2-u_2), u_2-u_1) = ((f_1-f_2)-(u_1-u_2), u_2-u_1) =\\= (f_1-f_2, u_2-u_1) + (u_2-u_1, u_2-u_1)
+        \end{gather*}
+        Y aplicando la desigualdad de Cauchy-Schwarz
+        \begin{align*}
+            \|u_2-u_1\|^2 &= (u_2-u_1, u_2-u_1) \leq -(f_1-f_2, u_2-u_1)\\
+            &\leq \|f_1-f_2\| \|u_2-u_1\| \Rightarrow \|u_2-u_1\| \leq \|f_1-f_2\|
+        \end{align*}
+    \end{proof}
+\end{prop}
+
+\begin{coro}[Proyección ortogonal]
+    Sea $H$ un espacio de Hilbert y $\emptyset \neq M \subset H$ un subespacio vectorial cerrado. Entonces se tiene que 
+    \begin{gather*}
+        \forall f \in H \ \ \ \exists_1u\in M \text{ tal que } \|f-u\| = dist(f,M)
+    \end{gather*}
+    Además, $u=F_Mf$ está caracterizado por
+    \begin{itemize}
+        \item $u\in M$
+        \item $(f-u, w) = 0$ \ \ \ $\forall w \in M$
+    \end{itemize}
+
+    Y se tiene que $P_M:H \to H$ es lineal.
+    \begin{proof}
+        Comencemos con la primera parte del corolario. Sabemos que $u\in K$ y $(f-u, v-u)\leq 0$\ \ \ $\forall v \in M$ del teorema de la proyección. Tendremos que probar la equivalencia entre esto y $(f-u, w) = 0$ \ \ \ $\forall w \in M$ cuando $M$ es un subespacio vectorial. Veamos ambas implicaciones:
+        \begin{itemize}
+            \item[$\Leftarrow$)] Evidente por ser $M$ un espacio vectorial.
+            \item[$\Rightarrow$)] Tenemos que $(f-u, v-u)\leq 0$\ \ \ $\forall v \in M$. Tomamos ahora $v\in M$, $t\neq 0$ y como $M$ es un subespacio vectorial, entonces $\frac{v}{t}\in M$ por lo que
+            
+            \begin{gather*}
+                (f-u, \frac{v}{t}-u) \leq 0 \ \ \ \forall v\in M, \ t\neq 0
+            \end{gather*}
+            Hagamos una distinción de casos:
+            \begin{gather*}
+                \left\{
+                    \begin{array}{c c c}
+                        \text{Si } t>0 & \Rightarrow  &(f-u,v-tu) \leq 0 \ \ \ \forall t>0, v\in M\\
+                        \text{Si } t<0 & \Rightarrow  &(f-u,v-tu) \geq 0 \ \ \ \forall t<0, v\in M\\
+                    \end{array}
+                \right.
+            \end{gather*}
+            Tomando límite cuando $t$ tiende a $0$
+            \begin{gather*}
+                \left\{
+                    \begin{array}{c}
+                        (f-u,v) \leq 0 \ \ \ \forall t>0, v\in M\\
+                        (f-u,v) \geq 0 \ \ \ \forall t<0, v\in M\\
+                    \end{array}
+                \right.
+            \end{gather*}
+            Y por tanto $(f-u,v) = 0$ \ \ \ $\forall v\in M$
+        \end{itemize}
+
+        La demostración de que $P_M$ es lineal se deja como ejercicio.
+    \end{proof}
+\end{coro}
+
+\section{Espacios Duales}
+
+\begin{definicion}[Dual algebráico]
+    Sea $E$ un espacio vectorial, llamamos \textbf{dual algebráico} al siguiente espacio:
+    \begin{gather*}
+        E^\# = \{f: E \to \bb{R}: f \text{ es lineal}\}
+    \end{gather*}
+\end{definicion}
+
+\begin{definicion}[Dual topológico]
+   Dado $(E, \|\cdot\|)$ un espacio normado, llamamos \textbf{dual topológico} a
+    \begin{gather*}
+        E^* = \{f: E \to \bb{R}: f \text{ es lineal y continua}\}
+    \end{gather*} 
+\end{definicion}
+
+
+\begin{observacion}
+    Si tenemos $(E, \|\cdot\|_E)$, $(F, \|\cdot\|_F)$ dos espacios normados y una aplicación $T:E\to F$ lineal. Son equivalentes:
+    \begin{enumerate}
+        \item[(i)] $T$ es continua
+        \item[(ii)] $T$ es continua en $0$
+        \item[(iii)] $T(B_E(0,1))$ es un conjunto acotado de $F$, es decir que $\exists R>0 : \|T(x)\|_F \leq R\ \ \ \forall x\in E$ con $\|x\|<1$
+        \item[(iv)] $T$ es acotada, es decir, $T(A)$ es acotada en $F$ para todo $A\subset E$ que esé acotado
+        \item[(v)] $T$ es Lipschitziana.
+    \end{enumerate}
+    
+    %La demostración se deja como ejercicio.
+
+    \begin{proof}\ 
+        \begin{itemize}
+            \item[(v)$\Rightarrow$(iv) )] Trivial
+            \item[(iv)$\Rightarrow$(iii) )] Trivial
+            \item[(iii)$\Rightarrow$(i) )] Trivial
+            \item[(i)$\Rightarrow$(ii) )] Trivial
+            \item[(ii)$\Rightarrow$(iii) )] Sabemos que $T$ es continua en $0$. Luego para $\veps = 1$\ \ $\exists \delta>0$ tal que $\|x\|_E<\delta$ luego $\|T(x)\|_F<1$. Tenemos que
+            \begin{gather*}
+                \|T(x-y)\| = \|T(x)-T(y)\| \leq M\|x-y\| \ \ \ \forall x,y \in E
+            \end{gather*}
+            luego $\|T(x)\| \leq M\|x\|$ para todo $x\in E$. De esta forma tenemos que 
+            \begin{gather*}
+                \|T(x)\| = \left\| T \left(\frac{x}{\|x\|} \cdot \|x\| \cdot \frac{\delta}{2} \cdot \frac{2}{\delta}\right) \right\| = \frac{2}{\delta}\left\| T\left(\frac{x}{\|x\|} \cdot\frac{\delta}{2} \right) \right\| < \frac{2}{\delta}\cdot \|x\|
+            \end{gather*}
+            \item [(iii)$\Rightarrow$(vi) )] Sabemos que $A\subset E$ está acotado, luego $T(A)$ también, es decir que $T(A)\subset B(0,M)$ para cierto $M>0$. Tenemos que probar que
+            \begin{gather*}
+                T(A) \subset T(B(0,R))\subset B(0,M)
+            \end{gather*}
+            Dado $x\in A$ tal que $\|x\|\leq R$, como además es Lipschitziana tenemos que 
+            \begin{gather*}
+                \|T(x)\| \leq N\|x\| \leq N \|x\| < NR = M
+            \end{gather*}
+            y tenemos la inclusión que queríamos probar.
+            \item [(iv)$\Rightarrow$(ii) )] Por hipótesis tenemos que si $\|x\|<1$ entonces $\|T(x)\|\leq R$ y queremos probar que $\forall \veps >0 \ \ \exists \delta>0$ tal que si $\|x\|<\delta$, entonces $\|T(x)\|<\veps$. Tomamos $\delta = \frac{\veps}{2R}$ y suponiendo que $\|x\|<\delta$ tenemos que
+            \begin{gather*}
+                \|T(x)\| = \left\|T\left(\frac{x}{2\|x\|}\cdot 2 \|x\|\right)\right\| = 2\|x\| \left\|T\left(\frac{x}{2\|x\|}\right)\right\| \leq 2\|x\|R < 2\delta R = \veps
+            \end{gather*}
+            y ya lo tenemos.
+        \end{itemize}
+    \end{proof}
+\end{observacion}
+
+\begin{definicion}
+    Dado $E$ un espacio vectorial, consideramos su dual topológico $E^*$ y definimos la norma
+    \begin{gather*}
+        \|f\|_{E^*} := \sup_{\|x\|\leq 1} \|f(x)\| \ \ \ \forall f \in E^*
+    \end{gather*}
+\end{definicion}
+
+\begin{ejercicio} % Hacer para el miércoles que viene
+    Demostrar que $\|f\|_{E^*}$ es una norma.\\
+
+    
+\end{ejercicio}
+
+\begin{ejercicio}
+    Demostrar que $(E^*, \|\cdot\|_{E*})$ es de Banach.
+\end{ejercicio}
+
+\begin{ejercicio}
+    Demostrar que $\|f\|_{E^*} = \inf\{M\geq 0 : \|f(x)\| \leq M\|x\|_E\ \ \forall x \in E\}$
+\end{ejercicio}
+
+\section{Espacio Dual de un Espacio de Hilbert}
+
+\begin{observacion}
+    Es elemental que si tomo $v\in H$, entonces la aplicación
+    \begin{align*}
+        \varphi_v : H &\to \bb{R}\\
+        u &\mapsto \varphi(u) = (u,v)
+    \end{align*}
+    verifica que $\varphi_v\in H^*$ y $\|\varphi_v\|_{H^*} = \|v\|_H$. Además, podemos definir la siguiente aplicación:
+    \begin{align*}
+        \Psi: H &\to H^*\\
+        v &\mapsto \phi_v
+    \end{align*}
+    que será lineal por lo que tenemos que un espacio de Hilbert y su dual topológico serán isomorfos.
+
+    \begin{proof}
+        La demostración se deja como ejercicio.
+    \end{proof}
+\end{observacion}
+
+\begin{teo}[Teorema de Riesz-Fischer]
+    Para toda $\varphi\in H^*$, se tiene que $\exists_1 v\in H$ tal que $\varphi(u)=(u,v)\ \ \ \forall u\in H$. Además, se tiene que $\|\varphi\|_{H^*} = \|v\|_H$
+\end{teo}
+
+\begin{ejercicio} % TODO: poner f como f_y
+    Sea $H$ un espacio de Hilbert, y tomamos un elemento cualquiera $y\in H$. Consideramos $f:H\to \bb{R}$ dada por $f_y(x)=(x,y)$ para todo $x\in H$. Entonces se tiene que $f_y$ es lineal, y además
+    \begin{gather*}
+        |f_y(x)| = |(x,y)| \leq \|y\|\cdot \|x\| \ \ \forall x\in H \Rightarrow f_y \text{ acotada}
+    \end{gather*}
+    con lo que $\|f_y\|_{H^*}\leq \|y\|_{H}$.\\
+
+    Con la definición de la norma tenemos que 
+    \begin{gather*}
+        \|f_y\|_{H^*} = \sup\{|(x,y)| : x\in H,\ \|x\|_H\leq 1\} \leq \|y\|_H \sup\{\|x\|_H: x\in H,\ \|x\|_H\leq 1\} = \|y\|_H
+    \end{gather*}
+    Comenzamos con el caso $y\neq 0$ y tomamos $x=\frac{y}{\|y\|_H}$ y tenemos que
+    \begin{gather*}
+        |(x,y)| = \left|\left(\frac{y}{\|y\|_H}, y\right)\right| = \frac{1}{\|y\|_H}(y,y) = \|y\|_H
+    \end{gather*}
+    por lo que hemos visto que se alcanza el máximo por lo que $\|f_y\|_{H^*}=\|y\|_H$ . Veamos ahora qué sucede cuando $y=0$. En este caso tendremos $f_y(x) = (x,0)$ y por tanto se tiene directamente que $\|f_y\|_{H^*}=0=\|y\|_H$.\\
+
+    La linealidad se deja como ejercicio.
+\end{ejercicio}
+
+\begin{teo}[Teorema de representación del dual de un espacio de Hilbert de Riesz-Fréchet] 
+    Sea $H$ un espacio de Hilbert, entonces $\forall f \in H^*$ existe un único $y\in H$ tal que $f(x)=(x,y)$\ \ $\forall x \in H$. Además, $\|f\|_{H^*}=\|y\|_H$.
+
+    \begin{proof}
+        Solo tenemos que probar la primera parte, pues la segunda es consecuencia del ejercicio anterior. Para ello tomamos $f\in H^*$ y tenemos dos casuísticas:
+        \begin{itemize}
+            \item Si $f=0$, entonces puedo tomar $y=0$ y es evidente.
+            \item Si $f\neq 0$, entonces tenemos que $M=f^{-1}(\{0\})\varsubsetneq H$ es un subespacio vectorial cerrado (imagen inversa de un cerrado por una función continua\footnote{nos dice que es cerrado.} y lineal\footnote{nos dice que es espacio vectorial.}). Podemos aplicar entonces el teorema de la proyección ortogonal. Sabemos que $\exists z_0 \in H\setminus M$. Llamamos $z_1=P_Mz_0\in M$ y tenemos que $(z_0-z_1, v) = 0$ para todo $v\in M$. Definimos ahora
+            \begin{gather*}
+                z = \frac{z_0-z_1}{\|z_0-z_1\|_H}
+            \end{gather*}
+            y está bien definido ya que $z_0\notin M$ y $z_1 \in M$ luego $z_0-z_1\neq 0$. Es claro que $\|z\| = 1$ y veamos cuánto vale $(z,v)$ para todo $v\in M$:
+            \begin{gather*}
+                (z,v) = \frac{1}{\|z_0-z_1\|}(z_0-z_1,v) = 0\ \ \ \forall v \in M
+            \end{gather*}
+            Veamos que $z\notin M$. Sabemos que $M$ es un espacio vectorial y si $z_0-z_1$ estuviera en $M$, entonces $z_0\in M$ pero sabemos que $z_0\notin M$ luego $z\notin M$ o equivalentemente $f(z)\neq 0$ (por la definición de $M$).\\
+
+            Tenemos ahora que para todo $x\in H$ tenemos que $x-\frac{f(x)}{f(z)}\in M = \ker f$ ya que
+            \begin{gather*}
+                f\left(x - \frac{f(x)}{f(z)}z\right) = f(x)-\frac{f(x)}{f(z)}f(z) = 0
+            \end{gather*}
+            luego $f(x) = f\left(\frac{f(x)}{f(z)}z\right)$ lo que nos dice que
+            \begin{gather*}
+                0 = \left(z, x - \frac{f(x)}{f(z)}z\right) = (z,x) - \frac{f(x)}{f(z)} \Rightarrow f(x) = f(z)(z,x) = (x, f(z)z)
+            \end{gather*}
+            Por tanto, tomando $y=f(z)z$ tenemos la existencia probada. Nos queda por ver la unicidad. Para ello, supongamos que existen $y_1,y_2\in H$ tal que $f(x)=(x,y_1)=(x,y_2)$ para todo $x\in H$. Con esto tendríamos que $(x, y_1-y_2) = 0$ para todo $x\in H$. Elijo $x = y_1-y_2$ y tenemos que $0 =(y_1-y_2, y_1-y_2) = \|y_1-y_2\|^2$ por lo que finalmente $y_1=y_2$.
+        \end{itemize}
+    \end{proof}
+\end{teo}
+
+Nos planteamos ahora qué ocurre cuando tenemos un espacio de Banach $E$ y un subespacio $G\subset E$. Tenemos además una aplicación $g:G\to \bb{R}$ lineal y continua. Lo que nos plantemos ahora es si existe una aplicación $f:E \to \bb{R}$ lineal y continua tal que su restricción $f_{|_G}=g$.\\
+
+Que $g$ sea continua es equivalente a decir que $|g(x)| \leq k \|x\|$ para todo $x\in G$ y queremos ver si se verifica la continuidad de $f$, es decir que $|f(x)| \leq k \|x\|$ para todo $x\in E$.
+
+\begin{ejercicio}
+    Definimos $p(x)=k\|x\|$\ \ $\forall x \in E$. Probar que se verifican las siguientes propiedades:
+    \begin{enumerate}
+        \item $p(x+y) \leq p(x) + p(y)$ \ \ \  $\forall x,y\in E$
+        \item $p(\lambda x) = \lambda p(x)$ \ \ $\forall \lambda>0$, \ \ $\forall x \in E$
+    \end{enumerate}
+\end{ejercicio}
+
+% aq iba el teorema
+
+\begin{definicion}
+    Sea $\emptyset \neq P$ un conjunto con una relación $\leq$ de orden (reflexiva, antisimétrica y transitiva). Entonces
+    \begin{itemize}
+        \item un subconjunto $Q\subset P$ es \textbf{totalmente ordenado} si para cualesquiera dos elementos $a,b\in Q$ se tiene que $a\leq b$ o $b\leq a$ (o ambas).
+        \item Si $Q\subset P$ y $x\in P$, diremos que $x$ es \textbf{cota superior} de $Q$ si $a\leq x$ para todo $a\in Q$.
+        \item Si $m\in P$, entonces diremos que $m$ es un \textbf{elemento maximal} de $P$ si
+        \begin{gather*}
+            \{x\in P : m\leq x\} = \{m\}
+        \end{gather*}
+        es decir, no hay ningún elemento de $P$ excepto $m$ que esté por encima de $m$.
+        \item Diremos que $P$ es \textbf{inductivo} si todo subconjunto $Q\subset P$ que sea totalmente ordenado posee una cota superior.
+    \end{itemize} 
+\end{definicion}
+
+\begin{lema}[Lema de Zorn]
+    Sea $\emptyset \neq P$ un conjunto con una relación de orden $\leq$. Entonces se tiene que si $P$ es inductivo, entonces $P$ tiene un elemento máximo.
+\end{lema}
+
+\begin{teo}[versión analítica del teorema de Hanh-Banach]
+    Supongamos que $E$ es un espacio vectorial y tenemos $p:E\to \bb{R}$ tal que se verifica
+    \begin{gather*}
+        p(x+y) \leq p(x) + p(y)\ \ \ \forall x,y\in E\\
+        p(\lambda x) = \lambda p(x) \ \ \ \forall x \in E\ \ \forall \lambda >0
+    \end{gather*}
+    Sea $G\subset E$ un subespacio vectorial y $G:G\to \bb{R}$ una aplicación lineal verificando
+    \begin{gather*}
+        g(x) \leq p(x)\ \ \ \forall x \in G
+    \end{gather*}
+    Entonces se tiene que $\exists f:E\to \bb{R}$ lineal verificando
+    \begin{gather*}
+        f(x) \leq p(x)\ \ \ \forall x \in E\\
+        f_{|_G} = g
+    \end{gather*}
+
+    \begin{proof}
+        Definimos el siguiente conjunto
+        \begin{gather*}
+            P = \left\{h: D(h) \to \bb{R} :
+            \begin{array}{l}
+                G\subset D(h) \text{ subespacio vectorial de }E\\
+                h\text{ lineal},\ h(x)\leq p(x)\ \ \ \forall x \in D(h) \\
+                h(x) = g(x)\ \ \ \forall x \in G
+            \end{array}
+            \right\}
+        \end{gather*}
+        y lo llamaremos \textbf{conjunto de extensiones} de $g$. Sabemos que $P\neq \emptyset$ ya que $g\in P$ (es una extensión de sí misma en el espacio $P$). Necesitamos ahora definir una relación de orden. Lo haremos de la siguiente forma
+        \begin{gather*}
+            h_1\leq h_2 \sii \left\{
+                \begin{array}{l}
+                    D(h_1)\subset D(h_2)\\
+                    h_2{|_{D(h_1)}} = h_1
+                \end{array}
+            \right.\ \ \ \ \ \forall h_1,h_2\in P
+        \end{gather*}
+        y diremos que $h_2$ es una \textbf{extensión} de $h_1$. Se deja como ejercicio demostrar que $\leq$ es una relación de orden.\\
+
+        Probemos ahora que $P$ es inductivo. Para ello tendremos que probar que cualquier subconjunto suyo que esté totalmente ordenado tiene una cota superior. Sea $Q\subset P$ totalmente ordenado. Consideramos
+        \begin{gather*}
+            V_0 = \bigcup_{h\in Q}D(h)
+        \end{gather*}
+        y definimos la aplicación
+        \begin{align*}
+            h_0: V_0 &\to \bb{R}\\
+            x &\mapsto h_0(x) = h(x) \ \ \ \text{ si } x\in D(h)
+        \end{align*}
+        Está bien definida como consecuencia de que el conjunto sea totalmente ordenado. Se deja como ejercicio demostrar que $V_0$ es un subespacio vectorial, que $h_0$ está bien definida, que es lineal y que $h_0(x)\leq p(x)$ para todo $x\in V_0$.\\
+
+        Con esto tengo que $h_0$ es una extensión de todas las $h\in Q$, es decir, $h\leq h_0$ para todo $h\in Q$ lo que nos dice que $h_0$ es la cota superior de $Q$. Con esto podemos concluir que $P$ es inductivo.\\
+        
+        Tenemos todas las hipótesis necesarias para aplicar el teorema de Zorn, que nos dice que $\exists f \in P$ elemento maximal de $P$, es decir, 
+        \begin{align*}
+            f:D(f) \to \bb{R} \left\{
+            \begin{array}{l}
+                G\subset D(f)\subset E\\
+                f\text{ lineal, }\ f(x)\leq p(x)\ \ \ \forall x \in D(f)\\
+                f_{|_G} = g
+            \end{array}
+            \right.
+        \end{align*}
+        Se deja como ejercicio demostrar que si $f$ es maximal, entonces $D(f)=E$ (por contrarrecíproco).\\
+
+        Para ello supongamos que por contradicción se tuviera $D(f) \varsubsetneq E$ por lo que $\exists x_0\in E\setminus D(f)$. Por tanto,
+        \begin{align*}
+            D(f) \oplus x_0 \bb{R} & \to \bb{R}\\
+            x+tx_0 & \mapsto f(x) + t\alpha = \hat{f}(x+t_0)
+        \end{align*}
+        Solo tendremos que ver que $\hat{f}_{|_{D(f)}}=f$ y que $\hat{f}(x+tx_0)\leq p(x+tx_0)$ para todo $x\in D(f)$, $\forall t \in \bb{R}$.\\
+
+        Sabemos que Esto es equivalente a
+        \begin{align*}
+            &\hat{f}(x+tx_0)\leq p(x+tx_0) \ \ \ \forall x \in D(f),\ \forall r \in \bb{R} \sii\\ 
+            \sii &\hat{f}(t_z+tx_0)\leq p(t_z+tx_0) \ \ \ \forall z \in D(f),\ \forall r \in \bb{R} \sii\\
+            \sii &t \hat{f}(z+x_0) \leq p(t(z+x_0)) = 
+            \left\{
+                \begin{array}{l c}
+                    tp(z+x_0) & t>0\\
+                    -tp(-z-x_0) & t<0
+                \end{array}
+            \right. \sii\\
+            \sii & \left\{
+                \begin{array}{l c}
+                    f(z) +\alpha = \hat{f}(z+x_0)\leq p(z+x_0) & t>0,\ z\in D(f)\\
+                    -f(z) -\alpha = -\hat{f}(z+x_0)\leq p(-z-x_0) & t>0,\ z\in D(f)\\
+                \end{array}
+            \right. \sii\\
+            \sii & \left\{
+                \begin{array}{l}
+                    \alpha \leq -f(z) + p(z+x_0)\\
+                    -f(z)-p(-z-x_0) \leq \alpha
+                \end{array}
+            \right. \forall z \in D(f)
+        \end{align*}
+        Por lo que nos basta con demostrar lo siguiente
+        \begin{gather*}
+            \sup\{f(-z)-p(-z-x_0) : z\in D(f)\} \leq \alpha \leq \inf\{-f(z) + p(z+x_0):z\in D(f)\}
+        \end{gather*}
+        Podemos cambiar $-z$ por un $w\in D(f)$ cualquiera de la siguiente forma:
+        \begin{gather*}
+            \sup\{f(w)-p(w-x_0) : w\in D(f)\} \leq \alpha \leq \inf\{-f(z) + p(z+x_0):z\in D(f)\}
+        \end{gather*}
+        Veamos que esta desigualdad se verifica. Para cualesquiera $z,w\in D(f)$
+        \begin{gather*}
+            f(z) + f(w) = f(z+w) \leq p(z+w) = p(z+x_0-x_0+w) \leq p(z+x_0) + p(w)-x_0 \Rightarrow \\
+            f(w) - f(w-x_0) \leq -f(z)+p(z+x_0)
+        \end{gather*}
+        y hemos probado que cualquier elemento del segundo conjunto es cota superior de todos los elementos del primer conjunto, lo que prueba la existencia del $\alpha$ probando lo buscado.
+    \end{proof}
+\end{teo}
+
+\begin{observacion}
+    Sea $E$ un espacio normado, $f:E\to \bb{R}$ una aplicación no nula ($f\neq 0$) y $\alpha \in \bb{R}$. Si $f$ lineal y continua, entonces
+    \begin{gather*}
+        [f=\alpha] = \{x\in E : f(x)=\alpha\} = f^{-1}(\{\alpha\})
+    \end{gather*} es un hiperplano\footnote{basta con la linealidad (primer teorema de isomorfía)} cerrado\footnote{por ser $f$ continua}.
+\end{observacion}
+
+\begin{definicion}
+    Si $A,B\subset E$ es un espacio normado. Diremos que el hiperplano $H=[f=\alpha]$ \textbf{separa} $A$ y $B$ si 
+    \begin{gather*}
+        \exists \alpha \in \bb{R} \text{ tal que } f(x) \leq \alpha \leq f(y)\ \ \ \forall x \in A,\ \ \forall y \in B
+    \end{gather*}
+    Diremos que \textbf{separa estrictamente} $A$ y $B$ si 
+    \begin{gather*}
+        \exists \veps > 0 \text{ tal que } f(x)\leq \alpha -\veps < \alpha + \veps \leq f(y)\ \ \ \forall x \in A,\ \forall y \in B
+    \end{gather*}
+\end{definicion}
+
+\begin{teo}[Primera forma geométrica del teorema de Hanh-Banach]
+    Supongamos que $E$ es un espacio normado, $A,B\subset E$ dos subconjuntos de $E$ no vacíos, disjuntos, es decir, $A\cap B = \emptyset$, convexos y con $A$ abierto. Entonces existe un hiperplano cerrado $H$ que separa $A$ y $B$.
+    \begin{proof}\
+        \begin{itemize}
+            \item[\textbf{Paso 1:}] Vamos a considerar $B=\{x_0\}$ y $\emptyset \neq A \subset E$ abierto convexo con $x_0\notin A$. Elijo $C = A -z_0$. Se deja como ejercicio probar que $C$ es convexo y abierto con $0\in C$. Probar también que $y_0 = x_0-z_0\notin C$.\\
+            
+            Sabemos que $\bb{R}y_0$ es un espacio de dimensión 1 y buscamos 
+            una función lineal, que en este espacio será de la forma
+            \begin{align*}
+                g:\bb{R}y_0 &\to \bb{R}\\
+                t{y_0} & \mapsto g(t{y_0}) = t
+            \end{align*}
+            Buscamos ahora una aplicación $f:E \to \bb{R}$ que extienda a $g$ verificando $f(x) \leq f(y_0) = g(y_0) = 1 $ para todo $x\in C$. El teorema de Hanh-Banach nos dirá que existe un $f:E\to \bb{R}$ lineal tal que 
+            \begin{gather*}
+                f(ty_0) = t \ \ \ \forall t \in \bb{R}\\
+                f(x) \leq p(x)\ \ \ \forall x \in E
+            \end{gather*}
+        \end{itemize}
+    \end{proof}
+\end{teo}
+
+\section{Funcional de Minkowski de un conjunto}
+
+\begin{definicion}[Funcional de Minkowski]
+    Sea $E$ un espacio normado y $C\subset E$ convexo, abierto y tal que $0\in C$. Consideramos la aplicación
+    \begin{align*}
+        p:E &\to \bb{R}\\
+        x & \mapsto p(x) = 
+        \left\{
+        \begin{array}{l c c}
+            \inf\left\{\alpha>0 : \frac{x}{\alpha}\in C\right\} & \text{ si }& \forall x \in E\setminus \{0\}\\
+            0 & \text{ si }& x=0
+        \end{array}
+        \right.
+    \end{align*}
+    y la llamaremos \textbf{funcional de Minkowski}.
+\end{definicion}
+
+\begin{propiedades}
+    El funcional de Minkowski verifica las siguientes propiedades:
+    \begin{enumerate}
+        \item $p(\lambda x) = \lambda p(x)  \ \ \ \forall x \in E, \ \ \ \forall \lambda >0$
+        \item $\exists M>0$ tal que $0\leq p(x)\leq M\|x\|\ \ \ \forall x \in E$
+        \item $C=\{x\in E : p(x)<1\}$
+        \item $p(x+y)\leq p(x) + p(y) \ \ \ \forall x,y\in E$
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item $p(\lambda x ) = hf\{\alpha>0 : \frac{x}{\nicefrac{\alpha}{\lambda}} = \frac{\lambda x}{\alpha}\in C\} = \lambda \inf\{\alpha>0 : \frac{x}{\alpha}\in C\} = \lambda p(x)$
+
+            \item Como $C$ ebierto y $0\in C$ sabemos que $\exists r>0 : B_E(0,r)\subset C$ y se tiene
+            \begin{gather*}
+                \alpha > \frac{\|x\|}{r} \Rightarrow \left\| \frac{x}{\alpha} \right\| < r \Rightarrow \frac{x}{\alpha}\in B_E(0,r)\subset C
+            \end{gather*}
+            por lo que 
+            \begin{gather*}
+                \left(\frac{\|x\|}{r}, +\infty\right)\subset \left\{\alpha>0 : \frac{x}{\alpha}\in C\right\} \Rightarrow p(x) \leq \frac{\|x\|}{r}
+            \end{gather*}
+
+            \item Queremos ver que $p(x)<1$ para todo $x\in C$. Sabemos que si $x\in C$ abierto, entonces $\exists r>0$ tal que $B_E(x,r)\subset C$. Tomamos ahora un $\veps>0$ y queremos ver cuánto vale la siguente norma:
+            \begin{gather*}
+                \left\| \frac{x}{1+\veps} - x\right\| = \left\| \frac{-\veps x}{1+\veps}\right\| = \frac{\veps}{1+\veps} \|x\|
+            \end{gather*}
+            Elegimos ahora un $\veps_0>0$ tal que 
+            \begin{gather*}
+                \frac{\veps_0}{1+\veps_0} < \veps_0 < \frac{r}{\|x\| + 1}
+            \end{gather*}
+            y podemos afirmar que 
+            \begin{gather*}
+                \left\| \frac{x}{1+\veps} - x\right\| < r \ \ \ \forall \veps \in (0,\veps_0]
+            \end{gather*}
+            por lo que 
+            \begin{gather*}
+                \frac{x}{1+\veps} \in B_E(x,r)\subset C \ \ \ \forall \veps \in (0,\veps_0]
+            \end{gather*}
+            Acabamos de demostrar que $p(x)\leq \frac{1}{1+\veps}$ para todo $\veps\in (0,\veps_0]$. Hay algo mal en la demostración de este apartado. Se deja como ejercicio para el lector averiguar qué es lo q está mal (deberíamos haber empezado con $(1+\veps)x$ en vez de con $\frac{x}{1+\veps}$).
+
+            La otra inclusión la haremos sabiendo que si $p(x)=\inf\left\{ \alpha >0 : \frac{x}{\alpha}\in C\right\}<1$, entonces sabemos que $\exists \alpha_0<1$ tal que $\frac{x}{\alpha_0}\in C$. Como además $C$ es convexo y $0\in C$ tenemos que
+            \begin{gather*}
+                x=\alpha_0 \cdot \frac{x}{\alpha_0} + (1-\alpha) \in C
+            \end{gather*}
+
+
+            \item Podemos afirmar que 
+            \begin{gather*}
+                \frac{x}{p(x)+\veps} \in C \ \ \ \forall \veps > 0
+            \end{gather*}
+            y por el apartado anterior tenemos que 
+            \begin{gather*}
+                p\left(\frac{x}{p(x)+\veps}\right)<1
+            \end{gather*}
+            Como $C$ es convexo, puedo considerar $\frac{y}{p(y)+\veps}\in C$ y cualquier combinación convexa de $x$ e $y$ estará en $C$. Consideramos 
+            \begin{gather*}
+                0\leq t = \frac{p(x)+\veps}{p(x)+p(y)+2\veps} \leq 1
+            \end{gather*}
+            y con este $t$ formamos la siguiente combinación
+            \begin{gather*}
+                t \frac{x}{p(x)+\veps} + (1-t) \frac{y}{p(y)+\veps} = \frac{x + y}{p(x)+p(y)+2\veps} \in C
+            \end{gather*}
+            por el apartado anterior tenemos que $p(x+y)\leq p(x) + p(y)$.
+        \end{enumerate}
+    \end{proof}
+\end{propiedades}
+
+\begin{ejemplo}
+    Para $C=B(0,1)$ tenemos que $p_C(x)=\|x\|$ (sale claramente si se piensa lo que se está haciendo).
+\end{ejemplo}
+
+\begin{teo}[Primera forma geométrica del teorema de Hanh-Banach]
+    Supongamos que $E$ es un espacio normado, $A,B\subset E$ dos subconjuntos de $E$ no vacíos, disjuntos, es decir, $A\cap B = \emptyset$, convexos y con $A$ abierto. Entonces existe un hiperplano cerrado $H$ que separa $A$ y $B$.
+    \begin{proof}\
+        \begin{itemize}
+            \item[\textbf{Paso 1:}] Vamos a considerar $B=\{x_0\}$ y $\emptyset \neq A \subset E$ abierto convexo con $x_0\notin A$. Elijo $C = A -z_0$. Se deja como ejercicio probar que $C$ es convexo y abierto con $0\in C$. Probar también que $y_0 = x_0-z_0\notin C$.\\
+            
+            Sabemos que $G=\bb{R}y_0$ es un espacio de dimensión 1 y buscamos 
+            una función lineal, que en este espacio será de la forma
+            \begin{align*}
+                g:\bb{R}y_0 &\to \bb{R}\\
+                t{y_0} & \mapsto g(t{y_0}) = t
+            \end{align*}
+
+            Considero $p$ el funcionar de Minkowski de $C$. Observemos 
+
+            \begin{itemize}
+                \item Como $y_0\notin C \Rightarrow p(y_0) \geq 1$
+                \item Si $t>0$, entonces $g(ty_0)=t \leq p(y_0) = p(ty_0)$
+                \item Si $t<0$, entonces $g(ty_0) = t < 0 \leq p(ty_0)$
+            \end{itemize}
+            En cualquier caso tendremos que 
+            \begin{gather*}
+                g(ty_0)\leq p(ty_0)\ \ \ \forall t \in \bb{R}
+            \end{gather*}
+            Usando el teorema de Hanh-Banach tenemos que existe un  $f:E\to \bb{R}$ lineal tal que 
+            \begin{gather*}
+                f_{|_G} = g\\
+                \text{y}\\
+                f(y) \leq p(y) \leq M \|y\|\ \ \ \forall x \in E
+            \end{gather*}
+            Por lo que podemos concluir que 
+            \begin{gather*}
+                |f(y)| \leq M\|y\| \ \ \ \forall y \in E
+            \end{gather*}
+            lo que nos dice que $f$ es continua. Nos queda probar que $f$ es la aplicación que queremos buscar y por tanto tendremos que encontrar $\alpha$, es decir, probar que $f(y)\leq 1 = f(y_0)$ para todo $y\in C$, lo que significaría que hemos separado $C$ de $y_0$. Se deja como ejercicio.
+
+            \item[\textbf{Paso 2:}] Consideramos $\emptyset\neq A \subset E$ abierto, $\emptyset\neq B\subset E$ convexos tales que $A\cap B=\emptyset$. Consideramos 
+            \begin{gather*}
+                A-B = \{a-b : a\in A,\ b\in B\}
+            \end{gather*}
+            y como $A\cap B=\emptyset$ sabemos que $0\notin (A-B)$. Veamos ahora que $A-B$ es abierto. Esto es muy sencillo ya que podemos escribir
+            \begin{gather*}
+                A-B = \bigcup\limits_{b\in B}(A-b)
+            \end{gather*}
+            y tenemos que es unión de abiertos trasladados que siguen siendo abiertos luego $A-B$ es abierto.
+            Se deja como ejercicio demostrar que $A-B$ es convexo y terminar la demostración.
+        \end{itemize}
+    \end{proof}
+\end{teo}
+
+\begin{teo}[Segunda forma geométrica del teorema de Hanh-Banach]
+    Sea $\emptyset\neq A \subset E$, $\emptyset \neq B \subset E$ tal que $A\cap B\neq \emptyset$  y con $A$ y $B$ convexos, $A$ cerrado y $B$ compacto. Entonces existe un hiperplano que separa estrictamente $A$ y $B$, es decir,
+    \begin{gather*}
+        \exists f :E \to \bb{R} \text{ lineal y continua}\\
+        \text{ y }\\
+        \exists \alpha \in \bb{R}, \ \exists \veps >0 : f(a) \leq \alpha - \veps < \alpha < \alpha + \veps \leq f(b) \ \ \ \forall a \in A,\ \forall b \in B
+    \end{gather*}
+
+    \begin{proof}
+        Consideramos el conjunto $C:=A-B$ que sabemos que es convexo de la demostración del teorema anterior. Como $A$ es cerrado y $B$ es compacto sabemos que $C$ es cerrado (se deja la demostración como ejercicio). Igual que antes, sabemos que $0\notin C$ y además, como $C$ es cerrado tenemos que $E\setminus C$ es abierto y tenemos que 
+        \begin{gather*}
+            \exists r >0: B_E(0,r)\cap C =0
+        \end{gather*}
+        Por la primera forma geométrica del teorema de Hanh-Banach podemos separar $B_E(0,r)$ y $C$. El resto de la demostración se deja como ejercicio (la idea es separar estrictamente $0$ de $C$ y aprovechar la linealidad para separar estrictamente $A$ de $B$).
+    \end{proof}
+\end{teo}
+
+% Lunes
+
+\begin{lema}
+    Sean $E$, $F$ espacios normados, $T\in L(E,F)$, entonces se tiene que 
+    \begin{gather*}
+        \sup\limits_{\|x-x_0\|<r} \|T_x\| \geq r \|T\| \ \ \ \forall x_0\in E,\ \ \forall f>0
+    \end{gather*}
+
+    \begin{proof}
+        Tenemos, para todo $y\in E$ que
+        \begin{gather*}
+            \|T_y\| = \left\|T\left(\frac{1}{2}[x_0 +y - (x_0 -y)]\right)\right\| = \frac{1}{2}\left[ \|T(x_0+y)\| + \|T(x_0-y)\| \right] \leq\\
+            \leq \max\{\|T(x_0+y)\|,\ \|T(x_0-y)\|\}\ \ \ \forall x_0\in E
+        \end{gather*}
+        Además,
+        \begin{gather*}
+            r\|T\| = \sup\limits_{\|y\| \leq r} \|Ty\| \leq \sup\limits_{\|y\| \leq r} \max\{\|T(x_0+y)\|,\ \|T(x_0-y)\|\} \leq \\
+            \leq \sup\limits_{\|z-x_0\| \leq r} \|Tz\|
+        \end{gather*}
+    \end{proof}
+\end{lema}
+
+\begin{prop}[Principio de acotación uniforme]
+
+    Sea $E$ un espacio de Banach, $F$ espacio normado, $\cc{F}$ una familia de operadores $T\in L(E,F)$. Si $\sup\limits_{T\in \cc{F}} \|T_x\| < \infty$ para todo $x\in E$, entonces $\sup\limits_{T\in \cc{F}} \|T\|<\infty$.
+
+    \begin{proof}
+        Por contradicción al absurdo. Supongamos que $\sup\limits_{T\in \cc{F}} \|T\| = \infty$. Esto significa que existe una sucesión de operadores de $\cc{F}$, $\{T_n\}\subset \cc{F}$ con $\|T_n\|\geq 4^n$ para todo $n\in \bb{N}$. Tomo $x_0=0$ y $r=\frac{1}{3}$ y aplicamos el lema recién probado y llegamos a que existe un $x_1\in B(x_0, \nicefrac{1}{3})$
+        \begin{gather*}
+            \|T_1x_1\| > \frac{2}{3} \cdot \frac{1}{3} \|T_1\|
+        \end{gather*}
+        y seguimos contruyendo por inducción
+        \begin{gather*}
+            \sup\limits_{\|x-x_{n-1}\| < \frac{1}{3^n}} \|Tx\| \geq \frac{1}{3^n} \|T_n\| > \frac{2}{3} \cdot \frac{1}{3^n} \|T_n\|
+        \end{gather*}
+        Esto nos da una sucesión $\{x_n\}\subset E$ y veamos ahora que dicha sucesión es de Cauchy. Para ello tomamos $m>n$ y tenemos
+        \begin{gather*}
+            \|x_m-x_n\| = \|x_m-x_{m-1}+x_{m-1} - x_{m-2} + \dots + x_{n+1} - x_n \| \leq\\
+            \leq  \|x_m - x_{m-1}\| + \|x_{m-1} - x_{m-2}\| + \dots + \|x_{n+1} - x_n\| \leq \frac{1}{3^n} + \frac{1}{3^{m-1}} + \dots + \frac{1}{3^{n+1}} =\\
+            = \frac{1}{3^n} \left[\frac{1}{3^{m-n} + \dots + \frac{1}{3}}\right] = \frac{1}{3^n} \sum_{j=1}^\infty \frac{1}{3^t} = \frac{1}{3^n} \cdot \frac{\frac{1}{3}}{1-\frac{1}{3}} = \frac{1}{2} \cdot \frac{1}{3^n}
+        \end{gather*}
+        y tenemos que es de Cauchy en un espacio de Banach, luego $\{x_n\}$ converge a un $x\in E$. Tenemos además
+        \begin{gather*}
+            \lim_{n\to\infty} \|x_m-x_n\| = \|lim_{m\to \infty} (x_m-x_n)\| = \|x-x_n\| \leq \frac{1}{2} \cdot \frac{1}{3^n}
+        \end{gather*}
+        Vamos a estimar la norma de $T_nx$. Para ello escribimos
+        \begin{gather*}
+            \|T_n(x)\| = \| T_n(x-x_n+x_n)\| \geq \|T_n(x_n)\| - \|T_n(x-x_n)\| \geq \frac{2}{3} \cdot \frac{1}{3^n} \|T_n\| - \|T_n\|\|x - x_n\| \geq \\
+            \geq \left(\frac{2}{3} - \frac{1}{2} \right) \frac{1}{3^n} \|T_n\| = \frac{1}{6} \cdot \frac{1}{3^n} \|T_n\| \geq \frac{1}{6}\left(\frac{4}{3}\right)^n \to \infty
+        \end{gather*}
+        y en este caso tendríamos que
+        \begin{gather*}
+            \sup_{T\in \cc{F}} \|Tx\| \geq \sup_{n\in \bb{N}} \|T_nx\| = \infty
+        \end{gather*}
+        por lo que llegamos a la contradicción buscada.
+    \end{proof}
+\end{prop}
+
+\begin{lema} [Lema de Beire]
+    Supongamos que $X$ es un espacio métrico completo, $X_n\subset X$ tal que $X_n$ cerrado y $int X_n = \emptyset$ para todo $n\in \bb{N}$. Etnonces se tiene que
+    \begin{gather*}
+        int \left(\bigcup\limits_{n=1}^\infty X_n\right) = \emptyset
+    \end{gather*}
+\end{lema}
+
+\begin{observacion}
+    El contrarrecíprodo del lema anterior sería:\\
+    Si $X$ es un espacio métrico completo y $X_n\subset X$ es cerrado $\forall n\in \bb{N}$. Entonces
+    \begin{gather*}
+        int \left(\bigcup\limits_{n=1}^\infty X_n\right) \neq \emptyset \Rightarrow \exists n_0\in \bb{N} \text{ tal que } intX_{n_0}\neq \emptyset
+    \end{gather*}
+    Se recomienda ver este lema y su demostración en el libro de Brezis.
+\end{observacion}
+
+% Corolario 2.3, Corolario 2.4, Corolario 2.5 ya los podemos hacer como ejercicios y mañana se presentarán en clase
+
+\begin{ejercicio}
+    Sean $X,Y$ espacio de Banach, $T\in L(X,Y)$ y definimos
+    \begin{gather*}
+        \|y\|_n := \inf\{\|u\|_X+n \|v\|_Y: u\in X,\ v\in Y, \ y=T(u)+v\}\ \ \ \forall n \in \bb{N},\ \ \forall y \in Y
+    \end{gather*}
+    Probar que $\|\cdot\|_n$ es una norma en $Y$ que verifica
+    \begin{gather*}
+        \|y\|_n \leq n \|y\|_y \ \ \ \forall y \in Y
+    \end{gather*}
+    Además, si $y=T(x)$, con $x\in X$ entonces se verifica
+    \begin{gather*}
+        \|y\|_n \leq \|x\|_X
+    \end{gather*}
+\end{ejercicio}
+
+% El truco está en que tengo muchas formas de escribir y=Y(u)+v y habrá que jugar con ellas para probar esto (por ejemplo para la segunda parte basta con ver que \|x\|_X está en el conjunto por lo que el ínfimo será menor o igual).
+
+\section{Teorema de la aplicación abierta}
+
+\begin{ejercicio}
+    Sea $T:X\to Y$ lineal. Entonces se tiene que $T$ es abierta si y solo si
+    \begin{gather*}
+        \exists \delta>0 \text{ tal que } B_Y(0,\delta) \subset T(B_X(0,1))
+    \end{gather*}
+\end{ejercicio}
+
+\begin{teo}[Teorema de la aplicación abierta]
+    Sean $X,Y$ espacios de Banach, y $T\in L(X,Y)$ una aplicación sobreyectiva. Entonces $T$ es abierta.
+    \begin{proof}\
+        \begin{itemize}
+            \item[\textbf{Paso 1.}] Vamos a demostrar en primer lugar que existe un $r>0$ tal que
+            \begin{gather*}
+                B_Y(0,r)\subset \overline{T(B_X(0,1))}
+            \end{gather*}
+            Para ello considero en el espacio $Y$ la siguiente norma para todo $n\in \bb{N}$:
+            \begin{gather*}
+                \|y\|_n = \inf\{\|u\|_X+n \|v\|_Y: u\in X,\ v\in Y, \ y=T(u)+v\}\ \ \ \forall y \in Y
+            \end{gather*}
+            Abreviaremos la notación como 
+            \begin{gather*}
+                \|y\|_n = \inf_{y=T(u)+v}\{\|u\|_X+n \|v\|_Y\}\ \ \ \forall y \in Y
+            \end{gather*}
+            entendiendo que es equivalente a la definición anterior. Consideramos ahora el siguiente espacio
+            \begin{gather*}
+                Z \equiv 
+                \begin{array}{l}
+                    \text{espacio de todas las sucesiones } \{z_m\}_{m\in \bb{N}}\subset Y\\
+                    \text{ con un número finito de términos } z_m \text{ no nulo}
+                \end{array}
+            \end{gather*}
+            y en dicho espacio podemos considerar
+            \begin{gather*}
+                \|\{z_m\}_{m\in \bb{N}}\|_\infty = \max_{m\in \bb{N}} \|z_m\|_n
+            \end{gather*}
+            Se deja como ejercicio demostrar que esto es una norma en $Z$. Vamos a definir la aplicación
+            \begin{align*}
+                T_n : Y &\to Z\\
+                y &\mapsto T_n(y) = \{\delta_{nk}y\}_{k\in \bb{N}}\\\\
+            \end{align*}
+            donde $\delta_{nk}$ es la aplicación delta de Kronecker,
+            \begin{gather*}
+                \delta_{nk} = \left\{
+                    \begin{array}{l c c}
+                        1 & \text{ si } & k=n\\
+                        0 & \text{ si } & k \neq n
+                    \end{array}
+                \right.
+            \end{gather*}
+            Con estas definiciones tenemos que $\forall y_1,y_2\in Y$
+            \begin{align*}
+                T_n(y_1+y_2) &= \{\delta_{nk}(y_1+y_2)\}_{k\in \bb{N}} = \{\delta_{nk}y_1 + \delta_{nk} y_2\}_{k\in \bb{N}} =\\
+                &= \{\delta_{nk}y_1\}_{k\in \bb{N}} + \{\delta_{nk} y_2\}_{k\in \bb{N}} =\\
+                &= T_n(y_1) + T_n(y_2)
+            \end{align*}
+            por lo que $T_n$ es lineal y además es continua con $\|T_n\|_{L(Y,Z)} \leq n$. Con esto tenemos que
+            \begin{gather*}
+                \|T_n(y)\|_\infty = \|\{\delta_{nk} y\}_{k\in \bb{N}}\|_{\infty} = \max_{k\in \bb{N}} \|\delta_{nk} y\|_n = \|y\|_n \leq n \|y\|_Y
+            \end{gather*}
+            Vemos ahora que $\forall y \in Y$ la sucesión $\{T_n(y)\}_{n\in \bb{N}}$ está acotada. Como $T$ es sobreyectiva sabemos que $\exists x\in X$ tal que $T(x) = y$ por lo que podemos escribir $y=T(x)+0$ y tomando $u=x$, $v=0$ y con la definición de la norma anterior tenemos que 
+            \begin{gather*}
+                \|y\|_n \leq \|x\|_X + n\|0\| = \|x\|_X
+            \end{gather*}
+            por lo que  $\|T_n(y)\|_\infty \leq n\|y\|_Y \leq n\|x\|_X$ y tenemos que la sucesión$\{T_n(y)\}_{n\in \bb{N}}$ está acotada. Por el principio de acotación uniforme sabemos que $\{\|T_n\|(y)\}_{n\in \bb{N}}$ está acotada, es decir, que $\exists M \geq 0$ tal que 
+            \begin{gather*}
+                \|T_n\|_{Y(Y,Z)} \leq M\ \ \ \forall n \in \bb{N}
+            \end{gather*}
+            lo que nos dice que
+            \begin{gather*}
+                \|T_n(y)\|_\infty \leq M \|y\|_Y\ \ \ \forall n \in \bb{N}
+            \end{gather*}
+            Sea $y\in B_Y(0,\nicefrac{1}{M})$ y queremos ver que $y\in \overline{T(B_X(0,1))}$. Para ello empecemos calculando
+            \begin{gather*}
+                \|y\|_n = \inf_{y=T(u)+v}\{\|u\|_X + n\|v\|_Y\} \leq M\|Y\|_Y < M \cdot \frac{1}{M} = 1
+            \end{gather*}
+
+            Vamos ahora a definir
+            \begin{gather*}
+                A = \{\|u\|_X + n\|v\|_Y : y=T(u)+v,\ u\in X,\ v\in Y\}
+            \end{gather*}
+            y sabemos que $\inf A < 1$, luego $\exists a_n \in A$ tal que $\inf A \swarrow a_n < 1$
+
+            y podemos garantizar que $\exists u_n\subset X$, $\exists v_n\subset Y$ tales que si podemos escribir $y=T(u_n) + v_n$, entonces 
+            \begin{gather*}
+                \|u_n\| + n\|v_n\|_Y <1
+            \end{gather*}
+            por lo que además por ser suma de cantidades positivas tenemos 
+            \begin{gather*}
+                \left.
+                \begin{array}{r}
+                    \|u_n\|_X<1\\
+                    n\|v_n\|_Y<1
+                \end{array}
+                \right\} \Rightarrow
+                \left.
+                \begin{array}{r}
+                    \|u_n\|_X<1\\
+                    \|v_n\|_Y<\frac{1}{n}
+                \end{array}
+                \right\}
+            \end{gather*}
+            Evaluamos ahora $T$ en $u_n$.
+            \begin{gather*}
+                T(u_n) = \{T(u_n) + v_n - v_n\} = \{y-v_n\} \overset{Y}{\to}y \ \ \ \text{ (cuando $n\to \infty$)}\\
+                % \|T(u_n)\|_Y = \|y-v_n\|_Y \to \|y\|_Y
+            \end{gather*}
+            Sabemos que $v_n \to 0$ en $Y$ cuando $n\to \infty$ y $T(u_n)\in T(B_X(0,1))$ y como $y=T(u_n) + v_n$ tendremos que $y\in \overline{T(B_X(0,1))}$ como queríamos demostrar.
+            
+            \item[\textbf{Paso 2.}] Vamos a demostrar ahora que $B_Y(0,\nicefrac{r}{2})\subset T(B_X(0,1))$. Esto es equivalente a probar que 
+            \begin{gather*}
+                \frac{1}{2^n} B\left(0, \frac{r}{2^n}\right) \subset \overline{\frac{1}{2^n} \cdot T\left(B_X\left(0,\frac{1}{2^n}\right)\right)} \sii B\left(0, \frac{r}{2^n}\right) \subset \overline{T\left(B_X\left(0,\frac{1}{2^n}\right)\right)}
+            \end{gather*}
+            Veámoslo por inducción. Para $n=1$ tenemos que
+            \begin{gather*}
+                y\in B_Y\left(0,\frac{r}{2}\right) \subset \overline{T\left(B_X\left(0,\frac{1}{2}\right)\right)} \Rightarrow \exists x_1 \in B_X\left(0,\frac{1}{2}\right) : \|y-T(x_1)\| < \frac{r}{2^2}
+            \end{gather*}
+            Tenemos entonces 
+            \begin{gather*}
+                y-T(x_1) \in B_Y\left(0,\frac{r}{2^2}\right) \subset \overline{T\left(B_X\left(0,\frac{1}{2}\right)\right)} \Rightarrow\\
+                \Rightarrow \exists x_2 \in B_X\left(0,\frac{1}{2^2}\right) : \|y-T(x_1) - T(x_2)\| < \frac{r}{2^3}
+            \end{gather*}
+            Si repetimos este proceso podemos llegar a que 
+            \begin{gather*}
+                \exists x_n \in B_X\left(0,\frac{1}{2^n}\right) : \|y-\sum_{k=1}^n T(x_k)\| < \frac{r}{2^{n+1}}
+            \end{gather*}
+            Por lo tanto, tendríamos que 
+            \begin{gather*}
+                \sum_{n=1}^\infty \|x_n\|_X \leq \sum_{n=1}^\infty \frac{1}{2^n} < \infty
+            \end{gather*}
+            por lo que $\sum\limits_{n\geq 1} x_n$ converge en norma\footnote{o equivalentemente es de Cauchy}. Por ser $X$ un espacio de Banach tenemos que $\sum\limits_{n=1}^\infty x_n = x$. Tenemos entonces $\|x\|_X \leq \sum\limits_{n=1}^\infty \|x_n\|_X < 1$. Además, de lo anterior podemos concluir que
+            \begin{gather*}
+                \|y-\sum_{k=1}^ T(x_k)\| < \frac{r}{2^{n+1}} \Rightarrow \sum_{k=1}^\infty T(x_k) = y
+            \end{gather*}
+            Y escribirmos ahora
+            \begin{align*}
+                T(x) &= T\left(\sum_{k=1}^\infty x_k\right) = T\left(\lim_{N\to \infty}\sum_{k=1}^N x_k\right) \overset{T \text{ cont.}}{=} \lim_{N\to \infty}T\left(\sum_{k=1}^N x_k\right) \\
+                &\overset{T \text{ lineal.}}{=} \lim_{N\to \infty} \sum_{N\to \infty}^N T(x_k) = \sum_{k=1}^\infty T(x_k) = y\in T(B_X(0,1))
+            \end{align*}
+        \end{itemize}
+    \end{proof}
+\end{teo}
+
+\begin{teo}[Teorema de la gráfica cerrada]
+    Sean $E,F$ espacios de Banach, $T:E\to F$ lineal. Entonces si $T$ es continua si y solo si
+    \begin{gather*}
+        Gr(T) = \{(x,T_x):x\in E\}
+    \end{gather*}
+    es cerrado en $E\times F$.
+
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$)] Se deja como ejercicio.
+            \item[$\Leftarrow$)] Vamos a construir una nueva norma $\|\cdot\|_T$ que la definimos como 
+            \begin{gather*}
+                \|x\|_T := \|x\|_E + \|T_x\|_F\ \ \ \forall x \in E
+            \end{gather*}
+            Veamos que es una norma.
+            \begin{enumerate}
+                \item[(i)] $\|x\|_T \geq 0$ ya que es suma de dos normas.
+                \item[(ii)] $\|\lambda x\|_T = \|\lambda x\|_E + \|T(\lambda x)\|_F = |\lambda\ \|x\|_E + |\lambda| \|T_x\|_F = |\lambda| \|x\|_T$.
+                \item[(iii)] $\|x_1+x_2\|_T = \|x_1+x_2\|_E + \|T(x_1+x_2)\| \leq \|x_1\|_E + \|x_2\|_E + \|T_{x_1}\|_F + \|T_{x_2}\|_F = \|x_1\|_E + \|x_2\|_E$ 
+            \end{enumerate}
+            y ya tenemos probado que es una norma. Veamos ahora que es completa. En efecto si $\|x_n\|\subset E$ es de Cauchy para $\|\cdot\|_T$ se tiene que 
+            \begin{gather*}
+                \forall \veps > 0\ \ \exists n_0\in \bb{N}: n,m\geq n_0 \Rightarrow \|x_1-x_2\|_E + \|T_{x_n}-T_{x_m}\|_F = \|x_n-x-m\|_T < \veps
+            \end{gather*}
+            por lo que tenemos que 
+            \begin{gather*}
+                \{x_n\} \text{ de Cauchy para } \|\cdot\|_E \overset{\text{E.Banach}}{\Longrightarrow} \exists x\in E : \|x_n-x\|_E \overset{(n\to \infty)}{\longrightarrow} 0\\
+                \{T_{x_n}\} \text{ de Cauchy para } \|\cdot\|_F \overset{\text{E.Banach}}{\Longrightarrow} \exists y\in F : \|T_{x_n} -y\|_E \overset{(n\to \infty)}{\longrightarrow} 0
+            \end{gather*}
+
+            Esto nos dice que $\{(x_n, T_{x_n})\} \overset{E\times F}{\longrightarrow} (x,y)$. Además por hipótesis tenemos que $\{(x_n, T_{x_n})\}\subset Gr(T)$ cerrado en $E\times F$ luego se tiene que $(x,y)\in Gr(E) \Rightarrow y = T_x$.
+            \begin{gather*}
+                \|x_n-x\|_T = \|x_n-x\|_E + \|T_{x_n} - T_x\|_F \overset{(n\to\infty)}{\longrightarrow} 0
+            \end{gather*}
+            Por la definición de $\|\cdot\|_T$ tenemos que 
+            \begin{gather*}
+                \|x\|_E \leq \|x\|_T\ \ \forall x \in E
+            \end{gather*}
+            y por el teorema de la aplicación abierta sabemos que 
+            \begin{gather*}
+                \exists k \geq 0 : \|x\|_T \leq k\|x\|_E\ \ \ \forall x \in E
+            \end{gather*}
+            luego se tiene que 
+            \begin{gather*}
+                \|x\|_E + \|T_x\|_F \leq k \|x\|_E\ \ \ \forall x \in E \Rightarrow k \geq 1
+            \end{gather*}
+            es decir, 
+            \begin{gather*}
+                \|T_x\|_F \leq (k-1)\|x\|_E \ \ \ \forall x \in E
+            \end{gather*}
+            y tenemos entonces que es Lipschitziana y por tanto se tiene finalmente que $T$ es continua en $E$.
+        \end{itemize}
+    \end{proof}
+\end{teo}
+
+\section{Espacio Bidual}
+
+\begin{definicion}
+    Dado $E$ de Banach, entonces 
+    \begin{gather*}
+        (E^*, \|\cdot\|_{E^*})\text{ de Banach con } \|f\|_{E^*}:=\sup_{\|x\|\leq 1} |\langle f,x \rangle_{E^*, E} |
+    \end{gather*}
+    Tenemos $\chi\in E^{**}=(E^*)^*$ donde
+    \begin{align*}
+        \chi: E^* &\to \bb{R} \text{ lineal y continua}\\
+        f & \mapsto \langle x,f \rangle_{E^{**}, E^*}
+    \end{align*}
+    y se tiene que 
+    \begin{gather*}
+        \|\chi\|_{E^**} = \sup_{\|f\|_{E^*}\leq 1} |\langle f,x \rangle_{E^{**}, E^*}|
+    \end{gather*}
+    Dado un $x\in E$ podemos considerar $\chi_x\in E^{**}$ y tendremos
+    \begin{align*}
+        \chi_x : E^* & \to \bb{R} \text{ lineal y continua}\\
+        f & \mapsto \langle f, x \rangle_{E^*, E}
+    \end{align*}
+    y tendremos que 
+    \begin{gather*}
+        \|\chi\|_{E^{**}} = \sup_{\|f\|_{E^*}\leq 1} |\chi_x(f)| = \sup_{\|f\|_{E^*}\leq 1} |\langle f,x \rangle_{E^{*}, E}| = \|x\|_E
+    \end{gather*}
+    Normalmente notaremos $\chi_x = J(x)$.
+\end{definicion}
+
+
+

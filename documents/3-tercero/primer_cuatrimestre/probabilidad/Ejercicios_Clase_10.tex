@@ -1,0 +1,63 @@
+\section{Trabajo de clase del martes 12 de Noviembre de 2024}
+
+\begin{ejercicio}
+    (Continuación Ejercicio 1.9.1) 
+    \begin{align*}
+        Var[X]=Var[E[X/Y]]+E[Var[X/Y]]
+    \end{align*}
+    Del ejercicio teníamos la siguiente tabla: 
+    \begin{center}
+        \begin{tabular}{c | c c | c}
+            $X\backslash Y$ & 0 & 1 & $P[X=x_i]$\\
+            \hline
+            0 & $\nicefrac{3}{10}$ & $\nicefrac{3}{10}$ & $\nicefrac{3}{5}$\\
+            1 & $\nicefrac{3}{10}$ & $ \nicefrac{1}{10}$ & $\nicefrac{2}{5}$\\
+            \hline
+            $P[Y=y_i]$ & $\nicefrac{3}{5}$ & $\nicefrac{2}{5}$ & \\
+        \end{tabular}
+    \end{center}
+    Veamos en primer lugar cuál es la varianza de $X$:
+    \begin{align*}
+        E[X] &= 0 \cdot \nicefrac{3}{5} + 1 \cdot \nicefrac{2}{5} = \nicefrac{2}{5}\\
+        E[X^2] &= 0^2 \cdot \nicefrac{3}{5} + 1^2 \cdot \nicefrac{2}{5} = \nicefrac{2}{5}\\
+        Var(X) &= E[X^2]-E[X]^2 = \nicefrac{2}{5} - \left(\nicefrac{2}{5}\right) = \nicefrac{6}{25}
+    \end{align*}
+    Calculemos lo que nos queda:
+    \begin{align*}
+        Var(E[X/Y]) &= E[E[X/Y]^2] - (E[E[X/Y]])^2 =\\
+        &= E[E[X/Y]^2] - E[X]^2\\
+    \end{align*}
+    Del ejercicio nos quedaba lo siguiente:
+    \begin{gather*}
+        E[X/Y] = \left\{
+        \begin{array}{ccc}
+            \nicefrac{1}{2} & \text{ si } & Y=0\\
+            \nicefrac{1}{4} & \text{ si } & Y=1
+        \end{array}
+        \right.
+    \end{gather*}
+    Tenemos entonces lo siguiente:
+    \begin{align*}
+        E[E[X/Y]^2]=\left(\frac{1}{2}\right)^2 \cdot P[Y=0] + \left(\frac{1}{4}\right)^2 \cdot P[Y=1] = \frac{1}{4} \cdot \frac{3}{5} + \frac{1}{16} \cdot \frac{2}{5} = \frac{7}{40} 
+    \end{align*}
+    \begin{align*}
+        E[Var[X/Y]]=E[E[X^2/Y] - E[X/Y]^2] = E[E[X^2/Y]] - E[E[X/Y]^2] = \frac{2}{5} - \frac{7}{40} = \frac{9}{40}
+    \end{align*}
+\end{ejercicio}
+
+\begin{ejercicio}
+    Se lanzan 2 monedas numeradas con las caras 1 y 2. Notemos $X$ a la suma e $Y$ al máximo de las caras obtenidas. Obtener las funciones de regresión mínimo-cuadráticas de $Y$ dado $X$ y de $X$ dado $Y$ así como los errores cuadráticos medios asociados.
+
+    Tenemos la siguiente tabla:
+    \begin{center}
+        \begin{tabular}{c|cc|c}
+            $X\backslash Y$ & 1 & 2 & $P[X=x_i]$\\
+            \hline
+            2 & $\nicefrac{1}{4}$ & 0 & $\nicefrac{1}{4}$\\
+            3 & 0 & $\nicefrac{1}{2}$ & $\nicefrac{1}{2}$\\
+            4 & 0 & $\nicefrac{1}{4}$ & $\nicefrac{1}{4}$\\
+            \hline
+            $P[Y=y_i]$ & $\nicefrac{1}{4}$ & $\nicefrac{3}{4}$\\
+        \end{tabular}
+    \end{center}
+\end{ejercicio}

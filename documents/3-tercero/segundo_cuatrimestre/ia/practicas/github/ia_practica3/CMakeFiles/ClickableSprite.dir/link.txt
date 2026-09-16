@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/libClickableSprite.a CMakeFiles/ClickableSprite.dir/src/gui/ClickableSprite.cpp.o
+/usr/bin/ranlib lib/libClickableSprite.a

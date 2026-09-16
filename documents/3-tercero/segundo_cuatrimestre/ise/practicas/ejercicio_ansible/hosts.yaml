@@ -1,0 +1,9 @@
+servers:
+  hosts:
+    nginx:
+      ansible_host: 192.168.56.100
+    apache_httpd:
+      ansible_host: 192.168.56.101
+  vars:       # Variables de grupo (afectan a todos los hosts)
+    ansible_user: root
+    ansible_password: root

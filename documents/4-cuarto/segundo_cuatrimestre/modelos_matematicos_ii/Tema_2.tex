@@ -1,0 +1,768 @@
+\chapter{Estudio de extremos locales. Condiciones suficientes}
+
+Dado $\cc{F}:D \to \bb{R}$, dado $y_*\in D$ un punto crítico, estudiar su carácter de máximo o mínimo local se reduce a estudiar
+\begin{gather*}
+    \veps \mapsto \cc{F}[y_* + \veps \varphi] \ \ \text{ para cualquier $\varphi$ admisible}
+\end{gather*}
+De hecho, 
+\begin{gather*}
+    \cc{F}[y_*+\veps\varphi] = \cc{F}[y_*] + \frac{\veps^2}{2} \frac{d^2}{d\veps^2} \cc{F}[y_* + \veps\varphi]_{|_{\veps = 0}} + O(\veps^3)
+\end{gather*}
+Solamente consideramos el siguiente caso:\\
+
+$I=[x_0, x_1]$, $F\in C^3(I \times \bb{R} \times \bb{R})$ dada por 
+\begin{gather*}
+    \cc{F}[y] = \int_{x_0}^{x_1} F(x, y(x), y'(x)) dx
+\end{gather*}
+definido sobre
+\begin{gather*}
+    D = \{y\in C^1(I) : y(x_0)=y_0,\ y(x_1)=y_1\}
+\end{gather*}
+con $y_0,y_1\in \bb{R}$ dados. Las direcciones admisibles son $\varphi\in C_0^1(I)$.\\
+
+Dado $y\in D$, $\varphi$ admisible, formamos
+\begin{gather*}
+    y_\veps := y +\veps \varphi
+\end{gather*}
+Una vez hecho eso calculamos la derivada segunda
+\begin{gather*}
+    \frac{d^2}{d\veps^2}\cc{F}[y_\veps] = \frac{d}{d\veps} \int_{x_0}^{x_1} \frac{d}{d\veps} [F(x, y_\veps(x), y_\veps'(x))] dx
+\end{gather*}
+Utilizaremos la notación que venimos usando en el tema anterior:
+\begin{gather*}
+    F=F(x,y,p),\ \ \ \ F_y=\frac{\partial F}{\partial y},\ \ \ \ F_p = \frac{\partial F}{\partial p}
+\end{gather*}
+y la expresión anterior quedará como 
+\begin{align*}
+    \frac{d^2}{d\veps^2}\cc{F}[y_\veps] &= \frac{d}{d\veps} \int_{x_0}^{x_1} F_y(x,y_\veps(x), y_\veps'(x))\varphi(x) + F_p(x,y_\veps(x), y_\veps'(x))\varphi'(x)dx = \\
+    &= \int_{x_0}^{x_1} F_{yy}(x,y_\veps(x), y_\veps'(x)) \varphi^2(x) + F_{yp}(x,y_\veps(x), y_\veps'(x))\varphi'(x)\varphi(x) + \\
+    &+ F_{py}(x,y_\veps(x), y_\veps'(x))\varphi(x)\varphi'(x) + F_{pp}(x,y_\veps(x), y_\veps'(x))\varphi'(x)^2 dx
+\end{align*}
+Como $F\in C^3(I\times \bb{R} \times \bb{R})$ tendremos que $F_{yp}=F_{py}$. Además
+\begin{gather*}
+    2\int_{x_0}^{x_1} F_{yp}(x,y_\veps(x), y_\veps'(x)) \varphi(x)\varphi'(x) dx = \int_{x_0}^{x_1} F_{yp}(x,y_\veps(x), y_\veps'(x)) \frac{d}{dx}(\varphi(x))^2 dx
+\end{gather*}
+Si integramos ahora por partes tenemos que 
+\begin{gather*}
+    \int_{x_0}^{x_1} F_{yp}(x,y_\veps(x), y_\veps'(x)) \frac{d}{dx}(\varphi(x))^2 dx = -\int_{x_0}^{x_1} \frac{d}{dx} [F_{yp}(x,y_\veps(x), y_\veps'(x))] \varphi(x)^2 dx
+\end{gather*}
+Si ahora unimos esto a la expresión anterior llegamos a 
+\begin{align*}
+    \frac{d^2}{d\veps^2}\cc{F}[y_\veps] &= \int_{x_0}^{x_1} F_{pp}(x,y_\veps(x), y_\veps'(x)) \varphi'(x)^2 +\\
+    &+ \left(-\frac{d}{dx}[F_{yp}(x,y_\veps(x), y_\veps'(x)) ] + F_{yy}(x,y_\veps(x), y_\veps'(x))\right)\varphi(x)^2 dx
+\end{align*}
+Por tanto, al evaluar en $\veps = 0$ tenemos
+\begin{gather*}
+    \frac{d^2}{d\veps^2}\cc{F}[y_\veps]_{|_{\veps=0}} =\\
+    \int_{x_0}^{x_1} F_{pp}(x,y(x), y'(x)) \varphi'(x)^2 + \left(-\frac{d}{dx}[F_{yp}(x,y(x), y'(x)) ] + F_{yy}(x,y(x), y'(x))\right)\varphi(x)^2 dx
+\end{gather*}
+En varias fuentes podremos encontrar la siguiente notación:
+\begin{gather*}
+    P = F_{pp}(x,y(x), y'(x)),\ \ \ \ Q = -\frac{d}{dx}[F_{yp}(x,y(x), y'(x)) ] + F_{yy}(x,y(x), y'(x))
+\end{gather*}
+
+\begin{definicion}[Condición necesaria de Legendre]
+    Diremos que el punto crítico $y_*\in D$ satisface la \textbf{condición necesaria de Legendre} para minimalidad si 
+    \begin{gather*}
+        P \geq 0\ \ \ \forall x \in  I
+    \end{gather*}
+    Si esto no se cumple, entonces $y_*$ no será un mínimo\footnote{no veremos la prueba pero se puede encontrar en la bibliografía}. Diremos que es estricta si 
+    \begin{gather*}
+        P > 0\ \ \ \forall x \in  I
+    \end{gather*}
+\end{definicion}
+
+De forma sintética escribiremos
+\begin{gather*}
+    \frac{d^2}{d\veps^2}\cc{F}[y_\veps]_{|_{\veps=0}} = \int_{x_0}^{x_1} P(\varphi')^2 + Q\varphi^2 dx
+\end{gather*}
+Observamos que 
+\begin{gather*}
+    \int_{x_0}^{x_1} (P\varphi')\varphi' dx = -\int_{x_0}^{x_1} \frac{d}{dx} (P\varphi'(x)) \varphi(x) dx
+\end{gather*}
+Por tanto,
+\begin{gather*}
+    \frac{d^2}{d\veps^2}\cc{F}[y_\veps]_{|_{\veps=0}} = \int_{x_0}^{x_1} \left( -\frac{d}{dx} (P\varphi') + Q\varphi \right) \varphi dx
+\end{gather*}
+
+\begin{definicion}[Ecuación de Jacobi]
+    Dado $y\in D$ punto crítico, diremos que su \textbf{ecuación de Jacobi asociada} es 
+    \begin{gather*}
+        -\frac{d}{dx}(P\varphi') + Q\varphi = 0 \ \ \text{ en } [x_0, x_1]
+    \end{gather*}
+    La incógnita en esta ecuación es $\varphi\in C^2([x_0, x_1])$.
+\end{definicion}
+
+\begin{definicion}[Punto conjugado]
+    Diremos que un cierto punto $\bar{x}\in ]x_0, x_1]$ es un \textbf{punto conjugado} al $x_0$ si podemos encontrar una solución $\varphi$ de la ecuación de Jacobi tal que  se verifiquen las siguientes condiciones
+    \begin{itemize}
+        \item $\varphi \not\equiv 0$
+        \item $\varphi(x_0)=0$
+        \item $\varphi(\bar{x})=0$
+    \end{itemize}
+\end{definicion}
+
+\begin{teo}[Condición de Jacobi]
+    Sea $I=[x_0,x_1]$, $F\in C^3(I \times \bb{R} \times \bb{R})$. Consideramos 
+    \begin{gather*}
+        \cc{F}[y] = \int_{x_0}^{x_1} F(x,y(x),y'(x))dx
+    \end{gather*}
+    definido sobre $D = \{y\in C^1(I) : y(x_0)=y_0,\ y(x_1=y_1)\}$ con $y_0, y_1\in \bb{R}$ dados. Sea $y\in D$ un punto crítico que verifique la condición de Legendre estricta, es decir, $P>0$ para todo $x\in I$. Entonces:
+    \begin{itemize}
+        \item (Condición necesaria) Si $y$ es mínimo local estricto, entonces no existen puntos conjugados a $x_0$ en el intervalo $]x_0, x_1[$.
+        \item (Condición suficiente) Si $x_0$ no tiene puntos conjugados en $]x_0,x_1]$, entonces $y$ es un mínimo local estricto.
+    \end{itemize}
+\end{teo}
+
+\begin{coro}
+    Bajo estas circunstancias, si $[x_0,x_1]$ es suficientemente pequeño\footnote{dependerá de cada problema concreto.}, se cumple la condición de Jacobi.
+\end{coro}
+
+\begin{ejemplo}
+    Es espacio ambiente es $X=C^1(I)$ con la norma $\|u\|_{C^1} = \|u\|_\infty + \|u'\|_\infty$. Estudiamos $\cc{F}[y] = \int_0^1 (y'(x))^3dx$ sobre
+    \begin{gather*}
+        D=\{y\in C^1([0,1]) : y(0)=0,\ y(1)=1\}
+    \end{gather*}
+    Notaremos $x_0=0$ y $x_1=1$ (para adaptar el enunciado a nuestra notación). Como el funcional solo depende de $p$ tendremos $F=F(p)=p^3$. La ecuación de Euler-Lagrange queda
+    \begin{gather*}
+        -\frac{d}{dx}(F_p) = 0 \Rightarrow \frac{d}{dx} [3(y'(x))^2] = 0
+    \end{gather*}
+    lo que nos dice que $y'(x)^2 = cte$, luego $y'(x)=cte$. Por tanto, como $y\in D$ tendremos que los extremales son de la forma
+    \begin{gather*}
+        y(x)=c_1 + c_2x,\ \ c_1,c_2\in \bb{R}
+    \end{gather*}
+    De la condición $y\in D$ llegamos a que la única extremal es $y(x)=x$. Ahora nos podríamos preguntar si esto es un máximo o un mínimo local. Tenemos que 
+    \begin{gather*}
+        F_{pp} = 6p
+    \end{gather*}
+    Para $y(x)=x$ tenemos $y'(x)=1$ y por tanto $P=6>0$ para todo $x\in [x_0, x_1]$ (se cumple la condición de Legendre estricta). Estamos en condiciones de comprobar la condición de Jacobi. La ecuación de Jacobi que es
+    \begin{gather*}
+        -\frac{d}{dx}(P\varphi') + Q\varphi = 0
+    \end{gather*}
+    Como en este caso $Q=0$ tendremos que la ecuación de Jacobi será
+    \begin{gather*}
+        -6\varphi''=0
+    \end{gather*}
+    Buscamos soluciones de la forma $\varphi(x_0)=0$ y $\varphi(\bar{x})=0$ para algún $x_0<\bar{x}\leq x_1$. De nuevo, la solución general es $\varphi(x)=c_1+c_2x$ con $c_1,c_2\in \bb{R}$. Al imponer $\varphi(x_0)=0$ llegamos a que $c_1=0$, de forma que $\varphi(x)=c_2x$ para $c_2\in \bb{R}$. Nos preguntamos ahora si existe algún $\bar{x}>0$ tal que $\varphi(\bar{x})=0$. La respuesta es que independientemente del valor de $c_2\in \bb{R}$ no existe un tal $\bar{x}$ ($\varphi$ es lineal). Por tanto, no hay puntos conjugados, lo que nos dice que la condición de Jacobi se cumple. Por tanto $y(x)=x$ es un mínimo local estricto.
+\end{ejemplo}
+
+\begin{ejemplo}
+    Estudiamos $\cc{F}[y] = \int_0^a (y')^2 - y^2 dx$ en $D=C_0^1([0,a])$.\\
+
+    Al aplicar la notación estudiada tenemos 
+    \begin{gather*}
+        F=p^2 - y^2,\ \ \ \ F_p=2p,\ \ \ \ F_{y}=-2y,\ \ \ \ F_{pp}=2,\ \ \ \ F_{yy}=-2,\ \ \ \ F_{py}=0
+    \end{gather*}
+    La ecuación de Euler-Lagrange es en este caso 
+    \begin{gather*}
+        -2y(x) - \frac{d}{dx}(2y'(x)) = 0
+    \end{gather*}
+    Lo que nos lleva a la ecuación diferencial
+    \begin{gather*}
+        y''(x)+y(x)=0
+    \end{gather*}
+    Por lo que las extremales serán de la forma 
+    \begin{gather*}
+        y(x) = A\sin(x) + B\cos(x),\ \ \ A,B\in \bb{R}
+    \end{gather*}
+    Como $y(0)=0$ llegamos a que $B=0$. Por tanto $y(x)= A\sin(x)$. O bien $A=0$ o bien $a=u\pi$ para $u\in \bb{Z}$. Es decir, en general el único punto crítico es $y(x)=0$. Para cualquier punto $y\in D$ tenemos que $P=2>0$ por lo que se cumple la ecuación de Legendre estricta (para mínimo local). Nos preguntamos ahora si hay puntos conjugados para $x_0=0$, cuestión que nos lleva a calcular la Ecuación de Jacobi
+    \begin{gather*}
+        -2\varphi''-2\varphi = 0
+    \end{gather*}
+    La solución general es $\varphi(x) = C\cos(x) + D\sin(x)$ con $C,D\in \bb{R}$. Si $\varphi(0)=0$, entonces $D=0$, por lo que $\varphi(x) = C\cos(x)$. Buscamos ahora la posibilidad de que exista un $0<\bar{x}\leq a$ tal que $\varphi(\bar{x})=0$, entonces o bien $C=0$, lo cual no aporta información, o bien $\bar{x}=n\pi$ con $n\in \bb{N}$. Si $a\geq \pi$, entonces podemos encontrar algún $\bar{x}\leq a$ en esas circunstancias. Cabe hacer una distinción de casos:
+    \begin{itemize}
+        \item Si $a<\pi$, no hay puntos conjugados por lo que $y(x)=0$ es un mínimo local estricto.
+        \item Si $a>\pi$, la función $y(x)=0$ no es un mínimo local estricto (se viola la condición de Jacobi) 
+    \end{itemize}
+    En el caso de que se dé la igualdad es más complicado extraer una conclusión.
+\end{ejemplo}
+
+\section{Funcionales integrales definidos sobre curvas}
+Dado $I\subset \bb{R}$ un intervalo, digamos $I=[x_0, x_1]$, nos interesan las curvas parametrizadas $y:I \to \bb{R}^N$. Entendemos que $y=(y_1,y_2,...,y_n)$, con $y_i:I\to \bb{R}$ para cada $1\leq i \leq N$. Definimos 
+\begin{gather*}
+    C(I;\bb{R}^N):= \{y:I\to \bb{R}^N : y\in C(I,\bb{R})\text{ para } 1\leq i \leq N\}\\
+    C^1(I;\bb{R}^N):= \{y:I\to \bb{R}^N : y\in C^1(I,\bb{R})\text{ para } 1\leq i \leq N\}\\
+    C_0^1(I;\bb{R}^N):= \{y:I\to \bb{R}^N : y\in C^1(I,\bb{R})\text{ para } 1\leq i \leq N,\ y(x_0) = \vec{0},\ y(x_1) = \vec{0}\}
+\end{gather*}
+Si el contexto lo deja claro podremos escribir $C(I)$, $C^1(I)$, etc.\\
+
+Dada $y:I \to \bb{R}^N$ nos interesarán funcionales de la forma
+\begin{gather*}
+    \cc{F} = \int_{x_0}^{x_1} F(x, y(x), y'(x)) dx
+\end{gather*}
+Se entiende que $y':I \to \bb{R}^N$ viene dado por 
+\begin{gather*}
+    y'(x) = (y_1'(x), y_2'(x), ..., y_N'(x)) \ \ \ \ \forall x \in I
+\end{gather*}
+y además por su definición se entiende que $F:I\times \bb{R}^N \times \bb{R}^N \to \bb{R}$.\\
+
+\begin{notacion}
+    Digamos que $F=F(x,y,p)$ donde $y=(y_1, y_2,...,y_N)$ y $p = (p_1,p_2,...,p_N)$ donde $p_i = y_i'$ para cada $1\leq i \leq N$. Introduciremos de nuevo los atajos de notación que introducíamos para el caso escalar
+    \begin{gather*}
+        F_y := \left(\frac{\partial F}{\partial y_1}, \frac{\partial F}{\partial y_2}, ..., \frac{\partial F}{\partial y_N}\right),\ \ \ \
+        F_p := \left(\frac{\partial F}{\partial p_1}, \frac{\partial F}{\partial p_2}, ..., \frac{\partial F}{\partial p_N}\right)
+    \end{gather*}
+\end{notacion}
+
+El caso que trabajaremos típicamente será un $F\in C^2(I\times \bb{R}^N \times \bb{R}^N)$ dado por un funcional $\cc{F}$ definido sobre
+\begin{gather*}
+    D = \{y\in C^1(I;\bb{R}^N) : y(x_0) = y_0,\ y(x_1)=y_1\}
+\end{gather*}
+con $y_0, y_1\in \bb{R}^N$ dados.\\
+
+Dado $y_*\in C^2(I;\bb{R}^N)\cap D$, si es punto crítico verifica la ecuación de Euler-Lagrange, es decir, 
+\begin{gather*}
+    F_y(x,y_*(x), y_*'(x)) - \frac{d}{dx} [F_p(x,y_*(x), y_*'(x))] = \vec{0}\ \ \ \ \forall x \in I
+\end{gather*}
+que será un sistema de $N$ ecuaciones diferenciales ordinarias. Al calcular $\delta_y\cc{F}[y]$ se obtiene 
+ \begin{gather*}
+    \delta_y\cc{F}[y] = \int_{x_0}^{x_1} F_y(x,y(x), y'(x)) \varphi(x) + F_p(x,y(x, y'(x))) \varphi'(x) dx
+ \end{gather*}
+ Las direcciones admisibles son $\varphi \in C_0^1(I:\bb{R}^N)$ donde seguimos definiendo $y_\veps := y + \veps \varphi$.
+ \begin{align*}
+    \int_{x_0}^{x_1} \frac{d}{d\veps}(F(x,y_\veps, y'_\veps)) dx &= \int_{x_0}^{x_1} \frac{\partial F(x,y_\veps, y'_\veps)}{y_1} \frac{d(y_\veps)_1}{d \veps} + \frac{\partial F(x,y_\veps, y'_\veps)}{y_2} \frac{d(y_\veps)_2}{d \veps} + ... = \\
+    &= \int_{x_0}^{x_1} \frac{\partial F(x,y_\veps, y'_\veps)}{y_1} \varphi_1 + \frac{\partial F(x,y_\veps, y'_\veps)}{y_2} \varphi_2 + ... = \\
+    &= \int_{x_0}^{x_1} F_y(x,y(x), y'(x)) \varphi(x)
+ \end{align*}
+ Queremos ahora integrar por partes en el término
+ \begin{gather*}
+    F_p(x,y(x, y'(x))) \varphi'(x) = \sum_{i=1}^{N}F_{p_i}(x, y(x), y'(x))\varphi'_i
+ \end{gather*}
+ Véase que 
+ \begin{gather*}
+    \int_{x_0}^{x_1} F_{p_1}(x, y(x), y'(x)) \varphi'_1(x) dx = \\
+    - \int_{x-0}^{x_1} \frac{d}{dx} [F_{p_1}(x,y(x), y'(x))]\varphi_1(x) dx + \left[ F_{p_1}(x,y(x), y'(x)) \varphi_1(x)\right]_{x=x_0}^{x=x_1} 
+ \end{gather*}
+ Recordemos que $\varphi(x_0) = \vec{0} = \varphi(x_1)$ por lo que 
+ \begin{gather*}
+    \int_{x_0}^{x_1} F_{p_1}(x, y(x), y'(x)) \varphi'_1(x) dx =
+    - \int_{x-0}^{x_1} \frac{d}{dx} [F_{p_1}(x,y(x), y'(x))]\varphi_1(x) dx
+ \end{gather*}
+ y por tanto 
+ \begin{align*}
+    \int_{x_0}^{x_1} F_p(x, y(x), y'(x)) \varphi'(x) dx &= - \int_{x_0}^{x_1} \sum_{i=1}^N \frac{d}{dx} [F_{p_i}(x, y(x), y'(x))] \varphi_i(x) dx =\\
+    &= -\int_{x_0}^{x_1} \frac{d}{dx} [F_p(x, y(x), y'(x))]\varphi(x) dx
+ \end{align*}
+
+ Al unir todos estos resultados nos quedará que si $y\in I$ es punto crítico, entonces
+ \begin{gather*}
+    \int_{x_0}^{x_1} [F_y(x, y(x), y'(x)) - \frac{d}{dx}F_p(x, y(x), y'(x))] \varphi(x)dx = 0\ \ \ \ \forall \varphi\in C_0^1(I;\bb{R}^N)
+ \end{gather*}
+
+ \begin{lema}[Lema fundamental. Versión para curvas]
+    Dada $f\in C([x_0, x_1]; \bb{R}^N)$, si 
+    \begin{gather*}
+        \int_{x_0}^{x_1} f \cdot \varphi \ dx = 0 \ \ \ \ \forall \varphi \in C_c^\infty(]x_0, x_1[; \bb{R}^N)
+    \end{gather*}
+    entonces $f=\vec{0}$ para todo $x\in [x_0, x_1]$.
+    \begin{proof}
+        Tenemos que 
+        \begin{gather*}
+            f\cdot \varphi = f_1 \cdot \varphi_1 + f_2 \cdot \varphi_2 + ... + f_N\cdot \varphi_N
+        \end{gather*}
+        Escojo $\varphi = (\varphi_1, 0, 0, ..., 0) \in C_c^\infty(]x_0, x_1[;\bb{R}^N)$ y deducimos que $f_1(x) = 0$ para todo $x\in I$. Si repetimos este razonamiento de forma análoga para los restantes $f_i$ obtenemos el resultado del lema.
+    \end{proof}
+ \end{lema}
+
+ \begin{ejemplo}
+    Calculemos los extremales de 
+    \begin{gather*}
+        \cc{F}[y] = \int_0^{\frac{\pi}{2}} (y_1'(x))^2 + (y_2'(x))^2 + 2y_1(x)y_2(x) dx
+    \end{gather*}
+    definido sobre
+    \begin{gather*}
+        D = \left\{y\in C^1\left(\left[0,\frac{\pi}{2}\right];\bb{R}^2\right) : y(0) = 
+        \begin{pmatrix}
+            0\\ 0
+        \end{pmatrix}
+        , y\left(\frac{\pi}{2}\right) = 
+        \begin{pmatrix}
+            1 \\ -1
+        \end{pmatrix}
+        \right\}
+    \end{gather*}
+ \end{ejemplo}
+%  Podemos escribir equivalentemente
+%  \begin{gather*}
+%     \cc{F}[y,z] = \int_0^{\frac{\pi}{2}} (y')^2 + (z')^2 + 2yz dx
+%  \end{gather*}
+%  definido sobre
+%  \begin{gather*}
+%     D = \left\{(y,z)\in \left\{y\in C^1\left(\left[0,\frac{\pi}{2}\right]\right) : y(0) = 
+%         \begin{pmatrix}
+%             0\\ 0
+%         \end{pmatrix}
+%         , y\left(\frac{\pi}{2}\right) = 
+%         \begin{pmatrix}
+%             1 \\ -1
+%         \end{pmatrix}
+%         \right\}\right\}
+%  \end{gather*}
+
+Tenemos
+\begin{gather*}
+    F = F(x,y_1,y_2,p_1,p_2) = p_1^2 + p_2^2 + 2y_1y_2
+\end{gather*}
+Aplicando la notación adecuada tenemos 
+\begin{gather*}
+    F_y = (2y_2, 2y_1)^T\\
+    F_p = (2p_1, 2p_2)^T\\
+\end{gather*}
+Escribimos ahora la ecuación de Euler-Lagrange:
+\begin{gather*}
+    \begin{pmatrix}
+        2y_2(x)\\
+        2y_1(x)
+    \end{pmatrix}
+    - \frac{d}{dx}
+    \begin{pmatrix}
+        2y_1'(x)\\
+        2y_2'(x)
+    \end{pmatrix} = 
+    \begin{pmatrix}
+        0 \\
+        0
+    \end{pmatrix}
+    \ \ \ \ \forall x \in \left[0, \frac{\pi}{2}\right]
+\end{gather*}
+Y nos quedaría el sistema de ecuaciones diferenciales
+\begin{gather*}
+    \left\{
+        \begin{array}{l}
+            y_1''(x) - y_2(x) = 0\\
+            y_2''(x) - y_1(x) = 0
+        \end{array}
+    \right.
+\end{gather*}
+De aquí tenemos que 
+\begin{gather*}
+    y_2^{iv)} (x) - y_1''(x) = 0 \Rightarrow y_2^{iv)}(x) -y_2(x) = 0
+\end{gather*}
+La solución general sería 
+\begin{gather*}
+    y_2(x) = Ae^x + Be^{-x} + C\sen(x) + D\cos(x)
+\end{gather*}
+para $A,B,C,D\in \bb{R}$. Forzando que $y(0)=\vec{0}$ y $y(\nicefrac{\pi}{2}) = (1,-1)^T$, se obtiene que 
+\begin{gather*}
+    y_2(x) = -\sen(x),\ \ \ y_1(x) = \sen(x)
+\end{gather*}
+
+\section{Nociones de convexidad}
+\begin{definicion}[Convexidad de un subconjunto]
+    Sea $X$ un espacio vectorial (real), un subconjunto $U\subset X$ diremos que es \textbf{convexo} si, para cualquiera vectores $u,v\in U$, su combinación convexa se mantiene dentro de $U$, es decir,
+    \begin{gather*}
+        \theta u + (1-\theta)v\in U \ \ \ \ \forall \theta \in [0,1]
+    \end{gather*}
+\end{definicion}
+
+\begin{observacion}
+    Los siguientes conjuntos son convexos:
+    \begin{itemize}
+        \item El conjunto vacío $\emptyset$.
+        \item El propio conjunto $X$.
+        \item Cualquier subespacio vectorial o afín de $X$.
+        \item Las bolas de un espacio normado (las esferas no lo son).
+    \end{itemize}
+\end{observacion}
+
+\begin{ejemplo}
+    El conjunto $A=\{y\in L^2([0,1]): \|y\|^2=1\}$ no es convexo.\\
+    
+    Para verlo tomamos $z\in A$, por lo que tendremos que $-z\in A$. Sin embargo, tenemos que 
+    \begin{gather*}
+        0 = \frac{1}{2}z + \frac{1}{2}(-z) \notin A
+    \end{gather*}
+\end{ejemplo}
+
+\begin{ejemplo}
+    Estudiar la convexidad de $C_0^1([x_0, x_1])$.\\
+
+    Dados $u,v\in C_0^1([x_0, x_1])$ vemos que 
+    \begin{gather*}
+        \theta u + (1-\theta)v \in C^1([x_0, x_1])\\
+        (\theta u + (1-\theta)v)(x_0) = \theta u(x_0) + (1-\theta)v(x_0) = \theta \cdot 0 + (1-\theta) \cdot 0 = 0\\
+        (\theta u + (1-\theta)v)(x_1) = \theta u(x_1) + (1-\theta)v(x_1) = \theta \cdot 0 + (1-\theta) \cdot 0 = 0
+    \end{gather*}
+    Por lo que efectivamente $C_0^1([x_0, x_1])$ es convexo.
+\end{ejemplo}
+
+\begin{observacion}
+    Cualquier conjunto de la forma
+    \begin{gather*}
+        \{y\in C^1([x_0, x_1];\bb{R}^N) : y(x_0) = y_0,\ y(x_1) = y_1\}
+    \end{gather*}
+    es convexo.
+\end{observacion}
+
+\begin{definicion}[Convexidad de funcionales]
+    Dado $U\subset X$ convexo, diremos que $\cc{F}:U\to \bb{R}$ es \textbf{convexo} si 
+    \begin{gather*}
+        \cc{F}[\theta u + (1-\theta)v] \leq \varphi \cc{F}[u] + (1-\theta)\cc{F}[v],\ \ \ \ \forall u,v\in U,\ \ \theta \in [0,1]
+    \end{gather*}
+    Diremos que $\cc{F}$ es \textbf{estrictamente convexo} si
+    \begin{gather*}
+        \cc{F}[\theta u + (1-\theta)v] < \varphi \cc{F}[u] + (1-\theta)\cc{F}[v],\ \ \ \ \forall u,v\in U,\ \text{ con } u\neq v,\ \ \theta \in ]0,1[
+    \end{gather*}
+    Diremos que $\cc{F}$ es \textbf{cóncavo} si se da la otra desigualdad, es decir, si
+    \begin{gather*}
+        \cc{F}[\theta u + (1-\theta)v] \geq \varphi \cc{F}[u] + (1-\theta)\cc{F}[v],\ \ \ \ \forall u,v\in U,\ \ \theta \in [0,1]
+    \end{gather*}
+    y análogamente para \textbf{estrictamente cóncavo}.
+\end{definicion}
+
+\begin{lema}
+    Dado $S$ espacio vectorial, $U\subset X$ un subconjunto convexo y $\cc{F}:U\to \bb{R}$ un funcional convexo, entonces $argmin_U\cc{F}$ es convexo.
+
+    \begin{proof}
+        Si $argmin_U \cc{F}$ es vacío o solo tiene un elemento no hace falta demostrar nada. En otro caso podemos considerar $z_1,z_2\in argmin_U\cc{F}$ con $z_1\neq z_2$. Digamos que el mínimo del funcional $\cc{F}$ vale una cierta cantidad $\alpha\in \bb{R}$. Véase que
+        \begin{gather*}
+            \cc{F}[z_1] = \alpha = \cc{F}[z_2]
+        \end{gather*}
+        Dado un $\theta \in [0,1]$ evaluamos $\cc{F}[\theta z_1 + (1-\theta)z_2]$. A priori no puedo saber su valor pero por la convexidad del funcional tenemos que
+        \begin{gather*}
+            \cc{F}[\theta z_1 + (1-\theta)z_2] \leq \theta \cc{F}[z_1] + (1-\theta)\cc{F}[z_2] = \theta \alpha + (1-\theta) \alpha = \alpha
+        \end{gather*} 
+        Como $\alpha$ es el valor del mínimo global tendremos que se dará la igualdad, es decir, que 
+        \begin{gather*}
+            \cc{F}[\theta z_1 + (1-\theta)z_2] = \alpha
+        \end{gather*} 
+        Por tanto, $\theta z_1 + (1-\theta) z_2 \in argmin_U \cc{F}$ para cualquier $\theta \in [0,1]$. Como $z_1, z_2$ son arbitrarios tendremos la condición requerida, es decir, $argmin_U \cc{F}$ es convexo.
+    \end{proof} 
+\end{lema}
+
+\begin{coro}
+    Dados $X$ espacio vectorial, $U\subset X$ un subconjunto convexo y $\cc{F}:U \to \bb{R}$ un funcional estrictamente convexo. Entonces $argmin_U \cc{F}$ tiene a lo sumo un elemento.
+    \begin{proof}
+        Supongamos que existen dos elementos $z_1,z_2\in argmin_U\cc{F}$ con $z_1\neq z_2$. De nuevo, consideramos que el mínimo del funcional $\cc{F}$ vale una cierta cantidad $\alpha\in \bb{R}$. Se dará que
+        \begin{gather*}
+            \cc{F}[z_1] = \alpha = \cc{F}[z_2]
+        \end{gather*}
+        Dado un $\theta \in [0,1]$ se tiene que
+        \begin{gather*}
+            \cc{F}[\theta z_1 + (1-\theta)z_2] < \theta \cc{F}[z_1] + (1-\theta)\cc{F}[z_2] = \theta \alpha + (1-\theta) \alpha = \alpha
+        \end{gather*} 
+        Habremos encontrado entonces un elemento $z_3 = \theta z_1 + (1-\theta)z_2 \in U$ por la convexidad de $U$ tal que $\cc{F}[z_3]<\alpha$ lo que nos llevaría a contradicción.
+    \end{proof}
+\end{coro}
+
+\begin{prop}
+    Sea $X$ un espacio normado, $D \subset X$ convexo y $\cc{F}:D \to \bb{R}$ un funcional convexo. Si $y_*\in D$ es un mínimo local, entonces es un mínimo global (de hecho, si es mínimo local estricto, entonces es mínimo global estricto).
+
+    \begin{proof}
+        Como $y_*$ es mínimo local, entonces tenemos que existe un entorno $E \subset D$ tal que $y_*\in E$ y 
+        \begin{gather*}
+            \cc{F}[y_*] \leq \cc{F}[y]\ \ \ \ \forall y \in E
+        \end{gather*}
+        Dado ahora $y\in D$ formamos la combinación convexa $\theta y + (1-\theta)y_*$ para $\theta\in[0,1]$. Observamos que existirá algún $0 < \theta \ll 1$ tal que que dicha combinación convexa queda dentro de $E$ (se puede ver usando la norma del espacio ambiente). Por tanto
+        \begin{gather*}
+            \cc{F}[y_*] \leq \cc{F}[\theta y + (1-\theta)y_*] \ \ \ \ 0 <\theta \ll1
+        \end{gather*}
+        Usando que el funcional es convexo tenemos que para dichos valores de $\theta$ tendremos
+        \begin{gather*}
+            \cc{F}[y_*] \leq \theta \cc{F}[y] + (1-\theta)\cc{F}[y_*] \Rightarrow \theta \cc{F}[y_*] \leq \theta \cc{F}[y] \Rightarrow \cc{F}[y_*] \leq \cc{F}[y]
+        \end{gather*}
+        Como $y$ era arbitrario en $D$ tendremos el resultado buscado. La demostración para estricto es análoga.
+    \end{proof}
+\end{prop}
+
+Para tratar con funcionales integrales utilizamos $F:I\times \bb{R}^N \times \bb{R}^N \to \bb{R}$ donde $I=[x_0,x_1]$ (o bien sobre adecuados subconjuntos convexos de $\bb{R}^N \times \bb{R}^N$).
+
+\begin{lema}
+    Supongamos que $F(x,\cdot,\cdot):\bb{R}^N \times \bb{R}^N \to \bb{R}$ es convexa para cualquier $x\in I$. Entonces el funcional dado por 
+    \begin{gather*}
+        \cc{F}[y] = \int_{x_0}^{x_1} F(x,y(x),y'(x)) dx
+    \end{gather*}
+    es convexo en cualquier subconjunto convexo de $C^1(I;\bb{R})$
+    \begin{proof}
+        Fijado $x\in I$ y dadas $y_1,y_2$ en el dominio del funcional $D\subset C^1(I;\bb{R}^N)$ tenemos que 
+        \begin{gather*}
+            (y_1(x), y_1'(x)) \in \bb{R}\times \bb{R}\\
+            (y_2(x), y_2'(x)) \in \bb{R}\times \bb{R}
+        \end{gather*}
+        Por la convexidad que nos da la hipótesis tenemos que 
+        \begin{gather*}
+            F(x, \theta y_1(x) + (1-\theta) y_2(x), \theta y'_1(x) + (1-\theta) y'_2(x)) \leq\\
+            \leq \theta F(x, y_1(x), y_2(x)) + (1-\theta) F(x, y_2(x), y'_2(x)) \ \ \ \ \forall  \theta \in [0,1]
+        \end{gather*}
+        Como esto se pede hacer para cualquier $x\in I$ podemos integrar la desigualdad entre $x_0$ y $x_1$. y por el crecimiento de la integral tenemos que 
+        \begin{gather*}
+            \int_{x_0}^{x_1} F(x, \theta y_1(x) + (1-\theta) y_2(x), \theta y'_1(x) + (1-\theta) y'_2(x)) dx \leq\\
+            \leq \int_{x_0}^{x_1} \theta F(x, y_1(x), y_2(x))dx + \int_{x_0}^{x_1}(1-\theta) F(x, y_2(x), y'_2(x)) dx\ \ \ \ \forall  \theta \in [0,1]
+        \end{gather*}
+        De donde podemos deducir
+        \begin{gather*}
+            \cc{F}[\theta y_1(x) + (1-\theta) y_2(x)] \leq \theta \cc{F}[y_1(x)] + (1-\theta) \cc{F}[y_2(x)] \ \ \ \ \forall \theta \in [0,1],\ y_1,y_2\in D
+        \end{gather*}
+        Por tanto $\cc{F}$ es convexo en $D$.
+    \end{proof}
+\end{lema}
+
+\begin{observacion}\
+    \begin{enumerate}
+        \item Si $F$ es estrictamente convexa, en muchos casos tendremos que $\cc{F}$ será estrictamente convexo (pero no en todos).
+        \item Esto no es una condición necesaria (hay casos de $\cc{F}$ convexo que no cumplen lo anterior)
+    \end{enumerate}
+\end{observacion}
+
+\begin{prop}
+    Sea $I=[x_0,x_1]$, $F:I\times \bb{R}^N\times \bb{R}^N\to \bb{R}^N$, $D\subset C^1(I;\bb{R})$ convexo. Supongamos que el funcional dado por 
+    \begin{gather*}
+        \cc{F}[y] = \int_{x_0}^{x_1} F(x,y(x),y'(x)) dx
+    \end{gather*}
+    es convexo sobre $D$. Si $y_*$ es un punto crítico, entonces $y_*$ es un mínimo global.
+
+    \begin{proof}
+        Dado $y\in D$, formamos la combinación convexa $\theta y + (1-\theta) y_*$ para $\theta\in [0,1]$ que podremos escribir como 
+        \begin{gather*}
+            y_* + \theta(y-y_*) \ \ \ \ \forall \theta \in [0,1]
+        \end{gather*}
+        Por la convexidad del funcional tenemos que 
+        \begin{gather*}
+            \cc{F}[y_* + \theta(y-y_*)] = \cc{F}[\theta y + (1-\theta)y_*] \leq \theta \cc{F}[y] + (1-\theta)\cc{F}[y_*] = \cc{F}[y_*] + \theta(\cc{F}[y] - \cc{F}[y_*])
+        \end{gather*}
+        para cualquier $\theta \in [0,1]$. Si tomamos ahora $\theta \in ]0,1]$ obtenemos 
+        \begin{gather*}
+            \frac{\cc{F}[y_* + \theta(y-y_*)] - \cc{F}[y_*]}{\theta} \leq \cc{F}[y] - \cc{F}[y_*] \ \ \ \ \forall y\in D
+        \end{gather*}
+        Como $y-y_*$ es dirección admisible, tomando límite cuando $\theta\to 0$ obtenemos 
+        \begin{gather*}
+            0 = \delta_{y-y_*} \cc{F}[y_*] \leq F[y] - F[y_*]
+        \end{gather*}
+        ya que $y_*$ es punto crítico. Por tanto $\cc{F}[y_*]\leq \cc{F}[y]$ para todo $y\in D$.
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}
+    Consideramos 
+    \begin{gather*}
+        \cc{F}[y] = \int_{0}^{1} (y'(x))^2 + (y(x))^2 + 2xy(x) dx
+    \end{gather*}
+    Sobre $D = \left\{ y\in C^2([0,1]) : y(0) = 0, y(1) = 1 \right\}$.\\
+
+    Tenemos que $D$ es convexo. Veamos ahora si $\cc{F}$ es convexo. Véase que 
+    \begin{gather*}
+        F(x,y,p) = p^2 + y^2 + 2xy
+    \end{gather*}
+    Para ver que $F(x,\cdot, \cdot)$ es convexa sobre $\bb{R}^2$, calculamos
+    \begin{gather*}
+        F_y = 2y+2x\\
+        F_p = 2p
+    \end{gather*}
+    Para $x\in [0,1]$ fijado tenemos 
+    \begin{gather*}
+        Hess(F)(x,\cdot,\cdot) = 
+        \begin{pmatrix}
+            \dfrac{\partial^2F}{\partial y^2} & \dfrac{\partial^2F}{\partial y \partial p}\\\\
+            \dfrac{\partial^2F}{\partial p\partial y} & \dfrac{\partial^2F}{\partial p^2}
+        \end{pmatrix}(x,y,p)
+    \end{gather*}
+    En este caso tenemos que 
+    \begin{gather*}
+        Hess(F) = D^2 F = \begin{pmatrix}
+            2 & 0 \\ 
+            0 & 2
+        \end{pmatrix}
+    \end{gather*}
+    Como $Hess(F)$ es definida positiva, tenemos que $F(x,\cdot,\cdot):\bb{R}^2 \to \bb{R}$ es estrictamente convexa, lo que nos dice que $\cc{F}$ es convexo. \\
+
+    Veamos ahora si es estrictamente convexo. Tomamos $y_1,y_2\in D$ con $y_1\neq y_2$. Tenemos entonces que existe un cierto intervalo $]a,b[\subset [0,1]$ tal que 
+    \begin{gather*}
+        y_1(x) \neq y_2(x) \ \ \ º \forall x \in ]a,b[
+    \end{gather*}
+    Dado $x\in ]a,b[$, vemos que $(y_1(x), y'_1(x)) \neq (y_2(x), y'_2(x))$ como vectores de $\bb{R}^2N$. Usando la convexidad estricta de $F(x,\cdot,\cdot)$ tenemos que 
+    \begin{gather*}
+        F(x, \theta y_1(x)+ (1-\theta) y_2(x), \theta y'_1(x)+ (1-\theta) y'_2(x)) < \theta F(x,y_1(x),y'_1(x)) + (1-\theta) F(x,y_2(x),y'_2(x))
+    \end{gather*}
+    y bastaría integrar obteniendo 
+    \begin{gather*}
+        (\theta y'_1(x) + (1-\theta)y'_2(x))^2 + (\theta y_1(x) + (1-\theta)y_2(x))^2 + 2x (\theta y_1(x) + (1-\theta) y_2(x)) <\\
+        < \theta[(y'_1(x))^2 + (y_1(x))^2 + 2xy_1(x) ] + (1-\theta)[(y'_2(x))^2 + (y_2(x))^2 + 2xy_2(x) ]
+    \end{gather*}
+    donde $D=\{C^1([x_0, x_1]) : y'(x_0) = 0 = y'(x_1)\}$ y obtenemos que el funcional es estrictamente convexo en dicho $D$.\\
+
+    La ecuación de Euler-Lagrange queda
+    \begin{gather*}
+        2y(x) + 2x - \frac{d}{dx}(2y'(x)) = 0\\
+        y''(x) - y(x) = x \ \ \ \ x\in[0,1]
+    \end{gather*}
+    La solución general a esta ecuación diferencial será
+    \begin{gather*}
+        y(x) = -x + c_1e^x + c_2 e^{-x} \ \ \ \ c_1,c_2\in \bb{R}
+    \end{gather*}
+    Se escogen $c_1$ y $c_2$ para cumplir $y(0)=0$ y $y(1)=1$. Resulta que el único punto crítico de $\cc{F}$ en $D$ es 
+    \begin{gather*}
+        y(x) = -x + \frac{2}{e - \frac{1}{e}} (e^x - e^{-x})
+    \end{gather*}
+    Concluimos que $\cc{F}$ alcanza su mínimo y solo lo hace en $y(x)$.
+\end{ejemplo}
+
+\begin{ejemplo}
+    Consideramos 
+    \begin{gather*}
+        \cc{F}[y] = \int_{0}^{\frac{\pi}{2}} (y_1'(x))^2 + (y_2(x))^2 + 2xy_1(x)y_2(x) dx
+    \end{gather*}
+    definido sobre
+    \begin{gather*}
+        D = \left\{y\in C^1\left(\left[0,\frac{\pi}{2}\right];\bb{R}^2\right) : y(0) = 
+        \begin{pmatrix}
+            0\\ 0
+        \end{pmatrix}
+        , y\left(\frac{\pi}{2}\right) = 
+        \begin{pmatrix}
+            1 \\ -1
+        \end{pmatrix}
+        \right\}
+    \end{gather*} 
+\end{ejemplo}
+
+\section{Conexión entre el cálculo de variaciones y la mecánica}
+
+Supongamos que dada una partícula de masa $m>0$ puntual, que se mueve en una línea bajo la acción una fuerza $F$ que supondremos que solo depende de la posición de la partícula.\\
+
+La trayectoria se describe mediante una función $x(t)$ deefinida sobre
+\begin{gather*}
+    x:[t_0,t_1] \to \bb{R}
+\end{gather*}
+La segunda ley de Newton nos dice que $F=m\cdot a$. Consideramos entonces 
+\begin{gather*}
+    x':[t_0,t_1] \to \bb{R} \ \ \ \ \text{(velocidad)}\\
+    x'':[t_0,t_1] \to \bb{R} \ \ \ \ \text{(aceleración)}
+\end{gather*}
+la fuerza $F$ deriva de un potencial $\cc{U}:\bb{R} \to \bb{R}$, tal que 
+\begin{gather*}
+    F(x) = -\cc{U}'(x)
+\end{gather*}
+Determinamos la trayectoria resolviendo la ecuación anterior:
+\begin{gather*}
+    mx''(t) = -\cc{U}'(x(t))
+\end{gather*}
+que es una ecuación diferencial ordinaria de orden 2. Multiplicando por $x'(t)$ se obtiene
+\begin{gather*}
+    mx'(t)x''(t) = -x'(t) \cc{U}'(x(t))
+\end{gather*}
+que podremos escribir como 
+\begin{gather*}
+    \frac{m}{2} \frac{d}{dt}\left[ (x'(t))^2 \right] = -\frac{d}{dt}[\cc{U}(x(t))]
+\end{gather*}
+y le pondremos nombre a cada uno de estos términos:
+\begin{gather*}
+    E_{pot}(x(t)) = \cc{U}(x(t)),\ \ \ E_{kin}(x'(t)) = \frac{m}{2}(x'(t))^2
+\end{gather*}
+que llamaremos \textbf{energía potencial} y \textbf{energía cinética} respectivamente. De esta forma podremos reescribir dicha ecuación como 
+\begin{gather*}
+    \frac{d}{dt}(E_{kin} + E_{pot}) = 0
+\end{gather*}
+lo que llamaremos \textbf{conservación de la energía}. A partir de esta propiedad se podría estudiar la \textbf{mecánica Hamiltoniana} pero nosotros no entraremos en detalle. Lo que sí estudiaremos será la \textbf{Mecánica Lagrangiana}.\\
+
+\subsection{Mecánica Lagrangiana}
+Formamos el funcional
+\begin{gather*}
+    A[x] = \int_{t_0}^{t_1} E_{kin}(x'(t)) - E_{pot}(x(t)) dt
+\end{gather*}
+que con la notación descrita anteriormente será
+\begin{gather*}
+    A[x] = \int_{t_0}^{t_1} \frac{m}{2} (x'(t))^2 - U(x(t)) dt
+\end{gather*}
+Podemos calcular la ecuación de Euler-Lagrange de $A$ y nos quedará
+\begin{gather*}
+    -U'(x(t)) - \frac{d}{dt} (mx'(t)) = 0
+\end{gather*}
+es decir, $mx''(t) = -U'(x(t))$, la misma expresión a la que habíamos llegado antes. Esto significa que podemos describir el movimiento de una partícula estudiando su energía cinética y potencial, y construyendo el funcional recién definido.\\
+
+Consideramos ahora que estamos en un espacio de dimensión arbitraria y queremos describir el movimiento de una partícula puntual, de masa $m>0$, que se desplaza en $\bb{R}^N$ bajo la acción de un potencial $\cc{U}:\bb{R}^N \to \bb{R}$. De esta forma, tendremos que la trayectoria vendrá dada por una función $x:[t_0,t_1] \to \bb{R}^N$, de donde podremos calcular la velocidad y la aceleración como 
+\begin{gather*}
+    x':[t_0,t_1] \to \bb{R}^N \ \ \ \ \text{(velocidad)}\\
+    x'':[t_0,t_1] \to \bb{R}^N \ \ \ \ \text{(aceleración)}
+\end{gather*}
+Estamos en condiciones de definir para este caso la energía cinética y la energía potencial que adquiere la partícula
+\Func{E_{kin}}{\bb{R}^N}{\bb{R}_0^+}{p}{\frac{m}{2}|p|^2}
+\Func{E_{pot}}{\bb{R}^N}{\bb{R}}{x}{\cc{U}(x)}
+Podemos formar el \textbf{Lagrangiano} asociado:
+\Func{L}{\bb{R}^N\times \bb{R}^N}{\bb{R}}{(x,p)}{E_{kin}(p) - E_{pot}(x)}
+A partir de este construimos la acción mecánica:
+\begin{gather*}
+    A[x] = \int_{t_0}^{t_1} L(x(t), x'(t)) dt = \int_{t_0}^{t_1} \frac{m}{2} |x'(t)|^2 - U(x(t)) dt
+\end{gather*}
+Nos planteamos ahora cuáles son los puntos críticos de este funcional, para lo cual escribimos la ecuación de Euler-Lagrange:
+\begin{gather*}
+    -\nabla U(x(t)) -\frac{d}{dt} (mx'(t)) = \vec{0} \ \ \text{ en } [t_0, t_1]
+\end{gather*}
+Llegamos a 
+\begin{gather*}
+    mx''(t) = -\nabla U(x(t))
+\end{gather*}
+que son las ecuaciones del movimiento de la partícula. Esta es la expresión de Newton de la fuerza y nos dice que el campo de fuerzas que guía la trayectoria de la partícula es $-\nabla U$.
+
+\section{Principio de mínima acción}
+
+Consideramos una partícula puntual de masa $m>0$, que se mueve en el seno de un potencial regular $\cc{U}$ de forma que pasa por la posición $x_0\in \bb{R}^N$ en el instante $t_0$ y por la posición $x_1\in \bb{R}^N$ en el instante $t_1$. \\
+
+En esta situación se tiene que 
+\begin{itemize}
+    \item La trayectoria que sigue la partícula es un punto estacionario (punto crítico) del funcional acción ($A$) sobre el dominio
+    \begin{gather*}
+        D = \{x\in C([t_0, t_1];\bb{R}^N) : x(t_0) = x_0,\ x(t_1) = x_1\}
+    \end{gather*}
+
+    \item Si tomamos $\Delta t>0$ lo suficientemente pequeño (depende de las características del potencial), la restricción de $x(t)$ al intervalo $[t_0, t_0+\Delta t]$ es un mínimo local de la acción.
+\end{itemize}
+Si queremos describir muchas partículas, digamos 
+\begin{gather*}
+    \left.
+        \begin{array}{r}
+            x_1:[t_0,t_1] \to \bb{R}^3\\
+            x_2:[t_0,t_1] \to \bb{R}^3\\
+            ...\\
+            x_N:[t_0,t_1] \to \bb{R}^3\\
+        \end{array}
+    \right\} N \text{ trayectorias individuales}
+\end{gather*}
+definimos entonces la \textbf{trayectoria conjunta} $x:[t_0, t_1]\to \bb{R}^3N$ como 
+\begin{gather*}
+    x(t) = (x_1(t), x_2(t), ..., x_N(t))
+\end{gather*}
+
+\subsection{Problema de los $N$ cuerpos en gravitación}
+
+Si cada cuerpo tiene masa $m_i>0$ podemos considerar
+\begin{gather*}
+    E_{kin}(x'(t)) = \sum_{i=1}^N \frac{m_i}{2} |x_i'(t)|^2\\
+    E_{pot}(x(t)) = -G \sum_{1=1<j \leq N} \frac{m_i m_j}{|x_i(t)-x_j(t)|}
+\end{gather*}
+
+% Hemos estudiado la braquistócrona
+
+\begin{ejemplo}
+    Estudiemos 
+    \begin{gather*}
+        \cc{F}[y] = \int_{0}^{1} (y'(x))^2 dx
+    \end{gather*}
+    deefinida sobre 
+    \begin{gather*}
+        D = \left\{ y\in C_0^2([0,1]) : \int_{0}^{1} y(x) dx = 2,\ \int_{0}^{1} xy(x) dx = \frac{1}{2} \right\}
+    \end{gather*}
+
+    El conjunto de direcciones admisibles $\varphi$ no cubre todo $C_0^2([0,1])$ por lo que no podremos usar el lema fundamental y no podremos forzar a que se cumpla la ecuación de Euler-Lagrange.\\
+
+    Lo que hay que hacer (método/receta) es buscar las extremales de un funcional modificado:
+    \begin{gather*}
+        \cc{F}^*[y] := \cc{F}[y] + \lambda \int_{0}^{1} y(x) dx + \mu \int_{0}^{1} xy(x) dx = \frac{1}{2}
+    \end{gather*}
+    con $\lambda, \mu\in \bb{R}$ los ``multiplicadores de Lagrange''. La ecuación de Euler-Lagrange para $\cc{F}^*$ donde $F^*(x,y,p) = p^2 + \lambda y + \mu xy$ quedaría
+    \begin{gather*}
+        \lambda + \mu x - \frac{d}{dx}(2y'(x)) = 0 \equiv 2y''(x) = \lambda + \mu x \Rightarrow y(x) = \frac{\mu}{12}x^3 + \frac{\lambda}{4}x^2 + Ax + B
+    \end{gather*}
+    donde $\lambda, \mu, A, B$ están por determinar y se fijan con la condición $y\in D$, es decir, 
+    \begin{gather*}
+        \left.
+            \begin{array}{l}
+                y(0)=0\\
+                y(1)=0\\
+                \int_{0}^{1} y(x) dx = 2\\
+                \int_{0}^{1} xy(x) dx = \frac{1}{2}
+            \end{array}
+        \right\} \Rightarrow y(x) = 60x^3 - 102x^2 + 42x
+    \end{gather*}
+    tenemos que es el único punto crítico en $D$.
+\end{ejemplo}
+

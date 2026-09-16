@@ -1,0 +1,70 @@
+\section{Trabajo de clase del martes 1 de Octubre de 2024}
+
+\begin{ejercicio}
+    \textbf{Ejemplos T1 (Ejemplo de ejercicio de la distribución normal)}
+    \begin{gather*}
+        X_i\equiv \text{ Puntuaciones obtenidas por los candidatos} \rightsquigarrow N(100,\sigma^2)\\
+        P(X>100.6)=0.4404 \Rightarrow P(X \leq 100.6)=0.5596\\
+        \Rightarrow P\left[Z\leq \dfrac{100.6-100}{\sigma}=0.5596\right]\\
+        \Rightarrow P\left[Z\leq \dfrac{0.6}{\sigma}\right] = 0.5596 \Rightarrow \dfrac{0.6}{\sigma}=0.15 \Rightarrow \sigma=4
+    \end{gather*}
+    Por tanto, $N(100,4^2)$.
+
+    \begin{enumerate}[label=\alph*)]
+        \item $P(X>105) = 1-P(X\leq 105) = 1 - P(Z\leq 1.25) = 1-0.8943 = 0.106$. Por tanto solo un $10.6\%$ supera la oposición.
+
+        \item Tengo que calcular el valor de $a$ que verifique $P(X>a) = 0.33$
+        
+        \begin{gather*}
+            P\left[Z\leq \dfrac{a-100}{4}\right]=0.67\\\\
+            \frac{a-100}{4} = 0.44 \Rightarrow a = 101.76
+        \end{gather*}
+
+        \item $P(100\leq X \leq 101.7) = P\left(0\leq Z \leq 0.44\right) = P(Z\leq 0.44)- P(Z\leq 0) = 0.67-0.5 = 0.17$
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio} \textbf{Ejercicio 7 de la Relación 1.}
+    \begin{gather*}
+        X\equiv \text{ Número de individuos que sufren reacción de una muestra de 400} \rightsquigarrow B(400,0.1)
+    \end{gather*}
+    Como $n=400>30 $ y $1 \leq p \leq 0.9$, entonces puedo aproximar por una normal $\Rightarrow X \rightsquigarrow B(400,0.1) \cong N(np, npq)$, es decir, $N(40,6^2 )$.
+
+    \begin{gather*}
+        P(33\leq X \leq 50) = P(X\leq 50)-P(X< 33) = P(X\leq 50)-P(X\leq 32) = P[X \leq 50.5]- P[X \leq 32.5] = P[Z \leq 1.75] - P[Z\leq -1.25] = P[Z \leq 1.75]- (1-P[Z\leq 1.25]) = 0.9598 - (1-0.8943) = 0.8543
+    \end{gather*}
+\end{ejercicio}
+
+\begin{ejercicio}\textbf{Ejercicio 12 de la Relación 1.}
+    \begin{enumerate}[label=\alph*)]
+        \item $X\equiv$ Tiempo entre dos llegadas consecutivas de coches (en un minuto) $\rightsquigarrow exp(6)$
+        \begin{gather*}
+            P[X>\nicefrac{1}{2}] = 1 - P [X\leq \nicefrac{1}{2}] = 1-(1-e^{-\nicefrac{6}{2}}) = e^{-3} = 0.04978
+        \end{gather*}
+        \item $X\equiv$ Número de coches que llegan en $\nicefrac{1}{2}$ minuto $\rightsquigarrow P(\nicefrac{6}{2}) = P(3)$
+        \begin{gather*}
+            P[X=0] = e^{-3}\frac{3^0}{0!} = e^{-3} = 0.04978
+        \end{gather*}
+    \end{enumerate}
+    
+\end{ejercicio}
+
+\begin{ejercicio}\textbf{Ejercicio 8 de la Relación 1}\\
+    $X\equiv$ Tiempo que el equipo funciona $\rightsquigarrow E(3,0.2)$.
+
+    \begin{enumerate}[label=\alph*)]    
+        \item \begin{gather*}
+            P[X>0] = 1-P[X\leq 10] = 1 -\int\limits_{0}^{10} \frac{\lambda^n}{\Gamma(n)} x^{n-1} e^{-\lambda x dx} = 1-\frac{0.2^3}{2!}-\int\limits_{0}^{10} x^2 e^{-0.2x} =\\=\left\{
+            \begin{array}{cc}
+                u=x^2 & du=2xdv\\
+                dv=e^{-0.2} & v=\frac{-1}{0.2}e^{-0.2x}\\
+            \end{array}
+            \right\} = 1-\frac{0.2^3}{2!} \cdot 80.8262 = 0.6767s
+        \end{gather*}
+        \item \begin{gather*}
+            P[10\leq X \leq 15] = 0.2228
+        \end{gather*}
+    \end{enumerate}
+\end{ejercicio}
+
+% 5 6 9 15  (no hacer el 16)

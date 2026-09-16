@@ -1,0 +1,649 @@
+\chapter{Segunda forma fundamental. Curvaturas}
+
+Consideramos una superficie $S\subset \bb{R}^3$ y un punto $p\in S$. Consideramos su plano tangente $T_pS$ y vemos que no podemos ``derivarlo''. Nos planteamos entonces cuántos vectores $n\in \bb{R}^3$ verifican $n\bot T_pS$ y $|n|=1$ y llegamos a la conclusión de que existen exactamente 2. Si elijo uno de ellos, oriento $T_pS$ porque divido las bases $\{u,v\}$ de $T_pS$ en dos clases:
+\begin{itemize}
+    \item Positivamente orientadas: Si $det(u,v,n)>0$.
+    \item Negativamente orientadas: Si $det(u,v,n)<0$
+\end{itemize}
+La igualdad no se puede dar ya que $u,v,n$ son linealmente independientes. Además, un cambio de $n$ a $-n$ invierte la orientación en $T_pS$.
+
+\begin{definicion}
+    Diremos que una superficie $S$ es \textbf{orientable}\footnote{no orientada, orientable} si se pueden orientar todos sus planos tangentes mediante una aplicación diferenciable, es decir, si existe una aplicación $N: S \to \bb{R}^3$ diferenciable tal que 
+    \begin{gather*}
+        \forall p \in S \ \ \ N(p)\bot T_pS\ \ \wedge\ \ |N(p)|=1
+    \end{gather*}
+    Muchas veces representaremos $N_p=N(p)$. Si $S$ es orientable, diremos que está \textbf{orientada} si se ha elegido una aplicación $N$ con las características anteriores.
+\end{definicion}
+
+\begin{propiedades}
+    Algunas propiedades que podemos extraer de estas definiciones son las siguientes:
+    \begin{enumerate}
+        \item Si $S\subset \bb{R}^3$ es una superficie conexa y orientable, entonces existen exactamente 2 orientaciones sobre $S$.
+        \begin{proof}
+            Por ser orientable tenemos que existe $N:S\to \bb{R}^3$ que cumple $N_p\bot T_pS$ y $|N_p|=1$. Fijamos $N$ y supongamos que tenemos otra orientación $N':S\to \bb{R}^3$. Podemos considerar el producto escalar de $N$ y $N'$.
+            \Func{\langle N, N' \rangle}{S}{\bb{R}}{p}{\langle N_p, N'_p \rangle = \pm 1}
+            Como $S$ es conexa, necesariamente se tendrá
+            \begin{gather*}
+                \langle N, N' \rangle (p) = \left\{
+                \begin{array}{r c c l l}
+                    1 & \forall p \in S & \Rightarrow & N_p=N'_p & \forall p \in S\\
+                    -1 & \forall p \in S & \Rightarrow & N_p=-N'_p & \forall p \in S
+                \end{array}
+                \right.
+            \end{gather*}
+        \end{proof}
+        \item Toda superficie es localmente orientable, es decir, para todo $p\in S$ va a existir un entorno abierto $V$ de $p$ en $S$ tal que $V$ (visto como superficie) es orientable.
+        \begin{proof}
+            Sea $X:U\to \bb{R}^3$ una parametrización de $S$ tal que $p\in X(U)=V$. Tomamos $(u,v)\in U$ y podemos considerar $T_{X(u,v)}S$. $X$ proporciona una base de $T_{X(u,v)}S$, que recordemos que será 
+            \begin{gather*}
+                \{X_u(u,v), X_v(u,v)\}
+            \end{gather*}
+            Para simplificar la notación notaremos $\{X_u,X_v\}$ base de $T_XS$. Definimos así $N^X:U \to \bb{R}^3$ dada por 
+            \begin{gather*}
+                N^X = \frac{X_u \wedge X_v}{|X_u \wedge X_v|}\bot X_u,\ X_v
+            \end{gather*}
+            que está bien definida ya que $X_u$ y $X_v$ son linealmente independientes. Por tanto tendremos $N^X \bot T_XS$ y además $|N^X| = 1$. Defino finalmente $N:V \to \bb{R}^3$ como 
+            \begin{gather*}
+                N = N^X \circ X^{-1}
+            \end{gather*}
+            que será diferenciable y cumplirá las condiciones para orientar a $V$ por lo que $V$ es orientable.
+        \end{proof}
+    \end{enumerate}
+\end{propiedades}
+
+\begin{notacion}
+    A una orientación $N$ sobre una superficie $S$ orientable se le llama también \textbf{campo normal unitario} y también \textbf{aplicación de Gau\ss}\footnote{Así se escribe Gauss en Alemán}.
+\end{notacion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Planos. Sea $P\subset \bb{R}^3$ un plano afín dado por 
+        \begin{gather*}
+            \{p\in \bb{R}^3 : \langle p-p_0, a \rangle = 0\}
+        \end{gather*}
+        y teníamos que $T_pP = \vec{P}=\langle a \rangle^{\bot}$ donde $a\bot T_pP$ y $|a| = 1$. Definimos $N:P \to \bb{R}^3$ dado por $N_p=a$ para todo $p\in P$y tenemos que es una orientación.
+
+        \item Esferas. Consideramos ahora $S^2(p_0, R)$ con $p_0\in \bb{R}^3$, $R>0$. Para todo punto $S^2(p_0, R)$ tenemos que 
+        \begin{gather*}
+            T_pS^2(p_0, R) = \{v\in \bb{R}^3 : v \bot p-p_0\} = \langle p-p_0\rangle^{\bot}
+        \end{gather*}
+        Por tanto definimos una aplicación de Gau\ss~ como $N:S^2(p_0, R)\to \bb{R}^3$ dada por 
+        \begin{gather*}
+            N_p = \frac{p-p_0}{|p-p_0|} = \frac{1}{R}(p-p_0)
+        \end{gather*}
+
+        \item Grafos. Todos los grafos son orientables porque existe una parametrización que los cubre por completo. Consideramos la aplicación $h:U\subset \bb{R}^2 \to \bb{R}$ y tenemos 
+        \begin{gather*}
+            Grafo(h)=S=\{(x,y,z)\in \bb{R}^3 : (x,y)\in \bb{R}^2, \ z=h(x,y)\}
+        \end{gather*}
+        Consideramos la parametrización $X:U \to Grafo(h)$ dada por 
+        \begin{gather*}
+            X(u,v) = (u,v,h(v))
+        \end{gather*}
+        Y tendremos que $X(U)=S$. Además, 
+        \begin{gather*}
+            X_u = (1,0,h_u)\ \ ,\ \ X_v=(0,1,h_v)
+        \end{gather*}
+        Consideramos $N^X:U \to \bb{R}^3$ dado por
+        \begin{gather*}
+            N^X = \frac{(-h_u, -h_v, 1)}{\sqrt{1 + h_u^2 + h_v^2}} = \frac{1}{\sqrt{1+|\nabla h|^2}} (-h_u, -h_v, 1)
+        \end{gather*}
+        Con dicho $N^X$ se define la correspondiente aplicación de Gauss $N=N^X \circ X^{-1}$
+
+        \item Imágenes inversas de un valor regular. Consideramos $f: O \subset \bb{R}^3 \to \bb{R}$ y $a\in \bb{R}$ valor regular de $f$ con $f^{-1}(\{a\})\neq \emptyset$. Teníamos que 
+        \begin{gather*}
+            S = \{(x,y,z)\in \bb{R}^3 : f(x,y,z)=a\}
+        \end{gather*}
+        es una superficie. Para todo punto $(x,y,z)\in S$ podemos considerar $T_{x,y,z}S=\langle \nabla f_{(x,y,z)} \rangle ^{\bot}$. Definimos una aplicación de Gau\ss~ $N$ dada por 
+        \Func{N}{S}{\bb{R}^3}{(x,y,z)}{N(x,y,z)=\frac{\nabla f}{|\nabla f|}(x,y,z) = \frac{1}{\sqrt{f_x^2 + f_y^2 + f_z^2}}(f_x, f_y, f_z)}
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{teo}[Teorema de Brouwer-Samelson]
+    Toda superficie $S\subset \bb{R}^3$ compacta (cerrada en $\bb{R}^3$) es orientable
+\end{teo}
+
+\begin{ejercicio}\
+    \begin{enumerate}
+        \item Supongamos $S=S_1 \cup S_2$ con $S_i$ superficie orientable para $i=1,2$. Si $S_1\cap S_1$ es conexa, entonces $S$ es orientable.
+        \item Supongamos que $S=S_1\cup S_2$ con $S_i$ superficie orientable y conexa para $i=1,2$ y que $S_1\cap S_2$ tiene exactamente dos componentes conexas $A$ y $B$. Si $S_1$ y $S_2$ se pueden orientar de forma que las orientaciones inducidas en $A$ y en $B$ son opuestas, entonces $S$ no es orientable. Aplicarlo a la cinta de Möbius dada por $M = im(X)$ donde
+        \begin{gather*}
+            X(u,v) = \left(\left(2 - v \sen\left(\frac{u}{2}\right)\right)\sen(u), \left(2 - v \sen \left(\frac{u}{2}\right)\right)\cos(u), v \cos \left(\frac{u}{2}\right)\right)
+        \end{gather*}
+        para todo $(u,v)\in \bb{R}$.
+    \end{enumerate}
+\end{ejercicio}
+
+\begin{observacion}
+    Sea $S\subset \bb{R}^3$ una superficie orientable. Consideramos entonces la aplicación de Gau\ss~ $N:S \to \bb{R}^3$ tal que 
+    \begin{gather*}
+        N_p\bot T_pS\ \ \wedge\ \ |N_p| = 1
+    \end{gather*}
+    Por tanto se puede considerar que $N:S\to S^2$ diferenciable tal que $N_p\bot T_pS$. Tomamos $p\in S$ y tenemos 
+    \begin{gather*}
+        (dN)_p : T_pS \to T_{N_p}S^2 = \langle N_p\rangle^\bot = T_pS
+    \end{gather*}
+    Por lo que $(dN)_p$ es un endomorfismo de $T_pS$ y tiene, por tanto, dos invariantes: el determinante y la traza.
+\end{observacion}
+
+\begin{definicion}
+    Al determinante $det(dN)_p$ lo notaremos por $K(p)$ y lo llamaremos \textbf{curvatura de Gau\ss}.
+\end{definicion}
+\begin{definicion}
+    A la media de la traza, $-\frac{1}{2}tr(dN)_p$ la notaremos\footnote{La H viene de \textit{half} en inglés (mitad).} por $H(p)$ y la llamaremos \textbf{curvatura media}.
+\end{definicion}
+\begin{notacion}
+    Es fácil ver que la curvatura de Gau\ss~ no depende de la orientación mientras que la curvatura media cambia de signo frente a cambios de orientación.
+\end{notacion}
+
+\begin{observacion}
+    No sabemos si $K,H:S\to \bb{R}$ son continuas. Sin embargo, sabemos que hay una forma bilineal asociada a $(dN)_p$. La definimos como 
+    \Func{\sigma_p}{T_pS\times T_pS}{\bb{R}}{(v,w)}{\sigma_p(v,w)=\langle (dN)_p(v), w \rangle}
+    A esta aplicación la llamaremos la \textbf{segunda forma fundamental} de $S$ en $p$ (para la orientación N).\\
+
+    (La \textbf{primera forma fundamental} $g_p$ de $S$ en $p$ no es más que el producto escalar de $\bb{R}^3$ restringido a $T_pS$, es decir, 
+    \Func{g_p}{T_pS\times T_pS}{\bb{R}}{(v,w)}{g_p(v,w)=\langle v, w\rangle}
+    Es natural que llamemos a esto primera forma fundamental ya que es mucho más primitiva y venimos usándola sin haberle puesto nombre).
+\end{observacion}
+
+\begin{definicion}
+    A la aplicación $-(dN)_p$ la notaremos por \textbf{endomorfismo de Weingarten}\footnote{Weingarten viene del alemán, \textit{wein} (vino) y \textit{garten} (jardín), haciendo referencia a un viñedo o bodega.}. Además, se verificará
+    \begin{gather*}
+        K(p) = \det(A_p)\\
+        H(p) = \frac{1}{2}tr(A_p)
+    \end{gather*}
+\end{definicion}
+
+Consideramos una superficie $S\subset \bb{R}^3$ orientada, con su respectiva aplicación de Gau\ss~ $N:S\to S^2$. Consideramos $p\in S$ y podemos tomar $v\in T_pS$ con $|v|=1$. Al ser ortogonales tendremos que $p + \langle \{v, N_p \}\rangle$ es un plano, al que llamaremos $P_v$. Tendremos así que $P_v$ con $v\in T_pS$ es un haz de planos con eje la recta normal a $S$ en $p$. Nos vamos a creer que $P_v\cap S$ es la traza de una curva regular, es decir, que
+\begin{gather*}
+    \exists \alpha:(-\veps, \veps) \to S\cap P_v \text{ tal que } \alpha(0)=p\ \ \wedge \ \ \alpha'(0)=v
+\end{gather*}
+Consideramos $\langle N_{\alpha(s), \alpha'(s)} \rangle = 0$ para todo $s$ ya que $\alpha'(s)\in T_{\alpha(s)}S$. Derivamos en $s=0$ y obtenemos
+\begin{gather*}
+    \langle (dN)_p(v), v\rangle + \langle N_p, \alpha''(0) \rangle = 0
+\end{gather*}
+y llegamos a que 
+\begin{gather*}
+    \sigma_p(v,v) = \langle \alpha''(0),N_p \rangle
+\end{gather*}
+de esta forma nos damos cuenta de que $\sigma_p$ mide la curvatura de las secciones normales a $S$ en $p$ (vistas como curvas planas).
+
+% TODO: No fui a clase porque había examen de Modelos Matemáticos II (se lo tendré que copiar a JJ) (SE LO HE COPIADO A JJ)
+
+\begin{propiedades}
+    Sea $N:S\to S^2$ la aplicación de Gau\ss\ de una superficie, sea $X:U\to S$ una parametrización, para $(u,v)\in U$ consideramos $N_{X(u,v)} = (N\circ X)(u,v)\perp T_{X(u,v)}S$, pero sabemos que $X$ nos da una base de este plano, $\{X_u(u,v),X_v(u,v)\}$. Así:
+    \begin{equation*}
+        \langle (N\circ X)(u,v),X_u(u,v) \rangle  = 0 = \langle (N\circ X)(u,v),X_v(u,v) \rangle  
+    \end{equation*}
+    Como esto vale para todo $(u,v)\in U$, seguimos escribiendo a continuación lo mismo pero sin indicar las variables en las que se evalúan las funciones:
+    \begin{equation*}
+        \langle N\circ X, X_u \rangle  = 0 = \langle N\circ X, X_v \rangle 
+    \end{equation*}
+    Derivando la primemra respecto $v$ y la segunda respecto $u$:
+    \begin{align*}
+        \langle (N\circ X)_v,X_u \rangle  + \langle N\circ X,X_{uv} \rangle  &= 0 \\
+        \langle (N\circ X)_u,X_v \rangle + \langle N\circ X, X_{vu} \rangle  &= 0
+    \end{align*}
+    Pero la igualdad de Schwartz nos dice que los dos sumandos son idénticos, por lo que deducimos que los dos primeros son iguales también:
+    \begin{align*}
+        \sigma_X(X_v,X_u) &= \langle (dN)_XXv,X_u \rangle = \langle (N\circ X)_v,X_u \rangle  = \langle (N\circ X)_u,X_v \rangle \\ &= \langle (dN)_XX_u, X_v \rangle = \sigma_X(X_u,X_v)
+    \end{align*}
+    Pero $\{X_u,X_v\}$ es una base de $T_XS$, por lo que deducimos que $\sigma_{X(u,v)}$ es simétrico $\forall (u,v)\in U$. Para cada $p\in S$ podemos encontrar una parametrización $X:U\to S$ con $p\in X(U)$, por lo que deducimos que $\sigma_p$ es simétrica $\forall p\in S$.\\
+
+    \noindent
+    En vista de la definición de la segunda forma fundamental deducimos que $(dN)_p$ y $A_p$ son autoadjuntos respecto de la primera forma fundamental:
+    \begin{equation*}
+        \langle A_pv,w \rangle = \langle v,A_pw \rangle  \qquad \forall v,w\in T_pS
+    \end{equation*}
+    Tenemos así que tanto $A_p$ como $(dN)_p$ \textbf{son diagonalizables}, por lo que existe una base ortonormal $\{e_1,e_2\}$ de $T_pS$ de forma que:
+    \begin{equation*}
+        A_pe_i = k_i(p)e_i, \quad i \in \{1,2\}
+    \end{equation*}
+\end{propiedades}
+
+\begin{notacion}
+    A los valores propios de $A_p$, $k_1(p)\leq k_2(p)$ se les llama \textbf{curvaturas principales} de $S$ en $p$. Son aplicaciones $k_1,k_2:S\to\mathbb{R}$ que verifican:
+    \begin{equation*}
+        K = k_1\cdot k_2, \qquad H = \frac{1}{2}(k_1+k_2)
+    \end{equation*}
+    Notemos que por el trabajo que realizamos en la sección anterior, $k_1(p)$ y $k_2(p)$ son los valores máximo y mínimo de la sgunda forma fundamental:
+    \begin{equation*}
+        k_1(p) = \min_{\substack{v\in T_pS\\|v| =1}} \sigma_p(v,v), \qquad k_2(p) = \max_{\substack{v\in T_pS\\|v| =1}}\sigma_p(v,v)
+    \end{equation*}
+    A $e_1$ y $e_2$ se les llama direcciones principales de $S$ en $p$.\\
+
+    \noindent
+    El polinomio característico de $A_p$ es:
+    \begin{equation*}
+        \lm^2 - 2H\lm + K 
+    \end{equation*}
+    Que sabemos que tiene raíces (por ser simétrica), luego:
+    \begin{equation*}
+        \Delta = 4H^2 - 4K \geq 0 \quad\Longleftrightarrow\quad K\leq H^2
+    \end{equation*}
+    Y la igualdad se alcanza si y solamente si $k_1(p) = k_2(p)$, por lo que se alcanza si y solo si $\sigma_p$ es constante.\\
+
+    \noindent
+    Si $p\in P$ verifica $k_1(p) = k_2(p) \quad\Longleftrightarrow\quad K(p) = H^2(p)$, entonces $p$ se dice un punto \textbf{umbilical} o \textbf{umbílico}.
+\end{notacion}
+
+\begin{observacion}
+    Notemos que si nos encontramos en una superficie, la dirección de máxima curvatura es ortogonal a la dirección de mínima curvatura.
+\end{observacion}
+
+\begin{ejemplo}
+    Veamos ejemplos:
+    \begin{enumerate}
+        \item \textbf{Planos}. Consideramos el plano dado por
+            \begin{equation*}
+                P = \{p\in \mathbb{R}^3 : \langle p-p_0,u \rangle = 0\}, \qquad p_0,u\in \mathbb{R}^3, \quad |u| = 1
+            \end{equation*}
+            Tenemos que $N_p = u\quad \forall p\in P$, con lo que $(dN)_p = 0 = A_p$, de donde:
+            \begin{equation*}
+                k_1(p) = 0 = k_2(p) \qquad \forall p\in P
+            \end{equation*}
+            Por lo que $K(p) = 0 = H(p)\quad \forall p\in P$.
+
+            $P$ es por tanto \textbf{totalmente umbilical}.
+
+        % HASTA AQUÍ ES DE JJ
+
+            \item \textbf{Esferas}. Tomamos la esfera arbitraria $S = S^2(p_0, R)$ donde $p_0\in \bb{R}^3$, $R>0$. Sea la aplicación de Gau\ss~ 
+            \begin{gather*}
+                N : S^2(p_0, R) \to S^2
+            \end{gather*}
+            Las únicas posibilidades que teníamos para $N_p$ eran
+            \begin{gather*}
+                N_p = \frac{1}{R}(p-p_0)
+            \end{gather*}
+            y su opuesto. Tendremos que para $v\in T_pS^2$
+            \begin{gather*}
+                (dN)_p(v) = \frac{1}{R}v \ \ \ \ A_p = - \frac{1}{R}I_{R_pS^2(p_0, R)}
+            \end{gather*}
+            Tendremos entonces
+            \begin{gather*}
+                k_1(p) = k_2(p) = - \frac{1}{R}
+            \end{gather*}
+            es decir, $S^2(p_0, R)$ también es \textbf{totalmente umbilical}. Además,
+            \begin{gather*}
+                K_p = \frac{1}{R^2}\ \ \ \ H_p = - \frac{1}{R}
+            \end{gather*}
+            Recordamos la relación entre $K_p$ y $H_p$:
+            \begin{gather*}
+                K \leq H^2
+            \end{gather*}
+            y sabemos que la igualdad se daba en puntos umbilicales (por lo que en este caso se dará siempre). Como curiosidad podríamos escribir la segunda forma fundamental:
+            \begin{gather*}
+                \sigma_p(v,v) = - \frac{1}{R}|v|^2
+            \end{gather*}
+            Por lo que la segunda forma fundamental será proporcional a la primera.
+
+            \item \textbf{Cilindro}. Consideramos la siguiente superficie descrita en forma canónica:
+            \begin{equation*}
+                C = \{(x,y,z)\in \bb{R}^3 : x^2 + y^2 = R^2\}
+            \end{equation*}
+            que es un cilindro circular recto de radio $R>0$. Tomamos un punto cualquiera $(x,y,z)\in C$ y podemos calcular
+            \begin{equation*}
+                T_{(x,y,z)}C = \{(v_1, v_2, v_3)\in \bb{R}^3: xv_1 + xv_2 = 0\}
+            \end{equation*}
+            Una base de este plano tangente $T_{(x,y,z)}C$ será (a ojo)
+            \begin{equation*}
+                \{(0,0,1), (y,-x,0)\}
+            \end{equation*}
+            Con esto podemos buscar el normal:
+            \begin{equation*}
+                N_{(x,y,z)} = \frac{1}{R}(x,y,0)
+            \end{equation*}
+            de donde 
+            \Func{(dN)_{(x,y,z)}}{T_{(x,y,z)}C}{T_{(x,y,z)}C}{(v_1,v_2,v_3)}{(dN)_{(x,y,z)}(v_1, v_2, v_3) = \dfrac{1}{R}(v_1, v_2, 0)}
+            Además tenemos 
+            \begin{gather*}
+                -A_{(x,y,z)} = (dN)_{(x,y,z)}(0,0,1) = \frac{1}{R}(0,0,0) = 0 \cdot (0,0,1)\\
+                -A_{(x,y,z)} = (dN)_{(x,y,z)}(y, -x, 0) = \frac{1}{R}(y, -x, 0)
+            \end{gather*}
+            por lo que tendremos ya los valores y vectores propios
+            \begin{equation*}
+                k_1(x,y,z) = -\frac{1}{R},\ \ \ \ k_2(x_1, y, z)=0
+            \end{equation*}
+            lo que nos dice que ningún punto umbilical.
+            \begin{equation*}
+                K(x,y,z) = 0
+            \end{equation*}
+            esto nos recuerda al plano (y nos lleva a pensar en qué relación habría entre un cilindro y un plano, donde parece que uno es el otro enrollado).
+            \begin{equation*}
+                H(x,y,z) = - \frac{1}{2R}
+            \end{equation*}
+            Sin embargo vemos que esta curvatura nos indica que ha dejado de ser un plano (claramente un cilindro no es un plano así que alguna diferencia debía hacer).
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{ejercicio}\
+    \begin{enumerate}
+        \item Calcular $A_p$, $\sigma_p$, $k_1$, $k_2$, $H$ y $K$ para la superficie
+        \begin{equation*}
+            S = \{(x,y,z)\in \bb{R}^3 : z = \frac{1}{2}(x^2 - y^2)\}
+        \end{equation*}
+        (Como mínimo estudiarlas en el punto $(0,0,0)\in S$)
+
+        \item Sea $S\subset \bb{R}^3$ conexa y totalmente umbilical orientada. Entonces $k_1(p)=k_2(p)=\lambda(p)$ para todo $p\in S$. Entonces 
+        \begin{equation*}
+            A_p = \lambda(p)I_{T_pS}\ \ \ \forall p \in S
+        \end{equation*}
+        Tenemos entonces $\lambda : S\to \bb{R}$ y nos preguntamos si es diferenciable. Para ello consideramos una parametrización $X:U\to S\subset \bb{R}^3$ y nos preguntamos si $\lambda \circ X$ es diferenciable. Para verlo tomamos $(u,v)\in U$ de forma que $X(u,v)\in S$. Tenemos
+        \begin{gather*}
+            (dN)_{X(u,v)} X_u(u,v) = - \lambda(X(u,v))X_u(u,v) = -(\lambda \circ X) X_u(u,v)\\
+            (dN)_{X(u,v)} X_v(u,v) = \lambda(X(u,v))X_v(u,v) = -(\lambda \circ X) X_v(u,v)
+        \end{gather*}
+        Observamos que esto es equivalente (por la regla de la cadena) a  
+        \begin{equation*}
+            (N\circ X)_u = -(\lambda \circ X) X_u\\
+            (N\circ X)_v = -(\lambda \circ X) X_v
+        \end{equation*}
+        En la primera ecuación podemos aplicar el producto escalar por $X_u$ obteniendo
+        \begin{equation*}
+            \langle (N \circ X)_u, X_u \rangle = - (\lambda \circ X) |X_u|^2
+        \end{equation*}
+        de donde
+        \begin{equation*}
+            \lambda \circ X = - \frac{\langle (N\circ X)_u, X_u \rangle}{|X_u|^2}
+        \end{equation*}
+        por lo que $\lambda$ es diferenciable y no solo eso. Si seguimos desarrollando las 2 ecuaciones obtenidas anteriormente, derivando la primera con respecto a $v$ y la segunda con respecto a $u$ (sabiendo ya que $\lambda$ es derivable) obtenemos
+        \begin{gather*}
+            (N \circ X)_{uv} = -(\lambda \circ X)_v X_u - (\lambda \circ X) X_{uv}\\
+            (N \circ X)_{vu} = -(\lambda \circ X)_u X_v - (\lambda \circ X) X_{vu}
+        \end{gather*}
+        por el teorema de Schwarz tendremos que 
+        \begin{gather*}
+            (\lambda \circ X)_v X_u = (\lambda \circ X)_u X_v
+        \end{gather*}
+        tenemos una combinación lineal de dos elementos de una base igualada a $0$ por lo que ambos elementos deben de ser nulos, es decir
+        \begin{gather*}
+            (\lambda \circ X)_u = (\lambda \circ X)_v = 0 \ \ \ \text{ en }U
+        \end{gather*}
+        Sabemos que $\lambda \circ X : U \to \bb{R}$ por lo que necesariamente $\lambda \circ X$ es constante (ambas derivadas parciales son nulas), lo que además nos dice que $\lambda_{\|X(U)}$
+        es constante para toda parametrización $X$. Por tanto, finalmente tenemos que $\lambda : S \to \bb{R}$ es constante. Concluimos que 
+        \begin{gather*}
+            (dN)_p = -\lambda I_{T_pS}
+        \end{gather*}
+        Distinguimos dos casos posibles:
+        \begin{enumerate}
+            \item Supongamos que $\lambda = 0$. Entonces tendremos que 
+            \begin{gather*}
+                (dN)_p = 0 \ \ \ \forall p\in S
+            \end{gather*}
+            donde $S$ era conexa. Por tanto tendremos que 
+            \begin{gather*}
+                N_p = a \ \ \ \forall p \in S
+            \end{gather*}
+            Lo que nos dice que todas las rectas normales son paralelas, lo que ya hemos trabajado llegando a la conclusión de que $S$ es un abierto de un plano (posiblemente el plano entero).
+
+            \item Supongamos ahora que $\lambda \neq 0$. Definimos $f:S\to \bb{R}^3$ dada por 
+            \begin{gather*}
+                f(p) = \frac{1}{\lambda}N_p + p\ \ \ \forall p \in S
+            \end{gather*}
+            que será diferenciable por su definición (suma y producto de funciones diferenciables). Calculamos su diferencial $(df)_p : T_pS \to \bb{R}^3$, 
+            \begin{gather*}
+                (df)_p = \frac{1}{\lambda}(dN)_p + I_{\bb{R}^3} = \frac{1}{\lambda}(-\lambda I) + I = 0\ \ \ \forall p \in S
+            \end{gather*}
+            por lo que tendremos que $f$ será constante y llamaremos $f(p)=p_0\in \bb{R}^3$ para todo $p\in S$. Si recordamos la definición de $f$ con esta nueva información tendremos
+            \begin{gather*}
+                f(p) = \frac{1}{\lambda}N_p + p = p_0 \Rightarrow p - p_0 = - \frac{1}{\lambda} N(p)
+            \end{gather*}
+            Tomando módulo al cuadrado
+            \begin{gather*}
+                | p - p_0 |^2 = \frac{1}{\lambda^2} \ \ \forall p \in S
+            \end{gather*}
+            lo que nos dice que $S\subset S^2(p_0, \frac{1}{|\lambda|})$ siendo un abierto suyo
+        \end{enumerate}
+        Este resultado lo podemos enunciar como:
+
+        Las únicas superficies conexas, orientables y totalmente umbilicales con los dominios de un plano y los dominios de una esfera. En particular, si la superficie es cerrada, entonces será o un plano o una esfera entera y si fuera compacta solo podría ser una esfera (los únicos compactos totalmente umbilicales son las esferas). A este resultado lo llamaremos \textbf{clasificación de las superficies totalmente umbilicales}.
+
+        \item Sea $S\subset \bb{R}^3$ la superficie dada por 
+        \begin{gather*}
+            S = \{p \in \bb{R}^3 : (1,p^t)A \begin{pmatrix}
+                1 \\ p
+            \end{pmatrix} = 0\}
+        \end{gather*}
+        donde $p\in \bb{R}^3$ es un vector columna y $A\in M_4(\bb{R})$ tal que $A=A^t$. Tenemos que $S$ será una superficie si $(1,p^t)A\neq 0$ para todo $p\in S$. De esta forma podemos escribir 
+        \begin{gather*}
+            A = \left(
+                \begin{array}{c|c}
+                    c & a^t\\
+                    \hline
+                    a & B
+                \end{array}
+            \right)
+        \end{gather*}
+        donde $c\in \bb{R}$, $a\in \bb{R}^3$ y $B\in M_3(\bb{R})$ con $B=B^t$. Tendremos entonces
+        \begin{gather*}
+            (1,p^t)\left(
+                \begin{array}{c|c}
+                    c & a^t\\
+                    \hline
+                    a & B
+                \end{array}
+            \right) = (c+\langle p , a \rangle, a^t + p^t B) \begin{pmatrix}
+                1 \\ p
+            \end{pmatrix}
+        \end{gather*}
+        por lo que otra forma de escribir la superficie será 
+        \begin{gather*}
+            S = \{p\in \bb{R}^3 : c +2\langle p,a \rangle + p^tBp = 0\}
+        \end{gather*}
+        y el plano tangente será 
+        \begin{align*}
+            T_pS &= \{v\in \bb{R}^3 : 2 \langle v,a \rangle + v^tVp + 2p^tBv = 0\} = \\
+            &= \{v\in \bb{R}^3 : \langle a,v \rangle + p^tBv = 0\} =\\
+            &= \{v\in \bb{R}^3 : \langle a,v \rangle + \langle Bp, v \rangle = 0\} =\\
+            &= \{v\in \bb{R}^3 : \langle a +Bp, v \rangle = 0\} =\\
+            &= \langle a + Bp \rangle^{\bot}
+        \end{align*}
+        y como la cuádrica no tiene puntos singulares (están todos en el infinito) tendremos que $a + Bp \neq 0$ (lo que excluye a los conos y a los pares de planos secantes). Esto nos dice que $S$ es orientable e inmediatamente la podemos orientar con la aplicación de Gau\ss~ siguiente\footnote{también podríamos haber considerado su opuesta}:
+        \Func{N}{S}{S^2}{p}{N_p = \frac{a + Bp}{|a + Bp|}} 
+        Podemos considerar entonces su diferencial
+        \Func{(dN)_p}{T_pS}{T_pS}{v}{(dN)_p(v) = \frac{Bv}{|a+Bp|} + \lambda(p,v)(a + Bp)}
+        donde hemos llamado $\lambda(p,v) = (|a+Bp|^{-1})'$, ya que lo importantes es que está multiplicado por $(a+Bp)$. Pasamos a calcular directamente su segunda forma fundamental, en concreto su forma cuadrática asociada a la forma bilineal:
+        \Func{\sigma_p}{T_pS}{\bb{R}}{v}{\sigma_p(v) = \sigma_p(v,v) = -\langle (dN)_p(v), v \rangle} 
+        por lo que, como ya hemos calculado la diferencial tenemos 
+        \begin{align*}
+            \sigma_p(v) &= - \langle \frac{Bv}{|a+Bp|} + \lambda(p,v)(a+Bp), v \rangle = \\
+            &= - \frac{\langle Bv,v\rangle}{|a+Bp|}\ \ \ \ \forall p \in S,\ \ \forall v \in T_pS
+        \end{align*}
+        donde como vemos no importa el valor de $\lambda(p,v)$, razón por la que no lo habíamos calculado. Nos planteamos ahora cómo serán las curvaturas. Realizamos el siguiente estudio, teniendo en cuenta el estudio de valores propios que ya deberíamos de conocer: 
+        \begin{gather*}
+            S \text{ elipsoide } \sii B \text{ es definida } \Rightarrow \sigma_p \text{ es definida } \Rightarrow K_p > 0\\
+            S \text{ paraboloide elíptico } \sii B \text{ semidefinida no definida} \Rightarrow \sigma_p \text{ semidefinida } \Rightarrow K_p \geq 0\\
+            S \text{ cilindro } \Rightarrow K_p = 0
+        \end{gather*}
+
+        \item Consideramos $S\subset \bb{R}^3$ orientable. La orientamos con $N:S\to S^2$ una aplicación de Gau\ss. Consideramos además $X:U\to S\subset \bb{R}^3$ una parametrización \textbf{compatible} con $N$, es decir, tal que 
+        \begin{gather*}
+            N \circ X = N^X = \frac{X_u \wedge X_v}{|X_u \wedge X_v|}
+        \end{gather*}
+        Como base de $T_XS$ elegimos $\{X_u, X_v \}$. Tenemos con la primera forma fundamental que existe una matriz $M$ asociada respecto de $B$ donde\footnote{La $M$ es de \textit{métrica}.} 
+        \begin{gather*}
+            M = \begin{pmatrix}
+                |X_u|^2 & \langle X_u, X_v \rangle \\
+                \langle X_u, X_v \rangle & |X_v|^2
+            \end{pmatrix} = \begin{pmatrix}
+                E & F\\
+                F & G
+            \end{pmatrix}
+        \end{gather*}
+        donde $E,F,G : U \to \bb{R}$. Consideramos la segunda forma fundamental que será también una forma bilineal simétrica que tendrá una matriz $\Sigma$ respecto de $B$:
+        \begin{gather*}
+            \Sigma = \begin{pmatrix}
+                \sigma_X(X_u, X_u) & \sigma_x(X_u, X_v)\\
+                \sigma_X(X_u, X,v) & \sigma_X(X_v, X_v)
+            \end{pmatrix} = \begin{pmatrix}
+                e & f \\
+                f & g
+            \end{pmatrix}
+        \end{gather*}
+        Así escrito no podemos ver a primera vista si son diferenciables. Trabajaremos con una y el resto serán análogas:
+        \begin{align*}
+            \sigma_X(X_u, X_u) &= - \langle (dN)_X X_u, X_u \rangle = - \langle (N \circ X)_u, X_u \rangle \overset{(\ast)}{=} \langle N\circ X, X_{uu} \rangle =\\
+            &= \langle N^X, X_{uu} \rangle = \langle \frac{X_u \wedge X_v}{|X_u \wedge X_v|}, X_uu \rangle = \frac{1}{|X_u \wedge X_v|} \langle X_u \wedge X_v, X_{uu} \rangle =\\
+            &= \frac{\det(X_u, X_v, X_{uu})}{|X_u \wedge X_v|} = e
+        \end{align*}
+        donde en $(\ast)$ hemos aplicado que 
+        \begin{gather*}
+            (\langle N \circ X, X_u \rangle)_u = \langle (N \circ X)_u, X_u \rangle + \langle N \circ X, X_{uu} \rangle = 0
+        \end{gather*}
+        Análogamente tendremos que 
+        \begin{gather*}
+            \sigma_X(X_v, X_v) = \frac{\det(X_u, X_v, X_{vv})}{|X_u \wedge X_v|} = g\\\\
+            \sigma_X(X_u, X_v) = \frac{\det(X_u, X_v, X_{uv})}{|X_u \wedge X_v|} = f
+        \end{gather*}
+        Llamaremos $A_X$ a la matriz del enformorfismo de Weingarten respecto de $B$:
+        \begin{gather*}
+            A_X = M^{-1}\Sigma
+        \end{gather*}
+    \end{enumerate}
+\end{ejercicio}
+
+%TODO: Falté a clase aquí
+
+\begin{ejercicio}
+    Calcular las curvaturas de la superficie\footnote{Como viene de una superficie se llama \textit{elicoide} (es una especie de escalera de caracol si se piensa geométricamente)}
+    \begin{gather*}
+        H = \{X(u,v) = (v\cos(u), v\sen(u), au) : u,v\in \bb{R}^2,\ a\in \bb{R}^*\}
+    \end{gather*}
+    Previamente demostrar que $H$ es una superficie cubierta por una sola parametrización y por tanto es orientable. 
+    \begin{proof}
+        Comenzaremos calculando los coeficientes de la primera y segunda forma fundamentales para calcular
+        \begin{gather*}
+            K \circ X = \frac{eg - f^2}{EG-F^2}\ \ \ \ H\circ X = \frac{1}{2} \cdot \frac{eG - 2fF + gE}{EG-F^2}
+        \end{gather*}
+        Tenemos entonces que los coeficientes de la primera forma fundamental son 
+        \begin{align*}
+            E &= |X_u|^2 = |(-v\sen(u), v\cos(u), a)|^2 = a^2 + v^2\\
+            G &= |X_v|^2 = |(\cos(u), \sen(u), 0)|^2 = 1\\
+            F &= \langle X_u, X_v \rangle = \langle (-v\sen(u), v\cos(u), a), (\cos(u), \sen(u), 0) \rangle = 0
+        \end{align*}
+        Pasamos a calcular los denominadores:
+        \begin{gather*}
+            EG - F^2 = a^2 + v^2
+        \end{gather*}
+        Estudiemos ahora los coeficientes de la segunda forma fundamental
+        \begin{align*}
+            e &= \frac{det(X_u, X_v, X_{uu})}{|X_u \wedge X_v|} = \frac{
+            \begin{vmatrix}
+                -v\sen(u) & v\cos(u) & a\\
+                \cos(u) & \sen(u) & 0\\
+                -v\cos(u) & -v\sen(u) & 0
+            \end{vmatrix}}{\sqrt{EG - F^2}} = 0\\\\
+            %
+            f &= \frac{det(X_u, X_v, X_{uv})}{|X_u \wedge X_v|} = \frac{
+            \begin{vmatrix}
+                -v\sen(u) & v\cos(u) & a\\
+                \cos(u) & \sen(u) & 0\\
+                -\sen(u) & \cos(u) & 0
+            \end{vmatrix}}{\sqrt{EG - F^2}} = \frac{a}{\sqrt{a^2 + v^2}}\\\\
+            %
+            g &= \frac{det(X_u, X_v, X_{vv})}{|X_u \wedge X_v|} = 0
+        \end{align*}
+        Así podemos calcular ya las composiciones del principio
+        \begin{align*}
+            K \circ X &= -\frac{\frac{a^2}{a^2+v^2}}{a^2 + v^2} = - \frac{a^2}{(a^2 + v^2)^2} < 0\\\\
+            %
+            H \circ X &= \frac{eG - 2dF + gE}{EG - F^2} = 0
+        \end{align*}
+        Para las superficies que tienen curvatura media nula en todos los puntos se llaman \textbf{superficies mínimas} (o minimales\footnote{viene del inglés}). La curvatura media mide en cada punto la \textbf{tensión superficial} de una superficie.
+    \end{proof}b de una superficie
+\end{ejercicio}
+
+\begin{observacion}
+    Se puede demostrar que para cualquiera $a,b\in \bb{R}^3$ se tiene que 
+    \begin{gather*}
+        |a \wedge b| = \sqrt{|a|^2|b|^2 - (a \cdot b)^2}
+    \end{gather*}
+\end{observacion}
+
+\begin{ejercicio}
+    Ver que $K, H, k_1$ y $k_2$ son invariantes por movimientos rígidos de $\bb{R}^3$.\\
+
+    Basta ver que la segunda forma fundamental es invariante por movimientos rígidos. Para ello tomamos $S\subset \bb{R}^3$ una superficie orientada mediante la aplicación $N : S \to S^2$. Consideramos también el movimiento rígido
+    \Func{\phi}{\bb{R}^3}{\bb{R}^3}{x}{\phi(x) = Ax+b}
+    donde $A\in M_3(\bb{R})$, $b\in \bb{R}^3$ y $AA^t = Id$. Además, si consideramos
+    \begin{gather*}
+        S' = \phi(S)
+    \end{gather*}
+    tendremos que $S'$ es otra superficie. Queremos ver que tiene la misma forma que la primera (misma curvatura de gauss, misma curvatura media y mismas curvaturas principales). Para ello vamos a considerar un punto $p'\in S'$ y podemos tomar $T_{p'}S'$. Como $p'\in S'$ ha de existir un $p\in S$ tal que $p'=\phi(p)$. De esta forma tendremos 
+    \begin{gather*}
+        T_{p'}S' = (d\phi)_p(T_pS)
+    \end{gather*}
+    Sabemos que $T_pS \bot N_p$. Como es una aplicación lineal tendremos
+    \begin{gather*}
+        T_{p'}S' = (d\phi)_p(T_pS) = A(T_pS) \bot AN_p = N'_{p'}
+    \end{gather*}
+    Podemos definir entonces $N': S'\to S^2$ dada por
+    \begin{gather*}
+        N' = A \circ N \circ A
+    \end{gather*}
+    que a poco que lo pensemos está bien definida. Además es diferenciable y se tiene que 
+    \begin{gather*}
+        N'_{p'} \bot T_{p'}S'
+    \end{gather*}
+    Hemos visto que $S'=\phi(S)$ también es orientable y la hemos orientado en función de la orientación $N$ de $S$. Se tiene 
+    \begin{gather*}
+        N' = AN\circ \phi^{-1} \Rightarrow N'\circ \phi = AN\ \ \ \text{ en }S
+    \end{gather*}
+    Tenemos por tanto que existe un $\alpha: (-\veps, \veps) \to S$ tal que $\alpha(0)=p$ y $\alpha'(0)=v$. Tenemos la igualdad
+    \begin{gather*}
+        (N' \circ \phi)(\alpha(s)) = AN(\alpha(s))
+    \end{gather*}
+    derivamos respecto de $s$ en $s=0$ y obtenemos
+    \begin{gather*}
+        (dN')_{\phi(p)}(d\phi)_p(v) = A(dN)_p(v) \ \ \ \forall p \in S\ \ \forall v \in T_pS
+    \end{gather*}
+    Podemos escribir ya la segunda f.f. (de la segunda superficie):
+    \begin{gather*}
+        \sigma'_{\phi(p)}((d\phi)_p(v)) = \sigma'_{\phi(p)}(Av) = - \langle (dN')_{\phi(p)}(Av), Av \rangle = -\langle A(dN)_p(v), Av \rangle = - \langle (dN)_p(v), v \rangle
+    \end{gather*}
+    De ahí se obtiene que $k_i' \circ \phi = k_i$ para $i=1,2$ por lo que 
+    \begin{gather*}
+        K'\circ \phi = K \ \ \ \text{ y } \ \ \ H'\circ \phi = H
+    \end{gather*}
+\end{ejercicio}
+
+\begin{ejercicio}
+    Calcular las curvaturas del grafo de la función $h:U\subset \bb{R}^2 \to \bb{R}$. Definimos asi
+    \begin{gather*}
+        S = Grafo(h) = \{(x,y,z)\in \bb{R}^3 : (x,y)\in U, \ z=h(x,y)\}
+    \end{gather*}
+    La cubre un solo entorno coordenado. Consideramos entonces
+    \Func{X}{U}{S\subset \bb{R}^3}{(u,v)}{X(u,v) = (u, v, h(u,v))}
+    De esta forma tendremos
+    \begin{gather*}
+        X_u = (1,0,h_u),\ \ \ \ X_v = (0,1,h_v)\\
+        X_{uu} = (0,0,h_{uu}),\ \ \ \ X_{uv} = (0,0,h_{uv}),\ \ \ \ X_{vv} = (0,0,h_{vv})
+    \end{gather*}
+    Y si calculamos los coeficientes tenemos
+    \begin{align*}
+        E &= 1+h_u^2\\
+        G &= 1+h_v^2\\
+        F &= h_uh_v\\
+        EG - F^2 &= 1+h_u^2 + h_v^2 = 1 + |\nabla h|^2
+    \end{align*}
+    De esta forma calculando los de la segunda forma tendremos 
+    \begin{align*}
+        e& = \frac{
+        \begin{vmatrix}
+            1 & 0 & h_u\\
+            0 & 1 & h_v\\
+            0 & 0 & h_{uu}
+        \end{vmatrix}}{|X_u \wedge X_v|} = \frac{h_{uu}}{\sqrt{1 + |\nabla h|^2}}\\\\
+        f &= \frac{h_{uv}}{\sqrt{1 + |\nabla h|^2}}\\\\
+        g &= \frac{h_{vv}}{\sqrt{1 + |\nabla h|^2}}
+    \end{align*}
+    Y de esta forma podemos calcular finalmente
+    \begin{gather*}
+        K = \frac{h_{uu}h_{vv} - h^2_{uv}}{(1 + |\nabla h|^2)^2}\\\\
+        H = \frac{h_{uu}(1+h_v^2) + h_{vv}(1+h_u^2) - 2 h_{uv}h_{u}h_{v}}{(1 + |\nabla h|^2)^{\frac{3}{2}}}
+    \end{gather*}
+\end{ejercicio}
+
+
+

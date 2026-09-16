@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/libParchis.a CMakeFiles/Parchis.dir/src/model/Parchis.cpp.o
+/usr/bin/ranlib lib/libParchis.a

@@ -1,2 +1,0 @@
-/usr/bin/ar qc lib/libPowerBar.a CMakeFiles/PowerBar.dir/src/model/PowerBar.cpp.o
-/usr/bin/ranlib lib/libPowerBar.a

@@ -1,0 +1,2197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Interactivo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: #444;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1, h2, h3 {
+            margin-bottom: 10px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .answer {
+            display: block;
+            background-color: #555;
+            color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .answer:hover {
+            background-color: #777;
+        }
+        #next-button, #start-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #next-button:hover, #start-button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        #score-container {
+            display: none;
+        }
+        #incorrect-questions-container {
+            display: none;
+            margin-top: 20px;
+        }
+        ul {
+            padding-left: 0;
+            list-style-type: none;
+            text-align: left;
+        }
+        ul li {
+            margin-bottom: 5px;
+        }
+        #reset-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#reset-button:hover {
+    background-color: #c82333;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tests IA</h1>
+        <h2 id="author-name">Florin Emanuel Todor Gliga</h2>
+        <div id="question-container">
+            <p id="question">Haz click en "Comenzar Test" para empezar. Disfruta</p>
+            <div id="question-options"></div> <!-- Aquí se mostrarán las opciones de respuesta -->
+        </div>
+        <div class="button-container" id="answer-buttons" style="display: none;">
+            <!-- No se necesitan botones aquí para las opciones -->
+        </div>
+        <button id="next-button" onclick="nextQuestion()" style="display: none;">Siguiente Pregunta</button>
+        <div>
+            <p>Respondidas: <span id="answered-count">0</span></p>
+            <p>Aciertos: <span id="correct-count">0</span></p>
+            <p>Fallos: <span id="incorrect-count">0</span></p>
+            <p>Preguntas disponibles: <span id="available-questions-count">0</span></p>
+            <p id="score-container" style="display: none;">Nota: <span id="score">0</span></p>
+        </div>
+        <div id="incorrect-questions-container" style="display: none;">
+            <h3>Preguntas falladas:</h3>
+            <ul id="incorrect-questions-list"></ul>
+        </div>
+        <button id="start-button" onclick="startTest()">Comenzar Test</button>
+        
+    </div>
+
+    <script>
+        const allQuestions = [
+
+        //Florin
+            {
+                question: "¿Cuál de los siguientes métodos de búsqueda es un caso particular de búsqueda primero el mejor?",
+                options: [
+                    "a. Algoritmo A*",
+                    "b. Búsqueda en profundidad",
+                    "c. Algortimo genético"
+                ],
+                correct: "a"
+            },
+            {
+                question: "¿Cuál o cuáles de los siguientes algoritmos tienen una componente aleatoria?",
+                options: [
+                    "a. Genéticos",
+                    "b. A*",
+                    "c. Escalada máxima pendiente",
+                    "d. Escalada simple"
+                ],
+                correct: "a"
+            },
+            {
+            question: "¿El uso de una función heurística garantiza que un método de búsqueda consiga la solución óptima?",
+                options: [
+                    "a. Siempre",
+                    "b. Nunca",
+                    "c. Depende del algoritmo y de la heurística"
+                    
+                ],
+                correct: "c"
+            },
+
+            {
+            question: "En el algoritmo A* ABIERTOS representa",
+                options: [
+                    "a. el conjunto de nodos generados y explorados",
+                    "b. el conjunto de nodos generados y no explorados",
+                    "c. el conjunto de nodos no generados y explorados",
+                    "d. el conjunto de nodos no generados y no explorados"
+                    
+                ],
+                correct: "b"
+            },
+            {
+            question: "En el algoritmo A* Cerrados representa",
+                options: [
+                    "a. el conjunto de nodos no generados y no explorados",
+                    "b. el conjunto de nodos generados y explorados",
+                    "c. el conjunto de nodos generados y no explorados",
+                    "d.  el conjunto de nodos no generados y explorados"
+                    
+                ],
+                correct: "b"
+            },
+            {
+            question: "En el algoritmo A* cuando un sucesor corresponde con un nodo que ya estaba en CERRADOS",
+                options: [
+                    "a. el nodo se revisa para determinar cuál es su mejor sucesor, y en el caso de que haya cambio se propaga al padre del nodo.",
+                    "b. el nodo se revisa para determinar cuál es su mejor padre. (correcta, pero está incompleta)",
+                    "c. el nodo de elimina.",
+                    "d. el nodo se revisa para determinar cuál es su mejor padre, y en el caso de que haya cambio se propaga dicho cambio a los sucesores."
+                    
+                ],
+                correct: "d"
+            },
+            {
+            question: "En el algoritmo A* el enlace al mejor padre determina una estructura de",
+                options: [
+                    "a. árbol representando los mejores caminos desde cualquier nodo a la raíz.",
+                    "b. árbol representando los mejores descendientes de cada nodo",
+                    "c. grafo con todos los descendientes desde cualquier nodo al objetivo"
+                    
+                ],
+                correct: "a"
+            },
+            {
+            question: "En el algoritmo A*, ¿qué es la función g? Selecciona la respuesta correcta",
+                options: [    
+                "a. Es una estimación del coste necesario para alcanzar un estado objetivo por el camino que se el nodo actual",
+                "b. Es una estimación del coste adicional necesario para alcanzar un nodo objetivo a partir del no",
+                "c. Es una medida del coste para ir desde el estado inicial hasta el nodo actual"
+                ],
+                correct: "c"
+            },
+            {
+            question: "En el algoritmo A*, g(n) indica el coste del mejor camino hasta el momento desde el nodo inicial a unexpresa el coste estimado desde el nodo inicial hasta el nodo objetivo",
+                options: [    
+               "a. Verdadero",
+                "b. Falso"
+                ],
+                correct: "b"
+            },
+            {
+            question: "Las heurísticas son",
+                options: [    
+                "a. funciones usadas en algunos problemas",
+                "b. criterios, métodos o principios para decidir cuál de entre varias acciones promete ser la mejor para alcanzar una meta",
+                "c. criterios, métodos o principios para obtener el óptimo"
+                ],
+                correct: "b"
+            },
+
+            {
+            question: "Los métodos heurísticos en general no garantizan la solución óptima, pero producen resultados satisresolución de problemas",
+                options: [    
+                "a. Verdadero",
+                "b. Falso"
+                ],
+                correct: "a"
+            },
+            {
+            question: "Un juego es determinístico porque:",
+                options: [    
+                "a. Siempre se puede determinar una solución",
+                "b. Siempre se pueden determinar los resultados de los movimientos de los jugadores",
+                "c. Un jugador puede determinar siempre una estrategia ganadora"
+                ],
+                correct: "b"
+            },
+
+            {
+            question: "Hay una diferencia destacable entre un estado de un juego y un estado de un problema de búsqueda heurística y es que:",
+                options: [    
+                "a. En un estado de un juego no se representa la situación del mundo.",
+                "b. En un estado de un juego no se representa una valoración numérica sobre el estado.",
+                "c. En un estado de un juego hay que representar el jugador que le toca mover"
+                ],
+                correct: "c"
+            },
+            {
+            question: "Un juego puede considerarse como un caso de sistema multiagente _______.",
+                options: [    
+                "a. Competitivo",
+                "b. Cooperativo",
+                ],
+                correct: "a"
+            },
+            {
+            question: "En un juego inicialmente hay 3 palillos sobre la mesa, y dos jugadores Max y Min. Max comienza el jupalillos. Le sigue Min, que también podrá quitar 1, 2 ó 3 palillos. Estas acciones se repiten hasta que último palillo, en cuyo caso pierde el juego. ¿La figura muestra el árbol de este juego?.",
+                options: [    
+                "a. Sí, porque todos los nodos min están bien valorados",
+                "b. Sí, porque los nodos min son terminales",
+                "c. No, porque no todos los nodos terminales están etiquetados",
+                "d. No, porque faltan operadores por aplicar al nodo max."
+                ],
+                correct: "c"
+            },
+            {
+            question: "Las técnicas de juegos se llaman de búsqueda con adversario porque:",
+                options: [    
+                "a. Los agentes usan valoraciones de los estados terminales opuestas.",
+                "b. Los agentes usan repertorios de acciones opuestos.",
+                "c. Los agentes usan estados iniciales opuestos."
+                ],
+                correct: "a"
+            },
+            {
+            question: "Un estado terminal en un juego bipersonal es un estado en el que:",
+                options: [    
+                "a. hay empate entre los jugadores",
+                "b. los dos jugadores ganan",
+                "c. los dos jugadores pierden",
+                "d. no hay más movimientos aplicables y el juego finaliza"
+                ],
+                correct: "d"
+            },
+            {
+            question: "Un juego bipersonal con información perfecta se considera un laboratorio de interés para la IA porque:",
+                options: [    
+                "a. Tiene un repertorio de acciones pequeño y aun así son duros de resolver.",
+                "b. Siempre se puede encontrar una solución óptima con una buena heurística.",
+                "c. Es más difícil de representar que juegos físicos, como el “RoboSoccer” o Fútbol Robótico.",
+                ],
+                correct: "a"
+            },
+            {
+            question: "Al inicio de la exploración de un árbol de juego",
+                options: [    
+                "a. Todos los nodos valen inicialmente 0",
+                "b. . Todos los nodos valen inicialmente 0 menos los terminales",
+                "c. Todos los nodos tienen un valor desconocido menos los terminales",
+                ],
+                correct: "c"
+            },
+            {
+            question: "El tamaño aproximado del espacio de nodos a explorar en el ajedrez, que tiene un factor de ramificacprofundidad media de 50 movimientos por cada jugador es de:",
+                options: [    
+                "a. O(35^100)",
+                "b. O(100^35)",
+                "c. O(35*100)",
+                "d. O(e^(-35/100))"
+                ],
+                correct: "a"
+            },
+            {
+            question: "En un juego una estrategia contingente:",
+                options: [    
+                "a. Es un camino lineal entre el estado inicial y un estado terminal que incluye nodos max y nodo",
+                "b. Es un grafo Y/O que representa movimientos de max y todos los posibles movimientos de op",
+                ],
+                correct: "b"
+            },
+            {
+            question: "La solución de un juego permite indicar a cada jugador:",
+                options: [    
+                "a. Qué resultado puede esperar y cómo alcanzarlo",
+                "b. Un camino lineal para encontrar un estado ganador",
+                ],
+                correct: "a"
+            },
+            {
+            question: "Las valoraciones de los nodos terminales de un juego se realizan considerando el punto de vista de _",
+                options: [    
+                "a. max",
+                "b. min",
+                ],
+                correct: "a"
+            },
+            {
+            question: "En los juegos bipersonales con información perfecta:",
+                options: [    
+                "a. Los jugadores actúan cada uno racionalmente, es decir, cada uno trata de obtener el máximo beneficio",
+                "b. Los jugadores actúan cada uno racionalmente, es decir, cada uno trata de maximizar su pérdia",
+                ],
+                correct: "a"
+            },
+            {
+            question: "Un juego de suma nula:",
+                options: [    
+                "a. Hay reparto de beneficio entre los jugadores y la suma de beneficios es 0",
+                "b. El resultado final del juego es 0",
+                "c. Cada situación final el beneficio de un jugador es total y la pérdida del oponente es total",
+                ],
+                correct: "c"
+            },
+
+            {
+            question: "Un juego puede considerarse como un caso de sistema multiagente cooperativo.",
+                options: [    
+                "a. Verdadero",
+                "b. Falso",
+            ],
+                correct: "b"
+            },
+            {
+            question: "Es necesario valorar  situaciones o asociar una utilidad a situaciones distintas a las terminales  para poder resolver un juego",
+                options: [    
+                "a. Verdadero",
+                "b. Falso"
+                ],
+                correct: "a"
+            },
+            {
+            question: "Un juego con información perfecta es un caso de sistema multiagente con dos jugadores en el toda la información del tablero está disponible para cada jugador.",
+                options: [    
+                "a. Verdadero",
+                "b. Falso"
+                ],
+                correct: "a"
+            },
+            {
+            question: "El caso promedio la poda alfa beta permite profundizar",
+                options: [    
+                "a. el triple que un procedimiento minimax con el mismo esfuerzo",
+                "b. un 33% más que un procedimiento minimax con el mismo esfuerzo",
+                "c. el doble que un procedimiento minimax con el mismo esfuerzo"
+
+                ],
+                correct: "b"
+            },
+            {
+            question: "En el algoritmo minimax podemos cambiar el jugador MAX por el jugador MIN sin más que:",
+                options: [    
+                "a. Cambiar el orden de la exploración sin alterar ningún otro elemento",
+                "b. Modificar la función heurística sumando -1 a todos sus valores",
+                "c. Cambiar el orden de la exploración y el signo de la función heurística"
+                ],
+                correct: "c"
+            },
+            {
+            question: "En teoría de juegos, minimax es",
+                options: [    
+                "a. un método para encontrar la salida a un laberinto",
+                "b. un algoritmo para resolver una partida de ajedrez",
+                "c. un método de decisión para minimizar la pérdida máxima esperada en juegos con adversario, perfecta y suma nula",
+                "d. un tipo de agente deliberativo",
+                "e. un método de decisión para maximizar la pérdida mínima esperada en juegos con adversario, perfecta y suma nula"
+                ],
+                correct: "c"
+            },
+            {
+            question: "En un juego con componente aleatoria, si realizamos un cambio de escala en los valores ¿la variantetipo de juegos elegirá la misma jugada?",
+                options: [    
+                "a. Si, no depende de los cambios de escala siempre que se conserve el orden de los valores",
+                "b. No siempre, pues puede cambiar el orden de la esperanza matemática de las opciones de unaconserve el orden de los valores"
+                ],
+                correct: "b"
+            },
+            {
+            question: "La cota alfa se calcula como el",
+                options: [    
+                "a. el valor máximo de los nodos MAX en el camino del nodo a la raíz",
+                "b. el valor máximo de los nodos MIN en el camino del nodo a la raíz",
+                "c. el valor mínimo de los nodos MIN en el camino del nodo a la raíz",
+                "d. el valor máximo de los nodos MAX del árbol del juego"
+                ],
+                correct: "a"
+            },
+            {
+            question: "La efectividad de la poda alfa-beta del algoritmo minimax depende del orden en que se exploren las jugadas",
+                options: [    
+                "a. cierto",
+                "b. falso",
+                "c. depende de la función de evaluación estática usada"
+                ],
+                correct: "a"
+            },
+            {
+            question: "En el contexto de búsqueda en juegos con una profundidad de corte o limitada, una posición estable",
+                options: [    
+                "a. a. Una posición del juego en la que la valoración de sus sucesores no cambia respecto a la posicion actual",
+                "b. Una posición del juego desde la no se producen variaciones drásticas de la valoración de sus posición actual.",
+                "c. Una posición a la que se puede volver para iniciar una nueva estrategia contingente."
+                ],
+                correct: "b"
+            },
+            {
+            question: "Una función de valoración de nodos intermedios de un juego:",
+                options: [    
+                "a. No tiene que contemplar situaciones terminales del juego.",
+                "b. Tiene que contemplar situaciones terminales del juego, valorándolas con -inf si gana MIN y +inf si pierde MIN.",
+                "c. Tiene que contemplar situaciones terminales del juego, valorándolas con -inf si pierde MIN y +inf si gana MIN."
+                ],
+                correct: "b"
+            },
+            {
+            question: "Una regla general como “Todas las casillas azules de un mapa pueden transitarse si el agente tiene bikini",
+                options: [    
+                "a. se puede representar más adecuadamente con un modelo icónico que con un modelo descriptrivo",
+                "b. se puede representar más adecuadamente con un modelo descriptivo que con un modelo icónico",
+                "c. no puede representarse ni con un modelo descriptivo ni con un modelo icónico."
+                ],
+                correct: "b"
+            },
+            {
+            question: "La información que se almacena en un nodo de un espacio de estados es un ejemplo de",
+                options: [    
+                "a. un modelo de representación icónico",
+                "b. un modelo de representación descriptivo",
+                "c. un modelo de presentación ad-hoc."
+                ],
+                correct: "b"
+            },
+            {
+            question: "El cálculo proposicional es decidible, lo cual significa que:",
+                options: [    
+                "a. . Se puede usar para tomar decisiones a partir de un conjunto de fórmulas.",
+                "b. Se puede determinar en tiempo finito si una proposición es deducible de un conjunto de fórmulas",
+                "c. Se puede garantizar que si una fórmula es cierta entonces se puede decidir su certeza."
+                ],
+                correct: "b"
+            },
+            {
+            question: "La relación “X es el padre de Y”",
+                options: [    
+                "a. se puede representar más adecuadamente con proposiciones que con predicados",
+                "b. se puede representar más adecuadamente con predicados que con proposiciones.",
+                "c. solo puede representarse con predicados"
+                ],
+                correct: "b"
+            },
+            {
+            question: "Un árbol de demostración:",
+                options: [    
+                "a. es una representación del proceso de demostración de una fórmula bien formada",
+                "b. es una representación del espacio de estados en la búsqueda de una fórmula bien formada",
+                "c. es una representación del espacio de fórmulas donde se debe encontrar una demostración"
+                ],
+                correct: "a"
+            },
+            {
+            question: "El modus ponens:",
+                options: [    
+                "a. es una regla de inferencia para modelos icónicos",
+                "b. es una regla de inferencia en lógica en lógica proposicional y de predicados",
+                "c. es una regla de inferencia solo aplicable en lógica proposicional."
+                ],
+                correct: "b"
+            },
+            {
+            question: "Si partimos de dos cláusulas, una en la que se afirma que “no llueve o hace frío” y otra que en la que hace frío”, la regla de resolución aplicada a ambas establece que:",
+                options: [    
+                "a. hace frío",
+                "b. no llueve",
+                "c. no se pueden resolver, son cláusulas inconsistentes"
+                ],
+                correct: "a"
+            },
+            {
+            question: "La instanciación universal nos permite deducir:",
+                options: [    
+                "a. reglas generales a partir de casos particulares",
+                "b. casos particulares a partir de reglas generales",
+                "c. la instanciación no nos permite deducir, nos permite inferir."
+                ],
+                correct: "b"
+            },
+            {
+            question: "Para representar con predicados la información sobre una Asignatura, el Curso en que se imparte y el cuatrimestre",
+                options: [    
+                "a. se puede usar un único predicado asignatura(A,C,Cu) donde A es una variable que representa y Cu el cuatrimestre",
+                "b. se pueden usar dos predicados, asignatura-curso(A,C) y asignatura-cuatrimestre(A,Cu) donde representa la asignatura, C el curso y Cu el cuatrimestre",
+                "c. ninguna de las otras respuestas es cierta porque no se pueden usar predicados para represenen una base de datos",
+                "d. a y b son ciertas"
+                ],
+                correct: "d"
+            },
+            {
+            question: "¿Es eficiente la resolución en lógica de predicados?",
+                options: [    
+                "a. No, solo sirve como concepto teórico,",
+                "b. Si, siempre que nos limitemos a utilizar cláusulas de Horn",
+                "c. Si, siempre encuentra en tiempo eficiente las demostraciones"
+                ],
+                correct: "b"
+            },
+            {
+            question: "¿Cuál de los siguientes es un tipo de aprendizaje?",
+                options: [    
+                "a. Aprendizaje normal",
+                "b. no sabe no contesta",
+                "c. Aprendizae por eliminación",
+                "d. Aprendizaje supervisado"
+                ],
+                correct: "d"
+            },
+            {
+            question: "En un sistema basado en el conocimiento, el motor de inferencia",
+                options: [    
+                "a. contiene los hechos inferidos y las reglas para inferir",
+                "b. permite razonar sobre el conocimiento de la base de conocimiento y los datos proporcionados por un usuario",
+                "c. es independiente del modelo de representación"
+                ],
+                correct: "b"
+            },
+            {
+            question: "¿Cuál o cuáles son los componentes esenciales que necesita un Sistema Basado en el Conocimiento",
+                options: [    
+                "a. se puede usar un único predicado asignatura(A,C,Cu) donde A es una variable que representa y Cu el cuatrimestre",
+                "b. se pueden usar dos predicados, asignatura-curso(A,C) y asignatura-cuatrimestre(A,Cu) donde representa la asignatura, C el curso y Cu el cuatrimestre",
+                "c. Interfaz de usuario",
+                "d. ninguna de las otras respuestas es cierta porque no se pueden usar predicados para represenen una base de datos",
+                "e. a, b y c son ciertas"
+                ],
+                correct: "e"
+            },
+            {
+            question: "¿Cuáles son los dos métodos de aprendizaje supervisado?",
+                options: [    
+                "a. Métodos basados en instancias",
+                "b. Métodos basado en grafos",
+                "c. Métodos basados en modelos",
+                "d. Métodos basados en funciones",
+                "e. a y c son ciertas",
+                "f. b y c son ciertas",
+                ],
+                correct: "e"
+            },
+
+//PEDRO
+{
+  question: "¿Con qué método o métodos de búsqueda se obtiene siempre la solución con un número menor de iteracciones?",
+  options: [
+    "a. Descenso iterativo",
+    "b. Búsqueda en profundidad",
+    "c. Búsqueda en anchura",
+    "d. a y c son correctas"
+  ],
+  correct: "d"
+},
+{
+  question: "¿Cuál de entre los siguientes algoritmos de escalada reduce la posibilidad de caer en óptimos locales?",
+  options: [
+    "a. escalada simple",
+    "b. ninguno de ellos",
+    "c. escalada por máxima pendiente"
+  ],
+  correct: "b"
+},
+{
+  question: "¿Cuál o cuáles de las siguientes afirmaciones acerca de los algoritmos de búsqueda no informada son ciertas?",
+  options: [
+    "a. La búsqueda en anchura garantiza obtener la solución óptima siempre y cuando el coste sea unitario",
+    "b. Los algoritmos de búsqueda no informada requieren de información heurística para que funcionen ",
+    "c. La búsqueda en profundidad garantiza obtener la solución óptima siempre que el coste sea unitario "
+  ],
+  correct: "a"
+},
+{
+  question: "¿Cuáles de las siguientes opciones son correctas",
+  options: [
+    "a. El agente deliberativo dispone de un modelo de los efectos de sus acciones sobre el mundo",
+    "b. El agente deliberativo dispone de un modelo en el mundo que habita",
+    "c. El agente deliberativo reacciona a los cambios que percibe, aunque no estén en modelo",
+    "d. a y b son correctas"
+  ],
+  correct: "d"
+},
+{
+  question: "¿Cuáles  de los siguientes métodos son búsqueda sin información?",
+  options: [
+    "a. búsqueda en profundidad pero no búsqueda en anchura",
+    "b. búsqueda en anchura, pero no búsqueda en profundidad",
+    "c. búsqueda en anchura, búsqueda en profundidad"
+  ],
+  correct: "c"
+},
+{
+  question: "¿Cuántos caminos se mantendrán en memoria en la búsqueda en profundidad retroactiva?",
+  options: [
+    "a. 2",
+    "b. 1",
+    "c. todos",
+    "d. 3"
+  ],
+  correct: "b"
+},
+{
+  question: "¿El uso de una función heurística garantiza que un método de búsqueda consiga la solución óptima?",
+  options: [
+    "a. Nunca",
+    "b. Siempre",
+    "c. Depende del algoritmo y de la heurística"
+  ],
+  correct: "c"
+},
+{
+  question: "¿El uso de una función heurística garantiza que un método de búsqueda consiga la solución óptima?",
+  options: [
+    "a. Siempre",
+    "b. Nunca",
+    "c. Depende del algoritmo y de la heurística"
+  ],
+  correct: "c"
+},
+{
+  question: "¿Qué estrategia de control utiliza un método de escalada?",
+  options: [
+    "a. Exploración de grafos",
+    "b. Irrevocable",
+    "c. Retroactiva"
+  ],
+  correct: "b"
+},
+{
+  question: "¿Qué representan los nodos cuando se usa la estructura de grafo dirigido para representar un Artificial? ¿Y los arcos?",
+  options: [
+    "a. Nodos: un objeto; Arcos: un camino",
+    "b. Nodos: un estado del sistema; Arcos: una posible acción",
+    "c. Nodos: una posible acción; Arcos: un estado del sistema",
+    "d. Ninguna de las respuestas anteriores es cierta"
+  ],
+  correct: "b"
+},
+{
+  question: "¿Sería viable generar el grafo completo para representar el espacio de estados del ajedrez?",
+  options: [
+    "a. Si, pero es más eficiente trabajar con el grafo implícito",
+    "b. No, tendría demasiados nodos"
+  ],
+  correct: "b"
+},
+{
+  question: "¿De entre la búsqueda en anchura y en profundidad retroactiva, ¿cuál de los dos usa menos memoria?",
+  options: [
+    "a. La búsqueda en anchura",
+    "b. La búsqueda en profundidad retroactiva",
+    "c. Los dos usan la misma cantidad de memoria",
+    "d. No usan memoria",
+  ],
+  correct: "b"
+},
+{
+  question: "¿En el problema del mono y los plátanos, ¿qué tipo de agente sería más eficaz?",
+  options: [
+    "a. Social",
+    "b. Reactivo",
+    "c. Deliberativo"
+  ],
+  correct: "c"
+},
+{
+  question: "¿En la búsqueda en anchura es necesario ir analizando desde el estado inicial todos los sucesos para pasar al nivel siguiente en el árbol de búsqueda?",
+  options: [
+    "a. solo en los primeros pasos",
+    "b. no",
+    "c. si"
+  ],
+  correct: "c"
+},
+{
+  question: "¿En la búsqueda en profundidad retroactiva, el contenido de la memoria almacenada es?",
+  options: [
+    "a. el camino que se está explorando",
+    "b. el nodo actual",
+    "c. todos los caminos que se han explorado"
+  ],
+  correct: "a"
+},
+{
+  question: "¿La búsqueda en anchura permite obtener la solución con menor número de acciones?",
+  options: [
+    "a. no",
+    "b. si",
+    "c. depende del problema"
+  ],
+  correct: "b"
+},
+{
+  question: "¿La búsqueda en profundidad retroactiva es una estrategia de búsqueda",
+  options: [
+    "a. especulativa",
+    "b. tentativa",
+    "c. explicativa"
+  ],
+  correct: "b"
+},
+{
+  question: "La principal diferencia entre el algoritmo de escalada simple y el algoritmo de escalada por la máxima pendiente es",
+  options: [
+    "a. el uso de la heurística sobre los nodos sucesores y el criterio de parada",
+    "b. los estados que se tienen en cuenta para la generación del siguiente estado",
+    "c. la posibilidad de vuelta atrás y el criterio de parada"
+  ],
+  correct: "b"
+},
+
+
+{
+  question: "¿Las heurísticas son?",
+  options: [
+    "a. criterios, métodos o principios para obtener el óptimo",
+    "b. criterios, métodos o principios para decidir cuál de entre varias acciones promete ser la mejor para alcanzar una meta",
+    "c. funciones usadas en algunos problemas"
+  ],
+  correct: "b"
+},
+
+
+{
+  question: "¿Los métodos heurísticos en general no garantizan la solución óptima, pero producen resultados que satisfacen la resolución del problema?",
+  options: [
+    "a. Falso",
+    "b. Verdadero"
+  ],
+  correct: "b"
+},
+{
+  question: "¿Los problemas fundamentales de un método de escalada son?",
+  options: [
+    "a. Cálculo de la heurística",
+    "b. Mesetas",
+    "c. Máximos locales",
+    "d. b y c"
+  ],
+  correct: "d"
+},
+{
+  question: "Qué tipo de aprendizaje aprende una función a partir de ejemplos de sus entradas y salidas?",
+  options: [
+    "a. Aprendizaje por refuerzo",
+    "b. aprendizaje no supervisado",
+    "c. aprendizaje supervisado",
+    "d. no sabe no contesta"
+  ],
+  correct: "c"
+},
+
+
+{
+  question: "Según su funcionamietno, ¿qué estructura de datos sería más apropiada para implementar la búsqueda en profundidad?",
+  options: [
+    "a. Una cola con prioridad",
+    "b. Una lista",
+    "c. Una pila",
+    "d. Una cola"
+  ],
+  correct: "c"
+},
+{
+  question: "Selecciona la definición que mejor se ajusta al concepto de espacio de estados:",
+  options: [
+    "a. Grafo cuyos nodos representan las configuraciones alcanzables (los estados válidos) y explicitan las acciones posibles",
+    "b. Es la representación de conocimientos del problema, ya generada al inicio del problema en la ejecución del agente ",
+    "c. Grafo cuyos nodos representan acciones, algunas imposibles y otras posibles; el agente elige la que mejora le satisfaga"
+  ],
+  correct: "a"
+},
+{
+  question: "Una ventaja de los métodos de escalada es que son siempre fáciles de implementar",
+  options: [
+    "a. tan solo los métodos de escalada simples",
+    "b. tan solo cuando no se incluyen probabilidades",
+    "c. siempre"
+  ],
+  correct: "a"
+},
+
+
+{
+  question: "¿Cuál de entre los siguientes algoritmos de escalada tiene más probabilidad de caer en óptimo?",
+  options: [
+    "a. escalada por máxima pendiente",
+    "b. enfriamiento simulado",
+    "c. escalada simple"
+  ],
+  correct: "c"
+},
+{
+  question: "¿Cuál de entre los siguientes algoritmos de escalada reduce la posibilidad de caer en óptimos locales?",
+  options: [
+    "a. escalada simple",
+    "b. escalada por máxima pendiente",
+    "c. enfriamiento simulado"
+  ],
+  correct: "c"
+},
+{
+  question: "¿Cuál o cuáles de los siguientes algoritmos tienen una componente aleatoria?",
+  options: [
+    "a. Géneticos",
+    "b. A*",
+    "c. Escalada simple",
+    "d. Escalada máxima pendiente"
+  ],
+  correct: "a"
+},
+{
+  question: "Cuando la salida de un árbol de decisión es una variable continua, el proble se denomina:",
+  options: [
+    "a. Completo",
+    "b. continuo",
+    "c. regresión",
+    "d. no sabe no contesta"
+  ],
+  correct: "c"
+},
+{
+  question: "¿El uso de una función heurística garantiza que un método de búsqueda consiga la solución óptima?",
+  options: [
+    "a. Nunca",
+    "b. Siempre",
+    "c. Depende del algoritmo y de la heurística"
+  ],
+  correct: "c"
+},
+{
+  question: "¿Qué estrategia de control utiliza un método de escalada?",
+  options: [
+    "a. Irrevocable",
+    "b. Retroactiva",
+    "c. Exploración en grafos"
+  ],
+  correct: "a"
+},
+{
+  question: "¿Qué hace diferente a los algoritmos genéticos de los otros métodos de escalada?",
+  options: [
+    "a. el uso de conjuntos de estados y operaciones sobre conjuntos de estados",
+    "b. el uso de decisiones probabilísticas",
+    "c. el uso de estrategias irrevocables"
+  ],
+  correct: "a"
+},
+
+{
+  question: "¿Qué representa en el problema la adecuación con el entorno en un algoritmo genético?",
+  options: [
+    "a. el valor de la función heurística",
+    "b. la población",
+    "c. el operador de selección"
+  ],
+  correct: "a"
+},
+{
+  question: "Cuando se resuelve un problema con un algoritmo genético tanto la condificación del problema ",
+  options: [
+    "a. es conveniente que se adapten al modelo definido por el algoritmo genético",
+    "b. no es necesario que se adapten al modelo definido por el algoritmo genético",
+    "c. es necesario que se adapten al modelo definido por el algoritmo genético "
+  ],
+  correct: "c"
+},
+{
+  question: "¿De los siguientes algoritmos ¿cuál tiene más posibilidades de caer en un máximo o mínimo local?",
+  options: [
+    "a. Escalada máxima pendiente",
+    "b. Profundizaje iterativo",
+    "c. Algoritmos genéticos"
+  ],
+  correct: "a"
+},
+
+
+{
+  question: "¿El algoritmo de enfriamiento simulado es una variante de los métodos de escalada que se cambia en algunos casos?",
+  options: [
+    "a. estados diferentes al actual",
+    "b. estados mejores que el actual",
+    "c. estados peores que el actual"
+  ],
+  correct: "c"
+},
+{
+  question: "¿El algoritmo de escalada estocástico selecciona el siguiente estado?",
+  options: [
+    "a. Aleatoriamente entre todos los descendientes",
+    "b. Aleatoriamente entre todos los descendientes que mejoran al actual y con una probabilidad constante",
+    "c. Aleatoriamente entre todos los descendientes que mejoran al actual y con una probabilidad descendiente proporcional al valor de la heurística del mismo",
+     "d. Aleatoriamente entre todos los descendientes que mejoran al actual"
+  ],
+  correct: "c"
+},
+{
+  question: "¿En el algoritmo de enfriamiento simulado la energía representa?",
+  options: [
+    "a. un valor global del sistema ",
+    "b. la cercanía al óptimo",
+    "c. la función heurística"
+  ],
+  correct: "c"
+},
+{
+  question: "En el algoritmo simulado la temperatura representa",
+  options: [
+    "a. la cercanía al óptimo",
+    "b. un parámetro artificial que permite controlar la conducta del algoritmo a lo largo del tiempo ",
+    "c. el incremento de la función heurística",
+     "d. un parámetro artificial que permite controlar la definición de la función heurística a lo "
+  ],
+  correct: "b"
+},
+{
+  question: "La principal diferencia entre el algoritmo de escalada simple y el algoritmo de escalada por la máxima pendiente",
+  options: [
+    "a. el uso de la heurística sobre los nodos sucesores y el criterio de parada",
+    "b. los estados que se tienen en cuenta para la generación del siguiente estado",
+    "c. la posibilidad de vuelta atrás y el criterio de parada"
+  ],
+  correct: "b"
+},
+{
+  question: "Los métodos de escalada tienen como objetivo pasar irrevocablemente desde un nodo al nodo siguiente",
+  options: [
+    "a. a todos los nodos sucesores",
+    "b. que mejore al nodo actual",
+    "c. ninguna de las anteriores"
+  ],
+  correct: "b"
+},
+
+
+{
+  question: "Los métodos heurísticos en general no garantizan la solución óptima, pero producen resultados para la resolución deñ problema",
+  options: [
+    "a. Verdadero",
+    "b. Falso"
+  ],
+  correct: "a"
+},
+{
+  question: "Los problemas fundamentales de un método de escalada son",
+  options: [
+    "a. Cálculo de la heurística",
+    "b. Máximos locales",
+    "c. Mesetas",
+    "d, b y c"
+  ],
+  correct: "d"
+},
+{
+  question: "Una ventaja de los métodos de escalada es que son siempre fáciles de implementar",
+  options: [
+    "a. siempre",
+    "b. tan solo los métodos de escalada simples",
+    "c. tan solo cuando no incluyen probabilidades"
+  ],
+  correct: "b"
+},
+
+
+{
+  question: "Una ventaja de los métodos de escalada es que son siempre fáciles de implementar",
+  options: [
+    "a. siempre",
+    "b. tan solo los métodos de escalada simples",
+    "c. tan solo cuando no incluyen probabilidades"
+  ],
+  correct: "b"
+},
+{
+  question: "En el algoritmo de búsqueda A*, g(n) expresa el coste estimado desde el nodo n hasta el nodo del mejor camino hasta el momento desde el nodo inicial al n",
+  options: [
+    "a. Verdadero",
+    "b. Falso"
+  ],
+  correct: "b"
+},
+{
+  question: "Para un nodo, en el algoritmo A* la función g es un valor que no cambia a lo largo del algoritmo",
+  options: [
+    "a. Verdadero",
+    "b. Falso"
+  ],
+  correct: "b"
+},
+
+
+{
+  question: "Para un nodo, el algoritmo A* la función h es un valor que no cambia a lo largo del algoritmo",
+  options: [
+    "a. Verdadero",
+    "b. Falso"
+  ],
+  correct: "a"
+},
+{
+  question: "¿Cuál de entre los siguientes algoritmos de escalada reduce la posibilidad de caer en óptimos locales?",
+  options: [
+    "a. escalada simple",
+    "b. escalada por máxima pendiente",
+    "c. enfriamiento simulado"
+  ],
+  correct: "c"
+},
+
+// ANGEL
+{
+    question: "Según su funcionamiento, ¿qué estructura de datos sería más apropiada para implementar la búsqueda en profundidad sobre grafos?",
+    options: [
+        "a) Una cola con prioridad",
+        "b) Una pila",
+        "c) Una cola"
+    ],
+    correct: "b"
+},
+
+{
+    question: "Si realizamos un cambio de escala en los valores de la función de evaluación estática, por ejemplo, multiplicar el valor por 10, ¿el algoritmo minimax elige la misma jugada?",
+    options: [
+        "a) Solo si el cambio de escala aumenta el valor actual",
+        "b) Solo si el cambio de escala disminuye el valor actual",
+        "c) Sí, no depende de los cambios de escala"
+    ],
+    correct: "c"
+},
+
+{
+    question: "Un problema para el que existe una resolución algorítmica ¿podría ser un problema de Inteligencia Artificial?",
+    options: [
+        "a) Si, esos problemas se incluyen siempre en Inteligencia Artificial",
+        "b) Podría ser, dependiendo del tipo de solución que tenga el problema",
+        "c) No, ya existe un algoritmo que lo resuelve"
+    ],
+    correct: "b"
+},
+
+{
+    question: "¿En qué consiste actuar racionalmente?",
+    options: [
+        "a) en percibir y actuar",
+        "b) en dar una solución aunque no sea la mejor",
+        "c) en resolver el problema de forma óptima",
+        "d) en actuar de la forma correcta según la información que se posee"
+    ],
+    correct: "d"
+},
+
+{
+    question: "En su definición más estricta, una arquitectura reactiva es aquella que",
+    options: [
+        "a) no incluye ninguna clase de modelo centralizado de representación simbólica del mundo, y hace uso de razonamiento complejo",
+        "b) no incluye ninguna clase de modelo centralizado de representación simbólica del mundo, y/o no hace uso de razonamiento complejo sobre dicha representación",
+        "c) incluye una clase de modelo centralizado de representación simbólica del mundo, y hace uso de razonamiento complejo",
+        "d) incluye una clase de modelo centralizado de representación simbólica del mundo, y no hace uso de razonamiento complejo"
+    ],
+    correct: "b"
+},
+
+{
+    question: "El aprendizaje basado en instancias",
+    options: [
+        "a) representa el conocimiento mediante reglas",
+        "b) representa el conocimiento mediante los mismos ejemplos",
+        "c) representa el conocimiento mediante árboles de decisión"
+    ],
+    correct: "b"
+},
+
+{
+    question: "La búsqueda primero el mejor o por el mejor nodo hace uso de una estrategia de control",
+    options: [
+        "a) de exploración en grafos",
+        "b) irrevocable",
+        "c) retroactiva"
+    ],
+    correct: "a"
+},
+
+{
+    question: "¿Cuál de los siguientes algoritmos tienen una componente aleatoria?",
+    options: [
+        "a) Algoritmo A*",
+        "b) Algoritmos genéticos",
+        "c) Algoritmo de escalada por la máxima pendiente",
+        "d) Algoritmo de escalada simple"
+    ],
+    correct: "b"
+},
+
+{
+    question: "¿Es esencial el uso de memoria en un agente reactivo?",
+    options: [
+        "a) no, porque seguiría siendo inteligente, aunque no tuviera memoria",
+        "b) no, pero incluirla provocaría una mejora de la eficiencia y el comportamiento del agente",
+        "c) no, porque si se incluye dicha memoria pasa a ser un agente deliberativo",
+        "d) si, porque es imposible que un agente funcione sin memoria"
+    ],
+    correct: "b"
+},
+
+{
+    question: "Todo juego bipersonal con información perfecta y suma nula tiene solución.",
+    options: [
+        "a) La afirmación es cierta pero no podemos conseguir resolver de forma práctica juegos complejos",
+        "b) La afirmación es falsa, el ajedrez es un ejemplo de juego que no se puede resolver",
+        "c) La verdad de la afirmación depende de la complejidad del juego y de la implementación del algoritmo"
+    ],
+    correct: "a"
+},
+
+{
+    question: "En el contexto del aprendizaje automático, ¿Qué es una instancia?",
+    options: [
+        "a) Una observación de una situación conocida en un problema",
+        "b) Un recurso del sistema",
+        "c) Un algoritmo de búsqueda"
+    ],
+    correct: "a"
+},
+{
+    question: "Con qué método de búsqueda se obtienen siempre la solución con un número menor de pasos?",
+    options: [
+        "a) Descenso iterativo",
+        "b) Búsqueda en profundidad",
+        "c) Búsqueda en anchura",
+        "d) a y c son correctas"	
+    ],
+    correct: "d"
+},
+{
+    question: "Cuál de entre los siguientes algoritmos de escalada reduce la posibilidad de caer en óptimos locales?",
+    options: [
+        "a) escalada por máxima pendiente",
+        "b) escalada simple",
+        "c) ninguno de ellos",	
+    ],
+    correct: "c"
+},
+
+{
+    question: "El test de Turing tiene que ver con",
+    options: [
+        "a) sistemas que piensan como humanos",
+        "b) sistemas que actúan racionalmente",
+        "c) sistemas que actúan como humanos",
+        "d) sistemas que piensan racionalmente"
+    ],
+    correct: "c"
+},
+
+{
+    question: "Cuando se dice que un agente es capaz de razonar sobre un modelo del mundo para decidir qué hacer para lograr un objetivo, estamos hablando de un agente",
+    options: [
+        "a) reactivo",
+        "b) social",
+        "c) deliberativo"
+    ],
+    correct: "c"
+},
+
+{
+    question: "El subsistema de explicación de un sistema experto basado en reglas tiene como misión",
+    options: [
+        "a) deducir los hechos más importantes que se han utilizado en el proceso",
+        "b) justificar como se ha llegado a la decisión propuesta por el sistema",
+        "c) obtener una retroalimentación de la decisión tomada"
+    ],
+    correct: "b"
+},
+
+{
+    question: "¿Cuál de las siguientes opciones es incorrecta?",
+    options: [
+        "a) El agente deliberativo reacciona a los cambios que percibe, aunque no estén en su modelo del mundo",
+        "b) El agente deliberativo dispone de un modelo de los efectos de sus acciones sobre el mundo",
+        "c) El agente deliberativo dispone de un modelo del mundo en el que habita"
+    ],
+    correct: "a"
+},
+
+{
+    question: "En el algoritmo A* usando f = g+h, la función g es un valor asociado a cada estado que no cambia a lo largo del tiempo",
+    options: [
+        "a) Es falso, el valor cambia en función de la heurística empleada.",
+        "b) Es falso, el valor puede cambiar",
+        "c) Es cierto, ese valor nunca cambia"
+    ],
+    correct: "b"
+},
+
+{
+    question: "En el algoritmo de poda alfa-beta, un nodo min se puede podar cuando",
+    options: [
+        "a) su valor actual es menor o igual que la cota beta",
+        "b) su valor actual es mayor que la cota alfa",
+        "c) su valor actual es menor o igual que la cota alfa",
+        "d) su valor actual es mayor que la cota beta"
+    ],
+    correct: "c"
+},
+
+{
+    question: "Cuando tengamos más de una hipótesis que satisfaga todos los ejemplos debemos elegir",
+    options: [
+        "a) la más simple",
+        "b) la más difícil",
+        "c) la primera que se haya obtenido",
+        "d) no saber no contestar",
+        "e) la que más nos guste"
+    ],
+    correct: "a"
+},
+
+{
+    question: "Cuando tengamos más de una hipótesis que satisfaga todos los ejemplos debemos elegir",
+    options: [
+        "a) la más simple",
+        "b) la más difícil",
+        "c) la primera que se haya obtenido",
+        "d) podemos elegir cualquiera"
+    ],
+    correct: "a"
+},
+
+{
+    question: "¿Con qué método de búsqueda, entre los siguientes, se obtiene siempre la solución con un número menor de operadores/acciones?",
+    options: [
+        "a) Algoritmo genético",
+        "b) Búsqueda en profundidad",
+        "c) Enfriamiento simulado",
+        "d) Descenso iterativo"
+    ],
+    correct: "d"
+},
+
+{
+    question: "Señalar de entre los siguientes cuál es un modelo de representación del conocimiento",
+    options: [
+        "a) el campo de potencial",
+        "b) la lógica de predicados",
+        "c) los algoritmos genéticos"
+    ],
+    correct: "b"
+},
+{
+    question: "22. En un grafo Y/O si tenemos un nodo O, debemos",
+    options: [
+        "a) resolver el subproblema asociado y devolverlo",
+        "b) resolver todos sus hijos por separado, si todos están resueltos el nodo padre está resuelto, en otro caso el nodo padre no se puede resolver",
+        "c) resolver un nodo hijo para ver si está resuelto, si es así, el padre está resuelto, en caso contrario comprobar con otro hijo, si ninguno de los nodos hijos se puede resolver, el nodo padre tampoco"
+    ],
+    correct: "c"
+},
+{
+    question: "23. El enfriamiento simulado consiste en",
+    options: [
+        "a) definir los valores de las probabilidades del modelo",
+        "b) definir el número de iteraciones y el valor de la constante K",
+        "c) definir la temperatura de inicio y el cambio de temperatura en las diferentes iteraciones"
+    ],
+    correct: "c"
+},
+{
+    question: "24. En el algoritmo A* usando la fórmula f = g+h en cada nodo, ¿qué es la función g?",
+    options: [
+        "a) Es una estimación del mejor coste para ir desde el nodo actual al nodo objetivo",
+        "b) Es una estimación del mejor coste para ir desde el estado inicial al estado objetivo pasando por el nodo actual",
+        "c) Es una estimación del mejor coste para ir desde el estado inicial hasta el nodo actual"
+    ],
+    correct: "c"
+},
+{
+    question: "25. En un juego la incertidumbre producida por la tirada de un dado se mide",
+    options: [
+        "a) con el caso promedio",
+        "b) con el caso más desfavorable",
+        "c) con el caso más favorable"
+    ],
+    correct: "a"
+},
+{
+    question: "26. ¿Cuál de las siguientes herramientas no debería emplearse para construir un agente reactivo?",
+    options: [
+        "a) Un sistema basado en reglas de producción",
+        "b) Variables de estado",
+        "c) Una tabla entrada-salida",
+        "d) Un sistema de búsqueda"
+    ],
+    correct: "d"
+},
+{
+    question: "27. En el algoritmo de poda alfa-beta, beta es",
+    options: [
+        "a) el mayor valor actual de entre los nodos MAX en el camino que hay desde el nodo actual al nodo solución",
+        "b) el menor valor actual de entre los nodos MIN en el camino que hay desde el nodo actual al nodo de inicio",
+        "c) el menor valor actual de entre los nodos MIN en el camino que hay desde el nodo actual al nodo solución",
+        "d) el mayor valor actual de entre los nodos MAX en el camino que hay desde el nodo actual al nodo de inicio"
+    ],
+    correct: "b"
+},
+{
+    question: "28. La búsqueda en anchura permite obtener la solución con menor número de acciones",
+    options: [
+        "a) Sí",
+        "b) depende del problema",
+        "c) no"
+    ],
+    correct: "a"
+},
+{
+    question: "29. En el problema del mono y los plátanos, donde el mono tiene que determinar una serie de acciones para coger un plátano colgado del techo conociendo los objetos presentes en la habitación, ¿qué tipo de agente sería más apropiado?",
+    options: [
+        "a) Un agente social",
+        "b) Un agente deliberativo",
+        "c) Un agente reactivo"
+    ],
+    correct: "b"
+},
+{
+    question: "30. Un problema de aprendizaje es realizable",
+    options: [
+        "a) si el espacio de hipótesis se representa mediante un modelo",
+        "b) si el espacio de hipótesis es finito",
+        "c) si el espacio de hipótesis contiene a la función verdadera"
+    ],
+    correct: "c"
+},
+{
+    question: "31. La arquitectura de subsunción",
+    options: [
+        "a) consiste en usar ejemplos para aprender el comportamiento del agente y usar ese comportamiento para determinar la acción más apropiada",
+        "b) consiste en seleccionar reglas usando una determinada ordenación y comprobar si se cumple una condición para asociarle la acción correspondiente",
+        "c) consiste en usar módulos de comportamiento que se activan y que con una determinada prioridad devuelven una acción a aplicar"
+    ],
+    correct: "c"
+},
+{
+    question: "32. El algoritmo de escalada estocástico selecciona el siguiente estado",
+    options: [
+        "a) aleatoriamente entre todos los descendientes que mejoran al actual y con una cierta probabilidad para cada descendiente proporcional al valor de la heurística en el mismo",
+        "b) aleatoriamente entre todos los descendientes que mejoran al actual y con una cierta probabilidad con valor constante para cada descendiente",
+        "c) aleatoriamente entre todos los descendientes",
+        "d) aleatoriamente entre todos los descendientes que mejoran al actual"
+    ],
+    correct: "a"
+},
+{
+    question: "Un algoritmo de aprendizaje es bueno si",
+    options: [
+        "a) produce hipótesis que hacen un buen trabajo al evaluar clasifacaciones de ejemplos observados previamente",
+        "b) produce hipótesis que hacen un buen trabajo al evaluar clasificaciones de ejemplos no han sido observados",
+        "c) no sabe no contesta",
+        "d) hace un buen trabajo produciendo clasificaciones de las diferentes hipótesis observadas"
+    ],
+    correct: "b"
+},
+{
+    question: "Se dice que un problema de aprendizaje es realizable si el espacio de hipotesis",
+    options: [
+        "a) contiene a la función verdadera",
+        "b) no sabe no contesta",
+        "c) es lo suficientemente grande",
+        "d) es continuo"
+    ],
+    correct: "a"
+},
+{
+    question: "En aprendizaje una hipótesis estará bien generalizada si:",
+    options: [
+        "a) puede predecir ejemplos que no se conocen",
+        "b) es simple",
+        "c) no sabe no contesta",
+        "d) es consistente con los datos del conjunto de entrenamiento"
+    ],
+    correct: "a"
+},
+{
+    question: "Una hipótesis es consistente si",
+    options: [
+        "a) es completa",
+        "b) satisface a los datos",
+        "c) no sabe no contesta",
+        "d) generaliza el conocimiento"
+    ],
+    correct: "b"
+},
+{
+    question: "33. En el algoritmo A* CERRADOS representa",
+    options: [
+        "a) el conjunto de nodos no generados y explorados",
+        "b) el conjunto de nodos no generados y no explorados",
+        "c) el conjunto de nodos generados y no explorados",
+        "d) el conjunto de nodos generados y explorados"
+    ],
+    correct: "d"
+},
+{
+    question: "34. En el algoritmo de poda alfa-beta, la cota alfa se calcula como el",
+    options: [
+        "a) el valor mínimo de los nodos MIN en el árbol del juego",
+        "b) el valor mínimo de los nodos MIN en el camino del nodo a la raíz",
+        "c) el valor máximo de los nodos MAX en el camino del nodo a la raíz",
+        "d) el valor máximo de los nodos MAX del árbol del juego"
+    ],
+    correct: "c"
+},
+{
+    question: "35. En el algoritmo minimax el valor minimax V(J) de un nodo J de la frontera de búsqueda es ___ al de su función de evaluación estática.",
+    options: [
+        "a) menor",
+        "b) diferente",
+        "c) mayor",
+        "d) igual"
+    ],
+    correct: "d"
+},
+{
+    question: "36. La complejidad de un juego se mide",
+    options: [
+        "a) con el resultado de multiplicar la profundidad por la anchura del árbol del juego",
+        "b) con la profundidad del árbol del juego",
+        "c) con la anchura del árbol del juego",
+        "d) con el número de nodos que se procesan",
+        "e) con B^p donde B es el factor de ramificación y P la profundidad"
+    ],
+    correct: "e"
+},
+{
+    question: "37. ¿Qué estrategia de control utiliza un método de escalada?",
+    options: [
+        "a) Exploración en grafos",
+        "b) Irrevocable",
+        "c) Retroactiva"
+    ],
+    correct: "b"
+},
+{
+    question: "38. Las bases de conocimiento",
+    options: [
+        "a) son dinámicas, pueden incorporar siempre nuevos datos a lo largo del tiempo",
+        "b) son estáticas, no varían a lo largo del tiempo dado que pueden deducir nuevo conocimiento en cualquier momento",
+        "c) pueden ser estáticas o dinámicas dependiendo del campo que trate y las necesidades que se tengan que cubrir"
+    ],
+    correct: "c"
+},
+{
+    question: "39. En el contexto de los problemas de búsqueda ¿qué es el factor de ramificación?",
+    options: [
+        "a) El número promedio de descendientes por nodo",
+        "b) Un parámetro que determina la probabilidad de mutación en un algoritmo genético",
+        "c) Una constante asociada al algoritmo de enfriamiento simulado"
+    ],
+    correct: "a"
+},
+{
+    question: "40. ¿El uso de una función heurística garantiza que un método de búsqueda consiga la solución óptima?",
+    options: [
+        "a) Siempre",
+        "b) Depende del algoritmo y de la heurística",
+        "c) Nunca"
+    ],
+    correct: "b"
+},
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+{
+  question: "¿Cuál de estos problemas no es de interés para la inteligencia artificial?",
+  options: [
+    "a. Apagar automáticamente un calefactor cuando haya más de 30ºC",
+    "b. Jugar al ajedrez",
+    "c. Apagar automáticamente un calefactor cuando se perciba sensación de calor",
+    "d. Invertir en bolsa"
+  ],
+  correct: "a"
+},
+{
+  question: "Los sistemas expertos son un ejemplo de ",
+  options: [
+    "a. Sistemas que actúan racionalmente ",
+    "b. Sistemas que piensan como humanos ",
+    "c. Sistemas que actúan como humanos",
+    "d. Ninguna de las otras respuestas"
+  ],
+  correct: "c"
+},
+{
+  question: "La denominada edad oscura de la I.A., fue debida a que:",
+  options: [
+    "a. Se necesitaba un gran conocimiento para resolver problemas específicos y se descubrió la complejidad de algunos problemas",
+    "b. El trabajo de investigación sobre la IA se desarrollaba en sótanos oscuros. ",
+    "c. Se perdió totalmente el interés por la IA, debido a su dificultad. "
+  ],
+  correct: "a"
+},
+
+
+{
+  question: " Un problema para el que hay una resolución algorítmica nunca puede ser un problema de I.A.",
+  options: [
+    "a. False",
+    "b. Depende",
+    "c. Verdadero"
+  ],
+  correct: "b"
+},
+{
+  question: "La Inteligencia Artificial surge a partir (seleccionar solo una opción)",
+  options: [
+    "a. La informática y la electrónica ",
+    "b. Filosofía, psicología y neurociencia ",
+    "c. Todas las mencionadas y algunas más "
+  ],
+  correct: "c"
+},
+{
+  question: "¿Cuál de las siguientes respuestas representa mejor los pasos que lleva a cabo un agente reactivo?",
+  options: [
+    "a. percibir y buscar la mejor alternativa. ",
+    "b percibir, procesar la información percibida, seleccionar la acción usando esa información y realizar la acción. ",
+    "c. percibir y actuar "
+  ],
+  correct: "b"
+},
+
+
+{
+  question: "¿ Cuál de las siguientes no es una característica propia de los agentes?",
+  options: [
+    "a. Proactividad ",
+    "b. Capacidad individualista ",
+    "c. Autonomía ",
+    "d. Capacidad estímulo-respuesta."
+  ],
+  correct: "b"
+},
+{
+  question: "¿Cómo podría beneficiar el uso de una arquitectura de subsunción en un robot aspirador?",
+  options: [
+    "a. El comportamiento sería emergente y permitiría entender fácilmente el comportamiento global esperado.",
+    "b. Las decisiones se basan en información local.",
+    "c. Los estímulos del exterior se procesan por capas especializadas de modo que se siguen unas prioridades a la hora de actuar."
+  ],
+  correct: "c"
+},
+{
+  question: "¿Qué es un agente inteligente?",
+  options: [
+    "a. es el estudio de cómo hacer que los ordenadores hagan cosas que por el momento son realizadas mejor por los seres humanos.",
+    "b. es un sistema de ordenador, situado en algún entorno, que es capaz de realizar acciones de forma autónoma y que es flexible para lograr los objetivos planteados.",
+    "c. es el sentido en que se puede tomar una sentencia, un dicho o una expresión.",
+    "d. es un sistema robótico que se desplaza de forma segura por un entorno de habitaciones realizando diversas tareas. "
+  ],
+  correct: "b"
+},
+
+
+{
+  question: "¿Cuál de los siguientes problemas no debería modelizarse como un agente reactivo?",
+  options: [
+    "a. un robot aspirador",
+    "b. una casa domotizada",
+    "c. un robot que recorre el centro de un pasillo",
+    "d. un navegador GPS que recomienda rutas"
+  ],
+  correct: "d"
+},
+{
+  question: "Las heurísticas son",
+  options: [
+    "a. criterios, métodos o principios para decidir cuál de entre varias acciones promete ser la mejor para alcanzar una meta",
+    "b. criterios, métodos o principios para obtener el óptimo",
+    "c. funciones usadas en algunos problemas"
+  ],
+  correct: "a"
+},
+
+{
+  question: "¿Cuál o cuáles de los siguientes juegos son bipersonales con información perfecta? (marcar todos los que sean): Seleccione una o más de una:",
+  options: [
+    "a. Backgammon ",
+    "b. Damas ",
+    "c. Poker ",
+    "d. Ajedrez",
+     "e. b y d "
+  ],
+  correct: "e"
+},
+{
+  question: "En el algoritmo minimax se parte de la hipótesis de que los dos jugadores juegan de manera perfecta. ¿Qué ocurre si uno de ellos falla y no actúa según lo previsto? Seleccione una:",
+  options: [
+    "a. Ese fallo no afecta al contrincante",
+    "b. El contrincante se perjudica",
+    "c. El contricante se beneficia"
+  ],
+  correct: "c"
+},
+{
+  question: "La cota beta es:",
+  options: [
+    "a. una cota inferior",
+    "b. una cota superior"
+  ],
+  correct: "b"
+},
+
+
+{
+  question: "En un juego con componente aleatoria los valores de los estados se propagan hacia arriba en las capas aleatorias usando",
+  options: [
+    "a. una variación de la función heurística",
+    "b. la esperanza matemática",
+    "c. las cotas alfa o beta según corresponda"
+  ],
+  correct: "b"
+},
+{
+  question: "En el algoritmo minimax el valor V(J) de un nodo J de la frontera de búsqueda es _____ al de su función de evaluación estática. Seleccione una:",
+  options: [
+    "a. menor",
+    "b. diferente",
+    "c. mayor",
+    "d. igual "
+  ],
+  correct: "d"
+},
+{
+  question: "Entre las múltiples formas de inferir un árbol de decisión la más usada y eficaz consiste en:",
+  options: [
+    "a. seleccionar el atributo en cada nivel del árbol en función de la calidad de la división que produce",
+    "b. crear una ruta del árbol para cada instancia de entrenamiento",
+    "c. inferir el árbol más pequeño posible que sea compatible con todas las instancias."
+  ],
+  correct: "a"
+},
+
+
+{
+  question: "En aprendizaje una hipótesis estará bien generalizada si:",
+  options: [
+    "a. es consistente con los datos del conjunto de entrenamiento",
+    "b. es la más simple",
+    "c. puede predecir ejemplos que no se conocen"
+  ],
+  correct: "c"
+},
+{
+  question: "¿Qué dice el principio conocido como Navaja de Ockham (cuando dos teorías explican los hechos observados)?",
+  options: [
+    "a. Que la teoría más simple tiene más probabilidades de ser correcta que la compleja",
+    "b. Que la teoría más simple siempre y en todos los casos es la mejor",
+    "c. Que la teoría más simple tiene más probabilidades de ser incorrecta que la compleja",
+    "d. Que la teoría más compleja tiene más probabilidades de ser correcta que la simple"
+  ],
+  correct: "a"
+},
+{
+  question: "El aprendizaje inductivo se basa en",
+  options: [
+    "a. aprender en base a prueba y error",
+    "b. resolver problemas exactamente iguales a los resueltos anteriormente",
+    "c. aprender a partir de ejemplos"
+  ],
+  correct: "c"
+},
+
+
+{
+  question: "Un aprendizaje que se basa en aprender a partir de patrones de entradas sin especificar sus salidas es un aprendizaje:",
+  options: [
+    "a. Por refuerzo",
+    "b. Supervisado",
+    "c. No supervisado"
+  ],
+  correct: "c"
+},
+{
+  question: "Según su funcionamiento, ¿qué estructura de datos sería más apropiada para implementar la búsqueda en profundidad sobre grafos?",
+  options: [
+    "a. Una cola con prioridad",
+    "b. Una pila",
+    "c. Una cola",
+     "d.  Una lista" 
+  ],
+  correct: "b"
+},
+
+{
+  question: "Cuando se dice que un agente es capaz de razonar sobre un modelo del mundo para decidir qué hacer para lograr un objetivo, estamos hablando de un agente",
+  options: [
+    "a. reactivo",
+    "b. social",
+    "c. deliberativo "
+  ],
+  correct: "c"
+},
+
+{
+  question: "El subsistema de explicación de un sistema experto basado en reglas tiene como misión",
+  options: [
+    "a. deducir los hechos más importantes que se han utilizado en el proceso",
+    "b. justificar como se ha llegado a la decisión propuesta por el sistema",
+    "c. obtener una retroalimentación de la decisión tomada"
+  ],
+  correct: "b"
+},
+
+{
+  question: "¿Cuál de las siguientes opciones es incorrecta?",
+  options: [
+    "a. El agente deliberativo reacciona a los cambios que percibe, aunque no estén en su modelo del mundo ",
+    "b. El agente deliberativo dispone de un modelo de los efectos de sus acciones sobre el mundo ",
+    "c. El agente deliberativo dispone de un modelo del mundo en el que habita "
+  ],
+  correct: "a"
+},
+
+{
+  question: "En el algoritmo A* usando f = g+h, la función g es un valor asociado a cada estado que no cambia a lo largo del tiempo",
+  options: [
+    "a. Es falso, el valor cambia en función de la heurística empleada.",
+    "b. Es falso, el valor puede cambiar",
+    "c. Es cierto, ese valor nunca cambia"
+  ],
+  correct: "b"
+},
+
+{
+  question: "En el algoritmo de poda alfa-beta, un nodo min se puede podar cuando",
+  options: [
+    "a. su valor actual es menor o igual que la cota beta ",
+    "b. su valor actual es mayor que la cota alfa ",
+    "c. su valor actual es menor o igual que la cota alfa",
+    "d. su valor actual es mayor que la cota beta"
+  ],
+  correct: "c"
+},
+
+{
+  question: "Cuando tengamos más de una hipótesis que satisfaga todos los ejemplos debemos elegir",
+  options: [
+    "a. la más simple ",
+    "b. la más difícil ",
+    "c. la primera que se haya obtenido",
+     "d. podemos elegir cualquiera"
+  ],
+  correct: "a"
+},
+
+{
+  question: "¿Con qué método de búsqueda, entre los siguientes, se obtiene siempre la solución con un número menor de operadores/acciones?",
+  options: [
+    "a. Algoritmo genético ",
+    "b. Búsqueda en profundidad",
+    "c. Enfriamiento simulado ",
+    "d. Descenso iterativo"
+  ],
+  correct: "d"
+},
+
+{
+  question: "Señalar de entre los siguientes cuál es un modelo de representación del conocimiento",
+  options: [
+    "a. El campo potencial ",
+    "b. La lógica de predicados",
+    "c. Los algoritmos genéticos "
+  ],
+  correct: "b"
+},
+
+{
+  question: "En un grafo Y/O si tenemos un nodo O, debemos",
+  options: [
+    "a. resolver el subproblema asociado y devolverlo",
+    "b. resolver todos sus hijos por separado, si todos están resueltos el nodo padre está resuelto, en otro caso el nodo padre no se puede resolver",
+    "c. resolver un nodo hijo para ver si está resuelto, si es así, el padre está resuelto, en caso contrario comprobar con otro hijo, si ninguno de los nodos hijos se puede resolver, el nodo padre tampoco "
+  ],
+  correct: "c"
+},
+
+{
+  question: "El enfriamiento simulado consiste en",
+  options: [
+    "a. definir los valores de las probabilidades del modelo",
+    "b. definir el número de iteraciones y el valor de la constante K",
+    "c. definir la temperatura de inicio y el cambio de temperatura en las diferentes iteraciones"
+  ],
+  correct: "c"
+},
+
+{
+  question: "En el algoritmo A* usando la fórmula f = g+h en cada nodo, ¿qué es la función g?",
+  options: [
+    "a. Es una estimación del mejor coste para ir desde el nodo actual al nodo objetivo ",
+    "b. Es una estimación del mejor coste para ir desde el estado inicial al estado objetivo pasando por el nodo actual ",
+    "c. Es una estimación del mejor coste para ir desde el estado inicial hasta el nodo actual "
+  ],
+  correct: "c"
+},
+
+{
+  question: "En un juego la incertidumbre producida por la tirada de un dado se mide",
+  options: [
+    "a. con el caso promedio ",
+    "b. con el caso más desfavorable",
+    "c. con el caso más favorable "
+  ],
+  correct: "a"
+},
+
+{
+  question: "¿Cuál de las siguientes herramientas no debería emplearse para construir un agente reactivo?",
+  options: [
+    "a. Un sistema basado en reglas de producción",
+    "b. Variables de estado",
+    "c. Una tabla entrada-salida",
+    "d. Un sistema de búsqueda"
+  ],
+  correct: "d"
+},
+
+{
+  question: "En el algoritmo de poda alfa-beta, beta es",
+  options: [
+    "a. el mayor valor actual de entre los nodos MAX en el camino que hay desde el nodo actual al nodo solución ",
+    "b. el menor valor actual de entre los nodos MIN en el camino que hay desde el nodo actual al nodo de inicio",
+    "c. el menor valor actual de entre los nodos MIN en el camino que hay desde el nodo actual al nodo solución",
+   "d. el mayor valor actual de entre los nodos MAX en el camino que hay desde el nodo actual al nodo de inicio"
+  ],
+  correct: "b"
+},
+
+{
+  question: "Un problema para el que existe una resolución algorítmica ¿podría ser un problema de Inteligencia Artificial?",
+  options: [
+    "a. Si, esos problemas se incluyen siempre en Inteligencia Artificial ",
+    "b. Podría ser, dependiendo del tipo de solución que tenga el problema",
+    "c. No, ya existe un algoritmo que lo resuelve "
+  ],
+  correct: "b"
+},
+
+{
+  question: "La búsqueda en anchura permite obtener la solución con menor número de acciones",
+  options: [
+    "a. Si",
+    "b. Depende del problema",
+    "c. No"
+  ],
+  correct: "a"
+},
+
+{
+  question: "En el problema del mono y los plátanos, donde el mono tiene que determinar una serie de acciones para coger un plátano colgado del techo conociendo los objetos presentes en la habitación, ¿qué tipo de agente sería más apropiado?",
+  options: [
+    "a. Un agente social ",
+    "b. Un agente deliberativo",
+    "c. Un agente reactivo  "
+  ],
+  correct: "b"
+},
+
+{
+  question: "Un problema de aprendizaje es realizable",
+  options: [
+    "a. si el espacio de hipótesis se representa mediante un modelo ",
+    "b. si el espacio de hipótesis es finito",
+    "c. si el espacio de hipótesis contiene a la función verdadera"
+  ],
+  correct: "c"
+},
+
+{
+  question: "La arquitectura de subsunción",
+  options: [
+    "a. consiste en usar ejemplos para aprender el comportamiento del agente y usar ese comportamiento para determinar la acción más apropiada ",
+    "b. consiste en seleccionar reglas usando una determinada ordenación y comprobar si se cumple una condición para asociarle la acción correspondiente",
+    "c. consiste en usar módulos de comportamiento que se activan y que con una determinada prioridad devuelven una acción a aplicar"
+  ],
+  correct: "c"
+},
+
+{
+  question: " El algoritmo de escalada estocástico selecciona el siguiente estado",
+  options: [
+    "a. aleatoriamente entre todos los descendientes que mejoran al actual y con una cierta probabilidad para cada descendiente proporcional al valor de la heurística en el mismo ",
+    "b. aleatoriamente entre todos los descendientes que mejoran al actual y con una cierta probabilidad con valor constante para cada descendiente ",
+    "c. aleatoriamente entre todos los descendientes ",
+    "d. aleatoriamente entre todos los descendientes que mejoran al actual"
+  ],
+  correct: "a"
+},
+
+{
+  question: "En el algoritmo A* CERRADOS representa",
+  options: [
+    "a. el conjunto de nodos no generados y explorados",
+    "b. el conjunto de nodos no generados y no explorados",
+    "c. el conjunto de nodos generados y no explorados",
+     "d. el conjunto de nodos generados y explorados"
+  ],
+  correct: "d"
+},
+
+{
+  question: "En el algoritmo de poda alfa-beta, la cota alfa se calcula como el",
+  options: [
+    "a. el valor mínimo de los nodos MIN en el árbol del juego ",
+    "b. el valor mínimo de los nodos MIN en el camino del nodo a la raíz",
+    "c. el valor máximo de los nodos MAX en el camino del nodo a la raíz",
+    "d. el valor máximo de los nodos MAX del árbol del juego "
+  ],
+  correct: "c"
+},
+
+{
+  question: "n el algoritmo minimax el valor minimax V(J) de un nodo J de la frontera de búsqueda es _____ al de su función de evaluación estática",
+  options: [
+    "a. menor ",
+    "b. diferente ",
+    "c. mayor ",
+    "d. igual"
+  ],
+  correct: "d"
+},
+
+{
+  question: "La complejidad de un juego se mide",
+  options: [
+    "a. con el resultado de multiplicar la profundidad por la anchura del árbol del juego ",
+    "b. con la profundidad del árbol del juego ",
+    "c. con la anchura del árbol del juego",
+    "d. con el número de nodos que se procesan ",
+    "e. con B^p donde B es el factor de ramificación y P la profundidad"
+  ],
+  correct: "e"
+},
+
+{
+  question: "¿Qué estrategia de control utiliza un método de escalada?",
+  options: [
+    "a. Exploración en grafos ",
+    "b. Irrevocable",
+    "c. Retroactiva"
+  ],
+  correct: "b"
+},
+
+{
+  question: "Las bases de conocimiento",
+  options: [
+    "a. son dinámicas, pueden incorporar siempre nuevos datos a lo largo del tiempo",
+    "b. son estáticas, no varían a lo largo del tiempo dado que pueden deducir nuevo conocimiento en cualquier momento",
+    "c. pueden ser estáticas o dinámicas dependiendo del campo que trate y las necesidades que se tengan que cubrir "
+  ],
+  correct: "c"
+},
+
+{
+  question: "En el contexto de los problemas de búsqueda ¿qué es el factor de ramificación?",
+  options: [
+    "a. El número promedio de descendientes por nodo ",
+    "b. Un parámetro que determina la probabilidad de mutación en un algoritmo genético",
+    "c. Una constante asociada al algoritmo de enfriamiento simulado"
+  ],
+  correct: "a"
+},
+
+{
+  question: "¿El uso de una función heurística garantiza que un método de búsqueda consiga la solución óptima?",
+  options: [
+    "a. Siempre ",
+    "b. Depende del algoritmo y de la heurística",
+    "c. Nunca "
+  ],
+  correct: "b"
+},
+
+
+];
+
+const questionsPerTest = 40; // Total de preguntas en el test
+        const maxScore = 10; // Puntaje máximo posible
+        const pointsPerQuestion = 1 // Puntos por pregunta
+        let availableQuestions = JSON.parse(localStorage.getItem('availableQuestions')) || allQuestions.slice();
+        let shuffledQuestions, currentQuestionIndex;
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let answeredCount = 0;
+        let incorrectQuestions = [];
+
+        document.getElementById('available-questions-count').textContent = availableQuestions.length;
+
+        function startTest() {
+            if (availableQuestions.length === 0) {
+                alert('Reiniciando preguntas...');
+                resetQuestions();
+                // Mostrar el botón de inicio después de reiniciar
+                document.getElementById('start-button').style.display = 'block';
+                return; // Salir de la función después de reiniciar
+            }
+            
+
+            correctCount = 0;
+            incorrectCount = 0;
+            answeredCount = 0;
+            incorrectQuestions = [];
+            document.getElementById('correct-count').textContent = correctCount;
+            document.getElementById('incorrect-count').textContent = incorrectCount;
+            document.getElementById('answered-count').textContent = answeredCount;
+            document.getElementById('score-container').style.display = 'none';
+            document.getElementById('incorrect-questions-container').style.display = 'none';
+            document.getElementById('incorrect-questions-list').innerHTML = '';
+            shuffledQuestions = availableQuestions.sort(() => Math.random() - 0.5).slice(0, questionsPerTest);
+            currentQuestionIndex = 0;
+            document.getElementById('start-button').style.display = 'none';
+            document.getElementById('next-button').style.display = 'none';
+            document.getElementById('answer-buttons').style.display = 'none';
+            document.getElementById('author-name').style.display = 'none';
+
+            // Mostrar la primera pregunta del nuevo test
+            showQuestion(shuffledQuestions[currentQuestionIndex]);
+
+            // Mostrar los elementos relevantes para el nuevo test
+            document.getElementById('question-container').style.display = 'block';
+            document.getElementById('question-options').style.display = 'block'
+        }
+
+        function resetQuestions() {
+           alert('Reiniciando preguntas...');
+            availableQuestions = allQuestions.slice();
+            localStorage.setItem('availableQuestions', JSON.stringify(availableQuestions));
+            document.getElementById('available-questions-count').textContent = availableQuestions.length;
+            document.getElementById('start-button').style.display = 'block';
+        }
+
+        function showQuestion(question) {
+            document.getElementById('question').innerText = question.question;
+            document.getElementById('question').style.color = 'white'; // Restaurar el color original
+            const optionsContainer = document.getElementById('question-options');
+            optionsContainer.innerHTML = ''; // Limpiar el contenido anterior
+
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('answer');
+                optionElement.textContent = option;
+                optionElement.setAttribute('data-option', String.fromCharCode(97 + index));
+                optionElement.setAttribute('onclick', `checkAnswer('${String.fromCharCode(97 + index)}')`);
+                optionsContainer.appendChild(optionElement);
+            });
+
+            document.getElementById('answer-buttons').style.display = 'block';
+        }
+
+        function checkAnswer(answer) {
+            const question = shuffledQuestions[currentQuestionIndex];
+            if (answer === question.correct) {
+                document.getElementById('question').style.color = 'green';
+                correctCount += pointsPerQuestion;
+                availableQuestions = availableQuestions.filter(q => q.question !== question.question);
+                localStorage.setItem('availableQuestions', JSON.stringify(availableQuestions));
+                document.getElementById('available-questions-count').textContent = availableQuestions.length;
+            } else {
+                document.getElementById('question').style.color = 'red';
+                incorrectCount++;
+                incorrectQuestions.push({ question: question.question, answer: answer });
+
+                // Resaltar la respuesta correcta
+                const correctOption = document.querySelector(`[data-option="${question.correct}"]`);
+                if (correctOption) {
+                    correctOption.style.backgroundColor = 'green';
+                    correctOption.style.color = 'white';
+                }
+            }
+            answeredCount++;
+            document.getElementById('correct-count').textContent = correctCount;
+            document.getElementById('incorrect-count').textContent = incorrectCount;
+            document.getElementById('answered-count').textContent = answeredCount;
+
+            // Deshabilitar las respuestas para esta pregunta
+            const answerButtons = document.querySelectorAll('.answer');
+            answerButtons.forEach(button => {
+                button.onclick = null; // Eliminar el manejador de eventos
+                button.style.cursor = 'default'; // Cambiar el cursor para indicar que está deshabilitado
+            });
+
+            document.getElementById('answer-buttons').style.display = 'none';
+            document.getElementById('next-button').style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < shuffledQuestions.length) {
+                showQuestion(shuffledQuestions[currentQuestionIndex]);
+                document.getElementById('question').style.color = 'white';
+                document.getElementById('next-button').style.display = 'none';
+                document.getElementById('answer-buttons').style.display = 'block';
+            } else {
+                let adjustedCorrectCount = correctCount;
+
+                // Calcular penalización por respuestas incorrectas
+                incorrectQuestions.forEach(entry => {
+                    const question = allQuestions.find(q => q.question === entry.question);
+                    const incorrectPenalty = 1 / (question.options.length - 1);
+                    adjustedCorrectCount -= incorrectPenalty;
+                });
+
+                // Calcular la nota final
+                const score = (adjustedCorrectCount / questionsPerTest) * 10;
+
+                document.getElementById('question-container').style.display = 'none'; // Ocultar contenedor de preguntas
+                document.getElementById('question-options').style.display = 'none'; // Ocultar opciones de preguntas
+
+                document.getElementById('question').innerText = `Test terminado. Aciertos: ${correctCount}, Fallos: ${incorrectCount}, Nota: ${score.toFixed(2)}`;
+                document.getElementById('score').textContent = score.toFixed(2);
+                document.getElementById('score-container').style.display = 'block';
+                document.getElementById('next-button').style.display = 'none';
+                document.getElementById('start-button').style.display = 'block';
+                document.getElementById('author-name').style.display = 'block';
+
+                showIncorrectQuestions();
+            }
+        }
+
+        function showIncorrectQuestions() {
+            const incorrectQuestionsContainer = document.getElementById('incorrect-questions-container');
+            const incorrectQuestionsList = document.getElementById('incorrect-questions-list');
+            incorrectQuestions.forEach(entry => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${entry.question} (Tu respuesta: ${entry.answer})`;
+                incorrectQuestionsList.appendChild(listItem);
+            });
+            incorrectQuestionsContainer.style.display = 'block';
+            document.getElementById('answer-buttons').style.display = 'none'; // Asegurarse de ocultar las opciones de respuesta al mostrar las preguntas incorrectas
+            document.getElementById('question-options').style.display = 'none'; // Asegurar que las opciones estén ocultas
+        }
+    </script>
+
+<button id="reset-button" onclick="resetQuestions()">Reiniciar Preguntas</button>
+</body>
+</html>

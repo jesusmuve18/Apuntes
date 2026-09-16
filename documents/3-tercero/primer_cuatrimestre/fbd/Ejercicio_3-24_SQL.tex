@@ -1,0 +1,70 @@
+\documentclass[12pt]{article}
+
+\input{../../../_assets/preambulo.tex}
+\input{../../../_assets/portada.tex}
+\usepackage{ wasysym }
+
+\begin{document}
+
+\portada[%
+        titulo=Fundamentos de Bases de Datos,
+        subtitulo=Ejercicio 3.24 (SQL),
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2024-2025]
+
+\setcounter{ejercicio}{2}
+\begin{ejercicio}\hspace{-0.15cm}\textbf{24.}(SQL) Encontrar los códigos de las piezas suministradas a todos los proyectos
+    localizados en Londres.\\
+
+    La resolución de este ejercicio consistirá en resolver con SQL la siguiente consulta (en Álgebra Relacional):
+    \begin{align*}
+        \pi_{codpie}(\pi_{codpie, codpro}(ventas) \% \pi_{codpro}(\sigma_{ciudad='Londres'}(proyecto))
+    \end{align*}
+
+    Para ello se ofrecen las siguientes solucionas (cada una resuelta con un patrón de los que aparecen en el cuadernillo de prácticas en la sección de división):
+
+    \begin{minted}{sql}
+--Aproximacion Algebra Relacional
+(SELECT codpie FROM pieza)
+MINUS
+(SELECT codpie
+    FROM ((SELECT pieza.codpie, proyecto.codpj
+           FROM pieza, proyecto
+           WHERE proyecto.ciudad='Londres')
+           MINUS
+           (SELECT codpie, codpj
+           FROM ventas))
+);
+
+--Aproximacion Calculo Relacional
+SELECT codpie
+FROM pieza
+WHERE NOT EXISTS (
+    SELECT *
+    FROM proyecto
+    WHERE ciudad='Londres'
+        AND NOT EXISTS (
+            SELECT *
+            FROM ventas
+            WHERE pieza.codpie= ventas.codpie
+                AND codpj=proyecto.codpj));
+
+--Aproximacion mixta
+SELECT codpie 
+FROM pieza
+WHERE NOT EXISTS (
+       (SELECT codpj 
+        FROM proyecto
+        WHERE proyecto.ciudad='Londres')
+    MINUS
+       (SELECT codpj 
+        FROM ventas 
+        WHERE ventas.codpie=pieza.codpie)
+);
+    \end{minted}
+
+
+\end{ejercicio}
+    
+
+\end{document}

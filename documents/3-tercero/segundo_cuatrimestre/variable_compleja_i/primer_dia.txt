@@ -1,0 +1,18 @@
+Profesor: Francisco Javier Meri de la Maza
+
+Despacho: Planta baja frente a la sala de estudio (fuera del departamento de Análisis Matemático).
+
+Email: jmeri@ugr.es
+
+web: https://www.ugr.es/~jmeri/docencia-VCompleja.html
+
+La asistencia no es obligatoria (pero sí muy recomendable)
+
+Calificación:
+    Parcial: 40% (no es obligatorio)
+    Salida a la pizarra: adicional ("se tendrá en cuenta")
+    Prueba final: 60% (o 100% si no se hace el primer parcial) y de toda la materia.
+
+Si perjudica el parcial no se tendrá en cuenta.
+
+Nota final = max{0.4*Nota_parcial + 0.6*Nota_final, Nota_final}

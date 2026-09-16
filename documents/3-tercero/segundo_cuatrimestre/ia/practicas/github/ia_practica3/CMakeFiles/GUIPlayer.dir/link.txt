@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/libGUIPlayer.a CMakeFiles/GUIPlayer.dir/src/model/GUIPlayer.cpp.o
+/usr/bin/ranlib lib/libGUIPlayer.a

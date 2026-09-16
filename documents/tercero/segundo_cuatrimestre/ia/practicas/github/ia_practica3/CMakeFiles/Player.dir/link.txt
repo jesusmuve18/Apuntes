@@ -1,2 +1,0 @@
-/usr/bin/ar qc lib/libPlayer.a CMakeFiles/Player.dir/src/model/Player.cpp.o
-/usr/bin/ranlib lib/libPlayer.a

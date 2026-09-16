@@ -1,0 +1,81 @@
+\chapter{Ecuación de ondas}
+Esta ecuación se puede obtener a partir de la acción 
+\begin{gather*}
+    A[u] = \int_{0}^{T} \left\{ \int_{\Omega} \left(\frac{\partial u}{\partial t}\right)^dx - \int_\Omega c^2 |\nabla u|^2 dx \right\} dt
+\end{gather*}
+Tendremos $\Omega \subset \bb{R}^d$ abierto, $c>0$ que podemos considerar la ``velocidad del sonido'' y una aplicación $u:[0,T]\times Omega \to \bb{R}$ que llamaremos coordenada desplazamiento respecto al equilibrio. Tendremos 
+\begin{gather*}
+    F_u - div_{(t,x)} (F_p) = 0
+\end{gather*}
+y además
+\begin{gather*}
+    -\frac{d}{dt} \left(2\frac{\delta u}{\delta t}\right) + \frac{d}{dt} \left(2c^2\frac{\delta u}{\delta x_1}\right) + ... + \frac{d}{dt} \left(2c^2\frac{\delta u}{\delta x_d}\right) = 0
+\end{gather*}
+lo que podríamos reescribir con la notación estándard como 
+\begin{gather*}
+    \frac{\delta^2u}{\partial t^2} - c^2 \Delta u = 0
+\end{gather*}
+Nos centramos en dimensión espacial $d=1$ y obtenemos 
+\begin{gather*}
+    \frac{\delta^2u}{\partial t^2} - c^2 \frac{\partial^2 u}{\partial x^2} = 0
+\end{gather*}
+Introduzcamos la notación 
+\begin{gather*}
+    u_t = \frac{\partial u}{\partial t},\ \ \ \ u_{xx} = \frac{\partial ^2u}{\partial x^2},\ \ \ \ etc
+\end{gather*}
+La ecuación de ondas es lineal: dadas dos soluciones $u_1, u_2$, entonces $c_1u_1 + c_2u_2$, con $c_1,c_2\in \bb{R}$ también será solución de la ecuación de ondas.
+
+Dos situaciones de interés serán el problema de Cauchy y el problema de valores en la frontera con extremos fijos
+\section{Problema de Cauchy}
+Este problema consistirá en resolver el siguiente PVI:
+\begin{gather*}
+    \left\{
+    \begin{array}{l c c}
+        u_{tt} - c^2u_{xx} = & \text{ en } & [0,\infty[\times \bb{R}\\
+        u(t=0, x) = \varphi(x) & \text{ en } & \bb{R}\\
+        u_t(t=0, x) = \psi(x) & \text{ en } & \bb{R}
+    \end{array}
+    \right.
+\end{gather*}
+donde $\varphi, \psi$ vienen dadas.
+
+\section{Problema de valores en la frontera con extremos fijos}
+Este problema vendrá planteado por 
+\begin{gather*}
+    \left\{
+    \begin{array}{l c c}
+        u_{tt} - c^2u_{xx} = & \text{ en } & [0,\infty[\times [0,L]\\
+        u(t=0, x) = \varphi(x) & \text{ en } & [0,L]\\
+        u_t(t=0, x) = \psi(x) & \text{ en } & [0,L]\\
+        u(t,x=0) = 0 & \text{ para } & t\geq 0\\
+        u(t, x=L) = 0 & \text{ para } & t\geq 0
+    \end{array}
+    \right.
+\end{gather*}
+La enerdía asociada para este problema será 
+\begin{gather*}
+    E(u) = \int_{0}^{L} (u_t)^2 + c^2(u_x)^2 dx
+\end{gather*}
+(será similar para el problema anterior). Dada $u$ una solución de este problema, veamos que $E(u)$ no depende del tiempo:
+\begin{gather*}
+    \frac{d}{dt} E(u) = \int_{0}^{L} \frac{d}{dt}(u_t)^2 + c^2 \frac{d}{dt}(u_x)^2 dx = \int_{0}^{L}2 u_tu_{tt} + 2c^2u_xu_{tx} dx 
+\end{gather*}
+Tras integrar por partes obtenemos que esto vale 0. Además, la conservación de la energía implica que este problema tiene como mucho una solución (y lo mismo ocurrirá con el problema anterior). Si esto no fuera cierto habería dos soluciones $u_1,u_2$ distintas, tales que 
+\begin{gather*}
+    \left\{
+    \begin{array}{l}
+        u_{1tt} - c^2u_{1xx} = 0\\
+        u_1(t=0, x) = \varphi(x)\\
+        u_{1t}(t=0, x) = \psi(x)\\
+        u_1(t, x=0) = u_1(t, x=L)=0
+    \end{array}
+    \right. \ \ \ \
+    \left\{
+    \begin{array}{l}
+        u_{2tt} - c^2u_{2xx} = 0\\
+        u_2(t=0, x) = \varphi(x)\\
+        u_{2t}(t=0, x) = \psi(x)\\
+        u_2(t, x=0) = u_2(t, x=L)=0
+    \end{array}
+    \right.
+\end{gather*}

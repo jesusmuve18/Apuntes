@@ -1,0 +1,72 @@
+\documentclass[12pt]{article}
+
+\input{../../../../../_assets/preambulo.tex}
+\input{../../../../../_assets/portada.tex}
+
+% Mejor tipografía en bloques de código
+\usepackage{inconsolata}
+
+\definecolor{codebg}{gray}{0.9}
+
+% Para código en línea
+\newcommand{\icode}[1]{\colorbox{codebg}{\texttt{\detokenize{#1}}}}
+
+% Para bloques de código
+\lstdefinestyle{mycode}{
+  backgroundcolor=\color{codebg},   
+  basicstyle=\ttfamily\small,      
+  numbers=none,               
+  frame=none,                 
+  breaklines=true,            
+  showstringspaces=false,
+  aboveskip=1em,   % espacio antes del bloque
+  belowskip=1em    % espacio después del bloque
+}
+
+\lstnewenvironment{icodeblock}[1][]
+{
+  \lstset{style=mycode, language=#1}
+}
+{}
+
+\usepackage{sectsty} % paquete para modificar estilos de secciones
+\allsectionsfont{\sffamily}
+
+\newcommand{\img}[1] {
+    \begin{center}
+        \includegraphics[width=15cm]{./images/img#1.png}
+    \end{center}
+}
+
+
+\begin{document}
+
+\sffamily
+    \portada[%
+        titulo=Ingeniería de Servidores (Prácticas),
+        subtitulo=Simulación de carga Http con jMeter,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2024-2025]
+        
+    \thispagestyle{empty}
+    \tableofcontents
+    \newpage
+
+    \section{Enunciado}
+El repositorio https://github.com/davidPalomar-ugr/iseP4JMeter.git contiene la aplicación objeto de la prueba de carga y una descripción de los requerimientos sobre la carga a simular. Siga las instrucciones y elabore la prueba de carga con Jmeter.\\
+
+El alumno/a deberá realizar todo el ejercicio en un directorio que contendrá todos los artefactos necesarios para la ejecución de la prueba de carga con Jmeter. Dentro de la prueba de carga, los paths a los archivos se definirán de forma relativa para que la ejecución sea independiente de la localización del directorio. Como validación final, el alumno/a debe ser capaz de ejecutar la prueba de carga por línea de comandos (sin interfaz grafica) desde cualquier directorio de su equipo.
+
+\section{Resolución}
+
+Todo el ejercicio se ha resuelto y guardado en el archivo \icode{jmeter_pruebas.jmx}.
+
+El único punto a resaltar es la ejecución desde la consola de comandos que se hará de la siguiente forma:
+
+\begin{icodeblock}[bash]
+    docker compose up # Si no estaba corriendo
+    ~/Descargas/apache-jmeter-5.6.3/bin/jmeter -n -t ./jmeter_pruebas.jmx -l ./resultado.jtl
+\end{icodeblock}
+
+teniendo en cuenta que tengo descargado jMeter en el directorio \icode{~/Descargas/apache-jmeter-5.6.3/} y que lo estoy ejecutando desde el directorio donde se encuentra el archivo \icode{jmeter_pruebas.jmx} y guardando el resultado en \icode{resultado.jtl}
+\end{document}

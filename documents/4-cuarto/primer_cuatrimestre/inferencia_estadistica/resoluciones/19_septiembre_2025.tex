@@ -1,0 +1,31 @@
+\section{Tarea del 19 de septiembre de 2025}
+
+\begin{ejercicio}
+    
+    Obtener las distribuciones muestrales de $X(1)$ y $X(n)$ para $X \rightsquigarrow U(a, b)$
+
+    Podemos escribir $X_{(n)} = \max\{X_1,\dots,X_n\}$.
+
+    \begin{gather*}
+        F_{X_{(n)}} (x) = P[X(n)\leq x] = P[X_1<x,\dots,X_n\leq x] = \prod_{i=1}^n P[X_i\leq x] =\\ =\prod_{i=1}^n P[X\leq x] = (P[X\leq x])^n = (F_X(x))^n
+    \end{gather*}
+
+    Derivando este término tenemos
+    \begin{gather*}
+        f_{X_(n)}(x) = n(F_X(x))^{n-1}f_X(x)
+    \end{gather*}
+
+    Pasamos ahora a la del mínimo:
+
+    $X_{(1)} = \min\{X_1,\dots,X_n\}$
+    \begin{gather*}
+        F_{X_{(1)}} (x) = P[X(1)\leq x] = 1- P[X(1)> x] = 1- P[X_1>x, \dots X_n>x] = 1 - \prod_{i=1}^n P[X_i>x] =\\= n-\prod_{i=1}^n P[X>x] = 1 - (P[X>x])^n = 1-(1-P[X\leq x])^n = 1 - (1-F_X(x))^n
+    \end{gather*}
+
+    Donde hemos aplicado la independencia y el hecho de que estén idénticamente distribuidas.\\
+
+    Derivando esto tenemos
+    \begin{gather*}
+        f_{X_(1)}(x) = n(1-F_X(x))^{n-1}f_X(x)
+    \end{gather*}
+\end{ejercicio}

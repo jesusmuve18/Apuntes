@@ -1,0 +1,1440 @@
+% 18-09-2024
+
+\chapter{Espacios Topológicos}
+
+\begin{definicion}
+    Un \textbf{espacio topológico} es una par $(X, \cc{T})$, donde $X \neq \emptyset$ es un conjunto y $\cc{T}\subset\cc{P}(X)$ es una familia de subconjuntos de $X$. Esta familia $\cc{T}$ tiene las siguientes propiedades:
+
+    \begin{enumerate}
+        \item[\objetivo{A1}] $\emptyset, X \in \cc{T}$.
+        \item[\objetivo{A2}] Si $\{U_i\}_{i\in I} \subset \cc{T}$, entonces $\cuptext{i\in I} U_i \in \cc{T}$ (unión arbitraria\footnote{Puede ser finita o infinita, numerable o no numerable}).
+        \item[\objetivo{A3}] Si $U_1, U_2 \in \cc{T}$, entonces $U_1 \cap U_2 \in \cc{T}$.
+    \end{enumerate}
+
+    A la familia $\cc{T}$ se le llama \textbf{topología} en el conjunto $X$. A los elementos de $\cc{T}$ se les llama \textbf{abiertos} en el espacio topológico $(X, \cc{T})$.
+    \endsquare
+\end{definicion}
+
+\begin{observacion}
+    De \apuntar{A3} podemos concretar que si $U_1, \dots, U_k \in \cc{T}$, entonces $\bigcap\limits_{i=1}^{k}U_i \in \cc{T}$, es decir, que la intersección finita de abiertos es abierto (se prueba con una inducción trivial).
+
+    En general, si $\{U_i\}_{i=1}^{\infty}\in \cc{T}$, entonces $\bigcap\limits_{i=1}^{\infty}U_i$ no tiene por qué ser abierto.
+    \endsquare
+\end{observacion}
+
+\begin{ejemplo}\ 
+    \begin{itemize}
+        \item \textbf{Topología trivial:} Sea $X \neq \emptyset$, $\cc{T}_t = \{\emptyset, X\} \Rightarrow (X, \cc{T}_t)$ es un e.t\footnote{A partir de ahora notaremos así a un espacio topológico}.
+        \item \textbf{Topología discreta:} Sea $X \neq \emptyset$, $\cc{T}_{disc}= \cc{T}_{D} = \cc{P}(X) \Rightarrow (X, \cc{T}_D)$ es un e.t.
+        \item \textbf{Topología del punto incluido:} Sea $X \neq \emptyset$, $x_0\in X$,
+        
+        $\cc{T}_{x_0} = \{\emptyset\}\cup \{U \subset X : x_0 \in U\} \Rightarrow (X, \cc{T}_{x_0})$ es un e.t.
+        \item \textbf{Topología cofinita:} (o topología de los complementos finitos) Sea $X \neq \emptyset$,
+        
+        $\cc{T}_{CF} = \{\emptyset\}\cup\{U\subset X : X \setminus U \text{ es finito}\} \Rightarrow (X, \cc{T}_{CF})$ es un e.t. (por las leyes de Morgan)
+        \begin{align*}
+            X \setminus \left(\bigcup\limits_{i\in I}U_i\right) &= \bigcap\limits_{i\in I}(X \setminus U_i) \text{(intersección de finitos es finito)}\\
+            X \setminus (U_1 \cap U_2) &= (X\setminus U_1) \cup (X \setminus U_2)\text{(unión de finitos es finito)}
+        \end{align*}
+        \item \textbf{Topología conumerable:} (o topología de los complementos numerables) Sea $X \neq \emptyset$, $\cc{T}_{CN} = \{\emptyset\}\cup\{U\subset X : X \setminus U \text{ es numerable}\} \Rightarrow (X, \cc{T}_{CN})$ es un e.t.
+        \item $\bb{R}$, $ \cc{T}=\{\emptyset, \bb{R}, \bb{Q}, \bb{R}\setminus \bb{Q}\}, \Rightarrow (\bb{R}, \cc{T})$ es un e.t. 
+        \item \textbf{Topología de Sierpinski:} $X=\{a,b\}$, $\cc{T}=\{\emptyset, \{a\}, X\} \Rightarrow (X, \cc{T})$ es un e.t. (es un caso particular del punto incluido, $\cc{T}_a$).
+        \item \textbf{Topología de Sorgenfrey:} $X=\bb{R}$, $\cc{T}_S$, $U\in \cc{T}_S \sii \forall x \in U \ \  \exists \veps > 0 \text{ tal que } [x, x+\veps) \subset U$. 
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{observacion}
+    En $X=\{x\}$ solo existe una topología, $\cc{T}=\{\emptyset, \{x\}\}$ (todas las topologías son la misma).
+    \endsquare
+\end{observacion}
+
+\begin{ejercicio}
+    Determinar todas las topologías en un conjunto con 2 elementos.\\
+    % Hay 4: trivial, discreta y punto incluido con cada elemento
+
+    Consideramos $X=\{a,b\}$. Las topologías posibles son:
+    \begin{itemize}
+        \item Trivial: $\cc{T}_t=\{\emptyset, X\}$
+        \item Discreta: $\cc{T}_{disc}=\cc{P}(X)$
+        \item Punto incluido (a): $\cc{T}_a = \{\emptyset, \{a\}, X\}$
+        \item Punto incluido (b): $\cc{T}_b = \{\emptyset, \{b\}, X\}$
+    \end{itemize}
+    Cualquier otra topología que se pueda construir sobre este conjunto coicidirá con alguna de las anteriores.
+    \endsquare
+\end{ejercicio}
+
+\begin{ejercicio}
+    Sea $(X, \cc{T})$ e.t. Demostrar que $\cc{T}=\cc{T}_{disc} \sii \{x\}\in \cc{T}\ \  \forall x \in X$. 
+    % Implicación derecha es trivial
+    \begin{itemize}
+        \item[$\Rightarrow$)] Si $\cc{T} = \cc{T}_{disc}$, como $\{x\}\in \cc{P}(X) \ \ \forall x \in X$, se tiene que $\{x\}\in \cc{T}_{disc} = \cc{T}$.
+        \item[$\Leftarrow$)] Tenemos $\{x\} \in \cc{T} \ \ \forall x \in X$. Consideramos $U \in \cc{P}(X)$ un subconjunto cualquiera de $X$. Podemos expresar $U=\bigcup\limits_{i\in I} \{x_i\}$, donde $\{x_i\} \in X \ \ \forall i \in I$. Por la propiedad \apuntar{A2} tenemos $U \in \cc{T}$. Como $U$ era un subconjunto arbitrario de $X$, tenemos $\cc{T}=\cc{T}_{disc}$.
+    \end{itemize}
+    \endsquare
+\end{ejercicio}
+
+\section{Topología métrica. La topología usual de $\bb{R}^n$}
+
+\begin{definicion}
+    Un \textbf{espacio métrico} es un par $(X, d)$ donde $X \neq \emptyset$ es un conjunto y $d: X \times X \rightarrow \bb{R}$ es una aplicación que verifica:
+
+    \begin{enumerate}
+        \item [\objetivo{D1}] $d(x, y) \geq 0$\ \ $\forall x,y \in X$. Además, $d(x,y)= 0 \sii x=y$.
+        \item [\objetivo{D2}] (simetría) $d(x,y)=d(y,x)$ $\forall x, y, \in X.$
+        \item [\objetivo{D3}] (desigualdad triangular) $d(x,z) \leq d(x,y) + d(y,z)$\ \ $\forall x,y,z \in X$
+    \end{enumerate}
+
+    A la aplicación $d$ la llamaremos \textbf{distancia}.
+    \endsquare
+\end{definicion}
+
+\begin{ejercicio}
+    % (D2) + (D3) + 2ª parte de (D1) se deduce 1ª parte de (D1) luego $d:X \times X \rightarrow [0, \infty)$
+    Demostrar que a partir de las propiedades \apuntar{D2}, \apuntar{D3} y la segunda parte de \apuntar{D1} se puede deducir la primera parte de \apuntar{D1}, y como consecuencia se tiene $d:X \times X \rightarrow [0, \infty)$.\\
+
+    Para cualesquiera $x,y \in X$, tenemos:
+    \begin{gather*}
+        0 \overset{\apuntar{D1}{(2)}}{\vphantom{\leq}=} d(x,x) \overset{\apuntar{D3}}{\leq} d(x,y) + d(y,x) \overset{\apuntar{D2}}{\vphantom{\leq}=} d(x,y) + d(x,y) = 2 d(x,y)
+    \end{gather*}
+    De donde podemos deducir
+    \begin{gather*}
+        d(x,y) \geq 0 \Rightarrow d:X \times X \rightarrow [0, \infty)
+    \end{gather*}
+
+    \endsquare
+\end{ejercicio}
+
+\begin{definicion}
+    Sea $(X,d)$ un e.m.\footnote{A partir de ahora notaremos así a un espacio métrico} $x \in X$, $r >0$, se definen:
+
+    \begin{itemize}
+        \item La \textbf{bola (abierta)} de centro $x$ y radio $r$ como 
+        \begin{gather*}
+            B(x, r) = \{y \in X : d(x,y) < r\} \subset X
+        \end{gather*}
+        \item La \textbf{bola cerrada} de centro $x$ y radio $r$ como 
+        \begin{gather*}
+            \overline{B}(x, r) = \{y \in X : d(x,y) \leq r\} \subset X
+        \end{gather*}
+        \item La \textbf{esfera} de centro $x$ y radio $r$ como 
+        \begin{gather*}
+            S(x, r) = \{y \in X : d(x,y) = r\} \subset X
+        \end{gather*}
+    \end{itemize}
+    \endsquare
+\end{definicion}
+
+\begin{propiedades} De las definiciones anteriores se deducen las siguientes propiedades:
+    \begin{itemize}
+        \item $\overline{B}(x, r) = B(x,r) \cup S(x,r)$
+        \item $S(x,r) = \overline{B}(x, r) \setminus B(x,r)$
+        \item Si $s<r$, entonces $\overline{B}(x, s) \subset B(x,r)$
+    \end{itemize}
+    \endsquare
+\end{propiedades}
+
+\begin{ejemplo}(Espacio euclídeo $\bb{R}^n$)
+    En $\bb{R}^n$ consideramos la \textbf{distancia usual}, 
+    \begin{gather*}
+        d(x,y) = \|x-y\| = \sqrt{\sum\limits_{i=1}^2(x_i-y_i)^2}
+    \end{gather*}
+
+    Al espacio métrico $(\bb{R}^n, d )$ lo denominaremos \textbf{Espacio Euclídeo}.
+
+    \begin{itemize}
+        \item Si $n=1$, $d(x,y) = |x-y|$,,  %Arreglar
+        \begin{align*}
+            B(x,r) &= (x-r, x+r)\\
+            \overline{B}(x,r) &= [x-r, x+r]\\
+            S(x,r) &= \{x,y\}
+        \end{align*}
+        
+        \item En $n=2$ tenemos
+        
+        \vspace*{0.25cm}
+
+        \begin{tikzpicture}
+            \centering
+
+            \def\radius{1.75}
+            \def\incolor{gray!20}
+            \def\angulo{45}
+
+            % Desactiva los caracteres conflictivos
+            \shorthandoff{>} % Para poner puntas de flecha
+
+            \filldraw[dashed, fill=\incolor, thick] (-5,0) circle (\radius);
+            \filldraw (-5,0) circle (1.5pt)  node[below] {$x$};
+            \draw[thick, ->] (-5,0) -> ({-5+sin(\angulo)*\radius}, {cos(\angulo)*\radius}) node[midway, below] {$r$};
+            \node at (-5,-2.25) {\small{$B(x,r) \equiv$ disco}};
+
+            \filldraw[fill=\incolor, thick] (0,0) circle (\radius);
+            \filldraw (0,0) circle (1.5pt)  node[below] {$x$};
+            \draw[thick, ->] (0,0) -> ({sin(\angulo)*\radius}, {cos(\angulo)*\radius}) node[midway, below] {$r$};
+            \node at (0,-2.25) {\small{$\overline{B}(x,r) \equiv$ disco cerrado}};
+
+            \draw[thick] (5,0) circle (\radius);
+            \filldraw (5,0) circle (1.5pt)  node[below] {$x$};
+            \draw[thick, ->] (5,0) -> ({5+sin(\angulo)*\radius}, {cos(\angulo)*\radius}) node[midway, below] {$r$};
+            \node at (5,-2.25) {\small{$S(x,r) \equiv$ circunferencia}};
+        \end{tikzpicture}
+
+        \item En $n=3$ tenemos:
+        
+        \vspace*{0.25cm}
+
+        \begin{tikzpicture}
+            \centering
+
+            \def\radius{1.75}
+            \def\incolor{gray!20}
+            \def\angulo{45}
+
+            % Desactiva los caracteres conflictivos
+            \shorthandoff{>} % Para poner puntas de flecha
+
+            \filldraw[dashed, fill=\incolor, thick] (-5,0) circle (\radius);
+            \draw[dashed, thick] (-5,0) ellipse [x radius=\radius, y radius=0.33*\radius];
+            \filldraw (-5,0) circle (1.5pt)  node[below] {$x$};
+            \draw[thick, ->] (-5,0) -> ({-5+sin(\angulo)*\radius}, {cos(\angulo)*\radius}) node[midway, below] {$r$};
+            \node at (-5,-2.25) {\small{$B(x,r) \equiv$ bola}};
+
+            \filldraw[fill=\incolor, thick] (0,0) circle (\radius);
+            \draw[dashed, thick] (0,0) ellipse [x radius=\radius, y radius=0.33*\radius];
+            \filldraw (0,0) circle (1.5pt)  node[below] {$x$};
+            \draw[thick, ->] (0,0) -> ({sin(\angulo)*\radius}, {cos(\angulo)*\radius}) node[midway, below] {$r$};
+            \node at (0,-2.25) {\small{$\overline{B}(x,r) \equiv$ bola cerrada}};
+
+            \draw[thick] (5,0) circle (\radius);
+            \draw[dashed, thick] (5,0) ellipse [x radius=\radius, y radius=0.33*\radius];
+            \filldraw (5,0) circle (1.5pt)  node[below] {$x$};
+            \draw[thick, ->] (5,0) -> ({5+sin(\angulo)*\radius}, {cos(\angulo)*\radius}) node[midway, below] {$r$};
+            \node at (5,-2.25) {\small{$S(x,r) \equiv$ esfera}};
+        \end{tikzpicture}
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{ejemplo}
+    En un conjunto $X \neq \emptyset$, se define la \textbf{distancia discreta} como 
+    \begin{align*}
+        d_{disc}(x,y) &=
+        \left\{ 
+        \begin{array}{ccc}
+            0 & \text{si} & x=y\\
+            1 & \text{si} & x\neq y
+        \end{array}
+        \right. 
+    \end{align*}
+    Con la distancia así definida tenemos:
+    \begin{align*}
+        B(x,r) &=
+        \left\{ 
+        \begin{array}{ccc}
+            X & \text{si} & r>1\\
+            \{x\} & \text{si} & r \leq 1
+        \end{array}
+        \right. \\\\
+        \overline{B}(x,r) &=
+        \left\{ 
+        \begin{array}{ccc}
+            X & \text{si} & r \geq 1\\
+            \{x\} & \text{si} & r < 1
+        \end{array}
+        \right.\\\\
+        S(x,r) &=
+        \left\{ 
+        \begin{array}{ccc}
+            X \setminus \{x\} & \text{si} & r =1 \\
+            \emptyset & \text{si} & r \neq 1\\
+        \end{array}
+        \right.
+    \end{align*}
+    \endsquare
+\end{ejemplo}
+
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Si $d$ es una distancia en $X$ y $\lambda > 0$, entonces $\lambda \cdot d : X \times X \rightarrow [0,\infty)$ también es una distancia y $B_{\lambda d}(x,r) = B_d\left(x, \dfrac{r}{\lambda}\right)$.
+        \item Sean $d$ y $\tilde{d}$ distancias en $X$ y $d \leq \tilde{d}$, entonces $B_d(x,r) \supseteq B_{\tilde{d}}(x,r)$ \ $\forall r \in \bb{R}^+,\ x\in X$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{definicion}
+    $(X,d)$ e.m. Un subconjunto $U \subset X$ se dice \textbf{abierto métrico} si $U=\emptyset$ o si $\forall x \in U, \ \ \exists r > 0$ tal que $B(x,r) \subset U$.
+    \endsquare
+\end{definicion}
+
+\begin{prop} %proposicion
+    Si $(X,d)$ es un espacio métrico, entonces 
+    \begin{gather*}
+        \cc{T}_d=\{U \subset X : U \text{ es un abierto métrico en }(X,d)\} \subset \cc{P}(X)
+    \end{gather*}
+    es una topología en $X$ que llamamos la \textbf{topología métrica} en $(X,d)$.
+
+    \begin{proof}\
+        Veamos que $\cc{T}_d$ así definida verifica las propiedades de una topología:
+        \begin{enumerate}[label=(A\arabic*)]
+            \item $\emptyset$, $X\in \cc{T}_d$ trivialmente (ya que $X\subset X$).
+            \item Sea $\{U_i\}_{i\in I}\subset \cc{T}_d$. Tendremos que ver si se verifica que $\bigcup\limits_{i\in I}U_i \in \cc{T}_d$. Para ello estudiemos los dos casos posibles:
+            
+            Si $\bigcup\limits_{i\in I}U_i = \emptyset \Rightarrow \bigcup\limits_{i\in I}U_i \in \cc{T}_d$.
+
+            Si $\bigcup\limits_{i\in I}U_i \neq \emptyset$, entonces podemos considerar $x \in \bigcup\limits_{i\in I}U_i \Rightarrow \exists i \in I : x \in U_i \in \cc{T}_d \Rightarrow \exists r>0 : B(x,r) \subset U_i \subset \bigcup\limits_{i\in I}U_i \Rightarrow \bigcup\limits_{i\in I}U_i\in \cc{T}$.
+
+            \item Sean $U_1, U_2 \in \cc{T}_d$. ¿Se verifica que $U_1 \cap U_2 \in \cc{T}_d$? De nuevo veamos los casos posibles:
+            
+            Si $U_1 \cap U_2 = \emptyset$, entonces se verifica trivialmente.
+
+            Si $U_1 \cap U_2 \neq \emptyset$, entonces podemos considerar $x\in U_1 \cap U_2 \Rightarrow \exists r_1,r_2>0: B(x,r_1)\subset U_1$ y $B(x,r_2)\subset U_2 \Rightarrow B(x, \min\{r_1, r_2\}) \subset U_1 \cap U_2$, es decir existe una bola abierta en la intersección que contiene al punto luego $U_1 \cap U_2 \in \cc{T}_d$.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{definicion}
+    Se llama \textbf{topología usual de $\bb{R}^n$}, $\cc{T}_u$, a la topología métrica en $\bb{R}^n$ con la distancia usual, es decir,
+    $U \subset \bb{R}^n$ es abierto en $(\bb{R}^n, \cc{T}_u)$ si $U=\emptyset$ o si $\forall x \in U \ \ \exists r>0 : B(x,r) \subset U$.
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    $(X,d)$ e.m. Se cumplen:
+    \begin{enumerate}
+        \item[(i)] Las bolas abiertas en $(X,d)$ son abiertos.
+        \item[(ii)] Todo abierto no vacío en $(X,d)$ se puede escribir como unión de bolas abiertas y como unión de bolas cerradas.
+    \end{enumerate}
+
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] Sea $x\in X$, $r>0$, ¿$B(x, r)\in \cc{T}_d$?
+            
+            Sea $y \in B(x,r) \Rightarrow d(x,y)<r \Rightarrow \exists \veps>0 : d(x,y) + \veps <r \Rightarrow B(y, \veps)\subset B(x,r)$. Para ver esta última implicación tenemos que si tomamos un $z \in B(y, \veps)\Rightarrow d(x,z) \leq d(x,y) + d(y,z) < d(x,y) + \veps < r \Rightarrow z \in B(x,r)$.
+
+            \begin{center}
+                \begin{tikzpicture}
+                    \centering
+        
+                    \def\radius{1.75}
+                    \def\incolor{gray!20}
+                    \def\angulo{45}
+        
+                    % Desactiva los caracteres conflictivos
+                    \shorthandoff{>} % Para poner puntas de flecha
+        
+                    \filldraw[dashed, fill=\incolor, thick] (0,0) circle (\radius);
+                    \filldraw (0,0) circle (1.5pt)  node[below] {$x$};
+                    \draw[thick, ->] (0,0) -> ({sin(\angulo)*\radius}, {cos(\angulo)*\radius}) node[midway, below] {$r$};
+                    \def\angulo{120}
+                    \draw[thick, dashed] (0,0) -- ({sin(\angulo)*\radius}, {cos(\angulo)*\radius});
+
+                    \filldraw ({sin(\angulo)*1}, {cos(\angulo)*1}) circle (1.5pt)  node[below] {$y$};
+
+                    \def\radius{0.5}
+                    \draw[dashed, thick] ({sin(\angulo)*1}, {cos(\angulo)*1}) circle (\radius);
+        
+                \end{tikzpicture}
+            \end{center}
+            
+            \item[(ii)] Sea $U \in \cc{T}_d \Rightarrow \forall x \in U \ \ \exists r_x >0$ tal que $B(x,r_x)\subset U \Rightarrow U = \bigcup\limits_{x\in U}B(x, r_x) = \bigcup\limits_{x\in U}\overline{B}\left(x, \frac{r_x}{2}\right)$.
+            
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{coro}
+    En $(X,d)$ tenemos 
+    \begin{gather*}
+        \cc{T}_d=\{\emptyset\}\cup\{U \subset X : U \text{ es unión de bolas abiertas}\}
+    \end{gather*}
+    \endsquare
+\end{coro}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Sea $(X,d)$ un e.m. En general, no todo abierto es una bola. Por ejemplo la unión de bolas no concéntricas.
+        \item No todo conjunto en $(\bb{R}^n, \cc{T}_u)$ es abierto. Por ejemplo $\{x\}\subset \bb{R}^n$ no es abierto.
+        \item En $(\bb{R}, \cc{T}_u)$ los únicos intervalos abiertos (topológicamente) son los intervalos abiertos, es decir, los del tipo $\bb{R}=(-\infty, +\infty)$, $(a,b)$ con $a<b$, $(-\infty, a)$ y $(b, +\infty)$.
+        \item En $(X, d)$, en general la intersección infinita de abiertos no es abierto. Por ejemplo, $\bigcap\limits_{n\in \bb{N}}\left(\frac{-1}{n}, \frac{1}{n}\right) = \{0\}$ que no es abierto.
+        \item $X\neq \emptyset$, $\cc{T}_{d_{disc}}=\cc{T}_{disc}$ (la topología asociada a la distancia discreta es la topología discreta).
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{definicion}
+    Sean $X\neq \emptyset$ y $d_1, d_2$ distancias en $X$. Decimos que $d_1$ y $d_2$ son \textbf{equivalentes} si existen $a,b>0$ tal que 
+    \begin{gather*}
+        a \cdot d_1(x,y) \leq d_2(x,y) \leq b \cdot d_1(x,y) \ \ \ \forall x,y \in X
+    \end{gather*}
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    Si $d_1, d_2$ son distancias en $X \neq \emptyset$ y existe $a>0$ tal que $a \cdot d_1(x,y) \leq d_2(x,y) \ \ \ \forall x,y \in X$, entonces $\cc{T}_{d_1} \subset \cc{T}_{d_2}$. En particular, si $d_1$ y $d_2$ son equivalentes, entonces $\cc{T}_{d_1} = \cc{T}_{d_2}$.
+
+
+    \begin{proof}
+        Sea $U\in \cc{T}_{d_1}$, $U \neq \emptyset$, ¿$U\in \cc{T}_{d_2}$?
+
+        Sea $x \in U \in \cc{T}_{d_1} \Rightarrow \exists r>0: B_{d_1}(x,r)\subset U$. Como $a \cdot d_1 \leq d_2 \Rightarrow B_{d_2}(x,a\cdot r)\subset B_{d_1}(x,r)$. Para verlo, tomamos $y\in B_{d_2}(x,a\cdot r) \Rightarrow d_2(x,y)<a\cdot r \Rightarrow a \cdot d_1(x,y)<r \Rightarrow y \in B_{d_1}(x,r)$. Por tanto, $B_{d_1}(x,r)\subset U \Rightarrow U \in \cc{T}_{d_2}\Rightarrow T_{d_1}\subset \cc{T}_{d_2}$.\\
+    \end{proof}
+\end{prop}
+
+\begin{definicion}
+    Un e.t. $(X,\cc{T})$ se dice \textbf{metrizable} si existe una distancia $d$ en $X$ tal que $\cc{T}= \cc{T}_d$.
+    \endsquare
+\end{definicion}
+
+\begin{ejemplo}\ 
+    \begin{itemize}
+        \item $(\bb{R}^n, \cc{T}_u)$ es metrizable.
+        \item $(X, \cc{T}_{disc})$ es metrizable.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{ejercicio}
+    Si $(X,\cc{T})$ es un e.t. metrizable, entonces cumple la condición de Hausdorff:
+    \begin{gather*}
+        \forall x,y\in X, x\neq y, \ \ \exists U,V \in \cc{T} \text{ tal que }x\in U,\ y\in V \text{ y } U \cap V = \emptyset
+    \end{gather*}
+
+    Por ser metrizable, sabemos que $\cc{T}=\cc{T}_d$ donde $d:X \to [0,\infty)$ es una distancia. Por tanto, para cada $x,y\in X$ con $x\neq y$ tengo $d(x,y)>0$. Puedo considerar entonces $r=\dfrac{d(x,y)}{2}$. Tengo entonces $U=B(x,r)$ y $V=B(y,r)$. Es claro que $x\in U$ y $y\in V$. Veamos que $U$ y $V$ son disjuntos. Tengo $U\cap V =\{z\in X : d(z,x)<r ,d(z,y)<r\}$. Supongamos que este conjunto no es vacío, en cuyo caso tendría que $\exists z \in X$ tal que $d(z,x)<r$ y $d(z,y)<r$. Por tanto, $d(z,x)+d(z,y)<2r = d(x,y)$ lo cual incumple la desigualdad triangular. Llegamos a contradicción y por tanto $U\cap V=\emptyset$.
+    \endsquare
+\end{ejercicio}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(X,\cc{T}_t)$ no es metrizable si $\#X>2$ (cardinal del conjunto) ya que no verifica la condición de Hausdorff.
+        \item $(X, \cc{T}_{x_0})$ no es metrizable por la misma razón (ya que la intersección de cualesquiera dos abiertos va a contener a $x_0$).
+        \item $(X, \cc{T}_{CF})$ no es metrizable si $X$ es infinito (aplicar las leyes de morgan para la intersección).
+        \item $(X, \cc{T}_{CN})$ no es metrizable si $X$ no es numerable.
+        \item $(\bb{R}, \{\emptyset, \bb{R}, \bb{Q}, \bb{R}\setminus \bb{Q}\})$.
+        \item La topología de Sierpinski tampoco es metrizable (ya que el único abierto que contiene a $b$ es el total).
+        \item La topología de Sorgenfrey $(\bb{R}, \cc{T}_S)$ cumple la propiedad de Hausdorff.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\section{Comparación de Topologías}
+\begin{definicion}
+    Sean $X\neq \emptyset$ un conjunto y $\cc{T}_1$, $\cc{T}_2$ dos topologías en $X$. Diremos que $\cc{T}_2$ es \textbf{más fina} que $\cc{T}_1$ o que $\cc{T}_1$ es \textbf{menos fina} que $\cc{T}_2$ si $\cc{T}_1\subseteq \cc{T}_2$ y lo notamos como $\cc{T}_1 \leq \cc{T}_2$.
+    \endsquare
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $X \neq \emptyset$,\ $\cc{T}_{CF}\leq \cc{T}_{CN}$.
+        \item Si $(X,\cc{T})$ es un e.t cualquiera, entonces $\cc{T}_t \leq \cc{T} \leq \cc{T}_{disc}$ 
+        % (ya que todas las topologías contienen a la trivial)
+        \item Si $\cc{T}_1 \leq \cc{T}_2$ y $\cc{T}_2\leq \cc{T}_1$, entonces $\cc{T}_1= \cc{T}_2$ (por doble inclusión).
+        \item En general si tenemos dos topologías en $X$, no siempre son comparables. Por ejemplo la topología del punto incluido en dos puntos distintos: 
+        \begin{gather*}
+            0,1\in \bb{R}\ \ \ (\bb{R}, \cc{T}_0), (\bb{R},\cc{T}_1)
+        \end{gather*}
+        Veamos que $\cc{T}_0 \nleq \cc{T}_1$, ya que $\{0\}\notin \cc{T}_1$, y por el mismo motivo (pero con el 1) tenemos $\cc{T}_1\nleq \cc{T}_0$.
+
+        Otro ejemplo sería $(\bb{R}, \cc{T}_u)$, $(\bb{R},\cc{T}_{x_0})$ ya que $\{x_0\}\in \cc{T}_{x_0}$, $\{x_0\}\notin \cc{T}_u\Rightarrow \cc{T}_{x_0\nleq \cc{T}_u}$
+        Igualmente $(x_0+1,x_0+2)\in \cc{T}_u$ y $(x_0+1,x_0+2)\in \cc{T}_{x_0} \Rightarrow \cc{T}_u \nleq \cc{T}_{x_0}$
+        \item En $\bb{R}$, $\cc{T}_u\leq \cc{T}_{Sorgenfrey}$.
+        \item $(X,d)$, $(X,d')$, $d \leq d' \Rightarrow \cc{T}_d \leq \cc{T}_{d'}$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\section{Cerrados}
+
+\begin{definicion}
+    Sea $(X,\cc{T})$ un e.t. Diremos que un conjunto $F\subset X$ es \textbf{cerrado} en $(X,\cc{T})$ si $X\setminus F \in \cc{T}$. Denotamos por $\cc{C}_{\cc{T}}$ a la familia de todos los cerrados en $(X,\cc{T})$.
+    \endsquare
+\end{definicion}
+
+\begin{propiedades}\ 
+    \begin{enumerate}
+        \item[\objetivo{C1}] $\emptyset, X \in \cc{C}_{\cc{T}}$.
+        \item[\objetivo{C2}] Si $\{F_i\}_{i\in I}\subset \cc{C}_{\cc{T}}$, entonces $\bigcap\limits_{i\in I}F_i \in \cc{C}_{\cc{T}}$.
+        \item[\objetivo{C3}] Si $F_1, F_2 \in \cc{C}_{\cc{T}}$, entonces $F_1 \cup F_2 \in \cc{C}_{\cc{T}}$
+    \end{enumerate}
+    Por inducción, de \apuntar{C3} tenemos que la unión finita de cerrados es cerrada.\\
+\end{propiedades}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item $U\in \cc{T}\sii X \setminus U \in \cc{C}_{\cc{T}}$, $F\in \cc{C}_{\cc{T}} \sii X\setminus F \in \cc{T}$.
+        \item $\cc{T}_1 \leq \cc{T}_2\sii \cc{C}_{\cc{T}_1}\subseteq \cc{C}_{\cc{T}_2}$. Esto además implica que $\cc{T}_1=\cc{T}_2 \sii \cc{C}_{\cc{T}_1} = \cc{C}_{\cc{T}_2}$. Esto nos dice que para conocer una topología basta con conocer la familia de sus cerrados.
+        \item En general, puede haber conjuntos que no sean ni abiertos ni cerrados. Por ejemplo, en $(\bb{R}, \cc{T}_u)$, tenemos que $[0,1)\notin (\cc{T}_u\cup \cc{C}_{\cc{T}_u})$.
+        \item En $(X, \cc{T}_{x_0})$ tenemos que $\cc{T}_{x_0}\cup \cc{C}_{\cc{T}_{x_0}} = \cc{P}(X)$ y además $\cc{T}_{x_0}\cap \cc{C}_{\cc{T}_{x_0}}=\{\emptyset, X\}$.
+        \item En general, la unión arbitraria de cerrados no es cerrado. Por ejemplo, $(\bb{R}, \cc{T}_u)$, tomamos $\bigcup\limits_{n\in \bb{N}}\left[-\frac{1}{n}, 3-\frac{1}{n}\right] = (0,3)$. Otro ejemplo sería $(\bb{R}, \cc{T}_{CF})$ considerando $\bigcup\limits_{n\in \bb{N}}\{n\}=\bb{N}$ que no es cerrado.
+    \end{itemize}
+    \endsquare
+\end{observacion}
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Topología trivial: $\cc{T}_t=\{\emptyset, X\} \Rightarrow \cc{C}_{\cc{T}_t} = \cc{C}_t = \{\emptyset, X\}$.
+        \item Topología discreta: $\cc{T}_{disc} = \cc{P}(X) \Rightarrow \cc{C}_{\cc{T}_{disc}} = \cc{C}_{disc} = \cc{P}(X)$.
+        \item Topología del punto incluido: $x_0 \in X$, $\cc{T}_{x_0}=\{\emptyset\} \cup \{U\subset X : x_0 \in U\} \Rightarrow \cc{C}_{\cc{T}_{x_0}} = \cc{C}_{x_0} = \{X\}\cup \{F \subset X : x_0 \notin F\}$
+        \item Topología cofinita: $\cc{T}_{CF} = \{\emptyset\}\cup \{U\subset X : X \setminus U \text{ finito }\} \Rightarrow \cc{C}_{\cc{T}_{CF}}=\cc{C}_{CF}=\{X\}\cup \{F\subset X : F \text{ finito}\}$
+        \item En ocasiones no es fácil describir $\cc{C}_{\cc{T}}$. Por ejemplo en $\cc{T}_u$ o $\cc{T}_{Sorgenfrey}$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{ejemplo} En un espacio métrico $(X, \cc{T}_d)$, las bolas cerradas y las esferas son cerrados.
+    \begin{proof}\
+        \begin{itemize}
+            \item Sea $x\in X$, $r>0$, ¿$\overline{B}(x,r)\in \cc{C}_d$? Esto es equivalente a preguntarse ¿$X\setminus \overline{B}(x,r) \in \cc{T}_d$?
+            
+            Sea $y \in X\setminus\overline{B}(x,r) \Rightarrow d(x,y>r)$. Entonces $\exists \veps >0 : r+\veps < d(x,y)\Rightarrow B(y,\veps)\cap \overline{B}(x,r)=\emptyset \Rightarrow B(y,\veps)\subset X\setminus \overline{B}(x,r)\in \cc{T}_d \Rightarrow X\setminus \overline{B}(x,r)\in \cc{C}_{\cc{T}}$
+
+            \item Sea $x\in X$, $r>0, $¿$S(x,r)\in \cc{C}_d$? Dado que $X\setminus S(x,r)=B(x,r)\cup (X\setminus \overline{B}(x,r))\in \cc{T}_d$ (por ser unión de abiertos).
+        \end{itemize}
+    \end{proof}
+\end{ejemplo}
+
+\begin{ejercicio}
+    En $(\bb{R},\cc{T}_u)$ los únicos intervalos cerrados son los de la forma $(-\infty, a]$, $[b, +\infty)$, $\bb{R}=(-\infty, +\infty)$ y $[a,b]$ con $a<b$.\\
+
+    Sabemos que los únicos abiertos en $\cc{T}_u$ son los intervalos de la forma $\bb{R}=(-\infty, +\infty)$, $(a,b)$ con $a<b$, $(-\infty, a)$ y $(b, +\infty)$.
+
+    Es claro que $\bb{R}\in \cc{C}_{\cc{T}_u}$. 
+    
+    Tenemos que $\bb{R}\setminus(-\infty,a] = (a,+\infty)\in \cc{T}_u$, luego $(-\infty,a]\in \cc{C}_{\cc{T}_u}$. 
+    
+    De la misma forma, $\bb{R}\setminus[b,+\infty) = (-\infty,b)\in \cc{T}_u$, luego $[b,+\infty)\in \cc{C}_{\cc{T}_u}$
+
+    Finalmente $\bb{R}\setminus [a,b]=(-\infty,a)\cup(b,+\infty)\in \cc{T}_u$ por ser unión de abiertos luego $[a,b]\in \cc{C}_{\cc{T}_u}$.
+
+    Dado que ya se han estudiado todos los complementarios de los intervalos abiertos (los abiertos en la topología) no habrá más tipos de intervalos cerrados (recordemos $U\in \cc{T}\sii X\setminus U \in \cc{C}_{\cc{T}}$)
+
+    \endsquare
+\end{ejercicio}
+
+\begin{teo}
+    Sea $X\neq \emptyset$ y $\cc{C}\subset \cc{P}(X)$ cumpliendo
+    \begin{enumerate}
+        \item[\apuntar{C1}] $\emptyset, X \in \cc{C}$.
+        \item[\apuntar{C2}] Si $\{F_i\}_{i\in I}\subset \cc{C}$, entonces $\bigcap\limits_{i\in I}F_i \in \cc{C}$.
+        \item[\apuntar{C3}] Si $F_1, F_2 \in \cc{C}$, entonces $F_1 \cup F_2 \in \cc{C}$
+    \end{enumerate}
+
+    Entonces existe una única topología $\cc{T}$ en $X$ tal que $\cc{C}_{\cc{T}}=\cc{C}$.
+
+    \begin{proof}
+        La existencia queda probada definiendo $\cc{T}=\{U\subset X : X \setminus U \in \cc{C}\}$.
+        La unicidad es inmediata ya que si $\cc{C}_{\cc{T'}}=\cc{C}_{\cc{T}}\Rightarrow \cc{T}=\cc{T}'$.\\
+    \end{proof}
+\end{teo}
+
+\section{Bases de topología}
+
+\begin{definicion}
+    Sea $(X,\cc{T})$ un e.t. Una familia de abiertos $\cc{B}\subset \cc{T}$ es una \textbf{base} de la topología $\cc{T}$ si $\forall U \in \cc{T}$\ \ \ $\exists \{B_i\}_{i\in I}\subset \cc{B}$ tal que $U=\bigcup\limits_{i\in I}B_i$.
+
+    A los elementos de $\cc{B}$ se les llama \textbf{abiertos básicos}.
+    \endsquare
+\end{definicion}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item Ni $\cc{B}$ ni la familia $\{B_i\}_{i\in I}$ tienen que ser finitas o numerables
+        \item La forma de escribir $U=\bigcup\limits_{i\in I} B_i$ puede no ser única.
+        \item $\cc{T}$ es base de $\cc{T}$ (trivialmente).
+        \item Si $\cc{B}\subset \cc{B}'\subset \cc{T}$ con $\cc{B}$ base de $\cc{T}$, entonces $\cc{B}'$ es también base de $\cc{T}$.
+    \end{itemize}
+    \endsquare
+\end{observacion}
+
+\begin{prop}
+    Sea $(X,\cc{T})$ un e.t y $\cc{B}\subset \cc{T}$ una familia de abiertos. Son equivalentes:
+    \begin{enumerate}
+        \item[(i)] $\cc{B}$ es base de $\cc{T}$.
+        \item[(ii)] $\forall U \in \cc{T}$,\ \ $U \neq \emptyset$\ \ $\forall x\in U$\ \ $\exists B \in \cc{B}$ tal que $x\in B \subset U$ (si tenemos un abierto de la topología podemos encontrar para cada punto suyo un abierto básico contenido en el abierto y que contiene al punto).
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{itemize}
+            \item[(i)$\Rightarrow$(ii)] Sea $U\in \cc{T}$, $U\neq \emptyset$. Sea $x \in U \Rightarrow  U = \bigcup\limits_{i\in I}B_i$ con $B_i \in \cc{B}\Rightarrow \exists i\in I$ tal que $x\in B_i=B_x\subset U$
+            \item[(ii)$\Rightarrow$(i)] Sea $U\in \cc{T}$.
+            \begin{itemize}[label=-]
+                \item Si $U=\emptyset\Rightarrow U=\bigcup\limits_{i\in \emptyset}B_i=\emptyset$
+                \item Si $U \neq \emptyset \Rightarrow \forall x \in U$\ \ $\exists B_x\in \cc{B}$ tal que $x\in B_x \subset U\Rightarrow U = \bigcup\limits_{x\in U}B_x$
+            \end{itemize}
+        \end{itemize} 
+    \end{proof}
+\end{prop}
+
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Sea $(X,\cc{T}_d)$ un e.m. La familia $\cc{B} =\{B(x,r):x\in X, r>0\}$ de todas las bolas abiertas es una base de $\cc{T}_d$.
+        \item En $(\bb{R},\cc{T}_u)$, $\cc{B}_u=\{(a,b):a<b\}$ es base de $\cc{T}_u$ y se le llama \textbf{base usual}.
+        \item En $(\bb{R},\cc{T}_u)$, $\cc{B}=\{(a,b): a,b\in \bb{Q},\ a<b\}$ es base de $\cc{T}_u$ (por la densidad de $\bb{Q}$ en $\bb{R}$).
+        \item En $(\bb{R}^n, \cc{T}_u)$, $\cc{B}_u=\{B(x,r): x\in \bb{R}^n, r>0\}$ es la base usual. $(\bb{R}^n, \cc{T}_u)$, $\cc{B}_u=\{B(x,r): x\in \bb{R}^n, r\in \bb{Q}, r>0\}$ también es base de $\cc{T}_u$ (numerable).
+        \item En $(X,\cc{T}_t)$, $\cc{B}=\{X\}$ es base (la única que no contiene al vacío).
+        \item $(X,\cc{T}_d)$, $\cc{B}=\{\{x\}: x\in X\}\subset \cc{T}$ es base de $\cc{T}_{disc}$. Es la más económica ya que si $\cc{B}'$ es base, entonces $\cc{B}\subset \cc{B}'$.
+        \begin{proof}
+            Sea $\{x\}\in \cc{T}_{disc}$, como $\cc{B}'$ es base podemos considerar $x\in \{x\}$ y entonces $\exists B \in \cc{B}'$ tal que $x\in B \subset \{x\}$ y entonces $B=\{x\}\subset \cc{B}'$ $\forall x \in X\Rightarrow \cc{B}\subset \cc{B}'$
+        \end{proof}
+        \item $(X, \cc{T}_{x_0})$, $x_0 \in X \neq \emptyset$, $\cc{B}=\{\{x,x_0\}: x\in X\}$ es una base. Esta es la base más económica.
+        \item $(\bb{R}, \cc{T}_{Sorgenfrey})$ (recordemos que $U \in \cc{T}_S \sii \forall x \in U,\ \ \exists \veps : [x, x+\veps)\subset U$). $\cc{B}=\{[x,x+\veps): x\in \bb{R}, \veps>0\}$ es base. $\cc{B}'=\{[x,x+\veps): x\in \bb{Q}, \veps\in \bb{Q}, \veps>0\}$ no lo es (ya que tomando un intervalo de la forma $[x,x+\veps)$ con $x\in \bb{Q}$ entonces no existe ningún elemento de $\cc{B}'$ que contenga a $x$ y quede en medio).
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{teo}\label{teorema1_6}
+    Sea $(X,\cc{T})$ un espacio topológico y $\cc{B}$ una base suya. Entonces:
+    \begin{enumerate}
+        \item[\objetivo{B1}] $X=\bigcup\limits_{B\in \cc{B}}B$
+        \item[\objetivo{B2}] Si $B_1,B_2\in \cc{B}$,\ $x\in B_1\cap B_2$, entonces $\exists B_3 \in \cc{B}$ con $x\in B_3 \subset B_1 \cap B_2$
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item[\apuntar{B1}] Trivial
+            \item[\apuntar{B2}] Tenemos $x\in B_1\cap B_2\in \cc{T}$ entonces, como $\cc{B}$ es base $\exists B_3=B_x \in \cc{B}$ con $x\in B_3 \subset B_1 \cap B_2$.
+        \end{enumerate}
+    \end{proof}
+\end{teo}
+
+\begin{teo}\label{teorema1_7}
+    Sean $X\neq \emptyset$ un conjunto y $\cc{B}\subset \cc{P}(X)$ cumpliendo:
+    \begin{enumerate}
+        \item[\apuntar{B1}] $X=\bigcup\limits_{B\in \cc{B}}B$
+        \item[\apuntar{B2}] Si $B_1,B_2\in \cc{B}$,\ $x\in B_1\cap B_2$, entonces $\exists B_3 \in \cc{B}$ con $x\in B_3 \subset B_1 \cap B_2$
+    \end{enumerate}
+    Entonces existe una única topología $\cc{T}(\cc{B})$ en $X$ tal que $\cc{B}$ es base de $\cc{T}(\cc{B})$. Además,
+    \begin{align*}
+        \cc{T}(\cc{B})&=\{\emptyset\}\cup\{U\subset X : \exists \{B_i\}_{i\in I}\subset \cc{B} \text{ con } U = \bigcup\limits_{i\in I}B_i\}=\\
+        &=\{\emptyset\}\cup \{U\in X:\forall x\in U\ \ \exists B=B_x\in \cc{B} \text{ con } x\in B\subset U \}
+    \end{align*}
+    Además, $\cc{T}(\cc{B})$ es la topología menos fina que contiene a $\cc{B}$, es decir, si $(X,\cc{T}')$ es un e.t y $\cc{B}\subset \cc{T}'$, entonces $\cc{T}(\cc{B})\leq \cc{T}'$. A esta topología se le llama la \textbf{topología generada} por $\cc{B}$.
+
+    \begin{proof}
+        Empezaremos por probar la existencia. Para ello tendremos que ver que $\cc{T}(\cc{B})$ es una topología, probando que verifica las propiedades de las topologías:
+        \begin{enumerate}[label=(A\arabic*)]
+            \item $\emptyset\in \cc{T}(\cc{B})$ por la definición de $\cc{T}(\cc{B})$. Por \apuntar{B1}, tenemos también que $X\in \cc{T}(\cc{B})$.
+            \item Sea $\{U_i\}_{i\in I}\subset \cc{T}(\cc{B})$ y sea $x\in \bigcup\limits_{i\in I}U_i\Rightarrow \exists i \in I : x\in U_i\in \cc{T}(\cc{B})$ por lo que $\exists B_x\in \cc{B}$ tal que $x \in B_x \subset U_i\subset \bigcup_{i\in I}U_i\Rightarrow \bigcup\limits_{i\in I}U_i \in \cc{T}(\cc{B})$.
+            \item Sean $U_1, U_2 \in \cc{T}(\cc{B})$ (si la intersección es vacía es trivial). Consideramos $x\in U_1\cap U_2\Rightarrow \exists B_1, B_2 \in \cc{B}$ con $x \in B_1 \subset U_1$ y $x \in B_2\subset U_2$ por tanto $x\in B_1 \cap B_2 \subset U_1 \cap U_2$. Por \apuntar{B2}, existe un $B_3\in \cc{B}$ tal que $x\in B_3 \subset B_1\cap B_2 \subset U_1 \cap U_2$ por lo que $U_1\cap U_2\in \cc{T}(\cc{B})$.
+        \end{enumerate}
+        Con esto queda probado que es una topología. Tendremos que ver ahora que $\cc{B}$ es base de $\cc{T}(\cc{B})$. Para ello empiezo viendo que $\cc{B}\subset \cc{T}$. Por la segunda defición de $\cc{T}(\cc{B})$, esto es evidente. Como verifica las hipótesis del Teorema 1.7, es base de $\cc{T}(\cc{B})$.\\
+
+        Veamos ahora la unicidad. Sea $(X, \cc{T}')$ un e.t. con $\cc{B}$ base de $\cc{T}'$. Tendré que ver que $\cc{T}'=\cc{T}$. Sea $\emptyset\neq U\subset X \Rightarrow U\in \cc{T}'\sii \forall x \in U\ \ \exists B\in \cc{B}$ con $x\in \cc{B}\subset U \sii U\in \cc{T}(\cc{B})$ ya que $\cc{B}$ es base de $\cc{T}'$.\\
+
+        Nos queda ver que es la menos fina conteniendo a $\cc{B}$. Para ello, sea $(X,\cc{T}')$ un e.t. tal que $\cc{B}\subset \cc{T}'$, entonces por \apuntar{A2} tenemos que $\cc{T}(\cc{B})\subset \cc{T}'$, lo cual es equivalente a decir que $\cc{T}(\cc{B})\leq \cc{T}'$.\\
+    \end{proof}
+\end{teo}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Si $X=\{a,b\}$ y $\cc{B}=\{\{a\}\}$ no es base de ninguna topología en $X$ (ya que no cumple \apuntar{B1}).
+        \item Si $X=\{a,b,c\}$ y $\cc{B}=\{\{a,b\},\{b,c\}\}$. Esta base verifica \apuntar{B1} pero no \apuntar{B2} (tomando $x=b$ se ve facilmente). %TODO 
+        \item Si $X=\bb{R}$ y $\cc{B}=\{[a,b]:a<b\}$. Si tomamos dos intervalos $[0,1]\cap [1,2]$, su intersección es $\{1\}$ y por tanto no verifica \apuntar{B2} (tomando $x=1$).
+        \item Si $X=\bb{R}$ y $\cc{B}=\{[a,b]:a\leq b\}$ es base de una topología, $\cc{T}(\cc{B})$ en $\bb{R}$. Además, $\cc{T}(\cc{B})=\cc{T}_{disc}$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}
+    Sean $X\neq \emptyset$ y $\cc{T}_1, \cc{T}_2$ topologías en $X$ con bases $\cc{B}_1$ y $\cc{B}_2$ respectivamente. Equivalen:
+    \begin{enumerate}
+        \item[(i)] $\cc{T}_1\leq \cc{T}_2$.
+        \item[(ii)] $\forall B_1 \in \cc{B}_1,\ \ x \in B_1,\ \ \exists B_2 \in \cc{B}_2$ con $x\in B_2 \subset B_1$.
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)$\Rightarrow$(ii)] Sea $B \in \cc{B}_1$. Por (i), $\cc{B}_1 \subset \cc{T}_1 \subset \cc{T}_2$ y como $\cc{B}_2$ es base de $\cc{T}_2$, aplicando la definición de base tengo que $\exists B_2 \in \cc{B}_2$ con $x\in B_2 \subset B_1$.
+            \item[(ii)$\Rightarrow (i)$] Por (ii) tenemos que $\cc{B}_1\subset \cc{T}_2\Rightarrow \cc{T}(\cc{B}_1)\leq \cc{T}_2$ (por el Teorema \ref{teorema1_7})
+             y entonces $\cc{T}_1=\cc{T}(\cc{B}_1)\leq \cc{T}_2$.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item En $\bb{R}$, $\cc{T}_u \leq \cc{T}_{Sorgenfrey}$.
+        \item Ejercicios 1 y 2 de la relación.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}
+    Sean $X\neq \emptyset$ y $S\subset \cc{P}(X)$, $S\neq \emptyset$, Entonces, 
+    \begin{gather*}
+        \cc{B}(S)=\left\{\bigcap\limits_{i\in I}S_i: I \text{ finito, }S_i \in S\ \ \forall i \in I\right\}
+    \end{gather*}
+    Es base de una única topología $\cc{T}(S)=\cc{T}(\cc{B}(S))$ en $X$. A esta topología la llamaremos la \textbf{topología generada} por $S$ y es la topología menos fina que contiene a $S$, es decir, si $(X,\cc{T}')$ es un e.t. y $S\subset \cc{T}'$, entonces $\cc{T}(S)\leq \cc{T}'$.\\
+
+    Decimos que $S$ es una \textbf{subbase} de $\cc{T}(S)$.
+
+    \begin{proof}
+        Tendremos que comprobar \apuntar{B1} y \apuntar{B2} y que es la menos fina.
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Toda base de $(X,\cc{T})$ es subbase de $(X,\cc{T})$.
+        \item $S=\{X\}$ es subbase de $\cc{T}_t$.
+        \item En $\bb{R}$, $S=\{(a,+\infty):a\in \bb{R}\}\cup \{(-\infty,b): b\in \bb{R}\}$ es subbase de $\cc{T}_u$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\section{Entornos}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t y $x\in X$. Diremos que un conjunto $N\subset X$ es un \textbf{entorno} de $x$ si $\exists U \in \cc{T}$ con $x\in U \subset N$.\\
+
+    Denotamos $\cc{N}_x = \{N\subset X : N \text{ es entorno de }x\}$ y lo llamamos \textbf{sistema de entornos} del punto $x$ en $(X,\cc{T})$.
+    \endsquare 
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item En $(\bb{R}, \cc{T}_u)$, $[0,1)\in \cc{N}_x$ para todo $x\in (0,1)$, pero no es entorno de $0$ ni de $1$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item $X\in \cc{N}_x$\ \ $\forall x \in X\Rightarrow \cc{N}_x\neq \emptyset$\ \ $\forall x\in X$.
+        \item Si $x\in U \in \cc{T}\Rightarrow U\in \cc{N}_x$
+        \item Puede ocurrir que exista $N\subset \cc{N}_x$ con $N\notin \cc{T}$.
+    \end{itemize}
+    \endsquare
+\end{observacion}
+
+\begin{prop}
+    Sea $(X,\cc{T})$ un e.t., $U\subset X$. Equivalen:
+    \begin{enumerate}
+        \item[(i)] $U\in \cc{T}$.
+        \item[(ii)] $U\in \cc{N}_x$\ \ $\forall x \in U$.
+    \end{enumerate}
+
+    Es decir, un conjunto es abierto si y solo si es entorno de todos sus puntos.
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)$\Rightarrow$ (ii)] Si $U\in \cc{T}$, entonces $U\in \cc{N}_x$\ \ $\forall x\in U$
+            \item[(ii)$\Rightarrow$ (i)] $\forall x \in U $\ \ $\exists U_x \in \cc{T}$ con $x\in U_x\subset U \Rightarrow U = \bigcup\limits_{x\in U}U_x \in \cc{T}$.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}   
+        \item $(X,\cc{T}_t)$, $\cc{N}_x=\{X\}$\ \ $\forall x \in X$.
+        \item $(X,\cc{T}_{disc})$, $\cc{N}_x=\{N\subset X : x\in N\}$
+        \item $(X,\cc{T}_{x_0})$, $\cc{N}_x = \{N \subset X : x_0,x\in N\}$
+        \item $(X,d)$, $\cc{N}_x = \{N\subset X : \exists \veps > 0 \text{ con } B(x,r)\subset N\}$. En particular, $\overline{B}(x,r)\in \cc{N}_x$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}\label{proposicion1_11}
+    Sea $(X,\cc{T})$ e.t., $x\in X$. Entonces:
+    \begin{enumerate}
+        \item[\objetivo{N1}] $\cc{N}_x \neq \emptyset$\ \ $\forall x \in X$.
+        \item[\objetivo{N2}] Si $N \in \cc{N}_x$, entonces $x\in N$.
+        \item[\objetivo{N3}] Si $N \in \cc{N}_x$ y $N\subset N'$, entonces $N'\in \cc{N}_x$.
+        \item[\objetivo{N4}] Si $N,N'\in \cc{N}_x$, entonces $N\cap N' \in \cc{N}_x$.
+        \item[\objetivo{N5}] Si $N\in \cc{N}_x$, entonces $\exists N'\in \cc{N}_x$ con $N'\subset N$ y $N\in \cc{N}_y$\ \ $\forall y \in N'$.  
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item[\apuntar{N5}] $N\in \cc{N}_x\Rightarrow \exists U \in \cc{T}$ con $x\in U\subset N$. Tomamos $U=N'$ y se verifica que $x\in U \in \cc{N}_x$. Además $U\subset N$ y tendré que ver que $N\in \cc{N}_y$\ \ $\forall y \in U$. Como $U\in \cc{T}\Rightarrow U\in \cc{N}_y$\ \ $\forall y \in U \overset{\apuntar{N3}}{\Rightarrow} N\in \cc{N}_y$\ \ $\forall y \in U$.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{prop}
+    (Hausdorff, 1914) Sean $X\neq \emptyset$ un conjunto y supongamos que tenemos $\forall x \in X$ una familia $\cc{M}_x\subset \cc{P}(X)$ cumpliendo \apuntar{N1},\dots,\apuntar{N5}. Entonces existe una única topología $\cc{T}$ en $X$ cuyos sistemas de entornos $\cc{N}_x$ coinciden con $\cc{M}_x$\ \ $\forall x \in X$ (es decir, $\cc{N}_x = \cc{M}_x\ \ \forall x \in X$).\\
+
+    Además, $\cc{T} = \{U\subset X : U \in \cc{M}_x\ \ \forall x \in U\}\cup\{\emptyset\}$.
+
+    \begin{proof}
+        Veamos en primer lugar que $\cc{T}$ es una topología, comprobando que verifica \apuntar{A1}, \apuntar{A2}, \apuntar{A3}. Esto se deja planteado como ejercicio para el lector.\\
+
+        Veamos que esa topología es única. Para ello supongamos que $\exists \cc{T}'$ con $\cc{N}_x'=\cc{M}_x(=\cc{N}_x)$. Tenemos que $U\in \cc{T}' \sii U\in \cc{N}_x'=\cc{N}_x$\ \ $\forall x \in U \sii U \in \cc{T}$.\\
+
+        Nos queda probar que $\cc{N}_x = \cc{M}_x$\ \ $\forall x \in X$. Sea $x\in X$. Veamos la doble inclusión:
+        \begin{itemize}
+            \item[$\subseteq)$] $N\in \cc{N}_x \Rightarrow \exists U \in \cc{T}$ con $x\in U\subset N$. Por la definición de $\cc{T}$, $U\in \cc{M}_x$.
+            \item[$\supseteq)$] Sea $N\in \cc{M}_x$. Tendremos que comprobar que $N \in \cc{N}_x$. Esto ocurrirá si $\exists U\in \cc{T}$ tal que $x\in U \subset N$. Definimos $U=\{y\in N : N\in \cc{M}_y\}$. Veamos que este conjunto verifica lo que buscamos. Comencemos viendo que $x\in U$. Es claro que $N\in \cc{M}_x$ (por hipótesis) y además, por \apuntar{N2} tenemos que $x\in N$, luego $x\in U$. Veamos ahora que $U\subset N$, lo cual es claro por la definición de $U$. Por último tendré que ver que $U\in \cc{T}$ lo cual equivale a ver que $U\in \cc{M}_y$\ \ $\forall y \in U$. Para ello tomo $y\in U$. Tendremos que ver que $U\in \cc{M}_y$. Como $y\in U \Rightarrow y\in N\in \cc{M}_y \overset{\apuntar{N5}}{\Rightarrow} \exists N'\in \cc{M}_y$ con $N'\subset N$ y $N\in \cc{M}_z$\ \  $\forall z \in N' \overset{\apuntar{N2}}{\Rightarrow} y \in N' \subset U \overset{\apuntar{N3}}{\Rightarrow} U \in \cc{M}_y $.
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\subsection{Bases de Entornos}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ e.t. y $x\in X $,. Entonces una \textbf{base de entornos} de $x$ en $\cc{T}$ es una familia de entornos, $\beta_x\subset \cc{N}_x$ tal que $\forall N \in \cc{N}_x$\ \ $\exists V \in \beta_x$ con $x \in V \subset N$.\\
+
+    A los elementos de $\beta_x$ se les llama \textbf{entornos básicos}.
+    \endsquare
+\end{definicion}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item Si $\beta_x$ es b.d.e\footnote{Notaremos así a las bases de entornos}. entonces $\cc{N}_x=\{N\subset X : \exists V \in \beta_x \text{ con } V \subset N\}$.
+
+        \item $\beta_x\neq \emptyset$.
+
+        \item $\cc{N}_x$ es una b.d.e. de $x$.
+
+        \item $\beta_x = \cc{N}_x \cap \cc{T}=\{U\subset \cc{T}: x\in U\}$ es también una b.d.e. de $x$.
+
+        \item Si $\cc{B}$ es base de $\cc{T}$, entonces $\cc{B}\cap \cc{N}_x = \{B \in \cc{B} : x \in B$\} es una b.d.e. de $x$
+        \begin{proof}
+            Sea $N \in \cc{N}_x \Rightarrow \exists U \in \cc{T}$ con $x \in U \subset N$. Como $\cc{B}$ es base de $\cc{T}$, entonces $\exists B \in \cc{B}$ con $x\in B \subset U\subset N$. 
+        \end{proof}
+
+        \item En general, no todo entorno de un punto es unión de entornos básico. Por ejemplo, $(\bb{R}, \cc{T}_u)$, $x=0$, $\beta_x = \{(a,b) : a<x<b\}$ es una b.d.e. de $x$. Tomamos $[-1,1) \in \cc{N}_x$ (es entorno de $x=0$) pero no es unión de elementos de $\beta_x$.
+    \end{itemize}
+    \endsquare
+\end{observacion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(X, \cc{T}_u)$, $x\in X\Rightarrow \beta_x=\{X\}$ es la única b.d.e de $x$ posible.
+        \item $(X, \cc{T}_{disc})$, $x \in X \Rightarrow \beta_x=\{\{x\}\}$ es una b.d.e de $x$ (la más ``económica'').
+        \item $(X, \cc{T}_{x_0})$, $x \in X \Rightarrow \beta_x = \{\{x,x_0\}\}$ es b.d.e de $x$ (la más ``económica'').
+        \item $(\bb{R}^n, \cc{T}_u)$, $x \in X\Rightarrow \beta_x = \{B(x, \veps): \veps > 0\}$ es una b.d.e de $x$. $\beta_x = \{B(x, \veps):\veps > 0 , \veps \in \bb{Q}\}$, $\beta_x = \{B(x, \veps):\veps =\frac{1}{k}, k\in \bb{N}\}$, $\beta_x = \{B(x, \veps):\veps =\frac{1}{k}, k\in \bb{N}, k\text{ par}\}$ también son bases de entornos de $x$ (cada una más económica que la anterior).
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}
+    Sea $(X,\cc{T})$ un e.t., $\beta_x$ una b.d.e. de $x$\ \ $\forall x \in X$ y $U\subset X$. Equivalen:
+    \begin{enumerate}
+        \item[(i)] $U\in \cc{T}$.
+        \item[(ii)] $\forall x \in U$\ \ $\exists V = V_x\in \beta_x$ con $V_x\subset U$. 
+    \end{enumerate}
+
+    \begin{proof}\ 
+        \begin{itemize}
+            \item[(i) $\Rightarrow$ (ii)] Como $U\in \cc{T}$, entonces $U\in \cc{N}_x$\ \ $\forall x \in U$. Por tanto, $\forall x \in U,$\ \ $\exists V_x\in \beta_x$ con $V_x\subset U$.
+            \item[(ii) $\Rightarrow$ (i)] Por la hipótesis tenemos que $U\in \cc{N}_x$\ \ $\forall x \in U$ por lo que $U\in \cc{T}$ (por la Proposición \ref{proposicion1_11})
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{prop}
+    Sea $(X,\cc{T})$ un e.t. y $\beta_x$ una b.d.e de $x$\ \ $\forall x \in X$. Entonces:
+    \begin{enumerate}
+        \item[\objetivo{V1}] $\beta_x\neq \emptyset$.
+        \item[\objetivo{V2}] Si $V\in \beta_x$, entonces $x\in V$. %(por \apuntar{N2})
+        \item[\objetivo{V3}] Si $V_1, V_2\in \beta_x$, entonces $\exists V_3 \in \beta_x$ con $V_3 \subset V_1 \cap V_2$. (En general, la intersección de dos abiertos básicos no tiene por qué ser abierto básico pero sí contener a uno).
+        \item[\objetivo{V4}] Si $V\in \beta_x$, entonces $\exists V'\in \beta_x$ con $V'\subset V$ tal que $\forall y\in V'$\ \ $\exists V_y\in \beta_y$ con $V_y\subset V$.
+    \end{enumerate}
+
+    \begin{center}
+        \begin{tikzpicture}
+            \centering
+            
+            \def\radius{1.75}
+            \def\incolor{gray!20}
+    
+            % Desactiva los caracteres conflictivos
+            \shorthandoff{>} % Para poner puntas de flecha
+    
+            \filldraw[dashed, fill=\incolor, thick] (0,0) circle (\radius) node[above, yshift=\radius cm, xshift=0.6cm] {$V$};
+            % \filldraw (0,0) circle (1.5pt)  node[below] {$x$};
+
+            \def\radius{0.4}
+            \draw[dashed, thick] (-0.6,0.6) circle (\radius) node[above, yshift=0.3cm]{$V_y$};
+            \filldraw (-0.6,0.6) circle (1.5pt)  node[below] {$y$};
+
+            \def\radius{1.1}
+            \draw[dashed, thick] (-0.3,-0.3) circle (\radius) node[above, yshift=\radius cm, xshift=0.6cm] {$V'$};
+            \filldraw (-0.3,-0.3) circle (1.5pt)  node[below] {$x$};
+
+        \end{tikzpicture}
+    \end{center}
+    
+    \begin{proof}\
+        \begin{enumerate}
+            \item[\apuntar{V4}] $V\in \beta_x\subset \cc{N}_x$, entonces, por \apuntar{N5} $\exists N'\in \cc{N}_x$ con $N'\subset V$ tal que $V \in \cc{N}_y$\ \ $\forall y \in N'$. Como $\beta_x$ es b.d.e, $\exists V'\in \beta_x$ con $V'\subset N'\subset V$.\\
+            
+            Sea $y\in V'\subset N'\Rightarrow V\in \cc{N}_y$. Como $\beta_y$ es b.d.e, $\exists V_y \in \beta_y$ con $V_y \subset V$.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{prop}
+    Sea $X \neq \emptyset$ un conjunto y supongamos que $\forall x \in X$ tenemos una familia $\beta_x \subset \cc{P}(X)$ cumpliendo \apuntar{V1}, \dots, \apuntar{V4}. Entonces existe una única topología $\cc{T}$ en $X$ tal que $\beta_x$ es b.d.e de $x$ en $(X,\cc{T})$\ \ $\forall x \in X$.\\
+
+    Además, $\cc{T}$ es la única topología con $\cc{N}_x=\{N\subset X : \exists V=V_x \in \beta_x\text{ con }V_x\subset N\}$\ \ $\forall x \in X$.
+
+    \begin{proof}
+        Tengo que comprobar que $\cc{N}_x$ cumplen \apuntar{N1},\dots, \apuntar{N5} usando que $\beta_x$ cumplen \apuntar{V1}, \dots, \apuntar{V4}. La demostración se deja propuesta como ejercicio para el lector. % TODO
+    \end{proof}
+\end{prop}
+
+\begin{ejercicio}
+    Sean $(X, \cc{T})$ y $(X, \cc{T}')$ espacios topológicos y $\beta_x$ b.d.e de $x$ en $(X,\cc{T})$\ \ $\forall x \in X$. Si $V$ es entorno de $x$ en $\cc{T}'$\ \ $\forall V \in \beta_x$, entonces $\cc{T} \leq \cc{T}'$.
+    \endsquare
+\end{ejercicio}
+
+\section{Puntos adherentes. Clausura}
+
+\begin{definicion}
+    Sean $(X, \cc{T})$ un e.t., $A\subset X$, $x\in X$. Diremos que $x$ es \textbf{adherente} de $A$ si $A\cap N\neq\emptyset$\ \ $\forall N \in \cc{N}_x$, es decir, si cada entorno del punto interseca al conjunto. Esto no implica que $x\in A$. Podemos distinguir dos tipos:
+    \begin{itemize}
+        \item Decimos que un punto adherente $x$ es de \textbf{acumulación} de $A$ si $A\cap(N\setminus\{x\})\neq \emptyset$\ \ $\forall N \in \cc{N}_x$ (Esto no implica que $x\in A$).
+        \item Decimos que un punto adherente $x$ es \textbf{aislado} de $A$ si existe un entorno $N\in \cc{N}_x$ tal que $A\cap N=\{x\}$ (Esto sí implica que $x\in A$).
+    \end{itemize}
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t., $A\subset X, x \in X$. Equivalen:
+    \begin{enumerate}
+        \item[(i)] $x$ es adherente a $A$.
+        \item[(ii)] $A\cap U \neq \emptyset$\ \ $\forall U \in \cc{T}$ con $x\in U$.
+        \item[(iii)] $A \cap B \neq \emptyset \ \ \forall B \in \cc{B}$ con $x\in B$, donde $\cc{B}$ es base de $\cc{T}$.
+        \item[(iv)] $A\cap V \neq \emptyset$\ \ $\forall V \in \beta_x$ con $\beta_x$ base de entornos de $x$.  
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{itemize}
+            \item[(iii) $\Rightarrow$ (iv)] Sea $V\in \beta_x\Rightarrow \exists U \in \cc{T}$ con $x\in U \subset V$. Como $\cc{B}$ es base de $\cc{T}$, entonces $\exists B\in \cc{B}$ con $x\in B\subset U \subset V$. Por hipótesis, $B\cap A \neq \emptyset$, por lo que $V\cap A \neq \emptyset$
+            \item[(iv)$\Rightarrow$(i)] Sea $N \in \cc{N}_x$. Como $\beta_x$ es base de entornos de $x$, entonces $\exists V \in \beta_x$ con $V\subset N$. Por hipótesis, $A\cap V\neq \emptyset \Rightarrow A\cap N \neq \emptyset$ por lo que $x$ es adherente a A.
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{observacion}
+    Los puntos de acumulación y los puntos aislados admiten una caracterización análoga. %TODO
+    \endsquare
+\end{observacion}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$, $A\subset X$. Se define la \textbf{adherencia} ( \textbf{clausura} o \textbf{cierre}) de $A$ como $\overline{A}=cl(A)=\{x\in X : x \text{ es adherente de } A\}$.
+    \endsquare
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $\overline{\emptyset} = \emptyset$.
+        \item $A\subset \overline{A}$. Para verlo puedo tomar $x\in A, N  \in \cc{N}_x$, entonces $x\in N\Rightarrow x \in N\cap A \neq \emptyset$ por lo que $x\in \overline{A}$.
+        \item $\overline{X} = X$.
+        \item Sea $(X,d)$ e.m. y tomamos $A\subset X, x \in X$. Entonces $x\in \overline{A}$ si $B(x,\veps)\cap A \neq \emptyset$\ \ $\forall \veps >0$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{ejemplo} En $(\bb{R}, \cc{T}_u)$
+    \begin{itemize}
+        \item $A=(0,1)\Rightarrow \overline{A}=[0,1]$ y todos los puntos son de acumulación.
+        \item $A=(0,1)\cup \{2\}\Rightarrow \overline{A} = [0,1]\cup\{2\}$. Además $x$ es de acumulación $\forall x \in [0,1]$ y $x=2$ es aislado (ya que puedo considerar $N=\left(\frac{3}{2}, \frac{5}{2}\right)\in \cc{N}_2$ y $N\cap A =\{2\}$).
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t y $A\subset X$. Entonces:
+    \begin{enumerate}
+        \item[(i)] $\overline{A}\in \cc{C}_{\cc{T}}$.
+        \item[(ii)] Si $C\in \cc{C}_{\cc{T}}$ y $A\subset C$, entonces $\overline{A}\subset C$, es decir, la adherencia es el cerrado más pequeño que contiene a $A$. 
+        \item[(iii)] $A=\overline{A}\sii A \in \cc{C}_{\cc{T}}$ .
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] Supongamos que $\overline{A}=X$. Entonces $\overline{A}\in \cc{C}_{\cc{T}}$. Supongamos ahora el caso $\overline{A}\neq X\Rightarrow X\setminus \overline{A} \neq \emptyset$. Tendré que ver si $X\setminus \overline{A}\in \cc{T}$. Para ello tomo $x \in X\setminus \overline{A}$ y como $x\notin \overline{A}$, entonces $\exists U \in \cc{T}$ con $x\in U$, $U\cap A=\emptyset$, luego $U\cap \overline{A}=\emptyset$. Esto quiere decir que $x \in U\in X\setminus \overline{A}$ y entonces $X\setminus \overline{A} \in \cc{N}_x$\ \ $\forall x \in X\setminus \overline{A}$ por lo que $X\setminus \overline{A}\in \cc{T}$
+            \item[(ii)] (Por reducción al absurdo) Supongamos $\overline{A}\cap (X\setminus C) \neq \emptyset$ y considero $x \in \overline{A}\cap (X\setminus C)$, entonces, como $(X\setminus C) \in \cc{T}$ tengo $x\in (X\setminus C) \in \cc{T}$ y como $x\in \overline{A}$, entonces $(X\setminus C)\cap A \neq \emptyset$, pero como teníamos que $A\subset C$ llegamos a contradicción
+            \item[(iii)]
+            \begin{itemize}
+                \item[$\Rightarrow$)] $A=\overline{A} \overset{(i)}{\Rightarrow} A\in \cc{C}_{\cc{T}}$.
+                \item[$\Leftarrow$)] Tengo que $A\in \cc{C}_{\cc{T}}$ y $A\subset A$ (trivialmente) $\overset{(ii)}{\Rightarrow} \overline{A}\subset A$ y como $A\subset \overline{A}$ (por lo visto anteriormente), se da la doble inclusión y tenemos que $A=\overline{A}$.
+            \end{itemize} 
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}(Ejercicio 23 de la Relación 1)
+    \begin{enumerate}[label=\alph*)]
+        \item $(X, \cc{T}_t)$, $A\subset X$, $\#A \geq 2 \Rightarrow \overline{A} = X$ ya que $X\cap A = A \neq \emptyset$\ \ $\forall x \in X$.
+        \item $(X, \cc{T}_{disc})$, $A\subset X \Rightarrow \overline{A} = A$ ya que $A\in \cc{C}_{\cc{T}}$\ \ $\forall A \subset X$. Además, todos los puntos son aislados ya que $\forall x \in \overline{A}$\ \ $\exists \{x\}\in \cc{N}_x$, $A\cap \{x\} = \{x\}$.
+        \item $(X, \cc{T}_{CF})$, $A\subset X$ infinito, entonces $\overline{A} = A$ (ya que al ser $A$ finito es cerrado). Además, todos los puntos serán aislados, ya que $\forall a \in A $ puedo considerar $U=(X\setminus A)\cup \{a\}\in \cc{N}_a$ y $U\cap A = \{a\}$.
+        \item $(\bb{R}, \cc{T}_S)$ (una base de $\cc{T}_S$ es $\{[x, x+\veps ) : x \in \bb{R}, \veps>0\}$).
+        
+        $A=(0,1] \Rightarrow \overline{A} = [0,1]$. Además $x$ es de acumulación $\forall x \in[0,1)$ y $x=1$ es aislado.
+
+        $A=(0,1) \Rightarrow \overline{A} = [0,1)$ (ya que puedo considerar $N=[1,2)\in \cc{N}_1$ y $N\cap A = \emptyset$ luego $1\notin \overline{A}$).
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(\bb{R}^n , \cc{T}_u)$, $\overline{B(x,r)} = \overline{B}(x,r)$. Esto no es cierto en todo espacio métrico.
+        \item $(\bb{R}, \cc{T}_u)$, $\overline{(a,b)} = [a,b] = \overline{(a,b]} = \overline{[a,b)}$. $\overline{\bb{Q}} = \bb{R} = \overline{\bb{R}\setminus \bb{Q}}$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t., $A\subset X$, $A$ se dice \textbf{denso} si $\overline{A} = X$. El espacio $(X,\cc{T})$ se dice \textbf{separable} si $\exists A \subset X$ denso y numerable.
+    \endsquare
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(\bb{R}^n, \cc{T}_u)$ es separable $\overline{\bb{Q}}=\bb{R}^n$.
+        \item $A\subset X$ denso $\sii A\cap B\neq \emptyset$\ \ $\forall B \in \cc{B}$ con $\cc{B}$ base de $\cc{T}$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t., $A,B\subset X$. Entonces:
+    \begin{enumerate}
+        \item[(i)] $\overline{\overline{A}} = \overline{A}$.
+        \item[(ii)] Si $A\subset B$, entonces $\overline{A}\subset \overline{B}$.
+        \item[(iii)] $\overline{A\cup B} = \overline{A}\cup \overline{B}$.
+        \item[(iv)] $\overline{A\cap B} \subset \overline{A}\cap \overline{B}$ (la otra inclusión no se verifica en general, por ejemplo, en $(\bb{R}, \cc{T}_u)$, los conjuntos $A=(0,1)$, $B=(1,2)$) 
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] $\overline{A}\in \cc{C}_{\cc{T}}$ luego $\overline{\overline{A}} = \overline{A}$.
+            \item[(ii)] $A\subset B \subset \overline{B}\in \cc{C}_{\cc{T}}\Rightarrow \overline{A}\subset \overline{B}$.
+            \item[(iii)] 
+            \begin{itemize}
+                \item[$\subset$)] $A\cup B \subset \overline{A}\cup \overline{B}\in \cc{C}_{\cc{T}}\Rightarrow \overline{A\cup B}\subset \overline{A}\cup \overline{B}$.
+                \item[$\supset$)]\ \\
+                \vspace{-2cm}
+                
+                \begin{gather*}
+                    \left.
+                    \begin{array}{c}
+                        A\subset A\cup B \subset \overline{A\cup B}\in \cc{C}_{\cc{T}} \Rightarrow \overline{A}\subset\overline{A\cup B} \\
+                        B\subset A\cup B \subset \overline{A\cup B}\in \cc{C}_{\cc{T}} \Rightarrow \overline{B}\subset\overline{A\cup B}
+                    \end{array}\right\} \Rightarrow \overline{A}\cup \overline{B}\subset \overline{A\cup B} \hspace*{5cm}
+                \end{gather*}
+
+            \end{itemize}
+            \item[(iv)]\ \\
+            \vspace{-2cm}
+
+            \begin{gather*}
+                \left.
+                \begin{array}{c}
+                    A\cap B \subset A \subset \overline{A}\in \cc{C}_{\cc{T}}\Rightarrow \overline{A\cap B}\subset \overline{A} \\
+                    A\cap B \subset B \subset \overline{B}\in \cc{C}_{\cc{T}}\Rightarrow \overline{A\cap B}\subset \overline{B}
+                \end{array}\right\} \Rightarrow \overline{A\cap B}\subset \overline{A}\cap \overline{B} \hspace*{5cm}
+            \end{gather*}
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\section{Interior}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t, $A\subset X$, $x\in X$ se dice \textbf{interior} de $A$ si $A\in \cc{N}_x$. Denotamos $A^\circ=int(A)=\{x\in A : x \text{ es interior de }A\}$ y lo llamamos \textbf{interior} de $A$.
+    \endsquare 
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $X^\circ = X$, $\emptyset^\circ = \emptyset$.
+        \item $(X, \cc{T}_d)$, $x \in A^\circ \sii \exists \veps >0 $ tal que $B(x, \veps)\subset A$.
+        \item $(\bb{R}, \cc{T}_u)$, $A=(0,1)$, $B=[0,1)\cup \{2\} \Rightarrow A^\circ=A$, $B^\circ=A$
+    \end{itemize}
+\end{ejemplo}
+
+\begin{propiedades}$(X, \cc{T})$ un e.t, $A\subset X$. Entonces:
+    \begin{enumerate}
+        \item[(i)] $A^\circ \subset A$ y $A^\circ \in \cc{T}$.
+        \item[(ii)] Si $U \subset \cc{T}$ y $U \subset A$, entonces $U \subset A^\circ$ ($A^\circ$ es el mayor abierto contenido en $A$).
+        \item[(iii)] $A\in \cc{T} \sii A = A^\circ$. 
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{itemize}
+            \item[(i)] $A^\circ\subset A$ trivial porque $A \in \cc{N}_x$\ \ $\forall x \in A^\circ$. $x\in A^\circ$, tendremos que ver que $A^\circ\in \cc{N}_x$. Sabemos que $A\in \cc{N}_x \Rightarrow \exists U \in \cc{T}$ con $x\in U$, $U\subset A$. TEndremos que ver entonces si $U\subset A^\circ$. Como $U\in \cc{T}$, entonces $U\in \cc{N}_y$\ \ $\forall y \in U$ y como $U\subset A$, entonces $A\in \cc{N}_y$\ \ $\forall y \in U$ luego tenemos que $U \in A^\circ$
+            \item[(ii)] $U \in \cc{T}$, $U\subset A$ y podemos comprobar que $U\subset \interior{A}$ (Igual que antes).
+            \item[(iii)] \begin{itemize}
+                \item[$\Rightarrow$)] $A\in \cc{T}$, $A\subset A$, luego por (ii) $A\subset \interior{A}$ y por (i) $A=\interior{A}$.
+                \item[$\Leftarrow$)] Por (i), $A=\interior{A}\in \cc{T}$. 
+            \end{itemize}  
+        \end{itemize}
+    \end{proof}
+    
+\end{propiedades}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(X, \cc{T}_t)$, $A\subset X$, $A\neq X\Rightarrow \interior{A}=\emptyset$.
+        \item $(X, \cc{T}_{disc})$, $A\subset X\Rightarrow \interior{A}=A$.
+        \item $(X, \cc{T}_{x_0})$, $A\subset X \Rightarrow A^\circ = \left\{\begin{array}{ccc}
+            A & \text{si} & x_0 \in A\\
+            \emptyset & \text{si} & x_0 \notin A
+        \end{array}\right.$
+
+        \item $(\bb{R}^n, \cc{T}_u)$, $(\overline{B}(x,r))^\circ = B(x,r)$\ \ $\forall x \in \bb{R}^n$, $r>0$. Esto no es cierto en cualquier espacio métrico.
+        \item $(\bb{R}, \cc{T}_u)$, $[a,b]^\circ = (a,b) = [a,b)^\circ = (a,b]^\circ = (a,b)^\circ$.
+        \item $(\bb{R}, \cc{T}_u)$, $\bb{Q}^\circ = \emptyset = (\bb{R}\setminus \bb{Q})^\circ$.
+        \item $(\bb{R}, \cc{T}_{Sorgenfrey})$, $[0,1)^\circ = [0,1) = [0,1]^\circ$, $(0,1]^\circ = (0,1)$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop} 
+    Sea $(X, \cc{T})$, $A\subset X$. Se tienen:
+    \begin{enumerate}
+        \item[(i)] $X\setminus \overline{A} = (X\setminus A)^\circ$.
+        \item[(ii)] $X\setminus A^\circ = \overline{X\setminus A}$. 
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] \begin{itemize}
+                \item[$\subset$)] $A\subset \overline{A}\Rightarrow X \setminus \overline{A} \subset X \setminus A\Rightarrow X \setminus \overline{A}\subset (X\setminus A)^\circ$.
+                \item[$\supset$)]  Sabemos que $(X\setminus A)^\circ \subset X\setminus A \Rightarrow A \subset X \setminus (X\setminus A)^\circ$ y como $X \setminus (X\setminus A)^\circ\in \cc{C}_{\cc{T}}\Rightarrow \overline{A}\subset X\setminus (X\setminus A)^\circ \Rightarrow (X\setminus A)^\circ \subset X\setminus \overline{A}$.
+            \end{itemize}
+            \item[(ii)] $A=X\setminus A \Rightarrow X \setminus \overline{(X\setminus A)}= A^\circ \Rightarrow \overline{A\setminus A}=X\setminus A^\circ$.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$, $A\subset X$, se llama \textbf{exterior} de $A$ al conjunto $A^e = ext(A) = (X\setminus A)^\circ = X \setminus \overline{A}$.
+    \endsquare
+\end{definicion}
+
+\section{Frontera}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t., $A\subset X$, $x\in X$. Se dice que $x$ es \textbf{frontera} de $A$ si $x\in \overline{A}\cap \overline{X\setminus A}$. Se denomina \textbf{frontera} de A al conjunto $\partial A = fr(A) =\overline{A}\cap \overline{X\setminus A} = \{x\in X : x\text{ es frontera de }A\}$.
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t, $A\subset X$. Se tienen:
+    \begin{enumerate}
+        \item[(i)] $\partial A = \overline{A}\setminus A^\circ$. Esto se ve sabiendo que $\partial A = \overline{A}\cap (\overline{X\setminus A}) = \overline{A}\setminus (X\setminus A^\circ) = \overline{A}\setminus A^\circ$.
+        \item[(ii)] $\partial A \in \cc{C}_{\cc{T}}$ (ya que es intersección de 2 conjuntos cerrados).
+        \item[(iii)] $\partial A = \partial (X\setminus A)$. Esto es porque $\partial (X\setminus A) = \overline{X\setminus A}\cap \overline{A}$.
+        \item[(iv)] $\overline{A} = A^\circ \sqcup \partial A$ (unión disjunta). Esto es porque $\overline{A} = A^\circ\sqcup (\overline{A}\setminus A^\circ)$.
+        \item[(v)] $A^\circ = A \setminus \partial A$.
+        \item[(vi)] $X = A^\circ\sqcup \partial A \sqcup A^e$.
+        \item[(vii)] $A \in \cc{C}_{\cc{T}} \sii \partial A \subset A$. (trivial con definiciones) %TODO
+        \item[(viii)] $A \in \cc{T} \sii \partial A = \emptyset$.
+        \item[(ix)] $A\in (\cc{T}\cap \cc{C}_{\cc{T}}) \sii \partial A = \emptyset$.
+        \item[(x)] $\partial (A\cup B) \subset (\partial A \cup \partial B)$
+    \end{enumerate}
+    \endsquare
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(X, \cc{T}_t)$, $A\subset X \Rightarrow \partial A = \left\{
+        \begin{array}{ccc}
+            \emptyset & \text{ si } & A \in \{X, \emptyset\}\\
+            X & \text{si} & A\notin \{X, \emptyset\}
+        \end{array}
+        \right.$
+        \item $(X, \cc{T}_{disc})$, $A\subset X \Rightarrow \partial A = \emptyset$.
+        \item $(X, \cc{T}_{x_0})$, $A\subset X \Rightarrow \partial A = \left\{
+        \begin{array}{ccc}
+            X\setminus A & \text{ si } & x_0\in A\\
+            A & \text{si} & x_0 \notin A
+        \end{array}
+        \right.$
+        \item $(\bb{R}^n, \cc{T}_u)$, $\partial B(x, r) = \partial \overline{B}(x,r) = S(x,r)$.
+        \item $(\bb{R}, \cc{T}_u)$, $\partial [a,b] = \{a,b\} = \partial (a,b) = \partial [a,b) = \partial (a,b]$, $\partial \bb{Q} = \bb{R} = \partial(\bb{R}\setminus \bb{Q})$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\section{Topología inducida. Subespacio topológico}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t. y sea $A\subset X$, $A\neq \emptyset$ un conjunto. Entonces el conjunto
+    \begin{gather*}
+        \cc{T}_A = \cc{T}_{|A}=\{U\cap A : U \in \cc{T}\}\subset \cc{P}(A)
+    \end{gather*}
+    es una topología en $A$ por lo que $(A, \cc{T}_A)$ es un e.t.
+
+    \begin{proof}
+        Para demostrarlo tendremos que ver que $\cc{T}_A$ es una topología, es decir que verifica las propiedades:
+        \begin{enumerate}
+            \item[\apuntar{A1}] Sabemos que $\emptyset\in \cc{T}$ y como $\emptyset\cap A = \emptyset$ entonces $\emptyset \in \cc{T}_A$. Análogamente, $X\in \cc{T}$ y $X\cap A=A$ por lo que $A\in \cc{T}_A$.
+            \item[\apuntar{A2}] Sea $\{O_i\}_{i\in I}\subset \cc{T}_A$. Tendremos que comprobar que $\bigcup\limits_{i\in I}O_i \in \cc{T}_A$. Para ello sabemos que para cada $i\in I$ se verifica que $O_i = U_i\cap A$ donde $U_i \in \cc{T}$. Tenemos entonces 
+            \begin{gather*}
+                \bigcup\limits_{i\in I}O_i = \bigcup\limits_{i\in I} (U_i \cap A) = (\overbrace{\bigcup\limits_{i\in I} U_i}^{\in \cc{T}}) \cap A \in \cc{T}_A 
+            \end{gather*}
+            \item[\apuntar{A3}] Sean $O_1, O_2 \in \cc{T}_A$, tendremos que ver que $O_1 \cap O_2 \in \cc{T}_A$. Para ello sabemos que 
+            \begin{gather*}
+                O_1 = U_1 \cap A \hspace{2cm} O_2 = U_2 \cap A \hspace{2cm} U_1, U_2 \in \cc{T}
+            \end{gather*} 
+            Por tanto, $O_1 \cap O_2 = (U_1 \cap A) \cap (U_2 \cap A) = (U_1 \cap U_2)\in A \in \cc{T}_A$ ya que $(U_1\cap U_2)\in \cc{T}$.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{definicion}
+    Diremos que $\cc{T}_A$ es la \textbf{topología inducida} por $\cc{T}$ sobre $A$, y que $(A, \cc{T}_A)$ es un \textbf{subespacio topológico} de $(X, \cc{T})$. De un conjunto $O\in \cc{T}_A$ diremos que es \textbf{abierto} en $A$.
+    \endsquare
+\end{definicion}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item Sea $O\subset A$, entonces $O \in \cc{T}_A \sii \exists U \in \cc{T}$ con $O=U\cap A$.
+        \item Sea $O \subset A$, entonces $O\in \cc{T} \Rightarrow O \in \cc{T}_A$ (ya que $O=O\cap A$). El recíproco no es cierto ya que no todo abierto de un subespacio tiene que ser abierto en el espacio. Por ejemplo, en $(\bb{R}, \cc{T}_u)$ consideramos $A=[0,3)$, entonces $[0,1)\in \cc{T}_A$ pero $[0,1)\notin \cc{T}_u$ (podemos considerar $[0,1) = (-1,1)\cap A$).
+    \end{itemize}
+    \endsquare
+\end{observacion}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t., $\emptyset \neq A \subset X$, $a\in A$. Se tienen:
+    \begin{enumerate}
+        \item[(i)] $C\subset A$ es cerrado en $A$ ($C\in \cc{C}_{\cc{T}_A}$) $\sii \exists C' \in \cc{C}_{\cc{T}}$ con $C=C'\cap A$.
+        \item[(ii)]  $N\subset A$ es entorno de $a$ en $A$ ($N \in \cc{N}_a^{\cc{T}_A}$) $\sii \exists N' \in \cc{N}_a^{\cc{T}}$ con $N=N'\cap A$.
+        \item[(iii)] Si $\cc{B}$ es base de $\cc{T}$, entonces $\cc{B}_A = \{B\cap A : B \in \cc{B}\}$ es base de $\cc{T}_A$.
+        \item[(iv)] Si $\cc{B}_a$ es b.d.e. de $a$ en $(X, \cc{T})$, entonces $(\cc{B}_A)_a = \{V\cap A : V\in \cc{B}_a\}$ es b.d.e. de $a$ en $(A, \cc{T}_A)$.
+        \item[(v)] $E\subset A \Rightarrow \overline{E}^A = \overline{E}\cap A$.
+        \item[(vi)] $E\subset A \Rightarrow E^{\circ A} \supset E^\circ \cap A$. La otra inclusión no es cierta en general. Por ejemplo, en $(\bb{R}, \cc{T}_u)$ consideramos $A=[0,2)$ y $E=[0,1)$. Entonces tenemos que $E^{\circ A} = E$ pero $E^\circ \cap A = (0,1)$.
+        \item[(vii)] $E\subset A \Rightarrow fr_A(E)\subset fr(E)\cap A$.  
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] 
+            \begin{itemize}
+                \item[$\Rightarrow$)] $C\subset A$ cerrado en $A \Rightarrow A\setminus C \in \cc{T}_A \Rightarrow \exists U\in \cc{T}$ con $A\setminus C = U\cap A \Rightarrow C = A \setminus (A \cap A) = A\cap (X\setminus U)$, donde $X \setminus U$ es cerrado por lo que puedo tomar $C'=X\setminus U\in \cc{C}_{\cc{T}}$ y se tiene lo buscado.
+                \item[$\Leftarrow$)] Sea $C' \in \cc{C}_{\cc{T}}$. Tendremos que ver que $C=C'\cap A$ es cerrado en $A$, lo cual equivale a ver que $A\setminus C\in \cc{T}_A$. Tenemos que $A\setminus C = A\setminus (C'\cap A) = A \cap (X\setminus C')\in \cc{T}_A$, ya que $X\setminus C'$ es abierto en $\cc{T}$.
+            \end{itemize}
+            \item[(ii)]
+            \begin{itemize}
+                \item[$\Rightarrow$)] Sea $N$ un entorno de $a$ en $A$. Entonces existe un $U\in \cc{T}_A$ con $a\in U\subset N$ lo cual implica que $\exists U'\in \cc{T}$ con $U=U'\cap A$. Tomamos $N'=U'\cup N \in \cc{N}_a$. Tenemos que $N'\cap A = (U'\cup N)\cap A = (U'\cap A) \cup (N\cap A) = U$.
+            \end{itemize}
+            \item[(iii)] Para ver que se verifica tendremos que probar la doble inclusión: 
+            \begin{itemize}
+                \item[$\supset$)] $\cc{B}_A = \{B\cap A : B\in \cc{B}\}\subset \cc{T}_A$ y se verifica.
+                \item[$\subset$)] Sea $O\in \cc{T}A$, $x\in O$. Entonces $\exists U \in \cc{T}$ con $x\in O = U\cap A$. Como $\cc{B}$ es base de $\cc{T}$, $\exists B \in \cc{B}$ tal que $x\in B \subset U \Rightarrow x \in (B\cap A)\subset (U\cap A)=O$.
+            \end{itemize}
+            \item[(iv)] Análogo a (iii). %TODO
+            \item[(v)] De nuevo tendremos que ver la doble inclusión:
+            \begin{itemize}
+                \item[$\subset$)] $E\subset (\overline{E}\cap A) \in \cc{C}_{\cc{T}_A} \Rightarrow \overline{E}^A \subset (\overline{E}\cap A)$, ya que $\overline{E}\in \cc{C}_{\cc{T}}$.
+                \item[$\supset$)] Sea $a \in \overline{E}\cap A$ y $N$ un entorno de $a$ en $A$. Tendremos que ver si $N\cap N = \emptyset$. Para ello sabemos que $\exists N \in \cc{N}_a$ con $N=N'\cap A$ por lo que $N\cap E = N'\cap A \cap E = N' \cap E \neq \emptyset\Rightarrow a \in \overline{E}^A$.
+            \end{itemize} 
+            %TODO (vi) Y (vii)
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(X, \cc{T}_t)$, $\emptyset \neq A \subset X$, $\cc{T}_{t_A} = \{\emptyset, A\} = \cc{T}_t$.
+        \item $(X, \cc{T}_{disc})$, $A\subset X$, $\cc{T}_{disc_A}=\cc{T}_{disc}$.
+        \item $(\bb{R}, \cc{T}_u)$, $\cc{T}_{u_\bb{Z}} = \cc{T}_{disc}$, $\{p\} = (p-\frac{1}{2}, p+\frac{1}{2})\cap \bb{Z}$.
+        $\cc{T}_{u_\bb{N}} = \cc{T}_{disc}$.
+        \item Ejercicio $\emptyset \neq A' \subset A \subset X$, $(\cc{T}_A)_{A'} = \cc{T}_{A'}$.
+        \item $(X, \cc{T}_d)$, $\emptyset\neq A \subset X \Rightarrow d_A: A\times A \to [0,+\infty)$ tal que $(x,y)\mapsto d_A(x,y) = d(x,y)$.
+        Entonces $d_A$ es una distancia en $A$ y $(A, \cc{T}_{d_A})$ es un espacio topológico y $\cc{T}_{d_A} = (\cc{T}_d)_A$. Todo subespacio de un e.t. metrizable es metrizable.
+        \item $(X, \cc{T}_d)$, $\emptyset \neq A \subset X$ finito $\Rightarrow (\cc{T}_d)_A = \cc{T}_{disc}$ (ya que $\exists \veps >0 : d(x,y)>\veps$\ \ $\forall x \neq y$ y tomando $B(x, \veps)\cap A =\{x\}$ se verifica).
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t., $A\subset X$ con $A\neq \emptyset$, decimos que $A$ es \textbf{discreto} si $\cc{T}_A$ es la topología discreta en $A$.
+    \endsquare
+\end{definicion}
+
+\begin{definicion}
+    Una propiedad topológica se dice \textbf{hereditaria} si al cumplirla un e.t $(X, \cc{T})$ también la cumplen todos su subespacios, es decir, si $(X, \cc{T})$ cumple $P \Rightarrow (A, \cc{T}_A)$ cumple $P$\ \ $\forall A \subset X, A\neq \emptyset$.
+    \endsquare
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item ``Ser metrizable'' es una propiedad hereditaria.
+        \item ``Tener la topología discreta'' es hereditario (trivialmente).
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\section{Axiomas de separación}
+
+\begin{definicion}
+    Un e.t. $(X, \cc{T})$ se dice:
+    \begin{itemize}
+        \item \objetivo{T1} (o de \textbf{Fréchet}, o que satisface el \textbf{primer axioma de separación}) si $\forall x,y \in X$ con $x\neq y$, $\exists V \in \cc{N}_x$, $W\in \cc{N}_y$ con $y\notin V$, $x\notin W$.
+        
+        \begin{center}
+            \begin{tikzpicture}
+                \centering
+    
+                \def\radius{1}
+                \def\incolor{gray!20}
+    
+                % Desactiva los caracteres conflictivos
+                \shorthandoff{>} % Para poner puntas de flecha
+    
+                % Background
+                \fill[fill=\incolor] (-1,0) circle (\radius);
+                \fill[fill=\incolor] (0.5,0) circle (\radius);
+    
+                \draw[dashed, thick] (-1,0) circle (\radius);
+                \filldraw (-1,0) circle (1.5pt)  node[below] {$x$};
+                \draw[dashed, thick] (0.5,0) circle (\radius);
+                \filldraw (0.5,0) circle (1.5pt)  node[below] {$y$};
+    
+            \end{tikzpicture}
+        \end{center}
+
+        Esta definición se podría hacer análogamente con abiertos, abiertos básicos o entornos básicos.
+
+        \item \objetivo{T2} (o de \textbf{Haussforff}, o que satisface el \textbf{segundo axioma de separación}) si $\forall x,y \in X$ con $x\neq y$, $\exists V \in \cc{N}_x$, $W\in \cc{N}_y$ tal que $V\cap W = \emptyset$.
+        
+        \begin{center}
+            \begin{tikzpicture}
+                \centering
+    
+                \def\radius{1}
+                \def\incolor{gray!20}
+    
+                % Desactiva los caracteres conflictivos
+                \shorthandoff{>} % Para poner puntas de flecha
+    
+                % Background
+                \fill[fill=\incolor] (-1,0) circle (\radius);
+                \fill[fill=\incolor] (1.5,0) circle (\radius);
+    
+                \draw[dashed, thick] (-1,0) circle (\radius);
+                \filldraw (-1,0) circle (1.5pt)  node[below] {$x$};
+                \draw[dashed, thick] (1.5,0) circle (\radius);
+                \filldraw (1.5,0) circle (1.5pt)  node[below] {$y$};
+    
+            \end{tikzpicture}
+        \end{center}
+
+        De nuevo esta definición se podría hacer con abiertos, abiertos básicos o entornos básicos.
+    \end{itemize}
+    \endsquare
+\end{definicion}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item T2 $\Rightarrow$ T1. Esto es claro ya que si un e.t $(X, \cc{T})$ es T2, entonces para $x,y\in X$, $x\neq y$ podemos encontrar $V \in \cc{N}_x$, $W\in \cc{N}_y$ tal que $V\cap W = \emptyset$. En particular tenemos que $y\notin V$ y $x\notin W$ y por tanto es T1. El recíproco no es cierto (T2 es una propiedad más restrictiva que T1).
+    \end{itemize}
+    \endsquare
+\end{observacion}
+
+\begin{prop}
+    T1 y T2 son propiedades hereditarias.
+    \begin{proof}\
+        \begin{enumerate}
+            \item[T1)] Supongamos $(X, \cc{T})$ un e.t. T1 y $\emptyset \neq A \subset X$. Tendré que ver que $(X, \cc{T}_A)$ es T1. Sean $a,a'\in A$ con $a\neq a'$. Como $(X, \cc{T})$ es T1 tenemos que $\exists V \in \cc{N}_a$, $W\in \cc{N}_{a'}$, con $a \notin W$ y $a' \notin V$. Defino $V'=V\cap A \in \cc{N}_a^A$ y $W'=W\cap A \in \cc{N}_{a'}^A$ y tengo que $a \notin W'$ y $a' \notin V'$ por lo que $(X, \cc{T}_A)$ es T1.
+            
+            \item[T2)]  Supongamos $(X, \cc{T})$ un e.t. T2 y $\emptyset \neq A \subset X$. Tendré que ver que $(X, \cc{T}_A)$ es T2. Sean $a,a'\in A$ con $a\neq a'$. Como $(X, \cc{T})$ es T2 tenemos que $\exists V \in \cc{N}_a$, $W\in \cc{N}_{a'}$, con $V\cap W = \emptyset$. Defino $V'=V\cap A \in \cc{N}_a^A$ y $W'=W\cap A \in \cc{N}_{a'}^A$ y tengo que $V'\cap W' = (V\cap W)\cap A = \emptyset$ y tenemos lo buscado.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(X, \cc{T}_t)$, con $\#X>2$, no es T1 (ya que el único entorno de cualquier punto es $X$). (por ser no es ni T0, aunque este concepto no se va a trabajar en esta asignatura).
+        \item $(X, \cc{T}_{disc})$ es T2 (y por tanto T1). Para verlo puedo tomar $x\neq y$ y tengo $\{x\}\in \cc{N}_x$, $\{y\}\in \cc{N}_y$ y $\{x\}\cap \{y\}= \emptyset$.
+        \item $(X, \cc{T}_u)$ es T2 (ya se vio anteriormente) y por tanto T1.
+        \item Si $X$ es un conjunto infinito, entonces $(X, \cc{T}_{CF})$ es T1, pero no T2. Comprobémoslo:
+        \begin{enumerate}
+            \item[T1)] $x\neq y$, $x,y\in X$. Cojo $V=X \setminus \{y\}\in \cc{T}_{CF}$ y además $V\in \cc{N}_x$ con $y\notin V$. Repetimos el proceso para $x$ y llegamos a lo mismo.
+            \item[T2)] (por reducción al absurdo) Supongamos $x\neq y$ y que existen $V\in \cc{N}_x$, $W\in \cc{N}_y$ con $V\cap W=\emptyset$. Entonces $X\setminus(V\cap W) = X=(X\setminus V)\cup (X\setminus W)$ que es finito por ser unión de conjuntos finitos, pero $X$ es infinito por lo que llegamos a contradicción. 
+        \end{enumerate}
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}(Caracterización de T1)
+    Un e.t. $(X, \cc{T})$ es T1 $\sii \{x\}\in \cc{C}_{\cc{T}}$\ \ $\forall x \in X$.
+
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$)] Supongamos $(X, \cc{T})$ un e.t. T1, $x \in X$, tendré que ver que $\overline{\{x\}} = \{x\}$. Veámoslo por reducción al absurdo. Para ello, supongamos que $\exists y \in X$, $y\in \overline{\{x\}}$ y $y \neq x \Rightarrow x \in N$\ \ $\forall N \in \cc{N}_y$. Esto contradice que $(X, \cc{T})$ sea T1.
+            \item[$\Leftarrow$)] Sean $x,y\in X$ con $x\neq y$ y tomo $V=X\setminus\{y\}\in \cc{T}$ (por hipótesis, al ser complementario de cerrado). Además como $x \in V$, tenemos $V\in \cc{N}_x$ y además $y\notin V$. Repetimos este razonamiento para $y$ y tenemos que $(S, \cc{T})$ es T1. 
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{ejercicio}
+    Sea $(X, \cc{T})$ un e.t. T2 y $\{y_n\}_{n\in \bb{N}}\subset X$ una sucesión convergente, entonces tiene un único límite.
+    \endsquare
+\end{ejercicio}
+
+\section{Axiomas de numerabilidad}
+
+\begin{definicion}
+    Diremos que un e.t $(X, \cc{T})$ es 
+    \begin{itemize}
+        \item \objetivo{1AN} (o que cumple el \textbf{primer axioma de numerabilidad}) si todo punto de $x$ tiene una base de entornos numerable.
+        \item \objetivo{2AN} (o que cumple el \textbf{segundo axioma de numerabilidad}) si existe una base de $\cc{T}$ numerable.
+    \end{itemize}
+    \endsquare
+\end{definicion}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item $2AN \Rightarrow 1AN$ ya que si $\cc{B}$ es base numerable y $x\in X$ entonces $\beta_x=\{B\in \cc{B} : x\in B\}$ es una b.d.e de $x$ numerable.
+        \item Si $\{V_n\}_{n\in \bb{N}}$ es una b.d.e de $x\in X$, entonces definiendo $W_n=\bigcap\limits_{k=1}^n V_k$, tenemos que $\{W_n : n\in \bb{N}\}$ es b.d.e de $x$ y $W_1 \supset W_2 \supset W_3 \supset \dots$. Es decir, para todo espacio 1AN podemos encontrar una base de entornos numerable y encajada.
+        \item Las propiedades 1AN y 2AN son propiedades hereditarias.
+        \begin{proof}\
+            \begin{itemize}
+                \item[2AN)] Supongamos $(X, \cc{T})$ 2AN y sea $(A, \cc{T}_A)$ con $\emptyset \neq A \subset X$. Sabemos que existe $\cc{B}$ base de $\cc{T}$ numerable $\Rightarrow \cc{B}_A = \{B\cap A : B \in \cc{B}\}$ es base de $\cc{T}_A$ y numerable.
+                \item[1AN)] %TODO     
+            \end{itemize}
+        \end{proof}
+    \end{itemize}
+\end{observacion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Si $(X, \cc{T})$ es un e.t. y $\cc{T}$ es numerable, entonces $(X, \cc{T})$ es 2AN. En particular, $(X, \cc{T})$ es 2AN.
+        \item $(X, \cc{T}_{disc})$ es 1AN ya que $\{\{x\}\}$ es b.d.e de $x$ en $\cc{T}$. Si además $X$ es numerable, entonces tengo que $\cc{B}=\{\{x\}:x\in X\}$ es base de $\cc{T}$ por lo que es 2AN. (es una condición suficiente y necesaria ya que dicha base es la más fina).
+        \item $(X, \cc{T}_{CF})$, si $X$ es numerable entonces tiene una cantidad numerable de subconjuntos finitos por lo que con esta condición, $\cc{T}_{CF}$ es numerable y por tanto 2AN (luego también 1AN). Si $X$ no es nuerable, entonces no es 1AN (luego tampoco 2AN).
+        
+        \begin{proof}
+            Veamos que si $X$ no es numerable entonces no es 1AN. Hagámoslo por reducción al absurdo. Supongamos $x \in X$, $\beta_x=\{V_n\}_{n\in \bb{N}}$ b.d.e. de $x$. Entonces podemos escribir $V_n = X \setminus C_n$ con $C_n$ finito. Entonces $C=\bigcup\limits_{n\in \bb{N}}C_n$ es numerable y además $C\subset X$. Por tanto, $X\setminus C$ no es vacío y además tiene infinitos elementos por lo que puedo tomar un $y\in X\setminus C$ con $y\neq x$ y consideramos $X\setminus\{y\}$ que es abierto en $\cc{T}_{CF}$. Como $\{V_n\}_{n\in \bb{N}}$ es b.d.e. de $x$, entonces existe un $n\in \bb{N}$ con $x\in V_n\subset X\setminus \{y\}\Rightarrow \{y\}\subset C_n$ y llegammos a contradicción (ya que $V_n = X\setminus C_n$).
+        \end{proof}
+        \item si $X$ no es numerable, entonces $(X, \cc{T}_{CF})$ no es 1AN (misma demostración que el apartado anterior pero con finito en lugar de numerable) y por tanto tampoco es 2AN.
+        
+        \item $(\bb{R}^n, \cc{T}_u)$ es 2AN (y 1AN). Esto es porque $\cc{B}\{B\left(x, \frac{1}{n}\right) : n\in \bb{N}, x \in \bb{Q}^n\}$ es base de $\cc{T}_u$ y es numerable.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{ejemplo}
+    $(\bb{R}, \cc{T}_S)$ la topología de Sorgenfrey
+    \begin{itemize}
+        \item Es 1AN: $x\in \bb{R}$, $\beta_x = \{[x, x+\frac{1}{n}): n\in \bb{N}\}$ es b.d.e. de $x$.
+        \item No es 2AN: para verlo tomo $\cc{B}$ base de $\cc{T}_S$. $\forall x \in \bb{R}$, $[x, x+1)\in \cc{T}_S$ y $x\in [x, x+1)$. Como $\cc{B}$ es base, entonces $\exists B_x \in \cc{B}$ con $x \in B_x \subset [x, x+1)$ y entonces $x$ es el mínimo de $\beta_x$. Esto quiere decir que $B_x\neq B_y$ para todo $x\neq y$. Entonces la familia $\{B_x : x\in \bb{R}\}\subset \cc{B}$ no es numerable por lo que $\cc{B}$ no es numerable.
+    \end{itemize}
+\end{ejemplo}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t. 2AN y $\cc{B}$ una base de $\cc{T}$, entonces existe una base $\cc{B}'$ de $\cc{T}$ con $\cc{B}'\subset \cc{B}$ con $\cc{B}'$ numerable. Es decir, de toda base puedo extraer una base numerable.\\
+
+    Esta proposición se usa para probar que un e.t. no es 2AN (utilizando el contrarrecíproco):
+    \begin{itemize}
+        \item $(\bb{R}, \cc{T}_S)$ no es 2AN. $\cc{B}=\{[a,b):a<b\}$ es base de $\cc{T}_S$. Hagámoslo por reducción al absurdo. Si $(\bb{R}, \cc{T}_S)$ es 2AN, entonces $\exists \cc{B}'=\{[a_n, b_n): n \in \bb{N}\}$ base de $\cc{T}_S$. Entonces el conjunto $A=\{a_n : n\in \bb{N}\}$ es numerable $\Rightarrow \bb{R}\setminus A \neq \emptyset$. Sea $x \in \bb{R}\setminus A $, $x\in [x, x+1)\in \cc{T}_S \Rightarrow \exists n \in \bb{N}: x\in [a_n, b_n)\subset [x, x+1)\Rightarrow a_n=x$ y llegamos a contradicción.
+    \end{itemize}
+    \endsquare
+\end{prop}
+
+\begin{prop}
+    Si $(X, \cc{T})$ es 2AN, entonces de todo recubrimiento\footnote{Un recubimiento de un conjunto $X$ es una familia $\{U_i\}_{i\in I}$ tal que $\bigcup\limits_{i\in I}U_i = X$, es decir, es como una partición de $X$ pero cuyos elementos no tienen por qué ser disjuntos 2 a 2.} por abiertos\footnote{Un recubrimiento por abiertos de un e.t. $(X, \cc{T})$ es un recubrimiento cuyos elementos son abiertos en la topología, es decir, una familia $\{U_i\}_{i\in I}$ tal que $U_i\in \cc{T}\ \ \forall i \in I$ y $\bigcup\limits_{i\in I}U_i = X$} de $X$ se puede extraer un subrecubrimiento numerable, es decir,
+    \begin{gather*}
+        \text{si } X=\bigcup\limits_{i\in I} U_i \text{ con } U_i \in \cc{T}\ \ \forall i \in I \Rightarrow \exists J\subset I \text{ numerable tal que } X=\bigcup\limits_{j\in J}U_j.
+    \end{gather*}
+    \endsquare
+\end{prop}
+

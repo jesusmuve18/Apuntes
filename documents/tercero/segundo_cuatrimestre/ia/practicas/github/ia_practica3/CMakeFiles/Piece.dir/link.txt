@@ -1,2 +1,0 @@
-/usr/bin/ar qc lib/libPiece.a CMakeFiles/Piece.dir/src/model/Piece.cpp.o
-/usr/bin/ranlib lib/libPiece.a

@@ -1,0 +1,9 @@
+/home/jesusmuve/Escritorio/IA_practica2/CMakeFiles/obj3DLib.dir
+/home/jesusmuve/Escritorio/IA_practica2/CMakeFiles/GLUILib.dir
+/home/jesusmuve/Escritorio/IA_practica2/CMakeFiles/modelosBelkanLib.dir
+/home/jesusmuve/Escritorio/IA_practica2/CMakeFiles/comportamientosLib.dir
+/home/jesusmuve/Escritorio/IA_practica2/CMakeFiles/motorLib.dir
+/home/jesusmuve/Escritorio/IA_practica2/CMakeFiles/practica2.dir
+/home/jesusmuve/Escritorio/IA_practica2/CMakeFiles/practica2SG.dir
+/home/jesusmuve/Escritorio/IA_practica2/CMakeFiles/edit_cache.dir
+/home/jesusmuve/Escritorio/IA_practica2/CMakeFiles/rebuild_cache.dir

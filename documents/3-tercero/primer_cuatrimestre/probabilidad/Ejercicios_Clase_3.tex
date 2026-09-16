@@ -1,0 +1,57 @@
+\section{Trabajo de clase del lunes 30 de Septiembre de 2024}
+
+\textbf{Desarrollo teórico:} (Demostración de la distribución reproductiva de la distribución binomial) Sabemos que la función generatriz de momentos de una distribución binomial es $M_{x_i}(t)=(pe^t+ (1-p))^{x_i}$\ \ $\forall t \in \bb{R}, i=1,\dots,n$.
+\begin{gather*}
+    M_{\sum x_i}(t)\overset{(*)}{=}\Pi \left( p e^t + (1-p)^{x_i}\right)^{x_i}=(pe^t+(1-p))^{\sum x_i}
+\end{gather*}
+que es la función generatriz de momentos de una distribución Binomial de parámetros $\sum x_i, p$.\\
+
+Donde en (*) aplicamos que son independientes (el Teorema visto en clase en la diapositiva 36).\\
+
+\textbf{Desarrolo teórico:} (Obtención de la función generatriz de momentos de una distribución uniforme continua) 
+\begin{align*}
+    M_X(t)&=E[e^{tX}]=\int_a^b e^{tx} \dfrac{1}{b-a}dx = \dfrac{1}{b-a} \sum_a^b e^{tx} dx =\\
+    &=\left\{
+        \begin{array}{ccc}
+            \dfrac{1}{b-a}\left[\dfrac{e^{tx}}{t}\right]_a^b = \dfrac{e^{tb}-e^{ta}}{(b-a)^t}& \text{ si } & t\neq 0\\\\
+            1 & \text{ si } & t=0
+        \end{array}
+    \right.
+\end{align*} 
+
+Aunque por definición la función generatriz de momentos vale uno, dicho valor se puede obtener por continuidad (calculando los límites laterales cuando t tiende a 0 de la función anterior).\\
+
+\textbf{Desarrolo teórico:} (Comprobación de que la función de densidad de la distribución normal es función de densidad).\\
+
+Para ello tendremos que comprobar que verifica las 2 propiedades de las funciones de densidad:
+\begin{enumerate}
+    \item[(i)] $f(x)\geq0\ \ \forall x \in \bb{R}$.
+    
+    Como $f(x)=\dfrac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}\geq 0$, se verifica.
+
+    \item[(ii)] $\int_{-\infty}^{+\infty} f_xdx = 1$.
+    
+    \begin{align*}
+        \int\limits_{-\infty}^{+\infty} \dfrac{1}{\sigma \sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}dx &= \left\{
+        \begin{array}{c}
+            t=\frac{x-\mu}{\sigma}\\
+            dt=\frac{dx}{\sigma}
+        \end{array}
+        \right\} = \dfrac{1}{\sigma \sqrt{2\pi}} \int\limits_{-\infty}^{+\infty}e^{-\frac{1}{2}t^2}\sigma dt =\\&= \left\{
+            \begin{array}{c}
+                \text{Integral de Gauss}\\
+                \int\limits_{-\infty}^{+\infty}e^{-a(x+b)^2}dx = \sqrt{\frac{\pi}{a}}
+            \end{array}
+            \right\} = \dfrac{1}{\sigma \sqrt{2\pi}}\sigma \sqrt{2\pi}= 1
+    \end{align*}
+    Por lo que se verifica.
+\end{enumerate}
+
+\textbf{Desarrollo teórico:} (Prueba de que en intervalo $[\mu-\sigma, \mu +\sigma]$ se encuentra el 68.26\% de la población).
+
+\begin{align*}
+    P[\mu-\sigma < X \leq \mu + \sigma] &= P\left[\dfrac{\mu-\sigma -\mu}{\sigma }\leq Z < \dfrac{\mu+\sigma -\mu}{\sigma }\right] = P[-1<Z<1]=\\
+    &=P[Z<1]-P[Z<-1]= P[Z<1]-(1-P[Z<1])=\\
+    &=2 P[Z<1]-1 = 2 \cdot 0.8413-1 = 0.6826\\
+\end{align*}
+Esto es simplemente una tipificación de cualquier distribución normal para transformarla en una normal 0-1 (para poder usar la tabla).

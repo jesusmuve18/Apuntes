@@ -1,2 +1,0 @@
-/usr/bin/ar qc lib/libRemotePlayer.a CMakeFiles/RemotePlayer.dir/src/model/RemotePlayer.cpp.o
-/usr/bin/ranlib lib/libRemotePlayer.a

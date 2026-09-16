@@ -1,0 +1,32 @@
+\section{Trabajo de clase del lunes 4 de Noviembre de 2024}
+ 
+\begin{ejercicio}
+    Si la función de densidad del vector $X=(X_1, X_2)$ está dada por cada una de las siguientes expresiones comprobar si las componentes son independientes:
+    \begin{enumerate}
+        \item $f_X(x_1, x_2) = 12 \cdot x_1^2 \cdot x_2 ^3\ \ \ \ \ \ 0<x_1<1,\ \ \ 0<x_2<1$\\
+        Si definimos
+        \begin{gather*}
+            h_1(x_1)=\left\{
+            \begin{array}{ccc}
+                12x_1^2 & \text{ si } & x_1 \in ]0,1[\\
+                0 & \text{ si } & x_1 \notin ]0,1[
+            \end{array}
+            \right.
+\\\\
+            h_2(x_2)=\left\{
+            \begin{array}{ccc}
+                x_2^3 & \text{ si } & x_1 \in ]0,1[\\
+                0 & \text{ si } & x_1 \notin ]0,1[
+            \end{array}
+            \right.
+        \end{gather*}
+        Entonces tenemos que $f_X(x_1, x_2) = h_1(x_1) \cdot h_2(x_2)$ y por tanto son independientes.
+        \item $f_{X_1}(x_1, x_2) = 12\cdot  x_1^2 \cdot x_2^3\ \ \ \ \ \ 0<x_1<x_2<1$\\
+        Tenemos que 
+        \begin{align*}
+            f_{X_2}(x)&=\int_{x_1}^{1} 12x_1^2x_2^3 dx_2 = 12x_1^2 \left[\frac{x_2^4 }{4}\right]_{x_1}^{1} = 3 \cdot x_1^2 \cdot (1-x_1^4) = 3x_1^2 - 3x_1^6 \\
+            f_{X_2}(x)&=\int_{0}^{x^2} 12x_1^2x_2^3 dx_1 = 12x_2^3 \left[\frac{x_1^3 }{3}\right]_{0}^{x_2} = 4 \cdot x_2^3 \cdot (x_2^3) = 4x_2^6
+        \end{align*}
+        Y tenemos entonces que $12\cdot x_1^2 \cdot x_2^3 \neq (3x_1^2 - 3x_1^6) \cdot 4x_2^6$ por lo que $X_1$ y $X_2$ no son independientes.
+    \end{enumerate}
+\end{ejercicio}

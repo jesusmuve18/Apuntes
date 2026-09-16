@@ -1,0 +1,20 @@
+---
+- name: Deshabilitar acceso por contraseña sore SSH para root
+  hosts: servers
+  vars_files:
+    - ../vars.yaml
+  become: yes
+  tasks:
+    - name: Deshabilitar el acceso SSH para root
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        state: present
+        line: "PermitRootLogin\tprohibit-password"
+        regex: '^PermitRootLogin\s+'
+        validate: "sshd -t -f %s"
+    
+    - name: Reinicar servicio SSH
+      ansible.builtin.service:
+        name: sshd
+        state: restarted
+        enabled: true

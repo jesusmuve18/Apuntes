@@ -1,0 +1,12 @@
+---
+- name: Dar acceso por ssh a admin con llave pública
+  hosts: servers
+  vars_files:
+    - ../vars.yaml
+  become: yes       # para sudo de root
+  tasks:
+    - name: Añadir clave pública a admin
+      ansible.posix.authorized_key:
+        user: "{{ admin_user }}"
+        state: present
+        key: "{{ lookup('ansible.builtin.file', '../keys/' + admin_user + '.pub') }}"

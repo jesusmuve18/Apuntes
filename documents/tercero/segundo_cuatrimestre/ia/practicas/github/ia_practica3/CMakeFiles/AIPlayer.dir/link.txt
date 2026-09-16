@@ -1,2 +1,0 @@
-/usr/bin/ar qc lib/libAIPlayer.a CMakeFiles/AIPlayer.dir/src/personal/AIPlayer.cpp.o
-/usr/bin/ranlib lib/libAIPlayer.a

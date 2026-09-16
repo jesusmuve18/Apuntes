@@ -1,0 +1,169 @@
+[root@jmvMV-20:53:46 /]# history
+    1  PS1="[\u@jmvMV-\t \w]"
+    2  vi ~/.bashrc 
+    3  su jesus
+    4  users
+    5  su jesus
+    6  su jmunoz
+    7  exit
+    8  cat /etc/sysconfig/network-scripts/ifcfg-enp0s8 
+    9  whoami
+   10  ping 192.168.56.1
+   11  ip a
+   12  clear
+   13  exit
+   14  passwd jmunoz
+   15  su jmunoz
+   16  exit
+   17  su jmunoz
+   18  exit
+   19  clear
+   20  du -k *
+   21  clear
+   22  exit
+   23  clear
+   24  lsblk
+   25  su jmunoz
+   26  ls
+   27  ls -l
+   28  cd ..
+   29  ls -l
+   30  df -h
+   31  vi ~/.bashrc 
+   32  clear
+   33  su jmunoz
+   34  exit
+   35  clear
+   36  fuser /var
+   37  fuse
+   38  fuser
+   39  clear
+   40  single user
+   41  systemctl isolate runlevel1.target
+   42  systemctl status
+   43  systemctl isolate runlevel5.target
+   44  systemctl status
+   45  reboot
+   46  exit
+   47  clear
+   48  useradd --no-create-home --shell /bin/false node_exporter
+   49  chown -R node_exporter:node_exporter /opt/node_exporter
+   50  chown -R node_exporter:node_exporter /opt/node_exporter-1.9.1.linux-amd64
+   51  clear
+   52  chown -R node_exporter:node_exporter /opt/node_exporter-1.9.1.linux-amd64
+   53  vi /etc/systemd/system
+   54  clear
+   55  touch /etc/systemd/system/node_exporter.service
+   56  vi /etc/systemd/system/node_exporter.service 
+   57  vi /etc/systemd/system/node_exporter.service 
+   58  clear
+   59  systemctl daemon-reexec
+   60  systemctl daemon-reload
+   61  systemctl enable node_exporter
+   62  systemctl status node_exporter
+   63  systemctl start node_esporter
+   64  clear
+   65  systemctl daemon-reexec
+   66  systemctl daemon-reload
+   67  systemctl enable node_exporter-1.9.1.linux-amd64
+   68  systemctl enable node_exporter
+   69  systemctl status node_exporter
+   70  clear
+   71  systemctl status node_exporter
+   72  clear
+   73  find . -name node_exporter
+   74  clear
+   75  rm -rf /opt/node_exporter
+   76  mv /opt/node_exporter-1.9.1.linux-amd64 /opt/node_exporter
+   77  chmod u+x /opt/node_exporter/node_exporter 
+   78  chown -R node_exporter:node_exporter /opt/node_exporter
+   79  systemctl daemon-reexec
+   80  systemctl daemon-reload
+   81  systemctl enable node_exporter
+   82  systemctl status node_exporter
+   83  systemctl start node_exporter
+   84  systemctl status node_exporter
+   85  clear
+   86  systemctl status node_exporter
+   87  clear
+   88  ss -ltnp | grep 9100
+   89  clear
+   90  firewall-cmd --permanent --add-port=9100/tcp
+   91  firewall-cmd --reload
+   92  clear
+   93  sudo mkdir -p /var/lib/node_exporter/textfile_collector
+   94  ps aux | grep node_exporter
+   95  sudo systemctl edit node_exporter
+   96  sudo systemctl edit node_exporter
+   97  sudo systemctl edit node_exporter
+   98  sudo systemctl edit node_exporter
+   99  clear
+  100  sudo systemctl edit node_exporter
+  101  sudo chown node_exporter:node_exporter /var/lib/node_exporter/textfile_collector
+  102  sudo systemctl daemon-reexec
+  103  sudo systemctl restart node_exporter
+  104  sudo vi /usr/local/bin/check_services.sh
+  105  sudo vi /usr/local/bin/check_services.sh
+  106  sudo chmod +x /usr/local/bin/check_services.sh
+  107  sudo crontab -e
+  108  cat /var/lib/node_exporter/textfile_collector/service_status.prom 
+  109  sudo start httpd
+  110  sudo systemctl start httpd
+  111  clear
+  112  ls -la /var/lib/node_exporter/textfile_collector
+  113  ls -la /var/lib/node_exporter/textfile_collector
+  114  clear
+  115  sudo chown node_exporter:node_exporter /var/lib/node_exporter/textfile_collector/service_status.prom 
+  116  clear
+  117  /usr/local/bin/check_services.sh 
+  118  ls -la /var/lib/node_exporter/textfile_collector
+  119  ps aux | grep node_exporter
+  120  sudo systemctl edit node_exporter
+  121  clear
+  122  systemctl daemon-reexec
+  123  systemctl daemon-reload
+  124  systemctl restart node_exporter
+  125  clear
+  126  /usr/local/bin/check_services.sh 
+  127  firewall-cmd --list-all
+  128  systemctl status httpd
+  129  ps aux | grep node_exporter
+  130  ss -tulnp | grep 9100
+  131  sudo ufw status
+  132  firewall-cmd --permantent --add-port=9100/tcp
+  133  firewall-cmd -permanent --add-port=9100/tcp
+  134  firewall-cmd  --add-port=9100/tcp
+  135  curl http://localhost:9100/metrics
+  136  systemctl start node_exporter
+  137  systemctl status node_exporter
+  138  systemctl status node_exporter
+  139  sudo vi /etc/systemd/system/node_exporter.service.d/override.conf 
+  140  systemctl start node_exporter
+  141  systemctl daemon-reexec
+  142  systemctl daemon-reload
+  143  sudo vi /etc/systemd/system/node_exporter.service.d/override.conf 
+  144  systemctl daemon-reexec
+  145  systemctl daemon-reload
+  146  systemctl start node_exporter
+  147  sudo vi /etc/systemd/system/node_exporter.service.d/override.conf 
+  148  clear
+  149  clear
+  150* sudo install nginx
+  151  clear
+  152  sudo dnf install nginx
+  153  clear
+  154  systemctl start nginx
+  155  clear
+  156  sudo dnf install httpd
+  157  systemctl start httpd
+  158  systemctl status httpd.service
+  159  clear
+  160  systemtl stop nginx
+  161  systemctl stop nginx
+  162  clear
+  163  systemctl start httpd
+  164  systemctl stop httpd
+  165  cd ..
+  166  ls
+  167  ls -la
+  168  history

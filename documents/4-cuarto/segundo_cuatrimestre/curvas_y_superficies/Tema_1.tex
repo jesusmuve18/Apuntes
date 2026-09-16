@@ -1,0 +1,581 @@
+% El comienzo de esta rama de estudio de las matemáticas surge en el siglo XVII, motivado por problemas de geometría como el siguiente:
+
+En Grecia se estudiaban problemas como el siguiente: si tengo una rueda con un punto en el borde y giro la rueda sobre una superficie plana resultará en la curva epicicloide. Sin embargo, esta solución se describía heurísticamente. Es por esto que tal y como la vamos a estudiar, el estudio de curvas y superficies surge en el siglo XVII con los dos autores más importantes de este siglo (y litigadores) Leibniz y Newton. En el siglo XVIII podemos estudiar a Euler y Monge. En el siglo XIX tenemos a Jean Frenet, Pauino Senet y autores de la Escuela Francesa, de entre ellos el más conocido, Cauchy. Por último del siglo XX tenemos a Jean Gaston Darboux y a Élie Cartan.
+
+\chapter{Curvas en el plano y en el espacio}
+
+\section{Definición. Curva Regular. Longitud de arco}
+
+\begin{definicion}[Curva]
+    Una \textbf{curva} en el espacio es una aplicación $\alpha: I \to \bb{R}^3$ diferenciable, donde $I\subseteq\bb{R}$ es un intervalo abierto. Normalmente, si queremos señalar las componentes de $\alpha$ escribiremos
+    \begin{gather*}
+        \alpha(t) = (x(t), y(t), z(t))
+    \end{gather*}
+    En realidad a un geómetra solo le interesa la llamada \textbf{traza de la curva}, definida como
+    \begin{gather*}
+        tr (\alpha) = img (\alpha) = \alpha(I)
+    \end{gather*}
+\end{definicion}
+
+\begin{ejemplo}
+    Sea $a\in \bb{R}^3$ un punto y $v\in \bb{R}^3$ un vector\footnote{Lo de llamar punto o vector solo sirve para facilitar el lenguaje y nuestro aprendizaje}. Definimos 
+    \Func{\alpha}{\bb{R}}{\bb{R}^3}{t}{a+tv}
+    Si estudiamos la traza de $\alpha$ veremos que tenemos que hacer una distinción de casos:
+
+    \begin{itemize}
+        \item Si $v=0$ tendremos que $img(\alpha) = \{a\}$ por lo que será un único punto y según nuestra definición esta será una recta.
+        \item Si $v\neq 0$ tendremos ahora que $tr(\alpha)$ es la recta que pasa por $a$ y que tiene como vector de dirección el vector $v$, que escribiremos como 
+        \begin{gather*}
+            R_{a,v} = a + \langle v \rangle
+        \end{gather*}
+    \end{itemize}
+\end{ejemplo}
+
+\begin{definicion}[Curva plana]
+    Una curva $\alpha: I \to \bb{R}^3$ la llamaremos \textbf{curva plana} si existe un plano $P\subset \bb{R}^3$ tal que $tr(\alpha)\subset P$.
+
+    Como $P$ y $P(\{z=0\})$ son equivalentes por un movimiento rígido\footnote{recordemos que es una transformación afín que conserva la métrica, o una isometría} de $\bb{R}^3$ podemos considerar que la curva $\alpha$ está definida como 
+    \begin{gather*}
+        \alpha: I \to P(\{z=0\})\subset \bb{R}^3
+    \end{gather*}
+    Por lo que podremos estudiar sus componentes como 
+    \begin{gather*}
+        \alpha(t) = (x(t), y(t), 0) \equiv (x(t),y(t))
+    \end{gather*}
+    De nuevo podemos abstraer y pensar que una curva plana es una aplicación diferenciable $\alpha: I \to \bb{R}^2$, donde $I\subset \bb{R}$ es un intervalo abierto.
+\end{definicion}
+
+\begin{observacion} % parametrizadas, diferenciable
+    Diremos que las curvas son \textbf{parametrizadas} si dependen de un parámetro (normalmente el tiempo\footnote{Se nos anima a buscar un software que nos permita pintar una curva}) y las llamaremos \textbf{diferenciables} ya que por su propia definición las componentes son diferenciables.
+\end{observacion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Consideramos la curva $\alpha(t) = a + tv$, con $a\in \bb{R}^2$, $v\in \bb{R}^2$ (la estudiada anteriormente). Si estudiamos su \textbf{velocidad} tendremos que pensar en su derivada obteniendo
+        \begin{gather*}
+            \alpha'(t) = v
+        \end{gather*}
+        lo que nos dice que la velocidad es constante (tanto celeridad como direccional). Esto nos dice que la curva $\alpha$ describe un MRU\footnote{Movimiento Rectilíneo Uniforme}, lo que nos recuerda a la Primera Ley de Newton\footnote{Todo cuerpo permanece en reposo o se mueve a velocidad constante en línea recta a menos que una fuerza externa neta actúe sobre él}. Si ahora estudiamos la \textbf{aceleración} tenemos 
+        \begin{gather*}
+            \alpha''(t) = 0
+        \end{gather*}
+        Lo que nos confirma que estamos ante un MRU (y no un MRUA\footnote{Movimiento Rectilíneo Uniformemente Acelerado}).
+
+        \item Consideramos ahora $a\in \bb{R}^2$, $v\in \bb{R}^2\setminus\{0\}$ y la curva
+        \Func{\beta}{\bb{R}}{\bb{R}^2}{t}{a+t^2v}
+        Tenemos que $tr(\beta) = \beta(I)\subset tr(\alpha)=R_{a,v}$. Si estudiamos su velocidad tendremos 
+        \begin{gather*}
+            \beta'(t)=2tv
+        \end{gather*}
+        y estaremos ante un Movimiento Rectilíneo (no uniforme). Estudiando su aceleración tendremos
+        \begin{gather*}
+            \beta''(t) = 2v
+        \end{gather*}
+        Por lo que la aceleración será constante y estamos ante un MRUA. Normalmente escribiremos
+        \begin{gather*}
+            tr(\beta) = R_0^+(a,v)
+        \end{gather*}
+
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{ejercicio}
+    Estudiar la curva $\gamma(t) = a + t^3v$ con $a\in \bb{R}^2$ y $v\in \bb{R}^2\setminus \{0\}$.
+\end{ejercicio}
+
+\begin{ejemplo}
+    Supongamos que tenemos la curva
+    \Func{\delta}{\bb{R}}{\bb{R}^2}{t}{(t^3-4t, t^2-4)}
+
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                % --- CONFIGURACIÓN DE LOS EJES ---
+                axis lines = middle,      % Los ejes se cruzan en el (0,0)
+                xlabel = {$x$},           % Etiqueta del eje X
+                ylabel = {$y$},           % Etiqueta del eje Y
+                grid = none,              % Muestra la cuadrícula principal y secundaria
+                minor tick num = 1,       % Líneas de cuadrícula intermedias
+                enlargelimits = true,     % Añade un pequeño margen a los bordes
+                axis line style={-, thick},     % Flechas en los extremos de los ejes
+                %
+                % Opcional: Esto asegura que si usas sin(t) o cos(t) en el futuro, 
+                % LaTeX asuma que 't' está en radianes y no en grados.
+                trig format plots=rad,    
+            ]
+            
+            % --- DEFINICIÓN DE LA CURVA PARAMÉTRICA ---
+            \addplot [
+                domain=-2.5:2.5, % 1. RANGO DE 't': Modifica esto según tu curva
+                samples=100,     % 2. SUAVIDAD: Aumenta este número (ej. 200) si la curva tiene picos raros
+                variable=\t,     % Definimos que nuestra variable paramétrica es 't'
+                thick,           % Grosor de la línea
+                blue,            % Color de la línea
+            ]
+            % 3. ECUACIONES
+            % Importante: Usa las llaves { } para agrupar cada componente
+            ({t^3 - 4*t}, {t^2 - 4});
+            
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+
+    Este ejemplo nos permite ver que existen curvas con \textbf{autointersecciones}.
+\end{ejemplo}
+
+\begin{ejemplo}
+    Consideramos ahora la curva definida como
+    \Func{\veps}{I}{\bb{R}^2}{t}{(t^3, t^2)}
+
+    Si estudiamos sus derivadas tenemos
+    \begin{gather*}
+        \veps'(t) = (3t^2, 2t)\\
+        \veps''(t) = (6t,2)
+    \end{gather*}
+    y obtenemos la siguiente gráfica
+
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                % --- CONFIGURACIÓN DE LOS EJES ---
+                axis lines = middle,      % Los ejes se cruzan en el (0,0)
+                xlabel = {$x$},           % Etiqueta del eje X
+                ylabel = {$y$},           % Etiqueta del eje Y
+                grid = none,              % Muestra la cuadrícula principal y secundaria
+                minor tick num = 1,       % Líneas de cuadrícula intermedias
+                enlargelimits = true,     % Añade un pequeño margen a los bordes
+                axis line style={-, thick},     % Flechas en los extremos de los ejes
+                %
+                % Opcional: Esto asegura que si usas sin(t) o cos(t) en el futuro, 
+                % LaTeX asuma que 't' está en radianes y no en grados.
+                trig format plots=rad,    
+            ]
+            
+            % --- DEFINICIÓN DE LA CURVA PARAMÉTRICA ---
+            \addplot [
+                domain=-2.5:2.5, % 1. RANGO DE 't': Modifica esto según tu curva
+                samples=100,     % 2. SUAVIDAD: Aumenta este número (ej. 200) si la curva tiene picos raros
+                variable=\t,     % Definimos que nuestra variable paramétrica es 't'
+                thick,           % Grosor de la línea
+                blue,            % Color de la línea
+            ]
+            % 3. ECUACIONES
+            % Importante: Usa las llaves { } para agrupar cada componente
+            ({t^3}, {t^2});
+            
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+
+    Este ejemplo nos demuestra que aunque $\veps$ sea diferenciable, $tr(\veps)$ tiene ``picos''. Tenemos que $img(\veps) = Gr\{y=x^{\nicefrac{2}{3}}\}$, es decir, la traza de $\veps$ coincide con la gráfica de una función no diferenciable.
+\end{ejemplo}
+
+\begin{ejemplo} Consideramos la siguiente curva
+    \Func{\zeta}{\bb{R}}{\bb{R}^3}{t}{a+r(e_1\cos(\frac{t}{r}) + e_2(\sen(\frac{t}{r})))}
+    donde $r>0$, $a\in \bb{R}^3$, $e_1,e_2\in \bb{R}^3$ tal que $|e_1|=|e_2|=1$ y $\langle e_1,e_2 \rangle = 0$.
+
+    Como tenemos 2 vectores ortogonales en el espacio, estos generarán un plano, por lo que $\zeta(t)\in P = a + \langle \{e_1,e_2\}\rangle$ $\forall t \in \bb{R}$. Por tanto
+    \begin{gather*}
+        img(\zeta) = tr(\zeta) \subset P \Rightarrow \zeta \text{ es una curva plana}
+    \end{gather*}
+    Además, se verifica que 
+    \begin{gather*}
+        |\zeta(t) - a | = r \ \ \forall t\in \bb{R}
+    \end{gather*}
+    lo que nos dice que todos los puntos de la traza equidistan al punto $a$, llegando a la conclusión de que $tr(\zeta)$ es una circunferencia centrada en $a$. A esta curva la llamaremos \underline{la} circunferencia de centro $a$ y radio $r>0$ en $P$.
+
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width = 8cm,   % Ajusta el ancho total
+                height = 8cm,  % Ajusta el alto total
+                % --- CONFIGURACIÓN DE LA VISTA 3D ---
+                view={60}{30},            % Ángulo de cámara {azimut}{elevación}
+                axis lines = center,      % Ejes cruzándose en el origen
+                axis line style={-, thick}, % Ejes gruesos y con flecha (como pediste antes)
+                xlabel = {$x$},
+                ylabel = {$y$},
+                zlabel = {$z$},           % ¡Añadimos la etiqueta para Z!
+                % xmin = -3, xmax = 3,
+                % ymin = -3, ymax = 3,
+                plot box ratio = 1 1 1, % Proporción de X, Y y Z.
+                grid = major,
+                enlargelimits = true,
+                trig format plots=rad,    % Usamos radianes
+                % --- DEFINICIÓN DE CONSTANTES ---
+                declare function={
+                    a=1; 
+                    b=2;
+                    c=1;
+                    r=1;
+                }
+            ]
+            % --- DEFINICIÓN DE LA CURVA 3D ---
+            \addplot3 [
+                domain=-20:20, % Rango de 't' (lo he hecho amplio para ver varias vueltas)
+                samples=300,   % En 3D se necesitan bastantes puntos para que sea suave
+                samples y=0,   % Truco vital: Evita que LaTeX intente dibujar una superficie
+                variable=\t,
+                thick,
+                blue,           % Color de la hélice
+            ]
+            % LAS ECUACIONES
+            ({a+r*cos(\t/r)}, {b+r*sin(\t/r)}, {c});
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+
+    Podemos ver también que esta curva no se recorre de una forma aleatoria:
+    \begin{gather*}
+        \zeta'(t) = -e_1\left(\sen\left(\frac{t}{r}\right)\right) + e_2\left(\cos\left(\frac{t}{r}\right)\right) \Rightarrow \text{ no es un MRU}\\
+        \zeta''(t) \text{ no es constante} \Rightarrow \text{ no es un movimiento rectilíneo acelerado}
+    \end{gather*}
+    Si estudiamos un poco más esta curva veremos que la aceleración es solo centrífuga ya que $|\zeta''(t)|=1$. Esta es la traza de un MCU\footnote{Movimiento Circular Uniforme}.
+\end{ejemplo}
+
+\begin{ejemplo}
+    Definimos la siguiente curva
+    \Func{\eta}{I}{\bb{R}^2}{t}{\left(\frac{3t}{1+t^3}, \frac{3t^2}{1+t^3} \right)}
+    donde $I=]-1, +\infty[$. La gráfica será algo como\footnote{a esta curva se le conoce como Folium (Hoja) de Descartes. Se suele tomar la simetría sobre el eje $y=x$.}
+
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                % --- CONFIGURACIÓN DE LOS EJES ---
+                axis lines = middle,      % Los ejes se cruzan en el (0,0)
+                xlabel = {$x$},           % Etiqueta del eje X
+                ylabel = {$y$},           % Etiqueta del eje Y
+                grid = none,              % Muestra la cuadrícula principal y secundaria
+                minor tick num = 1,       % Líneas de cuadrícula intermedias
+                enlargelimits = true,     % Añade un pequeño margen a los bordes
+                axis line style={-, thick},     % Flechas en los extremos de los ejes
+                %
+                % Opcional: Esto asegura que si usas sin(t) o cos(t) en el futuro, 
+                % LaTeX asuma que 't' está en radianes y no en grados.
+                trig format plots=rad,    
+            ]
+            
+            % --- DEFINICIÓN DE LA CURVA PARAMÉTRICA ---
+            \addplot [
+                domain=-0.85:50, % 1. RANGO DE 't'
+                samples=500,     % 2. SUAVIDAD: Aumenta este número (ej. 200) si la curva tiene picos raros
+                variable=\t,     % Definimos que nuestra variable paramétrica es 't'
+                thick,           % Grosor de la línea
+                blue,            % Color de la línea
+            ]
+            % 3. ECUACIONES
+            % Importante: Usa las llaves { } para agrupar cada componente
+            ({(3*t)/(1+t^3)}, {(3*t^2)/(1+t^3)});
+            
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+
+    Tendremos que ver que $\eta$ es inyectiva (o lo que es lo mismo, no tiene autointersecciones). Observamos también que $\eta'(t)\neq 0$ $\forall t \in I$. Nos preguntamos si $I\cong tr(\eta)$ es un homeomorfismo y llegamos a la conclusión de que no lo es (si quitamos el punto $(0,0)$ en la $tr(\zeta)$ obtenemos una única componente conexa, ya que $\overline{(tr(\zeta)\setminus\{(0,0)\})} = tr(\zeta)$, pero al quitar cualquier punto en $I$ obtendremos dos componentes).
+\end{ejemplo}
+
+\begin{definicion}
+    Sea $I\subset \bb{R}$ un intervalo, $\alpha: I \to \bb{R}^3$ una curva, definimos la \textbf{recta tangente} a $\alpha$ en el instante $t\in I$ como la recta afín $\alpha(t) + \langle \alpha'(t) \rangle$ y la representamos como $R_{\alpha(t), \alpha'(t)}\equiv R_t$.
+\end{definicion}
+
+\begin{observacion}
+    Si $\alpha'(t)=0$, entonces la recta tangente será $\alpha(t) + \langle 0 \rangle = \alpha(t)$ que no será una recta, sino un punto. Por tanto, en los puntos $t\in I$ con $\alpha'(t)=0$ no existirá recta tangente. Esto nos dará motivos para intentar evitar esta situación.
+\end{observacion}
+
+\begin{definicion}
+    Sea $I\subset \bb{R}$ un intervalo, $\alpha: I \to \bb{R}^3$ una curva. Los puntos $\alpha(t)\in tr(\alpha)$ tales que $\alpha'(t)\neq 0$ se llaman \textbf{regulares}. A los puntos que no verifican esta condición los llamaremos \textbf{singulares}.\\
+
+    La curva $\alpha$ se dice \textbf{regular} si $\alpha'(t)\neq 0$ $\forall t \in I$, es decir, si todos los puntos $t\in I$ son regulares.
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item La gráfica de una función real de variable real es la traza de una curva (parametrizada diferenciable\footnote{a veces lo notaremos como p.df}).\\
+        
+        Normalmente, en bachiller, la solución de un ejercicio de análisis de una función $f:I\to \bb{R}$ venía dada al estudiar la gráfica de $f$ dada por
+        \begin{gather*}
+            Gr(f) = \{(x,y)\in \bb{R}^2 : x\in I,\ y=f(x)\}
+        \end{gather*}
+        Tenemos que definir de una curva $\alpha_f:I\to \bb{R}^2$ tal que
+        \begin{gather*}
+            tr(\alpha_f) = \alpha_f(I) \overset{queremos}{\equiv} Gr(f)
+        \end{gather*}
+        Para ello definimos $\alpha_f(t) = (t,f(t))$. Esto nos dice que todas las funciones que hemos estudiado en análisis a lo largo de nuestra vida describen curvas p.df. Sin embargo, esto no es al revés, es decir, existen curvas cuya traza no es gráfica de ninguna función. Por ejemplo, la ya estudiada
+        \begin{gather*}
+            \delta(t) = (t^3-4t, t^2-4)
+        \end{gather*}
+        ya que su proyección sobre cualquier recta que pase por el origen no es inyectiva: existen valores de $x$ a los que les corresponde más de una imagen en $y$.
+
+        \item Definimos\footnote{Se pronuncia con la \textit{z} española (no es tita de nadie y no tiene connotaciones sexuales)}  la curva $\theta : \bb{R} \to \bb{R}^3$ dada por
+        \begin{gather*}
+            \theta(t) = \left(a\cos\left(\frac{t}{\sqrt{a^2+ b^2}}\right), a\sen\left(\frac{t}{\sqrt{a^2+ b^2}}\right), \frac{bt}{\sqrt{a^2 + b^2}}\right)
+        \end{gather*}
+        con $a,b\in \bb{R}$, $a^2 +b^2\neq 0$. Haremos una distinción de casos según los valores de $a$ y $b$.
+        \begin{itemize}
+            \item Si $a=0$, entonces $b\neq 0$ y la curva queda como 
+            \begin{gather*}
+                \theta(t) = (0,0,t)
+            \end{gather*}
+            que se corresponde al eje $Z$ por lo que $tr(\theta) $.
+
+            \item Si $b=0$, entonces $a\neq 0$ y como se anula la tercera componente tendremos que $tr(\theta)\subset P(\{z=0\})$. Además tendremos que la curva es una circunferencia centrada en $(0,0,0)$ y de radio $|a|$, lo que se ve fácilmente al sustituir en la definición de la curva:
+            \begin{gather*}
+                \theta(t) = \left(a\cos\left(\frac{t}{|a|}\right), a\sen\left(\frac{t}{|a|}\right), 0\right)
+            \end{gather*}
+            
+            \item Si $b\neq 0$. Tenemos que $x(t)^2 + y(t)^2 = a^2$ lo que nos dice que $\forall t \in \bb{R}$, se tiene que
+            \begin{gather*}
+                \theta(t) \in \{(x,y,z)\in \bb{R}^3 : x^2 + y^2 = a^2\}
+            \end{gather*}
+            Es fácil ver que esto es un cilindro circular recto de radio $|a|$. Estudiando la curva $\theta$ veremos que es una \textbf{hélice circular recta} con eje el eje $Z$ y de radio $|a|$.\\
+
+            Estudiamos dos casos dentro de este:
+            \begin{itemize}
+                \item Si $b>0$ la hélice gira hacia la izquierda (sentido contrario a las agujas del reloj) y diremos que es \textbf{levógira}.
+                
+                \begin{center}
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            width = 10cm,   % Ajusta el ancho total
+                            height = 10cm,  % Ajusta el alto total
+                            % --- CONFIGURACIÓN DE LA VISTA 3D ---
+                            view={60}{30},            % Ángulo de cámara {azimut}{elevación}
+                            axis lines = center,      % Ejes cruzándose en el origen
+                            axis line style={-, thick}, % Ejes gruesos y con flecha (como pediste antes)
+                            xlabel = {$x$},
+                            ylabel = {$y$},
+                            zlabel = {$z$},           % ¡Añadimos la etiqueta para Z!
+                            xmin = -3, xmax = 3,
+                            ymin = -3, ymax = 3,
+                            plot box ratio = 1 1 1, % Proporción de X, Y y Z.
+                            grid = major,
+                            enlargelimits = true,
+                            trig format plots=rad,    % Usamos radianes
+                            % --- DEFINICIÓN DE CONSTANTES ---
+                            % Cambia los valores de 'a' y 'b' aquí mismo. 
+                            % 'c' calcula el denominador automáticamente para no ensuciar el código.
+                            declare function={
+                                a=1; 
+                                b=1; 
+                                c=sqrt(a^2+b^2);
+                            }
+                        ]
+                        % --- DEFINICIÓN DE LA CURVA 3D ---
+                        \addplot3 [
+                            domain=-20:20, % Rango de 't' (lo he hecho amplio para ver varias vueltas)
+                            samples=300,   % En 3D se necesitan bastantes puntos para que sea suave
+                            samples y=0,   % Truco vital: Evita que LaTeX intente dibujar una superficie
+                            variable=\t,
+                            thick,
+                            blue,           % Color de la hélice
+                        ]
+                        % LAS ECUACIONES
+                        ({a*cos(\t/c)}, {a*sin(\t/c)}, {b*\t/c});
+                        
+                        \end{axis}
+                    \end{tikzpicture}
+                \end{center}
+
+                \item Si $b<0$ la hélice gira hacia la derecha (sentido horario) y diremos que es \textbf{dextrógira}.
+                
+                \begin{center}
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            width = 10cm,   % Ajusta el ancho total
+                            height = 10cm,  % Ajusta el alto total
+                            % --- CONFIGURACIÓN DE LA VISTA 3D ---
+                            view={60}{30},            % Ángulo de cámara {azimut}{elevación}
+                            axis lines = center,      % Ejes cruzándose en el origen
+                            axis line style={-, thick}, % Ejes gruesos y con flecha (como pediste antes)
+                            xlabel = {$x$},
+                            ylabel = {$y$},
+                            zlabel = {$z$},           % ¡Añadimos la etiqueta para Z!
+                            xmin = -3, xmax = 3,
+                            ymin = -3, ymax = 3,
+                            plot box ratio = 1 1 1, % Proporción de X, Y y Z.
+                            grid = major,
+                            enlargelimits = true,
+                            trig format plots=rad,    % Usamos radianes
+                            % --- DEFINICIÓN DE CONSTANTES ---
+                            % Cambia los valores de 'a' y 'b' aquí mismo. 
+                            % 'c' calcula el denominador automáticamente para no ensuciar el código.
+                            declare function={
+                                a=1; 
+                                b=-1; 
+                                c=sqrt(a^2+b^2);
+                            }
+                        ]
+                        % --- DEFINICIÓN DE LA CURVA 3D ---
+                        \addplot3 [
+                            domain=-20:20, % Rango de 't' (lo he hecho amplio para ver varias vueltas)
+                            samples=300,   % En 3D se necesitan bastantes puntos para que sea suave
+                            samples y=0,   % Truco vital: Evita que LaTeX intente dibujar una superficie
+                            variable=\t,
+                            thick,
+                            blue,           % Color de la hélice
+                        ]
+                        % LAS ECUACIONES
+                        ({a*cos(\t/c)}, {a*sin(\t/c)}, {b*\t/c});
+                        
+                        \end{axis}
+                    \end{tikzpicture}
+                \end{center}
+
+            \end{itemize}
+        \end{itemize}
+    \end{enumerate}
+\end{ejemplo}
+
+\begin{definicion}
+    Sea $\alpha: I \to \bb{R}^3$ una curva, definimos la \textbf{longitud de $\alpha$ entre $a$ y $b$ correspondiente a la partición $P=\{t_0=a<t_1<...<t_n=b\}$} de la siguiente forma:
+    \begin{align*}
+        L_a^b(\alpha, P) &= |\alpha(t_1) - \alpha(t_0)| + |\alpha(t_2) - \alpha(t_1)| + ... + |\alpha(t_n) - \alpha(t_{n-1})| \\
+        &= \sum_{i=0}^{n-1} |\alpha(i+1) - \alpha(i)|
+    \end{align*}
+\end{definicion}
+
+\begin{observacion}
+    Podemos aplicar ahora la desigualdad triangular $n$ veces a la expresión anterior y obtenemos
+    \begin{align*}
+        L_a^b(\alpha, P)  &= \sum_{i=0}^{n-1} |\alpha(i+1) - \alpha(i)| \geq |\alpha(t_n) - \alpha(t_0)| = |\alpha(b)-\alpha(a)|
+    \end{align*}
+    La igualdad se dará cuando todos los puntos de $P$ estén alineados. Además, esta propiedad nos dice que la longitud de una curva está acotada inferiormente, independientemente de la partición $P$ que tomemos, por la distancia entre $\alpha(a)$ y $\alpha(b)$, es decir, el camino más corto entre dos puntos es el segmento que los une.\\
+    
+    Nos interesará ver ahora si esta longitud está acotada superiormente. Para ello consideramos la misma definición anterior, pero escrita en forma integral:
+    \begin{align*}
+        L_a^b(\alpha, P) &= \left|\int_{t_0}^{t_1} \alpha'(t) dt\right| + \left|\int_{t_1}^{t_2} \alpha'(t) dt\right| + ... + \left|\int_{t_{n-1}}^{t_n} \alpha'(t) dt\right| \leq \\
+        &\leq \int_{t_0}^{t_1} |\alpha'(t)| dt + \int_{t_1}^{t_2} |\alpha'(t)| dt + ... + \int_{t_{n-1}}^{t_n} |\alpha'(t)| dt =\\
+        &= \int_{t_0}^{t_n} |\alpha'(t)| dt = \int_{a}^{b} |\alpha'(t)| dt
+    \end{align*}
+    y ya tenemos una cota superior a esta longitud. Tenemos entonces, para toda partición $P$ de $[a,b]$:
+    \begin{gather*}
+        |\alpha(b)-\alpha(a)| \leq L_a^b(\alpha, P) \leq \int_{a}^{b} |\alpha'(t)| dt \overset{def}{=} L_a^b(\alpha)
+    \end{gather*}
+
+    Si consideramos ahora las componentes de $\alpha$ podemos definir la siguiente aplicación:
+    \Func{f}{[a,b]\times [a,b] \times [a,b]}{\bb{R}}{(\delta, \beta, \gamma)}{\sqrt{x'(\delta)^2 + y'(\beta)^2 + z'(\gamma)^2}}
+    que será continua (por ser $\alpha$ diferenciable) y está definida en un compacto, lo que nos dice que $f$ es uniformemente continua, es decir, dado $\veps>0$, entonces $\exists \delta > 0$ tal que si
+    \begin{gather*}
+        \begin{array}{c}
+            t_1,t_2,t_3\\
+            t_1',t_2',t_3'
+        \end{array} \in [a,b] \text{ con }
+        \begin{array}{c}
+            |t_1-t_1'| < \delta \\
+            |t_2-t_2'| < \delta \\
+            |t_3-t_3'| < \delta 
+        \end{array} \Rightarrow |f(t_1,t_2,t_3) - f(t_1', t_2', t_3')| < \frac{\veps}{b-a}
+    \end{gather*}
+    Sea $P$ una partición de $[a,b]$ con\footnote{es decir, la distancia entre cualesquiera dos puntos consecutivos de la partición $P$ sea menor que $\delta$} $|P| < \delta$, tenemos que
+    \begin{align*}
+        \left| L_a^b(\alpha, P) - \int_{a}^{b} |\alpha'(t)| dt\right| &=
+        \left|\sum_{i=1}^{n}\left( |\alpha(t_i) - \alpha(t_{i-1})| - \int_{t_{i-1}}^{t_i} |\alpha'(t)| dt \right)\right| \leq\\
+        &\leq \sum_{i=1}^{n}\left| |\alpha(t_i) - \alpha(t_{i-1})| - \int_{t_{i-1}}^{t_i} |\alpha'(t)| dt \right| \overset{(\ast)}{=} \\
+        &= \sum_{i=1}^{n}\left| |f(\delta_i, \beta_i, \gamma_i)|(t_i-t_{i-1}) - f(\veps_i, \veps_i, \veps_i)(t_i-t_{i-1}) \right| =\\
+        &= \sum_{i=1}^{n} |f(\delta_i, \beta_i, \gamma_i) - f(\veps_i, \veps_i, \veps_i)|(t_i-t_{i-1}) <\\
+        &< \sum_{i=1}^{n} \frac{\veps}{b-a} (t_i-t_{i-1})
+        = \frac{\veps}{b-a} \sum_{i=1}^{n} (t_i-t_{i-1}) =\\
+        &= \frac{\veps}{b-a} (b-a) = \veps
+    \end{align*}
+    Donde en $(\ast)$ hemos aplicado el Teorema de Cauchy del valor intermedio y el Teorema de Cacuhy del valor intermedio integral, donde $\delta_i, \beta_i, \gamma_i, \veps_i \in [t_{i-1}, t_i]$. Acabamos de probar por tanto la siguiente proposición y posteriormente la definición de longitud de un arco.
+\end{observacion}
+
+\begin{prop}
+    Sea $\alpha: I \to \bb{R}^3$ una curva, $[a,b]\subset I \subset \bb{R}$ y $P$ una partición de $[a,b]$, entonces $\forall \veps >0$ se tiene que si $\exists \delta >0$ con $|P|<\delta$, entonces se tiene que 
+    \begin{gather*}
+        \left| L_a^b(\alpha, P) - \int_{a}^{b} |\alpha'(t)| dt\right| < \veps
+    \end{gather*}
+    O equivalentemente
+    \begin{gather*}
+        \exists \lim_{|P|\to 0} L_a^b(\alpha, P) = \int_a^b |\alpha'(t)| dt
+    \end{gather*}
+\end{prop}
+
+\begin{definicion}[Longitud de arco]
+    Sea $\alpha: I \to \bb{R}^3$ una curva, $[a,b]\subset I \subset \bb{R}$, definimos la \textbf{longitud de $\alpha$ entre $a$ y $b$} (``entre $\alpha(a)$ y $\alpha(b)$'') como 
+    \begin{gather*}
+        L_a^b(\alpha) = \int_a^b |\alpha'(t)| dt
+    \end{gather*}
+\end{definicion}
+
+\begin{ejercicio}
+    Probar que $L_a^b(\alpha) = \sup_P L_a^b (\alpha, P)$.
+\end{ejercicio}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Tomamos $p\in \bb{R}^3$, $v\in \bb{R}^3$ y consideramos la curva $\alpha(t) = p +tv$ con $t\in \bb{R}$. Tomamos $[a,b]\subset \bb{R}$ y tenemos
+        \begin{gather*}
+            L_a^b(\alpha) = \int_a^b |\alpha'(t)| dt = \int_a^b |v| dt = |v| \int_a^b 1 dt = |v|(b-a)
+        \end{gather*}
+        Por tanto podemos concluir
+        \begin{itemize}
+            \item Si $v=0 \Rightarrow L_a^b(\alpha) = 0$.
+            \item Si $v\neq 0$ entonces recuperamos la fórmula del MRU, $e = |v| t$ (pensando en que $b-a$ es una diferencia de tiempos, y por tanto, un incremento temporal).
+        \end{itemize}
+
+        \item Consideramos ahora $\beta : \bb{R} \to \bb{R}^2$ la curva tal que $tr(\beta) = C(a,r)$ con $a=(a_1, a_2)\in \bb{R}^2$, $r>0$. La definimos en el plano $P(\{z=0\})$ de la siguiente forma
+        \begin{gather*}
+            \beta(t) = (a_1,a_2) + r\left(\cos\left(\frac{t}{r}\right), \sin\left(\frac{t}{r}\right)\right)
+        \end{gather*}
+        Consideramos ahora el hecho de ``dar una vuelta'', que observamos que ocurre en el intervalo $[0, 2\pi r]$, es decir, la longitud de la circunferencia será
+        \begin{gather*}
+            L_0^{2\pi r} = \int_0^{2\pi r} |\beta'(t)| dt = \int_0^{2\pi r} 1 dt = 2\pi r
+        \end{gather*}
+
+        \item Calculemos la longitud de la siguiente curva
+        \Func{\gamma}{\bb{R}}{\bb{R}^2}{t}{(e^{-t}\cos(t), e^{-t}\sin(t)) = e^{-t}(\cos(t), \sin(t))}
+        en el intervalo $[a,b]\subset \bb{R}$. En primer lugar nos haremos una idea de la forma de la curva gráficamente:
+
+        \begin{center}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    % --- CONFIGURACIÓN DE LOS EJES ---
+                    axis lines = middle,      % Los ejes se cruzan en el (0,0)
+                    xlabel = {$x$},           % Etiqueta del eje X
+                    ylabel = {$y$},           % Etiqueta del eje Y
+                    grid = none,              % Muestra la cuadrícula principal y secundaria
+                    minor tick num = 1,       % Líneas de cuadrícula intermedias
+                    enlargelimits = true,     % Añade un pequeño margen a los bordes
+                    axis line style={-, thick},     % Flechas en los extremos de los ejes
+                    %
+                    % Opcional: Esto asegura que si usas sin(t) o cos(t) en el futuro, 
+                    % LaTeX asuma que 't' está en radianes y no en grados.
+                    trig format plots=rad,    
+                ]
+                
+                % --- DEFINICIÓN DE LA CURVA PARAMÉTRICA ---
+                \addplot [
+                    domain=-10:100, % 1. RANGO DE 't'
+                    samples=1000,     % 2. SUAVIDAD: Aumenta este número (ej. 200) si la curva tiene picos raros
+                    variable=\t,     % Definimos que nuestra variable paramétrica es 't'
+                    thick,           % Grosor de la línea
+                    blue,            % Color de la línea
+                ]
+                % 3. ECUACIONES
+                ({(e^(-t))*cos(t)}, {(e^(-t))*sin(t)});
+                
+                \end{axis}
+            \end{tikzpicture}
+        \end{center}
+
+        A esta curva la llamamos \textbf{espiral logarítmica}. Pasamos al cálculo:
+        \begin{gather*}
+            L_a^b(\gamma) = \int_a^b |\gamma'(t)| dt\\
+            \gamma'(t) = e^{-t}(\cos(t), \sin(t)) + e^{-t}(-\sin(t), \cos(t))\Rightarrow\\
+            \Rightarrow |\gamma'(t)|^2 = e^{-2t}+e^{-2t} = 2e^{-2t}
+        \end{gather*}
+        Podemos ver en nuestro estudio que $\gamma$ es regular. Podemos concluir también que
+        \begin{gather*}
+            |\gamma'(t)| = \sqrt{2}e^{-t} \Rightarrow L_a^b(\gamma) = \int_a^b \sqrt{2}e^{-t} dt = \sqrt{2}[-e^{-t}]_a^b = \sqrt{2}(-e^{-b}+e^{-a})
+        \end{gather*}
+        Además, en este caso concreto podemos estudiar una propiedad interesante:
+        \begin{gather*}
+            \lim_{b\to \infty} L_a^b(\gamma) = \sqrt{2}e^{-a}
+        \end{gather*}
+        Lo que nos dice que podríamos recorrer una distancia infinita con recursos finitos. Este ejemplo nos permite calcular la velocidad de forma muy sencilla. Lo normal es que el cálculo de la longitud sea complicado, ya que las primitivas a calcular no serán tan sencillas.
+    \end{enumerate}
+\end{ejemplo}
+
+
+

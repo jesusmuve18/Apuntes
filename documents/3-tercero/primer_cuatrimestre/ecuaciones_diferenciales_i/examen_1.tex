@@ -1,0 +1,62 @@
+\documentclass[12pt]{book}
+
+\input{../_assets/preambulo.tex}
+\input{../_assets/portada.tex}
+
+\begin{document}
+    \portada[%
+        titulo=Ecuaciones Diferenciales I,
+        subtitulo=Primera Prueba de Clase,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2024-2025]
+
+    \begin{ejercicio}
+        En el plano con coordenadas $(A,B)$ se considera la ecuación
+        \begin{gather*}
+            A^3-cos(AB)=0
+        \end{gather*}
+        ¿Es posible encontrar una función $\varphi:I \to \bb{R},B \mapsto \pi(B)$ con $\varphi(0)=1$ y de manera que se cumpla la ecuación para cada $(A,B)$ con $A=\varphi(B), B\in I$? $I=]-\delta, \delta[$ para algún $\delta>0$
+    \end{ejercicio}
+
+    \begin{ejercicio}
+        Se considera la familia uniparamétrica de curvas
+        \begin{gather*}
+            y = \frac{x^2}{2}+c,\ \ c\in \bb{R}
+        \end{gather*}
+        Encuentra la familia de trayectorias ortogonales y dibuja las dos familias en un plano común con coordenadas $(x,y)$.
+    \end{ejercicio}
+
+    \begin{ejercicio}
+        Encuentra la solución del problema de valores iniciales 
+        \begin{gather*}
+            x'=\frac{1+x^2}{1+t^2},\ \ x(0)=1.
+        \end{gather*}
+        ¿En qué intervalo está definida?
+    \end{ejercicio}
+    \begin{ejercicio}
+        Se considera la transformación
+        \begin{gather*}
+            \phi:D \to \bb{R}^2,\ \ \phi(t,x)=(e^tx, \arctan x)
+        \end{gather*}
+        donde $D=\bb{R}\times ]0,\infty[$. Se pide:
+        \begin{enumerate}
+            \item[a)] Describe el conjunto $D_1=\varphi(D)$ y prueba que $\varphi$ es un difeomorfismo entre $D$ y $D_1$.
+            \item[b)] Dada una ecuación $x'=f(t,x)$ con $f:D \to \bb{R}$, ¿qué condiciones hay que imponer para que se pueda asegurar que el cambio $(s,y)=\varphi(t,x)$ es admisible?
+        \end{enumerate}
+    \end{ejercicio}
+
+    \begin{ejercicio}
+        Dada una función $\phi:\bb{R} \to \bb{R}$ de clase $C^1$, se considera el cambio de variable
+        \begin{gather*}
+            s=t+\phi(x),\ \ y=x
+        \end{gather*}
+        \begin{enumerate}
+            \item[a)] Prueba que $\varphi:\bb{R}^2 \to \bb{R}^2$, $\varphi(t,x)=(s,y)$ es un difeomorfismo.
+            \item[b)] Encuentra una función $\phi$ en las condiciones anteriores que permita transformar la ecuación $x'=x$ en la ecuación
+            \begin{gather*}
+                \frac{dy}{ds}=\frac{y}{1+y\cos y}
+            \end{gather*}
+            Describe los dominios sobre los que este cambio es admisible.
+        \end{enumerate}
+    \end{ejercicio}
+\end{document}

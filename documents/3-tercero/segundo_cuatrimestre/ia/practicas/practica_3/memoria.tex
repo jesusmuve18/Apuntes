@@ -1,0 +1,275 @@
+\documentclass[12pt]{article}
+
+\input{../../../../../_assets/preambulo.tex}
+\input{../../../../../_assets/portada.tex}
+
+\newcommand{\tick}{\color{green}{$\checkmark$}}
+\newcommand{\cross}{\color{red}{$\times$}}
+
+\begin{document}
+    \portada[%
+        titulo=Inteligencia Artificial,
+        subtitulo=Memoria de la Práctica 3,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2024-2025]
+
+    \thispagestyle{empty}
+    \tableofcontents
+    
+    \newpage
+
+    \section{Podas}
+    A continuación se desarrollan las distintas podas que se han implementado con el objetivo de mejorar la eficacia y la eficiencia del algoritmo \verb|minimax|.
+
+    \subsection{Alpha-Beta}
+    En primer lugar se ha implementado la poda Alpha-Beta básica. Esta consiste en añadir dos parámetros a la función \verb|minimax| con el objetivo de evitar explorar ramas que no van a mejorar el resultado actual. Dichos parámetros representan unas cotas inferior y superior (respectivamente) de cada nodo. Conforme se llama al método recursivamente se producen 2 actualizaciones:
+
+    \begin{itemize}
+        \item \textbf{Actualización hacia abajo:} Cuando un nodo genera sus hijos les asigna a cada uno su valor alpha y su valor beta.
+        \item \textbf{Actualización hacia arriba:} Cuando un nodo es evaluado (ya sea por ser nodo hoja o por haber sido evaluados todos sus descendientes) se actualizan los valores \verb|alpha| y \verb|beta| del nodo padre. Esto depende de qué tipo de nodo sea:
+        \begin{itemize}
+            \item Si es un nodo \verb|MAX| actualiza el \verb|beta| del padre por su valor \verb|alpha| si y solo si $alpha_{hijo} < beta_{padre}$
+            \item Si es un nodo \verb|MIN| actualiza el \verb|alpha| del padre por su valor \verb|beta| si y solo si $beta_{hijo} > alpha_{padre}$
+        \end{itemize}
+        De esta forma si se va a evaluar un nodo y cumple que $alpha>=beta$ entonces se deja de seguir evaluando (evaluando a sus descendientes) y se produce la poda
+    \end{itemize}
+
+    \subsection{Poda Probabilística}
+    Después de la implementación anterior se ha añadido una versión que suaviza la condición de poda de forma que define un umbral (que se ha puesto a 10) y en este caso la condición de poda sería que $alpha + UMBRAL>=beta$. De esta forma se podan ramas que tienen mucha probabilidad de ser podadas (dado que \verb|alpha| solo puede crecer como se ha visto en el punto anterior). Aún así esto no deja de ser probabilístico y podría ignorar la rama donde se encuentra la solución que daría el minimax. Es por esto que hay mejores opciones.
+
+    \subsection{Ordenación de movimientos}
+    Este mecanismo consiste en elegir el orden en el que se evalúan los nodos descendientes de un nodo padre. Para ello se ordenan de mayor a menor según su valor heurístico. Esto provoca que se evalúen primero las ramas más prometedoras aumentando la probabilidad de cota. Este método sí promete dar la solución exacta y en la práctica se ha visto que es el más eficiente en relación tiempo-resultados.
+
+    \section{Heurísticas}
+    A continuación se describe el proceso que se ha seguido para la obtención de los resultados
+
+    \subsection{Heurística Básica}
+    En primer lugar se desarrolló una heurística básica, basada en la dada en el tutorial. En este punto se vio que al tener en cuenta los factores como la distancia a la meta, si está en la casa o si está en la recta final y modificando ligeramente los pesos ya se conseguía ganar al ninja 1. Esta heurística es la denominada \verb|valoracion1| en el código proporcionado.
+
+    \subsection{Heurística Avanzada}
+    Basada en la heurística anterior se buscó ganar ahora al ninja 2. Para ello se valoró positivamente si en la jugada actual podía comer alguna ficha rival valorando además cómo de buena era la ficha que había comido (basándose en la distancia a la meta). Con esto se consiguió vencer al ninja 2 (aunque por algún motivo dejé de ganar al ninja 1).
+
+    \subsection{Heurística Definitiva}
+    Terminando la heurística anterior (valorando barreras y rebotes) se vio que no mejoraba mucho la heurística anterior y que con pequeños cambios en los pesos variaba mucho las victorias o derrotas con respecto a los ninjas. Es por ello que se decidió hacer un nuevo enfoque. Para ello se desarrolló esta heurística pero definiendo todos los pesos al principio de la misma y de forma que leyera dichos valores de un archivo externo (en este caso \verb|'pesos.csv'|). Después se copió esta heurística pero de forma que leyera los pesos de otro archivo (\verb|'pesos2.csv|). \\
+
+    Después se desarrolló un programa externo (\verb|'generar_pesos.py'|) cuyo objetivo era mediante un algoritmo genético ir mejorando los pesos actuales. Se le dio como semilla los valores iniciales del archivo \verb|'pesos.csv'| que tenían los valores de la heurística anterior pero adaptados a esta (poniendo a 0 todos los casos que no se valoraban como barreras y rebotes).\\
+
+    De esta forma el programa hacía una mutación sobre los valores de \verb|'pesos.csv'| y lo guardaba en \verb|'pesos2.csv'|. Después enfrentaba ambas heurísticas en los dos casos posibles (según quién empezara). En caso de ganar las 2 partidas la segunda heurística, esta sustituía a la primera y se repetía el proceso. Además para la mutación se tuvo en cuenta la cantidad de partidas ganadas consecutivas que llevaba la heurística "ganadora" variando cada vez menos los pesos hasta un umbral inferior.\\
+
+    Lamentablemente al ser tan lenta la ejecución no logró mejorarse mucho y no consiguió ganar al ninja 3 en ningún caso. Si se quiere ver el desarrollo del programa auxiliar se puede consultar en el Anexo.
+
+    \section{Análisis de resultados}
+
+    El análisis de las Heurísticas ha resultado en lo siguiente (donde * indica que el ninja comienza la partida como jugador 1):
+
+    \begin{center}
+        \begin{tabular}{c|c|c|c|c|c|c}
+            Heurística & Ninja 1 & Ninja 1* & Ninja 2 & Ninja 2* & Ninja 3 & Ninja 3*\\
+            \hline
+            valoracion0 (Id=2) &\tick & \tick & \cross & \cross & \cross &\cross\\
+            valoracion1 (Id=3) &\cross & \cross & \tick & \tick & \cross &\cross\\
+            valoracion2 (Id=7) &\cross & \cross & \cross & \cross & \cross &\cross\\
+        \end{tabular}
+    \end{center}
+
+    En todas se ha elegido el algoritmo de la poda ordenada por ser el que mejor resultado ha proporcionado.
+    
+    \section{Conclusiones}
+    A pesar de los esfuerzos no se ha conseguido vencer a más de dos ninjas simultáneamente. Es posible que heurísticas más sencillas ofrezcan mejores resultados (igual que se vio que la primera heurística conseguía vencer al ninja 1 mientras no se ha vuelto a conseguir dicho resultado).
+
+    \section{Anexo (Algoritmo genético)}
+    A pesar de pedir explícitamente la no inclusión de código en el presente documento, ya que no va a estar incluido en la entrega añado el código del programa con el algoritmo genético. Si esto va a penalizar se puede omitir su lectura.
+
+    \begin{minted}[fontsize=\small, linenos]{python}
+#!/usr/bin/env python3
+import os
+import csv
+import random
+import subprocess
+from datetime import datetime
+
+# Configuración
+NUM_GENERACIONES = 10000
+ID_11 = 4
+ID_12 = 5
+FICHERO_PESOS_11 = "pesos.csv"
+FICHERO_PESOS_12 = "pesos2.csv"
+LOG_PATH = "log_evolucion.csv"
+
+# Rangos de cada parámetro
+rangos = [
+    (0, 100),   # Máximo beneficio distancia
+    (0, 100),   # Mínimo beneficio distancia
+    (0, 100),   # Máximo Comer Ficha
+    (0, 100),   # Mínimo Comer Ficha
+    (-100,100), # Comer propia
+    (-100, 0),  # Ficha en Casa
+    (0, 100),   # Ficha en Casilla Segura
+    (0, 100),   # Ficha en Recta Final
+    (0, 100),   # Ficha en Casilla Final
+    (-100, 0),  # Rebote
+    (0, 100),   # Barrera
+]
+
+# === Funciones auxiliares ===
+
+def crear_individuo():
+    return [round(random.uniform(r[0], r[1]), 2) for r in rangos]
+
+# def mutar(individuo, tasa_mutacion=0.3, desviacion=2.5):
+#     nuevo = individuo[:]
+#     # for i in range(len(nuevo)):
+#     #     if random.random() < tasa_mutacion:
+#     #         min_val, max_val = rangos[i]
+#     #         nuevo[i] = round(random.uniform(min_val, max_val), 2)
+#     if random.random() < tasa_mutacion:
+#             min_val, max_val = rangos[i]
+#             cambio = random.uniform(-desviacion, desviacion)
+#             nuevo_valor = nuevo[i] + cambio
+#             # Asegurar que el nuevo valor esté dentro de los rangos
+#             nuevo[i] = round(max(min_val, min(max_val, nuevo_valor)), 2)
+#     return nuevo
+
+def mutar(individuo, contador_mejoras, tasa_mutacion=0.3, desviacion_max=50.0, 
+            desviacion_min=2.5):
+    """
+    Mutación adaptativa: cuanto más mejora, más suave es la mutación.
+
+    :param individuo: lista de floats (pesos)
+    :param contador_mejoras: cuántas veces ha ganado consecutivamente
+    :param tasa_mutacion: probabilidad de mutar cada peso
+    :param desviacion_max: desviación inicial (cuando no ha ganado nada)
+    :param desviacion_min: desviación mínima (si ha ganado muchas veces)
+    """
+    nuevo = individuo[:]
+
+    # A partir de 10 victorias seguidas la desviación será constante
+    contador_mejoras=min(contador_mejoras,10)
+    desviacion = ((desviacion_min - desviacion_max)/10)*contador_mejoras 
+                   + desviacion_max
+
+    for i in range(len(nuevo)):
+        if random.random() < tasa_mutacion:
+            min_val, max_val = rangos[i]
+            cambio = random.uniform(-desviacion, desviacion)
+            nuevo_valor = nuevo[i] + cambio
+            nuevo[i] = round(max(min_val, min(max_val, nuevo_valor)), 2)
+    return nuevo
+
+def guardar_pesos(pesos, fichero):
+    with open(fichero, "w") as f:
+        f.write(",".join(map(str, pesos)) + "\n")
+
+def cargar_pesos(fichero):
+    with open(fichero, "r") as f:
+        return [float(x) for x in f.readline().strip().split(",")]
+
+# guardar_log(generacion, hijo, "Victoria" if resultado_2 == 1 else "Derrota", ID_12)
+def guardar_log(generacion, pesos, resultado, empieza):
+    encabezado = [
+        "generacion",
+        "empieza",
+        "min_distancia",
+        "max_distancia",
+        "comer_propia",
+        "max_comer",
+        "min_comer",
+        "ficha_casa",
+        "casilla_segura",
+        "recta_final",
+        "casilla_final",
+        "rebote",
+        "barrera",
+        "resultado",
+        "timestamp"
+    ]
+    existe = os.path.exists(LOG_PATH)
+    with open(LOG_PATH, mode="a", newline="") as f:
+        writer = csv.writer(f)
+        if not existe:
+            writer.writerow(encabezado)
+        writer.writerow([generacion, empieza] + pesos 
+                        + [resultado, datetime.now().isoformat()])
+
+def ejecutar_partida(id1, id2):
+    resultado = subprocess.run(
+        ["./ParchisGame", "--p1", "AI", str(id1), "jugador1", "--p2", 
+         "AI", str(id2), "jugador2", "--no-gui"],
+        capture_output=True, text=True
+    )
+    salida = resultado.stdout
+
+    if "Ha ganado el jugador 2" in salida:
+        return 2
+    elif "Ha ganado el jugador 1" in salida:
+        return 1
+    else:
+        return 0  # Empate o error
+
+# === Bucle principal ===
+
+if __name__ == "__main__":
+
+    # Cargo la información del 
+    try:
+        campeon = cargar_pesos(FICHERO_PESOS_11)
+        print("Campeón inicial cargado desde pesos.csv")
+    except FileNotFoundError:
+        campeon = crear_individuo()
+        guardar_pesos(campeon, FICHERO_PESOS_11)
+        print("No se encontró pesos.csv. Generado nuevo campeón aleatorio.")
+
+    contador_victorias=0
+
+    for generacion in range(1, NUM_GENERACIONES + 1):
+
+        hijo = mutar(campeon, contador_mejoras=contador_victorias)
+        guardar_pesos(hijo, FICHERO_PESOS_12)
+
+        resultado_1 = ejecutar_partida(ID_11, ID_12)
+        guardar_log(generacion, hijo, 
+                    "Victoria" if resultado_1 == 2 else "Derrota", ID_12)
+
+        puntuacion_id12 = 0
+
+        if resultado_1 == 2:
+            print(f"Gen {generacion}, Empieza id {ID_11}: ¡Nuevo campeón!")
+            puntuacion_id12 += 0.5
+
+            # Solo juega la segunda si gana la primera
+            resultado_2 = ejecutar_partida(ID_12, ID_11)
+            guardar_log(generacion, hijo, 
+                    "Victoria" if resultado_2 == 1 else "Derrota", ID_12)
+
+            if resultado_2 == 1:
+                print(f"Gen {generacion}, Empieza id {ID_12}: ¡Nuevo campeón!")
+                puntuacion_id12 += 0.5
+            else:
+                print(f"Gen {generacion}, Empieza id {ID_12}: Derrota o empate")
+        else:
+            print(f"Gen {generacion}, Empieza id {ID_11}: Derrota o empate")
+
+        guardar_log(generacion, hijo, 
+                    "Victoria" if resultado_1 == 2 else "Derrota", ID_11)
+
+
+        # Si gana 1: 0.5, si gana las 2: 1 y si pierde las 2: 0
+
+
+        if puntuacion_id12 == 1: # Que gane las 2
+            contador_victorias=0
+            campeon = hijo
+            guardar_pesos(campeon, FICHERO_PESOS_11)
+        elif puntuacion_id12 == -1: # Se quita esta opción
+            contador_victorias=0
+            for i in range(len(hijo)):
+                campeon[i] = (campeon[i]+hijo[i])/2   # La media
+            guardar_pesos(campeon, FICHERO_PESOS_11)            
+        else:
+            contador_victorias+=1
+            
+
+    print("Optimización finalizada.")
+
+    \end{minted}
+\end{document}

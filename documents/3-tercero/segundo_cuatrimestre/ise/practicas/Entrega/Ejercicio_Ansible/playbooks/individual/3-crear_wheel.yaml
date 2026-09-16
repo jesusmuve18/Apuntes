@@ -1,0 +1,19 @@
+---
+- name: Crear wheel y permitir ejecutar sudo
+  hosts: servers
+  vars_files:
+    - ../vars.yaml
+  become: yes
+  tasks:
+    - name: Crear wheel si no existe
+      ansible.builtin.group:
+        name: "{{ admin_group }}"
+        state: present              # si ya está no lo crea
+
+    - name: Permitir ejecutar sudo 
+      community.general.sudoers:
+        name: "{{ admin_group }}"
+        state: present              # si ya está no lo crea
+        group: "{{ admin_group }}"
+        commands: ALL
+        nopassword: false           # si se quisiese sin contraseña se cambiaría esta opción

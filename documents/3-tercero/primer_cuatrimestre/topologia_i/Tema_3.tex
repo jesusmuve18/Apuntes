@@ -1,0 +1,751 @@
+\chapter{Conexión y Compacidad}
+
+\section{Conexión}
+Una primera intuición nos puede decir que un conjunto es conexo si todos sus puntos están conectados. Por ejemplo el e.t. $(\bb{R}, \cc{T}_u)$ parece que es conexo mientras que otro espacio como el $([0,1]\cup\{2\}, \cc{T}_u)$ está hecho de varios ``trozos'' y por tanto no parece ser conexo. Incluso cambiando la topología puede ser que este segundo espacio fuese conexo (es por esto que no nos tenemos que dejar llevar siempre por la intuición).
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t.
+    \begin{itemize}
+        \item Una \textbf{separación} de $(X, \cc{T})$ es una pareja de abiertos $\{U,V\}\subset \cc{T}$ que verifican $U\cup V = X$ y $U\cap V = \emptyset$.
+        
+        Se llama \textbf{separación trivial} a $\{X, \emptyset\}$.
+        \item $(X, \cc{T})$ es \textbf{conexo} si su única separación es la trivial, es decir si $U,V\in \cc{T}$ con $U\cup V = X$ y $U\cap V = \emptyset$, entonces $U=\emptyset$ o $V=\emptyset$.
+        \item $(X, \cc{T})$ es \textbf{disconexo} si no es conexo, es decir, si existen $U,V\in \cc{T}$ con $U\neq \emptyset$ y $V\neq \emptyset$ de forma que $U\cup V = X$ y $U\cap V = \emptyset$.
+        \item Un subconjunto $A\subset X$ no vacío se dice \textbf{conexo} en $(X, \cc{T})$ si $(A, \cc{T}_A)$ es conexo y \textbf{disconexo} en caso contrario.
+    \end{itemize}
+    \endsquare
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(X, \cc{T}_t)$ es conexo siempre.
+        \item Si $\#X=1$ y consideramos $(X, \cc{T})$, entonces es conexo.
+        \item Si $\#X\geq 2 \Rightarrow (X, \cc{T}_{disc})$ es disconexo. Para verlo podemos tomar $U\in \cc{T}_{disc}$ con $U\notin \{\emptyset, X\}$ y entonces tenemos $X\setminus U\in \cc{T}_{disc}$ y además $X\setminus U\neq \notin \{X, \emptyset\}$ y tenemos que $U\cap (X\setminus U) = \emptyset$ y $U\cup (X\setminus U) = X$.
+        \item $(X, \cc{T}_{x_0})$ es conexo (si $U,V\in \cc{T}_{x_0}$ no vacíos, entonces $x_0\in (U\cap V) \neq \emptyset$).
+        \item Si $\#X=\infty \Rightarrow (X, \cc{T}_{CF})$ es conexo. Para verlo supongamos que existen $U,V\in \cc{T}_{CF}\setminus \{\emptyset\}$ con $U\cup V =X$ y $U\cap V = \emptyset$. Entonces $X\setminus U$, $X\setminus V$ son finitos y entonces $(X\setminus U)\cup (X\setminus V)$ es finito pero $(X\setminus U)\cup (X\setminus V) = X \setminus (U\cap V) = X$ que no es finito y por tanto llegamos a contradición.
+        \item $(\{0,1\}, \cc{T}_u|_{\{0,1\}})$ es disconexo ya que $\{\{0\}, \{1\}\}$ es una separación.
+        \item $(\{0,1\}, \cc{T})$ con $\cc{T}=\{\emptyset, \{0,1\}, \{0\}\}$ es conexo.
+        \item $X=(\{0\}\times \bb{R})\cup (\{1\}\times \bb{R})\subset \bb{R}^2$ es disconexo en $(\bb{R}^2, \cc{T}_u)$.
+        \item $[0,1]\cup \{2\}\subset \bb{R}$ es disconexo en $(\bb{R}, \cc{T}_u)$ 
+        \item $\bb{Q}\subset \bb{R}$ es disconexo en $(\bb{R}, \cc{T}_u)$.
+        \item $\bb{Z}$ es disconexo en $(\bb{R}, \cc{T}_u)$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{teo}
+    Si $(X, \cc{T})$ es un e.t, entonces equivalem:
+    \begin{enumerate}
+        \item[(i)] $(X, \cc{T})$ es conexo.
+        \item[(ii)] Si $A\in (\cc{T}\cap \cc{C}_{\cc{T}})$, entonces $A\in\{\emptyset, X\}$.
+        \item[(iii)] $(X, \cc{T})$ cumple la \textbf{propiedad de los valores intermedios}\footnote{A partir de ahora lo notaremos por PVI}, es decir, si $f:(X, \cc{T})\to (\bb{R}, \cc{T}_u)$ continua y $a<b\in f(X)$, entonces $[a,b]\in f(X)$.
+        \item[(iv)] Si $g:(X, \cc{T})\to (\{0,1\}, \cc{T}_{disc})$ es continua, entonces $g$ es constante 
+    \end{enumerate}
+    \begin{proof}\
+        \begin{itemize}
+            \item[(i)$\Rightarrow$(ii) )] $A\in \cc{T}\cap \cc{C}_{\cc{T}} \Rightarrow (X\setminus A) \in \cc{T} \Rightarrow \{A, (X\setminus A)\}$ es una separación de $(X, \cc{T})$. Por (i) tenemos que $\{A, (X\setminus A)\}=\{X, \emptyset\}$ por lo que $A\in \{\emptyset, X\}$.
+            \item[(ii)$\Rightarrow$(iii) )] Sea $f:(X, \cc{T})\to (\bb{R}, \cc{T}_u)$ continua. Veamos que verifica la propiedad de los valores intermedios. Hagamos una distinción de casos:
+            \begin{itemize}
+                \item[$\bullet)$] Si $f$ es constante, entonces cumple trivialmente PVI.
+                \item[$\bullet)$] Si $f$ no es constante podemos considerar $a<b\in f(X)$ y tendremos que ver que $[a,b]\subset f(X)$. Supongamos que no, es decir, que $\exists c\in (a,b)$ con $c\notin f(X)$. Definimos $A=f^{-1}((-\infty, c)) = f^{-1}((-\infty, c])$ y como $f$ es continua tenemos que $A\in (\cc{T}\cap \cc{C}_{\cc{T}})$ por lo que por (ii) sabemos que $A\in \{\emptyset, X\}$. Sin embargo, sabemos que $a\in f(X)$ y $a<c$ por lo que $A\neq \emptyset$. Además, $b\in f(X)$ pero $f^{-1}(b)\notin A$ por lo que $A\neq X$ y llegamos a contradicción.
+            \end{itemize}
+            \item[(iii)$\Rightarrow $(iv) )] Sea $g:(X, \cc{T}) \to (\{0,1\}, \cc{T}_{disc})$ continua. Sabemos que $\cc{T}_{disc}|_{\{0,1\}} = \cc{T}_u|_{\{0,1\}}$ y entonces podemos considerar la composición con la inclusión $i\circ g:(X, \cc{T})\to (\bb{R}, \cc{T}_u)$ es continua. Por (iii) sabemos que $(i\circ g)(X)\subset \bb{R}$ es un intervalo. Además, $(i\circ g)(X) = g(X)\subset \{0,1\}$ y es un intervalo (con la observación que viene a continuación). Esto implica que $g(X)=\{0\}$ o $g(X)=\{1\}$ lo cual implica que $g$ es constante.
+            \item[(iv)$\Rightarrow$(i) )] Sea $\{U,V\}$ una separación de $(X, \cc{T})$. Veamos que $\{U,V\}=\{X, \emptyset\}$. Para ello considero la aplicación $g:(X, \cc{T})\to (\{0,1\}, \cc{T}_{disc})$ dada por 
+            \begin{align*}
+                g(x)=\left\{
+                    \begin{array}{ccc}
+                        0 & \text{ si } x\in U\\
+                        1 & \text{ si } x \in V
+                    \end{array}
+                \right.
+            \end{align*}
+            Y tenemos que es continua ya que $g^{-1}(\{0\})=U\in \cc{T}$ y $g^{-1}(\{1\})=V\in \cc{T}$. Por (iv) tenemos que $g=cte$ y por tanto, $U =\emptyset$ o $V=\emptyset$ y como es una separación tenemos que $\{U,V\}=\{\emptyset, X\}$ y tenemos que $(X, \cc{T})$ es conexo.
+        \end{itemize}
+    \end{proof}
+\end{teo}
+
+\begin{observacion}
+    Consideraremos que $[a,a]=\{a\}$ y lo llamaremos intervalo (a pesar de no ser estrictamente un intervalo según su definición formal). Con esto podríamos traducir el apartado (iii) del teorema anterior en que $f(X)$ sea un intervalo.
+    \endsquare
+\end{observacion}
+
+\begin{coro}
+    (Teorema de Bolzano)
+    
+    Si $(X, \cc{T})$ es conexo, $f:(X, \cc{T})\to (\bb{R}, \cc{T}_u)$ es continua y $\exists x,y\in X$ con $f(x)<0<f(y)$, entonces $\exists z \in X$ con $f(z)=0$. Esto es por cumplir la PVI.
+    \endsquare
+\end{coro}
+
+\begin{coro}
+    Si $(X, \cc{T})$ conexo y $f:(X, \cc{T})\to (\bb{R}, \cc{T}_u)$ continua con $f(x)\neq 0\ \ \forall x \in X$, entonces $f>0$ o $f<0$ en todo $X$.
+    \endsquare
+\end{coro}
+
+\begin{coro}
+    Si $\emptyset\neq A \subset \bb{R}$, entonces $A$ es conexo en $(\bb{R}, \cc{T}_u)\sii A$ es unitario o $A$ es un intervalo.
+
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Leftarrow$)] Si $A$ es unitario es conexo. Si $A$ es un intervalo, entonces $(A, \cc{T}_u|_A)$ cumple la PVI\footnote{la estudiada en la asignatura de Cálculo I} y por el teorema tenemos que $A$ es conexo en $(\bb{R}, \cc{T}_u)$.
+            \item[$\Rightarrow$)] Supongamos que $A$ es conexo y que no es ni unitario ni un intervalo. Por tanto existen $a<c<b$ tales que $a,b\in A$ pero $c\notin A$. Consideramos $U=(-\infty, c)\cap A$, $V=(c, +\infty)\cap A$ y tenemos que $\{U,V\}$ es una separación de $(A, \cc{T}_u|_A)$ que no es trivial ya que $a\in U$ y $b\in V$ por lo que $(A, \cc{T}_u|_A)$ es disconexo y llegamos a contradicción.
+        \end{itemize}
+    \end{proof}
+\end{coro}
+
+\begin{observacion}
+    La conexión no es una propiedad hereditaria.
+    \endsquare
+\end{observacion}
+
+\begin{coro}
+    Si $(X, \cc{T})$ es conexo y $f:(X, \cc{T})\to (Y, \cc{T}')$ es continua, entonces $f(X)$ es conexo en $(Y, \cc{T}')$. \\
+    
+    Si $f$ es además sobreyectiva, entonces $(Y, \cc{T}')$ es conexo.
+    \begin{proof}
+        Tenemos que comprobar que $(f(X), \cc{T}'|_{f(X)})$ es conexo. Para ello consideramos $g:(f(X), \cc{T}'|_{f(X)})\to (\{0,1\}, \cc{T}_{disc})$ continua y tendremos que ver que $g=cte$. Tomamos $g\circ f^{f(X)}:(X, \cc{T})\to (\{0,1\}, \cc{T}_{disc})$ que es continua (por ser composición de continuas) y además, por hipótesis tenemos que $(X, \cc{T})$ es conexo por lo que $g\circ f^{f(X)}$ es constante y por tanto $g$ es constante y por el teorema anterior tenemos lo buscado.
+
+    \end{proof}
+\end{coro}
+
+\begin{coro}\
+    \begin{enumerate}
+        \item[(i)] La conexión es un invariante topológico.
+        \item[(ii)] Si $f:(X, \cc{T})\to (Y, \cc{T}')$ es una identificación y $(X, \cc{T})$ es conexo, entonces $(Y, \cc{T}')$ es conexo.
+        \item[(iii)] Si $(X, \cc{T})$ es conexo y $R$ es una relación de equivalencia en $X$, entonces $(X/R, \cc{T}/R)$ es conexo.
+        \item[(iv)] $(\bb{S}^1, \cc{T}_u|_{\bb{S}^1})$ es conexo.
+        \item[(v)] $[a,b], [a,b), (a,b]$ y $(a,b)$ no son homeomorfos en $(\bb{R}, \cc{T}_u)$ 
+        \item[(vi)] $(\bb{R}\setminus \{x\}, \cc{T}_u)$ no es homeomorfo a $(\bb{R}, \cc{T}_u)$.
+        \item[(vi)] $(\bb{R}, \cc{T}_u)$ no es homeomorfo a $(\bb{S}^1, \cc{T}_u|_{\bb{S}^1})$.  
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] Trivial.
+            \item[(ii)] Trivial.
+            \item[(iii)] Trivial.
+            \item[(iv)] Sabemos que $([0,1], \cc{T}_u|_{[0,1]})$ es conexo y tenemos que existe una función $f:([0,1], \cc{T}_u|_{[0,1]})\to (\bb{S}^1, \cc{T}_u)$ es continua y sobreyectiva, por ejemplo, $f(t)=(\cos(2\pi t), \sen(2\pi t))$.
+            \item[(v)] Supongamos que $[a,b)\cong(a,b)$. Entonces tenemos que existe un homeomorfismo $f:([a,b), \cc{T}_u)\to ((a,b), \cc{T}_u)$. Pero entonces $f|_{[a,b]}:([a,b), \cc{T}_u)\to ((a,b)\setminus \{f(a)\}, \cc{T}_u)$ sería un homeomorfismo pero llegaríamos a contradicción ya que la conexión es un invariante topológico.
+            \item[(vi),(vii)] Se dejan planteadas como ejercicios para el lector.  
+        \end{enumerate}
+    \end{proof}
+\end{coro}
+
+\begin{teo}
+    (Teorema del punto fijo) Si $f:([0,1], \cc{T}_u)\to ([0,1], \cc{T}_u)$ continua, entonces $\exists x_0 \in [0,1]$ con $f(x_0)=x_0$.
+    \begin{proof}
+        Sea $h:[0,1]\to [0,1]$ con $h(x)=f(x)-x$ continua. Tenemos que $[0,1]$ es conexo luego
+        \begin{align*}
+            \left.
+            \begin{array}{c}
+                h(0)=f(0)\geq 0\\
+                h(1)=f(1)-1 \leq 0\\
+            \end{array}
+            \right\} &\overset{PVI}{\Rightarrow} 0 \in [h(1),h(0)] \subset h([0,1]) \Rightarrow \exists x_0 : h(x_0)=0 \Rightarrow \\
+            &\Rightarrow f(x_0) = x_0
+        \end{align*}
+    \end{proof}
+\end{teo}
+
+\begin{teo}
+    (Teorema de la invariaza del dominio) Si $A\neq \emptyset $ es abierto en $(\bb{R}, \cc{T}_u)$ y $f:(A, \cc{T}|_A)\to (\bb{R}, \cc{T}_u)$ es un embebimiento, entonces $f(A)$ es abierto en $(\bb{R}, \cc{T}_u)$.
+
+    \begin{proof}
+        Sabemos que $A\in \cc{T}_u$ y además $A\neq \emptyset$ luego podemos escribir $A=\bigcup\limits_{i\in I}I_i$ donde $I_i$ es un itervalo abierto en $(\bb{R}, \cc{T}_u)$\ \ $\forall i \in I$, luego tenemos que $f(A)=f(\bigcup\limits_{i\in I}I_i)=\bigcup\limits_{i\in I}f(I_i)$. Si conseguimos ver que $f(I_i)\in \cc{T}_u\ \ \forall i \in I$ tendremos lo buscado. 
+
+        Sabemos que $I_i$ es conexo y $f$ es continua luego $f(I_i)$ es conexo en $(\bb{R}, \cc{T}_u)$ y por tanto es un intervalo (no unitario porque $f$ es inyectiva). Además, como $f$ es un embebimiento tenemos que $f(I_i)\cong I_i$ que es un intervalo abierto por lo que $f(I_i)$ será también un intervalo abierto y entonces $f(I_i)\in \cc{T}_u$. Como $i$ era arbitrario tenemos lo buscado.
+
+    \end{proof}
+\end{teo}
+
+\subsection{Construcción de conexos}
+
+ En general, la unión de conexos no es conexo. En $(\bb{R}, \cc{T}_u)$ tenemos que $]0,1[\cup]2,3[$ no es conexo. La intersección tampoco lo será. Por ejemplo, en $(\bb{S}^1, \cc{T}_u)$ podemos imaginar 2 abiertos que se ``crucen'' y su intersección no será conexa (ya que generará otros 2 abiertos que no estarán conectados) como se ve en la figura a continuación:
+\vspace*{0.25cm}
+\begin{center}
+    \begin{tikzpicture}
+        % Dinujar la mitad verde
+        \draw[green, thick] (90:1.475cm) arc[start angle=90, end angle=270, radius=1.475cm];
+        % Dibujar la mitad roja
+        \draw[red, thick] (120:1.5cm) arc[start angle=120, end angle=-120, radius=1.5cm];
+        
+        \node[color=red, rotate=30] at (120:1.5cm) {\textbf{]}};
+        \node[color=red, rotate=-30] at (-120:1.5cm) {\textbf{]}};
+
+        \node[color=green] at (90:1.5cm) {\textbf{[}};
+        \node[color=green] at (-90:1.5cm) {\textbf{[}};
+     \end{tikzpicture}
+\end{center}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t., $\{A_i\}_{i\in I}$ una familia de conexos en $(X, \cc{T})$. Se tienen:
+    \begin{enumerate}
+        \item[(i)] Si $\exists i_o \in I$ tal que $A_i\cap A_{i_0}\neq \emptyset \ \ \forall i\in I$, entonces se tiene que $\bigcup\limits_{i\in I}A_i$ es conexo en $(X, \cc{T})$.
+        \item[(ii)] Si $\bigcap\limits_{i\in I} A_i \neq \emptyset \Rightarrow \bigcup_{i\in I} A_i$ es conexo en $(X, \cc{T})$.
+        \item[(iii)] Si $I=\bb{N}$ y $A_n\cap A_{n+1}\neq \emptyset$\ \ $\forall n\in \bb{N}$, entonces $\bigcup\limits_{n\in \bb{N}}A_n$ es conexo en $(X, \cc{T})$.  
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] Sea $g:(\bigcup\limits_{i\in I}A, \cc{T}_u)\to (\{0,1\}, \cc{T}_{disc})$ continua. Entonces $\forall i \in I$ consideramos $g|_{A_i}:(A_i, \cc{T}_u)\to (\{0,1\}, \cc{T}_{disc})$ continua. Entonces tenemos que $g|_{A_i}$ es constante. En particular, $g|_{A_{i_0}}=c_{i_0}$. Tendremos que ver que $c_i=c_{i_0}$\ \ $\forall i \in I$. 
+            Como $A_i\cap A_{i_0}\neq \emptyset$, entonces $\exists x \in A_i \cap A_{i_0}$ y entonces
+            \begin{align*}
+                \left. 
+                \begin{array}{c}
+                    c_i=g|_{A_i}(x) = g(x)\\
+                    c_{i_0}=g|_{A_{i_0}}(x) = g(x)\\
+                \end{array}
+                \right\} \Rightarrow c_{i_0}=c_i \Rightarrow g \text{ es constante }\Rightarrow \bigcup\limits_{i\in I}A_i \text{ conexo}
+            \end{align*}
+            \item[(ii)] Corolario de (i).
+            \item[(iii)] Se deja planteado como ejercicio para el lector.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $A\subset \bb{R}^n$ se dice \textbf{estrellado} si $\exists x_0 \in A$ tal que $[x,x_0]^n = \{(\lambda x_0 + (1-\lambda)x):\lambda \in [0,1]\}\subset A\ \ \forall x \in A$, es decir, si el segmento que une cualquier punto $x$ de $A$ con el punto $x_0$ está contenido en $A$.
+        
+        En $(\bb{R}, \cc{T}_u)$ todo subconjunto estrellado es conexo, $A=\bigcup\limits_{x\in A}[x,x_0]$, con $x_0\in \bigcap\limits_{x\in A}[x,x_0]\neq \emptyset$ y $[x,x_0]$ es conexo. En particular, todo subespacio afín de $\bb{R}^n$, las bolas abiertas y cerradas y los convexos de $\bb{R}^n$ son conexos.
+
+        \item $(\bb{S}^n, \cc{T}_u)$ es conexo. Para verlo, podemos considerar $\bb{S}^n=(\bb{S}^n\setminus \{N\})\cup (\bb{S}^n \setminus \{S\})$ y como $(\bb{S}^n\setminus \{N\}) \cong \bb{R}^n \cong(\bb{S}^n\setminus \{S\})$ entonces $\bb{S}^n$ es unión de conexos con intersección no vacía.
+        
+        \item Si $n\geq 2$, entonces $\bb{R}^n \setminus\{0\}$ es conexo, ya que $\bb{R}^{n+1} \setminus \{0\}=\bigcup\limits_{x\in \bb{R}^{n+1}\setminus \{0\}} \left(\bb{S}^n\cup \left[x, \frac{x}{\|x\|}\right] \right)$. Además, como $\bb{R}^n\setminus\{x\}\cong \bb{R}^n \setminus\{0\}$ (aplicando una traslación $y\mapsto y-x$), entonces también será convexo $\forall x \in \bb{R}^n$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{coro}\
+    \begin{enumerate}
+        \item[(i)] $\bb{R}\ncong \bb{R}^n$\ \ $\forall n\geq 2$ ya que $\bb{R}^n\setminus\{x\}$ es conexo pero $\bb{R}\setminus \{0\}$ no lo es.
+        \item[(ii)] $\bb{S}^1 \ncong \bb{S}^n$\ \ $\forall n \geq 2$ porque $\bb{S}^1\setminus \{x\}\ncong \bb{S}^n\setminus \{x\}$ ya que $\bb{S}^1\setminus \{x\}\cong \bb{R} \ncong \bb{R}^n \cong \bb{S}^n \setminus \{x\}$. 
+    \end{enumerate}
+    \endsquare
+\end{coro}
+
+\begin{teo}
+    (Teorema de Borsuk-Ulam) Si $f:(\bb{S}^n, \cc{T}_u)\to (\bb{R}, \cc{T}_u)$ continua, entonces $\exists p_0\in \bb{S}^n$ tal que $f(p_0)=f(-p_0)$.
+    \begin{proof}
+        Sea $h:\bb{S}^n \to \bb{R}$ dada por $h(p)=f(p)-f(-p)$ que es continua por serlo $f$. Se tiene que $h(-p)=f(-p)-f(p)=-h(p) \Rightarrow h\equiv 0$ o $h$ toma valores negativos y negativos. En este segundo caso tendremos que $\exists p_0 \in \bb{S}^n$ tal que $h(p_0)=0=f(p_0)-f(-p_0)$ y lo tenemos en cualquiera de los dos casos.
+
+    \end{proof} 
+\end{teo}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t. y $A\subset X$ conexo. Si $B\subset X$ cumple $A\subset B \subset \overline{A}$, entonces $B$ es conexo. En particular, $\overline{A}$ es conexo.
+    \begin{proof}
+        Sea $f:(B, \cc{T}_B)\to (\{0,1\}, \cc{T}_{disc})$ continua. Tendremos que ver que $f$ es constante. Para ello, como $A\subset B$, puedo tomar $\overline{A}^B=\overline{A}\cap B = B$ por lo que $A$ es denso en $B$. Por otra parte, $f(\overline{A}^B)\subset \overline{f(A)}$, y como $A$ es conexo, $f|_A$ es continua y constante $\Rightarrow f(A)=\{0\}$ o $f(A)=\{1\}$. En cualquier caso tendremos $\overline{f(A)}=\{0\}$ o $\overline{f(A)}=\{1\}$, luego $f$ es constante porque $f(B)\subset f(A)$.
+
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Sea $(X, \cc{T})$ un e.t. y supongamos que existe $A\subset X$ denso y conexo, entonces $(X, \cc{T})$ es conexo.
+        \item $f:]0,1] \to \bb{R}$, $x\mapsto \sen\left(\frac{1}{x}\right)$, $A=G(f)=\left\{\left(x, \sen\left(\frac{1}{x}\right)\right): x\in ]0,1]\right\}$. Entonces $A\cong ]0,1]$ que es conexo. Esto quiere decir que la gráfica de una función es homeomorfa al dominio de la aplicación,
+        \begin{align*}
+            A & \to ]0,1]\\
+            \left(x, \sen\left(\nicefrac{1}{x}\right)\right) & \mapsto x
+        \end{align*}
+        Además, $\overline{A}=A\cup[(0,1),(0,-1)]$ es conexo.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{prop}
+    Sean $(X, \cc{T})$, $(Y, \cc{T}')$ e.t. Entonces $(X\times Y, \cc{T}\times \cc{T}')$ es conexo si y solo si $(X, \cc{T})$ y $(Y, \cc{T}')$ son conexos.
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$)] Como las proyecciones $\pi_X$ y $\pi_Y$ son continuas y sobreyectivas, esta implicación es trivial.
+            \item[$\Leftarrow$)] Sabemos que $(X, \cc{T})$ es conexo. Sea $y\in Y$ tenemos que $(X\times \{y\}, \cc{T}\times \cc{T}'|_{X\times\{y\}})\cong (X, \cc{T})$ que es conexo. Si consideramos ahora $x\in X$ y  $(\{x\}\times Y, \cc{T}\times \cc{T}'|_{\{x\}\times Y})\cong (Y, \cc{T}')$. Con esto tenemos que
+            \begin{align*}
+                X\times Y = \left(\bigcup\limits_{x\in X}\{x\}\times Y\right) \cup \left(X \times \{y_0\}\right)
+            \end{align*}
+            Por lo que $X\times Y$ es unión de conexos y $(X \times \{y_0\})$ tiene intersección con todos los $\{x\}\times Y$ luego $X\times Y$ es conexo.
+
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}
+    Los siguientes conjuntos son conexos:
+    \begin{itemize}
+        \item $\bb{S}^1 \times \bb{R}$ (cilindro).
+        \item $\bb{T}=\bb{S}^1 \times \bb{S}^1$ (toro).
+        \item $\bb{R}\bb{P}^n = \bb{R}^{n+1}\setminus \{0\}/R$ (proyectivo).
+        \item La cinta de Möbius.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\subsection{Componentes conexas}
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t., $x\in X$, se define la \textbf{componente conexa} (c.c.) de $x$ en $(X, \cc{T})$ como la unión de todos los conjuntos conexos de $X$ que contienen a $x$. Se le denota por $\cc{C}(x)$.
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t, $x\in X$. Entonces
+    \begin{enumerate}
+        \item[(i)] $\cc{C}(x)$ es el mayor conexo en $X$ que contiene a $x$.
+        \item[(ii)] Las c.c. de $(X, \cc{T})$ determinan una partición de $X$, es decir que $\bigcup\limits_{x\in X}\cc{C}(x)=X$ y $\forall x,y\in X$ se tiene que o bien $\cc{C}(x)=\cc{C}(y)$ o bien $\cc{C}(x)\cap \cc{C}(y)=\emptyset$.
+        \item[(iii)] $(X, \cc{T})$ es conexo si y solo sí tiene una única c.c., es decir, $\cc{C}(x)=X$\ \ $\forall x \in X$.
+        \item[(iv)] Las c.c. de $(X, \cc{T})$ son cerrados en $(X, \cc{T})$ (en general no serán abiertos).
+        \item[(v)] Si $\emptyset \neq A \subset X$ es abierto cerrado y conexo, es decir, $A\in (\cc{T}\cap \cc{C}_{\cc{T}})$ y conexo, entonces $A$ es una c.c. de $(X, \cc{T})$ (la otra implicación no es cierta en general, en concreto que $A$ sea abierto). 
+        \item[(vi)] Si $\{A_i\}_{i\in I}\subset \cc{T}$, $A_i$ conexo $\forall i \in I$, es una partición de $X$ , es decir, $\bigcup\limits_{i\in I}A_i=X$ y $A_i\cap A_j=\emptyset$\ \ $\forall i \neq j$, entonces $\{A_i\}_{i\in I}$ son las c.c. de $(X, \cc{T})$ (de nuevo la otra implicación no es cierta ya que no siempre la partición tiene que ser por abiertos).
+    \end{enumerate}
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] Trivial, porque la unión de conexos con intersección no vacía es conexa.
+            \item[(ii)] Como $x\in \cc{C}(x) \Rightarrow \bigcup\limits_{x\in X}\cc{C}(x)=X$. Veamos ahora la segunda parte. Para ello supongamos que tenemos dos componentes conexas de forma que $\cc{C}(x)\cap \cc{C}(y)\neq \emptyset $, tendré que ver que entonces $\cc{C}(x)=\cc{C}(y)$. Como la intersección es no vacía tengo que $x,y,\in \cc{C}(x)\cup \cc{C}(y)$ y es conexo por lo que $\cc{C}(x)\cup \cc{C}(y)\subset \cc{C}(x)$ y también $\cc{C}(x)\cup \cc{C}(y)\subset \cc{C}(y)$ por lo que $\cc{C}(x)\cup \cc{C}(y)\subset \cc{C}(x)\cap \cc{C}(y)$ y por tanto $\cc{C}(x)=\cc{C}(y)$.
+            \item[(iii)] Trivial.
+            \item[(iv)] Sea $x\in X$ y queremos ver que $\cc{C}$ es cerrado, es decir, que coincide con su adherencia. Para ello sabemos que $\overline{\cc{C}(x)}$ es conexo y además $x\in \overline{\cc{C}(x)}$ por lo que $\overline{\cc{C}(x)}\subset \cc{C}(x)$ y como la otra inclusión se da siempre ya lo tenemos probado.
+            \item[(v)] Sea $x\in A$, tendremos que ver que $A=\cc{C}(x)$. Sea $B\subset X$ conexo con $A\subset B$. Si esto implica que $A=B$ entonces tendré que $A$ es una componente conexa (ya que no hay ningún conexo más grande). Para ello tenemos que 
+            \begin{align*}
+                \left.
+                \begin{array}{ccc}
+                    A\in \cc{T}, A\subset B & \Rightarrow & A \in \cc{T}|_B \\
+                    A \in \cc{C}_{\cc{T}}, A\subset B & \Rightarrow & A\in \cc{C}_{\cc{T}|_B}\\
+                \end{array}
+                \right\} \overset{B \text{ conexo}}{\Rightarrow} A =\emptyset \text{ o } A=B
+            \end{align*}
+            Como $A\neq \emptyset$ tenemos lo buscado.
+            \item[(vi)] Su demostración se deja como ejercicio para el lector.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{observacion}\
+    \begin{itemize}
+        \item La relación en $R$ dada por $xRy \sii\exists A\subset X$ conexo con $\{x,y\}\subset A$ es de equivalencia. Las clases de equivalencia de $R$ son las c.c. de $(X, \cc{T})$.
+        \item Si $(X, \cc{T})$ tiene una cantidad finita de c.c, $A_1,\dots, A_n$, entonces $A_k\in \cc{T}\ \ \forall k\in 1,\dots n$ ya que tenemos 
+        \begin{align*}
+            A_i=X\setminus \left( \bigcup\limits_{j\neq i}^n A_j\right)
+        \end{align*}
+        Y como $A_j\in \cc{C}_{\cc{T}}$ y la unión finita de cerrados es cerrada, tendríamos que $A_i\in \cc{T}$.
+    \end{itemize}
+    \endsquare
+\end{observacion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $(X, \cc{T}_{disc})$ las c.c. son $\{\{x\}:x\in X\}$ (abierto, cerrado, conexo y no vacío).
+        \item Si $x_1<x_2<\dots<x_n \in \bb{R}$, las c.c. de $(\bb{R}\setminus \{x_1,x_2,\dots,x_n\}, \cc{T}_u)$ son 
+        \begin{align*}
+        \{(-\infty, x_1), (x_n, +\infty)\}\cup\{(x_i, x_i+1):i=1,2,\dots,n-1\}
+        \end{align*}
+        En particular, las c.c. de $\bb{R}\setminus \{0\}$ son $\{(-\infty,0),(0,+\infty)\}$. 
+        \item Las c.c. de $(\bb{R}\setminus \bb{Z}, \cc{T}_u)$ son $\{(m,m+1):m\in \bb{Z}\}$.
+        \item Las c.c. de $(\bb{R}\setminus \{\nicefrac{1}{n}:n\in \bb{N}\}, \cc{T}_u)$ son $\{(-\infty, 0], (1, +\infty)\}\cup \{\left(\frac{1}{n+1}, \frac{1}{n}\right):n\in \bb{N}\}$ y $(-\infty,0] \notin \cc{T}_u$ (ejemplo de que puede haber componentes conexas no abiertas).
+        \item Las c.c. de $(\bb{Q}, \cc{T}_u)$ son $\{\{q\}:q\in \bb{Q}\}$ y ninguna es abierta.
+        \item En $(\bb{R}^2, \cc{T}_u)$ y consideramos $X=\bigcup\limits_{n\in \bb{N}}\left\{(0,0), \left(1, \frac{1}{n}\right)\right\}$. $X$ es conexo por ser unión de conexos y cuya intersección es el punto $(0,0)$ por lo que no es vacía. Además, $\overline{X}=X\cup [(0,0),(1,0)]\Rightarrow Y = X \cup \{1,0\}$ es conexo por estar en la adherencia y contener a $X$. Sin embargo, si consideramos $Y\setminus \{(0,0)\}$ no es conexo y sus c.c. son $\left\{ \left.\left((0,0), \left(1, \frac{1}{n}\right)\right.\right] : n\in \bb{N} \right\}\cup \{1,0\}$.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{teo}
+    Sea $f:(X, \cc{T})\to (Y, \cc{T}')$ una aplicación continua, $x\in X$ y sea $\cc{C}(x)$ la c.c. de $X$ que contiene a $x$ y $\cc{C}'(f(x))$ a la c.c. de $Y$ que contiene a $f(x)$. Entonces $f(\cc{C}(x))\subset \cc{C}'(f(x))$. 
+    
+    Si además $f$ es un homeomorfismo, entonces $f$ define una biyección entre las c.c. de $(X, \cc{T})$ y $(Y, \cc{T}')$ y $f|_{\cc{C}(x)}:(\cc{C}(x), \cc{T}|_{\cc{C}(x)})\to (\cc{C}'(f(x)), \cc{T}'|_{\cc{C}'(f(x))})$ es un homeomorfismo.
+
+    \begin{proof}
+        Empecemos probando que $f(\cc{C}(x))\subset \cc{C}'(f(x))$. Sabemos que $f$ es continua y $\cc{C}(x)$ es conexo luego $f(\cc{C}(x))$ es conexo y además $f(x)\in f(\cc{C}(x))$ por lo que tenemos que $f(\cc{C}(x))\subset \cc{C}'(f(x))$.
+
+        Veamos la segunda parte. Como sabemos que $f$ es un homeomorfismo sabemos que $f^{-1}$ es continua y por tanto $f^{-1}(C'(f(x)))\subset \cc{C}(x)$. Si ahora aplicamos $f$ obtenemos $\cc{C}'(f(x))\subset f(\cc{C}(x)) \Rightarrow f(\cc{C}(x))=\cc{C}'(f(x))$ por lo que 
+        \begin{align*}
+            f|_{\cc{C}(x)}: \cc{C}(x)\to \cc{C}'(f(x))\text{ es un homeomorfismo } \ \ \forall x \in X
+        \end{align*}
+    \end{proof}
+\end{teo}
+
+\begin{coro}
+    El número de c.c. de un e.t. es un invariante topológico.
+    \endsquare
+\end{coro}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $[0,1]\times \{0,1\} \ncong [0,1]\times \{0,1,2\}$ (ya que tienen distinto número de c.c., el primero tiene 2 y el segundo tiene 3).
+        \item $[0,1]\cup\{2\} \ncong [0,1]\cup [2,3]$ (ya que si fuesen homeomorfos, al restringir a una componente conexa tendría que tener un homeomorfismo sobre las componentes conexas y al restringir la c.c. a $\{2\}$ tendría que ser homeomorfo a alguna de las c.c. pero como solo tiene un punto no se da).
+        \item $(\bb{R}\times \{0\})\cup (\{0\}\times \bb{R}) \ncong (\bb{R}\times \{0\})\cup (\{0\}\times \bb{R}_0^+)$ (ya que si lo fueran le podría quitar el origen al primer espacio y me quedarían 4 c.c. pero de ninguna forma quitandole un punto al segundo espacio se pueden obtener 4 c.c).
+    \end{itemize}
+\end{ejemplo}
+
+\begin{prop}
+    Sean $(X, \cc{T})$, $(Y, \cc{T}')$ e.t., $x\in X$, $y\in Y$, entonces $\cc{C}((x,y))=\cc{C}(x)\times \cc{C}(y)$.
+    \begin{proof}
+        Veámoslo por doble inclusión:
+        \begin{itemize}
+            \item[$\subset$ )] Sabemos que la proyección $p_X:X\times Y \to X$ es continua por lo que por el teorema anterior sabemos que $p_X(\cc{C}((x,y)))\subset \cc{C}(x)$. Si lo repetimos para $p_Y$ obtenemos que $p_Y(\cc{C}((x,y)))\subset \cc{C}'(y)$ y por tanto $\cc{C}((x,y))\subset\cc{C}(x)\times \cc{C}(y)$.
+            \item[$\supset$ )] Como $\cc{C}(x)$ y $\cc{C}(y)$ son conexos tenemos que $\cc{C}(x)\times \cc{C}(y)$ es conexo luego $\cc{C}(x)\times \cc{C}(y)\subset \cc{C}((x,y))$.
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\subsection{Conexión por arcos}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t. 
+    \begin{itemize}
+        \item Un \textbf{camino} o \textbf{arco} en $(X, \cc{T})$ es una aplicación continua 
+        \begin{align*}
+            \alpha: ([0,1], \cc{T}_u|_{[0,1]})\to (X, \cc{T})
+        \end{align*}
+        A los puntos $\alpha(0)$ y $\alpha(1)$ se les llama \textbf{extremo inicial} y \textbf{extremo final} respectivamente y decimos que $\alpha$ \textbf{conecta} $\alpha(0)$ y $\alpha(1)$. 
+
+        \item Se dice que $(X, \cc{T})$ es \textbf{conexo por arcos}, \textbf{conexo por caminos} o \textbf{arcoconexo} (a.c.) si $\forall x,y\in X$, existe un arco $\alpha$ en $X$ que conecta $x$ e $y$.
+
+        \item Sea $A\subset X$ un subconjunto, se dice que es \textbf{conexo por arcos} o \textbf{arcoconexo} (a.c.) si $(A, \cc{T}|_A)$ es a.c.
+     \end{itemize}
+\end{definicion}
+
+Intuitivamente podemos entender la arcoconexión como que existe una línea (camino o arco) que une cualesquiera dos puntos de un conjunto y que no se sale del conjunto.
+
+\begin{prop}\
+    \begin{itemize}
+        \item $(X, \cc{T})$ a.c. $\Rightarrow (X, \cc{T})$ conexo.
+        \item Si $f:(X, \cc{T})\to (Y, \cc{T}')$ continua y $(X, \cc{T})$ a.c. $\Rightarrow (f(X), \cc{T}'|_{f(X)})$ es a.c.
+        \item La arcoconexión es un invariante topológico.
+        \item La unión de a.c. que intersecan a uno dado es a.c. (lema del peine para arcoconexión).
+        \item $(X\times Y, \cc{T}\times \cc{T}')$ a.c. $\sii (X, \cc{T}), (Y, \cc{T}')$ son a.c.
+    \end{itemize}
+    \begin{proof}
+        La demostración de esta proposición no se dará en el temario por falta de tiempo. Igualmente la demostración es muy parecida a las vistas en conexión.
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $\bb{R}^n$, $\bb{R}^n\setminus \{x_1,\dots,x_k\}$ si $n\geq 2$, $\bb{S}^n$, $\bb{S}^n\setminus \{x_1,\dots,x_k\}$ si $k\geq 2$ y los conjuntos estrellados en $\bb{R}^n$ son a.c.
+        \item $Y=\{(0,y):y\in [-1,1]\}\cup \left\{\left(x,\sen\left(\frac{1}{x}\right)\right): x\in (0,1]\right\}$ es conexo pero no es a.c.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\section{Compacidad}
+
+\begin{definicion}
+    Sean $X\neq \emptyset$ un conjunto y $S\subset X$ un subconjunto. Se llama \textbf{recubrimiento} de $S$ es una familia $\cc{A}=\{U_i\}_{i\in I}$ de subconjuntos de $X$ tal que $S\subset \bigcup\limits_{i\in I}U_i$.
+
+    Un \textbf{subrecubrimiento} $\cc{A}'$ de $\cc{A}$ es un recubrimiento de $S$ con $\cc{A}'\subset\cc{A}$.
+    \endsquare
+\end{definicion}
+
+\begin{observacion}
+    Un recubrimiento de $X$ cumple que $X=\bigcup\limits_{i\in I}U_i$.
+    \endsquare
+\end{observacion}
+
+\begin{definicion}
+    Un e.t. $(X, \cc{T})$ es \textbf{compacto} si todo recubrimiento de $X$ por abiertos admite un subrecubrimiento finito, es decir,
+    \begin{gather*}
+        \text{si } \cc{A}=\{U_i\}_{i\in I} \text{ con } U_i\in \cc{T},\ \ \forall i \in I \text{ y } \bigcup\limits_{i\in I} U_i=X\\
+        \text{ entonces } \exists i_1,\dots,i_n \in I \text{ con } X=U_{i_1}\cup \dots\cup U_{i_n}=\bigcup\limits_{j=1}^{n}U_{ij}
+    \end{gather*}
+    \endsquare
+\end{definicion}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Si $(X, \cc{T})$ es un e.t. y $\cc{T}$ es finito, entonces es compacto. Por ejemplo, $(X, \cc{T}_t)$ es compacto.
+        \item $(X, \cc{T}_{disc})$ es compacto $\sii X$ es finito. 
+        \begin{proof}\
+            \begin{itemize}
+                \item[$\Rightarrow$ )] Supongamos que $X$ es infinito. Entonces puedo considerar $\cc{A}=\{\{x\}:x\in X\}$ recubrimiento de abiertos de $X$ que no admite un subrecubrimiento finito.
+                \item[$\Leftarrow$ )] Es un caso particular del ejemplo anterior. 
+            \end{itemize}
+        \end{proof}
+        \item $(X, \cc{T}_{CF})$ es compacto. 
+        \begin{proof}
+            Sea $\{U_i\}_{i\in I}$ recubrimiento por abiertos de $X \Rightarrow U_i\in \cc{T}_{CF}\ \ \forall i \in I$ y $\bigcup\limits_{i\in I}U_i=X$. Sea $i_0\in I$ con $U_{i_0}\neq \emptyset \Rightarrow X\setminus U_{i_0}=\{x_1, \dots,x_n\} \Rightarrow \exists i_1,\dots,i_n\in I$ con $x_j\in U_{i_j}\ \ \forall j =1,\dots,n \Rightarrow \bigcup\limits_{j=0}^{n} U_{i_j}=U_{i_0}\cup U_{i_1}\cup \dots\cup U_{i_n} = X$. 
+
+        \end{proof}
+        \item $(\bb{R}, \cc{T}_u)$ no es compacto.
+        \begin{proof}
+            $\bb{R}=\bigcup\limits_{n\in \bb{N}}(-n,n)$ que es un recubrimiento por abiertos que no admite un subrecubrimiento finito.
+
+        \end{proof}
+    \end{itemize}
+\end{ejemplo}
+
+\begin{definicion}
+    Sea $(X, \cc{T})$ un e.t. y $S\subset X$. Decimos que $S$ es \textbf{compacto} en $(X, \cc{T})$ si $(S, \cc{T}|_S)$ es compacto.
+    \endsquare
+\end{definicion}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t. y $S\subset X$. Equivalen:
+    \begin{enumerate}
+        \item[(i)] $S$ es compacto.
+        \item[(ii)] Todo recubrimiento de $S$ por abiertos de $(X, \cc{T})$ admite un subrecubrimiento finito. 
+    \end{enumerate}
+    \begin{proof}\
+        \begin{itemize}
+            \item[(i)$\Rightarrow$(ii) )] Sea $\{U_i\}_{i\in I}$ un recubrimiento de $S$ por abiertos de $(X, \cc{T})$, es decir, $U_i\in \cc{T}\ \ \forall i \in I$, $S\subset \bigcup\limits_{i\in I}U_i \Rightarrow \{U_i\cap S\}_{i\in I}$ con $U_i\cap S\in \cc{T}|_S\ \ \forall i \in I$. Como $S\subset \bigcup\limits_{i\in I}U_i$ este conjunto será $S$ y por tanto será un recubrimiento de $S$ por abiertos de $\cc{T}|_S$. Como $S$ es compacto, entonces $\exists i_1,\dots,i_n\in I$ con $\bigcup\limits_{j=1}^{n}(U_{i_j}\cap S)=S \Rightarrow \bigcup\limits_{j=1}^{n}U_{i_j}\supset S \Rightarrow \{U_{i_j}\}_{j=1,\dots,n}$ es un recubrimiento de $S$ por abiertos de $(X, \cc{T})$.
+            \item[(ii)$\Rightarrow$(i) )] Sea $\{U_i'\}_{i\in I}$ un recubrimiento de $S$ por abiertos de $\cc{T}|_S$. Como $U_i'\in \cc{T}|_S\Rightarrow U_i'=U_i\cap S$ con $U_i\in \cc{T}$. Entonces $\{U_i\}_{i\in I}$ es un recubrimiento de $S$ por abiertos de $\cc{T}$. Por (ii) tengo que $\exists i_1,\dots,i_n\in I$ con $S\subset \bigcup\limits_{j=1}^{n}U_{i_j} \Rightarrow S = \bigcup\limits_{j=1}^{n}(U_{i_j}\cap S) = \bigcup\limits_{j=1}^{n}U_{i_j}'$.
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item Si $(X, \cc{T})$ e.t., $\{x_n\}_{n\in \bb{N}}\subset X$ con $\{x_n\}\to x$. Entonces $S=\{x_n:n\in \bb{N}\}\cup\{x\}$ es compacto.
+        \begin{proof}
+            Sea $\{U_i\}_{i\in I}$ recubrimiento de $S$ por abiertos de $\cc{T}$. Sabemos que $S\subset \bigcup_{i\in I}U_i$, $U_i\in \cc{T}$. Sea $i_0\in I$ con $x\in U_{i_0}$ entonces, como la sucesión es convergente tenemos que $\exists n_0\in \bb{N}$ con $x_n\in U_{i_0}\ \ \forall n>n_0$. Ahora, para cada $n=1,\dots,n_0$ consideramos $i_n\in I$ con $x_n\in U_{i_n}$ y entonces $S\subset \bigcup_{n=0}^{n_0}U_{i_n}$.
+
+        \end{proof}
+        \item $(0,1)\subset (\bb{R}, \cc{T}_u)$ no es compacto ya que puedo escribir
+        \begin{align*}
+            (0,1)=\bigcup\limits_{n\in \bb{N}}\left(\frac{1}{2n}, 1 - \frac{1}{2n}\right) = \bigcup\limits_{n\in \bb{N}} \left(\frac{1}{n}, 1\right)
+        \end{align*}
+        que son recubrimientos abiertos que no admiten un subrecubrimiento finito.
+        \item $\bb{Q}\subset (\bb{R}, \cc{T}_u)$ no es compacto ya que 
+        \begin{align*}
+            \bb{Q}\subset \bigcup\limits_{n\in \bb{N}}(-n,n)
+        \end{align*}
+    \end{itemize}
+\end{ejemplo}
+
+\begin{prop}\
+    \begin{enumerate}
+        \item[(i)] Si $(X, \cc{T})$ es compacto y $S\subset X$ es cerrado, entonces $S$ es compacto.
+        \item[(ii)] Si $(X, \cc{T})$ es \apuntar{T2} y $S\subset X$ es compacto, entonces $S$ es cerrado.
+    \end{enumerate}
+
+    \begin{proof}\
+        \begin{enumerate}
+            \item[(i)] Sea $S\in \cc{C}_{\cc{T}}$. Sea $\{U_i\}_{i\in I}$ un recubrimiento de $S$ por abiertos de $\cc{T}$, es decir, $U_i\in \cc{T}\ \ \forall i \in I$ y $S\subset \bigcup\limits_{i\in I}U_i$. Como $X\setminus S\in \cc{T}$, entonces $\{X\setminus S\}\cup\{U_i\}_{i\in I}$ es un recubrimiento de $X$ por abiertos de $\cc{T}$. Como $(X, \cc{T})$ es compacto, entonces existen $i_1,\dots,i_n\in I$ con $\left(\bigcup\limits_{j=1}^{n}U_{i_j}\right)\cup (X\setminus S)=S$. Entonces $S\subset \bigcup\limits_{j=1}^{n}U_{i_j}$ por lo que $S$ es compacto.
+            \item[(ii)] Si $S\in \{\emptyset, X\}$, entonces $S\in \cc{C}_{\cc{T}}$ y lo tenemos. Supongamos entonces que $S\notin \{\emptyset, X\}$ y queremos ver que $X\setminus S\in \cc{T}$. Sea $x\in X\setminus S$ y veamos que $x\in \interior{(X\setminus S)}$. Si $y\in S$, como $(X, \cc{T})$ es T2, entonces $x\neq y$ y por tanto $\exists U_y\in \cc{T}$ con $y\in U_y$ y $x\in \interior{(X\setminus U_y)}$. Es claro que $S\subset \bigcup\limits_{y\in S}U_y$ y como $S$ es compacto puedo extraer un subrecubrimiento finito, es decir, $\exists y_1, \dots, y_n\in S$ con $S\subset \bigcup\limits_{j=1}^{n}U_{y_j}$. Sea $U=\bigcup\limits_{j=1}^{n}\interior{(X\setminus U_{y_j})}$, sabemos que $x\in U$ y además $\interior{(X\setminus U_{y_j})}\in \cc{T}\ \ \forall j\in 1,\dots,n$. Podemos escribir $U=\bigcap\limits_{j=1}^{n}(X\setminus \overline{U_{y_j}})=X\setminus \bigcup\limits_{j=1}^n \overline{U_{y_j}}\subset X\setminus \bigcup\limits_{j=1}^n U_{y_j} \subset X\setminus S$.
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{coro}
+    Si $(X, \cc{T})$ es metrizable, entonces todo compacto en $(X, \cc{T})$ es cerrado y acotado.
+    \begin{proof}
+        Supongamos que $d$ es la distancia en $X$ con $\cc{T}=\cc{T}_d$ y sea $S\subset X$ compacto. 
+
+        Empecemos viendo que $S$ está acotado. Sea $p\in X \Rightarrow S\subset \bigcup\limits_{n\in \bb{N}}B(p,n)=X$ y además $B(p,n)\in \cc{T}$ para todo $n\in \bb{N}$. Como $S$ es compacto $\exists n_1,\dots,n_k\in \bb{N}$ con $S\subset \bigcup\limits_{j=1}^n B(p,n_j) = B(p,\max\{n_1,\dots,n_k\})$ y por tanto el compacto está en una bola y entonces $S$ acotado.
+
+        Como $(X, \cc{T})$ es metrizable, en particular es T2 y como $S$ es compacto, entonces $S$ cerrado.
+
+    \end{proof}
+\end{coro}
+
+\begin{teo}
+    (Teorema de Heine-Borel) Todo intervalo cerrado y acotado en $(\bb{R}, \cc{T}_u)$ es compacto.
+
+    \begin{proof}
+        Sea $[a,b]$ con $a<b$ y queremos ver que es compacto. Consideramos $\{U_i\}_{i\in I}$ un recubrimiento de $[a,b]$ por abiertos de $\cc{T}_u$. Tendremos que ver que dicho recubrimiento admite un subrecubrimiento finito. 
+
+        Consideramos el siguiente conjunto: 
+        \begin{align*}
+            L=\{x\in [a,b] : \exists n\in \bb{N}, \exists i_1,\dots,i_n \text{ tal que } [a,x]\subset \bigcup\limits_{j=1}^n U_{i_j}\}
+        \end{align*}
+
+        Tendremos que ver que $b\in L$ ya que al probarlo tendremos que existe una cantidad finita tal que el intervalo $[a,b]$ está contenido en el recubrimiento finito. 
+
+        Si $x\in L\Rightarrow [a,x]\subset L$ por tanto probar que $[a,b]\in L$ será equivalente a ver que $b\in L$. Utilizaremos un argumento de conexión. Si conseguimos probar lo siguiente:
+        \begin{enumerate}
+            \item[(i)] $L\neq \emptyset$.
+            \item[(ii)] $L\in \cc{T}_u|_{[a,b]}$.
+            \item[(iii)] $L\in \cc{C}_{\cc{T}_u|_{[a,b]}}$
+        \end{enumerate}
+        Entonces, como $[a.b]$ es conexo, tendremos que $L=[a,b]$. Veámoslo:
+
+        \begin{enumerate}
+            \item[(i)] Como $a\in L$ tenemos que $L\neq \emptyset$.
+            \item[(ii)] Veamos que $L$ es abierto en $[a,b]$. Para ello consideramos $x\in L$ y veremos que hay un entorno de dicho punto que sigue dentro de $L$, es decir, que $x$ es interior de $L$. Como $x\in L$ sabemos que $\exists i_1,\dots,i_n$ con $[a,x]\subset \bigcup\limits_{j=1}^n U_{i_j}\in \cc{T}_u$ y por tanto es entorno de todos sus puntos. En particular será entorno de $x$ y entonces $\exists \veps >0$ con $(x-\veps,x+\veps)\subset \bigcup\limits_{j=1}^n U_{i_j}\Rightarrow \left[a,x+\frac{\veps}{2}\right]\subset \bigcup\limits_{j=1}^n U_{i_j}$ y entonces tenemos $\left[x-\frac{\veps}{2}, x+\frac{\veps}{2}\right]\subset L$ y entonces $x\in \interior{L}$ en $[a,b]$ y ya lo tenemos probado.
+            \item[(iii)] Veamos que $L$ es cerrado en $[a,b]$. Sea $x\in \overline{L}^{[a,b]} = \overline{L}$ y queremos ver que $x\in L$ para ver que $L$ coincide con su adherencia y por tanto es cerrado. Como $[a,b]$ es 2AN, entonces $\exists \{x_n\}_{n\in \bb{N}}\subset L $ con $\{x_n\}\to x$. 
+            
+            Sabemos que $x\in [a,b]\subset \bigcup\limits_{i\in I}U_i$ por lo que $\exists i_0\in I$ con $x\in U_{i_0}\in \cc{T}_u \Rightarrow \exists \veps >0$ tal que $(x-\veps, x+\veps)\subset U_{i_0}$. Como $\{x_n\}\to x$ tenemos que $\exists n_0\in \bb{N}$ con $x_n\in (x-\veps, x+\veps)\subset U_{i_0}\ \ \forall n\geq n_0$. Además, como $n_0\in L$, entonces $\exists n_1,\dots,n_k\in I$ con $[a,x_{n_0}]\subset \bigcup\limits_{j=1}^k U_{n_j}$. Entonces puedo escribir $[a,x]=[a,x_{n_0}]\cup[x_{n_0}, x]\subset \bigcup\limits_{j=0}^k U_{n_j}$ y además $[x_{n_0},x]\subset U_{i_0}$, $[a,x_{n_0}]\subset \bigcup\limits_{j=1}^k U_{n_j}$ por tanto $x\in L$.
+
+        \end{enumerate}
+        Aplicando lo sabido para conexión tenemos que $L=[a,b]$.
+
+    \end{proof}
+\end{teo}
+
+\begin{coro}
+    En $(\bb{R}, \cc{T}_u)$, un subconjunto $S\subset \bb{R}$ es compacto si y solo si es cerrado y acotado.
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$ )] Esto es cierto para todo espacio métrico.
+            \item[$\Leftarrow$ )] Supongamos que $S\subset \bb{R}$ es cerrado y acotado. Como $S$ es acotado, $\exists a<b$ con $S\subset [a,b]$ y por el Teorema de Heine-Borel $[a,b]$ es compacto. Como $S$ es cerrado y está dentro de un compacto, $S$ es compacto. 
+        \end{itemize}
+    \end{proof}
+\end{coro}
+
+\subsection{Propiedades de los compactos}
+
+\begin{prop}
+    Sea $(X, \cc{T})$ un e.t., entonces equivalen:
+    \begin{enumerate}
+        \item[(i)] $(X, \cc{T})$ es compacto.
+        \item[(ii)] Si $\{C_i\}_{i\in I} \subset \cc{C}_{\cc{T}}$ con $\bigcap\limits_{i\in I}C_i = \emptyset \Rightarrow \exists i_1,\dots,i_n\in I$ tal que $\bigcap\limits_{j=1}^n C_{i_j}=\emptyset$.
+        \item[(iii)] Si $\cc{B}$ es base de $\cc{T}$, entonces de cada recubrimiento por abiertos básicos se puede extraer un subrecubrimiento finito.
+    \end{enumerate}
+    \begin{proof}\
+        \begin{itemize}
+            \item[(i)$\sii$(ii) )] Trivial.
+            \item[(i)$\Rightarrow$(iii) )] Trivial.
+            \item[(iii)$\Rightarrow$(i) )] Sea $\{U_i\}_{i\in I}$ un recubrimiento de $X$ por abiertos de $\cc{T}$, $\cc{A}=\{B\in \cc{B} : \exists i \in I \text{ con }B\subset U_i\}$. Como $\cc{B}$ es base, $\cc{A}$ es un recubrimiento por abiertos básicos de $X$. Por (iii) tenemos que $\exists B_1,\dots,B_n\in \cc{A}$ con $\bigcup\limits_{j=1}^n B_j = X$, pero $\bigcup\limits_{j=1}^n B_j \subset \bigcup\limits_{j=1}^n U_{i_j} = X$ y tenemos lo buscado.
+        \end{itemize}
+    \end{proof}
+\end{prop}
+
+\begin{lema}
+    (Lema de la subbase de Alexander)Sea $(X, \cc{T})$ un e.t, entonces $(X, \cc{T})$ compacto si y solo sí de toda subbase $S$ de $\cc{T}$, entonces de cada recubrimiento por abiertos básicos de la topología generada por $S$, $\cc{T}(S) = \cc{T}(\cc{B}(S))$, se puede extraer un subrecubrimiento finito.
+    \endsquare %TODO: revisar
+\end{lema}
+
+\begin{prop}
+    Si $(X, \cc{T})$ es compacto y $f:(X, \cc{T})\to (Y, \cc{T}')$ es continua, entonces $f(X)$ es compacto en $(Y, \cc{T}')$. En particular, la compacidad es un invariante topológico.\\
+
+    
+    \begin{proof}
+        Sea $\{U_i'\}_{i\in I}$ un recubrimiento de $f(X)$ por compactos de $\cc{T}'$, $f(X)\subset \bigcup\limits_{i\in I}U_i'$. Consideramos $\{f^{-1}(U_i')\}_{i\in I}$. Tenemos 
+        \begin{align*}
+            \bigcup\limits_{i\in I}f^{-1}(U_i) = f^{-1}\left(\bigcup\limits_{i\in I} U_i'\right) \supset f^{-1}(f(X)) = X
+        \end{align*}
+        Como $X$ es compacto tenemos que $\exists i_1, \dots, i_n \in I$ con
+        \begin{align*}
+            X = \bigcup\limits_{j=1}^n f^{-1}(U_{ij}') \Rightarrow f(X)=f\left(\bigcup\limits_{j=1}^n f^{-1}(U_{ij}')\right) = \bigcup\limits_{j=1}^n f(f^{-1}(U_{ij}')) \subset \bigcup\limits_{j=1}^n U_{ij}
+        \end{align*}
+
+    \end{proof}
+\end{prop}
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item $\bb{S}^1\subset \bb{R}^2$ es compacto. Lo podemos ver considerando la función $f$ dada por 
+        \begin{align*}
+            f:([0,1], \cc{T}_u)&\to (\bb{S}^1, \cc{T}_u)\\
+            x&\mapsto (\cos(2\pi x), \sen(2\pi x))
+        \end{align*}
+        que es claramente continua y además $f([0,1])=\bb{S}^1$.
+        \item La compacidad no es una propiedad hereditaria. Para verlo podemos considerar en $\cc{T}_u$ el intervalo $[0,2]$ que es compacto, mientras que $]1,\nicefrac{1}{2}[$ no lo es.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{lema}
+    (Lema del tubo) Sean $(X, \cc{T})$, $(Y, \cc{T}')$ e.t. con $(Y, \cc{T}')$ compacto y sea $W\in \cc{T}\times \cc{T}'$ con $\{x\}\times Y \subset W$ para algún $x\in X$. Entonces $\exists U\in \cc{T}$ con $x\in U$ y $U\times Y \subset W$.
+    \endsquare
+\end{lema}
+
+\begin{teo}
+    (Teorema de Tychonoff) Sean $(X, \cc{T})$, $(Y, \cc{T}')$ e.t., entonces $(X\times Y)$ compacto $\sii (X, \cc{T})$ y $(Y, \cc{T}')$ son compactos.
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$)] Trivial porque las proyecciones son continuas.
+            \item[$\Leftarrow$)] Vamos a aplicar el lema del tubo. Sea $\{W_i\}_{i\in I}$ un recubrimiento de $X\times Y$ por abiertos de $\cc{T}\times \cc{T}'$, entonces $\{x\}\times Y \subset X\times Y = \bigcup\limits_{i\in I}W_i\ \ \forall x \in X$. 
+        \end{itemize}
+    \end{proof}
+\end{teo}
+
+\begin{coro}
+    El teorema anterior se puede generalizar para cualquier producto $(X_1\times \dots\times X_n, \cc{T}_1\times \dots\times \cc{T}_n)$ con $n\geq 2$, que será compacto si y solo si $(X_i, \cc{T}_i)$ es compacto para cada $i\in 1,\dots,n$.
+    \endsquare
+\end{coro}
+
+\begin{teo}
+    (Teorema de Heine-Borel generalizado) Un subespacio de $(\bb{R}^n, \cc{T}_u)$ es compacto si y solo si es cerrado y acotado.
+    \begin{proof}\
+        \begin{itemize}
+            \item[$\Rightarrow$ )] Es corolario de un resultado anterior.
+            \item[$\Leftarrow$ )] Sea $S\subset \bb{R}^n$ cerrado y acotado. Como $S$ es acotado está contenido en una bola y en particular considerando la norma infinito tenemos que $\exists r>0$ tal que $S\subset [-r,r]\times \dots\times [-r,r]$. Por el teorema de Heine-Borel sabemos que cada $[-r,r]$ es compacto y por Tijonov sabemos que el producto de compactos es compacto. Tenemos que $S$ es acotado y está contenido en un compacto luego $S$ es compacto.  %TODO: revisar
+        \end{itemize}
+    \end{proof}
+\end{teo}
+
+\begin{observacion}
+    No es cierto en todo espacio métrico. Por ejemplo, si consideramos $(\bb{R}, \cc{T}_{disc})$ que es un espacio métrico y tomamos $\overline{B}(0,2)$ que es cerrado y acotado pero $\overline{B}(0,2)=\bb{R}$ (recordemos que la distancia discreta es siempre menor que 2) y $\bb{R}$ no es compacto.
+    \endsquare
+\end{observacion}
+
+\begin{ejemplo}Considerando en cada caso $\cc{T}_u$
+    \begin{itemize}
+        \item $\bb{S}^n$ es compacto y $\bb{T}\cong \bb{S}^1\times \bb{S}^1$ compacto (por ser un invariante topológico).
+        \item $\bb{R}^n$ no es compacto por lo que $\bb{S}^1\times \bb{R}$ tampoco lo es.
+    \end{itemize}
+    \endsquare
+\end{ejemplo}
+
+\begin{coro}
+    Si $(X, \cc{T})$ es compacto y $f:(X, \cc{T})\to (\bb{R}, \cc{T}_u)$ es continua, entonces $f$ es acotada y alcanza su máximo y su mínimo.
+    \begin{proof}
+        Comencemos viendo que $f$ es acotada. Tendremos dos formas de hacerlo:
+
+        \begin{itemize}
+            \item[\textbf{1: }] Como $f$ es continua y $X$ es compacto tenemos que $f(X)\subset \bb{R}$ es compacto y por el teorema de Heine-Borel generalizado tenemos que $f(X)$ es cerrado y acotado en $\bb{R}$.
+            \item[\textbf{2: }] $\{f^{-1}((-n,n)):n\in \bb{N}\}$ es un recubrimiento por abiertos de $X$ y como $X$ es compacto existe un subrecubrimiento finito. Entonces $\exists n_0\in \bb{N}$ tal que $X=f^{-1}((-n_0, n_0)) \Rightarrow f(X)\subset (-n_0, n_0)$ luego $f$ acotado.
+        \end{itemize}
+        
+        Veamos que alcanza su máximo y su mínimo. Para ello tendremos que ver que el supremo y el ínfimo del conjunto $f(X)$ está contenido en $f(X)$ pero como $f(X)$ es cerrado esto se tiene.
+
+    \end{proof}
+\end{coro}
+
+\begin{coro}
+    Si $f:[a,b]\to \bb{R}$ es continua, entonces $f$ es constante o $f([a,b])$ es un intervalo cerrado y acotado.
+    \endsquare
+\end{coro}
+
+\begin{prop}
+    (Lema de la aplicación cerrada) Si $(X, \cc{T})$ es compacto, $(Y, \cc{T}')$ es T2 y $f:(X, \cc{T})\to (Y, \cc{T}')$ es continua, entonces $f$ es cerrada.
+    \begin{proof}
+        Para ver que $f$ es cerrada tendremos que ver que la imagen de un cerrado es cerrada. Sea $C\in \cc{C}_{\cc{T}}$ y como $X$ es compacto, entonces $C$ es compacto (un cerrado en un compacto es un compacto). Como $f$ es continua tenemos que $f(C)\subset Y$ es compacto y como $Y$ es T2, entonces $f(C)$ es cerrado (ya que un compacto en un T2 es cerrado) y tenemos lo que buscábamos.
+
+    \end{proof}
+\end{prop}
+
+\begin{coro}
+    Si $(X, \cc{T})$ es compacto, $(Y, \cc{T}')$ es T2 y $f:(X, \cc{T})\to (Y, \cc{T}')$ es continua, entonces 
+    \begin{itemize}
+        \item Si $f$ es inyectiva $\Rightarrow$ $f$ es un embebimiento.
+        \item Si $f$ es sobreyectiva $\Rightarrow$ $f$ es una identificación.
+        \item Si $f$ es biyectiva $\Rightarrow$ es un homeomorfismo.
+    \end{itemize}
+    \endsquare
+\end{coro}
+
+\begin{ejemplo}
+    Toda función continua y monótona $f:[a,b]\Rightarrow \bb{R}$ tiene inversa continua $f^{-1}:f([a,b])=[c,d] \to [a,b]$.
+    \endsquare
+\end{ejemplo}
+
+\subsection{Compacidad en espacios métricos}
+
+\begin{definicion}
+    Un e.t. $(X, \cc{T})$ se dice
+    \begin{itemize}
+        \item \textbf{Compacto por punto límite} si todo subconjunto infinito de $X$ tiene un punto de acumulación, es decir, si $A\subset X$ infinito, entonces $\exists x_0\in X$ con $A\cap(N\setminus\{x_0\})\neq \emptyset,\ \ \forall N\in \cc{N}_x$.
+        \item \textbf{Compacto por sucesiones} o \textbf{secuencialmente compacto} si toda sucesión en $X$ tiene una parcial convergente. 
+    \end{itemize}
+    \endsquare
+\end{definicion}
+
+En general compacidad y compacidad por sucesiones implica compacto por punto límite, pero compacto y compacto por sucesiones no son propiedades comparables (ya que hay espacios que son una pero no la otra). Poco a poco se irá viendo la relación entre estos conceptos.
+
+\begin{prop}
+    (Bolzano-Weierstrass) Todo e.t. compacto es compacto por punto límite.
+    \begin{proof}
+        Sea $(X, \cc{T})$ un e.t. compacto, $A\subset X$ infinito y veamos que $A$ tiene puntos de acumulación por reducción al absurdo. Para ello supongamos que $A$ no tiene puntos de acumulación. En dicho caso tendremos que $\forall x \in X$, entonces $\exists U_x\in \cc{T}$ con $x\in U_x$ y $A\cap(U_x\setminus \{x\})=\emptyset$. Como esto ocurre para cada $x\in X$ por lo que puedo escribir $X=\bigcup\limits_{x\in X}U_x$ y como $X$ es compacto, admite un subrecubrimiento finito, luego $\exists x_1,\dots,x_n\subset X$ con $X=\bigcup\limits_{j=1}^n U_{x_j}$. Tenemos
+        \begin{align*}
+            A=A\cap X = A \cap \left(\bigcup\limits_{j=1}^n\right) = \bigcup\limits_{j=1}^n(A\cap U_{x_j})\subset \{x_1,\dots,x_n\}
+        \end{align*} 
+        y llegamos a contradicción ya que el conjunto $A$ es infinto.
+
+    \end{proof}
+\end{prop}
+
+\begin{teo}
+    Si $(X, d)$ es un espacio métrico, entonces equivalen:
+    \begin{enumerate}
+        \item[(i)] $(X, d)$ es compacto.
+        \item[(ii)] $(X, d)$ es compacto por punto límite.
+        \item[(iii)] $(X, d)$ es compacto por sucesiones.
+        \item[(iv)] (\textbf{Numerablemente compacto}) Todo recubrimiento numerable por abiertos de $X$ admite un subrecubrimiento finito.
+    \end{enumerate}
+\end{teo}
+
+% ii y iv son equivalentes en cualquier espacio topológico

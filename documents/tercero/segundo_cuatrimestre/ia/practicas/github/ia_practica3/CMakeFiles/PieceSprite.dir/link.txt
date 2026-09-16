@@ -1,2 +1,0 @@
-/usr/bin/ar qc lib/libPieceSprite.a CMakeFiles/PieceSprite.dir/src/gui/PieceSprite.cpp.o
-/usr/bin/ranlib lib/libPieceSprite.a

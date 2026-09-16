@@ -1,0 +1,56 @@
+\documentclass[12pt]{book}
+
+\input{../../../../_assets/preambulo.tex}
+\input{../../../../_assets/portada.tex}
+
+\begin{document}
+    \portada[%
+        titulo=Inferencia Estadística,
+        subtitulo=Tema 9. Participación extra,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2025-2026]
+        
+    \begin{ejercicio}
+        En un estudio sobre el funcionamiento de un servidor web, se registran los accesos recibidos durante una hora por un sistema de balanceo de carga que distribuye las peticiones entre 8 procesos idénticos. Durante el periodo de observación se contabilizan 160 peticiones, obteniéndose el siguiente número de accesos gestionados por cada proceso:
+        \begin{gather*}
+            18, 21, 19, 17, 23, 20, 22, 20
+        \end{gather*}
+        Suponiendo que, si el sistema funciona correctamente, cada petición tiene la misma probabilidad de ser asignada a cualquiera de los procesos, contrastar si los datos son compatibles con una distribución uniforme de las peticiones entre los procesos.
+
+        \hrulefill
+
+        \section*{Resolución}
+
+        El ejercicio consiste en contrastar si la asignación de peticiones entre los procesos del servidor se realiza de forma uniforme. Para verlo definimos la variable aleatoria:
+        \begin{gather*}
+            X \equiv \text{proceso que gestiona una posición}
+        \end{gather*}
+        La variable $X$ toma valores en un conjunto de 8 categorías, correspondientes a los procesos del sistema.\\
+
+        Buscamos ahora plantear el contraste a analizar. Bajo un funcionamiento correcto del balanceador de carga, cada proceso debería recibir la misma proporción de peticiones. Por tanto, el contraste es:
+        \begin{gather*}
+            \left\{
+                \begin{array}{l}
+                    H_0:P(X=i)=\frac{1}{8}\ \text{ para todo } i\in \{1,...,8\}\\
+                    H_1:P(X=i)\neq \frac{1}{8}\ \text{ para algún } i\in \{1,...,8\}
+                \end{array}
+            \right.
+        \end{gather*}
+        e trata de un contraste de bondad de ajuste, que resolvemos mediante el test $\chi^2$.\\
+
+        Bajo la hipótesis de distribución uniforme para $n=160$ peticiones, el número esperado de peticiones en cada proceso es $np_i^0=\nicefrac{160}{8} = 20\  (\geq 5)$, $i\in\{1,...,8\}$ y por tanto, el estadístico $\chi^2$ toma el valor
+        \begin{align*}
+            \chi^2_{exp} &= \sum\limits_{i=1}^8 \frac{(n_i - np_i^0)^2}{np_i^0} = -n + \frac{1}{np_i^0} \sum\limits_{i=1}^8n_i^2 =\\
+            &= -160 + \frac{1}{20} (18^2 + 21^2 + 19^2 + 17^2 + 23^2 + 20^2 + 22^2 + 20^2) =\\
+            &= 1.4
+        \end{align*}
+        Como la distribución de $\chi^2(N_1,...,N_8)$ bajo $H_0$ es $\chi^2(7)$ tendremos que el $p$-nivel asociado es 
+        \begin{gather*}
+            p-\text{nivel}:\ \ P_{H_0}(\chi^2(N_1,...,N_8)>1.4) \in (0.975, 0.99)
+        \end{gather*}
+        Dado que el $p$-nivel es muy elevado, no se rechaza la hipótesis nula a ningún nivel de significación razonable.\\
+
+        Por tanto, los datos son compatibles con una distribución uniforme de las peticiones entre los procesos, y no se detectan indicios de un mal funcionamiento del sistema de balanceo de carga.
+
+    \end{ejercicio}
+\end{document}

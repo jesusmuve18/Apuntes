@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC  -O2 -O3 -DNDEBUG -shared -Wl,-soname,libcec17_test_func.so -o libcec17_test_func.so CMakeFiles/cec17_test_func.dir/cec17_test_func.c.o CMakeFiles/cec17_test_func.dir/cec17.c.o 

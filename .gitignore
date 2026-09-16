@@ -2,9 +2,12 @@
 **/grafana_data/
 
 # Archivos grandes
-documents/primero/primer_cuatrimestre/fft/teoria/libro/libro_completo/
+documents/1-primero/primer_cuatrimestre/fft/teoria/libro/libro_completo/
 
 # Enlaces simbólicos
-documents/cuarto/segundo_cuatrimestre/tsi/tsi-practicas
-documents/cuarto/segundo_cuatrimestre/aa/aa-practicas
-documents/cuarto/segundo_cuatrimestre/metaheuristicas/mh-practicas
+documents/4-cuarto/segundo_cuatrimestre/tsi/tsi-practicas
+documents/4-cuarto/segundo_cuatrimestre/aa/aa-practicas
+documents/4-cuarto/segundo_cuatrimestre/metaheuristicas/mh-practicas
+documents/1-primero/primer_cuatrimestre/fft/teoria/libro/libro_completo/FFT1_FFT2_FFT3_merged.pdf
+documents/1-primero/primer_cuatrimestre/fft/teoria/libro/libro_completo/Fundamentos Físicos y Tecnológicos Parte I (OCR).pdf
+documents/3-tercero/segundo_cuatrimestre/algebra_ii/examenes/RelExam.pdf

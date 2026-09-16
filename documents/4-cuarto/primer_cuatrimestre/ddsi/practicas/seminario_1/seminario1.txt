@@ -1,0 +1,60 @@
+# Creación de tablas
+CREATE TABLE Stock(
+	Cproducto varchar2(10) CONSTRAINT Cproducto_clave_primaria PRIMARY KEY,
+	Cantidad int
+);
+
+CREATE TABLE Pedido(
+	Cpedido varchar2(10) CONSTRAINT Cpedido_clave_primaria PRIMARY KEY,
+	Ccliente varchar2(10),
+	Fecha-pedido date
+);
+
+CREATE TABLE Detalle-Pedido(
+	Cpedido CONSTRAINT Cpedido_clave_externa_pedido REFERENCES Pedido(Cpedido),
+	Cproducto CONSTRAINT Cproducto_clave_externa_stock REFERENCES Stock(Cproducto),
+	Cantidad int
+	CONSTRAINT clave_primaria PRIMARY_KEY (Cpedido,Cproducto)
+);
+
+# Borrado de tablas
+DROP TABLE "Detalle-Pedido" CASCADE CONSTRAINTS PURGE;
+DROP TABLE Pedido CASCADE CONSTRAINTS PURGE;
+DROP TABLE Stock CASCADE CONSTRAINTS PURGE;
+
+# Ejemplos de Stock
+INSERT INTO Stock (Cproducto, Cantidad) VALUES ('PRD001', 150);
+INSERT INTO Stock (Cproducto, Cantidad) VALUES ('PRD002', 60);
+INSERT INTO Stock (Cproducto, Cantidad) VALUES ('PRD003', 80);
+INSERT INTO Stock (Cproducto, Cantidad) VALUES ('PRD004', 45);
+INSERT INTO Stock (Cproducto, Cantidad) VALUES ('PRD005', 200);
+INSERT INTO Stock (Cproducto, Cantidad) VALUES ('PRD006', 35);
+INSERT INTO Stock (Cproducto, Cantidad) VALUES ('PRD007', 110);
+INSERT INTO Stock (Cproducto, Cantidad) VALUES ('PRD008', 95);
+INSERT INTO Stock (Cproducto, Cantidad) VALUES ('PRD009', 75);
+INSERT INTO Stock (Cproducto, Cantidad) VALUES ('PRD010', 140);
+
+# Ejemplos de Pedido
+INSERT INTO Pedido (Cpedido, Ccliente, "Fecha-pedido") VALUES ('PED001', 'CLI001', DATE '2025-10-02');
+INSERT INTO Pedido (Cpedido, Ccliente, "Fecha-pedido") VALUES ('PED002', 'CLI002', DATE '2025-10-05');
+INSERT INTO Pedido (Cpedido, Ccliente, "Fecha-pedido") VALUES ('PED003', 'CLI003', DATE '2025-10-08');
+INSERT INTO Pedido (Cpedido, Ccliente, "Fecha-pedido") VALUES ('PED004', 'CLI004', DATE '2025-10-12');
+INSERT INTO Pedido (Cpedido, Ccliente, "Fecha-pedido") VALUES ('PED005', 'CLI005', DATE '2025-10-15');
+INSERT INTO Pedido (Cpedido, Ccliente, "Fecha-pedido") VALUES ('PED006', 'CLI006', DATE '2025-10-20');
+INSERT INTO Pedido (Cpedido, Ccliente, "Fecha-pedido") VALUES ('PED007', 'CLI007', DATE '2025-10-25');
+INSERT INTO Pedido (Cpedido, Ccliente, "Fecha-pedido") VALUES ('PED008', 'CLI008', DATE '2025-10-28');
+INSERT INTO Pedido (Cpedido, Ccliente, "Fecha-pedido") VALUES ('PED009', 'CLI009', DATE '2025-11-01');
+INSERT INTO Pedido (Cpedido, Ccliente, "Fecha-pedido") VALUES ('PED010', 'CLI010', DATE '2025-11-03');
+
+# Ejemplos de Detalle-Pedido
+INSERT INTO "Detalle-Pedido" (Cpedido, Cproducto, Cantidad) VALUES ('PED001', 'PRD001', 2);
+INSERT INTO "Detalle-Pedido" (Cpedido, Cproducto, Cantidad) VALUES ('PED001', 'PRD003', 1);
+INSERT INTO "Detalle-Pedido" (Cpedido, Cproducto, Cantidad) VALUES ('PED002', 'PRD002', 5);
+INSERT INTO "Detalle-Pedido" (Cpedido, Cproducto, Cantidad) VALUES ('PED003', 'PRD005', 3);
+INSERT INTO "Detalle-Pedido" (Cpedido, Cproducto, Cantidad) VALUES ('PED004', 'PRD004', 4);
+INSERT INTO "Detalle-Pedido" (Cpedido, Cproducto, Cantidad) VALUES ('PED005', 'PRD001', 1);
+INSERT INTO "Detalle-Pedido" (Cpedido, Cproducto, Cantidad) VALUES ('PED006', 'PRD007', 6);
+INSERT INTO "Detalle-Pedido" (Cpedido, Cproducto, Cantidad) VALUES ('PED007', 'PRD008', 2);
+INSERT INTO "Detalle-Pedido" (Cpedido, Cproducto, Cantidad) VALUES ('PED008', 'PRD006', 1);
+INSERT INTO "Detalle-Pedido" (Cpedido, Cproducto, Cantidad) VALUES ('PED010', 'PRD010', 7);
+

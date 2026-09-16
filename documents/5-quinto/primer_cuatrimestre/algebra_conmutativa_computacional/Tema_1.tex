@@ -1,0 +1,200 @@
+\chapter{Álgebra Conmutativa}
+
+\section{Anillos Conmutativos}
+
+Consideramos $A$ un conjunto, luego un grupo abeliano $(A,+)$ y finalmente añadimos una multiplicación 
+\Func{\cdot}{A\times A}{A}{(a, a')}{a \cdot a'}
+asociativa, conmutativa y un elemento neutro, $1_A$. Además, se verifica la propiedad distributiva.
+
+\begin{ejemplo}\
+    \begin{itemize}
+        \item El primer ejemplo que vamos a tener en cuenta es
+        \begin{gather*}
+            \bb{Z}\subset \bb{Q} \subset \bb{R} = \bar{\bb{Q}} \subset \bb{C} \subset \bb{H} \subset \bb{O}
+        \end{gather*}
+        Estos son ejemplos clásicos y a partir de ellos podremos construir más.
+
+        \item Consideramos un cuerpo $\bb{K}$ y un conjunto $X\neq \emptyset$. Si tomamos todas las aplicaciones de $X$ en $\bb{K}$ que será un conjunto isomorfo a $\bb{K}^I = \Pi_{i\in I} \bb{K}_i$.\\
+        
+        Supongamos ahora $X=\bb{N}$ y $Maps(\bb{N}, \bb{K}) \supseteq \bb{K}^{(\bb{N})}$ donde podemos considerar el producto de Hurwitz.
+        \begin{gather*}
+            (a_0, ..., a_n) \cdot (b_0, ..., b_n) = \sum_{k=0}^{n} \binom{n}{k} a_k \cdot b_{n\cdot k}
+        \end{gather*}
+
+        % Si queremos considerar ahora $l\geq 1$ y tomar $X=\bb{N}^l$ 
+
+        Si consideramos $A$ un anillo conmutativo, nos planteamos si podemos hacer esta construcción. Sabemos ya que hay un morfismo inyectivo $\bb{Z} \to A$, por lo que será una $\bb{Z}$-Álgebra.\\
+
+        Sean $A$ y $B$ dos anillos conmutativos. Se dice que $B$ es una $A$-Álgebra si existe un morfismo $A\to B$ de anillos.\\
+
+        % Buscar definición de morfismo de anillos 
+
+        Nos planteamos ahora las siguientes relaciones
+        \begin{gather*}
+            \xymatrix{
+                A[X] & \cong & A \underset{{\bb{K}}}{\otimes}  \bb{Z}[X]\\
+                \bb{Z}[X]
+            }
+        \end{gather*}
+
+        %buscar definición de producto \otimes_{\bb{K}} tensor g
+
+        Si yo cojo $V$ tal que $dim_{\bb{K}}(V)<\infty$ y consideramos su dual
+        \begin{gather*}
+            V^* = Hom(V, \bb{K})
+        \end{gather*}
+    \end{itemize}
+\end{ejemplo}
+
+% Aqui falta algo (producto tensorial)
+
+% Este producto tensorial desciende a $\bb{K}-$Álgebras (siempre conmutativas)
+
+% ecualizador A\times B \to A \otimes B
+
+Si consideramos $W$ un $\bb{K}-$espacio vectorial, en general
+\begin{gather*}
+    W \otimes ... \otimes W = W^{\otimes^n}\\
+    \prod_{n\in N} W^{\otimes^n}
+\end{gather*}
+dentro de este último podemos considerar los de soporte finito, que son esas tuplas infinitas, con un número finito de elementos distintos de $0$.
+
+Si $dim(V), dim(W) < \infty$ tendremos que 
+\begin{gather*}
+    dim(Hom(V,W)) = dim(M_{n\times m}(\bb{K}))
+\end{gather*}
+lo que nos dice que 
+\begin{gather*}
+    dim(V^*\otimes W) = n\cdot m
+\end{gather*}
+queremos introducir ahora las sumas directas, es decir, $\oplus_{n\geq 0} W^{\otimes^n}$ que escribiremos como
+\begin{gather*}
+    \lambda_0 \overset{\cdot}{+} w_1 + w_2 \otimes w_3 \overset{\cdot}{+} ... \overset{\cdot}{+} w_{k_1} \otimes ... \otimes w_{nt}
+\end{gather*}
+se usa el producto concatenado para considerar el álgebra.
+
+Si consideramos el ideal $I = \langle \{ v \otimes w + w \otimes v \}_{v\in W,\ u\in W} \rangle$
+
+\begin{gather*}
+    \wedge W = T_{\bb{K}} 
+\end{gather*}
+
+Antes hemos dicho lo que es un morfismo de anillos $A \overset{\varphi}{\to} B$ que son los que 
+\begin{enumerate}
+    \item $\ker(\varphi) = \{a \in A : \varphi(a) = 0\}$
+    \item $\Im(\varphi) = \{b\in B : \exists a \in A,\ \varphi(a) = b\}$
+\end{enumerate}
+dado $A$ un anillo, tenemos que $(I,+) \leq (A,+)$. Se dice que $I\leq A$ es un ideal de A por lo que $a\cdot x \in I$ para todo $a\in A$, $x\in I$. De esta forma
+\begin{gather*}
+    A \cdot I = I \cdot A \subset I\\
+    A \overset{\pi}{\to} A/I \text{ en } Ab\\
+    a \mapsto a + I = \bar{a}
+\end{gather*}
+y queremos ver que $\bar{a} \cdot \bar{a'} = \bar{aa'}$ está bien definida, es decir, que no depende de los representantes elegidos. \\
+
+Nos queda ver cuál es la propiedad universal. 
+
+La idea es que si tenemos $X$ un conjunto y $R$ una relación de equivalencia podemos considerar el conjunto cociente
+\begin{gather*}
+    X/R = \{\bar{x} : x\in X\}
+\end{gather*}
+donde
+\begin{gather*}
+    \bar{x} = \{x'\in X : xRx'\}
+\end{gather*}
+y se dice que $\bar{x} = \bar{y}$ si y solo si $xRy$ donde
+\begin{gather*}
+    X \to X/R \\
+    x \mapsto \bar{x}
+\end{gather*}
+La propiedad universal nos dice que si tenemos una aplicación $f:X\to Y$ bien definida tal que 
+\begin{gather*}
+    xRx' \Rightarrow f(x)=f(x')
+\end{gather*}
+entonces existe una única $\bar{f}$ que hace conmutar el siguiente diagrama
+\begin{gather*}
+    \xymatrix{
+        X \ar[d]_{\pi_R} \ar[r]^f & Y\\
+        X/R \ar@{-->}[ur]_{\bar{f}}
+    }
+\end{gather*}
+
+Con esto podemos hacer m ichas cosas. Por ejemplo si tenemos una torre de ideales $I \leq J \leq A$ podemos considerar los cocientes
+\begin{gather*}
+    A/I \geq J(I)
+\end{gather*}
+Si tenemos un cociente, entonces todos los ideales de un cociente. Consideramos $I\leq A$ y el anillo $A/I$, entonces los ideales $k\leq A/I$ considerando la proyección $A \overset{\pi}{\to} A/I$ serán
+\begin{gather*}
+    J=\pi^{-1}(k) = \{a \in A : a+I \in K\} \leq A
+\end{gather*}
+ya que para $a\in A, x\in A$
+\begin{gather*}
+    x \cdot(a+I) = xa + I
+\end{gather*}
+y lo que queremos ver es que $J/I = K$ y todos los ideales en el cociente se escriben como $J/I$. Además, $J/I$ es un grupo abeliano. Consideramos $x \in J/I$ y $\alpha \in A/I$ y podemos multiplicar
+\begin{gather*}
+    x\cdot \alpha = \bar{j} \cdot \bar{a} = \bar{ja} = aj + I
+\end{gather*}
+donde $\alpha = a + I = \bar{a}$. 
+
+Si ahora consideramos 
+\begin{gather*}
+    \frac{A/I}{J/I} \cong A/J
+\end{gather*}
+por el teorema de isomorfía.
+
+% No sé lo que son objetos ni flechas
+
+% buscar definición de monomorfismo de a,b,c y morfismo
+
+Sabemos que $\bb{Z}_n$ son todos anillos finitos para $n>1$. Consideramos los retículos de $D(12) = \{1,2,3,4,6,12\}$ y el de los ideales de $\bb{Z}_{12}$ % Hacer los retículos con la notación \langle \bar{1} ¶angle = \bb{Z}_{12}
+
+Vemos así que los ideales de $A$, $Id(A)$ es un retículo, es decir, un conjunto parcialmente ordenado con una operación binaria con ciertas propiedades % buscar propiedades
+\begin{gather*}
+    I \wedge J = I \cap J\\
+    I \vee J = A + J
+\end{gather*}
+Si consideramos $S \subseteq A$ tenemos 
+\begin{gather*}
+    \langle S \rangle = \cap_{S \subseteq I \leq A} I = \{\sum_{finita} a_is_i : a_i\in A,\ s_i\in S\}
+\end{gather*}
+Además,
+\begin{gather*}
+    \sum_{\lambda \in \Lambda} I_\lambda = \langle \cup_{\lambda \in \Lambda} I_\lambda \rangle
+\end{gather*}
+
+\begin{teo}[Teorema de Krull]
+    Sea $A$ un anillo conmutativo, $I\leq A$ un ideal propio ($\neq 0, A$), entonces existe $M\in Max(A)$ tal que $I \leq M$
+\end{teo}
+Siempre se verifica 
+\begin{gather*}
+    Max(A) \subseteq Spec(A)  \subseteq Irr(A)
+\end{gather*}
+donde $Spec(A)=\{p\in Id(A) : p \text{ primo }\}$. Diremos que $p\leq A$ es primo si y solo si se verifican 
+\begin{enumerate}
+    \item $ab\in p \Rightarrow a\in p$ o $b\in p$
+    \item $I,J\leq A$ tal que $IJ \subseteq P \Rightarrow I \subseteq I\subseteq P$ o $J\leq P$
+    \item $I,J\in A$ tal que $I\cap J \subseteq P \Rightarrow I \subseteq P$ p $J\subseteq P$
+\end{enumerate}
+
+La demostración del teorema anterior la haremos con el Lema de Zorn. 
+\begin{lema}
+    Consideramos $(P, \leq)$ un poset si toda cadena admite un supremo. Entonces $P$ posee un elemento maximal.
+\end{lema}
+
+\begin{proof}
+    Tenemos $0\lneq I \lneq A$ y consideramos
+    \begin{gather*}
+        P_I = \{J \leq A : I \leq J\} \neq \emptyset
+    \end{gather*}
+    y la cadena $\{J_\lambda\}_{\lambda\in \Lambda}$ en $P_I$.
+    Considerando $\cup_{\lambda \in I} J_\lambda$ un supremo de la cadena.
+\end{proof}
+
+\begin{lema}
+    
+\end{lema}
+ 
+
+
+

@@ -1,0 +1,68 @@
+Interrupciones -> asíncrono
+Excepciones -> síncrono
+
+Multiprogramación: Cuando un porceso se pone en espera, en lugar de estar el proceador inactivo esperando, el SO cambia a otro proceso y lo ejecuta (y así sucesiamente)
+
+	Implica:
+		1) Tener cargado memoria todos los procesos
+		2) Tener una planificación de la CPU (decidir entre varios procesos activos)
+
+Tiempo compartido: Se establecen turnos de CPU y el SO va decidiendo qué proceso va a ejecutarse en el siguiente ciclo. -> Eficiencia a la hora de ejecutar todos los procesos en el menor tiempo posible.
+	
+	Ej: Tema 1: DMA
+	.) Mediante el uso de interrupciones, el controlador del dispositivo de E/S se encarga de la operación de E/S mientras el procesador puede estar encargándose de otros procesos. (El controlador va activando interrupciones)
+
+PROCESO, relacionado con 
+	-La operación en lotes en sistemas multiprogramados.
+	-Tiempo compartido (múltiples procesos ejecutándose utilizando pequeños intervalos de tiempo del procesador.
+	-Sistemas de transacciones en tiempo real.
+	
+	PROCESO -> PROCESO DE INTERRUPCIONES 
+		(Los procesos se supenden a través de las interrupciones, se almacena su estado y el procesador pasa a ejecutar otro proceso)
+	
+	-Pueden producirse errores ocasionados por:
+		1) Sincrocizaciones inadeciadas (se interrumpa un proceso y no se restante adecuadamente).
+		2) Violacionies de exclusión mutua (hay recursos del sistema que sólo pueden utilizarse por un único proceso simultáneamente).
+		3) Operaciones no deterministas de los programas (protección del espacio de memoria de los procesos).
+		4) Interbloqueos (que existan varios programas que se estén esperando entre sí debido al uso que se está haciendo de los recursos)
+
+	-Para evitar estos errores, los procesos constan de:
+		1) Un programa ejecutable
+		2) Los datos necesarios que requiere el SO para ejecutarlo (incluyendo el contexto de la ejecución) -> Bloque de control de proceso (PCB)
+
+
+Gestión de procesos (Procesos A y B)
+	-Lista de procesos: posiciones de memoria en la que se almacena la dirección de memoria de inicio de cada proceso.
+	-Cada proceso es una estructura de datos para coordinar su ejecución.
+	-El PC almacena la dirección de la iguiente instrucción que debe ejecutarse del proceso que indica el registro "índice de proceso".
+	-El registro base contiene la dirección inicial del proceso.
+	-El registro límite incluye el tamaño del proceso.
+
+TRAZA DE EJECUCIÓN: La traza de ejecución de un proceso es la secuencia de instrucciones que se ejecutan en cada ciclo para este proceso.
+
+DISPATCHER: Módulo del SO que se encarga de intercambiar procesos 
+
+		 ___________
+		|           | PROCESO A
+		-------------
+		|           | DISPPATCHER
+		-------------
+		|           | PROCESO B
+		-------------
+		|           | DISPATCHER 
+		-------------
+		|           | PROCESO A
+		-------------
+			.
+			.
+			.
+
+MODELO DE DOS ESTADOS:
+	- Un proceso puede estar en una ejecución o no (los cambios de un estado a otro los realiza el dispatcher). (demasiado simple)
+
+MODELO DE CINCO ESTADOS:
+	- Contemplar que los estados que no están en ejecucion pueden estar:
+		.) preparados para ejecutarse.
+		.) bloqueados (porque están esperando a que termine una operación de E/S).
+		.) nuevos que todavía no se han aceptado para ejecución.
+		.) terminados (ya se han extraído del conjunto de procesos aceptados para ejecución.

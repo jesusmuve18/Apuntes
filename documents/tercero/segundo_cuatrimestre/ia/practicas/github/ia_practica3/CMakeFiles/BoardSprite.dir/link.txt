@@ -1,2 +1,0 @@
-/usr/bin/ar qc lib/libBoardSprite.a CMakeFiles/BoardSprite.dir/src/gui/BoardSprite.cpp.o
-/usr/bin/ranlib lib/libBoardSprite.a

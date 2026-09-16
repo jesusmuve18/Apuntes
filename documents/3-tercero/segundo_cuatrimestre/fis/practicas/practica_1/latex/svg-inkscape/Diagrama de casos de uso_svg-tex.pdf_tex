@@ -1,0 +1,89 @@
+%% Creator: Inkscape 1.2.2 (b0a8486541, 2022-12-01), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'Diagrama de casos de uso_svg-tex.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{496.5bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.918429)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{Diagrama de casos de uso_svg-tex.pdf}}%
+    \put(0.45468278,0.89728097){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Gestión de clubes y sus jugadores\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{Diagrama de casos de uso_svg-tex.pdf}}%
+    \put(0.4939577,0.76888218){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Alta clubb\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{Diagrama de casos de uso_svg-tex.pdf}}%
+    \put(0.74169184,0.84138973){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Consulta de club\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{Diagrama de casos de uso_svg-tex.pdf}}%
+    \put(0.79909366,0.63746224){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Identificacion\end{tabular}}}}%
+    \put(0.83383686,0.61329305){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Club\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{Diagrama de casos de uso_svg-tex.pdf}}%
+    \put(0.48640483,0.63897281){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Baja de club\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{Diagrama de casos de uso_svg-tex.pdf}}%
+    \put(0.45166163,0.50302115){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Modificación de club\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{Diagrama de casos de uso_svg-tex.pdf}}%
+    \put(0.42749245,0.35800604){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Inscripción Jugador en club\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{Diagrama de casos de uso_svg-tex.pdf}}%
+    \put(0.35649547,0.21148036){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Traspaso de Jugador\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{Diagrama de casos de uso_svg-tex.pdf}}%
+    \put(0.32779456,0.05589124){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Baja Jugador de Club\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{Diagrama de casos de uso_svg-tex.pdf}}%
+    \put(0.02719033,0.69637462){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Administrador\end{tabular}}}}%
+    \put(0.01812689,0.25981873){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<principal>>\end{tabular}}}}%
+    \put(0.05438066,0.23564955){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Club\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{Diagrama de casos de uso_svg-tex.pdf}}%
+    \put(0.44259819,0.27643505){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Include>>\end{tabular}}}}%
+    \put(0.37462236,0.13746224){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Include>>\end{tabular}}}}%
+    \put(0.64048338,0.27190332){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Include>>\end{tabular}}}}%
+    \put(0.67673716,0.46223565){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Include>>\end{tabular}}}}%
+    \put(0.66163142,0.54984894){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Include>>\end{tabular}}}}%
+    \put(0.66616314,0.64501511){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Include>>\end{tabular}}}}%
+    \put(0.83987915,0.73867069){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Include>>\end{tabular}}}}%
+    \put(0,0.90332326){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Visual Paradigm Standard(jesusmuve(Universidad Granada))\end{tabular}}}}%
+  \end{picture}%
+\endgroup%
