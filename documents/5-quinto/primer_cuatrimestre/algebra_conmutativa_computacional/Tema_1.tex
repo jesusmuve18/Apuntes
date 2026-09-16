@@ -191,9 +191,150 @@ La demostración del teorema anterior la haremos con el Lema de Zorn.
     Considerando $\cup_{\lambda \in I} J_\lambda$ un supremo de la cadena.
 \end{proof}
 
+Consideramos $Max(A)\subseteq Spec(A)$, entonces todos los cocientes $A/Q$ donde $Q\in Max(A)$ entonces eso será un cuerpo pero los cocientes $A/P$ donde $P\in Spec(A)$ entonces será un dominio.
+
 \begin{lema}
-    
+    Si cogemos $x\in I(A)$, es equivalente a decir que $x\notin M$ para cualquier $M\in Max(A)$.
+    \begin{proof}
+        \item[$\Rightarrow$)] Trivial
+        \item[$\Leftarrow$)] Sabemos que $x\neq 0$ y $x\neq 1$ y suponiendo que $x\notin U(A)$ Krull nos dice que $\langle x \rangle$ es propio y existe un $M\in Max(A)$ tal que $\langle x \rangle \subseteq M$
+    \end{proof}
 \end{lema}
+
+\section{Anillos locales}
+
+\begin{definicion}
+    Si $A$ no nulo se dice que es \textbf{local} si posee un solo ideal maximal, es decir
+    \begin{gather*}
+        Max(A) = \{x\}
+    \end{gather*}
+\end{definicion}
+
+\begin{prop}
+    La definición anterior es equivalente a decir que $A\setminus U(A)$ es un ideal. En tal caso $M=A\setminus U(A)$ es el único ideal maximal.
+
+    % \begin{proof}
+    %     Como $A$ no es nulo Krull nos dice que $Max(A)\neq \emptyset$.
+    % \end{proof}
+\end{prop}
+
+Consideramos $\bb{K} = \bb{R}$ y $A$ es un $\bb{R}-$Álgebra
+% buscar definición de R-Álgebra
+y podemos considerar el conjunto
+\begin{gather*}
+    Alg_{\bb{R}}(A, \bb{R})
+\end{gather*}
+el conjunto de morfismos de $\bb{R}$-Álgebras. Estas aplicaciones llevan las sumas en sumas, sueltan los escalares y son multiplicativas. Este conjunto es muy importante.
+\begin{gather*}
+    Alg_{\bb{R}}(A, \bb{R}) \to Max(A)\\
+    \varphi \mapsto ker(\varphi)
+\end{gather*}
+% Teorema de ceros de Hilbert
+Si cogemos $A = \frac{\bb{R}[x]}{\langle x^2 + 1 \rangle} \cong \bb{Q}(\sqrt{-1})$, entonces las algebras de $(A, \bb{R})$ es vacío.
+
+Si cojo $X$ un espacio topológico y considero 
+\begin{gather*}
+    C(x) = \text{funciones continuas de $x$ en $\bb{R}$}
+\end{gather*}
+
+Si cogemos un $x\in X$ podemos asociarle un $\mu_x = \{f \in \varphi(x) : f(x)=0\}$ y entonces $X\to Max(\varphi(x))$ es una aplicación bien definida con $x\mapsto \mu_x$.
+
+Que $X$ sea conexo nos dice que $\varphi(x)$ es idempotente.\\
+
+Qué pasa si ahora tomamos un $x_0\in \bb{R}$ y tomamos una función $f:I\to \bb{R}$ tal que $f(x_0)\neq 0$ no podemos tratarlo como un elemento invertible.
+
+La idea es tomar $I$ un abierto de $\bb{R}$ y una función $f:I\to \bb{R}$ y esto nos da un par
+\begin{gather*}
+    \{(I, f) : I \in V_{x_0}(\bb{R}),\ f\in C(I, \bb{R})\}
+\end{gather*}
+y vamos a dotarlo de una relación de equivalencia
+\begin{gather*}
+    (I,f)R(J,g) \sii \exists K\subseteq I\cap J \ \ : \ \ f_{|K} = g_{|K}
+\end{gather*}
+Llamaremos el germen de $f$ en $x$ a $\bar{(I,f)}$ y tendremos que $C_{x_0}(\bb{R}) = I_{x_0}/R_{x_0}$ es un anillo, y de hecho un $\bb{R}-$Álgebra. Tenemos un anillo y su localización, hemos invertado un formalismo llamado localización que nos permite encontrar un sitio donde es invertible. El germen es invertible, no la función. Stalz de un haz.
+
+Queremos formalizar esto. Para ello tomamos $A$ un anillo y $S \subseteq A$. Decir que $S$ es multiplicativo, es decir
+\begin{enumerate}
+    \item $0\notin S$
+    \item $1\in S$
+    \item $s,z\in S \Rightarrow sz\in S$
+\end{enumerate}
+
+Por ejemplo, para $A=\bb{Z}$ consideramos $S=\bb{Z}\setminus \{0\}$ y tenemos que $A$ es un dominio. Si cogemos $A\setminus \{0\}$ también es un $S$ multiplicativo.
+
+Si cogemos $P\in Spec(A)$ entonces $S = A\setminus P$.
+
+La idea es coger $S\times A$ (producto cartesiano de toda la vida) y lo dotamos de una relación de equivalencia
+\begin{gather*}
+    (s,a)R_S(r,b) \overset{def}{\sii} \exists u\in S \ : \ u(ar - sb) = 0
+\end{gather*}
+% Probar que es una relación de equivalencia
+Vamos a denotar la clase de equivalencia de $(s,a)$, es decir $\bar{(S,a)}$ como $\frac{a}{S}$.
+
+Vamos a denotar $\frac{S\times A}{R_S} = AS^{-1}$. 
+
+Nos planteamos cómo definir las operaciones:
+\begin{gather*}
+    \frac{a}{s} + \frac{b}{r} := \frac{as + sb}{sr}\\\\
+    \frac{a}{s} \cdot \frac{b}{r} : = \frac{ab}{sr}
+\end{gather*}
+y tenemos $0_{AS^{-1}} = \frac{0}{1}$ y $1_{AS^{-1}} = \frac{1}{1}$.
+Queremos ver que están bien definidas. 
+
+Hasta ahora hemos hecho un anillo con un conjunto multiplicativo y un morfismo que llamaremos morfismo canónico de la multiplicación
+\begin{gather*}
+    A \overset{\tau}{AS^{-1}}\\
+    a \mapsto \frac{a}{1}
+\end{gather*}
+Si $A$ es un dominio, entonces $\tau$ es inyectivo.
+\begin{gather*}
+    \frac{a}{1} = \frac{0}{1} \sii \exists s \in S \ : \ s(a \cdot 1 - 1 \cdot 0) = 0 \sii sa=0 \Rightarrow a=0\ (s\neq 0)
+\end{gather*}
+Planteamos ahora cuál es la propiedad universal. Si tengo un morfismo de anillos $\varphi: A \to B$ tal que $\varphi(S) \subseteq U(B)$, entonces existe un único $\tilde{\varphi}$ que hace que el siguiente diagrama sea conmutativo
+\begin{gather*}
+    \xymatrix{
+        A \ar[d]_{\tau} \ar[r]^{\varphi} & B\\
+        AS^{-1} \ar@{-->}[ru]_{\tilde{\varphi}}
+    }
+\end{gather*}
+
+Si tenemos el siguiente diagrama
+\begin{gather*}
+    \xymatrix{
+        A \ar[d]_{\tau} \ar[r]^{\varphi} & B\\
+        AS^{-1}
+    }
+\end{gather*}
+entonces $\varphi(S)=T$ es un conjunto multiplicativo de B. Entonces podemos encontrar lo que llamaremos \textbf{localizante}
+% Diagrama localizante
+
+\begin{gather*}
+    \xymatrix{
+        A \ar[d]_{\tau} \ar[r]^{\varphi} & B\\
+        AS^{-1} & BT^{-1}
+    }
+\end{gather*}
+
+Si tenemos un morfismo $\varphi: A \to V$ esto induce un morfismo 
+\begin{gather*}
+    Spec(B) \to Spec(A)\\
+    q \mapsto \varphi^{-1}(q)
+\end{gather*}
+
+$I \leq A$ esto induce que $I^e \leq AS^{-1}$ , $I^e = \tau(I)AS^{-1} = \langle \tau(I) \rangle$ dentro de $AS^{-1}$.
+
+$J\leq AS^{-1}$ esto induce que $J^{e}=\tau^{-1}(J)$. Tenemos las siguientes propiedades:
+\begin{enumerate}
+    \item $I^e = \{u\in AS^{-1} \ : \ u = \frac{a}{s} \text{ para algún } a\in I,\ s \in S\}$
+    \item Si $I\cap S\neq \emptyset $, entones $I^e = AS^{-1}$
+    \item $(J^e)^e = J$ y $I \leq (I^e)^e$
+\end{enumerate}
+
+Si $A = \bb{Z}$ localizado en $S$ con $S = \{S^n : n\geq 0\}$.
+
+Si cogemos esto vemos que $\frac{-2}{5} = \frac{-10}{2}$ y sicogemos el ideal $I=10\bb{Z}$ tenemos que $-10\in I$ pero $-2\notin I$.
+
+
  
 
 
