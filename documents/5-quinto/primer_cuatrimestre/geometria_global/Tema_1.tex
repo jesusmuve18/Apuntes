@@ -64,9 +64,12 @@
     y llegamos a la conclusión de que $\phi_{|_{W_3}}$ es derivable, pero $W_3$ es un entorno abierto de $t_0$. Hemos llegado a que para un $t_0$ cualquiera del dominio del cambio de parámetros existe un entorno suyo en el que $\phi$ es derivable. En particular lo será en $t_0$.
 \end{ejemplo}
 
-% No hay clase el 17 ni del 28-1.
-% Se recuperarán el día 9 y el 16 de 12:00-14:00.
-% Se recuperarán el día 23 de 13:00-14:00.
+% No hay clase el 17 de septiembre ni del 28-1.
+% Se recuperará:
+%   - día 25 de septiembre de 12:00-14:00.
+%   - día 9 de octubre de 12:00-14:00.
+%   - día 16 de octubre de 13:00-14:00.
+
 
 Del ejemplo anterior podemos concluir la siguiente proposición:\\
 \begin{prop}
@@ -114,3 +117,64 @@ Del ejemplo anterior podemos concluir la siguiente proposición:\\
     \end{gather*}
     lo que nos confirma que la definición anterior está bien hecha y no depende de la parametrización escogida.
 \end{observacion}
+
+\begin{ejemplo}\
+    \begin{enumerate}
+        \item Sea $C\subset \bb{R}^2$ una curva simple y consideramos $C'\subset C$ n abierto suyo. Entonces $C'$ es también una curva simple.
+        \begin{proof}
+            Para probarlo tenemos que ver que para todo punto existe una parametrización regular. Así consideramos un $p'\in C'$ y en particular $p'\in C$ por lo que existirá un $V\subset C$ entorno de $p'$, un intervalo abierto $I\subset \bb{R}$ y una curva regular $\alpha : I \to \bb{R}^2$ tal que $\alpha(I)=V$ y tal que $\alpha : I \to V$ es un homeomorfismo.\\
+
+            Podríamos ahora pensar en elegir un $V'=V\cap C'$ pero a poco que lo pensemos no vale porque $V'$ puede ser no conexo. Por ello consideramos $V'$ como la componente conexa de $V\cap C'$ que contiene a $p'$, que será un entorno abierto y conexo de $p'$ en $C'$.\\
+
+            Con esta elección es natural considerar $I'=\alpha^{-1}(V') \subset \alpha^{-1}(V) \subset I \subset \bb{R}$. Por ser $\alpha$ continua tendremos que $I'$ es un abierto de $\bb{R}$ y por ser homeomorfismo $\alpha^{-1}$ será también continua lo que nos garantiza que $I'$ es conexo. Concluimos que $I'$ es un intervalo abierto de $\bb{R}$.\\
+
+            Finalmente consideramos $\alpha' = \alpha_{|I'}$ que será una curva regular de $I'$ en $\bb{R}^2$ (por ser restricción en el dominio de una curva regular). \\
+            
+            Queremos ver ahora que se verifican las condiciones para que $C'$ sea una curva simple. Tenemos que 
+            \begin{gather*}
+                \alpha'(I') = \alpha' (\alpha^{-1} (V')) = V'
+            \end{gather*}
+            y además $\alpha':I'\to V'$ es un homeomorfismo por ser restricción de $\alpha$ que ya lo era.
+        \end{proof}
+
+        \item Consideramos $C\subset \bb{R}^2$ un subconjunto y $\{C_i\}_{i\in I}$ una familia de subconjuntos de $C$, es decir, $C_i\subset C$ para todo $i\in I$ tal que cada $C_i$ es una curva simple abierta en $C$ y tal que 
+        \begin{gather*}
+            C = \bigcup_{i\in I} C_i
+        \end{gather*}
+        Entonces $C$ es una curva simple.
+        \begin{proof}
+            La demostración se deja como ejercicio
+        \end{proof}
+
+        \item Grafos de funciones derivables. Consideramos un intervalo abierto $I\subset \bb{R}$ y una función $f: I\to \bb{R}$ es derivable. De esta forma podemos tomar
+        \begin{gather*}
+            Grafo(f) = \{(x,y) \in \bb{R}^2 \ : \ x\in I,\ y=f(x)\} \subset \bb{R}^2
+        \end{gather*}
+        y dicho grafo será una curva simple.
+        \begin{proof}
+            Comencemos nombrando $C=Grafo(f)\neq \emptyset$ y podemos reescribir
+            \begin{gather*}
+                C = \{(x,f(x)) : x\in I\}
+            \end{gather*}
+            Tomamos un $p=(x,f(x))\in C$ donde $x\in I$. Elegimos $V=C$ por lo que trivialmente $V$ será un entorno abierto de $p$ en $C$. También tomamos el $I$ dominio de la función que ya es un intervalo abierto de $\bb{R}$. Nos queda por escoger un $\alpha:I \to \bb{R}^2$ que a poco que pensemos es claro que nos vale
+            \begin{gather*}
+                \alpha(t) = (t,f(t))
+            \end{gather*}  
+            que es derivable por serlo la identidad y $f$. Además, tenemos que $\alpha'(t) = (1, f'(t)) \neq (0,0)$ por lo que claramente $\alpha$ es una curva regular. Tenemos que
+            \begin{gather*}
+                \alpha(I) = \{(t, f(t)) : t\in I\} = Grafo(f) = C = V
+            \end{gather*}
+            Veamos que $\alpha : I \to V$ es un homeomorfismo. Para ello consideramos $\pi:\bb{R}^2 \to \bb{R}$ la primera proyección, es decir, tal que
+            \begin{gather*}
+                \pi(x,y) = x
+            \end{gather*}
+            y se verificará que 
+            \begin{gather*}
+                (\pi \circ \alpha)(t) = \pi ( \alpha(t)) = \pi(t, f(t)) = t\\
+                (\alpha \circ \pi)(x, f(x)) = \alpha(\pi(x, f(x))) = \alpha(x) = (x, f(x))
+            \end{gather*}
+            Concluimos que $\pi$ es la inversa de $\alpha$ y además es continua (ya que la proyección siempre lo es\footnote{Contenido estudiado en Topología I}) por lo que $\alpha : I \to V$ es un homeomorfismo.
+        \end{proof}
+        Una consecuencia clara es que todas las rectas de $\bb{R}^2$ son curvas simples. Por la primera observación tendremos también que todos los segmentos abiertos de $\bb{R}^2$ (o la unión de ellos) son curvas simples.
+    \end{enumerate}
+\end{ejemplo}
