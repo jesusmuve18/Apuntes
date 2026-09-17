@@ -334,8 +334,148 @@ Si $A = \bb{Z}$ localizado en $S$ con $S = \{S^n : n\geq 0\}$.
 
 Si cogemos esto vemos que $\frac{-2}{5} = \frac{-10}{2}$ y sicogemos el ideal $I=10\bb{Z}$ tenemos que $-10\in I$ pero $-2\notin I$.
 
+Lo que interesa ahora es la contracción $J\leq AS^{-1}$, en concreto
+\begin{gather*}
+    Spec(AS^{-1}) \to Spec(A)
+    P \mapsto P^c = \tau^{-1}(P)
+\end{gather*}
+y queremos ver que esto es un homeomorfismo. 
 
- 
 
+% Ha dicho que lo siguiente es para sacar nota:
+%
+% Recordemos que estamos en un anillo $A$ y que definíamos $Spec(A)$ como el conjunto de todos los ideales primos en $A$. $Spec(A)$ es un espacio topológico con la topología de Zariski. Los cerrados son los 
+% \begin{gather*}
+%     V(I) = \{P\in Spec(A) \ ; \ I \leq P, \ I \leq Id(A)\}
+% \end{gather*}
+% Si consideramos $f$ una función podemos tomar
+% \begin{gather*}
+%     \{D_f \in Spec(A) \ : \ V(\langle f \rangle) \text{ son abiertos}\}
+% \end{gather*}
+% que forma una base de abiertos para dicha topología.
 
+Vamos a ver que es una biyección. Para empezar necesitaremos ver ciertas proposiciones
+\begin{enumerate}
+    \item Si $P\in Spec(A)$ tal que $P\cap S = \emptyset$, entonces queremos ver que si $u = \frac{a}{s}\in P^e$, entonces necesariamente $a\in P$. \\
+    
+    Si $\frac{a}{s} = \frac{b}{t} \in P$ y $a\in P$ entonces queremos ver que $b\in P$. De la igualdad anterior tenemos que existe un $e\in S$ tal que $e(at - bs) = 0$ lo que nos dice que 
+    \begin{gather*}
+        eat = ebs \in P \Rightarrow es \in S \Rightarrow es \notin P
+    \end{gather*}
+    Esto implica que $b\in P$.
+\end{enumerate}
 
+Ahora queremos ver que si $P\in Spec(A)$ tal que $P \cap S = \emptyset$, entonces necesariamente $P^e \in Spec(AS^{-1})$. Acabamos de ver que 
+\begin{gather*}
+    \frac{ab}{st} = \frac{a}{s} \cdot \frac{b}{t} \in P^e \Rightarrow ab \in P
+\end{gather*}
+con lo que $a\in P$ o $b\in P$, lo que a su vez nos dice que o bien $\frac{a}{s}\in P^e$ o bien $\frac{b}{t}\in P^e$. Si $P\in Spec(AS^{-1})$, entonces $\tau^{-1}(P)\in Spec(A)$. Si $S=P^e=Q^e$ tal qe $Q\cap S = P\cap S = \emptyset$ donde $Q\neq P$.\\
+
+\begin{prop}
+    Sea $A$ un anillo no nulo, $P_1,...,P_n\in Spec(A)$ y $I\leq A$. Entonces
+    \begin{gather*}
+        I \subseteq \bigcup_{i=1}^N P_i \Rightarrow \exists i = 1,...,N, \ : \ I \subseteq P_i
+    \end{gather*}
+    \begin{proof}
+        Vamos a hacer una inducción finita. Para $n=1$ la implicación es trivial. Para $N=2$ tenemos dos primos $P_1,P_2$ y $I\subseteq P_1\cup P_2$. Supongamos que $I\not\subseteq P_1$  y $I\not\subseteq P_2$. En este caso tendremos que existe un $x\in I$ tal que $x\notin P_1$ y un $y\in I$ tal que $y\notin P_2$. Por tanto $x\in P_2$ y $y\in P_1$. Consideramos la suma $x+y\notin P_1\cup P_2$ y llegamos a contradicción.\\
+
+        Si aplicamos ahora la hipótesis de inducción sobre $N-1$ tendremos que para cada $i=1,...,N$ podemos considerar
+        \begin{gather*}
+            J_i = \bigcup_{j=1,...,N,\ j\neq i} P_j
+        \end{gather*}
+        y supongamos que $I\not\subseteq P_i$ para ningún $i=1,...,N$. La hipótesis de inducción nos dice que $I\not\subseteq J_i$ para ningún $i=1,...,N$. Esto nos dice que existe $a_i\in I$ tal que $a_i\notin J_i$ para cualquier $i=1,...,N$. Entonces necesariamente $a_i\in P_i$ para todo $i=1,...,N$. Podemos reorganizar la suma que usabamos antes como
+        \begin{gather*}
+            a = a_1a_2...a_{N-1} + a_N \in I
+        \end{gather*}
+        Si escogemos $i=1,...,N-1$ y $a\in P_i$, entonces $a_N\in P_i$ pero $a_N\notin J_N$ llegando a contradicción.\\
+        
+        Nos queda un caso por contemplar. Si $a\in P_N$, entonces $a_1,...,a_{N-1}\in P_N$. 
+    \end{proof}
+\end{prop}
+
+% Radical de un ideal
+\section{Radical de un ideal}
+
+\begin{prop}
+    Dado un ideal $I\leq$, el siguiente conjunto
+    \begin{gather*}
+        I\leq \sqrt{I} = \{a\in A \ : \ \exists n \in \bb{N},\ a^n\in I\}
+    \end{gather*}
+    es un ideal de $A$.
+\end{prop}
+
+Para probar la proposición anterior vamos a empezar por ver el siguiente conjunto:
+\begin{gather*}
+    \sqrt{\langle 0 \rangle} = \{a\in A : \exists n \in \bb{N},\ a^n=0\} := rad(A)
+\end{gather*}
+el radical nilpotente de $A$.
+
+\begin{lema}
+    Sea $A$ un anillo, entonces
+    \begin{gather*}
+        rad(A) = \bigcap_{P\in Spec(A)} P
+    \end{gather*}
+    \begin{proof}
+        Veamos la doble inclusión
+        \begin{itemize}
+            \item[$\subseteq$ )] Es trivial %Justificar un poco
+            \item[$\supseteq$ )] Tomamos $0\neq x \in \bigcap_{P\in Spec(A)} P$ y supongamos que $x^n \neq 0$ para todo $n\in \bb{N}$. Esto nos genera un conjunto multiplicativo:
+            \begin{gather*}
+                S_x = \{x^n\in A : n\in \bb{N}\}
+            \end{gather*}
+            Podemos usar ahora la localización $A_x = A \cdot S^{-1}_x$, 
+            \begin{gather*}
+                \tau_x: A \to A_x\\
+                a \mapsto \frac{a}{1}
+            \end{gather*}
+            Tenemos que $ker(\tau_x)$ es un ideal propio, es decir, $1\notin ker(\tau_x)$ donde
+            \begin{gather*}
+                ker(\tau_x) = \{a\in A : \exists n \in \bb{N} , ax^n=0\}
+            \end{gather*}
+            $A_x\neq 0$ es un anillo no trivial. Esto implica que $Spec(A_x)\neq \emptyset$ (por Krull), es decir, que existe un $P\in Spec(A_x)$. Cogemos $P = P^c\in Spec(A)$ tal que $P\cap S_n\neq \emptyset$, lo qe nos dice que $x\notin P$. Hemos encontrado un primo que pertenece al espectro que no contiene a $x$ (que no estaba en las unidades de $A$).
+        \end{itemize}
+    \end{proof}
+\end{lema}
+
+\begin{coro}
+    El siguiente conjunto
+    \begin{gather*}
+        rad(I) = \bigcap_{P\in Spec(A),\ P\geq I} P
+    \end{gather*}
+    es un ideal.
+    \begin{proof}
+        Para verlo consideramos $\pi : A \to A/I$ y basta con probar que 
+        \begin{gather*}
+            \pi^{-1}(rad(A/I)) = rad(I) = \sqrt{I}
+        \end{gather*}
+        Para ello tomamos $a\in \sqrt{I}=rad(I)$ que nos dirá que existe un $n\in \bb{N}$ tal que $a^n\in I$. Podemos considerar entonces
+        \begin{gather*}
+            (a+I)^n = a^n + I = \bar{0}
+        \end{gather*}
+        es decir que $a+I\in rad(A/I)$ y tenemos la inclusión $rad(I)\subseteq rad(A/I)$.\\
+
+        Recíprocamente si $b\in \pi(rad(A/I))$, entonces podemos considerar $u=b+I$ y tenemos que existe un $n\in \bb{N}$ tal que $u^n = b^n + I = \bar{0} = I$ por lo que existe un $n\in \bb{N}$ tal que $b^n\in I$ llegando finalmente a $rad(I)$.
+        \begin{gather*}
+            \pi^{-1}(rad(A/I)) = \pi^{-1}\left( \bigcap_{P\in Spec(A),\ I\leq P} P/I\right) = \bigcap_{P\in Spec(A),\ I\leq P} = rad(I)
+        \end{gather*}
+    \end{proof}
+\end{coro}
+
+Radical de Jacobson:
+\begin{gather*}
+    Rad(A) = \bigcap_{M\in Max(A)} M = \{a\in A : 1-ax\in U(A),\ \forall x \in A\}
+\end{gather*}
+
+Nos planteamos ahora para cuáles $A$ se verifica $rad(A)=Rad(A)$ y cuando $rad(A) \not\leq Rad(A)$ (ya que siempre se tiene que $rad(A)\subseteq Rad(A)$).
+
+\begin{lema}
+    Sea $A$ un anillo. Son equivalentes:
+    \begin{enumerate}
+        \item $A$ posee un único ideal maximal, es decir $Max(A) = \{x\}$.
+        \item $A\setminus U(A)$ es un ideal.
+    \end{enumerate}
+    \begin{proof}
+        \item[(1)$\Rightarrow (2)$ )] Queremos ver que $\{M\} = Max(A)$. Si $a\in A$ tal que $a\notin U(A)$ sabemos por Krull que $\langle a \rangle \subseteq M$, luego $a\in M$. Esto nos dice que $A\setminus U(A)\subseteq M$ y es trivial que $M\subseteq A\setminus U(A)$.
+        \item[(2)$\Rightarrow (1)$ )] Notemos que $M=A\setminus U(A)$ es un ideal. Sabemos que $M$ contiene cualquier ideal propio $0\not\leq I \not\leq A$ y entonces $I\subseteq M$. Si cogemos $M_0\in Max(A)$ que existe por Krull se tiene que $M_0\subseteq M$ y esto implica que $M_0=M$.
+    \end{proof}
+\end{lema}
