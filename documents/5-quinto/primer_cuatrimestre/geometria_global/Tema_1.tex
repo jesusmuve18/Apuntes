@@ -176,5 +176,69 @@ Del ejemplo anterior podemos concluir la siguiente proposición:\\
             Concluimos que $\pi$ es la inversa de $\alpha$ y además es continua (ya que la proyección siempre lo es\footnote{Contenido estudiado en Topología I}) por lo que $\alpha : I \to V$ es un homeomorfismo.
         \end{proof}
         Una consecuencia clara es que todas las rectas de $\bb{R}^2$ son curvas simples. Por la primera observación tendremos también que todos los segmentos abiertos de $\bb{R}^2$ (o la unión de ellos) son curvas simples.
+
+        \item Consideramos $O\subset \bb{R}^2$ y la función $F:O \mapsto \bb{R}$ diferenciable. Vamos a suponer que $a\in \bb{R}$ es un valor regular\footnote{Un valor regular es aquel que verifica que $\forall p \in F^{-1}(\{a\})$ se tiene que $\nabla f_p = \left( \frac{\partial F}{\partial x} (p), \frac{\partial F}{\partial y}(p)\right) \neq (0,0)$.}
+        no trivial\footnote{Un valor regular no trivial es aquel $a\in \bb{R}$ que además verifica $F^{-1}(\{a\}) \neq \emptyset$.} 
+        de $F$. Tomamos $C = F^{-1}(\{a\}) \subset O \subset \bb{R}^2$ y queremos ver que es una curva simple. Ya sabemos que es no vacío (ya que hemos tomado $a$ un valor regular no trivial). \\
+
+        % Gráfico de mapa topográfico
+
+        Tomamos un punto $p\in C = F^{-1}(\{a\})$ y por ser $a$ regular tenemos que 
+        \begin{gather*}
+            \nabla f_p = \left( \frac{\partial F}{\partial x} (p), \frac{\partial F}{\partial y}(p)\right) \neq (0,0)
+        \end{gather*}
+        Vamos a suponer sin pérdida de generalidad que $\frac{\partial F}{\partial y}(p) \neq 0$. Estamos en la situación en la que $p=(x,y)$ y tenemos que $F(x,y) = a$ que es una ecuación y esto nos debería recordar al Teorema de la Función Implícita que nos permite despejar una variable en función de la otra de forma local, ya que tenemos todas las hipótesis necesarias. De esta forma sabemos que $\exists U_p$ entorno abierto de $p$ en $O$ (y por tanto en $\bb{R}^2$), $\exists I_p\subset \bb{R}$ un intervalo abierto y $\exists f_p : I_p \to \bb{R}$ tales que 
+        \begin{gather*}
+            C\cap U_p = F^{-1}(\{a\})\cap U_p = Grafo(f_p) = \{(x,y)\in \bb{R}^2 \ : \ x\in I_p,\ y=f(x)\}
+        \end{gather*}
+        y por ser grafo de una función diferenciable tenemos que $C\cap U_p$ es una curva simple. Además, podemos escribir
+        \begin{gather*}
+            C = \bigcup_{p\in C} (C\cap U_p) 
+        \end{gather*}
+        y además $(C\cap U_p)$ es abierto en $C$ porque $U_p$ es abierto en $\bb{R}^2$ por lo que su intersección con $C$ será un abierto en la topología inducida. De esta forma tenemos que $C$ es una curva simple.\\
+
+        Hemos demostrado que las imágenes inversas de un valor regular no trivial de una función de dos variables son curvas simples (no necesariamente conexas). Además a estas curvas las llamaremos \textbf{curvas de nivel} de la función.\\
+
+        Todos los grafos en particular son de este tipo, ya que tenemos $F(x,y)=a$ y tomando $F(x,y) = y - f(x)$ y $a=0$ tenemos $y=f(x)$ que era el caso que estudiábamos en el punto anterior. En este caso sí serán siempre conexos.
+
+        \item Consideramos $\alpha: \bb{R} \to \bb{R}^2$ curva regular $L-$periódica (con $L>0$) tal que $\alpha_{|_{[0,L)}}$ es inyectiva. Veamos que el siguiente conjunto
+        \begin{gather*}
+            C = traza(\alpha) = \alpha(\bb{R}) = \alpha([0,L]) = \alpha([0,L))
+        \end{gather*}
+        es una curva simple homeomorfa a $S^1$.\\
+
+        Lo primero que observamos es que $C$ es la imagen por $\alpha$, que es una función continua, de un compacto por lo que $C$ es un compacto. Además es no trivial, ya que $C$ es también $\alpha(\bb{R})$ y $\bb{R}$ no es vacío teniendo necesariamente alguna imagen. Tenemos
+        \begin{gather*}
+            \bb{R} \overset{\alpha}{\longrightarrow} C \quad \text{ continua y sobreyectiva}
+        \end{gather*} 
+        y así habrá una relación de equivalencia $R_\alpha$ inducida por $\alpha$ en $\bb{R}$ donde si $t,t'\in \bb{R}$ se tiene que 
+        \begin{gather*}
+            t R_\alpha t' \sii \alpha(t) = \alpha(t')
+        \end{gather*}
+        Podemos ver esta relación como
+        \begin{gather*}
+            \left.
+            \begin{array}{l}
+                t = kL + m,\ \  k\in \bb{Z},\ \  m\in [0,L)\\
+                t' = k'L + m',\ \ k'\in \bb{Z},\ \  m'\in [0,L)
+            \end{array}
+            \right\} \Rightarrow 
+            \begin{array}{c}
+                t R_\alpha t' \sii \alpha(kL + m) = \alpha(k'L + m') \\ 
+                \sii \alpha(m)=\alpha(m') \sii\\
+                t-t' = (k-k')L\in L\bb{Z}
+            \end{array}
+        \end{gather*}
+        de esta forma podemos considerar el conjunto cociente
+        \begin{gather*}
+            \xymatrix{
+                \bb{R} \ar[r]^\alpha \ar[d]_\pi & C \\
+                S^1 \cong \bb{R} / R_\alpha \quad \ar@{-->}[ur]_{\tilde{\alpha}}
+            }
+        \end{gather*}
+        y tenemos que existe $\tilde{\alpha} : \bb{R}/R_\alpha \to C$ continua y biyectiva. Para ver que es un homeomorfismo basta con ver que $\tilde{\alpha}$ es cerrada, y lo es porque sale de un compacto ($S^1$) y llega a un espacio T2 ($C$ es T2 porque lo hereda de $\bb{R}$). Por tanto
+        \begin{gather*}
+            C \cong \bb{R}/R_\alpha \cong S^1
+        \end{gather*}
     \end{enumerate}
 \end{ejemplo}
