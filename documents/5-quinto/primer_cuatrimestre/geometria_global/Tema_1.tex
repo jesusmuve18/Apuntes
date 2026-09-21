@@ -181,7 +181,93 @@ Del ejemplo anterior podemos concluir la siguiente proposición:\\
         no trivial\footnote{Un valor regular no trivial es aquel $a\in \bb{R}$ que además verifica $F^{-1}(\{a\}) \neq \emptyset$.} 
         de $F$. Tomamos $C = F^{-1}(\{a\}) \subset O \subset \bb{R}^2$ y queremos ver que es una curva simple. Ya sabemos que es no vacío (ya que hemos tomado $a$ un valor regular no trivial). \\
 
-        % Gráfico de mapa topográfico
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \shorthandoff{>}
+
+                \begin{scope}[shift={(-4,0)}]
+                    % Plano
+                    \draw[thick] (1.55,1.15) -- (0,0) -- (5,0) -- (7,1.5) -- (5.3,1.5);
+                    % \draw[thick, dashed] (5.3, 1.5) -- (2,1.5) -- (1.55,1.15);
+
+                    % Base
+                    \draw[thick, dashed, purple] (5.5,0.75) arc (0:180:2 and 0.5);
+                    \draw[thick, purple] (5.5,0.75) arc (0:-180:2 and 0.5);
+
+                    % Relieve
+                    \draw[thick, purple] plot[smooth, tension=0.5] coordinates {
+                        (1.5,0.75) (1.75, 2) (2.25, 2.5) (2.75, 2) (2.9, 1.8) (3.25,1.7)  (3.5, 2) (3.75, 2.5) (4.3,3.25) (5, 2.5)  (5.5,0.75)
+                    };
+
+                    % --- LÍNEAS DE NIVEL ---
+
+                    % 1. Nivel intermedio inferior
+                    \draw[thick, dashed, blue!50!green] (5.35,1.25) arc (0:180:1.875 and 0.45);
+                    \draw[thick, blue!50!green] (5.35,1.25) arc (0:-180:1.875 and 0.45);
+
+                    % 2. Nivel del valle (Forma de 8 exacta a altura Y=1.7)
+                    % Se unen dos arcos para crear los dos lóbulos del 8 que convergen en X=3.25
+                    \draw[thick, dashed, blue!40!green] (5.2,1.7) arc (0:180:0.975 and 0.25) arc (0:180:0.775 and 0.2);
+                    \draw[thick, blue!40!green] (5.2,1.7) arc (0:-180:0.975 and 0.25) arc (0:-180:0.775 and 0.2);
+
+                    % 3. Nivel por encima del valle (Las montañas ya se separan en dos anillos)
+                    % Anillo izquierdo
+                    \draw[thick, dashed, blue!30!green] (2.65,2.1) arc (0:180:0.4 and 0.1);
+                    \draw[thick, blue!30!green] (2.65,2.1) arc (0:-180:0.4 and 0.1);
+                    % Anillo derecho
+                    \draw[thick, dashed, blue!30!green] (5.1,2.1) arc (0:180:0.775 and 0.2);
+                    \draw[thick, blue!30!green] (5.1,2.1) arc (0:-180:0.775 and 0.2);
+
+                    % 4. Nivel exacto en la cima de la montaña izquierda (Y=2.5)
+                    % Cima izquierda representada por un punto
+                    \fill[blue!20!green] (2.25,2.5) circle (1.5pt);
+                    % Equivalente topográfico en la montaña derecha a la misma altura
+                    \draw[thick, dashed, blue!20!green] (5.0,2.5) arc (0:180:0.625 and 0.15);
+                    \draw[thick, blue!20!green] (5.0,2.5) arc (0:-180:0.625 and 0.15);
+
+                    % 5. Nivel superior (solo abarca la montaña derecha, acercándose a la cima)
+                    \draw[thick, dashed, blue!10!green] (4.65,2.85) arc (0:180:0.325 and 0.08);
+                    \draw[thick, blue!10!green] (4.65,2.85) arc (0:-180:0.325 and 0.08);
+
+                    % 6. Cima absoluta de la montaña derecha (Y=3.25)
+                    \fill[green] (4.3,3.25) circle (1.5pt);
+
+                \end{scope}
+
+                \draw[dashed, ->] (3.5, 1.5) -- (4.5,1.5);
+
+                \begin{scope}[shift={(4,1.5)}, yscale=0.65]
+                    % Base (Nivel del suelo)
+                    % Mismo diámetro que la base 3D (X abarca de 1.5 a 5.5)
+                    \draw[thick, purple] (3.5, 0) circle (2);
+
+                    % 1. Nivel intermedio inferior
+                    \draw[thick, blue!50!green] (3.475, 0) circle (1.875);
+
+                    % 2. Nivel del valle (El "8")
+                    % En 2D, el 8 son dos círculos que se tocan exactamente en X = 3.25
+                    \draw[thick, blue!40!green] (2.475, 0) circle (0.775); % Lóbulo izquierdo
+                    \draw[thick, blue!40!green] (4.225, 0) circle (0.975); % Lóbulo derecho
+
+                    % 3. Nivel por encima del valle (Anillos separados)
+                    \draw[thick, blue!30!green] (2.25, 0) circle (0.4);    % Montaña izquierda
+                    \draw[thick, blue!30!green] (4.325, 0) circle (0.775); % Montaña derecha
+
+                    % 4. Nivel exacto de la cima izquierda y corte en la derecha
+                    % La cima izquierda es ahora un punto visto desde arriba
+                    \fill[blue!20!green] (2.25, 0) circle (2pt); 
+                    \draw[thick, blue!20!green] (4.375, 0) circle (0.625); % Montaña derecha
+
+                    % 5. Nivel superior (solo montaña derecha)
+                    \draw[thick, blue!10!green] (4.325, 0) circle (0.325);
+
+                    % 6. Cima absoluta de la montaña derecha
+                    \fill[green] (4.3, 0) circle (2pt);
+                \end{scope}
+
+            \end{tikzpicture}
+        \end{figure}
 
         Tomamos un punto $p\in C = F^{-1}(\{a\})$ y por ser $a$ regular tenemos que 
         \begin{gather*}
