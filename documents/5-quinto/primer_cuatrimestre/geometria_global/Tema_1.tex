@@ -322,9 +322,25 @@ Del ejemplo anterior podemos concluir la siguiente proposición:\\
                 S^1 \cong \bb{R} / R_\alpha \quad \ar@{-->}[ur]_{\tilde{\alpha}}
             }
         \end{gather*}
-        y tenemos que existe $\tilde{\alpha} : \bb{R}/R_\alpha \to C$ continua y biyectiva. Para ver que es un homeomorfismo basta con ver que $\tilde{\alpha}$ es cerrada, y lo es porque sale de un compacto ($S^1$) y llega a un espacio T2 ($C$ es T2 porque lo hereda de $\bb{R}$). Por tanto
+        y tenemos que existe $\tilde{\alpha} : \bb{R}/R_\alpha \to C$ continua y biyectiva. Para ver que es un homeomorfismo basta con ver que $\tilde{\alpha}$ es cerrada, y lo es porque sale de un compacto ($S^1$) y llega a un espacio T2 ($C$ es T2 porque lo es $\bb{R}$ y es una propiedad hereditaria). Por tanto
         \begin{gather*}
             C \cong \bb{R}/R_\alpha \cong S^1
         \end{gather*}
+        De esta forma podemos tomar un $p\in C=tr(\alpha)$ por lo que habrá un $t\in \bb{R}$ tal que $p=\alpha(t)$. Vamos a considerar el intervalo $(t- \nicefrac{L}{2}, t+ \nicefrac{L}{2})\subset \bb{R}$ que contiene a $t$ y es abierto en $\bb{R}$. Sabemos que la aplicación
+        \begin{gather*}
+            \alpha_{|_{\left(t- \nicefrac{L}{2}, t+ \nicefrac{L}{2}\right)}} : \left(t- \nicefrac{L}{2}, t+ \nicefrac{L}{2}\right) \longrightarrow \alpha\left(\left(t- \nicefrac{L}{2}, t+ \nicefrac{L}{2}\right)\right)
+        \end{gather*}
+        es un homeomorfismo. Tomamos por tanto $V = \alpha\left(\left(t- \nicefrac{L}{2}, t+ \nicefrac{L}{2}\right)\right)$ y sabemos que $\alpha(t)=p$ está en dicho $V$. Además, por ser imagen por $\alpha$ de un abierto, $V$ es abierto en $\bb{R}$. De esta forma tenemos que $V$ es un entorno de $p$ en $C$.\\
+
+        Definimos $I = \left(t- \nicefrac{L}{2}, t+ \nicefrac{L}{2}\right)$ que es claramente un intervalo abierto de $\bb{R}$ y definimos $\beta = \alpha_{|_{\left(t- \nicefrac{L}{2}, t+ \nicefrac{L}{2}\right)}}$. De esta forma tendremos
+        \begin{gather*}
+            \beta: I \longrightarrow V
+        \end{gather*}
+        y podemos escribir
+        \begin{align*}
+            \beta = (\tilde{\alpha}\circ \pi)_{|_{\left(t- \nicefrac{L}{2}, t+ \nicefrac{L}{2}\right)}}
+            = \tilde{\alpha} \circ \pi_{|_{\left(t- \nicefrac{L}{2}, t+ \nicefrac{L}{2}\right)}}
+        \end{align*}
+        y por ser $\tilde{\alpha}$ un homeomorfismo y $\pi_{|_{\left(t- \nicefrac{L}{2}, t+ \nicefrac{L}{2}\right)}}$ la restricción de un homeomorfismo, su composición será un homeomorfismo.
     \end{enumerate}
 \end{ejemplo}
