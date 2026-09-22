@@ -36,9 +36,9 @@
     Además, podemos considerar los \textbf{cambios de parametrización}
     \begin{align*}
         \phi &= \beta^{-1}\circ \alpha : \alpha^{-1}(W) \to \beta^{-1}(W)\\
-        \phi^{-1} = \psi &= \alpha^{-1}\circ \beta : \beta^{-1}(W) \to \circ^{-1}(W)
+        \phi^{-1} = \Psi &= \alpha^{-1}\circ \beta : \beta^{-1}(W) \to \circ^{-1}(W)
     \end{align*}
-    Veamos que $\phi$ y $\psi$ son \textbf{difeomorfismos}. Para ello, tan solo tendremos que verlo para $\phi$. Además, bastará con ver que $\phi$ es derivable (diferenciable), ya que tenemos que es una biyección y su inversa será $\psi$, donde $\alpha$ y $\beta$ juegan papeles inversos por lo que será equivalente a ver que $\phi$ lo sea.\\
+    Veamos que $\phi$ y $\Psi$ son \textbf{difeomorfismos}. Para ello, tan solo tendremos que verlo para $\phi$. Además, bastará con ver que $\phi$ es derivable (diferenciable), ya que tenemos que es una biyección y su inversa será $\Psi$, donde $\alpha$ y $\beta$ juegan papeles inversos por lo que será equivalente a ver que $\phi$ lo sea.\\
 
     Recordamos la situación en la que estamos
     \begin{gather*}
@@ -80,7 +80,7 @@ Del ejemplo anterior podemos concluir la siguiente proposición:\\
     Entonces las aplicaciones \textbf{cambio de parámetros} siguientes
     \begin{align*}
         \phi &= \beta^{-1}\circ \alpha : \alpha^{-1}(W) \to \beta^{-1}(W)\\
-        \psi &= \alpha^{-1}\circ \beta : \beta^{-1}(W) \to \circ^{-1}(W)
+        \Psi &= \alpha^{-1}\circ \beta : \beta^{-1}(W) \to \circ^{-1}(W)
     \end{align*}
     son \underline{difeomorfismos} entre abiertos de $\bb{R}$ (de $I$ y $J$ respectivamente).
 \end{prop}
@@ -341,6 +341,37 @@ Del ejemplo anterior podemos concluir la siguiente proposición:\\
             \beta = (\tilde{\alpha}\circ \pi)_{|_{\left(t- \nicefrac{L}{2}, t+ \nicefrac{L}{2}\right)}}
             = \tilde{\alpha} \circ \pi_{|_{\left(t- \nicefrac{L}{2}, t+ \nicefrac{L}{2}\right)}}
         \end{align*}
-        y por ser $\tilde{\alpha}$ un homeomorfismo y $\pi_{|_{\left(t- \nicefrac{L}{2}, t+ \nicefrac{L}{2}\right)}}$ la restricción de un homeomorfismo, su composición será un homeomorfismo.
+        y por ser $\tilde{\alpha}$ un homeomorfismo y $\pi_{|_{\left(t- \nicefrac{L}{2}, t+ \nicefrac{L}{2}\right)}}$ la restricción de un homeomorfismo, su composición será un homeomorfismo.\\
     \end{enumerate}
 \end{ejemplo}
+
+\begin{definicion}
+    A las curvas simples de $\bb{R}^2$ que son homeomorfas a $S^1$ se les llama \textbf{curvas de Jordan}.
+\end{definicion}
+
+Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curvas regulares en $\bb{R}^2$ (aunque la otra inclusión no se da\footnote{Basta pensar en una curva regular con autointersecciones o el Folium de Descartes}).
+
+\begin{observacion}
+    En la definición de curvas simples podemos exigir que las parametrizaciones sean curvas parametrizadas por el arco (ya que toda curva regular se puede reparametrizar por el arco).\\
+
+    Consideramos $C\subset \bb{R}^2$ una curva simple y $\alpha:I \to C$, $\beta: J \to C$ parametrizaciones por el arco. Supongamos que
+    \begin{gather*}
+        \alpha(I)\cap \beta(J)=W\neq \emptyset, \qquad \alpha(I)\not\subset\beta(J), \qquad \beta(J)\not\subset \alpha(I)
+    \end{gather*}
+    Ya sabemos que los cambios de parametrización eran
+    \begin{gather*}
+        \Phi = \beta^{-1} \circ \alpha : \alpha^{-1}(W) \to \beta^{-1}(W)\\
+        \Psi = \alpha^{-1} \circ \beta : \beta^{-1}(W) \to \alpha^{-1}(W)
+    \end{gather*}
+    y sabemos que $\Phi$ y $\Psi$ son difeomorfismos. Vamos a definir el siguiente conjunto:
+    \begin{gather*}
+        X=\{(s_1, s_2) \in I\times J \ : \ \alpha(s_1)=\beta(s_2)\} \subset I \times J \subset \bb{R}^2
+    \end{gather*}
+    y de esta forma podemos reescribir
+    \begin{gather*}
+        X=\{(s_1, s_2) \in I\times J \ : \ s_1 \in \alpha^{-1}(W), \ s_2 = |Phi(s_1)\} = Grafo(\Phi) = Grafo(\Psi) 
+    \end{gather*}
+    El sitio donde coinciden dos funciones continuas es cerrado en el producto por lo que $X$ será cerrado en $\bb{R}^2$.
+\end{observacion}
+
+
