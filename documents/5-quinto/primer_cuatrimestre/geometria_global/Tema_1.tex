@@ -369,9 +369,70 @@ Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curva
     \end{gather*}
     y de esta forma podemos reescribir
     \begin{gather*}
-        X=\{(s_1, s_2) \in I\times J \ : \ s_1 \in \alpha^{-1}(W), \ s_2 = |Phi(s_1)\} = Grafo(\Phi) = Grafo(\Psi) 
+        X=\{(s_1, s_2) \in I\times J \ : \ s_1 \in \alpha^{-1}(W), \ s_2 = \Phi(s_1)\} = Grafo(\Phi) = Grafo(\Psi) 
     \end{gather*}
-    El sitio donde coinciden dos funciones continuas es cerrado en el producto por lo que $X$ será cerrado en $\bb{R}^2$.
-\end{observacion}8
+    El sitio donde coinciden dos funciones continuas es cerrado en el producto por lo que $X$ será cerrado en $\bb{R}^2$.\\
+
+    Veamos a continuación una serie de observaciones:
+
+    \begin{enumerate}
+        \item Todas las c.c de $X$ son grafos simultáneamente sobre intervalos abiertos de $\alpha^{-1}(W)$ y sobre intervalos abiertos de $\beta^{-1}(J)$, que son cerrados en $I\times J$.\\
+        
+        Si $\Phi$ es un cambio de parámetros, entonces podemos escribir $\alpha = \beta \circ \Phi$ en $I$. Si derivamos en cualquier punto del dominio $s\in I$ obtenemos
+        \begin{gather*}
+            \alpha'(s) = (\beta \circ \Phi)'(s) \overset{R.C.}{=} \Phi'(s)\beta'(\Phi(s))
+        \end{gather*}
+        Donde hemos aplicado la regla de la cadena. Tomando módulos obtenemos 
+        \begin{gather*}
+            1 = |\alpha'(s)| = |\Phi(s)| \cdot |\beta'(\Phi(s))| = |\Phi'(s)| \cdot 1 = |\Phi'(s)|
+        \end{gather*}
+        \item Por tanto $\Phi'(s) = 1$ o bien $\Phi'(s) = -1$ en cada componente conexa de $\alpha^{-1}(W)$. Eso implica que las componentes conexas de $X$ son segmentos (de recta) de pendiente $1$ o $-1$ que son cerradas en $I\times J$.
+
+        % Hacer dibujo de posibles rectas de pendiente 1 y -1 (son 10).
+
+        % Si proyectamos un segmento a ambas componentes nos debería de salir un intervalo abierto pero el segmento es homeomorfo a un intervalo cerrado por ambos lados lo cual es imposible ya que hemos visto que la proyección tiene que ser un intervalo abierto.
+
+        % Igual en las otras 2 de los segmentos cerrados o semicerrados
+
+        % Las únicas 2 que son posibles son las que cortan en 2 lados contiguos del rectángulo o 2 lados opuestos paralelos.
+
+        \item Las componentes conexas de $X$ son segmentos de pendiente $1$ o de pendiente $-1$ cuyos extremos se apoyan en la frontera de $I\times J$, es decir, en $Fr(I\times J)$.
+        
+        % Hacer las 4 de pendiente 1 y -1 (suponiendo que corta en cada lado)
+
+        Llamamos $S$ al segmento que corta en 2 lados opuestos (horizontales) y tenemos que 
+        \begin{gather*}
+            \pi_2(S) = J \subset \pi_2(X) = \beta^{-1}(W) \Rightarrow J \subset \beta^{-1}(W) \Rightarrow \beta(J) \subset W=\alpha(I)\cap \beta(J)
+        \end{gather*}
+        Esto nos diría que $\beta(J)\subset \alpha(I)$ lo cual nos lleva a contradicción ya que suponíamos lo contrario por hipótesis.\\
+
+        El cuarto caso (el segmento que corta en 2 lados opuestos verticales) es análogo por lo que descartamos estos casos también.
+
+        \item Las componentes conexas de $X$ son segmentos de pendiente $1$ o $-1$ apoyados sobre lados contiguos de $Fr(I \times J)$..\\
+        
+        Nos planteamos ahora si puede haber 2 componentes conexas del conjunto $X$ de la misma pendiente apoyadas sobre los mismos lados. Tenemos los siguientes casos posibles
+
+        % Hacer dibujos de 2 segmentos apoyados sobre los mismos lados (hay 2)
+
+        Pero en este caso no serían grafos sobre $\alpha^{-1}(W)$ ni sobre $\beta^{-1}(W)$ por lo que rechazamos esta posibilidad.\\
+
+        Nos planteamos también si puede haber un segmento de pendiente $1$ y otro de pendiente $-1$. Consideramos
+
+        % Hacer dibujos de 2 segmentos de pendientes opuestas primero en las 2 esquinas superiores y luego en las 2 inferiores.
+
+        Y en el primer caso no es un grafo sobre $\beta^{-1}(W)$ y el segundo no lo sería sobre $\alpha^{-1}(W)$ por lo que descartamos esta opción también.
+
+        \item $X$ tiene a lo sumo dos componentes conexas que son segmentos de igual pendiente, que puede ser $1$ o $-1$, que se apoyan sobre lados contiguos de $Fr(I\times J)$ (en particular $\Phi'$ tiene signo constante en su dominio, que es $\alpha^{-1}(W)$ y análogamente para $\Psi$).\\
+        
+        Nos planteamos las posibilidades que nos quedan
+
+        % Dibujar los rectángulos:
+        % Los primeros 2 con los segmentos en esquinas opuestas
+        % Los siguientes 2 con una sola cc (un solo segmento, uno en cada esquina)
+
+        
+    \end{enumerate}
+
+\end{observacion}
 
 
