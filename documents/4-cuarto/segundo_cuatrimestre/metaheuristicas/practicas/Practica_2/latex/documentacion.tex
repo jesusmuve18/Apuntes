@@ -1,0 +1,776 @@
+\documentclass[12pt]{article}
+
+\input{preambulo.tex}
+\input{portada.tex}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{subcaption}
+\usepackage{longtable}
+
+% Definición de colores pastel y modernos
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+\definecolor{codegreen}{rgb}{0.13,0.55,0.13}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{codeblue}{rgb}{0.0,0.0,0.8}
+
+% Configuración del estilo moderno
+\lstdefinestyle{modern}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen}\itshape,
+    keywordstyle=\color{codeblue}\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=10pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4,
+    frame=single,                    % Marco simple alrededor del código
+    rulecolor=\color{lightgray},     % Color del marco
+    xleftmargin=15pt,                % Margen para que los números no se peguen
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1
+}
+
+% Aplicar el estilo por defecto a todos los bloques de código
+\lstset{style=modern}
+
+\begin{document}
+    \portada[%
+        titulo=Metaheurísticas,
+        subtitulo=Práctica 2:\\ Técnicas de Búsqueda de Poblaciones para el Problema de Asignación Con Restricciones (PAR),
+        autor=Jesús Muñoz Velasco,
+        dni=76668409W,
+        email=jesusmuve18@correo.ugr.es,
+        horario practicas=Martes 15:30 - 17:30 (Grupo A3),
+        año=Curso 2025-2026]
+        
+    \thispagestyle{empty}
+    \tableofcontents
+    \newpage
+    \thispagestyle{empty}
+
+    \section{Descripción del problema}
+
+    El Problema de Agrupamiento con Restricciones (PAR), también conocido como \textit{Constrained Clustering}, consiste en la partición de un conjunto de $n$ datos o instancias en $k$ grupos (clústeres) disjuntos, basándose en la similitud de sus características y cumpliendo en la mayor medida posible un conjunto de restricciones impuestas sobre los pares de instancias. \\
+    
+    Formalmente, sea $X = \{x_1, x_2, \dots, x_n\}$ un conjunto de $n$ elementos en un espacio de dimensión $d$. El objetivo es encontrar una partición $C = \{C_1, C_2, \dots, C_k\}$ tal que se minimice la dispersión intra-clúster (medida como la distancia euclídea de cada elemento al centroide de su clúster), sujeta a un conjunto de restricciones a nivel de instancia (de tipo Must-Link y Cannot-Link). \\
+    
+    Hay 2 tipos de restricciones posibles sobre 2 instancias $x_i,x_j\in X$:
+    \begin{itemize}
+        \item \textit{Must-Link} (ML). Los elementos $x_i$ y $x_j$ deben pertenecer al mismo clúster.
+        \item \textit{Cannot-Link} (CL). Los elementos $x_i$ y $x_j$ no pueden pertenecer al mismo clúster.
+    \end{itemize}
+    
+    Dado que encontrar una solución factible que satisfaga todas las restricciones es un problema NP-completo en la mayoría de configuraciones prácticas, relajaremos el incumplimiento de estas condiciones, donde las violaciones se penalizan en la función objetivo. La función objetivo a minimizar se define como
+    \begin{gather*}
+        fitness(solucion) = desviacion(solucion) + \lambda \cdot infeasibility(solucion)
+    \end{gather*}
+    donde establecemos $\lambda = \frac{max_ {dist}(X)}{restricciones(R)}$ para asegurar que la infactibilidad y la desviación tienen la suficiente relevancia. Además, la desviación de una solución se define como 
+    \begin{gather*}
+        desviacion(C_s) = \frac{1}{k} \sum_{C_i\in C_s} \frac{1}{|C_i|} \sum_{\vec{x_j}\in C_i} \left\|\vec{x_j} - \frac{1}{|C_i|} \sum_{x_j\in C_i} \vec{X_j}\right\|
+    \end{gather*}
+    y la infactibilidad como el número de condiciciones inclumplidas de una solución.
+
+    \newpage
+
+    \section{Aplicación de los algoritmos empleados}
+
+    Para la resolución del PAR mediante los algoritmos Aleatorio, Greedy y Búsqueda Local, es necesario establecer un marco de trabajo común que defina cómo se representan, evalúan y manipulan las soluciones.
+
+    \subsection{Esquema de representación de soluciones}
+    Una solución $S$ se representa como un vector de tamaño $n$ (número de instancias), donde el índice $i$ representa la instancia $x_i$, y el valor almacenado en $S[i]$ indica el índice del clúster al que ha sido asignada.
+    \begin{gather*}
+        S = [c_0, c_1, \dots, c_{n-1}] \quad \text{donde} \quad c_i \in \{0,1, \dots, k-1\}
+    \end{gather*}
+    Esta representación garantiza que toda instancia pertenezca a un clúster y solo uno. 
+
+    \subsection{Esquema de representación de restricciones}
+    Para representar el conjunto de restricciones $R$ se pueden usar dos estrategias principalmente, según convenga para mayor eficiencia en las evaluaciones de una solución:
+    \subsubsection{Forma Matricial}
+    El conjunto $R$ se representa como una matriz de dimensión $n\times n$ donde cada elemento $R_{ij}$ representará la restricción existente entre la instancia $x_i$ y la $x_j$. Podrá tomar los siguientes valores:
+    \begin{itemize}
+        \item $R_{ij} = 1$: Indica una restricción \textit{Must-Link}.
+        \item $R_{ij} = -1$: Indica una restricción \textit{Cannot-Link}.
+        \item $R_{ij} = 0$: Indica que no existe ninguna restricción entre $x_i$ y $x_j$.
+    \end{itemize}
+    Por la naturaleza de esta matriz será cuadrada, simétrica y los elementos de la diagonal principal no podrán valer $-1$. Es muy útil para saber si 2 elementos tienen alguna restricción entre ellos.
+
+    \subsubsection{Forma Vectorial}
+    En este caso se ha creado un nuevo tipo de dato llamado ``Restricción'' y tendrá la siguiente estructura:
+
+\begin{lstlisting}[language=C++,mathescape=true, caption={Estructura de una restricción vectorial}, label={lst:VresStructure}]
+struct Restriccion:
+    i,j       // Indices de los puntos $x_i$ y $x_j$ que participan en la restricción
+    tipo      // 1 para Must-Link, -1 para Cannot-Link
+\end{lstlisting}
+    De esta forma, el conjunto de restricciones $R$ será un vector de ``Restricciones'' según acabamos de describir. Aunque esta estructura sea peor para saber si 2 elementos tienen alguna restricción, es mucho mejor para recorrer las restricciones una por una para cálculos como la infactibilidad.
+
+    \subsection{Criterio de validación de Soluciones}
+    Dado que el problema establece que hay un número $k$ de clústeres para la solución se considerará que una solución $S$ es válida si y solo si aparecen todos los clústeres en la solución, es decir, si se verifica que 
+    \begin{gather*}
+        c_i\in S \ \ \ \ \forall c_i\in \{0,1,...,k-1\} 
+    \end{gather*}
+
+    \subsection{Reparación de soluciones no válidas}
+    El proceso de reparación de una solución $S$ con clústeres vacíos consistirá en seleccionar un elemento $c_0\in S$ que aparezca al menos 2 veces en el vector (para no dejar dicho clúster vacío) y sustituir su valor por el índice del clúster vacío. Se repite este proceso hasta que no haya clústeres vacíos. Seguiría el siguiente esquema:
+
+\begin{lstlisting}[language=C++,mathescape=true, caption={Pseudocódigo de la reparación de una solución}, label={lst:fixSolution}]
+Función RepararSolucion(S):
+    // Inicializamos el vector n_puntos con el número de puntos de cada clúster en la solucion S
+    n_puntos = nPuntosClusteres(S)
+
+    Para cada clúster c desde 0 hasta $k-1$:
+        Si n_puntos[c] == 0:
+            arreglado = Falso
+            instancia = 1
+            
+            // Buscar una instancia de un clúster con más de 1 elemento
+            Mientras arreglado == Falso y instancia $\leq$ n:
+                cluster_actual = S[instancia]
+                
+                Si n_puntos[cluster_actual] > 1:
+                    // Reasignar al clúster vacío
+                    S[instancia] = c_vacio       
+                    n_puntos[cluster_actual] = n_puntos[cluster_actual] - 1
+                    n_puntos[c_vacio] = n_puntos[c_vacio] + 1
+                    arreglado = Verdadero
+
+                instancia++
+
+    return S
+\end{lstlisting}
+    
+    \subsection{Evaluación de una solución (función objetivo)}
+    La evaluación de una solución requiere calcular los centroides de los clústeres a partir de las asignaciones actuales en $S$, calcular la desviación media de cada clúster y contabilizar las restricciones violadas consultando la matriz $R$. Esto se hará de la siguiente forma:
+    
+    \subsubsection{Cálculo de centroides de una solución}
+
+\begin{lstlisting}[language=C++, mathescape=true, caption={Pseudocódigo del cálculo de los centroides de una solución}, label={lst:getcentroids}]
+Funcion obtenerCentroides(S):
+    n_puntos = nPuntosClusteres(S)
+
+    // Recorro todos los vectores sumándolos a su cluster
+    Para cada instancia i de X:
+        cluster = S[i]
+        Para cada dimension d de la instancia i:
+            centroides[cluster].coordenada[d] += X[i].coordenada[d]
+    
+
+    // Divido entre el número de cada cluster para calcular la media
+    Para cada cluster c desde 0 hasta $k-1$
+        Para cada dimension d del centroide centroides[c]:
+            centroides[c].coordenada[d] /= n_puntos[c]
+
+    return centroides
+\end{lstlisting}
+
+    \subsubsection{Cálculo de la desviación de una solución}
+    
+\begin{lstlisting}[language=C++, mathescape=true, caption={Pseudocódigo del cálculo de la desviación de una solución}, label={lst:desviation}]
+Función Desviacion(S):
+    centroides = obtenerCentroides(S)
+    n_puntos = nPuntosClusteres(S)
+
+    // Sumamos las distancias
+    Para cada instancia i de X:
+        cluster = S[i]
+        $distancia_{ic}$[cluster] += distancia(X[i], centroides[cluster])
+
+    desviacion = 0
+
+    // Sumamos la media de las distancias
+    Para cada clúster c desde 0 hasta $k-1$
+        Si n_puntos[c] > 0:
+            desviacion += ($distancia_{ic}$[c]/n)
+
+    return (desviacion/k)
+\end{lstlisting}
+
+    \subsubsection{Cálculo de la infactibilidad de una solución}
+    
+\begin{lstlisting}[language=C++, mathescape=true, caption={Pseudocódigo del cálculo de la infactibilidad de una solución}, label={lst:infeasibility}]
+Función Infactibilidad(S):
+    inf = 0
+
+    Para cada restricción res en el conjunto de restricciones R
+        juntos = (S[res.i] == S[res.j])
+
+        Si res es de tipo ML y !juntos:
+            inf++ // Error: Deberían estar juntos (Must-Link)
+        Sino si res es de tipo CL y juntos:
+            inf++ // Error: No deberían estar juntos (Cannot-Link)
+    
+    return inf
+\end{lstlisting}
+
+    \subsubsection{Evaluación de una solución}
+    Finalmente, usando las funciones previamente descritas, y previamente fijado el valor de lambda, la función objetivo se calculará de la siguiente forma
+\begin{lstlisting}[language=C++, mathescape=true, caption={Pseudocódigo del cálculo de la función objetivo}, label={lst:infeasibility}]
+Evaluacion(S) {
+        C = Desviacion(S)
+        inf = Infactibilidad(S)
+
+        return (C + lambda * inf)
+    }
+\end{lstlisting}
+
+    \newpage
+
+    \section{Estructura del método de búsqueda}
+ 
+A continuación se describe en pseudocódigo la estructura de cada uno de los
+algoritmos implementados, reflejando fielmente las decisiones de diseño adoptadas.
+Los operadores comunes (reparación, evaluación, centroides, infactibilidad) ya fueron
+descritos en la sección anterior.
+ 
+\subsection{Algoritmos Genéticos Generacionales con elitismo (AGG-UN y AGG-SF)}
+ 
+Los dos algoritmos generacionales comparten el mismo esquema de evolución con
+elitismo y únicamente difieren en el operador de cruce empleado.
+La generación se realiza {par a par} (a diferencia de una arquitectura por
+lotes) de modo que selección, cruce, mutación, reparación y evaluación ocurren dentro
+del mismo bucle para cada pareja de hijos.
+ 
+\begin{lstlisting}[language=C++, mathescape=true,
+    caption={Pseudocódigo de una generación del AGG con elitismo},
+    label={lst:agg_gen}]
+Función EvolveOneGeneration(P, fitnesses, bestSol, bestFit,
+                             operadorCruce, maxEvals):
+ 
+    // 1. Registrar el mejor de la generación ACTUAL antes de generar hijos.
+    best_old_idx = índice del mínimo en fitnesses
+ 
+    // 2. Precalcular qué cromosomas mutarán (esperanza matemática).
+    muta_hijo = vector de M booleanos con entero(Pm*M) valores Verdadero
+    Barajar(muta_hijo)
+ 
+    nueva_P        = vector vacío de tamaño M
+    nuevas_fitness = vector vacío de tamaño M
+ 
+    // 3. Generación par a par
+    Para i desde 0 hasta M-1 con paso 2:
+ 
+        // 3.1 Selección: dos torneos independientes de tamaño 3
+        p1_idx = Torneo(fitnesses)
+        p2_idx = Torneo(fitnesses)
+        hijo1  = P[p1_idx]
+        hijo2  = P[p2_idx]
+ 
+        // 3.2 Cruce: las (Pc*M/2) primeras parejas cruzan
+        Si (i/2) < entero(Pc * M / 2):
+            hijo1, hijo2 = operadorCruce(P[p1_idx], P[p2_idx])
+ 
+        // 3.3 Mutación de hijo1 (si le corresponde)
+        Si muta_hijo[i]:
+            gen_idx    = aleatorio(0, n-1)
+            nueva_etiq = aleatorio distinto de hijo1[gen_idx] en {0,...,k-1}
+            hijo1[gen_idx] = nueva_etiq
+ 
+        // 3.4 Reparación y evaluación de hijo1
+        RepararSolucion(hijo1)
+        nueva_P[i]        = hijo1
+        nuevas_fitness[i] = Evaluacion(hijo1);  evals += 1
+        Si nuevas_fitness[i] < bestFit:
+            bestFit = nuevas_fitness[i];  bestSol = hijo1
+ 
+        Si evals >= maxEvals: return
+ 
+        // 3.5 Mismo proceso para hijo2
+        Si i+1 < M:
+            Si muta_hijo[i+1]:
+                gen_idx    = aleatorio(0, n-1)
+                nueva_etiq = aleatorio distinto de hijo2[gen_idx] en {0,...,k-1}
+                hijo2[gen_idx] = nueva_etiq
+ 
+            RepararSolucion(hijo2)
+            nueva_P[i+1]        = hijo2
+            nuevas_fitness[i+1] = Evaluacion(hijo2);  evals += 1
+            Si nuevas_fitness[i+1] < bestFit:
+                bestFit = nuevas_fitness[i+1];  bestSol = hijo2
+ 
+            Si evals >= maxEvals: return
+ 
+    // 4. Elitismo: si el mejor padre supera al mejor hijo,
+    //    sustituye al peor hijo para no perder la mejor solución
+    best_new_idx  = índice del mínimo en nuevas_fitness
+    worst_new_idx = índice del máximo en nuevas_fitness
+ 
+    Si fitnesses[best_old_idx] < nuevas_fitness[best_new_idx]:
+        nueva_P[worst_new_idx]        = P[best_old_idx]
+        nuevas_fitness[worst_new_idx] = fitnesses[best_old_idx]
+ 
+    P        = nueva_P
+    fitnesses = nuevas_fitness
+\end{lstlisting}
+ 
+El bucle principal del AGG simplemente invoca \texttt{EvolveOneGeneration} de forma
+reiterada hasta agotar el presupuesto:
+ 
+\begin{lstlisting}[language=C++, mathescape=true,
+    caption={Pseudocódigo principal del AGG},
+    label={lst:agg_main}]
+Función AGG(operadorCruce, semilla):
+    // Parámetros: M=50, Pc=0.8, Pm=0.1, maxEvals=100000
+    P, fitnesses = InicializarPoblacion(M)   // M cromosomas aleatorios válidos
+    evaluar P;  evals += M
+    bestSol, bestFit = mejorIndividuo(P, fitnesses)
+ 
+    Mientras evals < maxEvals:
+        EvolveOneGeneration(P, fitnesses, bestSol, bestFit,
+                            operadorCruce, maxEvals)
+ 
+    return bestSol, bestFit
+\end{lstlisting}
+ 
+\subsubsection{Operador de cruce uniforme (AGG-UN)}
+ 
+Para cada posición $i$ del cromosoma se genera un aleatorio en $[0,1]$; si es
+$< 0.5$ el primer hijo hereda el gen del primer padre (y el segundo hijo del
+segundo), en caso contrario se intercambian.
+ 
+\begin{lstlisting}[language=C++, mathescape=true,
+    caption={Operador de cruce uniforme},
+    label={lst:cruce_un}]
+Función CruceUniforme(P1, P2):
+    Para cada posición i desde 0 hasta n-1:
+        Si aleatorio() < 0.5:
+            H1[i] = P1[i];  H2[i] = P2[i]
+        Sino:
+            H1[i] = P2[i];  H2[i] = P1[i]
+    return H1, H2
+\end{lstlisting}
+ 
+\subsubsection{Operador de cruce por segmento fijo (AGG-SF)}
+ 
+Se fija un segmento contiguo circular de longitud $\mathit{FN}$ (posición inicial aleatoria en $[0,n-1]$, longitud aleatoria en $[1, n/3]$). Dentro del segmento cada hijo hereda de un padre portador distinto; fuera del
+segmento se aplica cruce uniforme.
+ 
+\begin{lstlisting}[language=C++, mathescape=true, caption={Operador de cruce por segmento fijo}, label={lst:cruce_sf}]
+Función CruceSegmentoFijo(P1, P2):
+    length = aleatorio(1, n/3)          // longitud del segmento
+    start  = aleatorio(0, n-1)          // inicio del segmento
+ 
+    // Marcar las posiciones del segmento (recorrido circular módulo n)
+    inSegmento = vector de n booleanos inicializado a Falso
+    Para j desde 0 hasta length-1:
+        inSegmento[(start + j) mod n] = Verdadero
+ 
+    Para cada posición i desde 0 hasta n-1:
+        Si inSegmento[i]:
+            // Dentro del segmento: padre portador diferente para cada hijo
+            H1[i] = P1[i];  H2[i] = P2[i]
+        Sino:
+            // Fuera del segmento: cruce uniforme
+            Si aleatorio() < 0.5:
+                H1[i] = P1[i];  H2[i] = P2[i]
+            Sino:
+                H1[i] = P2[i];  H2[i] = P1[i]
+    return H1, H2
+\end{lstlisting}
+ 
+\subsubsection{Operador de mutación uniforme (AGG y AGE)}
+ 
+En AGG y AGE la mutación tiene semántica {por cromosoma}: si al cromosoma
+le corresponde mutar (determinado externamente por \texttt{muta\_hijo} en AGG, o por
+un aleatorio $< P_m$ en AGE), se elige aleatoriamente {un gen} y se le
+asigna un valor de clúster distinto al actual.
+ 
+\begin{lstlisting}[language=C++, mathescape=true,
+    caption={Operador de mutación uniforme por cromosoma (AGG y AGE)},
+    label={lst:mutate_agg}]
+Función Mutar(sol):
+    // Seleccionar un gen aleatorio y cambiar su etiqueta
+    gen_idx    = aleatorio(0, n-1)
+    nueva_etiq = aleatorio distinto de sol[gen_idx] en {0,...,k-1}
+    sol[gen_idx] = nueva_etiq
+\end{lstlisting}
+ 
+ 
+\subsection{Algoritmos Genéticos Estacionarios (AGE-UN y AGE-SF)}
+ 
+En el modelo estacionario solo se generan dos hijos por iteración, que compiten
+directamente con los dos peores de la población actual. Los operadores de cruce
+y mutación son los mismos que en el AGG.
+ 
+\begin{lstlisting}[language=C++, mathescape=true,
+    caption={Pseudocódigo del AGE (modelo estacionario)},
+    label={lst:age_opt}]
+Función AGE(operadorCruce, semilla):
+    // Parámetros: M=50, Pc=1.0, Pm=0.1, maxEvals=100000
+    P, fitnesses = InicializarPoblacion(M)
+    evaluar P;  evals += M
+    bestSol, bestFit = mejorIndividuo(P, fitnesses)
+ 
+    Mientras evals < maxEvals:
+ 
+        // 1. Selección: dos torneos independientes de tamaño 3
+        p1_idx = Torneo(fitnesses)
+        p2_idx = Torneo(fitnesses)
+        hijo1  = P[p1_idx];  hijo2 = P[p2_idx]
+ 
+        // 2. Cruce
+        Si aleatorio() < Pc:
+            hijo1, hijo2 = operadorCruce(P[p1_idx], P[p2_idx])
+ 
+        // 3. Mutación por cromosoma (un gen aleatorio si le toca)
+        Si aleatorio() < Pm: Mutar(hijo1)
+        Si aleatorio() < Pm: Mutar(hijo2)
+ 
+        // 4. Reparación
+        RepararSolucion(hijo1);  RepararSolucion(hijo2)
+ 
+        // 5. Evaluación
+        fit1 = Evaluacion(hijo1);  evals += 1
+        hijo2_evaluado = Falso
+        Si evals < maxEvals:
+            fit2 = Evaluacion(hijo2);  evals += 1
+            hijo2_evaluado = Verdadero
+ 
+        // 6. Reemplazo estacionario
+        worst1_idx = índice del máximo en fitnesses
+        worst2_idx = índice del segundo máximo en fitnesses
+ 
+        Si fit1 < fitnesses[worst1_idx]:
+            P[worst1_idx]         = hijo1
+            fitnesses[worst1_idx] = fit1
+ 
+        Si hijo2_evaluado y fit2 < fitnesses[worst2_idx]:
+            P[worst2_idx]         = hijo2
+            fitnesses[worst2_idx] = fit2
+ 
+        // 7. Actualizar mejor global
+        Si fit1 < bestFit:
+            bestFit = fit1;  bestSol = hijo1
+        Si hijo2_evaluado y fit2 < bestFit:
+            bestFit = fit2;  bestSol = hijo2
+ 
+    return bestSol, bestFit
+\end{lstlisting}
+ 
+\subsection{Algoritmos Meméticos (AM-All, AM-Rand y AM-Best)}
+ 
+Los tres algoritmos meméticos hibridan el AGG con una Búsqueda Local Suave (BLS).
+La BLS se aplica cada 10 generaciones sobre un subconjunto de cromosomas que varía
+según la variante. A diferencia del AGG, la mutación en los AM está
+{sobreescrita} con semántica por gen, tal como se describe a continuación.
+ 
+\subsubsection{Operador de mutación por gen (AM)}
+ 
+En los AM la función \texttt{Mutar} se sobreescribe: cada gen del cromosoma muta
+{independientemente} con probabilidad $P_m / n$, por lo que en una misma
+llamada pueden mutar entre 0 y $n$ genes. La esperanza de mutaciones por cromosoma
+es $P_m$, igual que en AGG/AGE, pero varios genes pueden verse afectados.
+ 
+\begin{lstlisting}[language=C++, mathescape=true,
+    caption={Operador de mutación por gen (AM, sobreescribe la versión AGG/AGE)},
+    label={lst:mutate_am}]
+Función Mutar(sol):           // versión AM: por gen, no por cromosoma
+    Para cada posición i desde 0 hasta n-1:
+        Si aleatorio() < (Pm / n):
+            nueva_etiq = aleatorio distinto de sol[i] en {0,...,k-1}
+            sol[i]     = nueva_etiq
+\end{lstlisting}
+ 
+\subsubsection*{Búsqueda Local Suave (BLS)}
+ 
+La BLS recorre las posiciones del cromosoma en orden aleatorio (RSI) y para cada
+posición prueba todos los valores de clúster posibles salvo el actual, aceptando
+el primero que mejore el fitness. Mantiene dos contadores de evaluaciones: uno local
+a la llamada (\texttt{bls\_evals}) y otro global (\texttt{evals}), ambos actúan
+como condición de parada. Si el presupuesto se agota dentro del bucle interno de
+una posición, dicha posición \textbf{no} se contabiliza como fallo.
+ 
+\begin{lstlisting}[language=C++, mathescape=true,
+    caption={Pseudocódigo de la Búsqueda Local Suave (BLS)},
+    label={lst:bls}]
+Función BLS(S, bestfit, maxevals_local, maxevals_global, $\epsilon$):
+    // maxevals_local : límite de evals para ESTA llamada a BLS.
+    // maxevals_global: límite global del algoritmo (compartido).
+    // $\epsilon$             : número máximo de fallos permitidos ($\epsilon$ = 0.1*n).
+ 
+    RSI       = PermutaciónAleatoria(0,...,n-1)
+    fallos    = 0;  i = 0
+    bls_evals = 0              // contador LOCAL de esta llamada
+    newsol    = S
+ 
+    Mientras fallos < $\epsilon$  y  i < n
+          y  bls_evals < maxevals_local  y  evals < maxevals_global:
+ 
+        p             = RSI[i]
+        oldvalue      = S[p]
+        no_more_evals = Falso
+ 
+        // Probar todos los valores de clúster
+        Para val desde 0 hasta k-1:
+            Si val == oldvalue: continuar    // omitir el cluster actual
+ 
+            Si bls_evals >= maxevals_local  o  evals >= maxevals_global:
+                no_more_evals = Verdadero
+                salir del bucle interno
+ 
+            newsol[p] = val
+            fit = Evaluacion(newsol)
+            bls_evals += 1;  evals += 1     // descuenta del contador global
+ 
+            Si fit < bestfit:
+                S       = newsol
+                bestfit = fit
+            Sino:
+                newsol[p] = S[p]            // deshacer cambio en newsol
+ 
+        // Contar fallo solo si no hubo mejora Y el presupuesto no se agotó
+        // a mitad de exploración (si se agotó, no es un fallo real)
+        Si no no_more_evals  y  S[p] == oldvalue:
+            fallos += 1
+ 
+        i += 1
+ 
+    return S, bestfit, bls_evals
+\end{lstlisting}
+ 
+\subsubsection{Esquema principal de los AM}
+ 
+Las tres variantes difieren únicamente en qué cromosomas reciben la BLS cada
+10 generaciones. El paso evolutivo es el del AGG (con la mutación por gen descrita
+arriba) y las evaluaciones de la BLS se descuentan del presupuesto global.
+ 
+\begin{lstlisting}[language=C++, mathescape=true,
+    caption={Pseudocódigo principal de los Algoritmos Meméticos},
+    label={lst:am_main}]
+Función AM(variante, semilla):
+    // Parámetros: M=50, Pc=0.8, Pm=0.1, maxEvals=100000
+    // BLS: maxevals_local=100, $\epsilon$=0.1*n
+ 
+    P, fitnesses = InicializarPoblacion(M)
+    evaluar P;  evals += M
+    bestSol, bestFit = mejorIndividuo(P, fitnesses)
+    generacion = 0
+ 
+    Mientras evals < maxEvals:
+ 
+        // 1. Paso evolutivo: una generación del AGG
+        EvolveOneGeneration(P, fitnesses, bestSol, bestFit,
+                            CruceSegmentoFijo, maxEvals)
+        generacion += 1
+ 
+        // 2. Paso memético: cada 10 generaciones, aplicar BLS
+        Si generacion mod 10 == 0  y  evals < maxEvals:
+ 
+            subconjunto = SeleccionarCromosomas(P, fitnesses, variante)
+ 
+            Para cada índice idx en subconjunto:
+                BLS(P[idx], fitnesses[idx], 100, maxEvals, entero(0.1*n))
+                Si fitnesses[idx] < bestFit:
+                    bestFit = fitnesses[idx];  bestSol = P[idx]
+ 
+    return bestSol, bestFit
+
+    
+Función SeleccionarCromosomas(P, fitnesses, variante):
+    Si variante == AM-All:
+        return {0, 1, ..., M-1}              // todos los cromosomas
+ 
+    Si variante == AM-Rand:
+        return {i : aleatorio() < 0.1}       // cada uno con prob. P_LS=0.1
+ 
+    Si variante == AM-Best:
+        ordenar índices por fitnesses ascendente
+        return los primeros entero(0.1*M) índices   // los mejores (mín. 1)
+\end{lstlisting}
+
+    \section{Estructura general del código}
+    El código está programado sobre la API proporcionada de C++. Los ficheros creados principales se encuentran en la carpeta \verb|inc|. El programa principal se encuentra en el fichero \verb|main.cpp| que se podrá ejecutar de cualquiera de las siguientes formas:
+\begin{lstlisting}
+main
+main <seed>
+main <seed> <filename> <ratio> <k>
+\end{lstlisting}
+
+    Además se ha creado un script para compilarlo y otro para ejecutarlo, que se deberá ejecutar desde la carpeta raíz del proyecto (la inmediatamente superior a la carpeta que contiene el código). Por tanto, para compilar y ejecutar el proyecto tendremos que ejecutar desde una terminal
+\begin{lstlisting}
+./compilar.sh
+./ejecutar.sh
+\end{lstlisting}
+    
+    \section{Experimentos y análisis de resultados}
+
+    \subsection{Descripción de casos del problema}
+    Esta implementación se ha utilizado para los siguientes casos:
+    \begin{enumerate}
+        \item Zoo: En donde hay que agrupar animales en función de 16 atributos. Tiene 7 clases ($k = 7$) y 101 instancias.
+        \item Glass: En donde hay que agrupar distintos vidrios en función de 9 atributos sobre sus componentes químicos. Tiene 7 clases ($k = 7$) y 214 instancias.
+        \item Bupa: En donde hay que agrupar personas en función de sus hábitos de consumo de alcohol, definido con 5 atributos. Tiene 16 clases ($k = 16$) y 345 instancias.
+    \end{enumerate}
+    Más adelante se especificarán el resto de parámetros
+    
+    \subsection{Resultados obtenidos}
+
+    Se ha ejecutado una batería de pruebas con un programa python (\verb|metrics.py|), ejecutando cada algoritmo para cada \textit{dataset} y \textit{ratio} para 10 semillas distintas, en concreto las siguientes:
+
+\begin{lstlisting}[language=Python, caption={Semillas utilizadas para las pruebas}, label={lst:proofseeds}]
+SEEDS = [12345, 67890, 13579, 24680, 98765, 43210, 10293, 84756, 97531, 8642]
+\end{lstlisting}
+
+    Tras ejecutar el programa se han extraído las siguientes métricas:
+    
+    \input{tablas/tabla_general} 
+
+    \subsubsection{Tablas globales por problema}
+
+    Con el objetivo de estudiar mejor este resultado rellenamos también las siguientes tablas con la información extraída de la tabla anterior
+
+    \input{tablas/tabla_zoo_15.tex}
+    \input{tablas/tabla_zoo_30.tex}
+    \input{tablas/tabla_glass_15.tex}
+    \input{tablas/tabla_glass_30.tex}
+    \input{tablas/tabla_bupa_15.tex}
+    \input{tablas/tabla_bupa_30.tex}
+
+    \subsubsection{Boxplots globales por problema}
+
+    Adicionalmente se han generado los siguientes gráficos (script \verb|graphics.py|) para visualizar la calidad de cada algoritmo:
+
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.49\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{graficos/boxplot_zoo_15.pdf}
+            \caption{15\% de restricciones}
+            \label{fig:boxplot_zoo_15}
+        \end{subfigure}\hfill
+        \begin{subfigure}{0.49\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{graficos/boxplot_zoo_30.pdf}
+            \caption{30\% de restricciones}
+            \label{fig:boxplot_zoo_30}
+        \end{subfigure}
+        \caption{Distribución de los valores de Fitness obtenidos para el dataset \textbf{Zoo} en 10 ejecuciones independientes.}
+        \label{fig:boxplot_zoo}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.49\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{graficos/boxplot_glass_15.pdf}
+            \caption{15\% de restricciones}
+            \label{fig:boxplot_glass_15}
+        \end{subfigure}\hfill
+        \begin{subfigure}{0.49\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{graficos/boxplot_glass_30.pdf}
+            \caption{30\% de restricciones}
+            \label{fig:boxplot_glass_30}
+        \end{subfigure}
+        \caption{Distribución de los valores de Fitness obtenidos para el dataset \textbf{Glass} en 10 ejecuciones independientes.}
+        \label{fig:boxplot_glass}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{0.49\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{graficos/boxplot_bupa_15.pdf}
+            \caption{15\% de restricciones}
+            \label{fig:boxplot_bupa_15}
+        \end{subfigure}\hfill
+        \begin{subfigure}{0.49\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{graficos/boxplot_bupa_30.pdf}
+            \caption{30\% de restricciones}
+            \label{fig:boxplot_bupa_30}
+        \end{subfigure}
+        \caption{Distribución de los valores de Fitness obtenidos para el dataset \textbf{Bupa} en 10 ejecuciones independientes.}
+        \label{fig:boxplot_bupa}
+    \end{figure}
+
+    \subsection{Análisis de resultados}
+
+    El análisis se organiza comparando los algoritmos que comparten componentes, de modo que las diferencias observadas puedan atribuirse al elemento que los distingue.
+ 
+    \subsubsection{Efecto del operador de cruce en los AGG}
+    
+    Comparando AGG-UN y AGG-SF en los tres datasets, se observa que las diferencias de \textit{fitness} son pequeñas pero consistentes. En el dataset Zoo con 15\% de restricciones, AGG-SF obtiene un fitness medio de 1.1115 frente a 1.1273 de AGG-UN, lo que supone una mejora del $1.4\%$. Sin embargo, con el $30\%$ de restricciones la situación se invierte ligeramente (1.2454 frente a 1.2277), lo que sugiere que el cruce uniforme preserva mejor la diversidad cuando el espacio de búsqueda está más limitado. En \textbf{Glass} y \textbf{Bupa}, las diferencias entre ambos cruces son prácticamente despreciables (inferiores al $0.5\%$), lo que indica que para estos datasets ninguno de los dos operadores tiene una ventaja estructural clara en el esquema generacional.\\
+    
+    Desde el punto de vista de los boxplots (Figuras~\ref{fig:boxplot_zoo}, \ref{fig:boxplot_glass} y~\ref{fig:boxplot_bupa}), tanto AGG-UN como AGG-SF presentan dispersiones similares, lo que confirma que la diferencia entre ambos operadores en el esquema generacional no es determinante.
+    
+    \subsubsection{Efecto del operador de cruce en los AGE}
+    
+    En el esquema estacionario, el cruce por segmento fijo (AGE-SF) supera sistemáticamente al cruce uniforme (AGE-UN) en todos los datasets y ratios excepto en Zoo con 15\%, donde las diferencias son mínimas (1.0790 frente a 1.0911). En Bupa con 30\% la ventaja es más notable: AGE-SF alcanza 0.2140 de fitness frente a 0.2181 de AGE-UN ($\approx 1.9\%$ de mejora). Esto puede explicarse por el sesgo del cruce por segmento fijo hacia el padre \textit{portador} del segmento: al utilizar siempre al mejor padre como portador para el primer hijo, se favorece la explotación de las mejores soluciones, comportamiento más alineado con la selección competitiva del esquema estacionario.
+    
+    \subsubsection{Modelo generacional vs. modelo estacionario}
+    
+    Comparando los mejores representantes de cada esquema (AGG-UN y AGE-SF), el modelo estacionario ofrece soluciones de mayor calidad en la práctica totalidad de los casos. La diferencia es especialmente visible en Zoo: con el 15\% de restricciones, AGE-SF logra 1.0790 frente a 1.1273 de AGG-UN ($4.3\%$ de mejora); con el 30\%, 1.2114 frente a 1.2277 ($1.3\%$). En Glass las ventajas son más modestas ($\approx 0.8\%$), y en Bupa el estacionario también es consistentemente mejor.\\
+    
+    Este comportamiento es coherente con la teoría: el modelo estacionario aplica presión selectiva de forma más intensa porque cada par de hijos compite directamente con los peores individuos de la población, lo que acelera la explotación de zonas prometedoras del espacio de búsqueda. El modelo generacional, en cambio, reemplaza toda la población cada generación, lo que preserva más diversidad aunque puede ralentizar la convergencia hacia buenas soluciones.\\
+    
+    En cuanto al tiempo de ejecución, ambos modelos son comparables dado que el criterio de parada es el número de evaluaciones (100000 en todos los casos).
+    
+    \subsubsection{Comparación entre Algoritmos Meméticos}
+    
+    Las tres variantes meméticas difieren en qué cromosomas reciben la Búsqueda Local Suave (BLS) cada 10 generaciones. Los resultados revelan patrones claros:
+    
+    \begin{itemize}
+        \item \textbf{AM-Best} es el mejor algoritmo memético en {Bupa} (el dataset de mayor tamaño con $k=16$): obtiene 0.1775 con el 15\% de restricciones y 0.2013 con el 30\%, siendo el mejor resultado global en ambos casos. Al concentrar la BLS en los 5 mejores cromosomas de la población, se realiza una explotación intensa pero selectiva, lo que evita desperdiciar evaluaciones en individuos de baja calidad.
+    
+        \item \textbf{AM-Rand} ofrece resultados muy competitivos en Bupa y es el mejor memético en algunos escenarios de ese dataset (15\% de restricciones: 0.1783). La aplicación probabilística de la BLS sobre un subconjunto variable introduce cierta variabilidad que puede ser beneficiosa cuando la población tiene buena diversidad.
+    
+        \item \textbf{AM-All} es el algoritmo memético más débil en todos los datasets. Aplicar la BLS sobre todos los cromosomas consume muchas evaluaciones en individuos de baja calidad, reduciendo el número efectivo de generaciones evolutivas y, por tanto, la exploración global. En {Bupa con 15\%}, AM-All obtiene 0.1989,
+        peor incluso que varios algoritmos puramente genéticos (AGE-UN: 0.1928, AGE-SF: 0.1926). Este efecto es menos pronunciado en {Glass} (0.4144 frente a 0.4191 de AGG-UN), lo que sugiere que cuando el problema tiene menos clústeres ($k=7$), la BLS total no penaliza tanto.
+    \end{itemize}
+
+    En {Zoo} ninguno de los meméticos destaca claramente sobre los genéticos puros: AM-Rand obtiene 1.1053 con el 15\% (entre AGE-SF=1.0790 y AGG-UN=1.1273), lo que indica que en datasets pequeños ($n=101$) el espacio de búsqueda es más manejable para los genéticos y la BLS no aporta tanto beneficio adicional.
+    
+    \subsubsection{Algoritmos Genéticos vs. Algoritmos Meméticos}
+    
+    La comparación global entre los mejores representantes de cada familia revela que los meméticos superan a los genéticos en los datasets más complejos. En \textbf{Bupa} ($n=345$, $k=16$), AM-Best y AM-Rand mejoran al mejor genético (AGE-SF: 0.1926) en un $7.8\%$ y $7.4\%$ respectivamente para el 15\% de restricciones. En \textbf{Glass} ($n=214$, $k=7$), la ventaja existe pero es más modesta (AM-All: 0.4144 frente a AGG-UN: 0.4191, mejora del $1.1\%$).\\
+    
+    En {Zoo}, sorprendentemente, los meméticos no superan de forma clara a los genéticos: el mejor resultado global lo obtiene AGE-SF (1.0790 con 15\%), mientras que AM-Best obtiene 1.1376, peor que varios algoritmos genéticos. Este comportamiento puede deberse al pequeño tamaño del dataset ($n=101$): con pocas instancias y sólo 7 clústeres, el espacio de búsqueda es reducido y la BLS puede inducir convergencia prematura, perdiendo diversidad que el genético puro habría aprovechado.
+    
+    \subsubsection{Efecto del ratio de restricciones}
+    
+    Al aumentar el porcentaje de restricciones del 15\% al 30\%, todos los algoritmos ven incrementado su fitness medio, lo cual es esperable dado que el término de infactibilidad $\lambda \cdot \text{infeasibility}$ crece con el número de restricciones presentes. Sin embargo, el incremento relativo varía entre datasets: en {Zoo} el fitness aumenta aproximadamente un $13\%$ para la mayoría de algoritmos, en {Glass} en torno al $17\%$ y en {Bupa} alrededor del $11\%$.\\
+    
+    Más relevante es observar que la distancia intra-clúster {disminuye} al pasar del 15\% al 30\% en casi todos los casos. Por ejemplo, en AGE-SF para Zoo, la distancia pasa de 0.9154 (15\%) a 0.8349 (30\%). Esto indica que un mayor número de restricciones guía mejor al algoritmo hacia agrupamientos más compactos, aunque a costa de un mayor número de restricciones incumplidas, que prácticamente se duplica. En otras palabras, el aumento del ratio obliga al algoritmo a priorizar la reducción de distancias intra-clúster frente al cumplimiento estricto de todas las restricciones.
+    
+    \subsubsection{Análisis de la variabilidad (boxplots)}
+    
+    Los boxplots de las Figuras~\ref{fig:boxplot_zoo} y \ref{fig:boxplot_bupa} revelan información adicional sobre la robustez de cada algoritmo:
+    
+    \begin{itemize}
+        \item En \textbf{Zoo}, los algoritmos genéticos (especialmente AGE-SF y AGE-UN) presentan cajas más estrechas con algunos valores atípicos superiores, lo que indica que en la mayoría de ejecuciones convergen a soluciones de calidad similar, pero ocasionalmente quedan atrapados en óptimos locales pobres. Los meméticos AM-Rand y AM-Best presentan mayor dispersión, reflejando la variabilidad introducida por la selección aleatoria de individuos a mejorar.
+    
+        \item En \textbf{Glass}, la dispersión es en general reducida para todos los algoritmos, siendo AM-All el que presenta la caja más baja y estrecha con el 15\% de restricciones, reflejando consistencia en la calidad obtenida.
+    
+        \item En \textbf{Bupa}, AM-Best y AM-Rand muestran las distribuciones más bajas y compactas, especialmente con el 30\% de restricciones, lo que confirma que son los algoritmos más robustos y consistentes en este dataset.
+    \end{itemize}
+    
+    \subsubsection{Síntesis general}
+    
+    En conjunto, pueden extraerse las siguientes conclusiones:
+    
+    \begin{enumerate}
+        \item El \textbf{esquema estacionario} supera al generacional en la mayoría de escenarios, especialmente cuando se combina con el cruce por segmento fijo (AGE-SF). La presión selectiva más intensa del modelo estacionario resulta ventajosa en todos los datasets evaluados.
+    
+        \item El \textbf{cruce por segmento fijo} es ligeramente superior al uniforme en el esquema estacionario, mientras que en el generacional las diferencias son mínimas o inexistentes.
+    
+        \item Los \textbf{algoritmos meméticos} mejoran significativamente a los genéticos en los problemas de mayor complejidad (Bupa, Glass), pero no siempre en problemas pequeños (Zoo). La variante \textbf{AM-Best} es la más recomendable cuando el problema es grande y complejo; AM-Rand ofrece un buen equilibrio entre explotación y diversidad.
+    
+        \item \textbf{AM-All} es sistemáticamente el peor memético, ya que desperdiciar evaluaciones en BLS sobre cromosomas de baja calidad compromete la exploración global del espacio de búsqueda.
+    
+        \item Un mayor \textbf{ratio} de restricciones conduce a soluciones con menor distancia intra-clúster pero más restricciones violadas, lo que refleja el compromiso inherente de la función objetivo utilizada.
+    \end{enumerate}
+
+\end{document}

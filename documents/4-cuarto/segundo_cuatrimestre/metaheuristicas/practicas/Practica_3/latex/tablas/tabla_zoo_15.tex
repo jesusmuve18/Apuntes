@@ -1,0 +1,19 @@
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lrrrrr}
+        \hline
+        Algoritmo & Fitness & Distancia & Incumplimiento & Evaluaciones & Tiempo (ms)\\
+        \hline
+        Greedy & 1.5067 & 1.4973 & 0.0026 & 1.0 & 1.8 \\
+        Random & 1.9318 & 1.5668 & 0.0991 & 100000.0 & 353.2 \\
+        BL & 1.0923 & 0.9492 & 0.0389 & 6201.6 & 10.1 \\
+        AM-BEST (Mejor P2) & 1.1376 & 0.9978 & 0.0380 & 100000.0 & 361.1 \\
+        BMB & 1.0338 & 0.8629 & 0.0464 & 29188.5 & 49.7 \\
+        ILS-BL & 1.0329 & 0.8704 & 0.0441 & 23883.4 & 38.2 \\
+        ES & 0.9848 & 0.8251 & 0.0434 & 67098.9 & 102.9 \\
+        ILS-ES & 0.9701 & 0.7632 & 0.0562 & 89887.9 & 139.7 \\
+        \hline
+    \end{tabular}
+    \caption{Resultados obtenidos para el dataset \textbf{Zoo} con 15\% de restricciones en  10 ejecuciones independientes (k=7).}
+    \label{tab:res_zoo_15}
+\end{table}

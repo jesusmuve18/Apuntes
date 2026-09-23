@@ -1,0 +1,625 @@
+=================================================
+Ejecutando: Ejercicio1a.mzn
+=================================================
+
+---> TABLA: Probando Ejercicio1a.mzn con volumen_total_buscado_ml = 200 <---
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatBoolVars=9
+%%%mzn-stat: flatIntVars=17
+%%%mzn-stat: flatBoolConstraints=2
+%%%mzn-stat: flatIntConstraints=33
+%%%mzn-stat: evaluatedReifiedConstraints=7
+%%%mzn-stat: evaluatedHalfReifiedConstraints=4
+%%%mzn-stat: method="satisfy"
+%%%mzn-stat: flatTime=0.139547
+%%%mzn-stat-end
+Cantidades usadas:
+------------------
+Agua base: 0 ml
+Jarabe A: 0 ml
+Jarabe B: 120 ml
+Concentrado salino: 30 ml
+Extracto energetico: 40 ml
+Aroma citrico: 10 ml
+
+Coste total = 23.0 centimos
+Azucar total = 16.2 g
+Sodio total = 82.5 mg
+Cafeina total = 12.0 mg
+----------
+%%%mzn-stat: initTime=0.0149162
+%%%mzn-stat: solveTime=0.00435868
+%%%mzn-stat: solutions=1
+%%%mzn-stat: variables=26
+%%%mzn-stat: propagators=34
+%%%mzn-stat: propagations=245
+%%%mzn-stat: nodes=7
+%%%mzn-stat: failures=1
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=5
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+---> TABLA: Probando Ejercicio1a.mzn con volumen_total_buscado_ml = 1000 <---
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatBoolVars=9
+%%%mzn-stat: flatIntVars=17
+%%%mzn-stat: flatBoolConstraints=2
+%%%mzn-stat: flatIntConstraints=33
+%%%mzn-stat: evaluatedReifiedConstraints=7
+%%%mzn-stat: evaluatedHalfReifiedConstraints=4
+%%%mzn-stat: method="satisfy"
+%%%mzn-stat: flatTime=0.20233
+%%%mzn-stat-end
+Cantidades usadas:
+------------------
+Agua base: 0 ml
+Jarabe A: 0 ml
+Jarabe B: 620 ml
+Concentrado salino: 150 ml
+Extracto energetico: 200 ml
+Aroma citrico: 30 ml
+
+Coste total = 115.8 centimos
+Azucar total = 83.0 g
+Sodio total = 415.5 mg
+Cafeina total = 60.0 mg
+----------
+%%%mzn-stat: initTime=0.0103789
+%%%mzn-stat: solveTime=0.00296364
+%%%mzn-stat: solutions=1
+%%%mzn-stat: variables=26
+%%%mzn-stat: propagators=34
+%%%mzn-stat: propagations=701
+%%%mzn-stat: nodes=25
+%%%mzn-stat: failures=10
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=11
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+---> TABLA: Probando Ejercicio1a.mzn con volumen_total_buscado_ml = 5000 <---
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatBoolVars=9
+%%%mzn-stat: flatIntVars=17
+%%%mzn-stat: flatBoolConstraints=2
+%%%mzn-stat: flatIntConstraints=33
+%%%mzn-stat: evaluatedReifiedConstraints=7
+%%%mzn-stat: evaluatedHalfReifiedConstraints=4
+%%%mzn-stat: method="satisfy"
+%%%mzn-stat: flatTime=0.180024
+%%%mzn-stat-end
+Cantidades usadas:
+------------------
+Agua base: 0 ml
+Jarabe A: 0 ml
+Jarabe B: 3140 ml
+Concentrado salino: 710 ml
+Extracto energetico: 1000 ml
+Aroma citrico: 150 ml
+
+Coste total = 579.8 centimos
+Azucar total = 419.8 g
+Sodio total = 2013.5 mg
+Cafeina total = 300.0 mg
+----------
+%%%mzn-stat: initTime=0.00954421
+%%%mzn-stat: solveTime=0.00295872
+%%%mzn-stat: solutions=1
+%%%mzn-stat: variables=26
+%%%mzn-stat: propagators=34
+%%%mzn-stat: propagations=2317
+%%%mzn-stat: nodes=101
+%%%mzn-stat: failures=48
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=11
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+---> TABLA: Probando Ejercicio1a.mzn con volumen_total_buscado_ml = 10000 <---
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatBoolVars=9
+%%%mzn-stat: flatIntVars=17
+%%%mzn-stat: flatBoolConstraints=2
+%%%mzn-stat: flatIntConstraints=33
+%%%mzn-stat: evaluatedReifiedConstraints=7
+%%%mzn-stat: evaluatedHalfReifiedConstraints=4
+%%%mzn-stat: method="satisfy"
+%%%mzn-stat: flatTime=0.195389
+%%%mzn-stat-end
+Cantidades usadas:
+------------------
+Agua base: 0 ml
+Jarabe A: 0 ml
+Jarabe B: 6290 ml
+Concentrado salino: 1410 ml
+Extracto energetico: 2000 ml
+Aroma citrico: 300 ml
+
+Coste total = 1159.8 centimos
+Azucar total = 840.8 g
+Sodio total = 4011.0 mg
+Cafeina total = 600.0 mg
+----------
+%%%mzn-stat: initTime=0.0119263
+%%%mzn-stat: solveTime=0.00501122
+%%%mzn-stat: solutions=1
+%%%mzn-stat: variables=26
+%%%mzn-stat: propagators=34
+%%%mzn-stat: propagations=4358
+%%%mzn-stat: nodes=195
+%%%mzn-stat: failures=95
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=11
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+
+=================================================
+Ejecutando: Ejercicio1b.mzn
+=================================================
+
+---> TABLA: Probando Ejercicio1b.mzn con volumen_total_buscado_ml = 200 <---
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatBoolVars=9
+%%%mzn-stat: flatIntVars=18
+%%%mzn-stat: flatBoolConstraints=2
+%%%mzn-stat: flatIntConstraints=34
+%%%mzn-stat: evaluatedReifiedConstraints=7
+%%%mzn-stat: evaluatedHalfReifiedConstraints=4
+%%%mzn-stat: method="minimize"
+%%%mzn-stat: flatTime=0.153459
+%%%mzn-stat-end
+Cantidades usadas:
+------------------
+Agua base: 0 ml
+Jarabe A: 0 ml
+Jarabe B: 110 ml
+Concentrado salino: 30 ml
+Extracto energetico: 40 ml
+Aroma citrico: 20 ml
+
+Coste total = 22.6 centimos
+Azucar total = 15.2 g
+Sodio total = 81.0 mg
+Cafeina total = 12.0 mg
+----------
+==========
+%%%mzn-stat: initTime=0.0104245
+%%%mzn-stat: solveTime=0.00356557
+%%%mzn-stat: solutions=2
+%%%mzn-stat: variables=27
+%%%mzn-stat: propagators=35
+%%%mzn-stat: propagations=1113
+%%%mzn-stat: nodes=31
+%%%mzn-stat: failures=14
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=5
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+---> TABLA: Probando Ejercicio1b.mzn con volumen_total_buscado_ml = 1000 <---
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatBoolVars=9
+%%%mzn-stat: flatIntVars=18
+%%%mzn-stat: flatBoolConstraints=2
+%%%mzn-stat: flatIntConstraints=34
+%%%mzn-stat: evaluatedReifiedConstraints=7
+%%%mzn-stat: evaluatedHalfReifiedConstraints=4
+%%%mzn-stat: method="minimize"
+%%%mzn-stat: flatTime=0.153516
+%%%mzn-stat-end
+Cantidades usadas:
+------------------
+Agua base: 0 ml
+Jarabe A: 0 ml
+Jarabe B: 500 ml
+Concentrado salino: 160 ml
+Extracto energetico: 200 ml
+Aroma citrico: 140 ml
+
+Coste total = 111.2 centimos
+Azucar total = 70.8 g
+Sodio total = 415.0 mg
+Cafeina total = 60.0 mg
+----------
+==========
+%%%mzn-stat: initTime=0.0105395
+%%%mzn-stat: solveTime=0.012997
+%%%mzn-stat: solutions=24
+%%%mzn-stat: variables=27
+%%%mzn-stat: propagators=35
+%%%mzn-stat: propagations=58144
+%%%mzn-stat: nodes=1829
+%%%mzn-stat: failures=891
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=11
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+---> TABLA: Probando Ejercicio1b.mzn con volumen_total_buscado_ml = 5000 <---
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatBoolVars=9
+%%%mzn-stat: flatIntVars=18
+%%%mzn-stat: flatBoolConstraints=2
+%%%mzn-stat: flatIntConstraints=34
+%%%mzn-stat: evaluatedReifiedConstraints=7
+%%%mzn-stat: evaluatedHalfReifiedConstraints=4
+%%%mzn-stat: method="minimize"
+%%%mzn-stat: flatTime=0.239419
+%%%mzn-stat-end
+Cantidades usadas:
+------------------
+Agua base: 0 ml
+Jarabe A: 0 ml
+Jarabe B: 2460 ml
+Concentrado salino: 770 ml
+Extracto energetico: 1000 ml
+Aroma citrico: 770 ml
+
+Coste total = 553.8 centimos
+Azucar total = 350.6 g
+Sodio total = 2016.5 mg
+Cafeina total = 300.0 mg
+----------
+==========
+%%%mzn-stat: initTime=0.0157217
+%%%mzn-stat: solveTime=0.373555
+%%%mzn-stat: solutions=98
+%%%mzn-stat: variables=27
+%%%mzn-stat: propagators=35
+%%%mzn-stat: propagations=4640650
+%%%mzn-stat: nodes=171819
+%%%mzn-stat: failures=85812
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=11
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+---> TABLA: Probando Ejercicio1b.mzn con volumen_total_buscado_ml = 10000 <---
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatBoolVars=9
+%%%mzn-stat: flatIntVars=18
+%%%mzn-stat: flatBoolConstraints=2
+%%%mzn-stat: flatIntConstraints=34
+%%%mzn-stat: evaluatedReifiedConstraints=7
+%%%mzn-stat: evaluatedHalfReifiedConstraints=4
+%%%mzn-stat: method="minimize"
+%%%mzn-stat: flatTime=0.153938
+%%%mzn-stat-end
+Cantidades usadas:
+------------------
+Agua base: 0 ml
+Jarabe A: 0 ml
+Jarabe B: 4910 ml
+Concentrado salino: 1530 ml
+Extracto energetico: 2000 ml
+Aroma citrico: 1560 ml
+
+Coste total = 1107.0 centimos
+Azucar total = 700.4 g
+Sodio total = 4014.0 mg
+Cafeina total = 600.0 mg
+----------
+==========
+%%%mzn-stat: initTime=0.0147049
+%%%mzn-stat: solveTime=2.76034
+%%%mzn-stat: solutions=229
+%%%mzn-stat: variables=27
+%%%mzn-stat: propagators=35
+%%%mzn-stat: propagations=34471024
+%%%mzn-stat: nodes=1321409
+%%%mzn-stat: failures=660476
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=11
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+
+=================================================
+Ejecutando: Ejercicio2.mzn
+=================================================
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatBoolVars=218
+%%%mzn-stat: flatIntVars=17
+%%%mzn-stat: flatBoolConstraints=180
+%%%mzn-stat: flatIntConstraints=158
+%%%mzn-stat: evaluatedReifiedConstraints=29
+%%%mzn-stat: evaluatedHalfReifiedConstraints=119
+%%%mzn-stat: method="satisfy"
+%%%mzn-stat: flatTime=0.381328
+%%%mzn-stat-end
+Alba: "A* cuántico", B1, 16:00
+Bruno: "Poda alfa-beta aplicada al encaje de bolillos", B2, 15:00
+Carla: "Demostración matemática de que RTA* es un algoritmo absurdo", A1, 18:00
+Diego: "Modelado de la incertidumbre a la hora de aprobar TSI sin estudiar nada", A2, 17:00
+Elena: "Planificación automática jerárquica híbrida dedicada a la yuxtaposición de los mundos paralelos", C1, 19:00
+Pablo: "Brazo robótico para jugar a la pocha", C2, 20:00
+----------
+%%%mzn-stat: initTime=0.0161316
+%%%mzn-stat: solveTime=0.00437559
+%%%mzn-stat: solutions=1
+%%%mzn-stat: variables=236
+%%%mzn-stat: propagators=110
+%%%mzn-stat: propagations=1782
+%%%mzn-stat: nodes=34
+%%%mzn-stat: failures=16
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=6
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+
+=================================================
+Ejecutando: Ejercicio3.mzn
+=================================================
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatBoolVars=7
+%%%mzn-stat: flatIntVars=8
+%%%mzn-stat: flatBoolConstraints=2
+%%%mzn-stat: flatIntConstraints=9
+%%%mzn-stat: method="maximize"
+%%%mzn-stat: flatTime=0.173769
+%%%mzn-stat-end
+Objetos seleccionados:
+ - Camara (peso=2, coste=6, utilidad=9)
+ - Ordenador (peso=4, coste=10, utilidad=14)
+ - Bateria_extra (peso=2, coste=4, utilidad=7)
+ - Botiquin (peso=3, coste=5, utilidad=8)
+ - Radio (peso=4, coste=7, utilidad=11)
+
+Utilidad total = 49
+Peso total = 15
+Coste total = 32
+----------
+==========
+%%%mzn-stat: initTime=0.00753514
+%%%mzn-stat: solveTime=0.00343978
+%%%mzn-stat: solutions=8
+%%%mzn-stat: variables=16
+%%%mzn-stat: propagators=11
+%%%mzn-stat: propagations=140
+%%%mzn-stat: nodes=23
+%%%mzn-stat: failures=4
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=5
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+
+=================================================
+Ejecutando: Ejercicio4.mzn
+=================================================
+
+---> TABLA: Probando Ejercicio4.mzn con N = 3 <---
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatIntVars=12
+%%%mzn-stat: flatIntConstraints=23
+%%%mzn-stat: method="minimize"
+%%%mzn-stat: flatTime=0.359057
+%%%mzn-stat-end
+N = 3
+MAXV = 100
+Minimo de valores distintos exigido = 5
+Número de valores distintos = 5
+Suma comun de filas/columnas/diagonales = 15
+Suma total minimizada = 45
+
+Matriz:
+  3  5  7
+  9  5  1
+  3  5  7
+----------
+==========
+%%%mzn-stat: initTime=0.0146648
+%%%mzn-stat: solveTime=0.0320494
+%%%mzn-stat: solutions=1
+%%%mzn-stat: variables=12
+%%%mzn-stat: propagators=32
+%%%mzn-stat: propagations=196301
+%%%mzn-stat: nodes=4585
+%%%mzn-stat: failures=2292
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=14
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+---> TABLA: Probando Ejercicio4.mzn con N = 4 <---
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatIntVars=19
+%%%mzn-stat: flatIntConstraints=32
+%%%mzn-stat: method="minimize"
+%%%mzn-stat: flatTime=0.37355
+%%%mzn-stat-end
+N = 4
+MAXV = 100
+Minimo de valores distintos exigido = 8
+Número de valores distintos = 8
+Suma comun de filas/columnas/diagonales = 16
+Suma total minimizada = 64
+
+Matriz:
+  0  6  0 10
+ 12  0  0  4
+  0  2 14  0
+  4  8  2  2
+----------
+==========
+%%%mzn-stat: initTime=0.00931197
+%%%mzn-stat: solveTime=4.6144
+%%%mzn-stat: solutions=2
+%%%mzn-stat: variables=19
+%%%mzn-stat: propagators=48
+%%%mzn-stat: propagations=32746024
+%%%mzn-stat: nodes=523395
+%%%mzn-stat: failures=261696
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=28
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+---> TABLA: Probando Ejercicio4.mzn con N = 5 <---
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatIntVars=28
+%%%mzn-stat: flatIntConstraints=43
+%%%mzn-stat: method="minimize"
+%%%mzn-stat: flatTime=0.397856
+%%%mzn-stat-end
+N = 5
+MAXV = 100
+Minimo de valores distintos exigido = 13
+Número de valores distintos = 13
+Suma comun de filas/columnas/diagonales = 39
+Suma total minimizada = 195
+
+Matriz:
+  1  1 11  5 21
+  1 27  1  9  1
+ 17  3  1  3 15
+ 19  7  3  9  1
+  1  1 23 13  1
+----------
+%%%mzn-stat: initTime=0.0127434
+%%%mzn-stat: solveTime=299.591
+%%%mzn-stat: solutions=3
+%%%mzn-stat: variables=28
+%%%mzn-stat: propagators=68
+%%%mzn-stat: propagations=2183303638
+%%%mzn-stat: nodes=44948550
+%%%mzn-stat: failures=22474265
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=36
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+---> TABLA: Probando Ejercicio4.mzn con N = 6 <---
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatIntVars=39
+%%%mzn-stat: flatIntConstraints=56
+%%%mzn-stat: method="minimize"
+%%%mzn-stat: flatTime=0.318584
+%%%mzn-stat-end
+N = 6
+MAXV = 100
+Minimo de valores distintos exigido = 18
+Número de valores distintos = 18
+Suma comun de filas/columnas/diagonales = 56
+Suma total minimizada = 336
+
+Matriz:
+  0  0 12 18  0 26
+  0 16  0 10 30  0
+  0  2 40  0  6  8
+  0 14  0  0 20 22
+ 56  0  0  0  0  0
+  0 24  4 28  0  0
+----------
+%%%mzn-stat: initTime=0.00857845
+%%%mzn-stat: solveTime=299.669
+%%%mzn-stat: solutions=1
+%%%mzn-stat: variables=39
+%%%mzn-stat: propagators=92
+%%%mzn-stat: propagations=2238360252
+%%%mzn-stat: nodes=37501557
+%%%mzn-stat: failures=18750764
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=70
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+---> TABLA: Probando Ejercicio4.mzn con N = 7 <---
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatIntVars=52
+%%%mzn-stat: flatIntConstraints=71
+%%%mzn-stat: method="minimize"
+%%%mzn-stat: flatTime=0.296875
+%%%mzn-stat-end
+=====UNKNOWN=====
+%%%mzn-stat: initTime=0.00850042
+%%%mzn-stat: solveTime=299.695
+%%%mzn-stat: solutions=0
+%%%mzn-stat: variables=52
+%%%mzn-stat: propagators=120
+%%%mzn-stat: propagations=1875636163
+%%%mzn-stat: nodes=25877877
+%%%mzn-stat: failures=12938924
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=72
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=0
+%%%mzn-stat-end
+
+
+=================================================
+Ejecutando: Ejercicio5a.mzn
+=================================================
+% Generated FlatZinc statistics:
+%%%mzn-stat: paths=0
+%%%mzn-stat: flatBoolVars=431
+%%%mzn-stat: flatIntVars=97
+%%%mzn-stat: flatBoolConstraints=194
+%%%mzn-stat: flatIntConstraints=475
+%%%mzn-stat: evaluatedReifiedConstraints=96
+%%%mzn-stat: evaluatedHalfReifiedConstraints=317
+%%%mzn-stat: method="minimize"
+%%%mzn-stat: flatTime=0.318516
+%%%mzn-stat-end
+ A - "Montar chasis" inicio dia 1 fin dia 7. Asignada a "Marty McFly" con apoyo de "Biff Tannen"
+ B - "Instalar ruedas" inicio dia 8 fin dia 8. Asignada a "Marty McFly" con apoyo de "Nadie"
+ C - "Cableado eléctrico" inicio dia 9 fin dia 11. Asignada a "Doc Brown" con apoyo de "Biff Tannen"
+ D - "Motor de fusión nuclear" inicio dia 12 fin dia 16. Asignada a "Doc Brown" con apoyo de "Nadie"
+ E - "Tablero de control" inicio dia 17 fin dia 19. Asignada a "Doc Brown" con apoyo de "Biff Tannen"
+ F - "Instalación y configuración del condensador de fluzo (flux capacitor)" inicio dia 20 fin dia 24. Asignada a "Doc Brown" con apoyo de "Nadie"
+ G - "Ajuste aerodinámico" inicio dia 17 fin dia 22. Asignada a "Marty McFly" con apoyo de "George McFly"
+ H - "Instalación de puertas de ala de gaviota" inicio dia 23 fin dia 24. Asignada a "Marty McFly" con apoyo de "Biff Tannen"
+ I - "Panel de tiempo" inicio dia 25 fin dia 25. Asignada a "Marty McFly" con apoyo de "George McFly"
+ J - "Implementación y validación de algoritmos de búsqueda heurística para optimización de caminos" inicio dia 26 fin dia 27. Asignada a "Doc Brown" con apoyo de "Nadie"
+ K - "Prueba de plutonio" inicio dia 26 fin dia 28. Asignada a "Marty McFly" con apoyo de "George McFly"
+
+Duración total = 28 días
+----------
+==========
+%%%mzn-stat: initTime=0.0155662
+%%%mzn-stat: solveTime=0.274237
+%%%mzn-stat: solutions=15
+%%%mzn-stat: variables=528
+%%%mzn-stat: propagators=665
+%%%mzn-stat: propagations=2130423
+%%%mzn-stat: nodes=27778
+%%%mzn-stat: failures=13859
+%%%mzn-stat: restarts=0
+%%%mzn-stat: peakDepth=38
+%%%mzn-stat-end
+%%%mzn-stat: nSolutions=1
+%%%mzn-stat-end
+
+

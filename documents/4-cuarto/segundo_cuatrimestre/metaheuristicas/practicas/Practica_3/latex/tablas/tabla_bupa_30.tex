@@ -1,0 +1,19 @@
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lrrrrr}
+        \hline
+        Algoritmo & Fitness & Distancia & Incumplimiento & Evaluaciones & Tiempo (ms)\\
+        \hline
+        Greedy & 0.2676 & 0.2476 & 0.0133 & 1.0 & 551.1 \\
+        Random & 0.3335 & 0.2469 & 0.0574 & 100000.0 & 2168.3 \\
+        BL & 0.1982 & 0.1437 & 0.0361 & 81769.3 & 1383.9 \\
+        AM-BEST (Mejor P2) & 0.2013 & 0.1451 & 0.0372 & 100000.0 & 2075.7 \\
+        BMB & 0.2040 & 0.1464 & 0.0382 & 100000.0 & 1890.2 \\
+        ILS-BL & 0.1986 & 0.1432 & 0.0367 & 100000.0 & 1759.2 \\
+        ES & 0.2510 & 0.1752 & 0.0502 & 100000.0 & 2467.7 \\
+        ILS-ES & 0.2496 & 0.1750 & 0.0495 & 100000.0 & 2426.8 \\
+        \hline
+    \end{tabular}
+    \caption{Resultados obtenidos para el dataset \textbf{Bupa} con 30\% de restricciones en  10 ejecuciones independientes (k=16).}
+    \label{tab:res_bupa_30}
+\end{table}

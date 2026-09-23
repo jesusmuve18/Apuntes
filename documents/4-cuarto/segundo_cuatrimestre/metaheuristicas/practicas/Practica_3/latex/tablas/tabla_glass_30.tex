@@ -1,0 +1,19 @@
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lrrrrr}
+        \hline
+        Algoritmo & Fitness & Distancia & Incumplimiento & Evaluaciones & Tiempo (ms)\\
+        \hline
+        Greedy & 0.5592 & 0.4259 & 0.0625 & 1.0 & 53.1 \\
+        Random & 0.6968 & 0.4214 & 0.1292 & 100000.0 & 993.0 \\
+        BL & 0.4682 & 0.2862 & 0.0854 & 17931.4 & 132.1 \\
+        AM-BEST (Mejor P2) & 0.4819 & 0.2804 & 0.0945 & 100000.0 & 992.1 \\
+        BMB & 0.4620 & 0.2843 & 0.0833 & 84487.6 & 635.2 \\
+        ILS-BL & 0.4604 & 0.2829 & 0.0832 & 68314.6 & 497.3 \\
+        ES & 0.4782 & 0.2872 & 0.0896 & 100000.0 & 873.9 \\
+        ILS-ES & 0.4799 & 0.2830 & 0.0924 & 100000.0 & 866.9 \\
+        \hline
+    \end{tabular}
+    \caption{Resultados obtenidos para el dataset \textbf{Glass} con 30\% de restricciones en  10 ejecuciones independientes (k=7).}
+    \label{tab:res_glass_30}
+\end{table}

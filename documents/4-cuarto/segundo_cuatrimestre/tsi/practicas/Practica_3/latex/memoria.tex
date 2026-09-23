@@ -1,0 +1,565 @@
+\documentclass[10pt]{article}
+
+\input{preambulo.tex}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{subcaption}
+\usepackage[table]{xcolor}
+\usepackage{titlesec}
+\usepackage{pgfgantt}
+
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{float}
+\usepackage{pgfplotstable}
+
+\colorlet{maincolor}{Violet}
+
+% Definición de colores pastel y modernos
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+\definecolor{codegreen}{rgb}{0.13,0.55,0.13}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{codeblue}{rgb}{0.0,0.0,0.8}
+
+% Configuración del estilo moderno
+\lstdefinestyle{modern}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen}\itshape,
+    keywordstyle=\color{codeblue}\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,
+    stepnumber=5,
+    firstnumber=1,
+    numberfirstline=true,              
+    numbersep=10pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4,
+    frame=single,                    % Marco simple alrededor del código
+    rulecolor=\color{lightgray},     % Color del marco
+    xleftmargin=15pt,                % Margen para que los números no se peguen
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1
+}
+
+% Aplicar el estilo por defecto a todos los bloques de código
+\lstset{style=modern}
+
+% Definimos el lenguaje MiniZinc
+\lstdefinelanguage{MiniZinc}{
+    morekeywords={
+        include, var, int, float, bool, string, set, array, of,
+        constraint, solve, satisfy, maximize, minimize, output,
+        par, enum, predicate, function, test, true, false, in,
+        if, then, else, endif, forall, exists, sum
+    },
+    sensitive=true,
+    morecomment=[l]{\%},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+}
+
+% --- CONFIGURACIÓN DE SECCIONES ---
+
+% Formato para \section
+% Sintaxis: \titleformat{\comando}{formato}{etiqueta}{separación}{antes_del_texto}
+\titleformat{\section}
+  {\color{maincolor}\large\bfseries} % Color, fuente, tamaño y estilo
+  {\thesection.} % Muestra el número de sección (ej. 1, 2...)
+  {0.5em} % Espacio entre el número y el texto del título
+  {} % Código adicional antes del texto del título
+
+% Formato para \subsection
+\titleformat{\subsection}
+  {\color{maincolor}\large\bfseries} % Color vino, tamaño grande, cursiva
+  {\thesubsection}
+  {0.5em}
+  {}
+
+\title{}
+\author{Jesús Muñoz Velasco}
+\date{Curso 2025-2026}
+
+\begin{document}
+
+{\Large \bfseries \centering \color{maincolor} Práctica 3: Representación de dominios y resolución de problemas con técnicas de planificación}
+
+\vspace{0.25cm}
+{\large \bfseries \color{maincolor} Autor: Jesús Muñoz Velasco}
+
+\section{Ejercicio 1}
+
+\subsection{Diseño del dominio}
+
+El dominio \texttt{tierra-media} del Ejercicio~1 establece la base sobre la que se construyen todos los ejercicios posteriores. Se establece la siguiente jerarquía de tipos:
+\begin{gather*}
+    \xymatrix{
+        & & \texttt{object} \ar[dll] \ar[d] \ar[drr] & & \\
+        \texttt{Localizacion} & & \texttt{Recurso} \ar[dl] \ar[dr] & & \texttt{Personaje} \ar[d]\\
+        & \texttt{TipoRecurso} && \texttt{NodoRecurso} & \texttt{TipoPersonaje}
+    }
+\end{gather*}
+donde
+\begin{itemize}[label=-]
+    \item \texttt{Localizacion} representa lugares del mapa (Hobbiton, Bree, Rivendell, etc.). Se utilizan principalmente para especificar los caminos que existen (teniendo que declararse bidireccionalmente con el predicado \texttt{camino} que se describirá más adelante)
+    \item \texttt{TipoRecurso} representa un tipo de recurso extraíble (Mineral, Mithril, Madera, etc.). Se utiliza para extracciones y construcciones.
+    \item \texttt{NodoRecurso} representa un nodo/yacimiento de un recurso en una localización concreta. Sirve principalmente para especificar la localización de un recurso (con el predicado \texttt{nodoEn}).
+    \item \texttt{Recurso} serviría para especificar una instancia concreta de un recurso pero en este problema en concreto no es necesario. En su lugar se utiliza por pura semántica para agrupar \texttt{TipoRecurso} y \texttt{NodoRecurso} (ya que semánticamente están relacionados como atributos de un recurso).
+    \item \texttt{Personaje} representa instancias concretas de personajes (Enano1, Hobbit1, etc.).
+    \item \texttt{TipoPersonaje} representa categoría de personaje (Enano, Hobbit, etc.)
+\end{itemize}
+
+Se hace uso de constantes para fijar los tipos de personaje (\texttt{Enano}, \texttt{Hobbit}) y los cinco tipos de recurso (\texttt{Mineral}, \texttt{Mithril}, \texttt{Madera}, \texttt{Especia}, \texttt{Alimento}), en lugar de declararlos como objetos, lo que permite referenciarlos directamente en las precondiciones sin necesidad de instanciarlos en cada problema (aplicando el principio de desacople del problema y el dominio).\\
+
+Se emplean además los siguientes predicados:
+\begin{itemize}[label=-]
+    \item \texttt{(estaEn [Personaje] [Localizacion])} registra la posición de cada personaje.
+    \item \texttt{(nodoEn [NodoRecurso] [Localizacion])} registra la localización de un recurso.
+    \item \texttt{(tipoNodo [NodoRecurso] [TipoRecurso])} especifica qué tipo de recurso se encuentra en \texttt{NodoRecurso}.
+    \item \texttt{(camino [Localizacion] [Localizacion])} sirve para representar el mapa, señalando que existe un camino desde la primera localización hasta la segunda (habrá que usar dos veces este predicado si el camino es bidireccional pero cambiando origen por destino).
+    \item \texttt{(caminoDestruible [Localizacion] [Localizacion])} indica que al atravesar el camino desde la primera localización hasta la segunda este se destruirá (en ambos sentidos). Habrá que usarlo dualmente de la misma manera que el predicado anterior para que se destruya independientemente del sentido en el que se recorra dicho camino. En nuestro problema solo se usa para el camino Rivendell$ \leftrightarrow$ Moria.
+    \item \texttt{(disponible [Personaje])} señala si un personaje no está asignado a ninguna tarea.
+    \item \texttt{(trabajando [Personaje] [Localizacion] [TipoRecurso])} indica que el personaje está trabajando en una cierta localizacióno extrayendo un cierto recurso del tipo indicado.
+    \item \texttt{(puedeExtraer [TipoPersonaje] [TipoRecurso])} registra que el personaje de dicho tipo puede extraer recursos del tipo \texttt{TipoRecurso} correspondiente.
+    \item \texttt{(esDeTipo [Personaje] [TipoPersonaje])} sirve para relacionar cada instancia de personaje con su tipo (por ejemplo \texttt{Humano1} es de tipo \texttt{Humano}).
+\end{itemize}
+
+Además, de acuerdo al enunciado se definen las siguientes acciones\footnote{La notación empleada será: \texttt{?p} para personajes, \texttt{?l} para localizaciones y \texttt{?tr} para tipos de recurso. Si hay varios del mismo tipo se usará un índice tras la letra.}:
+\begin{table}[H]
+        \centering
+        \arrayrulecolor{maincolor!50} % Suaviza un poco el borde para que sea más elegante        
+        \begin{tabular}{| m{4cm} | m{6cm} | m{6cm} |}
+            \hline
+            \rowcolor{maincolor}
+            \textcolor{white}{\textbf{Acción}} & 
+            \centering\arraybackslash\textcolor{white}{\textbf{Precondiciones}} & 
+            \textcolor{white}{\textbf{Efectos}} \\
+            \hline
+            \texttt{Viajar ?p ?l1 ?l2} & 
+            - \texttt{?p} está en \texttt{?l1}. \newline
+            - Existe un camino entre \texttt{?l1} y \texttt{?l2}. \newline
+            - \texttt{?p} está disponible. &
+            - \texttt{?p} está ahora en \texttt{?l2}.\newline
+            - \texttt{?p} ya no está en \texttt{?l1}.\newline
+            - Se elimina el camino si procede\\
+            \hline
+            \texttt{ExtraerRecurso ?p ?l ?tr} & 
+            - \texttt{?p} está en \texttt{?l}. \newline
+            - \texttt{?p} está disponible. \newline
+            - Existe un nodo del tipo \texttt{?tr} en \texttt{?l}. \newline
+            - El tipo de personaje de \texttt{?p} tiene capacidad para extraer ese recurso. &
+            - \texttt{?p} se marca como trabajando en \texttt{?l} extrayendo \texttt{?tr}.\newline
+            - \texttt{?p} deja de estar disponible.\\
+            \hline
+        \end{tabular}%
+        \caption{Acciones del dominio 1}
+        \label{tab:acciones_dom1} 
+    \end{table}
+
+\subsection{Diseño del problema}
+
+Para el diseño del problema se declaran en primer lugar los objetos correspondientes a
+\begin{itemize}[label=-]
+    \item Localizaciones en el mapa.
+    \item Personajes (instancias).
+    \item Nodos de recursos.
+\end{itemize}
+según el enunciado (para más información se puede leer el archivo \texttt{problema1.pddl}). \\
+
+En el estado inicial se definen los siguientes aspectos (también de acuerdo al enunciado):
+\begin{itemize}[label=-]
+    \item Posición inicial de cada personaje (de cada instancia).
+    \item Disponibilidad de cada personaje (de cada instancia).
+    \item Tipos de personaje (de cada instancia).
+    \item Capacidad de extracción de cada personaje (de cada tipo de personaje).
+    \item Ubicación de los nodos de recursos.
+    \item Tipo de recurso de cada nodo.
+    \item Mapa de caminos. Se declaran bidireccionalmente para indicar que se puede transitar en ambos sentidos (ya que el enunciado no indica lo contrario).
+\end{itemize}
+
+Finalmente, como objetivo se especifica que se verifiquen las siguientes condiciones:
+\begin{itemize}[label=-]
+    \item Que haya un personaje asignado a un nodo de Mithril (en este caso solo puede ser un enano, y como solo hay uno tendrá que ser necesariamente \texttt{Enano1}).
+    \item Que haya un personaje asignado a un nodo de Alimento (de nuevo solo hay una posibilidad y es que el \texttt{Hobbit1} esté extrayendo alimento en \texttt{Hobbiton}).
+\end{itemize}
+
+\section{Ejercicio 2}
+
+\subsection{Diseño del dominio}
+
+El dominio del Ejercicio~2 extiende el del Ejercicio~1 con los elementos necesarios para modelar la Comunidad del Anillo y la destrucción del Anillo Único. La jerarquía de tipos se amplía con un nuevo tipo raíz:
+\begin{gather*}
+    \xymatrix{
+        & & \texttt{object} \ar[dll] \ar[d] \ar[drr] \ar[drrr]& & \\
+        \texttt{Localizacion} & & \texttt{Recurso} \ar[dl] \ar[dr] & & \texttt{Personaje} \ar[d] & \texttt{Objeto}\\
+        & \texttt{TipoRecurso} && \texttt{NodoRecurso} & \texttt{TipoPersonaje}
+    }
+\end{gather*}
+donde \texttt{Objeto} representa ítems físicos portables por los personajes ({Anillo}, {ChalecoMithril} y {Espada}).\\
+
+En las constantes se añade el tipo de personaje \texttt{Mago} y los tres objetos especiales del dominio (\texttt{Anillo}, \texttt{ChalecoMithril}, \texttt{Espada}), que se declaran directamente como constantes de tipo \texttt{Objeto} por las mismas razones de desacople enumeradas en el Ejercicio~1.\\
+
+Se incorporan los siguientes predicados nuevos:
+\begin{itemize}[label=-]
+    \item \texttt{(comunidadFormada)} predicado sin parámetros que se activa cuando se ejecuta la acción \texttt{formarComunidad}. A partir de ese momento los miembros de la Comunidad deben desplazarse conjuntamente.
+    \item \texttt{(esMiembro [Personaje])} indica que el personaje pertenece a la Comunidad del Anillo.
+    \item \texttt{(tieneObjeto [Personaje] [Objeto])} registra que un personaje porta actualmente un objeto.
+    \item \texttt{(objetoEn [Objeto] [Localizacion])} indica que un objeto se encuentra en una localización (aún sin recoger).
+    \item \texttt{(portadorAnillo [Personaje])} señala que el personaje es el portador del Anillo Único.
+    \item \texttt{(anilloDestruido)} predicado sin parámetros que se activa cuando el Anillo es destruido.
+    \item \texttt{(lugarDestruccion [Localizacion])} marca la localización donde debe destruirse el Anillo.
+    \item \texttt{(chalecoMaterializado)} predicado sin parámetros que evita que el Chaleco de Mithril pueda materializarse más de una vez.
+\end{itemize}
+
+Respecto a las acciones, \texttt{Viajar} se modifica y se añaden cinco acciones nuevas:
+
+\begin{table}[H]
+    \centering
+    \arrayrulecolor{maincolor!50}
+    \begin{tabular}{| m{4cm} | m{6cm} | m{6cm} |}
+        \hline
+        \rowcolor{maincolor}
+        \textcolor{white}{\textbf{Acción}} &
+        \centering\arraybackslash\textcolor{white}{\textbf{Precondiciones}} &
+        \textcolor{white}{\textbf{Efectos}} \\
+        \hline
+        \texttt{Viajar ?p ?l1 ?l2} \newline \textit{(modificada)} &
+        - Igual que en el Ejercicio~1. \newline
+        - Adicionalmente: si la comunidad está formada, \texttt{?p} no puede ser miembro (los miembros deben usar \texttt{viajarComunidad}). &
+        - Igual que en el Ejercicio~1. \\
+        \hline
+        \texttt{formarComunidad ?p1 ?p2 ?l} &
+        - La comunidad no está formada aún. \newline
+        - \texttt{?p1} y \texttt{?p2} están disponibles y en la misma localización \texttt{?l}. \newline
+        - \texttt{?p1} es de tipo \texttt{Hobbit} y \texttt{?p2} es de tipo \texttt{Mago}. &
+        - Se activa \texttt{comunidadFormada}. \newline
+        - \texttt{?p1} y \texttt{?p2} pasan a ser miembros. \\
+        \hline
+        \texttt{viajarComunidad ?p1 ?p2 ?org ?dst} &
+        - La comunidad está formada. \newline
+        - \texttt{?p1} y \texttt{?p2} son miembros, están disponibles y en \texttt{?org}. \newline
+        - Existe camino entre \texttt{?org} y \texttt{?dst}. &
+        - Ambos se mueven a \texttt{?dst}. \newline
+        - Se elimina el camino si procede. \\
+        \hline
+        \texttt{materializarChaleco ?mago ?l} &
+        - La comunidad está formada. \newline
+        - \texttt{?mago} es de tipo \texttt{Mago}, es miembro, está disponible y en \texttt{?l}. \newline
+        - Hay algún personaje extrayendo Mithril en \texttt{?l}. \newline
+        - El chaleco no ha sido materializado todavía. &
+        - \texttt{ChalecoMithril} aparece en \texttt{?l}. \newline
+        - Se activa \texttt{chalecoMaterializado}. \\
+        \hline
+        \texttt{recogerObjeto ?p ?l ?o} &
+        - La comunidad está formada y \texttt{?p} es miembro, está disponible y en \texttt{?l}. \newline
+        - El objeto \texttt{?o} está en \texttt{?l}. \newline
+        - Si \texttt{?o} es el \texttt{Anillo}: \texttt{?p} debe ser \texttt{Hobbit}. \newline
+        - Si \texttt{?o} no es el \texttt{Anillo}: \texttt{?p} debe ser ya \texttt{portadorAnillo} (garantiza que el Anillo se recoja primero). &
+        - \texttt{?p} pasa a portar \texttt{?o}. \newline
+        - \texttt{?o} deja de estar en la localización. \newline
+        - Si \texttt{?o} es el \texttt{Anillo}, \texttt{?p} se convierte en \texttt{portadorAnillo}. \\
+        \hline
+        \texttt{destruirAnillo ?p ?l} &
+        - \texttt{?p} es \texttt{portadorAnillo} y porta los tres objetos (\texttt{Anillo}, \texttt{ChalecoMithril}, \texttt{Espada}). \newline
+        - \texttt{?p} está en \texttt{?l} y \texttt{?l} es el \texttt{lugarDestruccion}. \newline
+        - El Anillo no ha sido destruido todavía. &
+        - Se activa \texttt{anilloDestruido}. \newline
+        - \texttt{?p} deja de ser \texttt{portadorAnillo} y de portar el \texttt{Anillo}. \\
+        \hline
+    \end{tabular}
+    \caption{Acciones nuevas/modificadas del dominio 2}
+    \label{tab:acciones_dom2}
+\end{table}
+
+\subsection{Diseño del problema}
+
+El mapa de localizaciones y los nodos de recursos son idénticos a los del Ejercicio~1. Los cambios en los objetos declarados son:
+\begin{itemize}[label=-]
+    \item Se sustituyen los dos enanos y el hobbit del ejercicio anterior por una plantilla de personajes más amplia: cuatro Hobbits (\texttt{Hobbit1}--\texttt{Hobbit3} en Hobbiton, \texttt{Hobbit4} en Bree), dos Magos (\texttt{Mago1} en Rivendell, \texttt{Mago2} en Isengard) y dos Enanos (\texttt{Enano1} en Moria, \texttt{Enano2} en Isengard).
+\end{itemize}
+
+En el estado inicial se añaden o modifican los siguientes aspectos:
+\begin{itemize}[label=-]
+    \item \texttt{Enano2} comienza \emph{no disponible} (a diferencia del Ejercicio~1, donde todos los personajes iniciales estaban disponibles).
+    \item Se declaran las capacidades de extracción del nuevo tipo \texttt{Mago} (en este problema ninguna, de modo que no aparece ningún predicado \texttt{puedeExtraer Mago \ldots}).
+    \item Se especifica la ubicación inicial de los dos objetos recogibles en el mundo: el \texttt{Anillo} en Rivendell y la \texttt{Espada} en Lothlorien. El \texttt{ChalecoMithril} no tiene posición inicial porque se genera dinámicamente mediante la acción \texttt{materializarChaleco}.
+    \item Se declara \texttt{(lugarDestruccion Orodruin)} como el único lugar válido para destruir el Anillo.
+\end{itemize}
+
+Finalmente, el objetivo se simplifica a un único predicado:
+\begin{itemize}[label=-]
+    \item \texttt{(anilloDestruido)}: el plan tendrá éxito cuando el Anillo haya sido destruido en Orodruin. Esto implica implícitamente que se haya formado la Comunidad, recogido los tres objetos y llegado al lugar de destrucción.
+\end{itemize}
+
+\section{Ejercicio 3}
+
+\subsection{Diseño del dominio}
+
+El Ejercicio~3 extiende el dominio del Ejercicio~2 con tres bloques de cambios: un nuevo predicado de posición colectiva, dos predicados auxiliares de rendimiento y un conjunto de optimizaciones trasversales aplicadas en las acciones.\\
+
+En cuanto a los predicados nuevos:
+\begin{itemize}[label=-]
+    \item \texttt{(comunidadEstaEn [Localizacion])} registra la posición colectiva de la Comunidad como una única variable de estado. Este predicado sustituye funcionalmente a los predicados \texttt{estaEn} individuales de los miembros una vez formada la Comunidad: al ejecutar \texttt{formarComunidad}, los predicados \texttt{estaEn} de todos los miembros se retiran del estado y se inicializa \texttt{comunidadEstaEn}. A partir de ese momento, las acciones \texttt{viajarComunidad}, \texttt{materializarChaleco}, \texttt{recogerObjeto} y \texttt{destruirAnillo} comprueban exclusivamente \texttt{comunidadEstaEn}, nunca \texttt{estaEn}. Esto reduce significativamente el espacio de estados del planificador, pues $N$ fluentes de posición individuales quedan colapsados en uno solo.
+    \item \texttt{(hayNodoTipo [TipoRecurso] [Localizacion])} predicado auxiliar de rendimiento precalculado en el archivo de problema. Certifica que existe al menos un nodo del tipo de recurso indicado en la localización dada, eliminando el cuantificador \texttt{exists} sobre \texttt{NodoRecurso} que aparecía en la precondición de \texttt{ExtraerRecurso} en el Ejercicio~2. Su eliminación reduce el coste de la traducción a SAS+ y el tamaño del espacio de búsqueda.
+    \item \texttt{(puedeExtraerPersonaje [Personaje] [TipoRecurso])} predicado auxiliar de rendimiento también precalculado en el problema. Despliega explícitamente todas las combinaciones (personaje, recurso) válidas, eliminando el \texttt{exists} sobre \texttt{TipoPersonaje} que también existía en \texttt{ExtraerRecurso}. Al tratarse de la acción con mayor número de instanciaciones en el \textit{grounding}, este predicado tiene un impacto directo sobre el tiempo de planificación.
+    \item \texttt{(esMenor [Personaje] [Personaje])} predicado auxiliar de ruptura de simetrías. Impone un orden total sobre los Hobbits de la Comunidad (declarado en el problema), lo que permite al planificador descartar permutaciones equivalentes en las acciones \texttt{formarComunidad} y \texttt{viajarComunidad}, reduciendo drásticamente el factor de ramificación cuando hay varios Hobbits con el mismo tipo en la comunidad. Este predicado solo está presente a partir del apartado~(b) ya que es cuando aparecen varios Hobbits.
+\end{itemize}
+
+Las modificaciones sobre las acciones existentes son las siguientes:
+\begin{itemize}[label=-]
+    \item \texttt{ExtraerRecurso} reemplaza los dos \texttt{exists} originales por los predicados auxiliares \texttt{hayNodoTipo} y \texttt{puedeExtraerPersonaje}.
+    \item \texttt{formarComunidad}, además de marcar la comunidad y sus miembros, ahora retira los predicados \texttt{estaEn} de todos los miembros y establece \texttt{comunidadEstaEn}, lo que descarta su posición individual.
+    \item \texttt{viajarComunidad}, \texttt{materializarChaleco}, \texttt{recogerObjeto} y \texttt{destruirAnillo} pasan a usar \texttt{comunidadEstaEn} en lugar de \texttt{estaEn} para verificar la localización de la Comunidad.
+    \item \texttt{viajarComunidad} añade restricciones de tipo sobre sus parámetros personaje (e.g.\ \texttt{esDeTipo ?p1 Hobbit}) y, donde procede, condiciones \texttt{esMenor} entre los Hobbits, con el doble propósito de acotar el \textit{grounding} y eliminar simetrías.
+\end{itemize}
+
+\subsection{Diseño del problema}
+
+Los objetos, el mapa de caminos, los nodos de recursos, la ubicación de los objetos especiales y el objetivo son idénticos en las cuatro variantes. Las diferencias entre apartados son exclusivamente la composición de la Comunidad, la presencia o ausencia de las relaciones \texttt{esMenor}, y los valores \texttt{esDeTipo} adicionales. En todos los casos el conjunto de personajes es el mismo: \texttt{Hobbit1}--\texttt{Hobbit3} en Hobbiton, \texttt{Hobbit4} en Bree, \texttt{Mago1} en Rivendell, \texttt{Mago2} en Isengard, \texttt{Elfo1} en Lothlorien, \texttt{Enano1} en Moria y \texttt{Enano2} en Fangorn, todos disponibles. Las diferencias por variante se detallan en las subsecciones siguientes.
+
+\subsection{Variante (a): 1 Hobbit + 1 Mago}
+
+La comunidad la forman exactamente un Hobbit y un Mago. La acción \texttt{formarComunidad} acepta dos parámetros de personaje (\texttt{?p1} Hobbit, \texttt{?p2} Mago) y \texttt{viajarComunidad} también lleva exactamente esos dos. Al haber un solo Hobbit en la comunidad no existe simetría entre Hobbits que romper, por lo que el predicado \texttt{esMenor} no se introduce ni en el dominio ni en el problema.
+
+\subsection{Variante (b): 2 Hobbits + 1 Mago}
+
+Se amplía la comunidad a tres miembros: dos Hobbits y un Mago. Esto introduce la primera simetría real entre personajes del mismo tipo, ya que los dos Hobbits son intercambiables en la asignación de parámetros. Para gestionarla se añade el predicado \texttt{esMenor} y, en el problema, se declara el orden \texttt{Hobbit1 < Hobbit2 < Hobbit3 < Hobbit4}. Tanto \texttt{formarComunidad} como \texttt{viajarComunidad} exigen \texttt{(esMenor ?p1 ?p2)} sobre los dos Hobbits, reduciendo a la mitad las instanciaciones equivalentes en esas acciones.
+
+\subsection{Variante (c): 3 Hobbits + 1 Mago}
+
+La comunidad pasa a cuatro miembros: tres Hobbits y un Mago. Las simetrías entre los tres Hobbits crecen a $3! = 6$ permutaciones. Se aplica ruptura de orden total entre los tres Hobbits mediante las condiciones \texttt{(esMenor ?p1 ?p2)}, \texttt{(esMenor ?p1 ?p3)} y \texttt{(esMenor ?p2 ?p3)}, tanto en \texttt{formarComunidad} como en \texttt{viajarComunidad}, reduciendo el número de instancias válidas de $6$ a $1$ por combinación de Hobbits.
+
+\subsection{Variante (d): 3 Hobbits + 1 Mago + 1 Elfo}
+
+Se incorpora un quinto miembro de tipo \texttt{Elfo}. Las constantes del dominio ya incluían \texttt{Elfo} como tipo de personaje desde los ejercicios anteriores, pero es aquí donde se instancia por primera vez en la comunidad. La ruptura de simetrías entre los tres Hobbits se mantiene exactamente igual que en (c). La acción \texttt{viajarComunidad} gana un quinto parámetro de personaje con la restricción \texttt{(esDeTipo ?p5 Elfo)}, y \texttt{formarComunidad} exige igualmente un quinto miembro de tipo \texttt{Elfo}.
+
+\subsection{Análisis de resultados}
+
+\begin{table}[H]
+    \centering
+    \arrayrulecolor{maincolor!50}
+    \renewcommand{\arraystretch}{1.5}
+    
+    \begin{tabular}{| >{\centering\arraybackslash}m{5.25cm} | >{\centering\arraybackslash}m{5cm} | >{\centering\arraybackslash}m{6cm} |}
+        \hline
+        \rowcolor{maincolor}
+        \textcolor{white}{\textbf{Tamaño de la comunidad}} & 
+        \centering\arraybackslash\textcolor{white}{\textbf{Tiempo de planificación (\textit{Planner Time})}} & 
+        \textcolor{white}{\textbf{Longitud del plan encontrado (\textit{Plan Length})}} \\
+        \hline
+        (a): 1 hobbit y 1 mago  & 0.34s & 14 \\
+        \hline
+        (b): 2 hobbits y 1 mago & 0.45s & 16 \\
+        \hline
+        (c): 3 hobbits y 1 mago & 0.45s  & 17 \\
+        \hline
+        (d): 3 hobbits, 1 mago y 1 elfo & 1267.89s & 23 \\
+        \hline
+    \end{tabular}%
+    \caption{Resultados de ejecución del Ejercicio 3}
+    \label{tab:resultados_3} 
+\end{table}
+
+Los resultados revelan tres patrones de interés. En primer lugar, la transición de (a) a (b) y de (b) a (c) produce incrementos moderados tanto en tiempo como en longitud del plan. En tiempo, el salto de (a) a (b) se debe fundamentalmente al aumento del factor de ramificación de \texttt{formarComunidad} y \texttt{viajarComunidad} al considerar un Hobbit adicional; la práctica ausencia de crecimiento entre (b) y (c) demuestra que la ruptura de simetrías mediante \texttt{esMenor} absorbe casi por completo el coste teórico de multiplicar por tres las permutaciones de Hobbits. En longitud del plan, el incremento de una o dos acciones entre variantes refleja los pasos adicionales necesarios para reunir en un mismo punto a un miembro más de la comunidad antes de poder formarla. \\
+
+En segundo lugar, el salto de \texttt{0.45s} a más de \texttt{1267s} en el apartado (d) no se explica únicamente por añadir un miembro más, sino por la introducción del tipo \texttt{Elfo}. A diferencia de los Hobbits adicionales de (b) y (c), cuyas simetrías se gestionan con \texttt{esMenor}, el Elfo es un tipo distinto sin miembro del mismo tipo en la comunidad y con posición inicial en Lothlorien, lo que obliga al planificador a explorar rutas de reunificación radicalmente nuevas. La combinación de un espacio de búsqueda más grande (cinco parámetros en \texttt{viajarComunidad} frente a cuatro) con la ausencia de restricciones adicionales de tipo entre los miembros no Hobbit da lugar a un crecimiento exponencial del tiempo de planificación.\\
+
+Finalmente, el aumento de la longitud del plan de 17 a 23 acciones en el apartado (d) está en línea con la necesidad de desplazamientos adicionales para reunir al Elfo, que parte de Lothlorien, con el resto de la comunidad antes de poder formarla y llevarla a Orodruin.\\
+
+\subsection{Complejidad computacional y escalado}
+
+La planificación automática clásica es \texttt{PSPACE-completa} en su formulación general con acciones proposicionales~\cite{bylander1994}. Con los requisitos \texttt{:typing} y \texttt{:conditional-effects} del dominio, el problema permanece en esa clase, pero la fase de \textit{grounding} introduce una complejidad adicional de $O(n^k)$ por acción, donde $n$ es el número de objetos del tipo relevante y $k$ el número de parámetros de la acción.\\
+
+La acción dominante es \texttt{viajarComunidad}, con $k$ parámetros de personaje y $L=20$ localizaciones. Sin restricciones de tipo, su número bruto de instancias es $|P|^k \cdot L^2$. Los filtros \texttt{esDeTipo} y la ruptura de simetrías con \texttt{esMenor} lo reducen a:
+\[
+  |\text{ground efectivo}| = \binom{H}{h}\cdot\binom{M}{m}\cdot\binom{E}{e}\cdots\times L^2
+\]
+donde cada coeficiente binomial sustituye a un factorial de permutaciones equivalentes. Esto explica por qué el salto de (b) a (c) es casi nulo en tiempo: \texttt{esMenor} absorbe las $3!=6$ permutaciones de Hobbits. El salto de (c) a (d), en cambio, no se debe al \textit{grounding}, sino a la búsqueda en el espacio de estados. Con un planificador heurístico de complejidad $O(b^d)$, el plan de (d) tiene $d=23$ frente a $d=17$ en (c), y el factor de ramificación $b$ aumenta al introducir un tipo nuevo (Elfo) con posición inicial en Lothlorien, forzando rutas nuevas para reunirse con el resto. Si $b$ crece un factor $\alpha$ al pasar de (c) a (d), el tiempo escala como $\alpha^{23}\cdot b^{23}$ frente a $b^{17}$, lo que basta para explicar tres órdenes de magnitud incluso con $\alpha$ moderado.\\
+
+Una comunidad de $4\text{Ho}+1\text{M}+1\text{E}+1\text{En}+2\text{Hu}$ requeriría que 9 personajes convergieran desde hasta 9 localizaciones distintas. El número de intercalaciones equivalentes del plan de reunificación (del orden de $10^5$--$10^6$ para trayectos medios de 3 pasos) sería
+\begin{gather*}
+    \frac{(\sum_i d_i)!}{\prod_i d_i!}
+\end{gather*}
+y harían que el tiempo de planificación excediera cualquier límite práctico sin técnicas adicionales como planificación jerárquica (HTN) o detección explícita de simetrías~\cite{shleyfman2015}.
+
+\subsection{Simetrías residuales}
+
+A pesar de las optimizaciones aplicadas, persisten tres fuentes de simetría. La primera es la \textbf{simetría de extractor}: si dos Enanos comparten localización, las asignaciones \textit{Enano1 extrae / Enano2 libre} y viceversa son funcionalmente equivalentes, pero \texttt{esMenor} no cubre Enanos, por lo que el planificador explora ambas ramas. La segunda es la \textbf{simetría de reunificación}: el orden en que se desplazan los $k$ miembros hacia el punto de encuentro no afecta al objetivo. La tercera es la \textbf{simetría de Mago}: con dos Magos disponibles (Mago1 en Rivendell, Mago2 en Isengard), la elección de cuál entra en la Comunidad aumenta el espacio de búsqueda sin restricción \texttt{esMenor} entre ellos. Estas simetrías no comprometen la completitud, pero sí la eficiencia; en distintas bibliografías se identifican reducciones del espacio de búsqueda de hasta varios órdenes de magnitud al eliminarlas sistemáticamente~\cite{shleyfman2015} aunque no se ha creído conveniente para este ejercicio (ya que a excepción del apartado (d) los tiempos son muy bajos y se quería hacer el estudio cambiando solo los parámetros de las acciones, sin modificar apenas el resto).
+
+\section{Ejercicio 4}
+ 
+\subsection{Diseño del dominio}
+ 
+El Ejercicio~4 extiende el dominio del Ejercicio~3a para modelar la creación de Uruk-Hai en la Torre de Hechicería de Isengard. La jerarquía de tipos incorpora un nuevo tipo raíz: \texttt{TipoEdificio}, que representa las categorías de edificio construible (\texttt{TorreHechiceria} y \texttt{Extractor}).\\
+ 
+En las constantes se añaden tres tipos de personaje nuevos (\texttt{Orco}, \texttt{Humano} y \texttt{Corsario}), así como los dos tipos de edificio (\texttt{TorreHechiceria} y \texttt{Extractor}), declarados directamente como constantes por las mismas razones de desacople enumeradas en el Ejercicio~1.\\
+ 
+Los predicados nuevos incorporados son los siguientes:
+\begin{itemize}[label=-]
+    \item \texttt{(edificioEn [TipoEdificio] [Localizacion])} indica que el edificio del tipo dado ha sido construido en esa localización. Se utiliza para verificar la presencia del \texttt{Extractor} antes de extraer Mineral, y la presencia de la \texttt{TorreHechiceria} antes de crear el Uruk-Hai.
+    \item \texttt{(recursoNecesario [TipoEdificio] [TipoRecurso])} codifica los requisitos de materiales de cada edificio. Se declara en el problema: la \texttt{TorreHechiceria} requiere \texttt{Mineral} y \texttt{Madera}; el \texttt{Extractor} requiere únicamente \texttt{Madera}. Este predicado permite que la acción \texttt{Construir} itere sobre los recursos necesarios sin recibirlos como parámetro.
+    \item \texttt{(urukHaiCreado)} predicado sin parámetros que se activa al ejecutar \texttt{CrearUrukHai}. Evita que el Uruk-Hai sea creado más de una vez.
+    \item \texttt{(tieneEspecia [Personaje])} indica que el Corsario porta físicamente Especia consigo. Se activa al ejecutar \texttt{RecogerEspecia} y se propaga durante \texttt{Viajar}.
+    \item \texttt{(especiaEn [Localizacion])} señala que hay Especia disponible en esa localización. Al viajar, un Corsario con \texttt{tieneEspecia} actualiza este predicado: lo retira del origen y lo activa en el destino.
+    \item \texttt{(lugarCreacionUruk [Localizacion])} marca dónde debe crearse el Uruk-Hai (declarado como \texttt{Isengard} en el problema).
+\end{itemize}
+ 
+Las modificaciones sobre las acciones existentes son las siguientes:
+\begin{itemize}[label=-]
+    \item \texttt{Viajar} incorpora un efecto condicional: si el personaje porta Especia (\texttt{tieneEspecia}), al llegar al destino se activa \texttt{(especiaEn ?dst)} y se retira \texttt{(especiaEn ?org)}, propagando así la Especia sin necesidad de una acción explícita de depósito.
+    \item \texttt{ExtraerRecurso} añade una precondición adicional para el caso en que el recurso a extraer sea \texttt{Mineral}: debe existir un \texttt{Extractor} en la misma localización. Esto modela que la extracción de Mineral requiere infraestructura previa, de acuerdo al enunciado.
+\end{itemize}
+ 
+Las acciones nuevas introducidas son las siguientes:
+ 
+\begin{table}[H]
+    \centering
+    \arrayrulecolor{maincolor!50}
+    \begin{tabular}{| m{4cm} | m{6cm} | m{6cm} |}
+        \hline
+        \rowcolor{maincolor}
+        \textcolor{white}{\textbf{Acción}} &
+        \centering\arraybackslash\textcolor{white}{\textbf{Precondiciones}} &
+        \textcolor{white}{\textbf{Efectos}} \\
+        \hline
+        \texttt{Construir ?constructor ?e ?l} &
+        - \texttt{?constructor} está en \texttt{?l} y está disponible. \newline
+        - No existe ya un edificio de tipo \texttt{?e} en \texttt{?l}. \newline
+        - Si \texttt{?e} es \texttt{TorreHechiceria}: \texttt{?constructor} es Mago no miembro. \newline
+        - Si \texttt{?e} es \texttt{Extractor}: \texttt{?constructor} es Humano. \newline
+        - Para todo recurso necesario para \texttt{?e} (\texttt{forall}/\texttt{exists}): existe algún personaje extrayéndolo, y si se trata de la Torre, ese personaje no puede ser Enano. &
+        - El edificio \texttt{?e} queda construido en \texttt{?l}. \newline
+        - \texttt{?constructor} vuelve a estar disponible. \\
+        \hline
+        \texttt{RecogerEspecia ?corsario ?l} &
+        - \texttt{?corsario} es de tipo \texttt{Corsario}, está en \texttt{?l} y disponible. \newline
+        - El corsario no porta ya Especia. \newline
+        - Hay algún personaje extrayendo Especia en \texttt{?l}. &
+        - \texttt{?corsario} pasa a portar Especia (\texttt{tieneEspecia}). \newline
+        - Se activa \texttt{especiaEn ?l}. \\
+        \hline
+        \texttt{CrearUrukHai ?p ?l} &
+        - \texttt{?p} es Mago, no miembro de la Comunidad, está en \texttt{?l} y disponible. \newline
+        - Existe \texttt{TorreHechiceria} en \texttt{?l}. \newline
+        - Hay Especia en \texttt{?l} (\texttt{especiaEn}). \newline
+        - \texttt{?l} es el \texttt{lugarCreacionUruk}. \newline
+        - El Uruk-Hai no ha sido creado. &
+        - Se activa \texttt{urukHaiCreado}. \\
+        \hline
+    \end{tabular}
+    \caption{Acciones nuevas/modificadas del dominio 4}
+    \label{tab:acciones_dom4}
+\end{table}
+
+ 
+\subsection{Diseño del problema}
+ 
+Con respecto al Ejercicio 3a se introducen los cambios con respecto al enunciado (no cambia la estructura, solo el contenido en general). En el estado inicial también se declaran los predicados \texttt{recursoNecesario} (según las especificaciones del enunciado) y \texttt{(lugarCreacionUruk Isengard)}.\\
+ 
+El objetivo del problema es triple:
+\begin{itemize}[label=-]
+    \item \texttt{(anilloDestruido)}: el Anillo ha sido destruido en Orodruin por la Comunidad.
+    \item \texttt{(urukHaiCreado)}: se ha creado un Uruk-Hai en Isengard.
+    \item \texttt{(exists (?h - Personaje) (and (esDeTipo ?h Humano) (estaEn ?h Bree)))}: algún Humano se encuentra en Bree.
+\end{itemize}
+ 
+\section{Ejercicio 5}
+ 
+\subsection{Diseño del dominio}
+ 
+El Ejercicio~5 retoma el dominio del Ejercicio~1 y lo modifica exclusivamente para introducir costes de acción no unitarios, manteniendo intacta la lógica del dominio. La jerarquía de tipos, los predicados y la acción \texttt{ExtraerRecurso} son idénticos a los del Ejercicio~1.\\
+ 
+El único requisito nuevo es \texttt{:action-costs}, que habilita el uso de funciones numéricas y del efecto \texttt{increase} en PDDL. Esto sustituye al coste unitario implícito de cada acción por un coste variable declarado en el fichero de problema.\\
+ 
+Se añaden dos funciones numéricas al dominio:
+\begin{itemize}[label=-]
+    \item \texttt{(costeCamino [Localizacion] [Localizacion])} almacena el coste de desplazarse entre dos localizaciones concretas. Se inicializa en el fichero de problema para cada par con camino declarado. Los valores siguen las especificaciones del enunciado; los caminos no indicados tienen coste~1.
+    \item \texttt{(total-cost)} acumulador estándar de PDDL para el coste total del plan. El planificador minimizará este valor.
+\end{itemize}
+ 
+La única modificación sobre las acciones existentes recae en \texttt{Viajar}:
+\begin{itemize}[label=-]
+    \item Las precondiciones son idénticas al Ejercicio~1.
+    \item Se añade el efecto \texttt{(increase (total-cost) (costeCamino ?org ?dst))}, que acumula el coste del desplazamiento en lugar del coste unitario implícito. De este modo el planificador busca la ruta de mínimo coste acumulado, no la de menor número de pasos.
+\end{itemize}
+ 
+\subsection{Diseño del problema}
+ 
+Los objetos (localizaciones, personajes y nodos de recursos), las posiciones iniciales, las capacidades de extracción y el objetivo son idénticos a los del Ejercicio~1. El único cambio en el fichero de problema es la inicialización de la función \texttt{costeCamino} para cada par de localizaciones con camino y la inicialización del acumulador \texttt{(= (total-cost) 0)}. Los costes de los caminos se fijan según el enunciado.\\
+ 
+Finalmente, se añade la directiva de optimización \texttt{(:metric minimize (total-cost))}, que indica al planificador que debe encontrar el plan de mínimo coste acumulado.
+ 
+\subsection{Análisis y comparación de planes}
+ 
+Para el análisis, recordamos los planes obtenidos en ambos ejercicios. En el Ejercicio~1 el plan encontrado (con coste unitario, longitud 11) es:
+ 
+\begin{lstlisting}
+(viajar enano1 tharbad bree)
+(viajar enano1 bree rivendell)
+(viajar hobbit1 lothlorien amonhen)
+(viajar hobbit1 amonhen fangorn)
+(viajar hobbit1 fangorn isengard)
+(viajar hobbit1 isengard helmsdeep)
+(viajar hobbit1 helmsdeep tharbad)
+(viajar hobbit1 tharbad hobbiton)
+(extraerrecurso hobbit1 hobbiton alimento)
+(viajar enano1 rivendell moria)
+(extraerrecurso enano1 moria mithril)
+; cost = 11 (unit cost)
+\end{lstlisting}
+ 
+En el Ejercicio~5 el plan encontrado (con costes variables, coste total 23) es:
+ 
+\begin{lstlisting}
+(viajar enano1 tharbad bree)
+(viajar enano1 bree rivendell)
+(viajar hobbit1 lothlorien amonhen)
+(viajar enano1 rivendell moria)
+(viajar hobbit1 amonhen deadmarshes)
+(viajar hobbit1 deadmarshes minasmorgul)
+(viajar hobbit1 minasmorgul minastirith)
+(viajar hobbit1 minastirith edoras)
+(viajar hobbit1 edoras helmsdeep)
+(viajar hobbit1 helmsdeep tharbad)
+(viajar hobbit1 tharbad hobbiton)
+(extraerrecurso hobbit1 hobbiton alimento)
+(extraerrecurso enano1 moria mithril)
+; cost = 23 (general cost)
+\end{lstlisting}
+ 
+Las diferencias entre ambos planes pueden explicarse a partir de dos factores.\\
+ 
+El primero es la \textbf{ruta elegida por \texttt{Hobbit1}}. En el Ejercicio~1, el planificador minimiza el número de pasos y elige la ruta directa Lothlorien $\to$ AmonHen $\to$ Fangorn $\to$ Isengard $\to$ HelmsDeep $\to$ Tharbad $\to$ Hobbiton, que tiene 6 pasos (longitud 6). En el Ejercicio~5 esa misma ruta tendría coste $5 + 8 + 1 + 1 + 3 + 1 = 19$. En cambio, la ruta alternativa Lothlorien $\to$ AmonHen $\to$ DeadMarshes $\to$ MinasMorgul $\to$ MinasTirith $\to$ Edoras $\to$ HelmsDeep $\to$ Tharbad $\to$ Hobbiton tiene 8 pasos (longitud 8) pero coste $5 + 2 + 2 + 2 + 2 + 1 + 3 + 1 = 18$. El planificador escoge esta última por ser de menor coste acumulado, aunque sea más larga en número de acciones. En definitiva, el alto coste del tramo Lothlorien\,$\to$\,AmonHen (5) y, sobre todo, el de Fangorn\,$\to$\,AmonHen (8) desvía al Hobbit, que aunque añade dos pasos al plan resulta menos costoso en términos métricos.\\
+ 
+El segundo factor es la \textbf{ruta de \texttt{Enano1}} y el \textbf{orden de las acciones}. En ambos ejercicios \texttt{Enano1} recorre Tharbad $\to$ Bree $\to$ Rivendell $\to$ Moria (3 pasos, coste $1+1+3=5$ en el Ejercicio~5). Sin embargo, en el Ejercicio~1 el planificador sequenciaba el movimiento del Enano solo después de que el Hobbit hubiera comenzado su travesía hacia el oeste, mientras que en el Ejercicio~5 se intercalan las acciones de ambos personajes de forma más entrelazada (puede observarse que \texttt{enano1} ya emprende el camino hacia Moria mientras \texttt{hobbit1} todavía va en dirección a AmonHen). Este reordenamiento no afecta al coste total, pero sí a la longitud del plan en términos de pasos secuenciales.\\
+ 
+En definitiva, la introducción de costes no unitarios cambia el criterio de optimalidad. El plan del Ejercicio~1 es óptimo en longitud (mínimo número de acciones) pero no lo es en coste; el del Ejercicio~5 es óptimo en coste (mínimo coste acumulado) pero tiene mayor longitud. Esto hace ver la diferencia fundamental entre planificación clásica (minimizar longitud) y planificación con métricas de coste (minimizar coste total), y justifica la necesidad del requisito \texttt{:action-costs} y de la directiva \texttt{:metric} en PDDL cuando los desplazamientos tienen pesos heterogéneos.
+
+\section*{Uso de la IA}
+La IA se ha empleado principalmente para optimizar los programas (todas las optimizaciones implementadas han sido sugeridas por ella aunque solo se han elegido algunas). Además ha ayudado en gran medida al análisis de complejidad del ejericicio 3. Otro uso que se le ha dado ha sido a hacer un esquema inicial de cada ejercicio (añadir las acciones y predicados, en especial su documentación) aunque luego haya sido yo el que las haya implementado (para evitar estar buscando errores y depurando innecesariamente, ya que no tenía mucha complejidad una vez estaban bien planteadas y entendidas). 
+
+\begin{thebibliography}{9}
+\bibitem{bylander1994}
+Bylander, T. (1994). 
+The computational complexity of STRIPS planning. 
+\emph{Artificial Intelligence}, 69(1-2), 165--204.
+
+\bibitem{shleyfman2015}
+Shleyfman, A., Katz, M., Helmert, M., Sievers, S., \& Wehrle, M. (2015). 
+Heuristics and symmetries in classical planning. 
+In \emph{Proceedings of the AAAI Conference on Artificial Intelligence} (Vol. 29, No. 1, pp. 3371--3377).
+\end{thebibliography}
+
+\end{document}

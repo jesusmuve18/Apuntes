@@ -1,0 +1,77 @@
+BasicGame
+    SpriteSet
+        floor > Immovable img=oryx/grass_15
+        water > Immovable color=BLUE img=oryx/seaWater
+        catapult > Immovable
+            southfacing > orientation=DOWN  color=RED img=oryx/bookDown
+            northfacing > orientation=UP  color=ORANGE img=oryx/bookUp
+            eastfacing  > orientation=RIGHT color=YELLOW img=oryx/bookRight
+            westfacing  > orientation=LEFT color=YELLOW img=oryx/bookLeft
+
+        avatar >
+            moving > MovingAvatar img=oryx/vampire1 
+            bullet > MissileAvatar img=oryx/bat1
+                north  > orientation=UP color=RED
+                south  > orientation=DOWN color=ORANGE
+                east   > orientation=RIGHT color=YELLOW
+                west   > orientation=LEFT color=GREEN
+
+        # Corazones para recoger y subir vida
+        coins > Resource img=oryx/coins1 limit=5
+        key > Resource img=oryx/key3
+        goal  > Immovable color=GREEN  portal=True
+             locked > img=oryx/doorclosed1
+             unlocked > img=oryx/dooropen1
+        wall > Immovable img=oryx/bush5
+    LevelMapping
+        . > water floor
+        0 > eastfacing floor
+        1 > southfacing floor
+        2 > northfacing floor
+        3 > westfacing floor
+        g > locked floor
+        A > moving floor
+        _ > floor
+        w > wall floor
+        c > coins floor
+        m > coins water
+        k > key floor
+    InteractionSet
+
+        # 1. -- Recolección de Monedas (HP) -- 
+        coins avatar > collectResource
+
+        # 2. -- Recolección de Llave/Apertura de Meta --
+        #key avatar > transformTo stype=floor
+        key avatar > collectResource
+        avatar key > transformToAll stype=locked stypeTo=unlocked
+
+        # 3. -- Interacciones básicas --
+        bullet wall > transformTo stype=moving
+        moving wall > stepBack
+        moving water > killSprite
+
+        # 4. -- Uso de la catapulta --
+        # Si se encadenan varias catapultas seguidas solo se paga por la primera
+        
+        moving catapult > killIfHasLess resource=coins limit=0 
+        moving catapult > changeResource resource=coins value=-1
+        avatar catapult    > attractGaze prob=1
+        avatar westfacing  > transformTo stype=west
+        avatar eastfacing  > transformTo stype=east
+        avatar southfacing > transformTo stype=south
+        avatar northfacing > transformTo stype=north
+
+        catapult avatar    > killSprite scoreChange=1
+
+        # Colision con Puerta Cerrada
+        bullet locked > transformTo stype=moving
+        moving locked > stepBack
+        
+
+        # Finalización de juego
+        unlocked avatar    > killSprite
+
+    TerminationSet
+        SpriteCounter stype=goal    limit=0 win=True
+        SpriteCounter stype=avatar  limit=0 win=False

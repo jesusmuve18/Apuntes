@@ -1,0 +1,181 @@
+INFO     planner time limit: None
+INFO     planner memory limit: None
+
+INFO     Running translator.
+INFO     translator stdin: None
+INFO     translator time limit: None
+INFO     translator memory limit: None
+INFO     translator command line string: /usr/bin/python3 /home/jesusmuve/Escritorio/TSI-Practicas/Practica_3/fast-downward-24.06.1/builds/release/bin/translate/translate.py Ejercicios/dominio3d.pddl Ejercicios/problema3d.pddl --sas-file output.sas
+Parsing...
+Parsing: [0.000s CPU, 0.005s wall-clock]
+Normalizing task... [0.000s CPU, 0.000s wall-clock]
+Instantiating...
+Generating Datalog program... [0.010s CPU, 0.001s wall-clock]
+Normalizing Datalog program...
+Normalizing Datalog program: [0.010s CPU, 0.004s wall-clock]
+Preparing model... [0.000s CPU, 0.002s wall-clock]
+Generated 157 rules.
+Computing model... [0.020s CPU, 0.024s wall-clock]
+1956 relevant atoms
+3065 auxiliary atoms
+5021 final queue length
+7210 total queue pushes
+Completing instantiation... [0.040s CPU, 0.042s wall-clock]
+Instantiating: [0.080s CPU, 0.074s wall-clock]
+Computing fact groups...
+Finding invariants...
+27 initial candidates
+Finding invariants: [0.010s CPU, 0.005s wall-clock]
+Checking invariant weight... [0.000s CPU, 0.001s wall-clock]
+Instantiating groups... [0.000s CPU, 0.001s wall-clock]
+Collecting mutex groups... [0.000s CPU, 0.000s wall-clock]
+Choosing groups...
+125 uncovered facts
+Choosing groups: [0.000s CPU, 0.001s wall-clock]
+Building translation key... [0.000s CPU, 0.001s wall-clock]
+Computing fact groups: [0.010s CPU, 0.010s wall-clock]
+Building STRIPS to SAS dictionary... [0.000s CPU, 0.000s wall-clock]
+Building dictionary for full mutex groups... [0.000s CPU, 0.000s wall-clock]
+Building mutex information...
+Building mutex information: [0.000s CPU, 0.000s wall-clock]
+Translating task...
+Processing axioms...
+Simplifying axioms... [0.000s CPU, 0.000s wall-clock]
+Translator axioms removed by simplifying: 0
+Processing axioms: [0.010s CPU, 0.004s wall-clock]
+Translating task: [0.070s CPU, 0.064s wall-clock]
+532 effect conditions simplified
+0 implied preconditions added
+Detecting unreachable propositions...
+9 operators removed
+0 axioms removed
+115 propositions removed
+Detecting unreachable propositions: [0.020s CPU, 0.023s wall-clock]
+Reordering and filtering variables...
+61 of 81 variables necessary.
+0 of 18 mutex groups necessary.
+1404 of 1404 operators necessary.
+0 of 0 axiom rules necessary.
+Reordering and filtering variables: [0.010s CPU, 0.009s wall-clock]
+Translator variables: 61
+Translator derived variables: 0
+Translator facts: 291
+Translator goal facts: 1
+Translator mutex groups: 0
+Translator total mutex groups size: 0
+Translator operators: 1404
+Translator axioms: 0
+Translator task size: 11817
+Translator peak memory: 46328 KB
+Writing output... [0.020s CPU, 0.017s wall-clock]
+Done! [0.210s CPU, 0.206s wall-clock]
+translate exit code: 0
+
+INFO     Running search (release).
+INFO     search stdin: output.sas
+INFO     search time limit: None
+INFO     search memory limit: None
+INFO     search command line string: /home/jesusmuve/Escritorio/TSI-Practicas/Practica_3/fast-downward-24.06.1/builds/release/bin/downward --search 'astar(lmcut())' --internal-plan-file Ejercicios/output_3d.sas < output.sas
+[t=0.000080s, 10804 KB] reading input...
+[t=0.007338s, 11324 KB] done reading input!
+[t=0.009081s, 11892 KB] Initializing landmark cut heuristic...
+[t=0.009150s, 11892 KB] Building successor generator...done!
+[t=0.010010s, 12084 KB] peak memory difference for successor generator creation: 192 KB
+[t=0.010039s, 12084 KB] time for successor generation creation: 0.000671s
+[t=0.010084s, 12084 KB] Variables: 61
+[t=0.010122s, 12084 KB] FactPairs: 291
+[t=0.010158s, 12084 KB] Bytes per state: 16
+[t=0.010248s, 12084 KB] Conducting best first search with reopening closed nodes, (real) bound = 2147483647
+[t=0.010831s, 12084 KB] New best heuristic value for lmcut: 17
+[t=0.010856s, 12084 KB] g=0, 1 evaluated, 0 expanded
+[t=0.010883s, 12084 KB] f = 17, 1 evaluated, 0 expanded
+[t=0.010939s, 12084 KB] Initial heuristic value for lmcut: 17
+[t=0.010977s, 12084 KB] pruning method: none
+[t=0.016773s, 12084 KB] New best heuristic value for lmcut: 16
+[t=0.016817s, 12084 KB] g=1, 12 evaluated, 1 expanded
+[t=0.030048s, 12084 KB] New best heuristic value for lmcut: 15
+[t=0.030090s, 12084 KB] g=2, 40 evaluated, 2 expanded
+[t=0.047862s, 12084 KB] New best heuristic value for lmcut: 14
+[t=0.047954s, 12084 KB] g=3, 73 evaluated, 3 expanded
+[t=0.095049s, 12084 KB] f = 18, 180 evaluated, 8 expanded
+[t=0.379292s, 12084 KB] New best heuristic value for lmcut: 13
+[t=0.379384s, 12084 KB] g=5, 762 evaluated, 47 expanded
+[t=1.290233s, 12216 KB] f = 19, 2646 evaluated, 161 expanded
+[t=1.739644s, 12216 KB] New best heuristic value for lmcut: 12
+[t=1.739714s, 12216 KB] g=7, 3665 evaluated, 226 expanded
+[t=11.946842s, 13132 KB] f = 20, 21671 evaluated, 1609 expanded
+[t=11.998756s, 13132 KB] New best heuristic value for lmcut: 11
+[t=11.998874s, 13132 KB] g=9, 21747 evaluated, 1614 expanded
+[t=63.659084s, 19432 KB] f = 21, 118418 evaluated, 10174 expanded, 26 reopened
+[t=246.507042s, 40684 KB] f = 22, 450848 evaluated, 44174 expanded, 26 reopened
+[t=738.850255s, 84944 KB] f = 23, 1441858 evaluated, 157706 expanded, 39 reopened
+[t=1267.538612s, 141456 KB] New best heuristic value for lmcut: 10
+[t=1267.538725s, 141456 KB] g=13, 2469301 evaluated, 253375 expanded, 41 reopened
+[t=1267.540990s, 141456 KB] New best heuristic value for lmcut: 9
+[t=1267.541055s, 141456 KB] g=14, 2469312 evaluated, 253376 expanded, 41 reopened
+[t=1267.542880s, 141456 KB] New best heuristic value for lmcut: 8
+[t=1267.542941s, 141456 KB] g=15, 2469330 evaluated, 253377 expanded, 41 reopened
+[t=1267.543434s, 141456 KB] New best heuristic value for lmcut: 7
+[t=1267.543461s, 141456 KB] g=16, 2469334 evaluated, 253378 expanded, 41 reopened
+[t=1267.544149s, 141456 KB] New best heuristic value for lmcut: 6
+[t=1267.544174s, 141456 KB] g=17, 2469343 evaluated, 253379 expanded, 41 reopened
+[t=1267.544924s, 141588 KB] New best heuristic value for lmcut: 5
+[t=1267.544959s, 141588 KB] g=18, 2469353 evaluated, 253380 expanded, 41 reopened
+[t=1267.545712s, 141588 KB] New best heuristic value for lmcut: 4
+[t=1267.545748s, 141588 KB] g=19, 2469362 evaluated, 253381 expanded, 41 reopened
+[t=1267.546465s, 141588 KB] New best heuristic value for lmcut: 3
+[t=1267.546492s, 141588 KB] g=20, 2469372 evaluated, 253382 expanded, 41 reopened
+[t=1267.547012s, 141588 KB] New best heuristic value for lmcut: 2
+[t=1267.547040s, 141588 KB] g=21, 2469382 evaluated, 253383 expanded, 41 reopened
+[t=1267.547566s, 141588 KB] New best heuristic value for lmcut: 1
+[t=1267.547595s, 141588 KB] g=22, 2469392 evaluated, 253384 expanded, 41 reopened
+[t=1267.548085s, 141588 KB] New best heuristic value for lmcut: 0
+[t=1267.548113s, 141588 KB] g=23, 2469407 evaluated, 253385 expanded, 41 reopened
+[t=1267.548272s, 141588 KB] Solution found!
+[t=1267.548323s, 141588 KB] Actual search time: 1267.537289s
+extraerrecurso enano1 moria mithril (1)
+viajar elfo1 lothlorien amonhen (1)
+viajar elfo1 amonhen fangorn (1)
+viajar elfo1 fangorn isengard (1)
+viajar elfo1 isengard helmsdeep (1)
+viajar elfo1 helmsdeep tharbad (1)
+viajar hobbit1 hobbiton bree (1)
+viajar elfo1 tharbad bree (1)
+viajar hobbit2 hobbiton bree (1)
+viajar mago1 rivendell bree (1)
+formarcomunidad hobbit1 hobbit2 hobbit4 mago1 elfo1 bree (1)
+viajarcomunidad hobbit1 hobbit2 hobbit4 mago1 elfo1 bree rivendell (1)
+recogerobjeto hobbit1 rivendell anillo (1)
+viajarcomunidad hobbit1 hobbit2 hobbit4 mago1 elfo1 rivendell moria (1)
+materializarchaleco mago1 moria (1)
+recogerobjeto hobbit1 moria chalecomithril (1)
+viajarcomunidad hobbit1 hobbit2 hobbit4 mago1 elfo1 moria lothlorien (1)
+recogerobjeto hobbit1 lothlorien espada (1)
+viajarcomunidad hobbit1 hobbit2 hobbit4 mago1 elfo1 lothlorien amonhen (1)
+viajarcomunidad hobbit1 hobbit2 hobbit4 mago1 elfo1 amonhen deadmarshes (1)
+viajarcomunidad hobbit1 hobbit2 hobbit4 mago1 elfo1 deadmarshes minasmorgul (1)
+viajarcomunidad hobbit1 hobbit2 hobbit4 mago1 elfo1 minasmorgul orodruin (1)
+destruiranillo hobbit1 orodruin (1)
+[t=1267.548350s, 141588 KB] Plan length: 23 step(s).
+[t=1267.548350s, 141588 KB] Plan cost: 23
+[t=1267.548350s, 141588 KB] Expanded 253386 state(s).
+[t=1267.548350s, 141588 KB] Reopened 41 state(s).
+[t=1267.548350s, 141588 KB] Evaluated 2469409 state(s).
+[t=1267.548350s, 141588 KB] Evaluations: 2469409
+[t=1267.548350s, 141588 KB] Generated 11002254 state(s).
+[t=1267.548350s, 141588 KB] Dead ends: 23243 state(s).
+[t=1267.548350s, 141588 KB] Expanded until last jump: 157706 state(s).
+[t=1267.548350s, 141588 KB] Reopened until last jump: 39 state(s).
+[t=1267.548350s, 141588 KB] Evaluated until last jump: 1441858 state(s).
+[t=1267.548350s, 141588 KB] Generated until last jump: 6903695 state(s).
+[t=1267.548350s, 141588 KB] Number of registered states: 2469409
+[t=1267.548350s, 141588 KB] Int hash set load factor: 2469409/4194304 = 0.588753
+[t=1267.548350s, 141588 KB] Int hash set resizes: 22
+[t=1267.548350s, 141588 KB] Search time: 1267.538104s
+[t=1267.548350s, 141588 KB] Total time: 1267.548350s
+Solution found.
+Peak memory: 141588 KB
+Remove intermediate file output.sas
+search exit code: 0
+
+INFO     Planner time: 1267.89s

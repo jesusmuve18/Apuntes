@@ -1,0 +1,6 @@
+/home/jesusmuve/Escritorio/TSI-Practicas/Practica_3/fast-downward-24.06.1/builds/release/CMakeFiles/translate.dir
+/home/jesusmuve/Escritorio/TSI-Practicas/Practica_3/fast-downward-24.06.1/builds/release/CMakeFiles/edit_cache.dir
+/home/jesusmuve/Escritorio/TSI-Practicas/Practica_3/fast-downward-24.06.1/builds/release/CMakeFiles/rebuild_cache.dir
+/home/jesusmuve/Escritorio/TSI-Practicas/Practica_3/fast-downward-24.06.1/builds/release/search/CMakeFiles/downward.dir
+/home/jesusmuve/Escritorio/TSI-Practicas/Practica_3/fast-downward-24.06.1/builds/release/search/CMakeFiles/edit_cache.dir
+/home/jesusmuve/Escritorio/TSI-Practicas/Practica_3/fast-downward-24.06.1/builds/release/search/CMakeFiles/rebuild_cache.dir

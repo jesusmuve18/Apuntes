@@ -1,0 +1,787 @@
+\documentclass[11pt]{article}
+
+\input{preambulo.tex}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{subcaption}
+\usepackage[table]{xcolor}
+\usepackage{titlesec}
+\usepackage{pgfgantt}
+
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{float}
+\usepackage{pgfplotstable}
+
+\colorlet{maincolor}{Violet}
+
+% Definición de colores pastel y modernos
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+\definecolor{codegreen}{rgb}{0.13,0.55,0.13}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{codeblue}{rgb}{0.0,0.0,0.8}
+
+% Configuración del estilo moderno
+\lstdefinestyle{modern}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen}\itshape,
+    keywordstyle=\color{codeblue}\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,
+    stepnumber=5,
+    firstnumber=1,
+    numberfirstline=true,              
+    numbersep=10pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4,
+    frame=single,                    % Marco simple alrededor del código
+    rulecolor=\color{lightgray},     % Color del marco
+    xleftmargin=15pt,                % Margen para que los números no se peguen
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1
+}
+
+% Aplicar el estilo por defecto a todos los bloques de código
+\lstset{style=modern}
+
+% Definimos el lenguaje MiniZinc
+\lstdefinelanguage{MiniZinc}{
+    morekeywords={
+        include, var, int, float, bool, string, set, array, of,
+        constraint, solve, satisfy, maximize, minimize, output,
+        par, enum, predicate, function, test, true, false, in,
+        if, then, else, endif, forall, exists, sum
+    },
+    sensitive=true,
+    morecomment=[l]{\%},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+}
+
+% --- CONFIGURACIÓN DE SECCIONES ---
+
+% Formato para \section
+% Sintaxis: \titleformat{\comando}{formato}{etiqueta}{separación}{antes_del_texto}
+\titleformat{\section}
+  {\color{maincolor}\large\bfseries} % Color, fuente, tamaño y estilo
+  {\thesection.} % Muestra el número de sección (ej. 1, 2...)
+  {0.5em} % Espacio entre el número y el texto del título
+  {} % Código adicional antes del texto del título
+
+% Formato para \subsection
+\titleformat{\subsection}
+  {\color{maincolor}\large\bfseries} % Color vino, tamaño grande, cursiva
+  {\thesubsection}
+  {0.5em}
+  {}
+
+\title{}
+\author{Jesús Muñoz Velasco}
+\date{Curso 2025-2026}
+
+\begin{document}
+
+{\Large \bfseries \centering \color{maincolor} Práctica 2: Razonamiento con Restricciones}
+
+\vspace{0.25cm}
+{\large \bfseries \color{maincolor} Autor: Jesús Muñoz Velasco}
+
+\section{Problema de la fórmula de una bebida isotónica}
+\begin{enumerate}[label=\alph*)]
+    \item A partir de la implementación se ha rellenado la siguiente tabla:
+    \begin{table}[H]
+        \centering
+        \arrayrulecolor{maincolor!50} % Suaviza un poco el borde para que sea más elegante
+        \renewcommand{\arraystretch}{1.5} % Da un poco de "respiro" a las filas con muchas líneas
+        \begin{tabular}{| >{\centering\arraybackslash}m{3cm} | m{5.75cm} | >{\centering\arraybackslash}m{3cm} | >{\centering\arraybackslash}m{4.5cm} |}
+            \hline
+            \rowcolor{maincolor}
+            \textcolor{white}{\textbf{Volumen total buscado (en ml)}} & 
+            \centering\arraybackslash\textcolor{white}{\textbf{Primera solución encontrada}} & 
+            \textcolor{white}{\textbf{Número total de soluciones}} & 
+            \textcolor{white}{\textbf{\textit{Runtime} (en ms) para calcular todas las posibles soluciones}} \\
+            \hline
+            200 & 
+            \scriptsize
+            Agua base: 0 ml \newline
+            Jarabe A: 0 ml \newline
+            Jarabe B: 120 ml \newline
+            Concentrado salino: 30 ml \newline
+            Extracto energetico: 40 ml \newline
+            Aroma citrico: 10 ml \newline
+             \newline
+            Coste total = 23.0 centimos \newline
+            Azucar total = 16.2 g \newline
+            Sodio total = 82.5 mg \newline
+            Cafeina total = 12.0 mg
+            & 6 & 198 \\
+            \hline
+            1000 & 
+            \scriptsize
+            Agua base: 0 ml \newline
+            Jarabe A: 0 ml \newline
+            Jarabe B: 620 ml \newline
+            Concentrado salino: 150 ml \newline
+            Extracto energetico: 200 ml \newline
+            Aroma citrico: 30 ml \newline
+             \newline
+            Coste total = 115.8 centimos \newline
+            Azucar total = 83.0 g \newline
+            Sodio total = 415.5 mg \newline
+            Cafeina total = 60.0 mg
+            & 398 & 317
+            \\
+            \hline
+            5000 & 
+            \scriptsize
+            Agua base: 0 ml \newline
+            Jarabe A: 0 ml \newline
+            Jarabe B: 3140 ml \newline
+            Concentrado salino: 710 ml \newline
+            Extracto energetico: 1000 ml \newline
+            Aroma citrico: 150 ml \newline
+             \newline
+            Coste total = 579.8 centimos \newline
+            Azucar total = 419.8 g \newline
+            Sodio total = 2013.5 mg \newline
+            Cafeina total = 300.0 mg
+            & 41031 & 8998
+            \\
+            \hline
+            10000 & 
+            \scriptsize
+            Agua base: 0 ml \newline
+            Jarabe A: 0 ml \newline
+            Jarabe B: 6290 ml \newline
+            Concentrado salino: 1410 ml \newline
+            Extracto energetico: 2000 ml \newline
+            Aroma citrico: 300 ml \newline
+             \newline
+            Coste total = 1159.8 centimos \newline
+            Azucar total = 840.8 g \newline
+            Sodio total = 4011.0 mg \newline
+            Cafeina total = 600.0 mg
+            & 320957 & 40511
+            \\
+            \hline
+        \end{tabular}%
+        \caption{Resultados de ejecución del Ejercicio 1a}
+        \label{tab:resultados_1a} 
+    \end{table}
+
+    \item Al minimizar el coste total obtenemos el siguiente resultado:
+    
+    \begin{table}[H]
+        \centering
+        \arrayrulecolor{maincolor!50} % Suaviza un poco el borde para que sea más elegante
+        \renewcommand{\arraystretch}{1.5} % Da un poco de "respiro" a las filas con muchas líneas
+        
+        \begin{tabular}{| >{\centering\arraybackslash}m{3cm} | m{5.75cm} | >{\centering\arraybackslash}m{3cm} | >{\centering\arraybackslash}m{4.5cm} |}
+            \hline
+            \rowcolor{maincolor}
+            \textcolor{white}{\textbf{Volumen total buscado (en ml)}} & 
+            \centering\arraybackslash\textcolor{white}{\textbf{Solución óptima}} & 
+            \textcolor{white}{\textbf{\textit{Runtime} (en ms)}} \\
+            \hline
+            200 & 
+            \scriptsize
+            Agua base: 0 ml \newline
+            Jarabe A: 0 ml \newline
+            Jarabe B: 110 ml \newline
+            Concentrado salino: 30 ml \newline
+            Extracto energetico: 40 ml \newline
+            Aroma citrico: 20 ml \newline
+             \newline
+            Coste total = 22.6 centimos \newline
+            Azucar total = 15.2 g \newline
+            Sodio total = 81.0 mg \newline
+            Cafeina total = 12.0 mg
+            & 118 \\
+            \hline
+            1000 & 
+            \scriptsize
+            Agua base: 0 ml \newline
+            Jarabe A: 0 ml \newline
+            Jarabe B: 500 ml \newline
+            Concentrado salino: 160 ml \newline
+            Extracto energetico: 200 ml \newline
+            Aroma citrico: 140 ml \newline
+             \newline
+            Coste total = 111.2 centimos \newline
+            Azucar total = 70.8 g \newline
+            Sodio total = 415.0 mg \newline
+            Cafeina total = 60.0 mg 
+            & 108
+            \\
+            \hline
+            5000 & 
+            \scriptsize
+            Agua base: 0 ml \newline
+            Jarabe A: 0 ml \newline
+            Jarabe B: 2460 ml \newline
+            Concentrado salino: 770 ml \newline
+            Extracto energetico: 1000 ml \newline
+            Aroma citrico: 770 ml \newline
+             \newline
+            Coste total = 553.8 centimos \newline
+            Azucar total = 350.6 g \newline
+            Sodio total = 2016.5 mg \newline
+            Cafeina total = 300.0 mg
+            & 311
+            \\
+            \hline
+            10000 & 
+            \scriptsize
+            Agua base: 0 ml \newline
+            Jarabe A: 0 ml \newline
+            Jarabe B: 4910 ml \newline
+            Concentrado salino: 1530 ml \newline
+            Extracto energetico: 2000 ml \newline
+            Aroma citrico: 1560 ml \newline
+             \newline
+            Coste total = 1107.0 centimos \newline
+            Azucar total = 700.4 g \newline
+            Sodio total = 4014.0 mg \newline
+            Cafeina total = 600.0 mg
+            & 1609
+            \\
+            \hline
+        \end{tabular}%
+        \caption{Resultados de ejecución del Ejercicio 1b}
+        \label{tab:resultados_1b} 
+    \end{table}
+
+    \item Respondemos ahora a las preguntas planteadas:
+    \begin{enumerate}
+        \item [i)] Si introducimos los tiempos encontrados en una gráfica y calculamos su curva de regresión obtenemos el siguiente resultado:
+        \pgfplotstableread{
+        X       Y
+        200     198
+        1000    317
+        5000    8998
+        10000   40511
+        }\datatableA
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    % Ajustes de dimensiones y estilo general
+                    width=12cm,
+                    height=7cm,
+                    title={\textbf{Análisis de Eficiencia Ejercicio1a}},
+                    xlabel={Tamaño de la entrada (Volumen en ml)},
+                    ylabel={Runtime (en ms)},
+                    % Cuadrícula para facilitar la lectura
+                    grid=both,
+                    major grid style={line width=.2pt,draw=gray!50},
+                    minor grid style={line width=.1pt,draw=gray!20},
+                    % Posición de la leyenda
+                    legend pos=north west,
+                    % Asegura que el eje empiece cerca del origen sin cortar datos
+                    xmin=0, xmax=11000,
+                    ymin=0
+                ]
+                    
+                    % A. Los puntos de datos reales (Scatter)
+                    \addplot[
+                        only marks,
+                        mark=*,
+                        mark size=2.5pt,
+                        color=blue
+                    ] table {\datatableA};
+                    \addlegendentry{Datos experimentales}
+
+                    % C. Curva de Regresión
+                    \addplot[
+                        domain=0:10500,
+                        samples=100,
+                        color=red,
+                        dashed,
+                        thick
+                    ] {0.000405 * x^2};
+                    \addlegendentry{$y = 0.000405 x^2$}
+
+                    % B. Curva suave que une los puntos (Opcional, la puedes comentar)
+                    \addplot[
+                        color=blue,
+                        thick,
+                        % smooth,
+                        % tension=0.7 % Controla qué tan "curvada" es la línea
+                    ] table {\datatableA};
+                    % \addlegendentry{Línea de tendencia}
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Representación de tiempos del ejercicio 1a}
+            \label{fig:eficiencia_1a}
+        \end{figure}
+
+        Por tanto parece que escala de forma cuadrática (eficiencia del orden $O(n^2)$). Por tanto, a priori, para $volumen\_total\_buscado\_ml = 10^6$ (un millón) obtendríamos un tiempo aproximado de 
+        \begin{gather*}
+            t \approx 0.000405 \cdot (10^6)^2 = 405000000ms = 405000s = 112.5h = 4,6875\ dias
+        \end{gather*}
+        Por lo que tardaría más de 4 días de cómputo para calcular la solución (algo muy poco práctico).\\
+
+        \item[ii)] A priori, para calcular la solución óptima (apartado b) necesitaríamos calcular todas las soluciones y después elegir la mejor de todas, por lo que el tiempo de ejecución debería ser prácticamente el mismo (ligeramente mayor en el caso de optimizar por el tema de las comparaciones). Sin embargo, observamos que tarda mucho menor en el caso de la optimización. Si comparamos los tiempos de satisfacción (Ejercicio 1a) y optimización (Ejercicio 1b) gráficamente obtenemos
+        \pgfplotstableread{
+        X       Y
+        200     118
+        1000    108
+        5000    311
+        10000   1609
+        }\datatableB
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    % Ajustes de dimensiones y estilo general
+                    width=12cm,
+                    height=7cm,
+                    title={\textbf{Análisis de Eficiencia Ejercicio 1a vs Ejercicio 1b}},
+                    xlabel={Tamaño de la entrada (Volumen en ml)},
+                    ylabel={Runtime (en ms)},
+                    % Cuadrícula para facilitar la lectura
+                    grid=both,
+                    major grid style={line width=.2pt,draw=gray!50},
+                    minor grid style={line width=.1pt,draw=gray!20},
+                    % Posición de la leyenda
+                    legend pos=north west,
+                    % Asegura que el eje empiece cerca del origen sin cortar datos
+                    xmin=0, xmax=11000,
+                    ymin=0
+                ]
+                    
+                    % A. Los puntos de datos reales (Scatter)
+                    \addplot[
+                        only marks,
+                        mark=*,
+                        mark size=2.5pt,
+                        color=blue
+                    ] table {\datatableA};
+                    \addlegendentry{Tiempos experimentales 1a}
+
+                    \addplot[
+                        only marks,
+                        mark=*,
+                        mark size=2.5pt,
+                        color=red
+                    ] table {\datatableB};
+                    \addlegendentry{Tiempos experimentales 1b}
+
+                    % B. Curva suave que une los puntos (Opcional, la puedes comentar)
+                    \addplot[
+                        color=blue,
+                        thick,
+                        % smooth,
+                        % tension=0.7 % Controla qué tan "curvada" es la línea
+                    ] table {\datatableA};
+                    % \addlegendentry{Línea de tendencia}
+
+                    \addplot[
+                        color=red,
+                        thick,
+                        % smooth,
+                        % tension=0.7 % Controla qué tan "curvada" es la línea
+                    ] table {\datatableB};
+                    % \addlegendentry{Línea de tendencia}
+
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Comparación de tiempos entre satisfacción y optimización}
+            \label{fig:eficiencia_1a_vs_1b}
+        \end{figure}
+
+        Donde se ve mucho más claramente la diferencia. Por tanto vemos que la intuición no se cumple. Esto se debe a que MiniZinc no aplica fuerza bruta para resolver los ejercicios de optimización, sino que aplica algoritmos más eficientes (como \textit{backtracking}). Si investigamos un poco descubrimos que el solver GECODE aplica varias estrategias para hacer esta búsqueda mucho más eficiente como la propagación de restricciones, la ramificación con heurísticas (como \textit{First-Fail}) y el copiado híbrido para la marcha atrás (\textit{backtracking}).
+
+        \item[iii)] Si ejecutamos el ejercicio que propone el enunciado llegamos a soluciones como 
+\begin{lstlisting}[language=MiniZinc]
+monedas: [1.46999999999998, 1.47, 1.47, 1.47, 1.47, 1.47, 0.0881999999999997, 0.0, 0.0]
+total monedas: 8.908199999999979
+\end{lstlisting}
+        Si añadimos una variable para ver qué obtenemos en la suma como la siguiente:
+\begin{lstlisting}[language=MiniZinc]
+var float: valor_suma_monedas = sum(i in 1..n)(monedas[i]*valor[i]);
+% ...
+output [
+"monedas: " ++ show(monedas) ++ "\n" ++
+"valor suma monedas: \(valor_suma_monedas)\n" ++
+"total monedas: " ++ show(nmonedas)
+];
+\end{lstlisting}
+        obtenemos soluciones como
+\begin{lstlisting}[basicstyle=\ttfamily\fontsize{7}{9}\selectfont]
+monedas: [1.46999999999998, 1.47, 1.47, 1.47, 1.47, 1.47, 0.0881999999999997, 0.0, 0.0]
+valor suma monedas: 1.469999999999999
+total monedas: 8.908199999999979
+\end{lstlisting}
+        donde vemos que la suma no es $1.47$ como se esperaba. Esto se debe principalmente a la representación flotante que comete errores en la aproximación (un flotante se representa internamente en binario, lo que puede inducir este tipo de errores, sobre todo a la hora de comparar).\\
+        Una opción para solucionar esto es aplicar la estrategia aplicada al ejercicio, es decir, utilizar representación entera pero multiplicada por un cierto valor (que se dividirá más adelante). Una posible solución aplicando esta representación sería la siguiente:
+
+\begin{lstlisting}[language=MiniZinc]
+include "globals.mzn";
+int: importe_x100 = 147;
+% numero de monedas diferentes
+int: n = 9;
+% valor de las monedas
+array[1..n] of int: valor_x100 = [1, 3, 5, 10, 25, 50, 100, 200, 500];
+% array para la cantidad de monedas de cada valor
+array[1..n] of var 0..importe_x100: monedas_x100;
+% numero de monedas usadas
+var int: nmonedas_x100 = sum(i in 1..n) (monedas_x100[i]);
+% Valor de las moonedas
+var int: valor_suma_monedas_x10000 = sum(i in 1..n)(monedas_x100[i]*valor_x100[i]);
+% La suma debe ser la cantidad buscada
+constraint valor_suma_monedas_x10000 == importe_x100 * 100;
+solve satisfy;
+output [
+"monedas: ["] ++
+[
+    "\(monedas_x100[i]/100), " | i in 1..n
+] ++
+["]\n" ++
+"valor suma monedas: \(valor_suma_monedas_x10000/10000)\n" ++ 
+"total monedas: " ++ show(nmonedas_x100/100)
+];
+\end{lstlisting}
+    \end{enumerate}
+    Con este cambio de representación conseguimos que todas las soluciones tengan la suma exacta (todas tienen \verb|valor suma monedas: 1.47|).
+
+\end{enumerate}
+
+\section{Puzzle lógico}
+En este ejercicio se ha obtenido una única solución:
+\begin{lstlisting}[language=MiniZinc]
+Alba: "A* cuántico", B1, 16:00
+Bruno: "Poda alfa-beta aplicada al encaje de bolillos", B2, 15:00
+Carla: "Demostración matemática de que RTA* es un algoritmo absurdo", A1, 18:00
+Diego: "Modelado de la incertidumbre a la hora de aprobar TSI sin estudiar nada", A2, 17:00
+Elena: "Planificación automática jerárquica híbrida dedicada a la yuxtaposición de los mundos paralelos", C1, 19:00
+Pablo: "Brazo robótico para jugar a la pocha", C2, 20:00
+\end{lstlisting}
+
+\section{Problema de la mochila multiobjetivo con optimización lexicográfica}
+En este ejercicio se ha obtenido una única solución:
+\begin{lstlisting}[language=MiniZinc]
+Objetos seleccionados:
+ - Camara (peso=2, coste=6, utilidad=9)
+ - Ordenador (peso=4, coste=10, utilidad=14)
+ - Bateria_extra (peso=2, coste=4, utilidad=7)
+ - Botiquin (peso=3, coste=5, utilidad=8)
+ - Radio (peso=4, coste=7, utilidad=11)
+
+Utilidad total = 49
+Peso total = 15
+Coste total = 32
+\end{lstlisting}
+
+\section{Problema del cuadrado mágico}
+Tras ejecutar el código proporcionado se han obtenido los siguientes resultados:
+\begin{table}[H]
+    \centering
+    \arrayrulecolor{maincolor!50} % Suaviza un poco el borde para que sea más elegante
+    \begin{tabular}{| c | c | c | c | c |}
+        \hline
+        \rowcolor{maincolor}
+        \textcolor{white}{\textbf{N}} & 
+        \centering\arraybackslash\textcolor{white}{\textbf{Núm Valores Distintos}} & 
+        \textcolor{white}{\textbf{Suma Común}} & 
+        \textcolor{white}{\textbf{Suma Total Minimizada}} & 
+        \textcolor{white}{\textbf{\textit{Runtime} (ms)}} \\
+        \hline
+        3 & 5 & 15 & 45 & 201 \\
+        4 & 8 & 24 & 96 & 213 \\
+        5 & 13 & 37 & 185 & 632000\\
+        6 & - & - & - & $\infty$ \\
+        7 & - & - & - & $\infty$ \\
+        \hline
+    \end{tabular}%
+    \caption{Resultados de ejecución del Ejercicio 4}
+    \label{tab:resultados_4} 
+\end{table}
+
+Si analizamos los tiempos obtenidos en una gráfica obtenemos lo siguiente:
+
+\pgfplotstableread{
+X       Y
+3     201
+4     213
+5    632000
+6    10000000
+}\datatableC
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            % Ajustes de dimensiones y estilo general
+            width=12cm,
+            height=6cm,
+            title={\textbf{Análisis de Eficiencia Ejercicio4}},
+            xlabel={Dimensión del cuadrado (N)},
+            ylabel={Runtime (en ms)},
+            % Cuadrícula para facilitar la lectura
+            grid=both,
+            major grid style={line width=.2pt,draw=gray!50},
+            minor grid style={line width=.1pt,draw=gray!20},
+            % Posición de la leyenda
+            legend pos=north west,
+            % Asegura que el eje empiece cerca del origen sin cortar datos
+            xmin=3, xmax=7,
+            ymin=0, ymax=700000
+        ]
+            
+            % A. Los puntos de datos reales (Scatter)
+            \addplot[
+                only marks,
+                mark=*,
+                mark size=2.5pt,
+                color=red
+            ] table {\datatableC};
+
+             % B. Curva suave que une los puntos (Opcional, la puedes comentar)
+            \addplot[
+                color=red,
+                thick,
+                % smooth,
+                % tension=0.7 % Controla qué tan "curvada" es la línea
+            ] table {\datatableC};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Representación de tiempos del ejercicio 4}
+    \label{fig:eficiencia_4}
+\end{figure}
+
+Es fácil ver que el problema no es escalable, al menos con la configuración de mi código (probablemente admita más optimizaciones, incluso ajustando los dominios haciendo suposiciones, pero no concordarían con las condiciones del enunciado). El algoritmo parece ser de orden exponencial ($O(2^n)$) siendo muy malo para tamaños grandes (a partir de $5$ ya es poco práctico). Si calculamos el crecimiento de posibilidades de una ejecución a la siguiente tendríamos el siguiente planteamiento:\\
+
+Sea $N$ el tamaño del cuadrado a resolver y $M$ el máximo del dominio (consideramos que empieza en 0 por facilitar los cálculos aunque en realidad empezaría en 1). Tendríamos $M$ valores posibles en cada casilla y tendríamos $N^2$ casillas. Esto hace que el número de cuadrados posibles a considerar sea $M^{N^2}$. Si consideramos que el algoritmo genera cada cuadrado y comprueba si se verifican las condiciones (en realidad no es así porque no utiliza fuerza bruta, pero sería el peor de los casos), estaríamos hablando de que el algoritmo tiene una eficiencia $O(2^{n^2})$ que es incluso peor que exponencial. Para el caso $M=100$, $N=4$ (que se resuelve rápido) tendríamos 
+\begin{gather*}
+    M^{N^2} = 100^{4^2} = 100^16 = 10^{32}
+\end{gather*}
+lo cual es inabarcable (este sería el peor de los casos recordemos, pero nos da una idea del crecimiento que tiene un caso con respecto al siguiente).
+
+\section{Problema de planificación de tareas}
+
+\begin{enumerate}[label=\alph*)]
+    \item Si ejecutamos el script \verb|Ejercicio5a.mzn| obtenemos la siguiente salida:
+    
+\begin{lstlisting}[basicstyle=\ttfamily\fontsize{6.9}{9}\selectfont]
+A - "Montar chasis" inicio dia 1 fin dia 7. Asignada a "Marty McFly" con apoyo de "Biff Tannen"
+B - "Instalar ruedas" inicio dia 8 fin dia 8. Asignada a "Marty McFly" con apoyo de "Nadie"
+C - "Cableado eléctrico" inicio dia 9 fin dia 11. Asignada a "Doc Brown" con apoyo de "Biff Tannen"
+D - "Motor de fusión nuclear" inicio dia 12 fin dia 16. Asignada a "Doc Brown" con apoyo de "Nadie"
+E - "Tablero de control" inicio dia 17 fin dia 19. Asignada a "Doc Brown" con apoyo de "Biff Tannen"
+F - "Instalación y configuración del condensador de fluzo (flux capacitor)" inicio dia 20 fin dia 24. Asignada a "Doc Brown" con apoyo de "Nadie"
+G - "Ajuste aerodinámico" inicio dia 17 fin dia 22. Asignada a "Marty McFly" con apoyo de "George McFly"
+H - "Instalación de puertas de ala de gaviota" inicio dia 23 fin dia 24. Asignada a "Marty McFly" con apoyo de "Biff Tannen"
+I - "Panel de tiempo" inicio dia 25 fin dia 25. Asignada a "Marty McFly" con apoyo de "George McFly"
+J - "Implementación y validación de algoritmos de búsqueda heurística para optimización de caminos" inicio dia 26 fin dia 27. Asignada a "Doc Brown" con apoyo de "Nadie"
+K - "Prueba de plutonio" inicio dia 26 fin dia 28. Asignada a "Marty McFly" con apoyo de "George McFly"
+
+Duración total = 28 días
+\end{lstlisting}
+    Y lo podemos traducir al siguiente diagrama de Gantt:%
+
+    \begin{center}%
+        \begin{ganttchart}[%
+            vgrid,                 % Líneas verticales
+            hgrid,                 % Líneas horizontales
+            x unit=0.57cm,          % Ancho de cada día
+            y unit chart=0.5cm,    % Altura de cada fila
+            title label font=\bfseries\small,
+            bar/.style={fill=maincolor!50, draw=maincolor, thick}, % Estilo de las barras
+            bar height=0.6,
+            bar label font=\footnotesize,
+            group label font=\bfseries,
+            newline shortcut=true,
+            bar label node/.append style={align=center}
+        ]{1}{28} % Define el rango del día 1 al 28
+
+        % Títulos del calendario
+        \gantttitle{Línea de Tiempo del Proyecto (Días)}{28} \\
+        \gantttitlelist{1,...,28}{1} \\
+
+        % Definición de Tareas (ID, Nombre, Inicio, Fin)
+        \ganttbar{A}{1}{7} \\
+        \ganttbar{B}{8}{8} \\
+        \ganttbar{C}{9}{11} \\
+        \ganttbar{D}{12}{16} \\
+        \ganttbar{E}{17}{19} \\
+        \ganttbar{F}{20}{24} \\
+        \ganttbar{G}{17}{22} \\
+        \ganttbar{H}{23}{24} \\
+        \ganttbar{I}{25}{25} \\
+        \ganttbar{J}{26}{27} \\
+        \ganttbar{K}{26}{28}
+
+        \end{ganttchart}
+    \end{center}
+
+    \begin{table}[H]
+        \centering
+        \small
+        \renewcommand{\arraystretch}{1.2}
+        \arrayrulecolor{maincolor!50} % Suaviza un poco el borde para que sea más elegante
+        \begin{tabular}{|c|p{8cm}|c|c|l|l|}
+            \hline
+            \rowcolor{maincolor}
+            \textcolor{white}{\textbf{Id}} & 
+            \textcolor{white}{\textbf{Descripción de la tarea}} & 
+            \textcolor{white}{\textbf{Inicio}} & 
+            \textcolor{white}{\textbf{Fin}} & 
+            \textcolor{white}{\textbf{Responsable}} &
+            \textcolor{white}{\textbf{Apoyo}} \\ 
+            \hline
+            A & Montar chasis & Día 1 & Día 7 & Marty McFly & Biff Tannen \\ 
+            B & Instalar ruedas & Día 8 & Día 8 & Marty McFly & --- \\ 
+            C & Cableado eléctrico & Día 9 & Día 11 & Doc Brown & Biff Tannen \\ 
+            D & Motor de fusión nuclear & Día 12 & Día 16 & Doc Brown & --- \\ 
+            E & Tablero de control & Día 17 & Día 19 & Doc Brown & Biff Tannen \\ 
+            F & Instalación y config. del condensador de fluzo & Día 20 & Día 24 & Doc Brown & --- \\ 
+            G & Ajuste aerodinámico & Día 17 & Día 22 & Marty McFly & George McFly \\ 
+            H & Instalación de puertas de ala de gaviota & Día 23 & Día 24 & Marty McFly & Biff Tannen \\ 
+            I & Panel de tiempo & Día 25 & Día 25 & Marty McFly & George McFly \\ 
+            J & Algoritmos de búsqueda heurística & Día 26 & Día 27 & Doc Brown & --- \\ 
+            K & Prueba de plutonio & Día 26 & Día 28 & Marty McFly & George McFly \\ \hline
+        \end{tabular}
+    \end{table}
+
+    \item Si buscamos todas las soluciones que puedan plantearse en 28 días obtenemos 3 posibilidades, la ya estudiada en el apartado anterior y 2 más que son las siguientes:
+
+\begin{lstlisting}[basicstyle=\ttfamily\fontsize{6.8}{9}\selectfont]
+ A - "Montar chasis" inicio dia 1 fin dia 7. Asignada a "Marty McFly" con apoyo de "Biff Tannen"
+ B - "Instalar ruedas" inicio dia 8 fin dia 8. Asignada a "Marty McFly" con apoyo de "Nadie"
+ C - "Cableado eléctrico" inicio dia 9 fin dia 11. Asignada a "Doc Brown" con apoyo de "Biff Tannen"
+ D - "Motor de fusión nuclear" inicio dia 12 fin dia 16. Asignada a "Doc Brown" con apoyo de "Nadie"
+ E - "Tablero de control" inicio dia 17 fin dia 19. Asignada a "Doc Brown" con apoyo de "Biff Tannen"
+ F - "Instalación y configuración del condensador de fluzo (flux capacitor)" inicio dia 20 fin dia 24. Asignada a "Doc Brown" con apoyo de "Nadie"
+ G - "Ajuste aerodinámico" inicio dia 17 fin dia 22. Asignada a "Marty McFly" con apoyo de "George McFly"
+ H - "Instalación de puertas de ala de gaviota" inicio dia 23 fin dia 24. Asignada a "Marty McFly" con apoyo de "Biff Tannen"
+ I - "Panel de tiempo" inicio dia 25 fin dia 25. Asignada a "Marty McFly" con apoyo de "George McFly"
+ J - "Implementación y validación de algoritmos de búsqueda heurística para optimización de caminos" inicio dia 27 fin dia 28. Asignada a "Doc Brown" con apoyo de "Nadie"
+ K - "Prueba de plutonio" inicio dia 26 fin dia 28. Asignada a "Marty McFly" con apoyo de "George McFly"
+
+Duración total = 28 días
+----------
+ A - "Montar chasis" inicio dia 1 fin dia 7. Asignada a "Marty McFly" con apoyo de "Biff Tannen"
+ B - "Instalar ruedas" inicio dia 8 fin dia 8. Asignada a "Marty McFly" con apoyo de "Nadie"
+ C - "Cableado eléctrico" inicio dia 9 fin dia 11. Asignada a "Doc Brown" con apoyo de "Biff Tannen"
+ D - "Motor de fusión nuclear" inicio dia 12 fin dia 16. Asignada a "Doc Brown" con apoyo de "Nadie"
+ E - "Tablero de control" inicio dia 17 fin dia 19. Asignada a "Doc Brown" con apoyo de "Biff Tannen"
+ F - "Instalación y configuración del condensador de fluzo (flux capacitor)" inicio dia 20 fin dia 24. Asignada a "Doc Brown" con apoyo de "Nadie"
+ G - "Ajuste aerodinámico" inicio dia 17 fin dia 22. Asignada a "Marty McFly" con apoyo de "George McFly"
+ H - "Instalación de puertas de ala de gaviota" inicio dia 23 fin dia 24. Asignada a "Marty McFly" con apoyo de "Biff Tannen"
+ I - "Panel de tiempo" inicio dia 25 fin dia 25. Asignada a "Marty McFly" con apoyo de "George McFly"
+ J - "Implementación y validación de algoritmos de búsqueda heurística para optimización de caminos" inicio dia 26 fin dia 28. Asignada a "Marty McFly" con apoyo de "George McFly"
+ K - "Prueba de plutonio" inicio dia 26 fin dia 28. Asignada a "Doc Brown" con apoyo de "Nadie"
+
+Duración total = 28 días
+\end{lstlisting}
+
+Donde podemos ver que solo se producen cambios en las tareas \verb|J| y \verb|K|.
+
+\end{enumerate}
+
+\section{Problema de conformación de tribunales de defensa de TFG}
+
+Tras ejecutar el script \verb|Ejercicio6.mzn| obtenemos 4 soluciones:
+
+\begin{table}[H]
+    \centering
+    \vspace{0.3cm}
+    \small
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \rowcolor{maincolor}
+        \textcolor{white}{\textbf{Número Solución}} & 
+        \textcolor{white}{\textbf{Tribunal 1}} & 
+        \textcolor{white}{\textbf{Tribunal 2}} & 
+        \textcolor{white}{\textbf{Tribunal 3}} \\
+        \rowcolor{maincolor}
+        &
+        \textcolor{white}{{(Viernes Tarde)}} & 
+        \textcolor{white}{{(Lunes Mañana)}} & 
+        \textcolor{white}{{(Jueves Tarde)}} \\
+        \hline
+        1 & 4, 6, 8, 12 & 1, 3, 5, 10 & 2, 7, 9, 11 \\
+        2 & 4, 6, 7, 12 & 1, 3, 5, 10 & 2, 8, 9, 11 \\
+        3 & 2, 4, 6, 12 & 1, 3, 5, 10 & 7, 8, 9, 11 \\
+        4 & 2, 4, 7, 8  & 3, 5, 6, 12 & 1, 9, 10, 11 \\
+        \hline
+    \end{tabular}
+    
+    \vspace{0.4cm}
+    \footnotesize
+    \begin{tabular}{|c|c|}
+        \hline
+        \rowcolor{maincolor}
+        \textcolor{white}{\textbf{Tribunal}} & 
+        \textcolor{white}{\textbf{Miembros (Departamentos)}} \\ 
+        \hline
+        Tribunal 1 & 2 (DECSAI), 7 (LSI), 10 (ICAR) \\ 
+        Tribunal 2 & 3 (DECSAI), 5 (LSI), 10 (ICAR) \\ 
+        Tribunal 3 & 4 (DECSAI), 6 (LSI), 9 (ICAR) \\ 
+        \hline
+    \end{tabular}
+    \caption{Soluciones obtenidas en el Ejercicio 6}
+\end{table}
+
+donde como podemos ver sólo cambian los TFGs que se evalúan en cada tribunal (la conformación de estos y las fechas son idénticas para todas las soluciones obtenidas).
+
+Durante la resolución de este ejercicio surgen simetrías que hay que evitar. En mi resolución concreta la única simetría que se puede dar está relacionada con la conformación de los tribunales. Esto es porque el "Nombre" del tribunal (su número) no es importante. Es decir, si consideramos los tribunales
+\begin{gather*}
+    \text{Tribunal 1 }=\{2, 7, 10\}\\
+    \text{Tribunal 2 }=\{3, 5, 10\}\\
+    \text{Tribunal 3 }=\{4, 6, 9\}
+\end{gather*}
+Serían exactamente los mismos tribunales que
+\begin{gather*}
+    \text{Tribunal 1 }=\{4, 6, 9\}\\
+    \text{Tribunal 2 }=\{3, 5, 10\}\\
+    \text{Tribunal 3 }=\{2, 7, 10\}
+\end{gather*}
+y la solución sería la misma salvo por los nombres de estos tribunales. Cualquier permutación de estos 3 posibles tribunales daría una solución válida (simétrica), es decir, habría $3!=6$ posibles soluciones idénticas. Para evitar esto, en el código hemos ordenado los tribunales por el índice del primer miembro de la siguiente forma:
+\begin{lstlisting}[language=MiniZinc]
+constraint miembros[1, DECSAI] < miembros[2, DECSAI] /\ miembros[2, DECSAI] < miembros[3, DECSAI];
+\end{lstlisting}
+Así forzamos una única permutación posible, rompiendo simetrías.
+
+\section{Planificación de horarios de juego en una semana de la NBA}
+
+Tras ejecutar este ejercicio se han obtenido 12 soluciones. La primera de ellas es la siguiente:
+\begin{lstlisting}[basicstyle=\ttfamily\fontsize{4.9}{6}\selectfont]
+CALENDARIO SEMANAL NBA (CSP)
+============================
+Back-to-backs totales = 2
++------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+
+| Sesion     | Dia 1            | Dia 2            | Dia 3            | Dia 4            | Dia 5            | Dia 6            | Dia 7            |
++------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+
+| Tarde      | MIA-PHI / DEN-DAL | -                | -                | -                | PHX-DEN          | NYK-MIA / PHI-MIL | -                | 
++------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+
+| Noche      | BOS-NYK          | -                | -                | -                | DAL-LAL / MIA-GSW | -                | GSW-PHX          | 
++------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+
+| Prime Time | -                | LAL-GSW          | MIL-BOS          | -                | -                | BOS-LAL          | -                | 
++------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+
+Leyenda:
+BOS=Celtics, NYK=Knicks, PHI=Sixers, MIA=Heat, MIL=Bucks,
+LAL=Lakers, GSW=Warriors, PHX=Suns, DEN=Nuggets, DAL=Mavericks
+\end{lstlisting}
+
+\section*{Anexo: uso de IA generativa}
+En este caso solo se ha usado la IA generativa para consultar funciones desconocidas (como \verb|let-in|) o para arreglar errores sintácticos. No hay ninguna consulta especialmente interesante como sucedía en la práctica anterior (las decisiones de diseño las he tomado de forma independiente a la IA).\\
+
+Además, al final de cada ejercicio le entregaba la resolución (código MiniZinc), el resultado obtenido de la ejecución y el enunciado. A partir de esta información le pedía que comprobara si cumplía con todas las restricciones o si encontraba algún error lógico. En su mayoría decía que estaba todo bien o corregía algún fallo pequeño.
+
+\end{document}

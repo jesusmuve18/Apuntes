@@ -1,0 +1,3 @@
+/home/jesusmuve/Escritorio/MH-Practicas/Practica_2/code/build/CMakeFiles/main.dir
+/home/jesusmuve/Escritorio/MH-Practicas/Practica_2/code/build/CMakeFiles/edit_cache.dir
+/home/jesusmuve/Escritorio/MH-Practicas/Practica_2/code/build/CMakeFiles/rebuild_cache.dir
