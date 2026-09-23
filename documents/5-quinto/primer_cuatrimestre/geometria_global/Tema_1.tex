@@ -389,18 +389,270 @@ Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curva
         \item Por tanto $\Phi'(s) = 1$ o bien $\Phi'(s) = -1$ en cada componente conexa de $\alpha^{-1}(W)$. Eso implica que las componentes conexas de $X$ son segmentos (de recta) de pendiente $1$ o $-1$ que son cerradas en $I\times J$.
 
         % Hacer dibujo de posibles rectas de pendiente 1 y -1 (son 10).
+        Los posibles segmentos con pendiente 1 que puede haber en el producto son:
+        \begin{figure}[H]
+            \centering
+            \begin{subfigure}[b]{0.31\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] [{Bar[]}-{Bar[]}] (-1,0) -- (-0.5,0.5);
+                \end{tikzpicture}
+            \end{subfigure}%
+            \hspace{0.2cm}%
+            \begin{subfigure}[b]{0.31\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] [{Bar[]}-] (0,0) -- (1,1);
+                \end{tikzpicture}
+            \end{subfigure}%
+            \hspace{0.2cm}%
+            \begin{subfigure}[b]{0.31\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] [{Bar[]}-] (0,0) -- (-1,-1);
+                \end{tikzpicture}
+            \end{subfigure}
+
+            \vspace{0.5cm}
+
+            \begin{subfigure}[b]{0.33\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (-1.5,0) -- (-0.5,1);
+                \end{tikzpicture}
+            \end{subfigure}%
+            \hspace{0.2cm}%
+            \begin{subfigure}[b]{0.33\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (-1,-1) -- (1,1);
+                \end{tikzpicture}
+            \end{subfigure}
+        \end{figure}
+        Y con pendiente -1 tendremos análogamente
+        \begin{figure}[H]
+            \centering
+            \begin{subfigure}[b]{0.31\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] [{Bar[]}-{Bar[]}] (-1,0.5) -- (-0.5,0);
+                \end{tikzpicture}
+            \end{subfigure}%
+            \hspace{0.2cm}%
+            \begin{subfigure}[b]{0.31\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] [{Bar[]}-] (0,0) -- (1,-1);
+                \end{tikzpicture}
+            \end{subfigure}%
+            \hspace{0.2cm}%
+            \begin{subfigure}[b]{0.31\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] [{Bar[]}-] (0,0) -- (-1,1);
+                \end{tikzpicture}
+            \end{subfigure}
+
+            \vspace{0.5cm}
+
+            \begin{subfigure}[b]{0.33\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (1.5,0) -- (0.5,1);
+                \end{tikzpicture}
+            \end{subfigure}%
+            \hspace{0.2cm}%
+            \begin{subfigure}[b]{0.33\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (1,-1) -- (-1,1);
+                \end{tikzpicture}
+            \end{subfigure}
+        \end{figure}
+        Nos centraremos en trabajar con las de pendiente 1, pero recordemos que siempre tendremos el caso análogo con pendiente -1.\\
+
+        Ahora queremos ir descartando posibilidades y lo primero que observamos es que en los 3 primeros casos, si proyectamos a cada una de sus componentes tendremos:
+
+        \begin{figure}[H]
+            \centering
+            \begin{subfigure}[b]{0.31\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] [{Bar[]}-{Bar[]}] (-1,0) -- (-0.5,0.5);
+                    
+                    \draw[red, dashed] (-1,0) -- (-1,-1);
+                    \draw[red, dashed] (-0.5,0.5) -- (-0.5,-1);
+                    \draw[red, dashed] (-1,0) -- (1.5,0);
+                    \draw[red, dashed] (-0.5,0.5) -- (1.5,0.5);
+
+                    \draw[blue, thick] [{Circle[sep=-2.5pt]}-{Circle[sep=-2.5pt]}] (-1,-1) -- (-0.5,-1);
+                    \draw[blue, thick] [{Circle[sep=-2.5pt]}-{Circle[sep=-2.5pt]}] (1.5,0) -- (1.5,0.5);
+                \end{tikzpicture}
+            \end{subfigure}%
+            \hspace{0.2cm}%
+            \begin{subfigure}[b]{0.31\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] [{Bar[]}-] (0,0) -- (1,1);
+
+                    \draw[red, dashed] (0,0) -- (0,-1);
+                    \draw[red, dashed] (1,1) -- (1,-1);
+                    \draw[red, dashed] (0,0) -- (1.5,0);
+                    \draw[red, dashed] (1,1) -- (1.5,1);
+
+                    \draw[blue, thick] [{Circle[sep=-2.5pt]}-{Circle[sep=-2.5pt, open]}] (0,-1) -- (1,-1);
+                    \draw[blue, thick] [{Circle[sep=-2.5pt]}-{Circle[sep=-2.5pt, open]}] (1.5,0) -- (1.5,1);
+                \end{tikzpicture}
+            \end{subfigure}%
+            \hspace{0.2cm}%
+            \begin{subfigure}[b]{0.31\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] [{Bar[]}-] (0,0) -- (-1,-1);
+
+                    \draw[red, dashed] (0,0) -- (0,-1);
+                    \draw[red, dashed] (-1,-1) -- (1.5, -1);
+                    \draw[red, dashed] (0,0) -- (1.5,0);
+
+                    \draw[blue, thick] [{Circle[sep=-2.5pt, open]}-{Circle[sep=-2.5pt]}] (-1,-1) -- (0,-1);
+                    \draw[blue, thick] [{Circle[sep=-2.5pt, open]}-{Circle[sep=-2.5pt]}] (1.5,-1) -- (1.5,0);
+                \end{tikzpicture}
+            \end{subfigure}
+        \end{figure}
+        Sin embargo, sabemos que en todos los casos la proyección debería ser abierta en su espacio y está claro que ninguno de esos intervalos es homeomorfo a un intervalo abierto de $\bb{R}$ (son intervalos cerrados o semiabiertos).\\
+
 
         % Si proyectamos un segmento a ambas componentes nos debería de salir un intervalo abierto pero el segmento es homeomorfo a un intervalo cerrado por ambos lados lo cual es imposible ya que hemos visto que la proyección tiene que ser un intervalo abierto.
 
         % Igual en las otras 2 de los segmentos cerrados o semicerrados
 
-        % Las únicas 2 que son posibles son las que cortan en 2 lados contiguos del rectángulo o 2 lados opuestos paralelos.
+        Nos quedan por tanto que las únicas posibilidades que de momento no descartamos son las que cortan en 2 lados contiguos del rectángulo o 2 lados opuestos paralelos. Podemos concluir lo siguiente
 
         \item Las componentes conexas de $X$ son segmentos de pendiente $1$ o de pendiente $-1$ cuyos extremos se apoyan en la frontera de $I\times J$, es decir, en $Fr(I\times J)$.
         
         % Hacer las 4 de pendiente 1 y -1 (suponiendo que corta en cada lado)
 
-        Llamamos $S$ al segmento que corta en 2 lados opuestos (horizontales) y tenemos que 
+        Tenemos las siguientes 4 posibilidades (en pendiente 1):
+        \begin{figure}[H]
+            \centering
+            \begin{subfigure}[b]{0.30\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (-1.5,0) -- (-0.5,1);
+                \end{tikzpicture}
+            \end{subfigure}%
+            \hspace{0.2cm}%
+            \begin{subfigure}[b]{0.30\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (1.5,0) -- (0.5,-1);
+                \end{tikzpicture}
+            \end{subfigure}
+        \end{figure}
+        \begin{figure}[H]
+            \centering
+            \begin{subfigure}[c]{0.30\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \node[red] at (-0.2,0.2) {$S$};
+                    \draw[thick, red] (-1,-1) -- (1,1);
+                \end{tikzpicture}
+            \end{subfigure}%
+            \hspace{0.2cm}%
+            \begin{subfigure}[c]{0.30\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1,-1.5) rectangle (1,1.5);
+                    \node at (0,-1.75) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.25,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (-1,-1) -- (1,1);
+                \end{tikzpicture}
+            \end{subfigure}
+        \end{figure}
+
+        Llamamos $S$ al segmento que corta en 2 lados opuestos horizontales (tal y como aparece en la figura enterior) y tenemos que 
         \begin{gather*}
             \pi_2(S) = J \subset \pi_2(X) = \beta^{-1}(W) \Rightarrow J \subset \beta^{-1}(W) \Rightarrow \beta(J) \subset W=\alpha(I)\cap \beta(J)
         \end{gather*}
@@ -414,23 +666,166 @@ Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curva
 
         % Hacer dibujos de 2 segmentos apoyados sobre los mismos lados (hay 2)
 
-        Pero en este caso no serían grafos sobre $\alpha^{-1}(W)$ ni sobre $\beta^{-1}(W)$ por lo que rechazamos esta posibilidad.\\
+        \begin{figure}[H]
+            \centering
+            \begin{subfigure}[b]{0.30\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (-1.5,0) -- (-0.5,1);
+                    \draw[thick, red] (-1.5,-0.5) -- (0,1);
+                \end{tikzpicture}
+            \end{subfigure}%
+            \hspace{0.2cm}%
+            \begin{subfigure}[b]{0.30\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (1.5,0) -- (0.5,-1);
+                    \draw[thick, red] (1.5,0.5) -- (0,-1);
+                \end{tikzpicture}
+            \end{subfigure}
+        \end{figure}
+
+        Pero en este caso no serían grafos sobre $\alpha^{-1}(W)$ ni sobre $\beta^{-1}(W)$ (ya que habría puntos con más de una imagen) por lo que rechazamos esta posibilidad.\\
 
         Nos planteamos también si puede haber un segmento de pendiente $1$ y otro de pendiente $-1$. Consideramos
 
         % Hacer dibujos de 2 segmentos de pendientes opuestas primero en las 2 esquinas superiores y luego en las 2 inferiores.
 
-        Y en el primer caso no es un grafo sobre $\beta^{-1}(W)$ y el segundo no lo sería sobre $\alpha^{-1}(W)$ por lo que descartamos esta opción también.
+        \begin{figure}[H]
+            \centering
+            \begin{subfigure}[b]{0.30\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (-1.5,0) -- (-0.5,1);
+                    \draw[thick, red] (1.5,0) -- (0.5,1);
+                \end{tikzpicture}
+            \end{subfigure}%
+            \hspace{0.2cm}%
+            \begin{subfigure}[b]{0.30\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (1.5,0) -- (0.5,-1);
+                    \draw[thick, red] (-1.5,0) -- (-0.5,-1);
+                \end{tikzpicture}
+            \end{subfigure}
+        \end{figure}
+        \begin{figure}[H]
+            \centering
+            \begin{subfigure}[b]{0.30\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (-1.5,0.1) -- (-0.6,1);
+                    \draw[thick, red] (-1.5,-0.1) -- (-0.6,-1);
+                \end{tikzpicture}
+            \end{subfigure}%
+            \hspace{0.2cm}%
+            \begin{subfigure}[b]{0.30\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (1.5,0.1) -- (0.6,1);
+                    \draw[thick, red] (1.5,-0.1) -- (0.6,-1);
+                \end{tikzpicture}
+            \end{subfigure}
+        \end{figure}
+
+        Y en los dos primeros casos no serían un grafo sobre $\beta^{-1}(W)$ y en los segundos no lo serían sobre $\alpha^{-1}(W)$ por lo que descartamos esta opción también.
 
         \item $X$ tiene a lo sumo dos componentes conexas que son segmentos de igual pendiente, que puede ser $1$ o $-1$, que se apoyan sobre lados contiguos de $Fr(I\times J)$ (en particular $\Phi'$ tiene signo constante en su dominio, que es $\alpha^{-1}(W)$ y análogamente para $\Psi$).\\
         
-        Nos planteamos las posibilidades que nos quedan
+        Nos planteamos las posibilidades que nos quedan. Con 2 componentes conexas tenemos:
 
         % Dibujar los rectángulos:
         % Los primeros 2 con los segmentos en esquinas opuestas
         % Los siguientes 2 con una sola cc (un solo segmento, uno en cada esquina)
 
-        
+        \begin{figure}[H]
+            \centering
+            \begin{subfigure}[b]{0.30\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (-1.5,0.1) -- (-0.6,1);
+                    \draw[thick, red] (1.5,-0.1) -- (0.6,-1);
+                \end{tikzpicture}
+            \end{subfigure}%
+            \hspace{0.2cm}%
+            \begin{subfigure}[b]{0.30\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (1.5,0.1) -- (0.6,1);
+                    \draw[thick, red] (-1.5,-0.1) -- (-0.6,-1);
+                \end{tikzpicture}
+            \end{subfigure}
+        \end{figure}
+
+        Y con una sola componente conexa y pendiente $1$ tenemos:
+         \begin{figure}[H]
+            \centering
+            \begin{subfigure}[b]{0.30\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (-1.5,0.1) -- (-0.6,1);
+                \end{tikzpicture}
+            \end{subfigure}%
+            \hspace{0.2cm}%
+            \begin{subfigure}[b]{0.30\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \shorthandoff{>}
+                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                    \draw[thick, red] (1.5,-0.1) -- (0.6,-1);
+                \end{tikzpicture}
+            \end{subfigure}
+        \end{figure}
+
+
     \end{enumerate}
 
 \end{observacion}
