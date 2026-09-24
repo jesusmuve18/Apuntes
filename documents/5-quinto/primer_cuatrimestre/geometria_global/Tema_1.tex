@@ -879,7 +879,44 @@ Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curva
 
         % Hacer dibujo
 
-        Se puede ver que $I\cap T^{-1}(J) = I_2 = T^{-1}(J_1)$ por lo que $K$ es un intervalo abierto de $\bb{R}$.
+        Se puede ver que $I\cap T^{-1}(J) = I_2 = T^{-1}(J_1)$ por lo que $K$ es un intervalo abierto de $\bb{R}$. Definimos entonces $\gamma:K \to \bb{R}^2$ de la siguiente forma:
+        \begin{gather*}
+            \gamma(s) = \left\{
+                \begin{array}{l c c}
+                    \alpha(s) & \text{ si } & s\in I\\
+                    (\beta \circ T)(s) & \text{ si } & s \in T^{-1}(J)
+                \end{array}
+            \right.
+        \end{gather*}
+        Sabemos que en ambos trozos ambas aplicaciones son difeomorfismos regulares pero queremos ver ahora que $\gamma$ está bien definida y que es también un difeomorfismo regular. Para ello consideramos $s\in I\cap T^{-1}(J)=I_2 = T^{-1}(J_1)$ y tendremos que como $s\in I_2$ se verificará
+        \begin{gather*}
+            \alpha(s) = (\beta \circ \Phi)(s) = (\beta \circ T)(s)
+        \end{gather*}
+        y llegamos a que $\gamma$ es una curva p.p.a. En este punto notamos que $\gamma$ no es inyectiva, ya que por $\Phi$ tenemos que los puntos de $I_1$ van al mismo sitio que los de $J_2$. Veamos un resultado más formal y completo.\\
+
+        Sabemos que existe una única traslación $R:\bb{R}\to \bb{R}$ tal que 
+        \begin{gather*}
+            \Phi_{|_{I_1}} = R_{|_{I_1}} , \qquad R\neq T
+        \end{gather*}
+        y como se puede ver en el gráfico anterior %poner código gráfico
+        se tiene
+        \begin{gather*}
+            R(I_1) = J_2 \quad \Rightarrow \quad I_1 = R^{-1}(J_2)
+        \end{gather*}
+        Consideramos así la composición $T^{-1} \circ R : \bb{R} \to \bb{R}$ que es claramente una traslación de $\bb{R}$. Vamos a tomar un punto cualquiera $s\in I_1$ y vamos a considerar 
+        \begin{gather*}
+            (T^{-1} \circ R)(s) = s + a,\quad a>0
+        \end{gather*}
+        Como $R(I_1) = J_2$ tendremos que $(T^{-1} \circ R)(s)\in T^{-1}(J_2)$. Tenemos entonces que aplicar la definición de $\gamma$ en dicho tramo:
+        \begin{align*}
+            \gamma(s+a) &= (\beta \circ T) (s + a) = (\beta \circ\cancel{T} \circ \cancel{T^{-1}} \circ R) (s) = \\
+            &= \beta(R(s)) = (\beta \circ \Phi)(s) = \alpha(s) = \gamma(s)
+        \end{align*}
+        donde hemos aplicado que $s\in I_1$ por lo que podemos aplicar la primera definición de $\gamma$ al final. De esta forma hemos probado que
+        \begin{gather*}
+            \gamma(s+a) = \gamma(s) \quad \forall s \in I_1
+        \end{gather*}
+        es decir, que $\gamma$ actúa de forma periódica sobre $I_1$. Además, podemos extender $\gamma$ a una cierta $\delta : \bb{R} \to \bb{R}^2$ $a-$periódica con $a>0$. Además $a$ es el mínimo período (por unicidad de $T$ y $R$) de $\delta$ y $\delta_{|_{[0,a)}}$ es inyectiva
     \end{enumerate}
 
 \end{observacion}
