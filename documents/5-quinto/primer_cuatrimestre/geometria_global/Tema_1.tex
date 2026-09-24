@@ -838,7 +838,7 @@ Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curva
         Donde cada uno de estos conjuntos es gráficamente
         \begin{figure}[H]
             \centering
-            \begin{subfigure}[b]{0.30\textwidth}
+            \begin{subfigure}[c]{0.30\textwidth}
                 \centering
                 \begin{tikzpicture}
                     \shorthandoff{>}
@@ -865,21 +865,123 @@ Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curva
                     \draw[thick, blue] (1.5,0.1) -- (1.5,1);
                 \end{tikzpicture}
             \end{subfigure}%
+            % \hspace{2cm}%
+            \begin{subfigure}[c]{0.60\textwidth}
+                \centering
+                \begin{tikzpicture}[scale=2]
+                    \shorthandoff{>}
+                    
+                    % Curva azul
+                    \begin{scope}[yshift=0.4]
+                        \draw[line width=1.5pt, blue, dash pattern=on 3.03cm off 20cm, dash phase=0cm] 
+                            plot[smooth, tension=0.4] coordinates {
+                                (-1,1) (0,1.25) (0.5,1.2) (1, 1.3) (1.5,1.2) (1.75, 1)
+                        };
+                    \end{scope}
+       
+                    % Curva Roja
+                    \begin{scope}[yshift=-0.4]
+                        \draw[line width=1.5pt, red, dash pattern=on 0cm off 1.57cm on 20cm, dash phase=0cm] 
+                            plot[smooth, tension=0.4] coordinates {
+                                (-1,1) (0,1.25) (0.5,1.2) (1, 1.3) (1.5,1.2) (1.75, 1)
+                        };
+                    \end{scope}
+
+                    % \alpha(I_2)
+                    \begin{scope}
+                        % Limitamos la zona visible
+                        \clip (-0.5,1) rectangle (0.5,1.2); 
+                        \node[red] at (0.118,1.2) {$(\qquad \ \ \ )$};
+                    \end{scope}
+                    \node[blue] at (0.118, 1.4) {\tiny$\alpha(I_2)$};
+
+                    % \beta(J_1)
+                    \begin{scope}
+                        % Limitamos la zona visible
+                        \clip (-0.5,1.2) rectangle (0.5,1.4); 
+                        \node[blue] at (0.118,1.2) {$(\qquad \ \ \ )$};
+                    \end{scope}
+                    \node[red] at (0.118, 1.1) {\tiny$\beta(J_1)$};
+
+                    % \alpha(I_1)
+                    \node[blue, rotate=15] at (-0.85,1.05) {$(\quad)$};
+                    \node[blue, rotate=15] at (-0.9, 1.25) {\tiny$\alpha(I_1)$};
+
+                    % \beta(J_2)
+                    \node[red, rotate=-35] at (1.63,1.1) {$(\quad)$};
+                    \node[red, rotate=-35] at (1.5, 0.93) {\tiny$\beta(J_2)$};
+                \end{tikzpicture}
+            \end{subfigure}%
         \end{figure}
 
         Tenemos entonces que 
         \begin{gather*}
             \Phi(I_1) = J_2 \qquad \Phi(I_2) = J_1
         \end{gather*}
-        y por tanto existe una única traslación $T:\bb{R} \to \bb{R}$ tal que $\Phi_{|_{I_2}} = T_{|_{I_2}}$. Tendremos que 
+        Que recordemos que es el siguiente cambio de parametrización:
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \shorthandoff{>}
+
+                % I
+                \draw[very thick, blue] (-2,1) -- (2,1);
+                \node[blue] at (2.4,1) {$I$};
+                \node[blue] at (-1.5,1) {$(\qquad)$};
+                \node[blue] at (-1.5, 1.4) {$I_1$};
+                \node[blue] at (1.5,1) {$(\qquad)$};
+                \node[blue] at (1.5, 1.4) {$I_2$};
+ 
+                % J
+                \draw[very thick, red] (-1,-1) -- (3,-1);
+                \node[red] at (3.4,-1) {$J$};
+                \node[red] at (-0.5,-1) {$(\qquad)$};
+                \node[red] at (-0.5, -1.4) {$J_1$};
+                \node[red] at (2.5,-1) {$(\qquad)$};
+                \node[red] at (2.5, -1.4) {$J_2$};
+
+                % Imagenes
+                \draw[thick, dashed, ->] (1.25, 0.6) -- (-0.25,-0.6);
+                \node at (0.75, -0.25) {$\Phi$};
+
+                \draw[thick, dashed, ->] (-1.75, 0.6) to[out=230, in=250, looseness=1.3] (2.3, -1.6);
+                \node at (-1.5, -1.7) {$\Phi$};
+            \end{tikzpicture}%
+        \end{figure}
+        \vspace{-1cm}
+        y por tanto existe una única traslación $T:\bb{R} \to \bb{R}$ tal que $\Phi_{|_{I_2}} = T_{|_{I_2}}$ y verifique
         \begin{gather*}
             T(I_2) = J_1 \quad \Rightarrow \quad I_2 = T^{-1}(J_1)
         \end{gather*}
-        Consideramos el conjunto $K=I\cup T^{-1}(J)$ y nos planteamos si $K$ es un intervalo, lo cual ocurrirá si $I\cap T^{-1}(J)\neq \emptyset$. Con el siguiente dibujo
+        Consideramos el conjunto $K=I\cup T^{-1}(J)$ y nos planteamos si $K$ es un intervalo, lo cual ocurrirá si $I\cap T^{-1}(J)\neq \emptyset$. A poco que lo pensemos, al aplicar la traslación $T$ al intervalo $J$ y unirlo con $I$ obtendremos:
 
-        % Hacer dibujo
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \shorthandoff{>}
 
-        Se puede ver que $I\cap T^{-1}(J) = I_2 = T^{-1}(J_1)$ por lo que $K$ es un intervalo abierto de $\bb{R}$. Definimos entonces $\gamma:K \to \bb{R}^2$ de la siguiente forma:
+                % I
+                \draw[very thick, blue] (-2,1) -- (2,1);
+                \node[blue] at (-1.5,1) {$(\qquad)$};
+                \node[blue] at (-1.5, 1.4) {$I_1$};
+                \node[blue] at (1.5,1) {$(\qquad)$};
+                \node[blue] at (1.5, 1.4) {$I_2$};
+ 
+                % J
+                \begin{scope}[shift={(2.01,1.99)}]
+                    \draw[very thick, red] (-1,-1) -- (3,-1);
+                    \node[red] at (-0.5,-1) {$(\qquad)$};
+                    \node[red] at (-0.5, -1.5) {$T^{-1}(J_1)$};
+                    \node[red] at (2.5,-1) {$(\qquad)$};
+                    \node[red] at (2.5, -1.5) {$T^{-1}(J_2)$};
+                \end{scope}
+
+                % K
+                \node[red!50!blue] at (5.4,1) {$K$};
+            \end{tikzpicture}%
+        \end{figure}
+
+        Y es claro que se solapan (ya que la única traslación que queríamos verificaba justo dicha condición), en particular $I\cap T^{-1}(J) = I_2 = T^{-1}(J_1)$ por lo que $K$ es efectivamente un intervalo abierto de $\bb{R}$. Podemos definir entonces una nueva curva $\gamma:K \to \bb{R}^2$ de la siguiente forma:
         \begin{gather*}
             \gamma(s) = \left\{
                 \begin{array}{l c c}
@@ -894,16 +996,33 @@ Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curva
         \end{gather*}
         y llegamos a que $\gamma$ es una curva p.p.a. En este punto notamos que $\gamma$ no es inyectiva, ya que por $\Phi$ tenemos que los puntos de $I_1$ van al mismo sitio que los de $J_2$. Veamos un resultado más formal y completo.\\
 
-        Sabemos que existe una única traslación $R:\bb{R}\to \bb{R}$ tal que 
-        \begin{gather*}
-            \Phi_{|_{I_1}} = R_{|_{I_1}} , \qquad R\neq T
-        \end{gather*}
-        y como se puede ver en el gráfico anterior %poner código gráfico
-        se tiene
+        Sabemos que existe una única traslación $R:\bb{R}\to \bb{R}$ tal que $\Phi_{|_{I_1}} = R_{|_{I_1}}$ que verifique 
         \begin{gather*}
             R(I_1) = J_2 \quad \Rightarrow \quad I_1 = R^{-1}(J_2)
         \end{gather*}
-        Consideramos así la composición $T^{-1} \circ R : \bb{R} \to \bb{R}$ que es claramente una traslación de $\bb{R}$. Vamos a tomar un punto cualquiera $s\in I_1$ y vamos a considerar 
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \shorthandoff{>}
+
+                % I
+                \draw[very thick, blue] (-2,1) -- (2,1);
+                \node[blue] at (-1.5,1) {$(\qquad)$};
+                \node[blue] at (-1.5, 1.4) {$I_1$};
+                \node[blue] at (1.5,1) {$(\qquad)$};
+                \node[blue] at (1.5, 1.4) {$I_2$};
+ 
+                % J
+                \begin{scope}[shift={(-4.01,1.99)}]
+                    \draw[very thick, red] (-1,-1) -- (3,-1);
+                    \node[red] at (-0.5,-1) {$(\qquad)$};
+                    \node[red] at (-0.5, -1.5) {$R^{-1}(J_1)$};
+                    \node[red] at (2.5,-1) {$(\qquad)$};
+                    \node[red] at (2.5, -1.5) {$R^{-1}(J_2)$};
+                \end{scope}
+            \end{tikzpicture}%
+        \end{figure}
+        y es claro que $R\neq T$. Consideramos así la composición $T^{-1} \circ R : \bb{R} \to \bb{R}$ que es claramente una traslación de $\bb{R}$. Vamos a tomar un punto cualquiera $s\in I_1$ y por ser una traslación existirá un $a\in \bb{R}$ tal que podemos escribir
         \begin{gather*}
             (T^{-1} \circ R)(s) = s + a,\quad a>0
         \end{gather*}
@@ -916,15 +1035,15 @@ Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curva
         \begin{gather*}
             \gamma(s+a) = \gamma(s) \quad \forall s \in I_1
         \end{gather*}
-        es decir, que $\gamma$ actúa de forma periódica sobre $I_1$. Además, podemos extender $\gamma$ a una cierta $\delta : \bb{R} \to \bb{R}^2$ $a-$periódica con $a>0$. Además $a$ es el mínimo período (por unicidad de $T$ y $R$) de $\delta$ y $\delta_{|_{[0,a)}}$ es inyectiva.\\
+        es decir, que $\gamma$ actúa de forma periódica sobre $I_1$. Además, podemos extender $\gamma$ a una cierta $\delta : \bb{R} \to \bb{R}^2$ $a-$periódica con $a>0$. De hecho $a$ es el mínimo período (por unicidad de $T$ y $R$) de $\delta$ y la restricción $\delta_{|_{[0,a)}}$ es inyectiva.\\
 
-        Todo esto nos dice que $tr(\delta)$ es una curva de Jordan y además
+        Todo esto nos dice que $tr(\delta)$ es una curva de Jordan que verifica
         \begin{gather*}
             tr(\delta) = tr(\gamma) = tr(\alpha) \cup tr(\beta) \subset C
         \end{gather*}
-        y $tr(\alpha)$, $tr(\beta)$ son abiertos en $C$ por lo que su unión será también abierta por lo que $tr(\delta)$ será abierta y homeomorfa a $S^1$ que es compacto. Podemos concluir que $tr(\delta)$ es cerrado en $C$. Suponiendo que $C$ es conexa y sabiendo que la traza de una curva no puede ser vacía tenemos que $tr(\delta)=C$.\\
+        y como $tr(\alpha)$, $tr(\beta)$ son abiertos en $C$, su unión será también abierta por lo que $tr(\delta)$ será abierta y homeomorfa a $S^1$ que es compacto. Podemos concluir que $tr(\delta)$ es cerrado en $C$. Suponiendo que $C$ es conexa y sabiendo que la traza de una curva no puede ser vacía tenemos que $tr(\delta)=C$.\\
 
-        Concluimos que $C$ ha de ser una curva de Jordan del Ejemplo 5.
+        Concluimos que $C$ ha de ser una curva de Jordan del tipo que estudiamos en el Ejemplo 5.
     \end{enumerate}
 
 \end{observacion}
