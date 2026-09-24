@@ -768,6 +768,74 @@ Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curva
         % Los primeros 2 con los segmentos en esquinas opuestas
         % Los siguientes 2 con una sola cc (un solo segmento, uno en cada esquina)
 
+        \begin{enumerate}
+            \item[I)] \ 
+            \begin{figure}[H]
+                \centering
+                \begin{subfigure}[b]{0.30\textwidth}
+                    \centering
+                    \begin{tikzpicture}
+                        \shorthandoff{>}
+                        \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                        \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                        \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                        \draw[thick, red] (-1.5,0.1) -- (-0.6,1);
+                        \draw[thick, red] (1.5,-0.1) -- (0.6,-1);
+                    \end{tikzpicture}
+                \end{subfigure}%
+            \end{figure}
+        
+        \end{enumerate}
+
+        
+
+        Y con una sola componente conexa y pendiente $1$ tenemos:
+
+        \begin{enumerate}
+            \item[II)] \ 
+            \begin{figure}[H]
+                \centering
+                \begin{subfigure}[b]{0.30\textwidth}
+                    \centering
+                    \begin{tikzpicture}
+                        \shorthandoff{>}
+                        \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                        \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                        \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                        \draw[thick, red] (-1.5,0.1) -- (-0.6,1);
+                    \end{tikzpicture}
+                \end{subfigure}%
+                \hspace{0.2cm}%
+                \begin{subfigure}[b]{0.30\textwidth}
+                    \centering
+                    \begin{tikzpicture}
+                        \shorthandoff{>}
+                        \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                        \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                        \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                        \draw[thick, red] (1.5,-0.1) -- (0.6,-1);
+                    \end{tikzpicture}
+                \end{subfigure}
+            \end{figure}
+        \end{enumerate}
+    \end{enumerate}
+    Estudiamos ahora varios casos
+    \begin{enumerate}
+        \item Supongamos que existes dos parametrizaciones p.p.a. $\alpha:I\to C$ y $\beta:J \to C$, que tenemos 
+        \begin{gather*}
+            W = \alpha(I) \cap \beta(J) \neq \emptyset, \qquad \alpha(I)\not\subset \beta(J),\qquad \beta(J)\not\subset \alpha(I)
+        \end{gather*}
+        y que estamos en el caso I).\\
+
+        En esta situación tenemos 
+        \begin{gather*}
+            \alpha^{-1}(W) = I_1 \cup I_2, \qquad I_1 < I_2\\
+            \beta^{-1}(W) = J_1 \cup J_2,\qquad J_1 < J_2
+        \end{gather*}
+        Donde cada uno de estos conjuntos es gráficamente
         \begin{figure}[H]
             \centering
             \begin{subfigure}[b]{0.30\textwidth}
@@ -780,52 +848,38 @@ Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curva
 
                     \draw[thick, red] (-1.5,0.1) -- (-0.6,1);
                     \draw[thick, red] (1.5,-0.1) -- (0.6,-1);
+
+                    \draw[red, dashed] (-1.5,0.1) -- (1.5,0.1);
+                    \draw[red, dashed] (-0.6, 1) -- (-0.6,-1);
+
+                    \node[blue] at (-1,-1.25) {\scriptsize $I_1$};
+                    \draw[thick, blue] (-1.5,-1) -- (-0.6, -1);
+
+                    \node[blue] at (1,-1.25) {\scriptsize $I_2$};
+                    \draw[thick, blue] (0.6,-1) -- (1.5, -1);
+
+                    \node[blue] at (1.75, -0.75) {\scriptsize $J_1$};
+                    \draw[thick, blue] (1.5,-1) -- (1.5,-0.1);
+
+                    \node[blue] at (1.75, 0.75) {\scriptsize $J_2$};
+                    \draw[thick, blue] (1.5,0.1) -- (1.5,1);
                 \end{tikzpicture}
             \end{subfigure}%
-            \hspace{0.2cm}%
-            \begin{subfigure}[b]{0.30\textwidth}
-                \centering
-                \begin{tikzpicture}
-                    \shorthandoff{>}
-                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
-                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
-                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
-
-                    \draw[thick, red] (1.5,0.1) -- (0.6,1);
-                    \draw[thick, red] (-1.5,-0.1) -- (-0.6,-1);
-                \end{tikzpicture}
-            \end{subfigure}
         \end{figure}
 
-        Y con una sola componente conexa y pendiente $1$ tenemos:
-         \begin{figure}[H]
-            \centering
-            \begin{subfigure}[b]{0.30\textwidth}
-                \centering
-                \begin{tikzpicture}
-                    \shorthandoff{>}
-                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
-                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
-                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+        Tenemos entonces que 
+        \begin{gather*}
+            \Phi(I_1) = J_2 \qquad \Phi(I_2) = J_1
+        \end{gather*}
+        y por tanto existe una única traslación $T:\bb{R} \to \bb{R}$ tal que $\Phi_{|_{I_2}} = T_{|_{I_2}}$. Tendremos que 
+        \begin{gather*}
+            T(I_2) = J_1 \quad \Rightarrow \quad I_2 = T^{-1}(J_1)
+        \end{gather*}
+        Consideramos el conjunto $K=I\cup T^{-1}(J)$ y nos planteamos si $K$ es un intervalo, lo cual ocurrirá si $I\cap T^{-1}(J)\neq \emptyset$. Con el siguiente dibujo
 
-                    \draw[thick, red] (-1.5,0.1) -- (-0.6,1);
-                \end{tikzpicture}
-            \end{subfigure}%
-            \hspace{0.2cm}%
-            \begin{subfigure}[b]{0.30\textwidth}
-                \centering
-                \begin{tikzpicture}
-                    \shorthandoff{>}
-                    \draw[thick] (-1.5,-1) rectangle (1.5,1);
-                    \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
-                    \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+        % Hacer dibujo
 
-                    \draw[thick, red] (1.5,-0.1) -- (0.6,-1);
-                \end{tikzpicture}
-            \end{subfigure}
-        \end{figure}
-
-
+        Se puede ver que $I\cap T^{-1}(J) = I_2 = T^{-1}(J_1)$ por lo que $K$ es un intervalo abierto de $\bb{R}$.
     \end{enumerate}
 
 \end{observacion}
