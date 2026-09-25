@@ -13,3 +13,7 @@ Hay un tótem enfrente de consejería y otro en la planta baja del aulario.
 - Tercera entrega: Voz
 
 Hombre lo suyo esq haya un botón físico que tenga puesto en braile lo q sea y que se cambie el modo a voz (lo q pasa q supongo q nuestro totem no admite eso, aunque virtualmente se podría imprimir en 3d y ponerle un switch, conectarlo por usb y reconocerlo como un botón normal, con una librería de teclado, se puede hacer con un esp32).
+
+Kinect
+Leap
+Leap 2
