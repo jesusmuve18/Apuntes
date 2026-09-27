@@ -1044,7 +1044,57 @@ Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curva
         y como $tr(\alpha)$, $tr(\beta)$ son abiertos en $C$, su unión será también abierta por lo que $tr(\delta)$ será abierta y homeomorfa a $S^1$ que es compacto. Podemos concluir que $tr(\delta)$ es cerrado en $C$. Suponiendo que $C$ es conexa y sabiendo que la traza de una curva no puede ser vacía tenemos que $tr(\delta)=C$.\\
 
         Concluimos que $C$ ha de ser una curva de Jordan del tipo que estudiamos en el Ejemplo 5.
-    \end{enumerate}
+
+        \item Supongamos ahora que tenemos una curva simple conexa $C\subset \bb{R}^2$ y que existen dos parametrizaciones p.p.a. $\alpha:I \to C$, $\beta: J \to C$ tales que 
+        \begin{gather*}
+            W =  \alpha(I)\cap\beta(J)\neq \emptyset \qquad \alpha(I)\not\subset \beta(J), \qquad \beta(J)\not\subset \alpha(I)
+        \end{gather*}
+        Recordemos que en este caso tenemos que $W,X,\alpha^{-1}(W)$ y $\beta^{-1}(W)$ tienen una única componente conexa:
+        \begin{figure}[H]
+                \centering
+                \begin{subfigure}[b]{0.30\textwidth}
+                    \centering
+                    \begin{tikzpicture}
+                        \shorthandoff{>}
+                        \draw[thick] (-1.5,-1) rectangle (1.5,1);
+                        \node at (0,-1.25) {\scriptsize$\alpha^{-1}(W)$};
+                        \node[rotate=90] at (-1.8,0) {\scriptsize$\beta^{-1}(W)$};
+
+                        \draw[thick, red] (-1.5,0.1) -- (-0.6,1);
+                        \draw[dashed, red] (-1.5, 0.1) -- (1.5, 0.1);
+                        \draw[dashed, red] (-0.6, 1) -- (-0.6,-1);
+
+                        % I
+                        \draw[thick, blue] (-1.5,-1) -- (-0.6,-1);
+                        \node[blue] at (-1,-1.25) {\scriptsize$I_1$};
+
+                        %J
+                        \draw[thick, blue] (1.5,1) -- (1.5,0.1);
+                        \node[blue] at (1.75,0.5) {\scriptsize$J_1$};
+                    \end{tikzpicture}
+                \end{subfigure}%
+            \end{figure}
+            Tal y como aparece en la figura tenemos que 
+            \begin{gather*}
+                \alpha^{-1}(W) = I_1 \subset I,\qquad \beta^{-1}(W) = J_1 \subset J,\qquad \Phi(I_1)=J_1
+            \end{gather*}
+            Suponemos que $\alpha: I  \to C$ es una p.p.a. maximal (respecto de $I$), es decir, $\alpha$ no se puede extender a un intervalo mayor que $I$. Hacemos ahora una distinción de casos:
+
+            \begin{enumerate}
+                \item Si $\alpha(I)=C$, entonces podemos escribir $C=\alpha(I)\cong I \cong \bb{R}$ y tendremos que $C$ está cubierta por una parametrización y así $C\cong \bb{R}$.
+                \item Si $\alpha(I)\neq C$, entonces tendremos en particular que $Fr(\alpha(I))\neq \emptyset$. Para verlo supongamos que no, es decir que $Fr(\alpha(I))=\emptyset$ y entonces se verificará
+                \begin{gather*}
+                    \overline{\alpha(I)} - \alpha(I) =\emptyset \quad \Rightarrow \quad \overline{\alpha(I)} = \alpha(I)
+                \end{gather*}
+                y así $\alpha(I)$ será abierto y cerrado en $C$. Por conexión, necesariamente $\alpha(I)=\emptyset$ o bien $\alpha(I)=C$ llegando en ambos casos a contradicción. \\
+
+                Podemos elegir así un $p\in Fr(\alpha(I)) \subset C$ y tenemos que existe una curva $\beta:J\to C$ p.p.a. tal que 
+                \begin{gather*}
+                    p\in \beta(J), \quad W=\alpha(I)\cap \beta(J), \quad p\in Fr(\alpha(I))\subset \overline{\alpha(I)}
+                \end{gather*}
+                Como $\beta(J)$ es un entorno de $p$ y $p\in \overline{\alpha(I)}$ tendremos que $W\neq \emptyset$. Además como $p\in Fr(\alpha(I))=\overline{\alpha(I)} - \alpha(I)$ sabemos que $p\notin \alpha(I)$. Para $J$ convenientemente pequeño se dará $\alpha(I)\subset \beta(J)$ ya que $\alpha$ es maximal 
+            \end{enumerate}
+        \end{enumerate}
 
 \end{observacion}
 
