@@ -237,6 +237,19 @@ ul, ol {
 	z-index: 1000;
 }
 
+/* Esquinas redondeadas del rectángulo completo de cada menú desplegable */
+.icon > li:first-of-type > a,
+.icon li ul > li:first-child > a {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.icon > li:last-of-type > a,
+.icon li ul > li:last-child > a {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
 /* .icon li ul {
 	display: none;
 	position:absolute;
