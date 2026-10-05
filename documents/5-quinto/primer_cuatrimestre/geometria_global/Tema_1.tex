@@ -96,13 +96,13 @@ Del ejemplo anterior podemos concluir la siguiente proposición:\\
 \begin{observacion}
     En primer lugar es fácil ver que $T_pC$ es una recta, ya que $\alpha'(t_0)\neq 0$ por ser una curva regular. \\
     
-    Nos planteamos además, qué ocurre si tomamos una parametrización distinta. Para ello consideramos $\beta: J \to C$ otra parametrización con $\beta(u_0)=p$, donde $u_0\in J$ y queremos ver la relación entre $\alpha'(t_0)$ y $\beta(u_0)$.\\
+    Nos planteamos además si está bien definida, es decir, qué ocurre si tomamos una parametrización distinta. Para ello consideramos $\beta: J \to C$ otra parametrización con $\beta(u_0)=p$, donde $u_0\in J$ y queremos ver la relación entre $\alpha'(t_0)$ y $\beta'(u_0)$.\\
 
     Sabemos que $\Phi = \beta^{-1} \circ \alpha$ es un difeomorfismo. Además, esto podemos aplicarlo porque sabemos que se solapan, ya que 
     \begin{gather*}
         \left.
         \begin{array}{l}
-            p = \alpha(t_0) \in \alpha (I)\\
+            p = \alpha(t_0) \in \alpha (I)\\\\
             p = \beta(u_0) \in \beta(J)
         \end{array}
         \right\} \Rightarrow \alpha(I) \cap \beta(J) \neq \emptyset,\quad \Phi(t_0) = u_0
@@ -118,9 +118,9 @@ Del ejemplo anterior podemos concluir la siguiente proposición:\\
     lo que nos confirma que la definición anterior está bien hecha y no depende de la parametrización escogida.
 \end{observacion}
 
-\begin{ejemplo}\
+\begin{ejemplo} Vamos a ver a continuación una serie de ejemplos que nos darán las 5 formas de construír curvas regulares:
     \begin{enumerate}
-        \item Sea $C\subset \bb{R}^2$ una curva simple y consideramos $C'\subset C$ n abierto suyo. Entonces $C'$ es también una curva simple.
+        \item Sea $C\subset \bb{R}^2$ una curva simple y consideramos $C'\subset C$ un abierto suyo. Entonces $C'$ es también una curva simple.
         \begin{proof}
             Para probarlo tenemos que ver que para todo punto existe una parametrización regular. Así consideramos un $p'\in C'$ y en particular $p'\in C$ por lo que existirá un $V\subset C$ entorno de $p'$, un intervalo abierto $I\subset \bb{R}$ y una curva regular $\alpha : I \to \bb{R}^2$ tal que $\alpha(I)=V$ y tal que $\alpha : I \to V$ es un homeomorfismo.\\
 
@@ -1409,7 +1409,7 @@ Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curva
     \end{gather*}
     Además, sabemos que 
     \begin{gather*}
-        Fr(\Omega) = \overline{\Omega} \setminus \int{\Omega} = \overline{\Omega} \setminus \Omega \quad \Rightarrow \quad Fr(\Omega) \subset (\Omega \setminus C)\setminus \Omega = C
+        Fr(\Omega) = \overline{\Omega} \setminus \overset{\circ}{\Omega} = \overline{\Omega} \setminus \Omega \quad \Rightarrow \quad Fr(\Omega) \subset (\Omega \setminus C)\setminus \Omega = C
     \end{gather*}
     De esta forma hemos probado que $Fr(\Omega) \subset C$.\\
 
