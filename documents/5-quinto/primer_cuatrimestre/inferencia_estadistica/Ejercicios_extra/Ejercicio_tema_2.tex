@@ -21,14 +21,14 @@
         año=Curso 2026-2027]
         
     \begin{ejercicio}
-        Sean $(X_1,\dots,X_n)$ e $(Y_1,\dots,Y_m)$ muestras aleatorias simples independientes de poblaciones $\N(\mu_1,\sigma^2)$ y $\N(\mu_2,4\sigma^2)$, respectivamente. Sean $\alpha,\beta\in\R$ no ambos nulos, y sean $\overline{X}$, $\overline{Y}$, $S_X^2$, $S_Y^2$ las medias y cuasivarianzas de las dos muestras. Se pide:
+        Sean $(X_1,\dots,X_n)$ e $(Y_1,\dots,Y_m)$ muestras aleatorias simples independientes de poblaciones $\N(\mu_1,\sigma^2)$ y $\N(\mu_2,4\sigma^2)$, respectivamente. Sean $\alpha,\beta\in\R$ con al menos uno no nulo, y sean $\overline{X}$, $\overline{Y}$, $S_X^2$, $S_Y^2$ las medias y cuasivarianzas de las dos muestras. Se pide:
     
         \begin{enumerate}[label=\alph*)]
             \item Calcular la distribución de
             \begin{gather*}
                 T=\frac{\alpha(\overline{X}-\mu_1)+\beta(\overline{Y}-\mu_2)}{\sqrt{\dfrac{(n-1)S_X^2+\dfrac{(m-1)S_Y^2}{4}}{n+m-2}}\;\sqrt{\dfrac{\alpha^2}{n}+\dfrac{4\beta^2}{m}}}.
             \end{gather*}
-            \item Para $n=4$ y $m=5$ calcular $\P[T \geq 2.365]$.
+            \item Para $n=4$ y $m=5$ calcular $\P[T < 2.365]$.
         \end{enumerate}
         \vspace{1cm}
         \subsection*{Resolución}
@@ -73,7 +73,7 @@
             \]
             $Z$ depende solo de $(\overline{X},\overline{Y})$ y $U$ solo de $(S_X^2,S_Y^2)$, luego son independientes (por la extensión del Teorema de Fisher). Como $Z\sim\N(0,1)$ y $U\sim\chi^2_{n+m-2}$, por definición de la t de Student,
             \[
-                \boxed{T\sim t_{n+m-2}}.
+                {T\sim t_{n+m-2}}.
             \]
 
             \item Para $n=4$ y $m=5$ se tiene $n+m-2=7$, luego por el apartado anterior $T\sim t_7$. Consultando las tablas de la t de Student con $7$ grados de libertad, el valor que deja a su derecha una probabilidad de $0.025$ es
@@ -82,10 +82,8 @@
             \]
             Por tanto,
             \[
-                \boxed{\P[T\geq 2.365]=0.025}.
+                \P[T < 2.365]= 1-\P[T \geq 2.365] = 1 - 0.025 = 0.975
             \]
-        \end{enumerate}
-    
-        
+        \end{enumerate}        
     \end{ejercicio} 
 \end{document}
