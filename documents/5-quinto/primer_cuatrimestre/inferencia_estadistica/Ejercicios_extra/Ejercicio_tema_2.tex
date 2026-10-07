@@ -55,7 +55,7 @@
                 E[W]&=E[\alpha(\overline{X}-\mu_1)+\beta(\overline{Y}-\mu_2)] = \alpha(E[\overline{X}] - \mu_1) + \beta(E[\overline{Y}] - \mu_2)=\\
                 &=\alpha(\mu_1-\mu_1)+\beta(\mu_2-\mu_2)=0\\
                 \\
-                Var(W)&= Var(\alpha(\overline{X}-\mu_1)+\beta(\overline{Y}-\mu_2) = \alpha^2 Var(\overline{X}) + \beta^2 Var(\overline{Y})=\\
+                Var(W)&= Var(\alpha(\overline{X}-\mu_1)+\beta(\overline{Y}-\mu_2)) = \alpha^2 Var(\overline{X}) + \beta^2 Var(\overline{Y})=\\
                 &=\alpha^2\frac{\sigma^2}{n}+\beta^2\frac{4\sigma^2}{m}=\sigma^2\left(\frac{\alpha^2}{n}+\frac{4\beta^2}{m}\right).
             \end{align*}
             donde hemos usado que $\overline{X}$ e $\overline{Y}$ son independientes. Tipificando,
@@ -66,7 +66,7 @@
             \[
                 \frac{(n-1)S_X^2+\dfrac{(m-1)S_Y^2}{4}}{n+m-2}=\frac{\sigma^2U}{n+m-2},
             \]
-            de modo que, aplicando esto sobre $T$ obtenemos
+            de modo que, sustituyendo sobre $T$ obtenemos
             \[
                 T=\frac{W}{\sigma\sqrt{\dfrac{U}{n+m-2}}\;\sqrt{\dfrac{\alpha^2}{n}+\dfrac{4\beta^2}{m}}}
                 =\frac{Z}{\sqrt{\dfrac{U}{n+m-2}}}.
