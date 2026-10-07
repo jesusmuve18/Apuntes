@@ -1,0 +1,91 @@
+\documentclass[12pt]{article}
+
+\input{../../../../_assets/preambulo.tex}
+\input{../../../../_assets/portada.tex}
+
+
+\usepackage[all]{xy}
+\usepackage{ stmaryrd }
+\usepackage{pgfplots}
+
+
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\P}{{P}}
+
+\begin{document}
+    \portada[%
+        titulo=Inferencia Estadística,
+        subtitulo=Entrega Ejercicio Tema 2,
+        autor=Jesús Muñoz Velasco,
+        año=Curso 2026-2027]
+        
+    \begin{ejercicio}
+        Sean $(X_1,\dots,X_n)$ e $(Y_1,\dots,Y_m)$ muestras aleatorias simples independientes de poblaciones $\N(\mu_1,\sigma^2)$ y $\N(\mu_2,4\sigma^2)$, respectivamente. Sean $\alpha,\beta\in\R$ no ambos nulos, y sean $\overline{X}$, $\overline{Y}$, $S_X^2$, $S_Y^2$ las medias y cuasivarianzas de las dos muestras. Se pide:
+    
+        \begin{enumerate}[label=\alph*)]
+            \item Calcular la distribución de
+            \begin{gather*}
+                T=\frac{\alpha(\overline{X}-\mu_1)+\beta(\overline{Y}-\mu_2)}{\sqrt{\dfrac{(n-1)S_X^2+\dfrac{(m-1)S_Y^2}{4}}{n+m-2}}\;\sqrt{\dfrac{\alpha^2}{n}+\dfrac{4\beta^2}{m}}}.
+            \end{gather*}
+            \item Para $n=4$ y $m=5$ calcular $\P[T \geq 2.365]$.
+        \end{enumerate}
+        \vspace{1cm}
+        \subsection*{Resolución}
+
+        \begin{enumerate}[label=\alph*)]
+            \item Lo primero que observamos es que, por ser las muestras normales, por el Lema de Fisher tenemos que
+            \begin{align*}
+                &\overline{X}\sim\N\!\left(\mu_1,\frac{\sigma^2}{n}\right), &&\frac{(n-1)S_X^2}{\sigma^2}\sim\chi^2_{n-1}, &&\overline{X}\text{ y }S_X^2\text{ independientes},\\[2pt]
+                &\overline{Y}\sim\N\!\left(\mu_2,\frac{4\sigma^2}{m}\right), &&\frac{(m-1)S_Y^2}{4\sigma^2}\sim\chi^2_{m-1}, &&\overline{Y}\text{ y }S_Y^2\text{ independientes}.
+            \end{align*}
+            Como además las dos muestras son independientes entre sí, las cuatro variables $\overline{X}$, $\overline{Y}$, $S_X^2$, $S_Y^2$ son independientes.\\
+
+            Definimos
+            \[
+                U=\frac{(n-1)S_X^2+\dfrac{(m-1)S_Y^2}{4}}{\sigma^2}=\frac{(n-1)S_X^2}{\sigma^2}+\frac{(m-1)S_Y^2}{4\sigma^2}.
+            \]
+            El primer sumando es una $\chi^2_{n-1}$ y el segundo una $\chi^2_{m-1}$, y son independientes porque dependen de muestras independientes. Por la propiedad reproductiva de la chi-cuadrado,
+            \[
+                U\sim\chi^2_{n+m-2}.
+            \]
+
+            Denotamos ahora $W=\alpha(\overline{X}-\mu_1)+\beta(\overline{Y}-\mu_2)$. Es combinación lineal de normales independientes, luego es normal con
+            \begin{align*}
+                E[W]&=E[\alpha(\overline{X}-\mu_1)+\beta(\overline{Y}-\mu_2)] = \alpha(E[\overline{X}] - \mu_1) + \beta(E[\overline{Y}] - \mu_2)=\\
+                &=\alpha(\mu_1-\mu_1)+\beta(\mu_2-\mu_2)=0\\
+                \\
+                Var(W)&= Var(\alpha(\overline{X}-\mu_1)+\beta(\overline{Y}-\mu_2) = \alpha^2 Var(\overline{X}) + \beta^2 Var(\overline{Y})=\\
+                &=\alpha^2\frac{\sigma^2}{n}+\beta^2\frac{4\sigma^2}{m}=\sigma^2\left(\frac{\alpha^2}{n}+\frac{4\beta^2}{m}\right).
+            \end{align*}
+            donde hemos usado que $\overline{X}$ e $\overline{Y}$ son independientes. Tipificando,
+            \[
+                Z=\frac{W}{\sigma\sqrt{\dfrac{\alpha^2}{n}+\dfrac{4\beta^2}{m}}}\sim\N(0,1).
+            \]
+            Por otro lado, en el denominador de $T$ podemos reescribir
+            \[
+                \frac{(n-1)S_X^2+\dfrac{(m-1)S_Y^2}{4}}{n+m-2}=\frac{\sigma^2U}{n+m-2},
+            \]
+            de modo que, aplicando esto sobre $T$ obtenemos
+            \[
+                T=\frac{W}{\sigma\sqrt{\dfrac{U}{n+m-2}}\;\sqrt{\dfrac{\alpha^2}{n}+\dfrac{4\beta^2}{m}}}
+                =\frac{Z}{\sqrt{\dfrac{U}{n+m-2}}}.
+            \]
+            $Z$ depende solo de $(\overline{X},\overline{Y})$ y $U$ solo de $(S_X^2,S_Y^2)$, luego son independientes (por la extensión del Teorema de Fisher). Como $Z\sim\N(0,1)$ y $U\sim\chi^2_{n+m-2}$, por definición de la t de Student,
+            \[
+                \boxed{T\sim t_{n+m-2}}.
+            \]
+
+            \item Para $n=4$ y $m=5$ se tiene $n+m-2=7$, luego por el apartado anterior $T\sim t_7$. Consultando las tablas de la t de Student con $7$ grados de libertad, el valor que deja a su derecha una probabilidad de $0.025$ es
+            \[
+                t_{7;\,0.025}=2.365.
+            \]
+            Por tanto,
+            \[
+                \boxed{\P[T\geq 2.365]=0.025}.
+            \]
+        \end{enumerate}
+    
+        
+    \end{ejercicio} 
+\end{document}
