@@ -1589,4 +1589,89 @@ Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curva
     Además, $V \transv_{p_t}L_t$ y $V$ pasa en $p_t$ de un semiplano determinado por $L_t$ al otro.
 \end{lema}
 
+\begin{definicion}
+    Sea $C\subset \bb{R}^2$ una curva simple y $L$ una recta diremos que $L$ es \textbf{tangente} a $C$ cuando lo sea en algún punto\footnote{aunque haya más puntos de corte, con que haya uno tangente ya diremos que estas curvas son tangentes} y escribiremos $L \| C$. Equivalentemente $L$ será tangente a $C$ si
+    \begin{gather*}
+        \exists p\in L\cap C \text{ tal que } L \|_p C
+    \end{gather*}
+\end{definicion}
+
+\begin{definicion}
+    Sea $C\subset \bb{R}^2$ una curva simple y $L$ una recta diremos que $L$ es \textbf{transversa} a $C$ cuando lo sea en todo puntode la intersección y escribiremos $L \transv C$. Equivalentemente $L$ será transversa a $C$ si
+    \begin{gather*}
+        \forall p\in L\cap C \text{ se tiene que } L \transv_p C
+    \end{gather*}
+\end{definicion}
+
+\begin{observacion}
+    Comenzamos viendo una serie de consecuencias que podemos extraer del lema anterior:
+    \begin{enumerate}
+        \item Dada $C\subset \bb{R}^2$ una curva simple, $L$ una recta, $p\in L \cap C $ con $L \transv_p C$, entonces existe $V$ un entorno abierto de $p$ en $C$ tal que 
+        \begin{gather*}
+            V \cap L = \{p\}
+        \end{gather*}
+        \begin{proof}
+            Sabemos por el lema que $\exists V$ entorno abierto de $p$ en $C$ y $\exists \veps>0$ de forma que 
+            \begin{gather*}
+                V \cap L_t = \{p_t\}
+            \end{gather*}
+            Sabemos que $|0|<\veps$ por lo que $V\cap L_0 = \{p_0\}$ pero $L_0=L$, es decir, $V\cap L=\{p_0\}$. Sabemos que $p\in V\cap L$ luego necesariamente $p_0=p$ y lo tenemos.
+        \end{proof}
+        \item Dada $C\subset \bb{R}^2$ una curva simple, $L$ una recta y $p\in L\cap C$ con $L\transv_pC$. Entonces existe un entorno $U_p$ abierto de $p$ en $\bb{R}^2$ tal que 
+        \begin{gather*}
+            U_p \cap (L\cap C) = \{p\}
+        \end{gather*}
+        \begin{proof}
+            Por la consecuencia anterior sabemos que $\exists V$ entorno abierto de $p$ en $C$ con $V\cap L = \{p\}$. Por ser $V$ entorno abierto relativo a $C$ sabemos que existe un $U_p$ entorno abierto de $p$ en $\bb{R}^2$ con $V=U_p\cap C$ y sustituyendo en lo que ya sabemos tenemos
+            \begin{gather*}
+                V\cap L =(U_p \cap C)\cap L = U_p \cap (C\cap L) = \{p\}
+            \end{gather*}
+        \end{proof}
+
+        \item Tenemos $C\subset \bb{R}^2$ una curva simple, $L$ una recta y vamos a suponer que $L \transv C$. Entonces $L\cap C$ es discreto (en $\bb{R}^2$, en $L$ y en $C$).
+        \begin{proof}
+            Sea $p\in L\cap C$, sabemos que $L\transv_p C$. Por la consecuencia anterior $\exists U_p$ entorno abierto de $p$ en $\bb{R}^2$ tal que 
+            \begin{gather*}
+                U_p \cap (L\cap C) = \{p\}
+            \end{gather*}
+            por lo que $\{p\}$ es abierto en $L\cap C$, lo cual es equivalente a decir que $L\cap C$ es discreto.
+        \end{proof}
+        \item Sea $C\subset \bb{R}^2$ una curva simple compacta, $L$ una recta con $L\transv C$. Entonces $L\cap C$ es discreto (por la consecuencia anterior) y cerrado en $C$. Como además $C$ es compacto, $L\cap C$ será compacto. Por tanto $L\cap C$ es finito y podemos hablar de
+        \begin{gather*}
+            \# (L\cap C)\in \bb{N}
+        \end{gather*}
+    \end{enumerate}
+\end{observacion}
+
+\begin{observacion}
+    Nos planteamos ahora si dada $C$ existen $L$ con $L\transv C$, si existen $L$ con $L\|C$ y cómo se relacionan. Consideramos así $C$ una curva simple con $C=\alpha(I)$ siendo $\alpha: I \to \bb{R}^2$ p.p.a. y $p\in \bb{R}^2 \setminus C$ y $v\in S^1\subset \bb{R}^2 \cong \bb{C}$. A la semirrecta que sale de $p$ en dirección $v$ la representamos por $L_{p,v}$. Con esta notación queremos saber cuándo $L_{p,v} \| C$ lo cual por definición sucederá si
+    \begin{gather*}
+        \exists s \in I \text{ de forma que } L_{p,v} \|_{\alpha(s)} C \sii \left\{ 
+            \begin{array}{c l}
+                (1) & \alpha(s)\in L_{p,s}\\
+                (2) & \alpha'(s) \| v
+            \end{array}
+        \right.
+    \end{gather*}
+    Veamos cada uno de estos puntos por separado
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\alpha(s) \in L_{p,v} \sii \alpha(s) = p + \lambda v$ con $\lambda \geq 0$ lo cual sucederá si y solo si 
+        \begin{gather*}
+            \alpha(s) - p = \lambda v,\quad \lambda > 0
+        \end{gather*}
+        Tomando módulo en la expresión anterior obtenemos
+        \begin{gather*}
+            |\alpha(s) - p| = \lambda |v| = \lambda \sii \alpha(s) - p = |\alpha(s) - p |v \sii v = \frac{\alpha(s)-p}{|\alpha(s)-p|}
+        \end{gather*}
+        Por lo que concluímos que 
+        \begin{gather*}
+            \alpha(s) \in L_{p,v} \sii v = \frac{\alpha(s)-p}{|\alpha(s)-p|} := f_p(s)
+        \end{gather*}
+        Tenemos que $f_p$ es una función $f_p:I \to S^1 \subset \bb{R}^2 \equiv C$ y
+        \begin{gather*}
+            \alpha(s) \in L_{p,v} \sii v = f_p(s)
+        \end{gather*}
+    \end{enumerate}
+\end{observacion}
+
 
