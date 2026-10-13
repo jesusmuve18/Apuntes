@@ -1674,4 +1674,38 @@ Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curva
     \end{enumerate}
 \end{observacion}
 
+% TODO: Copiar lo que se dio el viernes de 12:00 a 14:00
+AQUÍ FALTA LO DEL VIERNES\\
+En resumen del día anterior:
+
+\begin{align*}
+    \Omega_0 &= \{p\in \bb{R}^2 \setminus C \ : \ \exists v \in S^1 \text{ con } L_{p,v}\transv C \text{ y } \#(L_{p,v} \cap C) \text{ par}\}\\
+    \Omega_1 &= \{p\in \bb{R}^2 \setminus C \ : \ \exists v \in S^1 \text{ con } L_{p,v}\transv C \text{ y } \#(L_{p,v} \cap C) \text{ impar}\}
+\end{align*}
+
+Ya habíamos estudiado que $\bb{R}^2 \setminus C = \Omega_0 \cup \Omega_1$ y que $\Omega_0\neq \emptyset$ y $\Omega_1 \neq \emptyset$. Además vimos que $\Omega_0$ no está acotado. Veamos ahora que $\Omega_0$ y $\Omega_1$ son disjuntos. Para ello suponemos que no, es decir que $\exists p\in \Omega_0\cap \Omega_1$. Entonces tendremos que
+\begin{gather*}
+    \exists v_0\in S^1 \text{ de forma que } L_{p,v_0}\transv C \text{ y } \#(L_{p,v_0} \cap C) \text{ par }\\
+    \exists v_1\in S^1 \text{ de forma que } L_{p,v_1}\transv C \text{ y } \#(L_{p,v_1} \cap C) \text{ impar }
+\end{gather*}
+Es trivial que $v_0\neq v_1$ ya que un número no puede ser simultáneamente par e impar. Consideramos entonces\footnote{Lo llamamos $A$ porque es un ángulo}
+\begin{gather*}
+    A = L_{p,v_0} \cup L_{p, v_1}
+\end{gather*}
+que será un ángulo no trivial por lo que divide a $\bb{R}^2$ en dos c.c. $A_0$ y $A_1$. Además tenemos que
+\begin{align*}
+    A\cap C &= (L_{p, v_0} \cup L_{p, v_1}) \cap C = (L_{p,v_0} \cap C) \dot{\cup} (L_{p, v_1}\cap C)\\
+    \#(A\cap C) &= \# (L_{p,v_0} \cap C) + \#(L_{p,v_1} \cap C) \text{ impar}
+\end{align*}
+Vamos a considerar el conjunto de puntos de intersección escribiendo $A\cap C = \{p_1, p_2, ..., p_k\}$. En estos puntos tendremos
+\begin{itemize}
+    \item En $p_1$ $C$ pasa de $A_1$ a $A_0$.
+    \item En $p_2$ $C$ pasa de $A_0$ a $A_1$.
+    \item En $p_3$ $C$ pasa de $A_1$ a $A_0$.
+    \item ...
+    \item En $p_k$ $C$ pasa de $A_0$ a $A_1$.
+\end{itemize}
+Podemos concluir que en los $p_i$ con $i$ impar se pasa de $A_1$ a $A_0$ y los $p_i$ con $i$ par se pasa de $A_0$ a $A_1$. Esto nos dice que $k$ tiene que ser par. Sin embargo teníamos que $\#(A\cap C)$ era impar llegando a contradicción. 
+
+
 
