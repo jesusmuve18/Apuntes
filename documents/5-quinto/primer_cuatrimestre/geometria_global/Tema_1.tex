@@ -1705,7 +1705,57 @@ Vamos a considerar el conjunto de puntos de intersección escribiendo $A\cap C =
     \item ...
     \item En $p_k$ $C$ pasa de $A_0$ a $A_1$.
 \end{itemize}
-Podemos concluir que en los $p_i$ con $i$ impar se pasa de $A_1$ a $A_0$ y los $p_i$ con $i$ par se pasa de $A_0$ a $A_1$. Esto nos dice que $k$ tiene que ser par. Sin embargo teníamos que $\#(A\cap C)$ era impar llegando a contradicción. 
+Podemos concluir que en los $p_i$ con $i$ impar se pasa de $A_1$ a $A_0$ y los $p_i$ con $i$ par se pasa de $A_0$ a $A_1$. Esto nos dice que $k$ tiene que ser par. Sin embargo teníamos que $\#(A\cap C)$ era impar llegando a contradicción. Por tanto $\Omega_0\cap \Omega_1 = \emptyset$.\\
+
+Podemos afirmar que $(\Omega_0,\Omega_1)$ es una partición no trivial de $\bb{R}^2 \setminus C$. Ahora observamos lo siguiente:
+\begin{gather*}
+    \bb{R}^2 \setminus D(R) \subset \Omega_0\\
+    \bb{R}^2 \setminus \Omega_0 \subset D(R)\\
+    \bb{R}^2 \setminus \Omega_0 = \Omega_1 \cup C
+\end{gather*}
+por lo que $\Omega_1$ es acotado. Queremos ver ahora que $\Omega_1$ y $\Omega_2$ son abiertos en $\bb{R}^2 \setminus C$ (y por tanto en $\bb{R}^2$). En este caso tendré una partición no trivial de abiertos lo que nos dirá que $\bb{R}^2 \setminus C$ no es conexo teniendo exactamente 2 componentes conexas (ya vimos que a lo sumo tenía 2).\\
+
+Supongamos que $\Omega_0$ no es abierto y tomamos $p\in \Omega_0$. Entonces existe una dirección $v\in S^1$ de forma que $L_{p,v} \transv C$ con $\#(L_p \cap C)$ par. Podemos escribir
+\begin{gather*}
+    L_{p,v}\cap C = \{p_1,p_2,...,p_{2k}\}
+\end{gather*}
+Por la definición de transversalidad tenemos que 
+\begin{gather*}
+    L_{p,v}\transv C \Rightarrow L_{p,v}\transv _{p_i} C \text{ con } i=1,2,...,2k
+\end{gather*}
+Por la Consecuencia 1 tenemos que existe un entorno abierto $V_i$ de $p_i$ en $C$ y existe un $\veps_i>0$ tal que si $|t|< \veps_i$ se verifica
+\begin{gather*}
+    L_t\transv C\\
+    \#(L_t \cap C) = 1
+\end{gather*}
+De esta forma podemos suponer si pérdida de generalidad que $V_i\cap V_j= \emptyset$ si $i\neq j$ ya que si no fueran disjuntos podemos tomar un $\veps$ más pequeño hasta que lo sean.\\
+
+Vamos a considerar entonces $\veps = \min\{\veps_1, \veps_2, ... , \veps_{2k}\}>0$ y al tomar $|t|<\veps$ tendremos
+\begin{gather*}
+    L_t \transv_{p_i}C\\
+    \#(L_t \cap C) = 1
+\end{gather*}
+Vamos a considerar $V_1\cup V_2 \cup ... \cup V_{2k}$ que será abierto en $C$ por ser unión de abiertos. Consideramos también su complementario
+\begin{gather*}
+    K = C\setminus (V_1\cup V_2 \cup ... \cup V_{2k}) \text{ que será cerrado en $C$}
+\end{gather*}
+Sabemos que $C$ es compacto por lo que $K$ (cerrado dentro de un compacto) será compacto también. Estudiamos ahora
+\begin{gather*}
+    r = dist(p,K) > 0
+\end{gather*}
+De esta forma existirá un $\delta>0$ con $B_\delta(p) \subset \bb{R}^2 \setminus C$ e imponemos también $\delta < min\{\veps, r\}$. Al obligar esto tenemos que si cogemos un punto $q\in B_\delta(p)$ tendremos que $L_{q,v} = L_t$ para $|t| < \veps$. Entonces $L_{q,v} \transv C$ y $\#(L_{q,v} \cap V_i) = 1$. Además $L_{q,v} \cap K = \emptyset$ ya que $|t|<r$. Ya tenemos todo lo que necesitamos para concluir.\\
+
+Dado $q\in B_\delta(p)$ elegimos el mismo $v$ original y tendremos que 
+\begin{align*}
+    L_{q,v}\cap C &= (L_{q,v} \cap (V_1\cup V_2 \cup ... \cup V_{2k})) \cup (L_{q,v}\cap K) =\\
+    &= (L_{q,v} \cap V_1) \dot{\cup} (L_{q,v} \cap V_2) \dot{\cup} ... \dot{\cup} (L_{q,v} \cap V_{2k})
+\end{align*}
+De esta forma 
+\begin{gather*}
+    \#(L_{q,v}\cap C) = \#(L_{q,v} \cap V_1) + (L_{q,v} \cap V_2) + ... + (L_{q,v} \cap V_{2k}) = 1 + 1 + ... + 1 = 2k
+\end{gather*}
+y además $L_{q,v}\transv C$ por lo que $q\in \Omega_0$. Por la arbitrariedad de $q$ tendremos que $B_\delta(p) \subset \Omega_0$ lo que nos dice que $\Omega_0$ es abierto. Análogamente $\Omega_1$ también lo será.
+
 
 
 
