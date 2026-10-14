@@ -1754,8 +1754,99 @@ De esta forma
 \begin{gather*}
     \#(L_{q,v}\cap C) = \#(L_{q,v} \cap V_1) + (L_{q,v} \cap V_2) + ... + (L_{q,v} \cap V_{2k}) = 1 + 1 + ... + 1 = 2k
 \end{gather*}
-y además $L_{q,v}\transv C$ por lo que $q\in \Omega_0$. Por la arbitrariedad de $q$ tendremos que $B_\delta(p) \subset \Omega_0$ lo que nos dice que $\Omega_0$ es abierto. Análogamente $\Omega_1$ también lo será.
+y además $L_{q,v}\transv C$ por lo que $q\in \Omega_0$. Por la arbitrariedad de $q$ tendremos que $B_\delta(p) \subset \Omega_0$ lo que nos dice que $\Omega_0$ es abierto. Análogamente $\Omega_1$ también lo será. Además, si $\Omega_0$ no fuera conexo tendríamos que $\Omega_0$ tiene al menos 2 c.c. por lo que 
+\begin{gather*}
+    \bb{R}^2 \setminus C = \Omega_0 \cup \Omega_1 \text{ tendría al menos 3 c.c.}
+\end{gather*}
+Por lo que $\Omega_0$ es conexo (y análogamente $\Omega_1$). Tenemos finalmente que 
+\begin{gather*}
+    (\Omega_0, \Omega_1)
+\end{gather*}
+es una partición no trivial en abiertos conexos de $\bb{R}^2 \setminus C$ lo que concluye en el siguiente teorema.
 
+\begin{teo}[Teorema de la Curva (Diferenciable) de Jordan]
+    Si $C\subset \bb{R}^2$ es una curva simple compacta y conexa, entonces $\bb{R}^2 \setminus C$ tiene exactamente 2 componentes conexas cuya frontera común es $C$ (esto es válido imponiendo solo que $C$ es cerrada). De dichas componentes conexas, solo una es acotada (si $C$ es compacta).\\
 
+    La componente conexa de $\bb{R}^2\setminus C$ que es acotada se llama el \textbf{dominio interior determinado por $C$} y se representa por $\Omega$, cuya definición era
+    \begin{gather*}
+        \Omega = \{p\in \bb{R}^2 \setminus C \ : \ \exists v \in S^1 \text{ con } L_{p,v}\transv C \text{ y } \#(L_{p,v} \cap C) \text{ impar}\}
+    \end{gather*} 
+\end{teo}
 
+\subsection{Más información sobre la forma de estar de $C$ en $\bb{R}^2$}
+\begin{definicion}
+    Vamos a considerar $C\subset \bb{R}^2$ una curva simple compacta y conexa, para un $\delta>0$ podemos definir
+    \begin{gather*}
+        B_\delta(C) = \{p\in \bb{R}^2 : dist(p,C) < \delta\}
+    \end{gather*}
+    que llamaremos la \textbf{bola métrica} en torno a $C$.
+\end{definicion}
 
+\begin{observacion}
+    Vamos a considerar $C=S^1$ y para un $\delta$ pequeño ($\delta<1$) tendremos que la bóla métrica en torno a $C$ será una especie de corona. Sin embargo, para un $\delta$ suficientemente grande ($\delta=1$) tenemos que
+    \begin{gather*}
+        B_\delta(C) = B(0,2) \setminus \{0\}
+    \end{gather*}
+    Y en este caso tendremos que es homeomorfo al caso anterior. Nos planteamos ahora qué ocurre su cogemos un valor de $\delta$ mayor ($\delta$>1) y ahora tendremos
+    \begin{gather*}
+        B_\delta(C) = B(0,1+\delta)
+    \end{gather*}
+    que ya no es homeomorfo a los casos anteriores.
+\end{observacion}
+
+\begin{observacion}
+    Sabemos que $C\subset B_\delta(C)$ y por teoría de espacios métricos sabemos que $B_\delta(C)$ será un entorno abierto de $C$.\\
+    
+    Dado un $p\in C$ representamos por $N_\delta(p)$ el segmento abierto de la recta normal a $C$ en $p$ que tiene centro $p$ y radio $\delta$. Sea 
+    \begin{gather*}
+        N_\delta(C) = \bigcup_{p\in C} N_\delta(p)
+    \end{gather*}
+    y tenemos que $C\subset N_\delta(C)$. Veamos que los conjuntos $B_\delta(C)$ y $N_\delta(C)$ son iguales.
+    \begin{proof}
+        Para ver que son iguales probaremos la doble inclusión
+        \begin{itemize}
+            \item[$\subseteq$ )] Consideramos $p\in B_\delta(C)$ y como $C$ es compacto tendremos que 
+            \begin{gather*}
+                \exists q \in C \quad \text{ tal que } \quad |p-q| = dist(p,C) < \delta
+            \end{gather*}
+            lo que nos dice que $p$ está en la recta normal a $C$ que pasa por $q$ con $|p-q| < \delta$ lo que nos dice que $p\in N_\delta(q)\subset N_\delta(C)$. Por tanto $p\in N_\delta(C)$.
+
+            \item[$\supseteq$ )] Tomamos $p\in N_\delta(C)$. Por la definición de $N_\delta(C)$ tendremos que 
+            \begin{gather*}
+                \exists q \in C \quad \text{ tal que } p\in N_\delta(q)
+            \end{gather*}
+            Además, sabemos que $dist(p,C) \leq |p-q| < \delta$ lo que nos confirma que $p\in B_\delta(C)$.
+        \end{itemize}
+        Finalmente podemos afirmar que $\forall \delta > 0$ se tiene que 
+        \begin{gather*}
+            B_\delta(C) = N_\delta(C)
+        \end{gather*}
+    \end{proof}
+    Una consecuencia inmediata es que $N_\delta(C)$ es un entorno abierto de $C$. 
+\end{observacion}
+
+\begin{observacion}
+    Si $C$ es una curva simple, compacta y conexa sabemos que 
+    \begin{gather*}
+        \exists \alpha : \bb{R} \longrightarrow C \quad \text{ p.p.a. y $L$-periódica}
+    \end{gather*}
+    tal que $\alpha_{|_{[0,L)}}$ es inyectiva y $tr(\alpha)=C$. Vamos a definir 
+    \Func{F}{\bb{R}^2}{\bb{R}^2}{(s,t)}{\alpha(s) + tN(s)}
+    y es claro que $F$ es diferenciable como aplicación de $\bb{R}^2$ en $\bb{R}^2$. Estudiamos ahora esta función.
+    Tenemos que 
+    \begin{gather*}
+        F(\bb{R}\times \{0\}) = C\\
+        F(\{s\} \times \bb{R}) = \text{recta normal a $C$ en $\alpha(s)$}
+    \end{gather*}
+    A la función $F$ se le llama \textbf{exponencial} ya que si $C=S^1$ nos recuerda al sistema de coordenadas polares. De esta forma $F$ controla todas las rectas normales a la curva $C$ en cualquier punto $p\in C$. Estudiamos ahora sus derivadas parciales
+    \begin{align*}
+        \frac{\partial F}{\partial s}(s,t) &= \alpha'(s) + tN'(s) = (1-t\kappa(s)) T(s)\\[1.5em]
+        \frac{\partial F}{\partial t}(s,t) &= N(s)
+    \end{align*}
+    Y aplicándolo a $(s,0)$
+    \begin{align*}
+        \frac{\partial F}{\partial s}(s,0) &= T(s)\qquad
+        \frac{\partial F}{\partial t}(s,0) &= N(s)
+    \end{align*}
+    que son linealmente independientes lo que nos permite aplicar el Teorema de la Función Inversa.
+\end{observacion}
