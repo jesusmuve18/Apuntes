@@ -1675,9 +1675,8 @@ Vamos a ver ahora que todas las curvas simples de $\bb{R}^2$ son trazas de curva
 \end{observacion}
 
 % TODO: Copiar lo que se dio el viernes de 12:00 a 14:00
-AQUÍ FALTA LO DEL VIERNES\\
+AQUÍ FALTA LO DEL VIERNES 9 DE OCTUBRE\\
 En resumen del día anterior:
-
 \begin{align*}
     \Omega_0 &= \{p\in \bb{R}^2 \setminus C \ : \ \exists v \in S^1 \text{ con } L_{p,v}\transv C \text{ y } \#(L_{p,v} \cap C) \text{ par}\}\\
     \Omega_1 &= \{p\in \bb{R}^2 \setminus C \ : \ \exists v \in S^1 \text{ con } L_{p,v}\transv C \text{ y } \#(L_{p,v} \cap C) \text{ impar}\}
@@ -1698,10 +1697,10 @@ que será un ángulo no trivial por lo que divide a $\bb{R}^2$ en dos c.c. $A_0$
     \#(A\cap C) &= \# (L_{p,v_0} \cap C) + \#(L_{p,v_1} \cap C) \text{ impar}
 \end{align*}
 Vamos a considerar el conjunto de puntos de intersección escribiendo $A\cap C = \{p_1, p_2, ..., p_k\}$. En estos puntos tendremos
-\begin{itemize}
-    \item En $p_1$ $C$ pasa de $A_1$ a $A_0$.
-    \item En $p_2$ $C$ pasa de $A_0$ a $A_1$.
-    \item En $p_3$ $C$ pasa de $A_1$ a $A_0$.
+\begin{itemize}[label=-, noitemsep]
+    \item En $p_1$ se tiene que $C$ pasa de $A_1$ a $A_0$.
+    \item En $p_2$ se tiene que $C$ pasa de $A_0$ a $A_1$.
+    \item En $p_3$ se tiene que $C$ pasa de $A_1$ a $A_0$.
     \item ...
     \item En $p_k$ $C$ pasa de $A_0$ a $A_1$.
 \end{itemize}
@@ -1845,8 +1844,92 @@ es una partición no trivial en abiertos conexos de $\bb{R}^2 \setminus C$ lo qu
     \end{align*}
     Y aplicándolo a $(s,0)$
     \begin{align*}
-        \frac{\partial F}{\partial s}(s,0) &= T(s)\qquad
-        \frac{\partial F}{\partial t}(s,0) &= N(s)
+        \left.
+            \begin{array}{c}
+                \dfrac{\partial F}{\partial s}(s,0) = T(s)\\[1.5em]
+                \dfrac{\partial F}{\partial t}(s,0) = N(s)
+            \end{array}
+        \right\} \Rightarrow Jac(F)(s,0) \text{ es regular}
     \end{align*}
-    que son linealmente independientes lo que nos permite aplicar el Teorema de la Función Inversa.
+    poer lo que son linealmente independientes lo que nos permite aplicar el Teorema de la Función Inversa en $(s,0)$. Este nos dirá que 
+    \begin{gather*}
+        \exists \delta_s >0 , \ \ \exists \veps_s > 0 \ \ \text{ tal que } \ \ F_{|_{(s-\delta_s, s+\delta_s) \times (-\veps_s, \veps_s)}} : (s-\delta_s, s+\delta_s) \longrightarrow \ \ \bigcup_{\mathclap{r\in(s-\delta_s, s+\delta_s)}}\ N_{\veps_s}(\alpha(r))\\
+        \exists V_{\alpha(s)} = \alpha(s-\delta_s, s+\delta_s) \text{ entorno abierto de $\alpha(s)$} \\[1.5em]
+        \exists \veps_s > 0 \ \ : \ \ N_{\veps_s}(r)\cap N_{\veps(s)}(q) = \emptyset \text{ para } r,q\in V_{\alpha(s)}
+    \end{gather*}
+    Resumiendo esta información en lo que nos interesa hemos probado que 
+    \begin{gather*}
+        \forall p \in C \quad \exists \veps_p > 0, \quad \exists V_p \text{ entorno abierto de $p$ en $C$}
+    \end{gather*}
+    de forma que si tomamos $q,r\in V_p$ se tiene que $N_{\veps_p}(q)\cap N_{\veps_p}(r)$.\\
+
+    Vamos a estudiar ahora la función $F$ en $[0,L]$ lo que nos permitirá estudiar la curva entera (recordemos que era $L$-periódica). Ya sabemos que 
+    \begin{gather*}
+        F_{|_{(s-\delta_s, s+\delta_s) \times (-\veps_s, \veps_s)}} \text{ es un difeomorfismo}
+    \end{gather*}
+    Y podemos considerar $(s-\delta_s, s+\delta_s)$ variando $s\in [0,L]$ que será un recubrimiento por abiertos de $[0,L]$, que es compacto. Por la definición topológica de compacidad tenemos que existe un subrecubrimiento finito, es decir,
+    \begin{gather*}
+        \exists s_1,...,s_k\in [0,L] \ \ : \ \ (s_i - \delta_{s_i}, s_i + \delta_{s_i}) \text{ con } i=1,...,k \ \text{ recubre a } [0,L]
+    \end{gather*}
+    Vamos a considerar ahora los $\veps$ asociados a esos puntos que notaremos como $\veps_{s_1}, ..., \veps_{s_k}$ todos ellos positivos. Como tenemos una cantidad finita podemos tomar
+    \begin{gather*}
+        \veps = \min\{\veps_{s_1}, ..., \veps_{s_k}\} > 0
+    \end{gather*}
+    De esta forma, con la altura fijada podemos considerar
+    \begin{gather*}
+        (s_i - \delta_{s_i}, s_i + \delta_{s_i})\times(-\veps, \veps)
+    \end{gather*}
+    y al restringir $F$ a cada uno de estos rectángulos seguiremos teniendo que es un difeomorfismo.\\
+    
+    Consideramos ahora $F_{|_{[0,L]\times(-\veps, \veps)}}$ que sabemos que no puede ser difeomorfismo (debido a que no es inyectiva en los extremos), pero sí que es un difeomorfismo local.
+    De esta forma, extendiendo el intervalo $[0,L]$ a $\bb{R}$ tendremos que
+    \begin{gather*}
+        F_{|_{\bb{R}\times(-\veps, \veps)}} : \bb{R}\times(-\veps, \veps) \longrightarrow \bigcup_{p\in C} N_\veps(p) = N_\veps(C)
+    \end{gather*}
+    es un difeomorfismo local sobreyectivo. Cabe destacar que $F$ no es inyectiva (es $L$-periódica en la variable $s$).
+
+    % Dibujo: Banda de ancho 2\veps llega a banda de la curva y las rectas
+    %         verticales de los puntos en \bb{R}^2 van a normales dentro de %         la banda
+    %
+    %         |
+    % --------|----------                      /---------\
+    % --------|---------- 0     -- F -->       |         |
+    % --------|----------                      \---------/
+    %         |
+    %
+    Vamos a seguir estudiando esta función $F$. Tomamos un $p\in C$ y sabemos que hay un entorno abierto suyo $V_p$ en $C$ de forma que si cogemos dos puntos $q,r\in V_p$, tendremos que $N_\veps(q)\cap N_\veps(r) = \emptyset$. Veamos que $\exists 0 < \delta \leq \veps$ de forma que si tomamos $q,r\in C$ tendremos que 
+    \begin{gather*}
+        N_\delta(q) \cap N_\delta(r) = \emptyset
+    \end{gather*}
+    es decir, que esta propiedad no funciona solo a nivel local, sino que se verifica para toda la curva tomando una banda lo suficientemente estrecha.
+    \begin{proof}
+        Supongamos que no, es decir que
+        \begin{gather*}
+            \forall n\in \bb{N} \text{ con } n\geq N \text{ se tiene que } 0<\frac{1}{n}\leq \veps \text{ y } N_{\frac{1}{n}}(p_n)\cap N_{\frac{1}{n}}(q_n) \neq \emptyset
+        \end{gather*}
+        para ciertos $p_n,q_n\in C$. Elegimos $r_n\in  N_{\frac{1}{n}}(p_n)\cap N_{\frac{1}{n}}(q_n)$. Como $p_n$ es una sucesión de $C$ que es un compacto, tendremos que existe una parcial convergente de $p_n$ convergente. Análogamente existirá una parcial convergente de $q_n$ y tomando los índices comunes a ambas parciales tendremos que 
+        \begin{gather*}
+            p_n \longrightarrow p , \qquad q_n \longrightarrow q,\qquad p,q\in C
+        \end{gather*}
+        Por la desigualdad triangular tendremos que 
+        \begin{gather*}
+            |p_n - q_n| \leq |p_n - r_n| + |r_n-q_n| \leq \frac{1}{n} + \frac{1}{n} = \frac{1}{n}
+        \end{gather*}
+        Tomando límite en esta desigualdad tendremos 
+        \begin{gather*}
+            |p-q| \leq 0 \Rightarrow p=q
+        \end{gather*}
+        Consideramos $V_p=V_q$ correspondiente y tendremos que $p_n,q_n\in V_p=V_q$ para un $n$ lo suficientemente grande. De esta forma, por el resultado local anterior tendremos que 
+        \begin{gather*}
+            N_{\frac{1}{n}}(p_n)\cap N_{\frac{1}{n}}(q_n) = \emptyset
+        \end{gather*} 
+        pero sabemos que $r_n\in N_{\frac{1}{n}}(p_n)\cap N_{\frac{1}{n}}(q_n)$ y llegamos a la contradicción que buscábamos.
+    \end{proof}
+    Concluimos que para una curva simple $C$ simple, conexa y compacta se tiene que $\exists \veps>0$ de forma que 
+    \begin{gather*}
+        F: \bb{R}\times (-\veps, \veps) \longrightarrow N_\veps(C) \qquad \text{ es un difeomorfismo local sobreyectivo}
+    \end{gather*}
+    y $\exists 0 < \delta \leq \veps$ de forma que $F$ es inyectiva en $[0,L) \times (-\delta, \delta)$.
 \end{observacion}
+
+
