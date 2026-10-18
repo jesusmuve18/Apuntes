@@ -8,11 +8,14 @@
 \usepackage{ stmaryrd }
 \usepackage{pgfplots}
 
+\usetikzlibrary{decorations.pathreplacing} % Llaves
+
 
 % Usamos la versión más reciente de pgfplots para evitar problemas de compatibilidad
 \pgfplotsset{compat=newest}
 
 \newcommand{\transv}{\pitchfork}
+\setlist[itemize,1]{label=$\bullet$}
 
 \begin{document}
     \portada[%
