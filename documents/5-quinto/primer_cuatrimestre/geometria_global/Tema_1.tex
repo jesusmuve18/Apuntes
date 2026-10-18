@@ -1816,11 +1816,69 @@ es una partición no trivial en abiertos conexos de $\bb{R}^2 \setminus C$ lo qu
     \begin{gather*}
         B_\delta(C) = B(0,2) \setminus \{0\}
     \end{gather*}
-    Y en este caso tendremos que es homeomorfo al caso anterior. Nos planteamos ahora qué ocurre si cogemos un valor de $\delta$ mayor ($\delta$>1) y ahora tendremos
+    Y en este caso tendremos que es homeomorfo al caso anterior. Nos planteamos ahora qué ocurre si cogemos un valor de $\delta$ mayor ($\delta>1$) y ahora tendremos
     \begin{gather*}
         B_\delta(C) = B(0,1+\delta)
     \end{gather*}
     que ya no es homeomorfo a los casos anteriores.
+
+    \begin{figure}[H]
+        \centering
+        % --- CASO 1: delta < 1 ---
+        \begin{subfigure}[b]{0.32\textwidth}
+            \centering
+            \begin{tikzpicture}[scale=0.75]
+                % Región B_delta(C): corona circular
+                \fill[red!10, even odd rule] (0,0) circle (1.5) (0,0) circle (0.5);
+                
+                % Fronteras abiertas (discontinuas)
+                \draw[red, dashed, semithick] (0,0) circle (1.5);
+                \draw[red, dashed, semithick] (0,0) circle (0.5);
+                
+                % Curva C = S^1
+                \draw[ForestGreen, very thick] (0,0) circle (1);
+                
+                \node at (0,-3.5) {$\delta < 1$};
+            \end{tikzpicture}
+        \end{subfigure}
+        \hfill
+        % --- CASO 2: delta = 1 ---
+        \begin{subfigure}[b]{0.32\textwidth}
+            \centering
+            \begin{tikzpicture}[scale=0.75]
+                % Región B_delta(C): disco sin el origen
+                \fill[red!10] (0,0) circle (2);
+                
+                % Frontera exterior abierta
+                \draw[red, dashed, semithick] (0,0) circle (2);
+                
+                % Curva C = S^1
+                \draw[ForestGreen, very thick] (0,0) circle (1);
+                
+                % Origen excluido (punto hueco)
+                \filldraw[fill=white, draw=red, semithick] (0,0) circle (2pt);
+                
+                \node at (0,-3.5) {$\delta = 1$};
+            \end{tikzpicture}
+        \end{subfigure}
+        \hfill
+        % --- CASO 3: delta > 1 ---
+        \begin{subfigure}[b]{0.32\textwidth}
+            \centering
+            \begin{tikzpicture}[scale=0.75]
+                % Región B_delta(C): disco completo
+                \fill[red!10] (0,0) circle (2.5);
+                
+                % Frontera exterior abierta
+                \draw[red, dashed, semithick] (0,0) circle (2.5);
+                
+                % Curva C = S^1
+                \draw[ForestGreen, very thick] (0,0) circle (1);
+                
+                \node at (0,-3.5) {$\delta > 1$};
+            \end{tikzpicture}
+        \end{subfigure}
+    \end{figure}
 \end{observacion}
 
 \begin{observacion}
@@ -1936,7 +1994,7 @@ es una partición no trivial en abiertos conexos de $\bb{R}^2 \setminus C$ lo qu
                 \shorthandoff{>}
 
                 % Área fondo
-                \fill[red, opacity=0.1] (-3,-1) rectangle (3,1);
+                \fill[red!7] (-3,-1) rectangle (3,1);
                 
                 % Eje ordenadas
                 \draw[very thick, ForestGreen] (-3,0) -- (3,0);
@@ -1960,7 +2018,7 @@ es una partición no trivial en abiertos conexos de $\bb{R}^2 \setminus C$ lo qu
                 (-3,-1) -- (-3,-0.05) 
                 node[midway, xshift=-0.5cm] {$\veps$};
 
-                \node at (0,-1.5) {$\bb{R}\times (-\veps, \veps)$};
+                \node at (0,-2) {$\bb{R}\times (-\veps, \veps)$};
             \end{tikzpicture}
         \end{subfigure}%
         \begin{subfigure}[c]{0.15\textwidth}
@@ -1979,33 +2037,37 @@ es una partición no trivial en abiertos conexos de $\bb{R}^2 \setminus C$ lo qu
                 \shorthandoff{>}
 
                 % Puntos principales
-                \coordinate (P1) at (0, 1);   \coordinate (P2) at (2, 3);
-                \coordinate (P3) at (5, 2);   \coordinate (P4) at (4, -2);
+                \coordinate (P1) at (0, 1);   
+                \coordinate (P2) at (2, 3);
+                \coordinate (P3) at (5, 2);   
+                \coordinate (P4) at (4, -2);
                 \coordinate (P5) at (2, 0);
 
-                % Centro de escalado (coordenadas numéricas)
-                \coordinate (C) at (2.6, 0.8);
 
                 % Envoltorio sombreado con bordes punteados
-                \draw[red, dashed, thick, double=red!0, double distance=32pt] 
+                \draw[red, dashed, thick, double=red!0, double distance=1cm] 
                 plot [smooth cycle, tension=0.7] coordinates {(P1) (P2) (P3) (P4) (P5)};
 
-                % 1. Franja continua de fondo (32pt de grosor)
-                \draw[line width=32pt, red!10, cap=round, join=round] 
+                % 1. Franja continua de fondo
+                \draw[line width=1cm, red!7, cap=round, join=round] 
                     plot [smooth cycle, tension=0.7] coordinates {(P1) (P2) (P3) (P4) (P5)};
 
                 % 4. Curva verde principal
                 \draw[very thick, ForestGreen] 
                     plot [smooth cycle, tension=0.7] coordinates {(P1) (P2) (P3) (P4) (P5)};
 
-                % 5. Puntos y tangentes
-                \foreach \p/\label/\pos in {P1/$P_1$/below, P2/$P_2$/above, P3/$P_3$/below, P4/$P_4$/above, P5/$P_5$/right} {
-                    \fill[red!80!black] (\p) circle (2.5pt);
-                    \node[\pos, yshift=2pt] at (\p) {\label};
+                % 5. Puntos
+                % \foreach \p/\label/\pos in {P1/$P_1$/below, P2/$P_2$/above, P3/$P_3$/below, P4/$P_4$/above, P5/$P_5$/right} {
+                %     \fill[red!80!black] (\p) circle (2.5pt);
+                %     \node[\pos, yshift=2pt] at (\p) {\label};
+                % }
+
+                % Tangentes
+                \foreach \p/\a/\dista/\distb in {P1/15/-0.65/1.4, P2/100/-0.65/1.3, P3/20/-0.65/1.3, P4/105/-0.65/1.4, P5/50/-0.65/1.3} {
+                    \draw[very thick, Dandelion, rotate around={\a:(\p)}] (\p) ++(\dista, 0) -- ++(\distb, 0);
                 }
-                \foreach \p/\a in {P1/10, P2/100, P3/25, P4/110, P5/40} {
-                    \draw[very thick, Dandelion, rotate around={\a:(\p)}] (\p) ++(-1, 0) -- ++(2, 0);
-                }
+
+                \node at (3,-3.5) {$N_\veps(C)$};
             \end{tikzpicture}
         \end{subfigure}
     \end{figure}
