@@ -1677,7 +1677,7 @@ Vamos a ver ahora que todas las curvas simples conexas de $\bb{R}^2$ son trazas 
         \exists s \in I \text{ de forma que } L_{p,v} \|_{\alpha(s)} C \sii \left\{ 
             \begin{array}{c l}
                 (1) & \alpha(s)\in L_{p,v}\\
-                (2) & \alpha'(s) \| v
+                (2) & \alpha'(s)\ \| \ v
             \end{array}
         \right.
     \end{gather*}
@@ -1699,6 +1699,12 @@ Vamos a ver ahora que todas las curvas simples conexas de $\bb{R}^2$ son trazas 
         \begin{gather*}
             \alpha(s) \in L_{p,v} \sii v = f_p(s)
         \end{gather*}
+
+        \item Tenemos que 
+        \begin{gather*}
+            \alpha'(s) \ \| \ v \sii \alpha'(s)=\lambda_v = \lambda \frac{\alpha(s) - p}{|\alpha(s)-p|} 
+        \end{gather*}
+        Si multiplicamos ahora escalarmente ambos miembros por $\alpha(s) - p$ obtenemos
     \end{enumerate}
 \end{observacion}
 
@@ -1706,6 +1712,10 @@ Vamos a ver ahora que todas las curvas simples conexas de $\bb{R}^2$ son trazas 
 
 % TODO: Copiar lo que se dio el viernes de 12:00 a 14:00
 AQUÍ FALTA LO DEL VIERNES 9 DE OCTUBRE\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 En resumen del día anterior:
 \begin{align*}
     \Omega_0 &= \{p\in \bb{R}^2 \setminus C \ : \ \exists v \in S^1 \text{ con } L_{p,v}\transv C \text{ y } \#(L_{p,v} \cap C) \text{ par}\}\\
@@ -2150,7 +2160,7 @@ Dada una curva $C\subset \bb{R}^2$ simple, compacta y conexa existe un $\veps>0$
         \begin{gather*}
             \alpha_{t|_{[0,L)}} = F_{|_{[0,L)\times \{t\}}}
         \end{gather*}
-        tenemos que $\alpha_{t|_{[0,L)}}$ es inyectiva. Podemos afirmar hasta el momento que $C_t=traza(\alpha_t)$ con $\alpha_t$ regular, $L$-periódica y con $\alpha_{t|_{[0,L)}}$ inyectiva. Por las construcciones de curvas estudiadas concluímos que $C_t$ es una curva simple. Por ser cerrada dentro de un compacto será también conexa. Como $\bb{R}$ es conexo y $\alpha_t$ es continua tendremos finalmente que $C_t$ es conexa. Hemos probado que 
+        tenemos que $\alpha_{t|_{[0,L)}}$ es inyectiva. Podemos afirmar hasta el momento que $C_t=traza(\alpha_t)$ con $\alpha_t$ regular, $L$-periódica y con $\alpha_{t|_{[0,L)}}$ inyectiva. Por las construcciones de curvas estudiadas concluímos que $C_t$ es una curva simple. Por ser cerrada y estar dentro de $\Omega$, que es acotado, será también compacta. Como $\bb{R}$ es conexo y $\alpha_t$ es continua tendremos finalmente que $C_t$ es conexa. Hemos probado que 
         \begin{gather*}
             \boxed{C_t \text{ es una curva simple compacta y conexa}}
         \end{gather*}
@@ -2188,8 +2198,8 @@ Dada una curva $C\subset \bb{R}^2$ simple, compacta y conexa existe un $\veps>0$
         \end{gather*}
         y llegamos finalmente a 
         \begin{gather*}
-            \boxed{\kappa_t(s) = \frac{\kappa(s)}{1-t\kappa(s)}} \ \ \forall s \in \bb{R}
+            \boxed{\kappa_t(s) = \frac{\kappa(s)}{1-t\kappa(s)} \qquad \forall s \in \bb{R}}
         \end{gather*}
-        Una observación que podemos hacer aquí es que si $t\to 0$ tendremoms que $\kappa_t \to \kappa$. Sin embargo, si $t\to \nicefrac{1}{k}$ tendremos que $\kappa_t\to \infty$, lo que nos dice que las curvas colapsan.
+        Una observación que podemos hacer aquí es que si $t\to 0$ tendremos que $\kappa_t \to \kappa$. Sin embargo, si $t\to \nicefrac{1}{k}$ tendremos que $\kappa_t\to \infty$, lo que nos dice que las curvas colapsan.
     \end{solucion}
 \end{ejercicio}
