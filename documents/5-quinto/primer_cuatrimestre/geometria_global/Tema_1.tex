@@ -1728,7 +1728,7 @@ Vamos a ver ahora que todas las curvas simples conexas de $\bb{R}^2$ son trazas 
     Es decir, $L_{p,v}\ \| \ C$ si y solo si $v\in f_p(C_{f_p})$ lo cual ocurrirá si y solo si $v$ es un valor singular de $f_p$.\\
 \end{observacion}
 \subsection{Teorema de Sard}
-A partir de aquí, para avanzar nedcesitaremos emplear el siguiente resultado del análisis (que nosotros no vamos a demostrar)
+A partir de aquí, para avanzar necesitaremos emplear el siguiente resultado del análisis (que nosotros no vamos a demostrar):
 
 \begin{teo}[Teorema de Sard]
     Sea $O\subset \bb{R}$ un abierto y $f:O\to \bb{R}$ con $f\in C^1(O)$. Entonces $f(C_f)$ tiene medida nula en $\bb{R}$. En particular, $f(C_f)$ tiene interior vacío. Por tanto $\bb{R}\setminus f(C_f)$ es denso en $\bb{R}$ y además 
@@ -1744,7 +1744,8 @@ A partir de aquí, para avanzar nedcesitaremos emplear el siguiente resultado de
     \end{gather*}
     Existe además una versión más general del teorema para dimensiones mayores.
 \end{observacion}
-No obstante, de momento no podemos aplicar directamente el teorema al caso que estábamos estudiando ya que nuestra $f:I \to S^1 \subset \bb{R}^2 \cong \bb{C}$ y, por tanto, el teorema de Sard no se puede aplicar, pues llega a $\bb{C}$ y no a $\bb{R}$.\\
+
+No obstante, de momento no podemos aplicar directamente el teorema al caso que estábamos estudiando debido a que nuestra función es $f:I \to S^1 \subset \bb{R}^2 \cong \bb{C}$ y, por tanto, el teorema de Sard no se puede aplicar, pues llega a $\bb{C}$ y no a $\bb{R}$.\\
 
 Para solventar este problema trataremos de parametrizar la circunferencia usando números complejos y la función argumento. Consideramos así $z\in \bb{C}$ con $|z|=1$ y podremos escribir $z = e^{i\theta}$ donde $\theta = arg(z)$. Sin embargo, la función argumento, $arg(\cdot)$ no es continua en toda la circunferencia. Por este motivo vamos a trabajar con dos ``ramas'' del argumento definiendo
 \begin{align*}
@@ -1829,7 +1830,7 @@ llegando finalmente a que
 \begin{gather*}
     \boxed{\Omega_0 \text{ es no acotado}}
 \end{gather*}
-En particular, $\Omega_0\neq \emptyset$.\\
+En particular, $\boxed{\Omega_0\neq \emptyset}$.\\
 
 Veamos ahora que $\Omega_1$ también es no vacío. Para ello de nuevo $p\notin D(R)$. Como $C$ es compacta entonces existe un $q\in C$ tal que 
 \begin{gather*}
