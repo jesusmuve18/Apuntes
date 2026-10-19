@@ -2109,3 +2109,87 @@ es una partición no trivial en abiertos conexos de $\bb{R}^2 \setminus C$ lo qu
 
 % TODO: Copiar lo que se dio el viernes de 12:00 a 13:00
 AQUÍ FALTA LO DEL VIERNES 16 DE OCTUBRE\\
+En resumen del día anterior:
+
+Dada una curva $C\subset \bb{R}^2$ simple, compacta y conexa existe un $\veps>0$ tal que la función $F:\bb{R}\times(-\veps, \veps) \to B_\veps(C)$ es un difeomorfismo local, sobreyectiva, su restricción $F_{|_{[0,L)\times(-\veps, \veps)}}$ es inyectiva (en vista del teorema de existencia de entornos tubulares). Además, sabemos que 
+\begin{gather*}
+    B_\veps(C) \cong S^1 \times (-\veps, \veps) \cong C \times (-\veps, \veps)
+\end{gather*}
+\begin{ejercicio}
+    Sea $C\subset \bb{R}^2$ una curva simple, conexa y compacta y sea $\veps>0$ tal que $B_\veps(C)$ es un entorno tubular. Entonces para cada $0<t<\veps$ vamos a definir
+    \begin{gather*}
+        C_t = \{p\in \bb{R}^2 \ : \ dist(p,C)=t,\ p\in \Omega\}
+    \end{gather*}
+    Demostrar que $C_t$ es una curva simple, compacta y conexa. Calcular además su longitud y su curvatura. A $C_t$ lo llamaremos \textbf{curva paralela} a $C$ a distancia $t>0$ en el interior de $C$.\\
+
+    \begin{solucion}
+        Podemos reescribir la curva paralela de la siguiente forma
+        \begin{gather*}
+            C_t = \{p\in \bb{R}^2 \ : \ p=F(s, t) \ \ \forall s \in \bb{R}\}
+        \end{gather*}
+        y sabemos que $F$ está asociada a un $\alpha:\bb{R} \to \bb{R}^2$ p.p.a $L$-periódica con $\alpha_{[0,L)}$ inyectiva de forma que 
+        \begin{gather*}
+            F(s,t) = \alpha(s) + tN(s)
+        \end{gather*}
+        Supongamos sin pérdida de generalidad que $\alpha$ orienta positivamente a $C$. Podemos definir
+        \Func{\alpha_t}{\bb{R}}{\bb{R}^2}
+             {s}{(F(s,t))}
+        y a primera vista podemos ver que $\alpha_t$ es diferenciable por lo que es una curva parametrizada. Queremos ver si es regular, es decir, si su vector tangente es no nulo en cada punto. Calculemos dicho vector:
+        \begin{gather*}
+            \alpha_t'(s) = \alpha'(s) + tN'(s) = T(s) - t\kappa(s)T(s) = (1-t\kappa(s)) T(s) = \frac{\partial F}{\partial s}(s,t) \neq 0
+        \end{gather*}
+        donde $(1-t\kappa(s))$ es una función escalar y $T(s)$ es vectorial por lo que esta derivada será una función vectorial. Además, sabemos que es no nulo ya que $F$ es un difeomorfismo local (su derivada parcial no puede ser nula). Sabemos que dentro del entorno tubular se da que 
+        \begin{gather*}
+            1+ t \kappa(s) \neq 0
+        \end{gather*}
+        por lo que no cambia de signo. Si $t=0$ está expresión vale 1 por lo que necesariamente por continuidad $1 +t\kappa(s) > 0$. Como $\alpha_t(s) \neq 0$ para todo $s\in \bb{R}$ tendremos que $\alpha_t$ es regular. Además, $\alpha_t$ es por construcción 
+        \begin{gather*}
+            \alpha_t(s) = \alpha(s) + tN(s) = \alpha(s) + tJ T(S) = \alpha(s) + tJ\alpha'(s)
+        \end{gather*}
+        y como $\alpha$ es periódica de período $L$ necesariamente $\alpha_t$ será también $L$-periódica\footnote{el mismo período que $\alpha$ original}. Si consideramos la restricción
+        \begin{gather*}
+            \alpha_{t|_{[0,L)}} = F_{|_{[0,L)\times \{t\}}}
+        \end{gather*}
+        tenemos que $\alpha_{t|_{[0,L)}}$ es inyectiva. Podemos afirmar hasta el momento que $C_t=traza(\alpha_t)$ con $\alpha_t$ regular, $L$-periódica y con $\alpha_{t|_{[0,L)}}$ inyectiva. Por las construcciones de curvas estudiadas concluímos que $C_t$ es una curva simple. Por ser cerrada dentro de un compacto será también conexa. Como $\bb{R}$ es conexo y $\alpha_t$ es continua tendremos finalmente que $C_t$ es conexa. Hemos probado que 
+        \begin{gather*}
+            \boxed{C_t \text{ es una curva simple compacta y conexa}}
+        \end{gather*}
+        Nos queda por estudiar su longitud y su curvatura.
+        \begin{align*}
+            \alpha_t'(s) &= (1-t\kappa(s))T(s) \Rightarrow |\alpha_t'(s)| = |1-t\kappa(s)| = 1-t\kappa(s)\\[1.25em]
+            L(C_t) &= \int_0^L |\alpha_t'(s)| ds = \int_0^L (1-t\kappa(s))ds = L - t\int_0^L\kappa(s) ds = L(C) - t\int_0^L \kappa(s) ds
+        \end{align*}
+        Concluimos que 
+        \begin{gather*}
+            \boxed{L(C_t) = L(C) - t\int_0^L \kappa(s) ds}
+        \end{gather*}
+        Nos queda por estudiar la curvatura. Recordemos que 
+        \begin{gather*}
+            \kappa_t(s) = \frac{det(\alpha_t'(s), \alpha_t''(s))}{|\alpha_t'(s)|^3}
+        \end{gather*}
+        De los cálculos realizados hasta el momento solo nos queda calcular $\alpha_t''(s)$. Aplicando la regla de la cadena y las ecuaciones de Frenet:
+        \begin{align*}
+            \alpha_t''(s) &= ((1-t\kappa(s))T(s))' = -t\kappa'(s)T(s) + (1-t\kappa(s))T'(s) = \\
+            &= -t\kappa'(s)T(s) + \kappa(s)(1-t\kappa(s))N(s)
+        \end{align*}
+        Continuamos con los cálculos, notando $\ast = -tk'(s)$ (ya que solo es un escalar por lo que no nos importará para los cálculos)
+        \begin{gather*}
+            det(\alpha_t'(s),\alpha_t''(s)) = det((1-t\kappa(s))T(s), \ast T(s) + \kappa(s)(1-t\kappa(s))N(s))
+        \end{gather*}
+        por lo linealidad del determinante tendremos que 
+        \begin{align*}
+            det(\alpha_t'(s),\alpha_t''(s)) &= \cancel{det((1-t\kappa(s))T(s), \ast T(s) )} + det((1-t\kappa(s))T(s), \kappa(s)(1-t\kappa(s))N(s)) =\\
+            &= \kappa(s)(1-t\kappa(s))^2det(T(s),N(s)) =\\
+            &= \kappa(s)(1-\kappa(s))^2
+        \end{align*}
+        donde hemos aplicado que $\{T(s), N(s)\}$ es una base ortonormal positivamente orientada de $\bb{R}^2$ (diedro de Frenet) por lo que su determinante es $1$. Aplicando esto a la fórmula de la curvatura
+        \begin{gather*}
+            \kappa_t(s) = \frac{\kappa(s)(1-t\kappa(s))^2}{(1-t\kappa(s))^3}
+        \end{gather*}
+        y llegamos finalmente a 
+        \begin{gather*}
+            \boxed{\kappa_t(s) = \frac{\kappa(s)}{1-t\kappa(s)}} \ \ \forall s \in \bb{R}
+        \end{gather*}
+        Una observación que podemos hacer aquí es que si $t\to 0$ tendremoms que $\kappa_t \to \kappa$. Sin embargo, si $t\to \nicefrac{1}{k}$ tendremos que $\kappa_t\to \infty$, lo que nos dice que las curvas colapsan.
+    \end{solucion}
+\end{ejercicio}
