@@ -1840,11 +1840,16 @@ ya que $p\notin D(R) \supset C$. Esto nos dice que en la semirrecta que une $q$ 
 \begin{gather*}
     |p-q| = dist(p,C)
 \end{gather*}
+
 Además, necesariamente $p-q \perp T_qC$. Consideramos ahora 
 \begin{gather*}
     v = \frac{p-q}{|p-q|}
 \end{gather*}
-que está bien definido, ya que $p\neq q$ ($p\notin C$ y $q\in C$). Tenemos que 
+que está bien definido, ya que $p\neq q$ ($p\notin C$ y $q\in C$). 
+
+% TODO: Hacer dibujo
+
+Tenemos que 
 \begin{gather*}
     L_{q,v} \cap C = \{q\}
 \end{gather*}
@@ -2133,16 +2138,6 @@ es una partición no trivial en abiertos conexos de $\bb{R}^2 \setminus C$ lo qu
     \end{gather*}
     es un difeomorfismo local sobreyectivo. Cabe destacar que $F$ no es inyectiva (es $L$-periódica en la variable $s$).
 
-    % Dibujo: Banda de ancho 2\veps llega a banda de la curva y las rectas
-    %         verticales de los puntos en \bb{R}^2 van a normales dentro de %         la banda
-    %
-    %         |
-    % --------|----------                      /---------\
-    % --------|---------- 0     -- F -->       |         |
-    % --------|----------                      \---------/
-    %         |
-    %
-
     \begin{figure}[H]
         \centering
         \begin{subfigure}[c]{0.4\textwidth}
@@ -2348,5 +2343,82 @@ Dada una curva $C\subset \bb{R}^2$ simple, compacta y conexa existe un $\veps>0$
             \boxed{\kappa_t(s) = \frac{\kappa(s)}{1-t\kappa(s)} \qquad \forall s \in \bb{R}}
         \end{gather*}
         Una observación que podemos hacer aquí es que si $t\to 0$ tendremos que $\kappa_t \to \kappa$. Sin embargo, si $t\to \nicefrac{1}{k}$ tendremos que $\kappa_t\to \infty$, lo que nos dice que las curvas colapsan.
+
+        Nos queda por estudiar la relación de las áreas. Consideramos $0<t<\veps$ y $B_\veps(C)$ un entorno tubular. Llamamos $\Omega_t$ al dominio determinado por $C_t$ y queremos estudiar la relación entre $\Omega$ y $\Omega_t$.\\
+
+        Sabemos que $C_t\subset \Omega$. Tomando complemento en la inclusión tenemos
+        \begin{gather*}
+            \bb{R}^2 \setminus \Omega \subset \bb{R}^2 \setminus C_t
+        \end{gather*}
+        Sabemos que $\bb{R}^2 \setminus \Omega = C\cup \Omega^{ext}$ y aplicando de nuevo el Teorema de la Curva de Jordan (\ref{teo:clasif}) tenemos que $\bb{R}^2 \setminus C_t = \Omega_t \cup \Omega_t^{ext}$. Reescribimos la expresión anterior:
+        \begin{gather*}
+            C\cup \Omega^{ext} \subset \Omega_t \cup \Omega_t^{ext} \sii \overline{\Omega^{ext}} \subset \Omega_t \dot{\cup} \Omega_t^{ext}
+        \end{gather*}
+        y sabemos que $\overline{\Omega^{ext}}$ es no acotado y conexo. Por tanto tendríamos solo dos posibilidades
+        \begin{gather*}
+            \overline{\Omega^{ext}} \subset \Omega_t \qquad \text{ o bien } \qquad \overline{\Omega^{ext}} \subset \Omega_t^{ext}
+        \end{gather*}
+        y descartamos la primera ya que $\Omega_t$ está acotado por lo que solo puede ser la segunda. Tomando complementarios de nuevo
+        \begin{gather*}
+            \bb{R}^2 \setminus \Omega_t^{ext} \subset \bb{R}^2 \setminus \overline{\Omega^{ext}} \sii C_t\cup \Omega_t \subset \Omega
+        \end{gather*}
+        De donde se deduce claramente que
+        \begin{gather*}
+            \Omega_t \subset \Omega
+        \end{gather*} 
+        Vamos a estudiar ahora el área de estos conjuntos (con el área de Lebesgue). Deducimos que 
+        \begin{gather*}
+            A(\Omega) = A(\Omega_t) + A(B_t^+(C))
+        \end{gather*}
+        Veamos si podemos extraer alguna conclusión de $A(B_t^+(C))$, lo cual nos permitirá estudiar la relación entre las áreas de $\Omega$ y $\Omega_t$. Podemos escribir
+        \begin{gather*}
+            A(B_t^+(C)) = A(F([0,L)\times (0,T]))
+        \end{gather*}
+        Aplicando la definición de área a esta igualdad tenemos
+        \begin{gather*}
+            A(B_t^+(C)) = A(F((0,L)\times (0,t))) = \int_{F((0,L)\times (0,t))} dsdr
+        \end{gather*}
+        Estamos en condiciones de aplicar el Teorema de Cambio de Variable (ya que $F$ es un difeomorfismo en $(0,L)\times (0,t)$) y tenemos
+        \begin{gather*}
+            A(B_t^+(C)) = \int_{(0,L)\times (0,t)} (1 \circ F)(s,r) |Jac(F(s,r))|drds = \int_{(0,L)\times (0,t)} |Jac(F(s,r))|drds
+        \end{gather*}
+        sabemos que 
+        \begin{gather*}
+            \frac{\partial F}{\partial s}(s,r) = (1-r\kappa(s))T(s) \qquad \qquad \frac{\partial F}{\partial r}(s,r) = N(s)
+        \end{gather*}
+        por lo que el Jacobiano de $F$ en el punto $(s,r)$ será 
+        \begin{gather*}
+            Jac(F(s,r)) = det 
+            \begin{pmatrix}
+                \frac{\partial F}{\partial s} \\[1em] \frac{\partial F}{\partial r}
+            \end{pmatrix}
+            (s,r) = (1-r\kappa(s))
+        \end{gather*}
+        por lo que volviendo al cálculo del Área
+        \begin{gather*}
+            A(B_t^+(C)) = \int_{(0,L)\times (0,t)} |Jac(F(s,r))|drds = \int_{(0,L)\times (0,t)} (1-r\kappa(s)) drds 
+        \end{gather*}
+        Por el teorema de Fubini tenemos
+        \begin{gather*}
+            A(B_t^+(C)) = \int_0^t \left(L-r \int_0^L \kappa(s) ds\right) dr
+        \end{gather*}
+        donde podemos pensar en que
+        \begin{gather*}
+            L-r \int_0^L \kappa(s) ds = \int_0^t L(C_r)dr
+        \end{gather*}
+        Sin embargo, nos interesa seguir calculando la integral:
+        \begin{gather*}
+            A(B_t^+(C)) = \int_0^t \left(L-r \int_0^L \kappa(s) ds\right) dr = Lt - (\int_0^L \kappa(s)ds) \frac{t^2}{2}
+        \end{gather*}
+        Uniendo esto con la relación que estábamos estudiando
+        \begin{gather*}
+            A(\Omega) = A(\Omega_t) + Lt - \left(\int_0^L \kappa(s)ds\right) \frac{t^2}{2}
+        \end{gather*}
+        de donde finalmente llegamos a la fórmula buscada
+        \begin{gather*}
+            \boxed{A(\Omega_t) = A(\Omega) + Lt - \left(\int_0^L \kappa(s)ds\right) \frac{t^2}{2}}
+        \end{gather*}
     \end{solucion}
 \end{ejercicio}
+
+
