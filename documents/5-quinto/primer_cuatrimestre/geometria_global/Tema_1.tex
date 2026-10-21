@@ -2424,6 +2424,8 @@ Dada una curva $C\subset \bb{R}^2$ simple, compacta y conexa existe un $\veps>0$
 
 \section{Teorema de la Divergencia}
 
+\subsection{Teorema del Área}
+
 Vamos a comenzar recordando un teorema que ya deberíamos todos de conocer:
 
 \begin{teo}[Teorema de Cambio De Variable]\label{teo:cambio_variable}
@@ -2439,7 +2441,7 @@ Vamos a comenzar recordando un teorema que ya deberíamos todos de conocer:
     \end{gather*}
 \end{teo}
 
-A pesar de la utilidad de este teorema, nosotros necesitamos un Teorema más general que este para el problema que estamos estudiando, en el que nos gustaría que desapareciera $J$ de la siguiente forma:\\
+A pesar de la utilidad de este teorema, nosotros necesitamos uno más general para el problema que estamos estudiando, en el que nos gustaría que desapareciera $J$. Inicialmente pensamos en la siguiente aproximación:\\
 
 Dada una función $h: I \to \bb{R}$ elegimos $f=h\circ \phi^{-1} : J \to \bb{R}$. Sustituyendo $f$ en el \hyperref[teo:cambio_variable]{Teorema de Cambio de Variable} obtenemos que 
 \begin{gather*}
@@ -2502,13 +2504,13 @@ La equivalencia y la igualdad anteriores tienen sentido si $\phi$ es solamente $
     \end{gather*}
 \end{teo}
 
-Esto es claramente una generalización del Teorema de Cambio de Variable.
+Esto es claramente una generalización del \hyperref[teo:cambio_variable]{Teorema de Cambio de Variable}.
 
 \begin{ejemplo}
-    Consideramos $C\subset \bb{R}^2$ una curva simple, compacta y conexa y una parametrización p.a. $L$-periódica $\alpha: \bb{R} \to \bb{R}^2$ tal que $\alpha_{|_{[0,L)}}$ es inyectiva y tal que $\alpha$ orienta positivamente a $C$. Elegimos $I=[0,L]$ un conjunto medible y 
+    Consideramos $C\subset \bb{R}^2$ una curva simple, compacta y conexa y una parametrización por el arco $L$-periódica $\alpha: \bb{R} \to \bb{R}^2$ tal que $\alpha_{|_{[0,L)}}$ es inyectiva y tal que $\alpha$ orienta positivamente a $C$. Elegimos $I=[0,L]$ un conjunto medible y definimos
     \Func{\phi}{[0,L]}{\bb{R}}
          {s}{arg(N(s))}
-    Por lo que $\phi: J\subset [0,L] \to $ ya que hay que quitar los $s\in [0,L]$ que verifiquen $N(s)=(1,0)$. Tenemos que su dominio es medible y $\phi$ es $\cc{C}^1$. Consideramos $h: I \to \bb{R}$ dado por $\chi_A$ donde 
+    Sin embargo, vamos a considerar $\phi: J\subset [0,L] \to \bb{R}$ ya que hay que quitar los $s\in [0,L]$ que verifiquen $N(s)=(1,0)$. En cualquier caso tenemos que su dominio es medible y $\phi$ es $\cc{C}^1$. Consideramos $h: I \to \bb{R}$ dado por $\chi_A$ (la función característica del conjunto $A$) donde 
     \begin{gather*}
         A = \{s\in [0,L] \ : \ \kappa(s) \geq 0 \}
     \end{gather*}
