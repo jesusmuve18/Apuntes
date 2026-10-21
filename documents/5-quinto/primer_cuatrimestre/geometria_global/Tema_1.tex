@@ -364,7 +364,7 @@ Del ejemplo anterior (Ejemplo~\ref{ej:cambio}) podemos concluir la siguiente pro
     A las curvas simples de $\bb{R}^2$ que son homeomorfas a $S^1$ se les llama \textbf{curvas de Jordan}.
 \end{definicion}
 
-\subsection{Parametrizaciones por el arco y solapamiento de entornos. Demostración del Teorema de Clasificación.}
+\subsection{Parametrizaciones por el arco y solapamiento de entornos.}
 
 Vamos a ver ahora que todas las curvas simples conexas de $\bb{R}^2$ son trazas de curvas regulares en $\bb{R}^2$ (aunque la otra inclusión no se da\footnote{Basta pensar en una curva regular con autointersecciones o el Folium de Descartes}).
 
@@ -1433,12 +1433,12 @@ Vamos a ver ahora que todas las curvas simples conexas de $\bb{R}^2$ son trazas 
         \overline{\Omega} \subset \overline{\Omega \cup C} = \Omega \cup C 
     \end{gather*}
     Además, sabemos que 
-    \begin{gather}
-        Fr(\Omega) = \overline{\Omega} \setminus \overset{\circ}{\Omega} = \overline{\Omega} \setminus \Omega \quad \Rightarrow \quad Fr(\Omega) \subset (\Omega \cup C)\setminus \Omega = C\label{eq:frOmega}
-    \end{gather}
+    \begin{gather*}
+        Fr(\Omega) = \overline{\Omega} \setminus \overset{\circ}{\Omega} = \overline{\Omega} \setminus \Omega \quad \Rightarrow \quad Fr(\Omega) \subset (\Omega \cup C)\setminus \Omega = C
+    \end{gather*}
     De esta forma hemos probado que $Fr(\Omega) \subset C$.\\
 
-    Sabemos que $Fr(\Omega)$ es cerrado en $C$. Nos preguntamos si $Fr(\Omega)=\emptyset$ pero ya habíamos escrito $Fr(\Omega) = \overline{\Omega} \setminus \Omega$ (\eqref{eq:frOmega}) por lo que si la frontera fuera vacía necesariamente tendríamos
+    Sabemos que $Fr(\Omega)$ es cerrado en $C$. Nos preguntamos si $Fr(\Omega)=\emptyset$ pero ya habíamos escrito $Fr(\Omega) = \overline{\Omega} \setminus \Omega$ por lo que si la frontera fuera vacía necesariamente tendríamos
     \begin{gather*}
         \overline{\Omega} = \Omega
     \end{gather*}
@@ -1815,9 +1815,9 @@ Tenemos que $\Omega_0 \cup \Omega_1 \subset \bb{R}^2 \setminus C$ y nos planteam
     p\in \Omega_0\cup\Omega_1
 \end{gather*}
 Lo que nos da la otra inclusión y prueba la igualdad
-\begin{gather}
-    \boxed{\Omega_0\cup\Omega_1 = \bb{R}^2 \setminus C}\label{eq:union}
-\end{gather}
+\begin{gather*}
+    \boxed{\Omega_0\cup\Omega_1 = \bb{R}^2 \setminus C}
+\end{gather*}
 Recordemos que $C$ era compacta, luego existe un $R>0$ tal que $C\subset D(R)$. Elegimos un $p\notin D(R)$ y definimos $v=\frac{p}{|p|}\in S^1$. Dicho $v$ es un vector que apunta a $p$ hacia el infinito desde el origen. Por ello es claro que $L_{p,v}\cap D(R) = \emptyset$ y por tanto
 \begin{gather*}
     L_{p,v}\cap C \subset L_{p,v}\cap D(R) = \emptyset \Rightarrow L_{p,v}\cap C = \emptyset
@@ -1827,9 +1827,9 @@ y concluimos que $L_{p,v} \transv C$ y que $\#(L_{p,v}\cap C)=0$, que al ser par
     \bb{R}^2 \setminus D(R)\subset \Omega_0
 \end{gather*}
 llegando finalmente a que 
-\begin{gather}
-    \boxed{\Omega_0 \text{ es no acotado}}\label{eq:Omega0}
-\end{gather}
+\begin{gather*}
+    \boxed{\Omega_0 \text{ es no acotado}}
+\end{gather*}
 En particular, $\boxed{\Omega_0\neq \emptyset}$.\\
 
 Veamos ahora que $\Omega_1$ también es no vacío. Para ello de nuevo $p\notin D(R)$. Como $C$ es compacta entonces existe un $q\in C$ tal que 
@@ -1865,16 +1865,13 @@ De esta forma, tomando $0<\veps<\delta$ podemos considerar $r=q - \veps v \in B(
 \end{gather*}
 Además, $L_{r,v}\transv C$ claramente. Igualmente $\#(L_{r,v}\cap C)=1$
 que es impar, luego $r\in \Omega_1$ lo que nos lleva que 
-\begin{gather}
-    \boxed{\Omega_1 \neq \emptyset}\label{eq:Omega1}
-\end{gather}
+\begin{gather*}
+    \boxed{\Omega_1 \neq \emptyset}
+\end{gather*}
 
-\subsection{Demostración del Teorema de la Curva de Jordan}
+\subsection{Teorema de la Curva de Jordan}
 
-% TODO: Copiar lo que se dio el viernes de 12:00 a 14:00
-% AQUÍ FALTA LO DEL VIERNES 9 DE OCTUBRE\\
-
-Ya habíamos estudiado que $\bb{R}^2 \setminus C = \Omega_0 \cup \Omega_1$ (\eqref{eq:union}) y que $\Omega_0\neq \emptyset$ y $\Omega_1 \neq \emptyset$ (\eqref{eq:Omega1}). Además vimos que $\Omega_0$ no está acotado (\eqref{eq:Omega0}). Veamos ahora que $\Omega_0$ y $\Omega_1$ son disjuntos. Para ello suponemos que no, es decir que $\exists p\in \Omega_0\cap \Omega_1$. Entonces tendremos que
+Ya habíamos estudiado que $\bb{R}^2 \setminus C = \Omega_0 \cup \Omega_1$  y que $\Omega_0\neq \emptyset$ y $\Omega_1 \neq \emptyset$ . Además vimos que $\Omega_0$ no está acotado. Veamos ahora que $\Omega_0$ y $\Omega_1$ son disjuntos. Para ello suponemos que no, es decir que $\exists p\in \Omega_0\cap \Omega_1$. Entonces tendremos que
 \begin{gather*}
     \exists v_0\in S^1 \text{ de forma que } L_{p,v_0}\transv C \text{ y } \#(L_{p,v_0} \cap C) \text{ par }\\
     \exists v_1\in S^1 \text{ de forma que } L_{p,v_1}\transv C \text{ y } \#(L_{p,v_1} \cap C) \text{ impar }
@@ -1956,13 +1953,15 @@ Por lo que $\Omega_0$ es conexo (y análogamente $\Omega_1$). Tenemos finalmente
 es una partición no trivial en abiertos conexos de $\bb{R}^2 \setminus C$ lo que concluye en el siguiente teorema.
 
 \begin{teo}[Teorema de la Curva (Diferenciable) de Jordan]
-    Si $C\subset \bb{R}^2$ es una curva simple compacta y conexa, entonces $\bb{R}^2 \setminus C$ tiene exactamente 2 componentes conexas cuya frontera común es $C$ (esto es válido imponiendo solo que $C$ es conexa y cerrada). De dichas componentes conexas, solo una es acotada (si $C$ es compacta).\\
+    Si $C\subset \bb{R}^2$ es una curva simple compacta y conexa, entonces $\bb{R}^2 \setminus C$ tiene exactamente 2 componentes conexas cuya frontera común es $C$ (esto es válido imponiendo solo que $C$ es conexa y cerrada). De dichas componentes conexas, solo una es acotada (si $C$ es compacta).
+\end{teo}
 
-    La componente conexa de $\bb{R}^2\setminus C$ que es acotada se llama el \textbf{dominio interior determinado por $C$} y se representa por $\Omega$, cuya definición era (\eqref{eq:defOmega})
+\begin{definicion}
+    La componente conexa de $\bb{R}^2\setminus C$ que es acotada se llama el \textbf{dominio interior determinado por $C$} y se representa por $\Omega$, cuya definición recordamos que era
     \begin{gather*}
         \Omega = \{p\in \bb{R}^2 \setminus C \ : \ \exists v \in S^1 \text{ con } L_{p,v}\transv C \text{ y } \#(L_{p,v} \cap C) \text{ impar}\}
     \end{gather*} 
-\end{teo}
+\end{definicion}
 
 \subsection{Más información sobre la forma de estar de $C$ en $\bb{R}^2$}
 \begin{definicion}
