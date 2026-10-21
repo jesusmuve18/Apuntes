@@ -2342,7 +2342,7 @@ Dada una curva $C\subset \bb{R}^2$ simple, compacta y conexa existe un $\veps>0$
         \begin{gather*}
             \boxed{\kappa_t(s) = \frac{\kappa(s)}{1-t\kappa(s)} \qquad \forall s \in \bb{R}}
         \end{gather*}
-        Una observación que podemos hacer aquí es que si $t\to 0$ tendremos que $\kappa_t \to \kappa$. Sin embargo, si $t\to \nicefrac{1}{k}$ tendremos que $\kappa_t\to \infty$, lo que nos dice que las curvas colapsan.
+        Una observación que podemos hacer aquí es que si $t\to 0$ tendremos que $\kappa_t \to \kappa$. Sin embargo, si $t\to \nicefrac{1}{k}$ tendremos que $\kappa_t\to \infty$, lo que nos dice que las curvas colapsan.\\
 
         Nos queda por estudiar la relación de las áreas. Consideramos $0<t<\veps$ y $B_\veps(C)$ un entorno tubular. Llamamos $\Omega_t$ al dominio determinado por $C_t$ y queremos estudiar la relación entre $\Omega$ y $\Omega_t$.\\
 
@@ -2418,7 +2418,107 @@ Dada una curva $C\subset \bb{R}^2$ simple, compacta y conexa existe un $\veps>0$
         \begin{gather*}
             \boxed{A(\Omega_t) = A(\Omega) + Lt - \left(\int_0^L \kappa(s)ds\right) \frac{t^2}{2}}
         \end{gather*}
+        que observamos que es un polinomio de grado 2.
     \end{solucion}
 \end{ejercicio}
 
+\section{Teorema de la Divergencia}
 
+Vamos a comenzar recordando un teorema que ya deberíamos todos de conocer:
+
+\begin{teo}[Teorema de Cambio De Variable]\label{teo:cambio_variable}
+    Consideramos los intervalos abiertos $I,J\subset \bb{R}$ y un difeomorfismo $\phi : I \to J$. Si consideramos ahora una función $f$ cualquiera con
+    \begin{gather*}
+        \xymatrix{
+            I \ar[r]^\phi & J \ar[r]^f & \bb{R}
+        }
+    \end{gather*}
+    Entonces $f$ es integrable en $J$ si y solo si $(f\circ \phi)|\phi'|$ es integrable en $I$. En tal caso
+    \begin{gather*}
+        \int_J f = \int_I (f \circ \phi)|\phi'|
+    \end{gather*}
+\end{teo}
+
+A pesar de la utilidad de este teorema, nosotros necesitamos un Teorema más general que este para el problema que estamos estudiando, en el que nos gustaría que desapareciera $J$ de la siguiente forma:\\
+
+Dada una función $h: I \to \bb{R}$ elegimos $f=h\circ \phi^{-1} : J \to \bb{R}$. Sustituyendo $f$ en el \hyperref[teo:cambio_variable]{Teorema de Cambio de Variable} obtenemos que 
+\begin{gather*}
+    \begin{array}{c}
+        h\circ \phi^{-1} \\
+        \text{integrable en $J$}
+    \end{array} \sii
+    \begin{array}{c}
+        (h \circ \phi^{-1} \circ \phi)|\phi'|\\
+        \text{es integrable en $I$}
+    \end{array} \sii
+    \begin{array}{c}
+        h|\phi'|\\
+        \text{es integrable en $I$}
+    \end{array}
+\end{gather*}
+en cuyo caso 
+\begin{gather*}
+    \int_J h \circ \phi^{-1} = \int_I h|\phi'|
+\end{gather*}
+donde $\phi: I \to J$ es un difeomorfismo y $h:I \to \bb{R}$ es una función.
+Definimos así una función nueva\footnote{se llama $n$ porque ``cuenta''} $n(\phi, h)$ dada por
+\begin{gather*}
+    n(\phi, h)(x) = \left\{
+        \begin{array}{l c l}
+            0 & \text{ si } & x\notin J = im(\phi)\\
+            h(\phi^{-1}(x)) & \text{ si } & x\in J = im(\phi)
+        \end{array}
+    \right.
+\end{gather*}
+Esta función podemos reescribirla como 
+\begin{gather*}
+    n(\phi, h)(n) = \sum_{\phi(s)=x} h(s)
+\end{gather*}
+donde la suma se entiende $0$ si $\phi^{-1}(x)=\emptyset$. Con esta nueva aplicación podemos reescribir el teorema como sigue:\\
+
+Dado $I \subset \bb{R}$ un intervalo abierto de $\bb{R}$, un difeomorfismo $\phi: I \to \phi(I)$ y $h:I \to \bb{R}$ una función cualquiera. Entonces 
+\begin{gather*}
+    h|\phi'| \text{ integrable en $I$ } \sii n(\phi, h) \text{ integrable en $\bb{R}$ }
+\end{gather*}
+En dicho caso, se tendrá que 
+\begin{gather*}
+    \int_I h|\phi'| = \int_\bb{R} n(\phi, h) 
+\end{gather*}
+
+La equivalencia y la igualdad anteriores tienen sentido si $\phi$ es solamente $\cc{C}^1$. Pues en este caso el teorema también es válido. Esto nos lleva a la redacción un nuevo Teorema:
+
+\begin{teo}[Teorema del Área]\label{teo:area}
+    Dado $I \subset \bb{R}$ un conjunto medible de, $\phi: I \to \phi(I)$ una función $\cc{C}^1$ y $h:I \to \bb{R}$ una función cualquiera. Entonces 
+    \begin{gather*}
+        h|\phi'| \text{ integrable en $I$ } \sii n(\phi, h) \text{ integrable en $\bb{R}$ }
+    \end{gather*}
+    donde $n(\phi, h):\bb{R}\to \bb{R}$ está definida por
+    \begin{gather*}
+        n(\phi, h)(n) = \sum_{\phi(s)=x} h(s)
+    \end{gather*}
+    donde se considera que la suma es $0$ si no hay ningún $s$ tal que $\phi(s)=x$. En cualquiera de los casos, se tendrá que 
+    \begin{gather*}
+        \int_I h|\phi'| = \int_\bb{R} n(\phi, h) 
+    \end{gather*}
+\end{teo}
+
+Esto es claramente una generalización del Teorema de Cambio de Variable.
+
+\begin{ejemplo}
+    Consideramos $C\subset \bb{R}^2$ una curva simple, compacta y conexa y una parametrización p.a. $L$-periódica $\alpha: \bb{R} \to \bb{R}^2$ tal que $\alpha_{|_{[0,L)}}$ es inyectiva y tal que $\alpha$ orienta positivamente a $C$. Elegimos $I=[0,L]$ un conjunto medible y 
+    \Func{\phi}{[0,L]}{\bb{R}}
+         {s}{arg(N(s))}
+    Por lo que $\phi: J\subset [0,L] \to $ ya que hay que quitar los $s\in [0,L]$ que verifiquen $N(s)=(1,0)$. Tenemos que su dominio es medible y $\phi$ es $\cc{C}^1$. Consideramos $h: I \to \bb{R}$ dado por $\chi_A$ donde 
+    \begin{gather*}
+        A = \{s\in [0,L] \ : \ \kappa(s) \geq 0 \}
+    \end{gather*}
+    Por el \hyperref[teo:area]{Teorema del Área} tenemos que $\chi_A|arg'(N)|$ es integrable en $J$ si y solo si $n(arg(N), \chi_A)$ es integrable en $\bb{R}$. En tal caso
+    \begin{gather*}
+        \int_J \chi_A |arg'N| = \int_\bb{R} n(arg(N), \chi_A)
+    \end{gather*}
+    Dado $s\in J$ tenemos que 
+    \begin{gather*}
+        \chi_A(s) \cdot |arg'(N(s))| = \chi_A(s) \cdot \left| \frac{1}{i} \cdot \frac{N'(s)}{N(s)} \right| = \chi_A(s) \cdot |N'(s)| = \chi_A(s)|\kappa(s) = \kappa^+(s)
+    \end{gather*}
+    donde $\kappa^+$ es la parte positiva de $\kappa$. Tenemos entonces que $\kappa^+$ es integrable en $J$ si y solo si $n(arg(N), \chi_A)$ es integrable en $\bb{R}$. Sabemos que $\kappa^+$ es integrable en $J$ ya que es continua y está acotada dentro de un medible lo que nos garantiza que se da la equivalencia.
+\end{ejemplo}
