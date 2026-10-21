@@ -111,7 +111,7 @@ Del ejemplo anterior (Ejemplo~\ref{ej:cambio}) podemos concluir la siguiente pro
     \begin{gather*}
         \left.
         \begin{array}{l}
-            p = \alpha(t_0) \in \alpha (I)\\\\
+            p = \alpha(t_0) \in \alpha (I)\\[0.8em]
             p = \beta(u_0) \in \beta(J)
         \end{array}
         \right\} \Rightarrow \alpha(I) \cap \beta(J) \neq \emptyset,\quad \Phi(t_0) = u_0
@@ -1190,7 +1190,7 @@ Vamos a ver ahora que todas las curvas simples conexas de $\bb{R}^2$ son trazas 
                 \gamma(s) =
                 \left\{
                     \begin{array}{l c c}
-                        \alpha(s) & \text{ si } & s \in I\\\\
+                        \alpha(s) & \text{ si } & s \in I\\[0.8em]
                         (\beta \circ T)(s) & \text{ si } & s\in T^{-1}(J)
                     \end{array}
                 \right.
@@ -1398,7 +1398,7 @@ Vamos a ver ahora que todas las curvas simples conexas de $\bb{R}^2$ son trazas 
         
         Analizamos si podemos aplicar el Teorema de la Función Inversa en $(0,0)$:
         \begin{align*}
-            \frac{\partial F}{\partial s}(s,t) &= \alpha'(s) + t N'(s) = T(s) + t(-\kappa(s)T(s)) = (1 - t\kappa(s)) T(s) \\\\
+            \frac{\partial F}{\partial s}(s,t) &= \alpha'(s) + t N'(s) = T(s) + t(-\kappa(s)T(s)) = (1 - t\kappa(s)) T(s) \\[0.8em]
             \frac{\partial F}{\partial t}(s,t) &= N(s)
         \end{align*}
         Evaluando en el origen $(0,0)$:
@@ -1479,133 +1479,137 @@ Vamos a ver ahora que todas las curvas simples conexas de $\bb{R}^2$ son trazas 
 
 \subsection{Distinción de las componentes: paridad de cortes con rectas}
 
-\begin{observacion}
-    Para probar que son dos exactamente hay que distinguir entre ellas. Vamos a suponer que $C$ es compacta, es decir, homeomorfa a $S^1$. Comenzamos viendo el caso más simple posible, $C=S^1$.\\
+Para probar que son dos exactamente hay que distinguir entre ellas. Vamos a suponer que $C$ es compacta, es decir, homeomorfa a $S^1$. Comenzamos viendo el caso más simple posible, $C=S^1$.\\
 
-    Comenzamos escribiendo $C$ de forma explícita:
-    \begin{gather*}
-        x^2 + y^2 = 1, \qquad F(x,y) = x^2 + y^2, \qquad S^1 = F^{-1}(\{1\})
-    \end{gather*}
-    De esta forma tendremos que 
-    \begin{gather*}
-        \bb{R}^2 \setminus S^1 = F^{-1}((-\infty, 1)) \dot{\cup} F^{-1}((1,+\infty))
-    \end{gather*}
-    donde ambos conjuntos disjuntos son conexos y abiertos. Esto lo podemos hacer porque $S^1$ viene dado por una ecuación implícita, es decir, es imagen inversa de un valor regular (apartado~\ref{ej:nivel} del Ejemplo~\ref{ej:construccion}) de un $F:\bb{R}^2 \to \bb{R}$. Sin embargo, en general para cualquier curva parece que no es viable encontrar una función $F$ con las características anteriores.\\
+Comenzamos escribiendo $C$ de forma explícita:
+\begin{gather*}
+    x^2 + y^2 = 1, \qquad F(x,y) = x^2 + y^2, \qquad S^1 = F^{-1}(\{1\})
+\end{gather*}
+De esta forma tendremos que 
+\begin{gather*}
+    \bb{R}^2 \setminus S^1 = F^{-1}((-\infty, 1)) \dot{\cup} F^{-1}((1,+\infty))
+\end{gather*}
+donde ambos conjuntos disjuntos son conexos y abiertos. Esto lo podemos hacer porque $S^1$ viene dado por una ecuación implícita, es decir, es imagen inversa de un valor regular (apartado~\ref{ej:nivel} del Ejemplo~\ref{ej:construccion}) de un $F:\bb{R}^2 \to \bb{R}$. Sin embargo, en general para cualquier curva parece que no es viable encontrar una función $F$ con las características anteriores.\\
 
-    Veamos un enfoque distinto. Consideramos un punto cualquiera $p$ que quede en la región interior a $C$. Cualquier semirrecta que tracemos desde $p$ en una cierta dirección cortará en un único punto a $C$ (habrá infinitas semirrectas que verifiquen esto, bastará variar la dirección). Sin embargo, si consideramos ahora que $p$ queda fuera de la circunferencia, estas semirrectas ahora pueden cortar en $0,1$ o $2$ puntos a $C$ dependiendo de la dirección escogida (infinitas direcciones para cortar $0$ o $2$ veces y solo 2 direcciones para cortar $1$ vez, las tangentes). De momento vamos a olvidar que pueden cortar en las tangentes por lo que solo cortarán en $0$ o en $2$ puntos distintos.
+Veamos un enfoque distinto. Consideramos un punto cualquiera $p$ que quede en la región interior a $C$. Cualquier semirrecta que tracemos desde $p$ en una cierta dirección cortará en un único punto a $C$ (habrá infinitas semirrectas que verifiquen esto, bastará variar la dirección). Sin embargo, si consideramos ahora que $p$ queda fuera de la circunferencia, estas semirrectas ahora pueden cortar en $0,1$ o $2$ puntos a $C$ dependiendo de la dirección escogida (infinitas direcciones para cortar $0$ o $2$ veces y solo 2 direcciones para cortar $1$ vez, las tangentes). De momento vamos a olvidar que pueden cortar en las tangentes por lo que solo cortarán en $0$ o en $2$ puntos distintos.
 
-    \begin{figure}[H]
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[c]{0.30\textwidth}
         \centering
-        \begin{subfigure}[c]{0.30\textwidth}
-            \centering
-            \begin{tikzpicture}
-                \shorthandoff{>}
-                \draw[thick] (0,0) circle (1.5cm);
+        \begin{tikzpicture}
+            \shorthandoff{>}
+            \draw[thick] (0,0) circle (1.5cm);
 
-                % Punto p
-                \coordinate (P) at (-0.3, -0.2);
-                \filldraw[red] (P) circle (2pt) node[below right] {$p$};
+            % Punto p
+            \coordinate (P) at (-0.3, -0.2);
+            \filldraw[red] (P) circle (2pt) node[below right] {$p$};
 
-                \draw[red, thick] (P) -- (30:2.5);
-                \filldraw[red] (30:1.5) circle (2pt);
+            \draw[red, thick] (P) -- (30:2.5);
+            \filldraw[red] (30:1.5) circle (2pt);
 
-                \draw[red, thick] (P) -- ++(200:2.5);
-                \filldraw[red] (203:1.5) circle (2pt);
+            \draw[red, thick] (P) -- ++(200:2.5);
+            \filldraw[red] (203:1.5) circle (2pt);
 
-                \draw[red, thick] (P) -- ++(100:2.5);
-                \filldraw[red] (112:1.5) circle (2pt);
-            \end{tikzpicture}
-        \end{subfigure}%
-        \hspace{2cm}
-        \begin{subfigure}[c]{0.30\textwidth}
-            \centering
-            \begin{tikzpicture}
-                \shorthandoff{>}
-                \draw[thick] (0,0) circle (1.5cm);
+            \draw[red, thick] (P) -- ++(100:2.5);
+            \filldraw[red] (112:1.5) circle (2pt);
+        \end{tikzpicture}
+    \end{subfigure}%
+    \hspace{2cm}
+    \begin{subfigure}[c]{0.30\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \shorthandoff{>}
+            \draw[thick] (0,0) circle (1.5cm);
 
-                % Punto p
-                \coordinate (P) at (-0.5, -2);
-                \filldraw[red] (P) circle (2pt) node[below right] {$p$};
+            % Punto p
+            \coordinate (P) at (-0.5, -2);
+            \filldraw[red] (P) circle (2pt) node[below right] {$p$};
 
-                % Definimos los 3 puntos sobre el círculo (a 30°, 200° y 100° del origen)
-                \coordinate (A) at (30:1.5);
-                \coordinate (B) at (212:1.5);
-                \coordinate (C) at (2, -1.5);
-                \coordinate (D) at (263.5:1.5);
+            % Definimos los 3 puntos sobre el círculo (a 30°, 200° y 100° del origen)
+            \coordinate (A) at (30:1.5);
+            \coordinate (B) at (212:1.5);
+            \coordinate (C) at (2, -1.5);
+            \coordinate (D) at (263.5:1.5);
 
-                % Semirrectas
-                \draw[red, thick] (P) -- ($(P)!1.5!(A)$);
-                \draw[red, thick] (P) -- ($(P)!2!(B)$);
-                \draw[red, thick] (P) -- ($(P)!1.5!(C)$);
+            % Semirrectas
+            \draw[red, thick] (P) -- ($(P)!1.5!(A)$);
+            \draw[red, thick] (P) -- ($(P)!2!(B)$);
+            \draw[red, thick] (P) -- ($(P)!1.5!(C)$);
 
-                % Puntos de corte
-                \filldraw[red] (A) circle (2pt);
-                \filldraw[red] (B) circle (2pt);
-                \filldraw[red] (D) circle (2pt);
-            \end{tikzpicture}
-        \end{subfigure}
-    \end{figure}
+            % Puntos de corte
+            \filldraw[red] (A) circle (2pt);
+            \filldraw[red] (B) circle (2pt);
+            \filldraw[red] (D) circle (2pt);
+        \end{tikzpicture}
+    \end{subfigure}
+\end{figure}
 
-    Por tanto, en $S^1$ podemos distinguir también en qué c.c. está un punto dependiendo de la paridad de $\#(L \cap C)$ donde $L$ son semirrectas \underline{no tangentes} a $S^1$. Para que esto funcione para una curva cualquiera $C$ necesitaremos 2 ingredientes: uno geométrico (\textbf{transversalidad}) y otro analítico (\textbf{Teorema de Sard}, Teorema~\ref{teo:sard}).\\
+Por tanto, en $S^1$ podemos distinguir también en qué c.c. está un punto dependiendo de la paridad de $\#(L \cap C)$ donde $L$ son semirrectas \underline{no tangentes} a $S^1$. Para que esto funcione para una curva cualquiera $C$ necesitaremos 2 ingredientes: uno geométrico (\hyperref[def:transv_p]{\textbf{transversalidad}}) y otro analítico (\hyperref[teo:sard]{\textbf{Teorema de Sard}}).\\
 
-    Consideramos así $C$ una curva simple y $L$ una recta (o semirrecta con punto base en $\bb{R}^2 \setminus C$) de $\bb{R}^2$.\\
+Consideramos así $C$ una curva simple y $L$ una recta (o semirrecta con punto base en $\bb{R}^2 \setminus C$) de $\bb{R}^2$.\\
 
-    Sabemos que $L$ es tangente a $C$ en $p$ si $T_pC=L$ (Usamos la notación $L\|_p C$). Diremos que $L$ es \textbf{transversa} a $C$ en $p$ si $T_pC \neq L$ y lo notaremos por $L\transv_pC$ . Nos preguntamos ahora qué condición ($\|_p$ o bien $\transv_p$) es más ``estable''. En principio parece que ante pequeñas variaciones la condición de transversalidad es mucho más ``estable'' y que la tangencia es ``inestable''.\\
+Sabemos que $L$ es tangente a $C$ en $p$ si $T_pC=L$ (Usamos la notación $L\|_p C$). Podemos pensar en el resto de casos posibles y hacemos la siguiente definición:
 
-    Consideramos así una curva $C$ y $L$ una recta con $C\transv_p L$. De esta forma tendremos que $L$ viene dada por una ecuación lineal 
-    \begin{gather*}
-        L \equiv \langle x,n \rangle + c = 0
-    \end{gather*}
-    donde $x\in \bb{R}^2$ y $|n|=1$. El haz $H$ de rectas paralelas a $L$ tiene ecuación 
-    \begin{gather*}
-        H = \langle x, n \rangle + c + t = 0 \quad \forall t \in \bb{R}
-    \end{gather*}
-    Si $t \in \bb{R}$, escribimos $L_t$ a la recta de $H$ correspondiente a dicho valor de $t$, de forma que $L_0=L$. Consideramos $\alpha:I \to \bb{R}^2$ curva regular, un intervalo $I$ con $0\in I$ de forma que $\alpha(0)=p$. Nos planteamos cómo escribir en función de $\alpha$ el hecho de que $C\transv_pL$. Sabemos que $T_pC \neq L$ lo cual podemos traducir como 
-    \begin{gather*}
-        \langle \alpha'(0),n \rangle \neq 0
-    \end{gather*}
-    Definimos $F: I \times \bb{R} \to \bb{R}$ de forma que 
-    \begin{gather*}
-        F(s,t) = \langle \alpha(s), n \rangle + c + t
-    \end{gather*}
-    y es diferenciable. Es claro también que
-    \begin{align*}
-        F(0,0) &= \langle \alpha(0), n \rangle + c + 0 = \langle p,n \rangle + c = 0\\\\
-        \frac{\partial F}{\partial s} (s,t) &= \langle \alpha'(s), n \rangle\\\\
-        \frac{\partial F}{\partial s}(0,t) &= \langle \alpha'(0), n \rangle \neq 0
-    \end{align*}
-    y por continuidad de $\alpha'$ existirá un entorno de $0$ suficientemente pequeño en el que se tiene que $\frac{\partial F}{\partial s}(s,t) = \langle \alpha'(s), n \rangle \neq 0$. Por tanto podemos considerar el intervalo $I$ lo suficientemente pequeño como para que $\langle \alpha'(s), n \rangle\neq 0$ para cualquier $s\in I$ lo que nos dice que 
-    \begin{gather*}
-        \frac{\partial F}{\partial s}(s,t) = \langle \alpha'(s), n \rangle \neq 0 \qquad \forall (s,t) \in I\times \bb{R}
-    \end{gather*}
-    Estamos en condiciones de aplicar el Teorema de la Función Implícita a $F$ en $(0,0)$. Este nos dirá que existe un $W$ entorno abierto de $(0,0)$ en $I \times \bb{R}$ de forma que $W=(-\delta , \delta) \times (-\veps, \veps)$ y tal que 
-    \begin{align*}
-        W\cap F^{-1}(\{0\}) &= \text{ grafo de una }f:(-\veps, \veps) \to \bb{R}\\
-        &= \{(s,t)\in (-\delta , \delta) \times (-\veps, \veps)\ : \ (s,t) = (f(t), t) \}
-    \end{align*}
-    Tenemos que 
-    \begin{gather*}
-        F^{-1}(\{0\}) = \{(s,t)\in I \times \bb{R} \ : \ \langle \alpha(s), n \rangle + c + t = 0\}
-    \end{gather*}
-    por lo que $W \cap F^{-1}(\{0\})$ serán los puntos con $|s| < \delta$, $|t|<\veps$ escritos de la forma $\alpha((-\delta, \delta))\cap H_\veps$ donde $H_\veps$ es una banda de $H$ de radio $\veps$. Además
-    \begin{gather*}
-        F(f(t), t) = 0 \qquad \forall |t|<\veps
-    \end{gather*}
-    Derivamos esta expresión respecto de $t$ y nos queda
-    \begin{align*}
-        \frac{\partial F}{\partial s}(f(t), t)f'(t) + \frac{\partial F}{\partial t}(f(t), t) = 0\quad
-        &\Rightarrow \quad
-        \langle \alpha'(f(t)), n \rangle \cdot f'(t) + 1 = 0\quad
-        \Rightarrow\\
-        &\Rightarrow \quad
-        f'(t) = - \frac{1}{\langle \alpha'(f(t)), n \rangle}
-    \end{align*}
-    Por lo que $f$ es monótona y biyectiva sobre la imagen. Llegamos a que 
-    para cada $t\in (-\veps, \veps)$ existe un único $p_t\in \alpha((-\delta, \delta))$ de forma que $\alpha((-\delta, \delta))\cap L_t = \{p_t\}$. Además, sabemos que $\alpha((-\delta, \delta)) \transv_{p_t} L_t$ y $\alpha((-\delta, \delta))$ pasa en $p_t$ de un semiplano determinado por $L_t$ al otro. Finalmente tenemos que
-    \begin{gather*}
-        V=\alpha((-\delta, \delta)) \text{ es un entorno abierto de $p$ en $C$}
-    \end{gather*}
-\end{observacion}
+\begin{definicion}\label{def:transv_p}
+    Diremos que $L$ es \textbf{transversa} a $C$ en $p$ si $T_pC \neq L$ y lo notaremos por $L\transv_pC$.
+\end{definicion}
+
+Nos preguntamos ahora qué condición ($\|_p$ o bien $\transv_p$) es más ``estable''. En principio parece que ante pequeñas variaciones la condición de transversalidad es mucho más ``estable'' y que la tangencia es ``inestable''.\\
+
+Consideramos así una curva $C$ y $L$ una recta con $C\transv_p L$. De esta forma tendremos que $L$ viene dada por una ecuación lineal 
+\begin{gather*}
+    L \equiv \langle x,n \rangle + c = 0
+\end{gather*}
+donde $x\in \bb{R}^2$ y $|n|=1$. El haz $H$ de rectas paralelas a $L$ tiene ecuación 
+\begin{gather*}
+    H = \langle x, n \rangle + c + t = 0 \quad \forall t \in \bb{R}
+\end{gather*}
+Si $t \in \bb{R}$, escribimos $L_t$ a la recta de $H$ correspondiente a dicho valor de $t$, de forma que $L_0=L$. Consideramos $\alpha:I \to \bb{R}^2$ curva regular, un intervalo $I$ con $0\in I$ de forma que $\alpha(0)=p$. Nos planteamos cómo escribir en función de $\alpha$ el hecho de que $C\transv_pL$. Sabemos que $T_pC \neq L$ lo cual podemos traducir como 
+\begin{gather*}
+    \langle \alpha'(0),n \rangle \neq 0
+\end{gather*}
+Definimos $F: I \times \bb{R} \to \bb{R}$ de forma que 
+\begin{gather*}
+    F(s,t) = \langle \alpha(s), n \rangle + c + t
+\end{gather*}
+y es diferenciable. Es claro también que
+\begin{gather*}
+    F(0,0) = \langle \alpha(0), n \rangle + c + 0 = \langle p,n \rangle + c = 0\\[0.8em]
+    \frac{\partial F}{\partial s} (s,t) = \langle \alpha'(s), n \rangle \quad \Rightarrow \quad
+    \frac{\partial F}{\partial s}(0,t) = \langle \alpha'(0), n \rangle \neq 0
+\end{gather*}
+y por continuidad de $\alpha'$ existirá un entorno de $0$ suficientemente pequeño en el que se tiene que $\frac{\partial F}{\partial s}(s,t) = \langle \alpha'(s), n \rangle \neq 0$. Por tanto podemos considerar el intervalo $I$ lo suficientemente pequeño como para que $\langle \alpha'(s), n \rangle\neq 0$ para cualquier $s\in I$ lo que nos dice que 
+\begin{gather*}
+    \frac{\partial F}{\partial s}(s,t) = \langle \alpha'(s), n \rangle \neq 0 \qquad \forall (s,t) \in I\times \bb{R}
+\end{gather*}
+Estamos en condiciones de aplicar el Teorema de la Función Implícita a $F$ en $(0,0)$. Este nos dirá que existe un $W$ entorno abierto de $(0,0)$ en $I \times \bb{R}$ de forma que $W=(-\delta , \delta) \times (-\veps, \veps)$ y tal que 
+\begin{align*}
+    W\cap F^{-1}(\{0\}) &= \text{ grafo de una }f:(-\veps, \veps) \to \bb{R}\\
+    &= \{(s,t)\in (-\delta , \delta) \times (-\veps, \veps)\ : \ (s,t) = (f(t), t) \}
+\end{align*}
+Tenemos que 
+\begin{gather*}
+    F^{-1}(\{0\}) = \{(s,t)\in I \times \bb{R} \ : \ \langle \alpha(s), n \rangle + c + t = 0\}
+\end{gather*}
+por lo que $W \cap F^{-1}(\{0\})$ serán los puntos con $|s| < \delta$, $|t|<\veps$ escritos de la forma $\alpha((-\delta, \delta))\cap H_\veps$ donde $H_\veps$ es una banda de $H$ de radio $\veps$. Además
+\begin{gather*}
+    F(f(t), t) = 0 \qquad \forall |t|<\veps
+\end{gather*}
+Derivamos esta expresión respecto de $t$ y nos queda
+\begin{align*}
+    \frac{\partial F}{\partial s}(f(t), t)f'(t) + \frac{\partial F}{\partial t}(f(t), t) = 0\quad
+    &\Rightarrow \quad
+    \langle \alpha'(f(t)), n \rangle \cdot f'(t) + 1 = 0\quad
+    \Rightarrow\\
+    &\Rightarrow \quad
+    f'(t) = - \frac{1}{\langle \alpha'(f(t)), n \rangle}
+\end{align*}
+Por lo que $f$ es monótona y biyectiva sobre la imagen. Llegamos a que 
+para cada $t\in (-\veps, \veps)$ existe un único $p_t\in \alpha((-\delta, \delta))$ de forma que $\alpha((-\delta, \delta))\cap L_t = \{p_t\}$. Además, sabemos que $\alpha((-\delta, \delta)) \transv_{p_t} L_t$ y $\alpha((-\delta, \delta))$ pasa en $p_t$ de un semiplano determinado por $L_t$ al otro. Finalmente tenemos que
+\begin{gather*}
+    V=\alpha((-\delta, \delta)) \text{ es un entorno abierto de $p$ en $C$}
+\end{gather*}
 
 \subsection{Rectas tangentes y transversas a una curva}
 
@@ -1806,10 +1810,10 @@ Todo esto lo podemos resumir en una nueva consecuencia:
 Ahora nos vamos a centrar en tomar una curva simple $C\subset \bb{R}^2$ compacta y en separar exactaemente en dos regiones $\bb{R}^2 \setminus C$. \\
 
 Consideramos $C\subset \bb{R}^2$ una curva simple, conexa y compacta. Definimos:
-\begin{align}
+\begin{align*}
     \Omega_0 &= \{p\in \bb{R}^2 \setminus C \ : \ \exists v \in S^1 \text{ con } L_{p,v}\transv C \text{ y } \#(L_{p,v} \cap C) \text{ par}\} \subset \bb{R}^2 \setminus C\notag\\
-    \Omega_1 &= \{p\in \bb{R}^2 \setminus C \ : \ \exists v \in S^1 \text{ con } L_{p,v}\transv C \text{ y } \#(L_{p,v} \cap C) \text{ impar}\} \subset \bb{R}^2 \setminus C\label{eq:defOmega}
-\end{align}
+    \Omega_1 &= \{p\in \bb{R}^2 \setminus C \ : \ \exists v \in S^1 \text{ con } L_{p,v}\transv C \text{ y } \#(L_{p,v} \cap C) \text{ impar}\} \subset \bb{R}^2 \setminus C
+\end{align*}
 Tenemos que $\Omega_0 \cup \Omega_1 \subset \bb{R}^2 \setminus C$ y nos planteamos si se dará la otra inclusión (y por tanto la igualdad). Sea $p\in \bb{R}^2 \setminus C$, por la consecuencia~\ref{cons:5} tenemos que existe un $v\in S^1$ tal que $L_{p,v} \transv C$. Sabemos por la consecuencia~\ref{cons:4} que $\#(L_{p,v}\cap C) \in \bb{N}$. Si este cardinal es par tendremos $p\in \Omega_0$ y en otro caso $p\in \Omega_1$. En cualquier caso
 \begin{gather*}
     p\in \Omega_0\cup\Omega_1
