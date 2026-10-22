@@ -1851,7 +1851,7 @@ Además, necesariamente $p-q \perp T_qC$. Consideramos ahora
 \end{gather*}
 que está bien definido, ya que $p\neq q$ ($p\notin C$ y $q\in C$). 
 
-% TODO: Hacer dibujo
+% x: Hacer dibujo
 
 Tenemos que 
 \begin{gather*}
@@ -2513,7 +2513,11 @@ Esto es claramente una generalización del \hyperref[teo:cambio_variable]{Teorem
     Consideramos $C\subset \bb{R}^2$ una curva simple, compacta y conexa y una parametrización por el arco $L$-periódica $\alpha: \bb{R} \to \bb{R}^2$ tal que $\alpha_{|_{[0,L)}}$ es inyectiva y tal que $\alpha$ orienta positivamente a $C$. Elegimos $I=[0,L]$ un conjunto medible y definimos
     \Func{\phi}{[0,L]}{\bb{R}}
          {s}{arg(N(s))}
-    Sin embargo, vamos a considerar $\phi: J\subset [0,L] \to \bb{R}$ ya que hay que quitar los $s\in [0,L]$ que verifiquen $N(s)=(1,0)$. En cualquier caso tenemos que su dominio es medible y $\phi$ es $\cc{C}^1$. Consideramos $h: I \to \bb{R}$ dado por $\chi_A$ (la función característica del conjunto $A$) donde 
+    Sin embargo, vamos a considerar $\phi: J\subset [0,L] \to \bb{R}$ ya que hay que quitar los $s\in [0,L]$ que verifiquen $N(s)=(1,0)$, es decir
+    \begin{gather*}
+        J = I \setminus \{ s\in I \ : \ N(s)=(1,0) \}\subset I
+    \end{gather*}
+    En cualquier caso tenemos que su dominio es medible y $\phi$ es $\cc{C}^1$. Consideramos $h: I \to \bb{R}$ dado por $\chi_A$ (la función característica del conjunto $A$) donde 
     \begin{gather*}
         A = \{s\in [0,L] \ : \ \kappa(s) \geq 0 \}
     \end{gather*}
@@ -2525,5 +2529,95 @@ Esto es claramente una generalización del \hyperref[teo:cambio_variable]{Teorem
     \begin{gather*}
         \chi_A(s) \cdot |arg'(N(s))| = \chi_A(s) \cdot \left| \frac{1}{i} \cdot \frac{N'(s)}{N(s)} \right| = \chi_A(s) \cdot |N'(s)| = \chi_A(s)|\kappa(s) = \kappa^+(s)
     \end{gather*}
-    donde $\kappa^+$ es la parte positiva de $\kappa$. Tenemos entonces que $\kappa^+$ es integrable en $J$ si y solo si $n(arg(N), \chi_A)$ es integrable en $\bb{R}$. Sabemos que $\kappa^+$ es integrable en $J$ ya que es continua y está acotada dentro de un medible lo que nos garantiza que se da la equivalencia.
+    donde $\kappa^+$ es la parte positiva de $\kappa$. Tenemos entonces que $\kappa^+$ es integrable en $J$ si y solo si $n(arg(N), \chi_A)$ es integrable en $\bb{R}$. Sabemos que $\kappa^+$ es integrable en $J$ ya que es continua y está acotada dentro de un medible lo que nos garantiza que se da la equivalencia. Tenemos entonces justificado el siguiente cálculo:
+    \begin{gather*}
+        \int_J \kappa^+ = \int_\bb{R} n(arg(N), \chi_A)
+    \end{gather*}
+    Vamos a tomar un $\theta \in \bb{R}$ y calculamos
+    \begin{gather*}
+        n(arg(N), \chi_A)(\theta) = \sum_{\smash{arg(N(s))=\theta}} \chi_A = 
+    \end{gather*}
+    Nos planteamos qué ocurrirá si $\theta\notin ]0,2\pi[$ y llegamos a la conclusión de que no habrá sumandos (en cuyo caso, pon convención considerábamos que $n(arg(N), \chi_A)=0$). Por tanto podemos escribir
+    \begin{gather*}
+        \int_J \kappa^+ = \int_\bb{R} n(arg(N), \chi_A) = \int_0^{2\pi} n(arg(N), \chi_A)
+    \end{gather*}
+    De esta forma, podemos considerar $v_\theta = (\cos(\theta), \sen(\theta))$
+    \begin{gather*}
+        n(arg(N), \chi_A)(\theta) = \sum_{arg(N(s))=\theta} \chi_A = \sum_{N(s)=v_\theta} \chi_A(s)
+    \end{gather*}
+    Dado $\theta\in]0,2\pi[$ y $v_\theta = (\cos(\theta), \sen(\theta))$ definimos 
+    \Func{f}{[0,2\pi]}{\bb{R}}
+         {s}{f(s) = \langle \alpha(s), v_\theta \rangle}
+    Esta función $f$ medirá la altura orientada de los puntos de la curva $C$ respecto de $R_\theta$ donde
+    \begin{gather*}
+        R_\theta \perp v_\theta
+    \end{gather*}
+    Como $[0,2\pi]$ es compacto y $f$ es continua tendrá mínimo, es decir
+    \begin{gather*}
+        \exists s_0\in [0,2\pi] \text{ tal que $f$ alcanza su mínimo en $s_0$} 
+    \end{gather*}
+    Además, por resultados básicos de análisis sabemos que 
+    \begin{gather*}
+        f'(s_0)=0 \qquad \qquad f''(s_0)\geq 0
+    \end{gather*}
+    De estos resultados analíticos buscamos obtener información geométrica. 
+    %TODO: En el dibujo se ve muy bien
+    Vamos a comenzar con la primera condición:
+    \begin{gather*}
+        0=f'(s_0) = \langle \alpha'(s_0), v_\theta \rangle
+    \end{gather*}
+    Lo que nos dice que el vector tangente a la curva en $\alpha(s_0)$ es ortogonal a $v_\theta$, es decir, $\alpha'(s_0)\perp v_\theta$ por lo que solo nos quedan dos posibilidades para el vector normal. 
+    \begin{gather*}
+        N(s_0) = \pm v_\theta
+    \end{gather*}
+    Nos gustaría concretar su signo y, como $v_\theta$ apunta a $\Omega$ por ser $s_0$ mínimo, es decir
+    \begin{gather*}
+        N(s_0)=v_\theta
+    \end{gather*}
+    Estudiamos ahora la segunda condición usando las ecuaciones de Frenet
+    \begin{gather*}
+        0 \leq f''(s_0) = \langle \alpha''(s_0), v_\theta \rangle = \langle T'(s_0), v_\theta \rangle = \kappa(s_0)\langle N(s_0), v_\theta \rangle = \kappa(s_0)
+    \end{gather*}
+    Donde hemos aplicado que $N(s_0) = v_\theta$ por lo que $\langle N(s_0), v_\theta\rangle = 1$. Por tanto, dado $\theta\in]0,2\pi[$ y $v_\theta=(\cos(\theta), \sen(\theta))$ entonces 
+    \begin{gather*}
+        \exists s_0\in[0,L] \text{ tal que } N(s_0) = v_\theta \quad \text{ y } \quad \kappa(s_0)\geq 0
+    \end{gather*}
+    o lo que es lo mismo
+    \begin{gather*}
+        \exists s_0\in[0,L] \text{ tal que } N(s_0) = v_\theta \quad \text{ y } \quad \chi_A(s_0)=1
+    \end{gather*}
+    Con esta nueva información podemos escribir
+    \begin{gather*}
+        n(arg(N), \chi_A)(s) = \sum_{N(s)=v_\theta} \chi_A(s) \geq \chi_A(s_0) = 1
+    \end{gather*}
+    Lo que nos dice que 
+    \begin{gather*}
+        \int_J \kappa^+ = \int_0^{2\pi} n(arg(N), \chi_A) \geq \int_0^{2\pi} 1 = 2\pi
+    \end{gather*}
+    Como $J\subset I$ y $\kappa^+$ es positiva tenemos que 
+    \begin{gather*}
+        \boxed{\int_0^{2\pi} \kappa^+(s) ds \geq 2\pi}
+    \end{gather*}
+    En una circunferencia de radio $R$ es fácil ver que vale justo $2\pi$ 
+    % TODO: Escribir para una circunferencia
+    Intuitivamente esto nos dice que al ``abollar'' la circunferencia conseguiremos puntos con curvatura negativa, pero este resultado nos dice que entonces aparecen puntos con curvatura positiva que de alguna forma ``compensan'' esa curvatura negativa.\\
+
+    Este último resultado es una copia en dimensión $1$ de un famoso Teorema de superficies (el Teorema de Chern-Lashoff).\\
+
+    Finalmente sabemos que en general $|\kappa| \geq \kappa^+$, luego
+    \begin{gather*}
+        \int_0^L |\kappa(s)| ds \geq \int_0^L \kappa^+(s) ds \geq 2\pi
+    \end{gather*}
+    En caso de que se dé la igualdad tendremos que $\kappa \geq 0$ en todo punto de la curva $C$, en cuyo caso diremos que $C$ es un \textbf{óvalo}\footnote{se puede demostrar que un óvalo es la frontera de un convexo pero nosotros no lo haremos}.
 \end{ejemplo}
+
+\subsection{Campos de vectores}
+
+Para poder seguir aproximándonos al Teorema de la Divergencia necesitaremos un nuevo ingrediente
+\begin{definicion}
+    Sea $A\subset \bb{R}^2$, un \textbf{campo} (diferenciable, de vectores) es una aplicación $X:A \to \bb{R}^2$ diferenciable\footnote{Si $A$ no es abierto decir que $X$ es diferenciable significa que $A$ está contenida en un abierto en la que $X$ es diferenciable. Al considerar su restricción a $A$ lo seguirá siendo.}.    
+\end{definicion}
+
+
+
+
