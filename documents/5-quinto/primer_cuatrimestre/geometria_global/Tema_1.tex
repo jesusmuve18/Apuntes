@@ -2608,16 +2608,31 @@ Esto es claramente una generalización del \hyperref[teo:cambio_variable]{Teorem
     \begin{gather*}
         \int_0^L |\kappa(s)| ds \geq \int_0^L \kappa^+(s) ds \geq 2\pi
     \end{gather*}
-    En caso de que se dé la igualdad tendremos que $\kappa \geq 0$ en todo punto de la curva $C$, en cuyo caso diremos que $C$ es un \textbf{óvalo}\footnote{se puede demostrar que un óvalo es la frontera de un convexo pero nosotros no lo haremos}.
+    En caso de que se dé la igualdad tendremos que $\kappa = \kappa^+ \geq 0$ en todo punto de la curva $C$, en cuyo caso diremos que $C$ es un \textbf{óvalo}\footnote{se puede demostrar que un óvalo es la frontera de un convexo pero nosotros no lo haremos}.
 \end{ejemplo}
 
 \subsection{Campos de vectores}
 
 Para poder seguir aproximándonos al Teorema de la Divergencia necesitaremos un nuevo ingrediente
 \begin{definicion}
-    Sea $A\subset \bb{R}^2$, un \textbf{campo} (diferenciable, de vectores) es una aplicación $X:A \to \bb{R}^2$ diferenciable\footnote{Si $A$ no es abierto decir que $X$ es diferenciable significa que $A$ está contenida en un abierto en la que $X$ es diferenciable. Al considerar su restricción a $A$ lo seguirá siendo.}.    
+    Sea $A\subset \bb{R}^2$ un subconjunto, un \textbf{campo} (diferenciable, de vectores) es una aplicación $X:A \to \bb{R}^2$ diferenciable\footnote{Si $A$ no es abierto decir que $X$ es diferenciable significa que $A$ está contenida en un abierto en la que $X$ es diferenciable. Al considerar su restricción a $A$ lo seguirá siendo.}.
+    % TODO: hacer dibujo de mancha de la que cada punto sale una flecha.  
 \end{definicion}
+Esto es un concepto elemental en Física (modela campos gravitatorios, dinámica de fluidos, ...).\\
 
+Dada $C\subset \bb{R}^2$ una curva simple, compacta y conexa, $\alpha$ una parametrización local $L$-periódica parametrizada por el arco que orienta positivamente a $C$ y consideramos también $\Omega$ el dominio interior de $C$. Tenemos $I=[0,L]\subset \bb{R}$ medible y vamos a escribir $\alpha=(x_1, x_2)$ definiendo
+\begin{gather*}
+    \phi = x_1
+\end{gather*}
+y claramente $\phi$ es diferenciable. Definimos también
+\begin{gather*}
+    h = (signo(N_2))X^2
+\end{gather*}
+donde 
+\begin{gather*}
+    N = (N_1, N_2) \qquad \qquad X=(X^1, X^2)
+\end{gather*}
+% Aplciar Teorema del área
 
 
 
