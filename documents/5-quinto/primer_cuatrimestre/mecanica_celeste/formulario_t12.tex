@@ -1,155 +1,159 @@
-\documentclass[8pt,a4paper,landscape]{extarticle}
+\documentclass[10pt,a4paper]{extarticle}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{lmodern}
+ 
 \usepackage{amsmath,amssymb}
-\usepackage[margin=5mm]{geometry}
-\usepackage{multicol}
-\usepackage[dvipsnames]{xcolor}
-
-\pagestyle{empty}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc}
+\usepackage[margin=1.1cm]{geometry}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage[most]{tcolorbox}
+ 
+\newcommand{\sen}{\operatorname{sen}}
+\newcommand{\R}{\mathbb{R}}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
-\setlength{\columnsep}{5pt}
-\setlength{\columnseprule}{0.2pt}
-\setlength{\emergencystretch}{3em}
-\thinmuskip=1mu
-\medmuskip=2mu plus 1mu minus 1mu
-\thickmuskip=3mu plus 1mu minus 1mu
-
-% ---------- Macros ----------
-\newcommand{\ip}[2]{\langle #1,#2\rangle}
-\newcommand{\ab}[1]{\lvert #1\rvert}
-\newcommand{\wg}{\wedge}
-\newcommand{\xd}{\dot x}
-\newcommand{\xdd}{\ddot x}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\rper}{r_{p}}
-\newcommand{\rapo}{r_{a}}
-\DeclareMathOperator{\sen}{sen}
-\DeclareMathOperator{\senh}{senh}
-\newcommand{\seccion}[1]{\par\vspace{1.5pt}\noindent\colorbox{blue!12}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\textbf{\textcolor{NavyBlue}{#1}}}}\par\vspace{0.5pt}}
+\pagestyle{empty}
+ 
+% Compactar fórmulas
+\everydisplay{\abovedisplayskip=2pt\belowdisplayskip=2pt\abovedisplayshortskip=1pt\belowdisplayshortskip=1pt}
+ 
+% Cajas de sección
+\newtcolorbox{bx}[1]{enhanced,colback=white,colframe=blue!55!black,boxrule=0.5pt,
+  arc=2pt,left=3pt,right=3pt,top=5pt,bottom=2pt,
+  title={\small\bfseries #1},fonttitle=\bfseries,coltitle=white,colbacktitle=blue!55!black,
+  toptitle=0.5pt,bottomtitle=0.5pt,attach boxed title to top left={yshift=-2mm,xshift=2mm},
+  boxed title style={arc=2pt,boxrule=0pt}}
+\newtcolorbox{key}{colback=yellow!12,colframe=orange!70!black,boxrule=0.5pt,arc=2pt,
+  left=2pt,right=2pt,top=1pt,bottom=1pt}
 
 \begin{document}
-\footnotesize
-\sloppy
 \begin{center}
-    {\bfseries\color{NavyBlue}\Large Formulario Mecánica Celeste --- Temas 1 y 2}\\
+ {\large\textbf{Formulario de Mecánica Celeste (Temas 1 y 2)}}
 \end{center}
+\vspace{-6pt}
 
-\begin{multicols}{4}
-\textit{Notación:} $r=\ab x$, $c=x\wg\xd$ (mom. angular), $h$ energía, $\varepsilon=\ab e$, $k=\ab c^2/\mu$, $a,b$ semiejes, $p$ periodo, $\nu=\sqrt\mu/a^{3/2}=2\pi/p$, $\ip{\cdot}{\cdot}$ prod. escalar.
+%================= TEMA 1 =================
+\begin{bx}{Tema 1}
+\begin{minipage}[t]{0.485\linewidth}
+\textbf{Fuerza y ecuación de movimiento}
+\[F(x)=-\frac{GMm}{|x|^2}\frac{x}{|x|},\quad x\in\R^3\setminus\{0\}\]
+\[\mu=GM,\qquad f(r)=-\frac{\mu}{r^2}\]
+\[F(x)=f(|x|)\frac{x}{|x|}\ \ (\text{campo de fuerzas}),\qquad f:(0,+\infty)\to\R\]
+\[\ddot x(t)=f\big(|x(t)|\big)\frac{x(t)}{|x(t)|}\]
+\textbf{Energía}
+\[E_c=\tfrac12 mv^2,\qquad E_{pg}=mgh\]
+\[F=-\nabla V\ \text{ en }\ \Omega\subseteq\R^3\ \text{abierto}\]
+\[E=\frac{|\dot x|^2}{2}+V(x)=\frac{|\dot x|^2}{2}-\Phi(|x|),\quad \Phi(r)=\int_1^r f(s)\,ds\]
+\[E=\frac{|\dot x|^2}{2}-\frac{\mu}{|x|}\quad(\text{caso newtoniano})\]
+\end{minipage}\hfill\vrule\hfill
+\begin{minipage}[t]{0.485\linewidth}
+\textbf{Momento angular y área}
+\[c(t)=x(t)\wedge\dot x(t)=r^2\dot\theta\,(0,0,1)\]
+\[x=r(\cos\theta,\sen\theta)\ \Rightarrow\ \dot\theta=x_1\dot x_2-\dot x_1x_2\]
+\[\text{Área}(D)=\frac12\int_{t_0}^{t_1}r^2\dot\theta\,dt=\frac12|c|\,(t_1-t_0)\]
+\vspace{1cm}
+\begin{key}\centering\textbf{TEOREMA DE PROLONGACIÓN} $(c=0)$\\[2pt]
+\raggedright
+i) $\displaystyle\lim_{t\to\omega}\ r(t)^2+\dot r(t)^2=+\infty$\qquad
+ii) $\exists\,t_n\to\omega:\ r(t_n)\to0$
+\end{key}
+\end{minipage}
+\end{bx}
 
-%==============================================================
-\seccion{1. Campos centrales, Newton, potencial, energía}
-\textbf{Campo central:} $\xdd=f(\ab x)\frac{x}{\ab x}$; $f<0$ atractivo, $f>0$ repulsivo.
-\textbf{Newton:} $f=-\mu/r^2$, $\xdd=-\mu x/\ab x^3$, $\mu=GM$ ($m$ se cancela; si $M=1/G\Rightarrow\mu=1$). $F=-\frac{GMm}{\ab x^2}\frac{x}{\ab x}$. Por coord.: $\ddot x_i=-\mu x_i/(x_1^2+x_2^2+x_3^2)^{3/2}$.
-Varios soles fijos $P_i$: $\xdd=\sum_i\mu_i\frac{P_i-x}{\ab{P_i-x}^3}$ (no central $\Rightarrow$ $c$ no cte).\\
-\textbf{Potencial:} $F=-\nabla V$. Central: $V(x)=-\Phi(\ab x)$, $\Phi'=f$ (ej. $\Phi(r)=\int_1^rf$). Newton: $V=-\mu/\ab x$. $f=-\mu/r^p$ ($p\ne1$): $V=-\frac{\mu}{(p-1)r^{p-1}}$. $f=-r^4\Rightarrow V=\frac{r^5}{5}$. $f=-\sqrt r\Rightarrow V=\frac23r^{3/2}$. Dos potenciales de $F$ (dominio conexo) difieren en una cte. No conservativo si $\partial_2F_1\neq\partial_1F_2$ (ej. $(x_2,-x_1)$); $(x_1,x_2)$ sí, $V=-\frac{x_1^2+x_2^2}{2}$.\\
-\textbf{Energía:} $E=\frac12\ab\xd^2+V(x)$ cte ($\dot E=\ip{\xdd}{\xd}+\ip{\nabla V}{\xd}=0$). Kepler: $h=\frac12\ab\xd^2-\frac{\mu}{\ab x}$.
-Si $V(r)\to\infty$ con $r\to\infty$: $E\ge V(\ab x)\Rightarrow$ acotada (ej. 1.8 $\xdd=-\ab x^3x$: $E=\frac12\ab\xd^2+\frac15\ab x^5$, no escapa a $\infty$).
-Ej. 1.10 ($f=-\sqrt r$, $c=0$ colisiona): $\dot r^2=2(E-V(r))\Rightarrow\ab\xd\to\sqrt{2E}$ finito.\\
-\textbf{Invariancias} (sol.$\Rightarrow$sol.): $x(t+\tau)$ (autónoma); $x(-t)$ (mismo $h$, $c\to-c$); $Ax(t)$, $A\in O(3)$: $AA^T=A^TA=I$ (columnas ortonormales), $\ab{Ax}=\ab x$. Si $x=Ry$, $R\in O(3)$: $h_x=h_y$, $c_x=\det(R)\,Rc_y$, $\ab{c_x}=\ab{c_y}$. Ej. 1.5: $Ax$ es sol. sii $A$ ortogonal (comprobar $A^TA=I$). Isometrías llevan planos por 0 en planos y semirrectas en semirrectas.
+\vspace{2pt}
+%================= TEMA 2 =================
+\begin{bx}{Tema 2}
+\begin{center}
+$\boxed{|x|+\langle x,e\rangle=k}\qquad e=\dfrac1\mu\dot x\wedge c-\dfrac{x}{|x|}\qquad k=\dfrac{|c|^2}{\mu}$
+\end{center}
+\vspace{-15pt}
+\begin{center}
+    \renewcommand{\arraystretch}{1.1}
+    \setlength{\tabcolsep}{3pt}
+    \newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+    \newcommand{\pun}{\rule[-3.5ex]{0pt}{7ex}}
+    \begin{tabular}{|C{0.32\linewidth}|C{0.32\linewidth}|C{0.32\linewidth}|}
+        \hline
+        \textbf{Elipse} ($|e| < 1$) & \textbf{Hipérbola} ($|e| > 1$) & \textbf{Parábola} ($|e| = 1$)\\ 
+        \hline
+        \begin{tikzpicture}[scale=0.7]
+            \draw[thick] (0,0) ellipse (2.2 and 1.3);
+            \draw[gray!50] (-2.5,0)--(2.6,0); \draw[gray!50] (0,-1.5)--(0,1.5);
+            \draw[blue,-{Stealth[length=2mm]},very thick] (1.77,0)--node[midway,above]{\scriptsize$e$}(2.9,0);
+            \fill (-2.2,0) circle (1.5pt) node[above left]{\scriptsize$A$};
+            \fill (2.2,0) circle (1.5pt) node[below right]{\scriptsize$P$};
+            \fill (0,1.3) circle (1.5pt) node[above right]{\scriptsize$B$};
+            \fill (0,0) circle (1.5pt) node[below right]{\scriptsize$C$};
+            \fill (-1.77,0) circle (1.5pt) node[below]{\scriptsize$F$};
+            \fill (1.77,0) circle (1.5pt) node[below]{\scriptsize$O$};
+            \coordinate (Q) at (1.262,1.065); \fill (Q) circle (1.5pt);
+            \draw[magenta] (-1.77,0)--(Q) node[midway,above left]{\scriptsize$d_2$};
+            \draw[magenta] (Q)--(1.77,0) node[midway,left]{\scriptsize$d_1$};
+        \end{tikzpicture}%
+        \par{\color{magenta}$d_1+d_2=d$}\ \ Área $=ab\pi$ 
+        &
+        \begin{tikzpicture}[scale=0.6]
+            \useasboundingbox (-2.5,-2) rectangle (2.5,3);
+            \draw[domain=-1.3:1.3,smooth,variable=\t, thick] plot ({1.2*cosh(\t)},{1.4*sinh(\t)});
+            \draw[dashed,domain=-1.3:1.3,smooth,variable=\t, thick] plot ({-1.2*cosh(\t)},{1.4*sinh(\t)});
+            \draw[gray!50] (-2.4,0)--(2.4,0); \draw[gray!50] (0,-1.9)--(0,1.9);
+            \draw[blue,-{Stealth[length=2mm]},very thick] (1.9,0)--node[midway,above]{\scriptsize$e$}(1.0,0);
+            \fill (-1.9,0) circle (1.5pt) node[below]{\scriptsize$A$};
+            \fill (1.9,0) circle (1.5pt) node[below]{\scriptsize$O$};
+            \coordinate (Q) at ({1.2*cosh(0.9)},{1.4*sinh(0.9)}); \fill (Q) circle (1.5pt);
+            \draw[magenta] (-1.9,0)--(Q) node[midway,above left]{\scriptsize$d_2$};
+            \draw[magenta] (Q)--(1.9,0) node[midway,right]{\scriptsize$d_1$};
+        \end{tikzpicture}\par{\color{magenta}$d_2-d_1=d$}
+        &
+        \begin{tikzpicture}[scale=0.7]
+            \begin{scope}[rotate=90]
+            \draw[domain=-2.2:2.2,smooth,variable=\t, thick] plot ({\t*\t/3.2-0.8},{\t});
+            \draw[gray!50] (-1.6,-2.4)--(-1.6,2.4) node[left]{\scriptsize$L$};
+            \fill (0,0) circle (1.5pt);
+            \draw[blue,-{Stealth[length=2mm]},very thick] (0,0)--node[midway,right]{\scriptsize$e$}(-0.9,0);
+            \coordinate (Q) at (0,1.6); \fill (Q) circle (1.5pt);
+            \draw[magenta] (Q)--node[midway,below]{\scriptsize$d_2$}(0,0);
+            \draw[magenta] (Q)--node[midway,left]{\scriptsize$d_1$}(-1.6,1.6);
+            \end{scope}
+            \node[above left] at (0,0) {\scriptsize$O$};
+        \end{tikzpicture}%
+        \par{\color{magenta}$d_1=d_2=d$}\ \ $L:\langle x,v\rangle+d=0$ \\ 
+        \hline
+        $e=-\dfrac1d\,F$ & $e=\dfrac1d\,A$ & $e=-v$ \\ 
+        \hline
+        $k=\dfrac{c^2-|F|^2}{2d}$ & $k=\dfrac{|A|^2-d^2}{2d}$ & $k=d$ \\ 
+        \hline
+        $|BC|=\sqrt{1-\varepsilon^2}\,a,\quad|OC|=\varepsilon a$\newline
+        $|OP|=\dfrac{k}{1+\varepsilon},\ \ |AP|=\dfrac{k}{1-\varepsilon}$\newline
+        $a=\dfrac{k}{1-\varepsilon^2}$ & --- & --- \\ \hline
+    \end{tabular}
+\end{center}
+ 
+\medskip
+\textbf{Parametrización:}
+\[\theta\mapsto\frac{k}{1+\varepsilon\cos(\theta-\omega)}(\cos\theta,\sen\theta),\qquad
+\gamma:\R\to\R^2,\quad \gamma:(\omega-\pi,\omega+\pi)\to\R^2,\quad \gamma:(\omega-\ell,\omega+\ell)\to\R^2,\ \ \ell\in(\tfrac\pi2,\pi)\]
 
-%==============================================================
-\seccion{2. Momento angular, polares, área (2ª ley)}
-$u\wg v=(u_2v_3-u_3v_2,\,u_3v_1-u_1v_3,\,u_1v_2-u_2v_1)$; $\ip{u\wg v}{w}=\det(u,v,w)=\ip{u}{v\wg w}$; $\ab{u\wg v}=\ab u\ab v\sen\theta$; $u\wg v\perp u,v$; $v\wg u=-u\wg v$; $(u\wg v)\wg w=\ip uw\,v-\ip vw\,u$; $\frac{d}{dt}\frac{x}{\ab x}=\frac{(x\wg\xd)\wg x}{\ab x^3}$.\\
-\textbf{Central $\Rightarrow\dot c=0$.}
-$c\ne0$: movimiento plano, $x(t)\in\{c\}^\perp\iff\ip cx=0$ (ej. $c=(0,-3,0)\Rightarrow x_2=0$); $\ab c=\ab x\ab\xd\sen\angle(x,\xd)$.
-$c=0\iff\xd\parallel x\iff x=r(t)v$, $\ab v=1$, $v=x_0/\ab{x_0}$, semirrecta $\R^+v$, $\ddot r=f(r)$.
-En $\R^2$: $c=(0,0,c_3)$, $c_3=x_1\dot x_2-x_2\dot x_1$ ($>0$ antihorario).\\
-\textbf{Polares} $x=r(\cos\theta,\sen\theta)$, $e_r=(\cos\theta,\sen\theta)$, $e_\theta=(-\sen\theta,\cos\theta)$:
-$\xd=\dot re_r+r\dot\theta e_\theta$; $\ab\xd^2=\dot r^2+r^2\dot\theta^2$; $\xdd=(\ddot r-r\dot\theta^2)e_r+(2\dot r\dot\theta+r\ddot\theta)e_\theta$.
-$r^2\dot\theta=\ab c$ (si $\dot\theta>0$; si no, usar $x(-t)$); $\dot r=\ip x\xd/r$; $\ab\xd^2=\dot r^2+\ab c^2/r^2$.
-Sistema: $\ddot r-\frac{\ab c^2}{r^3}=f(r)$, $\dot\theta=\frac{\ab c}{r^2}$, $\theta=\theta_0+\!\int\!\frac{\ab c}{r^2}$. Energía: $h=\frac12\dot r^2+\frac{\ab c^2}{2r^2}+V(r)$.\\
-Curva $\alpha\ne0$: $r=\ab\alpha$, $\dot\theta=\frac{\alpha_1\dot\alpha_2-\dot\alpha_1\alpha_2}{\ab\alpha^2}$, $\theta=\theta_0+\int\dot\theta$ ($r,\theta\in C^k$ si $\alpha\in C^k$; $\theta$ única mod $2\pi$). Si $\alpha(t_0)=0$: mirar $\lim\alpha/\ab\alpha$ (si salta, no hay $\theta$ continua: ej. 1.6; ej. 1.4: $\theta=t^{1/3}$ no es $C^1$ en 0).
-\textbf{Test no central:} si $r^2\dot\theta$ no es cte, no es solución (ej. 1.3: $(\cos t^2,\sen t^2)$ da $r^2\dot\theta=2t$).\\
-\textbf{Área / 2ª ley:} $A=\frac12\!\int_{t_0}^{t_1}\!r^2\dot\theta\,dt=\frac12\!\int(\alpha_1\dot\alpha_2-\dot\alpha_1\alpha_2)dt$ ($\dot\theta>0$, $\Delta\theta<2\pi$; si no, cuenta con multiplicidad). Cerrada simple antihoraria: $A=\frac12\oint(\cdot)$.
-Central (cualquier $f$): $A(t_1,t_2)=\frac12\ab c(t_2-t_1)$; \textbf{velocidad areolar $=\ab c/2$}.
-Ej. 1.7: $\alpha=e^t(\cos t,\sen t)$: $A=\frac12\!\int e^{2t}dt=\frac{e^{2\pi}-1}{4}$ ($t_1=\pi$); $\frac{e^{6\pi}-1}{4}$ ($t_1=3\pi$).
+\vspace{3pt}
 
-%==============================================================
-\seccion{3. Soluciones circulares y rectilíneas}
-\textbf{Circular} ($r\equiv R$, $f(R)<0$): $\omega=\sqrt{-f(R)/R}$, $v=R\omega=\sqrt{-Rf(R)}$, $\ab c=\sqrt{-R^3f(R)}$, $x=R(\cos(\theta_0+\omega t),\sen(\theta_0+\omega t))$ ($\omega>0$ antihorario; si $f(R)=0$: equilibrio).
-Newton: $\ab\omega=\sqrt\mu/R^{3/2}$, $v=\sqrt{\mu/R}$, $p=2\pi R^{3/2}/\sqrt\mu$, $\ab c=\sqrt{\mu R}$, $h=-\frac{\mu}{2R}$, $v_{esc}=\sqrt{2\mu/R}=\sqrt2\,v_{circ}$. Altura $H$ sobre planeta de radio $R_P$: $R=R_P+H$.\\
-\textbf{Rectilíneos ($c=0$, Newton):} $\ddot r=-\mu/r^2$, $h=\frac12\dot r^2-\frac\mu r$, $\dot r^2=2(h+\mu/r)$, $\dot r(t_0)=\ip{\xd}{x}/\ab x$. Intervalo maximal $]\alpha,\omega[$:\\
-(i) $h<0$ ($\dot r$ cambia de signo): $\alpha,\omega$ finitos, $r\to0$ en ambos, $r_{max}=\mu/\ab h$.\\
-(ii) $h\ge0$, $\dot r>0$: $\alpha$ finito ($r\to0$), $\omega=+\infty$, $r\to\infty$.\\
-(iii) $h\ge0$, $\dot r<0$: $\alpha=-\infty$, $\omega$ finito, $r\to0$ (colisión en $t=\omega$).\\
-$h\ge0\Rightarrow\dot r\ne0$ (monótona); $h<0\iff r$ crece y luego decrece. Desde el reposo: colisión en tiempo finito (caída libre desde $r_0$: $t=\frac\pi2\sqrt{r_0^3/2\mu}$). Sol. explícita ($h=0$): $x=(\frac{9\mu}{2})^{1/3}t^{2/3}v$, $t>0$. Ej. 1.13 ($\mu=2$, $\xd=2x$): $c=0$, $h=\frac12\ab\xd^2-\frac{2}{\ab x}>0$, $\dot r>0$ $\Rightarrow$ caso (ii).\\
-Ej. 1.12: $E_h$: $\ab v=\sqrt{2(h+1/\ab x)}$; $h\ge0$: $x\in\R^d\!\setminus\!\{0\}$, fibra $S^{d-1}$; $h<0$: $0<\ab x\le1/\ab h$, fibra $S^{d-1}$ que colapsa a un punto en $\ab x=1/\ab h$.
-
-%==============================================================
-\seccion{4. Cónicas con un foco en el origen}
-$\boxed{\ab x+\ip ex=k}$, $e\in\R^2$, $k>0$. $\varepsilon=\ab e$: $<1$ elipse, $=1$ parábola, $>1$ rama de hipérbola (la del foco 0); $e=0$ círculo ($r=k$).
-Comparar $\sqrt{x^2+y^2}+e_1x+e_2y=k$ para leer $e$ y $k$ (ej. 2.7, 2.19, examen).\\
-\textbf{Elipse} (focos $0,A$; $\ab x+\ab{x-A}=s$, $s=2a$): $e=-A/s$, $k=\frac{s^2-\ab A^2}{2s}$; eje de excentr. dirección $-A$. Ej. 2.1: $s=\ab{x_0}+\ab{x_0-A}$.
-\textbf{Hipérbola} ($\ab{x-A}-\ab x=s$): $e=A/s$, $k=\frac{\ab A^2-s^2}{2s}$. Otra rama ($\ab x-\ab{x-A}=s$): $\ab x+\ip{-e}{x}=-k$.
-\textbf{Parábola} (foco 0, directriz $\ip xv+k=0$, $\ab v=1$): $e=-v$; la directriz está a distancia $k$ del foco.\\
-\textbf{Polares:} $e=\varepsilon(\cos\omega,\sen\omega)$, $r=\frac{k}{1+\varepsilon\cos(\theta-\omega)}$, con $1+\varepsilon\cos(\theta-\omega)>0$. Elipse: $\theta\in\R$; parábola: $\theta\in]\omega-\pi,\omega+\pi[$; hipérbola: $\ab{\theta-\omega}<l=\arccos(-1/\varepsilon)\in]\frac\pi2,\pi[$.\\
-\textbf{Caso Newton} ($c\ne0$): $\mu\big[\frac{x}{\ab x}+e\big]=-c\wg\xd$, es decir
-$\boxed{e=\frac1\mu\,\xd\wg c-\frac{x}{\ab x}}$ (cte), $k=\frac{\ab c^2}{\mu}$. En el plano con $c=(0,0,\ab c)$: $e=\frac{\ab c}{\mu}(\dot x_2,-\dot x_1)-\frac x{\ab x}$.
-$\boxed{\mu^2(\varepsilon^2-1)=2h\ab c^2}$, es decir $\varepsilon^2=1+\frac{2h\ab c^2}{\mu^2}$. \textbf{$h<0\iff$ elipse; $h=0\iff$ parábola; $h>0\iff$ hipérbola.} ($e=0\iff$ circular.)
-Velocidades: $\dot r=\frac\mu{\ab c}\varepsilon\sen(\theta-\omega)$, $r\dot\theta=\frac{\ab c}{r}=\frac\mu{\ab c}(1+\varepsilon\cos(\theta-\omega))$.\\
-\textbf{Parámetros:} $a:=\frac{k}{1-\varepsilon^2}=-\frac{\mu}{2h}$ ($a>0$ elipse; hipérbola $a_H=\frac{k}{\varepsilon^2-1}=\frac{\mu}{2h}$); $\ab c^2=\mu k=\mu a(1-\varepsilon^2)$.
-$\rper=\frac{k}{1+\varepsilon}$ (en $\theta=\omega$), $\rapo=\frac{k}{1-\varepsilon}$ (en $\theta=\omega+\pi$, sólo elipse).\\
-\textbf{Elipse:} $\rper=a(1-\varepsilon)$, $\rapo=a(1+\varepsilon)$, $2a=\rper+\rapo$, $\varepsilon=\frac{\rapo-\rper}{\rapo+\rper}$; $b=a\sqrt{1-\varepsilon^2}=\sqrt{ak}$; $d=\varepsilon a=\frac{\varepsilon k}{1-\varepsilon^2}$ (centro–foco); $\varepsilon=\frac{\text{dist. focos}}{2a}$; $\sqrt{1-\varepsilon^2}=b/a$. Centro $C=-ae$, 2º foco $F=-2ae$, $P=\rper(\cos\omega,\sen\omega)$, $A=-\rapo(\cos\omega,\sen\omega)$. Área $=\pi ab=\pi a^2\sqrt{1-\varepsilon^2}$.\\
-\textbf{Hipérbola:} $\rper=a_H(\varepsilon-1)$, $b=a_H\sqrt{\varepsilon^2-1}$, centro $C=a_He$, $d=\varepsilon a_H$, $\varepsilon=\frac{\ab{0-F}}{\ab{P-A}}$; asíntotas $y=\pm\sqrt{\varepsilon^2-1}(x+d)$, ángulo entre ellas $\alpha=2\arccos(1/\varepsilon)$.
-\textbf{Parábola:} $\rper=k/2$, $h=0$, sin $a$.\\
-\textbf{Vis-viva:} $\ab\xd^2=\mu(\frac2r-\frac1a)$ (elipse); hipérbola $\mu(\frac2r+\frac1{a_H})$; parábola $\frac{2\mu}r$. En apsides $\xd\perp x$: $\ab c=\rper v_p=\rapo v_a$, $v_p=\sqrt{\frac{\mu(1+\varepsilon)}{\rper}}$, $v_a=\sqrt{\frac{\mu(1-\varepsilon)}{\rapo}}$; parábola: $v_p=\sqrt{2\mu/\rper}=2\sqrt{\mu/k}$.\\
-\textbf{Si $\xd\perp x$ en un punto} (ej. impulso tangencial, $\xd\to\lambda\xd$ da $h'=\frac12\lambda^2v^2-\frac\mu r$, $c'=\lambda c$): $\varepsilon=\ab{rv^2/\mu-1}$; si $rv^2>\mu$ es periastro ($\rper=r$), si $rv^2<\mu$ apoastro.\\
-\textbf{Colisión con planeta de radio $R_P$} ($c\ne0$): choca sii $\rper\le R_P$ ($\rper=k/(1+\varepsilon)$; altura mínima $=\rper-R_P$).
-
-%==============================================================
-\seccion{5. Leyes de Kepler, dominio, periodicidad}
-\textbf{1ª:} $c\ne0\Rightarrow$ cónica con foco en 0. \textbf{2ª:} $\frac{dA}{dt}=\frac{\ab c}2$. \textbf{3ª} ($h<0$): $x$ periódica de periodo mínimo
-$\boxed{p=\frac{2\pi}{\sqrt\mu}a^{3/2}}=\frac{2\pi a^2\sqrt{1-\varepsilon^2}}{\ab c}=\frac{2\pi ab}{\ab c}$; $\frac{a^3}{p^2}=\frac{\mu}{4\pi^2}$; $\frac12\ab cp=\pi ab$.
-$c\ne0\Rightarrow$ intervalo maximal $=\R$ (no hay colisión). Elíptico: pasa infinitas veces por cada punto; parab./hiperb.: recorre toda la curva una vez. $c=0$: colisiona en tiempo finito. Acotada ($c\ne0$) $\iff h<0$.
-Pollard: $\lim_{t\to\infty}\frac{\ab{x(t)}}{t}=0$ ($h<0$), $\sqrt{2h}$ ($h\ge0$).
-$\ab c\,p\,/2=$ área elipse (ej. 2.17: (i) $\pi a^2\sqrt{1-\varepsilon^2}$; (ii) $\ab cp/2$).
-Dada $p,\ c,\ \mu$ (ej. 2.2): $a=(\frac{p\sqrt\mu}{2\pi})^{2/3}$, $\varepsilon^2=1-\frac{\ab c^2}{\mu a}$ (exige $\ab c^2\le\mu a$); plano: $\ip cx=0$.\\
-\textbf{Criterio ODE:} sol. maximal con $\omega<\infty\Rightarrow\ab{X}\to\infty$ o $\mathrm{dist}(X(t_n),\partial D)\to0$. Para Kepler $c\ne0$: $\ab x\ge\rho>0$, $\ab\xdd\le\mu/\rho^2$ acotada $\Rightarrow$ $\omega=\infty$.\\
-\textbf{Periodos:} $P=\{p:f(t+p)=f(t)\}\cup\{0\}$ subgrupo de $(\R,+)$; $f$ continua no cte $\Rightarrow P=\alpha\mathbb Z$, $\alpha$ periodo mínimo. $G\le\R$, $\alpha=\inf(G\cap]0,\infty[)$: $\alpha=0\Rightarrow G$ denso; $\alpha>0\Rightarrow G=\alpha\mathbb Z$. $h_1,h_2$ continuas, periódicas, no ctes, $T_1/T_2\notin\mathbb Q\Rightarrow h_1+h_2$ no periódica (ej. $\sqrt2\cos\frac t{\sqrt8}-\cos t$). $x=a(\cos\omega t,\sen\omega t)$: periodo $2\pi/\ab\omega$.\\
-\textbf{EDO 1D} $\dot u=1/D(u)$, $D>0$ continua $2\pi$-periódica: $u$ difeo de $\R$, $u(t+T)=u(t)+2\pi$, $T=\int_0^{2\pi}D(u)\,du$; $T$ es periodo mínimo de $(\cos u,\sen u)$. Ej. 2.20: $D=3-\cos u-\sen2u\ge1$, $T=6\pi$.
-
-%==============================================================
-\seccion{6. Anomalías y ecuación de Kepler}
-\textbf{Elipse} (eje $e$ sobre $e_1$): $f$ anomalía real, $u$ excéntrica:
-$x=(r\cos f,r\sen f)=(a(\cos u-\varepsilon),\,a\sqrt{1-\varepsilon^2}\sen u)$, $r=a(1-\varepsilon\cos u)=\frac{k}{1+\varepsilon\cos f}$,
-$\cos f=\frac{\cos u-\varepsilon}{1-\varepsilon\cos u}$, $\tan\frac f2=\sqrt{\frac{1+\varepsilon}{1-\varepsilon}}\tan\frac u2$; $u=f=0$ (peri), $=\pi$ (apo).\\
-$\boxed{u-\varepsilon\sen u=\zeta=\nu(t-T)=\frac{2\pi}p(t-T)}$ (Kepler), $T$ paso por pericentro; $t(u)=T+\frac{u-\varepsilon\sen u}{\nu}$; $\dot u=\frac{\nu}{1-\varepsilon\cos u}$; $\ab c=\sqrt{\mu a(1-\varepsilon^2)}$.
-Elipse general $(a,\varepsilon,\omega,T,+)$: $x=R(\omega)y$, $R=\left(\begin{smallmatrix}\cos\omega&-\sen\omega\\\sen\omega&\cos\omega\end{smallmatrix}\right)$, $y=(a(\cos u-\varepsilon),a\sqrt{1-\varepsilon^2}\sen u)$. Sentido horario: $(a,\varepsilon,\omega,-T,-)$ es $x(-t)$.\\
-\textbf{Hipérbola} (peri sobre $+x$; deducido igual): $y=(a_H(\varepsilon-\cosh u),\,a_H\sqrt{\varepsilon^2-1}\senh u)$, $r=a_H(\varepsilon\cosh u-1)$, $\boxed{\varepsilon\senh u-u=\nu_H(t-T)}$, $\nu_H=\sqrt\mu/a_H^{3/2}$. $g(u)=\varepsilon\senh u-u$ y $u+\varepsilon\senh u$ son biyecciones crecientes de $\R$ (ej. 2.16: exactamente 1 solución de $u+\varepsilon\senh u=\zeta$).
-\textbf{Parábola} ($r=\frac k{1+\cos f}$): $t-T=\frac12\sqrt{\frac{k^3}{\mu}}\big(\tan\frac f2+\frac13\tan^3\frac f2\big)$. General: $dt=\frac{r^2}{\ab c}df$.\\
-\textbf{Función $f_\varepsilon(u)=u-\varepsilon\sen u$:} $f'_\varepsilon\ge1-\varepsilon>0$, difeo creciente; $f_\varepsilon(u+2\pi)=f_\varepsilon(u)+2\pi$, $f_\varepsilon(-u)=-f_\varepsilon(u)$, $f_\varepsilon(0)=0$, $f_\varepsilon(\pi)=\pi$, $f_\varepsilon(u)<u$ en $]0,\pi[$. Inversa $K_\varepsilon$: $K_\varepsilon(\zeta+2\pi)=K_\varepsilon(\zeta)+2\pi$, $K_\varepsilon(-\zeta)=-K_\varepsilon(\zeta)$, $K'_\varepsilon=\frac1{1-\varepsilon\cos K_\varepsilon}$. Cotas ($\zeta\in[0,\pi]$, $u^*=K_\varepsilon(\zeta)$): $\zeta\le u^*\le\zeta+\varepsilon$, $u^*\le\frac\zeta{1-\varepsilon}$.\\
-\textbf{Newton:} $u_{n+1}=\Phi(u_n)=u_n-\frac{u_n-\varepsilon\sen u_n-\zeta}{1-\varepsilon\cos u_n}=\frac{\zeta+\varepsilon\sen u_n-\varepsilon u_n\cos u_n}{1-\varepsilon\cos u_n}$.
-$\Phi(0)=\frac\zeta{1-\varepsilon}$, $\Phi(\pi)=\frac{\zeta+\varepsilon\pi}{1+\varepsilon}$, $\Phi'=\frac{\varepsilon(f_\varepsilon(u)-\zeta)\sen u}{f'_\varepsilon(u)^2}$; $\Phi(u)>u$ si $u<u^*$, $\Phi(u)<u$ si $u>u^*$; $u^*$ único punto fijo.
-\textbf{Convergencia:} $\zeta\in[0,\pi]$, $\varepsilon\in[0,1[$, $u_0\in[0,\pi]$ y $u_1=\Phi(u_0)\in[0,\pi]\Rightarrow u_n\to u^*$. Si $u_0\in[u^*,\pi]$: $u_n\downarrow u^*$ monótona desde $n=0$ (ej. 2.11: $\varepsilon=\frac12,\zeta=3$); si $u_0<u^*$ es monótona desde $n\ge1$. Contraejemplo: $\zeta=\pi,\varepsilon=\frac12,u_0=0$: 2-ciclo $0,2\pi,0,\dots$ Ej. 2.5 ($\varepsilon=0.01,\zeta=0.1,u_0=\pi$): $u_1=\Phi(\pi)=\frac{0.1+0.01\pi}{1.01}\in[0,\pi]\Rightarrow$ converge.\\
-\textbf{Fourier} ($h$ $2\pi$-per.): $h=a_0+\sum(a_n\cos n\zeta+b_n\sen n\zeta)$, $a_0=\frac1{2\pi}\!\int_0^{2\pi}\!h$, $a_n=\frac1\pi\!\int_0^{2\pi}\!h\cos n\zeta$, $b_n=\frac1\pi\!\int_0^{2\pi}\!h\sen n\zeta$; $h$ impar: $a_n=0$, $b_n=\frac2\pi\!\int_0^\pi h\sen n\zeta$.
-Ej. 2.18: $f(x)=x+\sum b_n\sen nx$, $b_n=\frac2\pi\!\int_0^\pi(f(x)-x)\sen nx\,dx=\frac2{n\pi}\!\int_0^\pi f'(x)\cos nx\,dx$.\\
-\textbf{Bessel:} $J_n(x)=\frac1\pi\!\int_0^\pi\!\cos(nu-x\sen u)du$; $x^2y''+xy'+(x^2-n^2)y=0$ (Frobenius $y=\sum y_n\ab x^{n+\alpha}$). Ej. 2.3: $x^2J_n''+xJ_n'+(x^2-n^2)J_n=\frac1\pi\!\int_0^\pi\!\frac{d}{du}\big[(-n-x\cos u)\sen(nu-x\sen u)\big]du=0$.
-$K_\varepsilon(\zeta)-\zeta=\sum_{n\ge1}b_n\sen n\zeta$, $b_n=\frac2nJ_n(n\varepsilon)$, es decir
-$\boxed{K_\varepsilon(\zeta)=\zeta+\sum_{n\ge1}\frac2nJ_n(n\varepsilon)\sen n\zeta}$; $u(t)=\nu(t-T)+\sum\frac2nJ_n(n\varepsilon)\sen(n\nu(t-T))$.
-
-%==============================================================
-\seccion{7. Fuerzas centrales no newtonianas}
-\textbf{Clairaut} ($\rho=1/r$ en función de $\theta$): $\dot r=-\ab c\rho'$, $\ddot r=-\ab c^2\rho^2\rho''$, y
-$\boxed{\rho''+\rho=-\frac1{\ab c^2\rho^2}f(1/\rho)}$.
-Newton: $\rho''+\rho=\frac\mu{\ab c^2}\Rightarrow\rho=\frac\mu{\ab c^2}+A\cos(\theta-\omega)$, $\varepsilon=\frac{A\ab c^2}\mu$ (recupera Kepler 1).\\
-\textbf{Cúbica atractiva} $f=-\mu/r^3$ (ej. 2.4 con $\mu=1$): $\rho''+(1-\frac\mu{\ab c^2})\rho=0$.
-$\ab c^2=\mu$: $r=\frac1{k_1+k_2\theta}$ (circular $r=1/k_1$ de cualquier radio; $k_1=0,k_2=1$: espiral $r=1/\theta$).
-$\ab c^2>\mu$: $\lambda=\sqrt{1-\mu/\ab c^2}$, $r=\frac1{A\cos(\lambda\theta+\varphi)}$.
-$\ab c^2<\mu$: $\lambda=\sqrt{\mu/\ab c^2-1}$, $r=\frac1{k_1e^{\lambda\theta}+k_2e^{-\lambda\theta}}$ ($e^{-\theta}$: espiral log.; $1/\cosh\theta$). Además $c=0$: rectilíneas.\\
-\textbf{Repulsivas:} $f>0\Rightarrow\ddot r=f+\frac{\ab c^2}{r^3}>0$, $r$ convexa, no acotada en su intervalo maximal (ej. 2.6). Coulomb $\xdd=\mu x/\ab x^3$: $\rho''+\rho=-\frac\mu{\ab c^2}$, $r=\frac{\ab c^2/\mu}{\varepsilon\cos(\theta-\omega)-1}$, $\varepsilon>1$, rama alejada del foco; $\varepsilon^2=1+\frac{2h\ab c^2}{\mu^2}$, $h=\frac12\ab\xd^2+\frac\mu{\ab x}>0$. Cúbica repulsiva $\xdd=\mu x/\ab x^4$: $\rho''+(1+\frac\mu{\ab c^2})\rho=0$.\\
-\textbf{Ecuación genérica} $\ab x+\ip ex=k$ ($k\in\R$): $k>0$ como en §4; $k=0$: $\varepsilon<1\Rightarrow\{0\}$, $\varepsilon=1\Rightarrow$ semirrecta $\{-\lambda e\}$, $\varepsilon>1\Rightarrow$ dos semirrectas ($\cos(\theta-\omega)=-1/\varepsilon$); $k<0$: $\varepsilon\le1\Rightarrow\emptyset$, $\varepsilon>1\Rightarrow$ rama lejana de hipérbola. En $\R^3$ ($k>0$): superficie de revolución en torno a $e$: elipsoide ($\varepsilon<1$), paraboloide ($=1$), hoja de hiperboloide ($>1$).
-
-%==============================================================
-\seccion{8. Elementos orbitales en el espacio}
-Órbita elíptica en $\R^3$: $(i,\Omega,a,\varepsilon,\omega,T)$ (+ sentido). $n=c/\ab c$; \textbf{inclinación} $i=\angle(e_3,n)\in]0,\pi[$, $\cos i=c_3/\ab c$. Línea de nodos (lado + = nodo ascendente): $N=e_3\wg c=(-c_2,c_1,0)$; \textbf{longitud del nodo} $\Omega=\angle(e_1,N)$: $\cos\Omega=\frac{-c_2}{\sqrt{c_1^2+c_2^2}}$, $\sen\Omega=\frac{c_1}{\sqrt{c_1^2+c_2^2}}$. $\omega$ = ángulo de $N$ al perihelio; $\varpi=\omega+\Omega$ (long. del perihelio).
-$n=(\sen i\sen\Omega,\,-\sen i\cos\Omega,\,\cos i)$; planos orientados $\neq x_1x_2\leftrightarrow(\Omega,i)\in\R/2\pi\mathbb Z\times]0,\pi[$.
-Perihelio: $\hat e=\cos\omega\,\hat N+\sen\omega\,(n\wg\hat N)$, $e=\varepsilon\hat e$.
-Posición: $x(t)=R_3(\Omega)R_1(i)R_3(\omega)\,(a(\cos u-\varepsilon),\,a\sqrt{1-\varepsilon^2}\sen u,\,0)^T$ con $u-\varepsilon\sen u=\nu(t-T)$ ($R_j(\phi)$: giro de ángulo $\phi$ en torno a $e_j$).
-Tierra: $i=\Omega=0$ por convenio.
-
-\end{multicols}
+\begin{minipage}[t]{0.50\linewidth}
+\[P=\frac{2\pi}{\sqrt\mu}\,a^{3/2},\qquad \mu^2(\varepsilon^2-1)=2h|c|^2\]
+\[\fbox{$\,i,\Omega,a,\varepsilon,\omega,T\,$}\ \text{ solución elíptica}\]
+\[\begin{cases}x_1=a\cos u-\varepsilon\\ x_2=a\sqrt{1-\varepsilon^2}\,\sen u\\ u-\varepsilon\sen u=\dfrac{2\pi}{P}(t-t_0)\end{cases}\ \text{\small\textbf{ECUACIÓN DE KEPLER}}\]
+\[P=t(2\pi)-t(0)\]
+\[f_\varepsilon(u)=u-\varepsilon\sen u=\xi\ \Rightarrow\ u_{n+1}=u_n-\frac{f_\varepsilon(u_n)-\xi}{f_\varepsilon'(u_n)}\]
+\end{minipage}\hfill\vrule\hfill
+\begin{minipage}[t]{0.46\linewidth}
+\[J_n(x)=\frac1\pi\int_0^\pi\cos(nu-x\sen u)\,du\quad\text{\small (Bessel, índice $n$)}\]
+\[u(t)=\underbrace{M+\sum_{n=1}^\infty\frac2n\,J_n(n\varepsilon)\sen(nM)}_{K_\varepsilon(\xi)},\quad M=\tfrac{2\pi}{P}(t-t_0)\]
+\begin{key}
+\textbf{Órbitas no newtonianas}
+\[\begin{cases}f(r)=\ddot r-\dfrac{|c|^2}{r^3}\\[4pt]\dot\theta=\dfrac{|c|}{r^2},\ r>0\end{cases}
+\ \Rightarrow\ \frac{d^2p}{d\theta^2}+p=-\frac{f(1/p)}{p^2|c|^2}\]
+con $p(\theta)=\dfrac1{r(t(\theta))}$
+\end{key}
+\end{minipage}
+\end{bx}
 \end{document}
