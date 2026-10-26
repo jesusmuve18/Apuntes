@@ -41,7 +41,7 @@
 \[F(x)=-\frac{GMm}{|x|^2}\frac{x}{|x|},\quad x\in\R^3\setminus\{0\}\]
 \[\mu=GM,\qquad f(r)=-\frac{\mu}{r^2}\]
 \[F(x)=f(|x|)\frac{x}{|x|}\ \ (\text{campo de fuerzas}),\qquad f:(0,+\infty)\to\R\]
-\[\ddot x(t)=f\big(|x(t)|\big)\frac{x(t)}{|x(t)|}\]
+\[\ddot x(t)=f\big(|x(t)|\big)\frac{x(t)}{|x(t)|} \qquad \ddot{x}(t) = - \frac{\mu x}{|x(t)|^3}\ \ \ \text{(newtoniano)}\]
 \textbf{Energía}
 \[E_c=\tfrac12 mv^2,\qquad E_{pg}=mgh\]
 \[F=-\nabla V\ \text{ en }\ \Omega\subseteq\R^3\ \text{abierto}\]
@@ -100,8 +100,10 @@ $\boxed{|x|+\langle x,e\rangle=k}\qquad e=\dfrac1\mu\dot x\wedge c-\dfrac{x}{|x|
             \draw[dashed,domain=-1.3:1.3,smooth,variable=\t, thick] plot ({-1.2*cosh(\t)},{1.4*sinh(\t)});
             \draw[gray!50] (-2.4,0)--(2.4,0); \draw[gray!50] (0,-1.9)--(0,1.9);
             \draw[blue,-{Stealth[length=2mm]},very thick] (1.9,0)--node[midway,above]{\scriptsize$e$}(1.0,0);
-            \fill (-1.9,0) circle (1.5pt) node[below]{\scriptsize$A$};
+            \fill (-1.9,0) circle (1.5pt) node[below]{\scriptsize$F$};
             \fill (1.9,0) circle (1.5pt) node[below]{\scriptsize$O$};
+            \fill (-1.2,0) circle (1.5pt) node[below right]{\scriptsize$A$};
+            \fill (1.2,0) circle (1.5pt) node[below left]{\scriptsize$P$};
             \coordinate (Q) at ({1.2*cosh(0.9)},{1.4*sinh(0.9)}); \fill (Q) circle (1.5pt);
             \draw[magenta] (-1.9,0)--(Q) node[midway,above left]{\scriptsize$d_2$};
             \draw[magenta] (Q)--(1.9,0) node[midway,right]{\scriptsize$d_1$};
@@ -126,8 +128,8 @@ $\boxed{|x|+\langle x,e\rangle=k}\qquad e=\dfrac1\mu\dot x\wedge c-\dfrac{x}{|x|
         $k=\dfrac{c^2-|F|^2}{2d}$ & $k=\dfrac{|A|^2-d^2}{2d}$ & $k=d$ \\ 
         \hline
         $|BC|=\sqrt{1-\varepsilon^2}\,a,\quad|OC|=\varepsilon a$\newline
-        $|OP|=\dfrac{k}{1+\varepsilon},\ \ |AP|=\dfrac{k}{1-\varepsilon}$\newline
-        $a=\dfrac{k}{1-\varepsilon^2}$ & --- & --- \\ \hline
+        $|OP|=\dfrac{k}{1+\varepsilon},\ \ |OA|=\dfrac{k}{1-\varepsilon}$\newline
+        $a=\dfrac{k}{1-\varepsilon^2},\ \ b=\sqrt{1-\varepsilon^2}a$ & $\varepsilon = \dfrac{|FO|}{|AP|}\quad |OP| = \dfrac{k}{1+\varepsilon}$  & --- \\ \hline
     \end{tabular}
 \end{center}
  
