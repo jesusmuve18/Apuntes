@@ -2620,19 +2620,84 @@ Para poder seguir aproximándonos al Teorema de la Divergencia necesitaremos un 
 \end{definicion}
 Esto es un concepto elemental en Física (modela campos gravitatorios, dinámica de fluidos, ...).\\
 
-Dada $C\subset \bb{R}^2$ una curva simple, compacta y conexa, $\alpha$ una parametrización local $L$-periódica parametrizada por el arco que orienta positivamente a $C$ y consideramos también $\Omega$ el dominio interior de $C$. Tenemos $I=[0,L]\subset \bb{R}$ medible y vamos a escribir $\alpha=(x_1, x_2)$ definiendo
+Dada $C\subset \bb{R}^2$ una curva simple, compacta y conexa, $\alpha$ una parametrización local $L$-periódica parametrizada por el arco que orienta positivamente a $C$ y consideramos también $\Omega$ el dominio interior de $C$. Tenemos $I=[0,L]\subset \bb{R}$ medible y vamos a escribir $\alpha=(x_1, x_2)$ definiendo $\phi: [0,L]\to \bb{R}$ dada por
 \begin{gather*}
     \phi = x_1
 \end{gather*}
-y claramente $\phi$ es diferenciable. Definimos también
+y claramente $\phi$ es diferenciable. Definimos también $h:[0,L]\to \bb{R}$ dada por
 \begin{gather*}
     h = (signo(N_2))X^2
 \end{gather*}
-donde 
+donde $N = (N_1, N_2)$ es el vector normal a la curva y $X=(X^1, X^2)$ un campo definido en $\overline{\Omega}$, es decir, $X: \overline{\Omega} \to \bb{R}^2$ campo. \\
+
+En este contexto, el \hyperref[teo:area]{Teorema del Área} nos dice que 
 \begin{gather*}
-    N = (N_1, N_2) \qquad \qquad X=(X^1, X^2)
+    h|\phi'| \text{ integrable en $I$ } \sii n(\phi, h) \text{ integrable en $\bb{R}$} 
 \end{gather*}
-% Aplciar Teorema del área
+y que en tal caso sus integrales coincide. Veamos ahora quiénes son exactamente esas funciones en la situación planteada. Tenemos que 
+\begin{gather*}
+    h|\phi'| = (signo(N_2))X^2|x_1'|\\[1.25em]
+    N = (N_1, N_2) = J(x_1', x_2') = (-x_2', x_1') \Rightarrow N_2 = x_1'
+\end{gather*}
+De esta forma tenemos que podemos expresar
+\begin{gather*}
+    h|\phi'| = (signo(N_2)) \cdot X^2 |N_2| = X^2\cdot N_2
+\end{gather*}
+Nos planteamos si esto es integrable en $I$. Sabemos que tanto $N_2$ como $X^2$ son diferenciables por lo que, en particular, $X^2 \cdot N_2$ es continua y además $I$ es compacto lo que finalmente nos confirma que $X^2 N_2$ es integrable en $I$. Aplicamos así el \hyperref[teo:area]{Teorema del Área} donde ambas integrales tienen sentido:
+\begin{gather*}
+    \int_0^L X^2N_2 = \int_\bb{R} n(\phi, h)
+\end{gather*}
+Nos planteamos ahora quién es $n(\phi, h)$. Tomamos $a\in \bb{R}$ y aplicando la definición tenemos
+\begin{gather*}
+    n(\phi, h)(a) = \sum_{x_1(s)=a} (signo(N_2(s)))\cdot X^2(\alpha(s))
+\end{gather*}
+Buscamos los $s\in I$ tales que $\alpha(s)=(x_1(s), x_2(s)) = (a, x_2(s))$, es decir,
+\begin{gather*}
+    n(\phi, a) = \sum_{(a,y)\in C}(signo(N_2(a,y)))X^2(a,y)
+\end{gather*}
+Buscar $s$ es lo mismo que buscar imágenes en $C$, es decir, buscar $(a,y)\in C$. Esto es, en el dibujo de ejemplo, ver los puntos de corte de $C$ con la recta vertical $x-a$.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        % Ejes
+        \draw[thick] (-1, 0) -- (5,0);
+        \draw[thick] (0,-1) -- (0,5);
+
+        %Línea vertical
+        \draw (2,-1) --(2,5);
+
+        % Curva
+        % Puntos principales
+        \coordinate (P1) at (1, 3.75);   
+        \coordinate (P2) at (2, 4.5);
+        \coordinate (P3) at (4, 3.5);  
+        \coordinate (P35) at (4, 2);
+        \coordinate (P4) at (2, 0.5);
+        \coordinate (P5) at (1, 1.25);
+        \coordinate (P6) at (2,2);
+        \coordinate (P7) at (2.5,2.5);
+        \coordinate (P8) at (2,3);
+
+        % 4. Curva verde principal
+        \draw[very thick, ForestGreen] plot [smooth cycle, tension=0.7] coordinates {
+                (P1) (P2) (P3) (P35) (P4) (P5) (P6) (P7) (P8)
+            };
+
+        % 5. Puntos
+        % \foreach \p/\label/\pos in {P1/$P_1$/below, P2/$P_2$/above, P3/$P_3$/below, P4/$P_4$/above, P5/$P_5$/right, P6/$P_6$/below, P7/$P_7$/below, P8/$P_8$/below, P35/$P35$/below} {
+        %     \fill[red!80!black] (\p) circle (2.5pt);
+        %     \node[\pos, yshift=2pt] at (\p) {\label};
+        % }
+
+        \foreach \p/\label/\pos in {P2/{$(a,y_4)$}/right, P4/{$(a,y_1)$}/right,  P6/{$(a,y_2)$}/right, P8/{$(a,y_3)$}/right} {
+            \fill[red!80!black] (\p) circle (2.5pt);
+            \node[\pos, yshift=2pt] at (\p) {\label};
+        }
+
+        \node[ForestGreen] at (4.75,3) {$C$};
+    \end{tikzpicture}
+\end{figure}
 
 
 
