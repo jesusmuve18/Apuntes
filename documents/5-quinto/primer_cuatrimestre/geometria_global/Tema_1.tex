@@ -2702,6 +2702,93 @@ Buscar $s$ es lo mismo que buscar imágenes en $C$, es decir, buscar $(a,y)\in C
 %TODO: Terminar de copiar los apuntes de Ramón
 AQUÍ FALTAN COSAS DEL LUNES 26 DE OCTUBRE
 
+En notación nos interesa el conjunto
+\begin{gather*}
+    \{(a,y)\in C : y\in \bb{R}\} = \{x=a\}\cap C
+\end{gather*}
+y para casi todo $a$ tendremos que $\{x=a\}\transv C$. Esto nos dice que el número de puntos de corte con $C$ es finito y, de hecho, como estamos considerando la intersección de $C$ no solo con una sermiirecta sino con la recta entera, entonces $\#(\{x0a\}\cap C)=2k$ con $k\in \bb{N}$ (ya que dado cualquier punto de la recta la paridad de las dos semirrectas que determina deberá coincidir para respetar el \hyperref[teo:clasif]{Teorema de la Curva de Jordan}).\\
+
+Como $\#(\{x=a\} \cap C)<\infty$ podemos ordenar este conjunto y lo hacemos de la siguiente forma
+\begin{gather*}
+    \{x=a\}\cap C = \{(a,y_1), (a,y_2), ..., (a,y_{2k})\}
+\end{gather*}
+de forma que $y_1<y_2<...<y_{2k}$. Así podemos expresar mejor qué es $h(\phi, h)(a)$ como
+\begin{gather*}
+    n(\phi, h)(a) = \sum_{i=1, 2, ..., 2k} (signo (N_2(a.y_i)))X^2(a,y_i)
+\end{gather*}
+Notemos que $N_2 = \langle N, (0,1) \rangle$. Como para el primer punto, $(a,y_1)$, el normal entrará dentro de $\Omega$ y hay transversalidad tanto de ese normal como de la recta $\{x=a\}$ entonces, en este caso, están tanto $N(a_1, y_1)$ como el vector $(0,1)$ sobre el punto $(a,y_1)$ al mismo lado de un semiplano (el determinado por la recta tangente en $(a,y_1)$). Esto nos dice que el ángulo formado por $N(a,y_1)$ y $(0,1)$ es agudo, es decir,
+\begin{gather*}
+    \langle N(a, y_1) , (0,1) \rangle > 0
+\end{gather*}
+Siguiendo un razonamiento similar, pero concreto para este otro caso siguiente, también es sencillo ver que
+\begin{gather*}
+    \langle N(a, y_2) , (0,1) \rangle < 0
+\end{gather*}
+De hecho tendremos 
+\begin{align*}
+    \langle N(a, y_j) , (0,1) \rangle > 0 &\qquad 1 \leq j < 2k,\ \ j \text{ impar}\\
+    \langle N(a, y_j) , (0,1) \rangle < 0 &\qquad 1 < j \leq 2k,\ \ j \text{ par}
+\end{align*}
+Esto se puede demostrar mediante una inducción finita (se deja como ejercicio). Por tanto, se verifica
+\begin{align*}
+    n(\phi, h)(a) &= X^2(a,y_1)-X^2(a,y_2) + ... + X^2(a,y_{2k-1}) - X^2(a,y_{2k}) =\\
+    &\overset{(\ast)}{=} - \int_{y_1}^{y_2} \frac{\partial X^2}{\partial x_2} (a,y)dy - ... - \int_{y_{2k-1}}^{y_{2k}} \frac{\partial X^2}{\partial x_2} (a,y)dy =\\
+    &= -\int_\bb{R} \frac{\partial \tilde{X}^2}{\partial x_2}(a,y) dy
+\end{align*}
+donde en $(\ast)$ hemos agrupado los términos consecutivos $2$ a $2$ y hemos aplicado el Teorema Fundamental del Cálculo (1 variable) y $\tilde{X}$ es la extensión de $X$ por cero fuera de $\overline{\Omega}$, es decir
+\begin{gather*}
+    \tilde{X} = 
+    \left\{
+        \begin{array}{l l}
+            0 & \text{ fuera de $\overline{\Omega}$}\\
+            X & \text{ en  $\overline{\Omega}$}
+        \end{array}
+    \right.
+\end{gather*}
+El resultado al que hemos llegado hasta ahora es 
+\begin{gather*}
+    n(\phi, h)(a) = -\int_\bb{R} \frac{\partial \tilde{X}^2}{\partial x_2}(a,y) dy
+\end{gather*}
+y recordemos que por aplicar el \hyperref[teo:area]{Teorema del Área} nos interesaba realmente
+\begin{gather*}
+    \int_\bb{R} n(\phi, h) \left( = \int_0^L X^2N_2 \right)
+\end{gather*}
+Así que
+\begin{gather*}
+    \int_0^L X^2N_2 = - \int_\bb{R} \left(\int_\bb{R} \frac{\partial \tilde{X}^2}{\partial x_2}(a,y) dy\right)da \overset{(\ast)}{=} -\int_{\bb{R}^2} \frac{\partial \tilde{X}^2}{\partial x_2} \overset{(\ast\ast)}{=} - \int_\Omega \frac{\partial \tilde{X}^2}{\partial x_2} \overset{(\ast\ast\ast)}{=} -\int_\Omega \frac{\partial X^2}{\partial x_2} 
+\end{gather*}
+donde en $(\ast)$ hemos aplicado el Teorema de Fubini, en $(\ast\ast)$ hemos aplicado que en $\bb{R}^2 \setminus\Omega$ se tiene $\tilde{X}=0$ y en $(\ast\ast\ast)$ hemos aplicado que en $\Omega$ se tiene $\tilde{X}=X$.\\
+
+En conclusión, tenemos que 
+\begin{gather*}
+    \boxed{\int_\Omega \frac{\partial X^2}{\partial x_2} = - \int_0^L X^2 N_2}
+\end{gather*}
+Podemos ver que en esta fórmula aparece el número $2$ en todos lados y nos planteamos si podríamos repetir el mismo razonamiento pero cambiando los papeles de $1$ y $2$ y la respuesta es que sí (compruébese) por lo que también es cierto que
+\begin{gather*}
+    \boxed{\int_\Omega \frac{\partial X^1}{\partial x_1} = - \int_0^L X^1 N_1}
+\end{gather*}
+Para obtener una fórmula que no dependa de las dos expresiones pensamos en sumar ambasa obteniendo así
+\begin{gather*}
+    \int_\Omega \left( \frac{\partial X^1}{\partial x_1} + \frac{\partial X^2}{\partial x_2} \right) = - \int_0^L \langle X, N \rangle
+\end{gather*}
+A este primer término le pondremos nombre
+\begin{definicion}
+    Dado $A\subset \bb{R}^2$, un campo $X:A \to \bb{R}^2$, $C$ una curva simple, compacta y conexa con $\alpha: I=[0,L]$ una parametrización por el arco suya que la orienta positivamente y $\Omega$ el dominio interior de $C$ definimos la \textbf{divergencia} de $X$ como $div(X):\overline{\Omega}\to \bb{R}$ dada por
+    \begin{gather*}
+        div(X) = \left( \frac{\partial X^1}{\partial x_1} + \frac{\partial X^2}{\partial x_2} \right)
+    \end{gather*}
+\end{definicion}
+
+Con esta definición, la expresión anterior queda como 
+\begin{gather*}
+    \boxed{\int_\Omega div(X) = - \int_0^L \langle X, N \rangle}
+\end{gather*}
+lo cual es el Teorema de la Divergencia, que enunciaremos debidamente más adelante. Notemos que es fundamental que $\alpha$ oriente positivamente a $C$ pues en caso contrario la fórmula saldría con el signo opuesto. Se suele denotar el segundo término por 
+\begin{gather*}
+    - \int_0^L \langle X, N \rangle = - \int_C \langle X, N \rangle = - \oint \langle X, N \rangle
+\end{gather*}
+(Los físicos dicen que este teorema es trivial, más adelante veremos también por qué) Fijémonos por último que este teorema es como una generalización del Teorema Fundamental del Cálculo, pues dice que la integral de una cierta ``derivada'' (la divergencia) se calcula como una integral en el borde.
+
 \begin{observacion}
     Vamos a hacer una serie de observaciones-ejercicios acerca de lo que acabamos de ver
     \begin{enumerate}
