@@ -2754,8 +2754,43 @@ AQUÍ FALTAN COSAS DEL LUNES 26 DE OCTUBRE
             \left.\frac{d}{dt} \right|_{t=0} A(t) = \int_\Omega div(X) = -\int_C \langle X, N \rangle
         \end{gather*}
         Una interpretación que podemos hacer es que $\left.\frac{d}{dt} \right|_{t=0} A(t)$ es lo que sale menos lo que entra en $\Omega$ por $C$.
+
+        \item ¿Qué ocurre si no encuentro una parametrización por el arco de $C$?\\
+        
+        Supongamos que $\alpha: \bb{R} \to \bb{R}^2$ es una parametrización regular \underline{no parametrizada por el arco} en general, $A$-periódica, con $\alpha_{|_{[0,A)}}$ inyectiva, $tr(\alpha)=C$ y tal que $\alpha$ orienta positivamente a $C$. El teorema de la divergencia se escirbirá de la siguiente forma:
+        \begin{gather*}
+            \int_\Omega div(X) = - \int_C \langle X,N \rangle = - \int_0^A \langle X_{\alpha(t)}, J\alpha'(t)\rangle dt
+        \end{gather*}
+        Esto se puede ver aplicando el Teorema de Cambio de Variable al Teorema del Área (se deja como ejercicio el cálculo concreto).
+
+        \item Supongamos que $A\subset \bb{R}^2$ y que tenemos el campo diferenciable $X: A \to \bb{R}^2$. Sabemos que si $p\in A$, entonces
+        \begin{gather*}
+            div(X)(p) = traza((dX)_p) = \sum_{i=1}^2 \langle (dX)_p(e_i), e_i \rangle
+        \end{gather*}
+        donde $\{e_1, e_2\}$ es una base ortonormal de $\bb{R}^2$.
     \end{enumerate}
 \end{observacion}
+
+\begin{propiedades}\
+    \begin{enumerate}
+        \item Si $X,Y$ campos, entonces $div(X+Y)=div(X)+div(Y)$.
+        \item Si $\lambda\in \bb{R}$ y $X$ campo, entonces $div(\lambda X) = \lambda\ div(X)$.
+        \item Si $X$ campo en $A$ y $f$ una función diferenciable en $A$, entonces
+        \begin{gather*}
+            div(fX) = \langle \nabla f, X \rangle + f\ div(X)
+        \end{gather*}
+        \item Si $X=\nabla f$ donde $f:A\to \bb{R}$ diferenciable, entonces
+        \begin{gather*}
+            \nabla f_p = \langle \frac{\partial f}{\partial x_1}(p), \frac{\partial f}{\partial x_2}(p) \rangle
+        \end{gather*}
+        por lo que 
+        \begin{gather*}
+            (div (\nabla f))(p) = \frac{\partial^2 f}{\partial x_1^2}(p) + \frac{\partial^2 f}{\partial x_2^2}(p) = (\triangle f)(p)
+        \end{gather*}
+        donde $\triangle f$ es el \textbf{Laplaciano} de $f$.
+        \item $div(\nabla f) = 0$ para todo $f$.
+    \end{enumerate}
+\end{propiedades}
 
 
 
