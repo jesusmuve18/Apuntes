@@ -2787,7 +2787,14 @@ lo cual es el Teorema de la Divergencia, que enunciaremos debidamente más adela
 \begin{gather*}
     - \int_0^L \langle X, N \rangle = - \int_C \langle X, N \rangle = - \oint \langle X, N \rangle
 \end{gather*}
-(Los físicos dicen que este teorema es trivial, más adelante veremos también por qué) Fijémonos por último que este teorema es como una generalización del Teorema Fundamental del Cálculo, pues dice que la integral de una cierta ``derivada'' (la divergencia) se calcula como una integral en el borde.
+(Los físicos dicen que este teorema es trivial, más adelante veremos también por qué) Fijémonos por último que este teorema es como una generalización del Teorema Fundamental del Cálculo, pues dice que la integral de una cierta ``derivada'' (la divergencia) se calcula como una integral en el borde. Formalicemos el Teorema:
+\begin{teo}[Teorema de la Divergencia (Gauss, Grin, Strokes, Ostrogradski)]\label{teo:divergencia}
+    Sea $C\subset \bb{R}^2$ una curva simple, compacta y conexa donde $\Omega$ es su dominio (interior) y $X: \overline{\Omega} \to \bb{R}$ un campo $C^1$, entonces
+    \begin{gather*}
+        \int_\Omega div(X) = -\int_C \langle X, N \rangle = -\int_0^L \langle X_{\alpha(s)}, N(s) \rangle ds
+    \end{gather*}
+    donde $div(X)= \dfrac{\partial X^1}{\partial x_1} + \dfrac{\partial X^1}{\partial x_1}$ y $\alpha$ parametriza a $C$ (por el arco) orientándola positivamente.
+\end{teo}
 
 \begin{observacion}
     Vamos a hacer una serie de observaciones-ejercicios acerca de lo que acabamos de ver
