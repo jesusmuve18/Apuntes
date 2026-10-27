@@ -2620,7 +2620,7 @@ Para poder seguir aproximándonos al Teorema de la Divergencia necesitaremos un 
 \end{definicion}
 Esto es un concepto elemental en Física (modela campos gravitatorios, dinámica de fluidos, ...).\\
 
-Dada $C\subset \bb{R}^2$ una curva simple, compacta y conexa, $\alpha$ una parametrización local $L$-periódica parametrizada por el arco que orienta positivamente a $C$ y consideramos también $\Omega$ el dominio interior de $C$. Tenemos $I=[0,L]\subset \bb{R}$ medible y vamos a escribir $\alpha=(x_1, x_2)$ definiendo $\phi: [0,L]\to \bb{R}$ dada por
+Dada $C\subset \bb{R}^2$ una curva simple, compacta y conexa, $\alpha$ una parametrización local $L$-periódica parametrizada por el arco que orienta positivamente a $C$ y dado también $\Omega$ el dominio interior de $C$, tenemos $I=[0,L]\subset \bb{R}$ medible y vamos a escribir $\alpha=(x_1, x_2)$ definiendo $\phi: [0,L]\to \bb{R}$ dada por
 \begin{gather*}
     \phi = x_1
 \end{gather*}
@@ -2698,6 +2698,64 @@ Buscar $s$ es lo mismo que buscar imágenes en $C$, es decir, buscar $(a,y)\in C
         \node[ForestGreen] at (4.75,3) {$C$};
     \end{tikzpicture}
 \end{figure}
+
+%TODO: Terminar de copiar los apuntes de Ramón
+AQUÍ FALTAN COSAS DEL LUNES 26 DE OCTUBRE
+
+\begin{observacion}
+    Vamos a hacer una serie de observaciones-ejercicios acerca de lo que acabamos de ver
+    \begin{enumerate}
+        \item ¿Por qué los físicos ``dicen'' que este teorema es trivial?\\
+        Para un $|t|<\veps$ definimos $\phi_t : \overline{\Omega} \to \bb{R}^2$ dado por $\phi_t=I+tX$. Si lo pensamos, esta función hace
+        \begin{gather*}
+            p \underset{\phi_t}{\mapsto} p +t X_p
+        \end{gather*}
+        Suponemos que $\veps$ es suficientemente pequeño para que 
+        \begin{gather*}
+            \phi_t : \overline{\Omega} \to \phi_t(\overline{\Omega})
+        \end{gather*}
+        sea difeomorfismo. Creemos que existe dicho $\veps>0$ y queremos estudiar cómo cambia el área al modificar $t$. De esta forma llamamos $A(t)$ al área de $\phi_t(\Omega)$, es decir,
+        \begin{gather*}
+            A(t) = Area(\phi_t(\Omega)) = \int_{\phi_t(\Omega)} 1
+        \end{gather*}
+        Tenemos la siguiente situación
+        \begin{gather*}
+            \xymatrix{
+                \Omega \ar[r]^{\phi_t}_{dif.} & \phi_t(\Omega) \ar[r]^1 &\bb{R}^2
+            }
+        \end{gather*}
+        Lo que nos confirma que podemos aplicar el Teorema de Cambio de Variable. De esta forma
+        \begin{gather*}
+            A(t) = \int_\Omega (1\circ \phi_t)|Jac(\phi_t)| = \int_\Omega |Jac(\phi_t)|
+        \end{gather*}
+        y vemos que así es mucho más fácil manejar una integral dependiente de un parámetro. Vamos ahora a intentar calcular el valor de $Jac(\phi_t)$. Vamos a escribir primero
+        \begin{gather*}
+            (x_1, x_2) \overset{\phi_t}{\longmapsto} (x_1, x_2) + t(X^1(x_1, x_2), X^2(x_1, x_2))
+        \end{gather*}
+        de donde
+        \begin{gather*}
+            Jac(\phi_t) = Jac(I + tX) = det
+            \begin{pmatrix}
+                1 + t\dfrac{\partial X^1}{\partial x_1} & t \dfrac{\partial X^2}{\partial x_1}\\[1em]
+                t \dfrac{\partial X^1}{\partial x_2} & 1 + t\dfrac{\partial X^2}{\partial x_2}
+            \end{pmatrix}
+            = 1 + t(div(X)) + t^2(Jac(X))
+        \end{gather*}
+        Por lo que ya podemos ver el valor del área
+        \begin{gather*}
+            A(t) = \int_\Omega (1+t\cdot div(X) + t^2 \cdot Jac(X))
+        \end{gather*}
+        Vamos a estudiar ahora cómo varía el área. Para ello vamos a calcular la siguiente derivada
+        \begin{gather*}
+            \left.\frac{d}{dt} \right|_{t=0} A(t) = \left.\frac{d}{dt} \right|_{t=0} \int_\Omega (1+t\cdot div(X) + t^2 \cdot Jac(X)) = \int_\Omega div(X)
+        \end{gather*}
+        y acabamos de dar una interpretación de la divergencia. Esto además justifica el hecho de que llamemos a esto divergencia. Ahora queremos saber por qué para los físicos es ``trivial'' el hecho de que 
+        \begin{gather*}
+            \left.\frac{d}{dt} \right|_{t=0} A(t) = \int_\Omega div(X) = -\int_C \langle X, N \rangle
+        \end{gather*}
+        Una interpretación que podemos hacer es que $\left.\frac{d}{dt} \right|_{t=0} A(t)$ es lo que sale menos lo que entra en $\Omega$ por $C$.
+    \end{enumerate}
+\end{observacion}
 
 
 
