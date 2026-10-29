@@ -3108,8 +3108,8 @@ lo cual es el Teorema de la Divergencia, que enunciaremos debidamente más adela
 
 \begin{observacion}
     Continuando con las observaciones anteriores:
-    \begin{enumerate}
-        \item[4.] Consideramos $C$ y $\Omega$ y el campo $X:\bb{R}^2 \to \bb{R}^2$ dado por 
+    \begin{enumerate}[start=4]
+        \item Consideramos $C$ y $\Omega$ y el campo $X:\bb{R}^2 \to \bb{R}^2$ dado por 
         \begin{gather*}
             X(p)=a \qquad \forall p \in \bb{R}^2
         \end{gather*}
@@ -3126,7 +3126,7 @@ lo cual es el Teorema de la Divergencia, que enunciaremos debidamente más adela
         \end{align*}
         Como esto ocurre para todo $a\in \bb{R}^2$, necesariamente tendremos $\int_0^L N(s) ds = 0$
 
-        \item[5.] Consideramos $C$ y $\Omega$ y el campo $X:\bb{R}^2 \to \bb{R}^2$ dado por 
+        \item Consideramos $C$ y $\Omega$ y el campo $X:\bb{R}^2 \to \bb{R}^2$ dado por 
         \begin{gather*}
             X(p)=p-a \qquad \forall p \in \bb{R}^2
         \end{gather*}
@@ -3161,7 +3161,7 @@ lo cual es el Teorema de la Divergencia, que enunciaremos debidamente más adela
         \end{align*}
         Y vemos que la fórmula funciona para este caso que ya conocemos.
 
-        \item[6.] Consideramos $C$ y $\Omega$ y el campo $X:\bb{R}^2 \to \bb{R}^2$ dado por 
+        \item Consideramos $C$ y $\Omega$ y el campo $X:\bb{R}^2 \to \bb{R}^2$ dado por 
         \begin{gather*}
             X(p)=\langle p, a \rangle b \qquad \forall p \in \bb{R}^2
         \end{gather*}
@@ -3194,6 +3194,107 @@ lo cual es el Teorema de la Divergencia, que enunciaremos debidamente más adela
             \boxed{A(\Omega) a = - \int_0^L \langle \alpha(s), a \rangle N(s) ds \qquad \forall a \in \bb{R}^2}
         \end{gather*}
         que se conoce como \textbf{Teorema de Arquímedes}.
+
+        \item Consideramos $a\in \bb{R}^2$ fijo, y el campo $X:\bb{R}^2 \setminus \{a\}\to \bb{R}^2$ dado por 
+        \begin{gather*}
+            X(p)=\frac{p-a}{|p-a|^2}
+        \end{gather*}
+        Para interpretar mejor cómo actúa este campo vamos a escribir
+        \begin{gather*}
+            X(p)= \frac{1}{|p-a|} \cdot \frac{p-a}{|p-a|}
+        \end{gather*}
+        y vemos que actúa en cada punto $p$ en la dirección de la recta que une $p$ con $a$ y es inversamente proporcional a la distancia de dicho $p$ con $a$. Esto nos puede recordar a un campo de fuerzas centrales de los que estudiamos en la física (pero la distancia no aparece al cuadrado). Queremos ver ahora que la divergencia de este campo es $0$. Para ello
+        \begin{gather*}
+            (div(X))(p) = traza(dX)_p = (dX)_p
+        \end{gather*}
+        donde $(dX)_p:\bb{R}^2\to \bb{R}^2$ es un endomorfismo del plano. Para ver cómo actúa tomamos $v\in \bb{R}^2$ y calculamos la derivada direccional
+        \begin{gather*}
+            (dX)_p(v) = \left.\frac{d}{dt}\right|_{t=0} X(p+tv) = \frac{v}{|p-a|^2} - \frac{2\langle v, p-a \rangle}{|p-a|^4}(p-a) \qquad \forall v \in \bb{R}^2
+        \end{gather*}
+        y podemos calcular ya la divergencia
+        \begin{align*}
+            (div(X))(p) &= tr(dX)_p = \sum_{i=1}^2 \langle (dX)_p(e_i), e_i \rangle =\\
+            &= \sum_{i=1}^2 \left\langle \frac{e_i}{|p-a|}-2\frac{\langle e_i, p-a \rangle}{|p-a|}(p-a), e_i \right\rangle =\\
+            &= \sum_{i=1}^2 \left(\frac{|e_i|^2}{|p-a|^2} - 2\frac{\langle e_i, p-a\rangle^2}{|p-a|^4}\right) =\\
+            &= \frac{2}{|p-a|^2} - 2 \frac{|p-a|^2}{|p-a|^4} = \frac{2}{|p-a|^2} - \frac{2}{|p-a|^2} =\\
+            &= 0
+        \end{align*}
+        y efectivamente tenemos que para cualquier punto $p\in \bb{R}^2 \setminus \{a\}$ se tiene $(div(X))(p)=0$. Se deja como ejercicio ver que $X$ es el gradiente de $f$ para cierta $f:\bb{R}^2\setminus\{a\} \to \bb{R}^2$, es decir
+        \begin{gather*}
+            X = \nabla f
+        \end{gather*}
+        y veremos que dicha $f$ es la energía potencial. En dicho caso tendremos $div(X)=\Delta f=0$ y diremos que $f$ es una \textbf{función armónica}.\\
+
+        Hacemos ahora aparecer la curva $C\subset \bb{R}^2$ simple, compacta y conexa. Veamos una distinción de casos
+        \begin{enumerate}
+            \item Supongamos que $a\notin \overline{\Omega}$, entonces $X$ está bien definido en $\overline{\Omega}$ y es diferenciable. Podemos aplicar por tanto el \hyperref[teo:divergencia]{Teorema de la Divergencia}.
+            \begin{gather*}
+                0 = \int_\Omega div(X) = - \int_0^L \frac{\langle \alpha(s)-a, N(s)\rangle}{|\alpha(s)-a|^2} ds
+            \end{gather*}
+
+            \item Si $\Omega$, entonces no podemos aplicar el Teorema, ya que $X$ no está definido en $a$. Veamos una definición y una observación para poder continuar:
+            \begin{definicion}[Dominio Regular]
+                Sea $D\subset \bb{R}^2$ un abierto acotado. Si 
+                \begin{gather*}
+                    Fr(D) = C_1 \dot{\cup} ... \dot{\cup} C_k
+                \end{gather*}
+                donde $C_i$ son curvas simples compactas y conexas diremos que $D$ es un \textbf{dominio regular}.
+            \end{definicion}
+            \begin{observacion}
+                En un dominio regular es válido el \hyperref[teo:divergencia]{Teorema de la Divergencia} (y su demostración).
+            \end{observacion}
+
+            Por tanto vamos a tratar de excluir el punto $a$ del dominio $\Omega$ encerrándolo en una curva. Como $a\in \Omega$ que es abierto tendremos que existe un $\veps>0$ tal que 
+            \begin{gather*}
+                B(a,\veps) \subset \Omega
+            \end{gather*}
+            Vamos a considerar entonces $\Omega_\veps = \Omega \setminus \overline{B}(a,\veps)$ que es un abierto en $\bb{R}^2$ y acotado (ya que está dentro de $\Omega$). Además,
+            \begin{gather*}
+                Fr(\Omega_\veps) = C \cup S^1(a,\veps)
+            \end{gather*}
+            Aplicamos el \hyperref[teo:divergencia]{Teorema de la Divergencia} en $\Omega_\veps$ para el campo $X$, ya que está bien definido en $\Omega_\veps$.
+
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}[scale=0.8]
+                    \shorthandoff{>}
+
+                    % Puntos principales
+                    \coordinate (P1) at (0, 1);   
+                    \coordinate (P2) at (2, 3);
+                    \coordinate (P3) at (5, 2);   
+                    \coordinate (P4) at (4, -2);
+                    \coordinate (P5) at (2, 0);
+
+                    % Dominio \Omega_\veps
+                    \filldraw[thick, ForestGreen, fill=ForestGreen!5] plot [smooth cycle, tension=0.7] coordinates {
+                        (P1) (P2) (P3) (P4) (P5)
+                    };
+                    \node[ForestGreen] at (4,1) {$\Omega_\veps$};
+                    \filldraw[thick, ForestGreen, fill=white] (2,1.5) circle (0.5);
+
+                    % Punto a
+                    \fill[red!80!black] (2,1.5) circle (2.5pt); 
+                    \node at (2,1.7) {$a$};     
+                \end{tikzpicture}
+            \end{figure}
+            Si consideramos $\beta(s)\in S^1(a,\veps)$ donde $\beta$ es una parametrización de la segunda curva que ha aparecido.
+            \begin{align*}
+                0 &= \int_0^L \frac{\langle \alpha(s)-a, N(s)\rangle}{|\alpha(s)-a|^2} ds +\int_0^{2\pi \veps} \frac{\langle \beta(s)-a, N(s)\rangle}{|\beta(s)-a|^2} = \\
+                &= \int_0^L \frac{\langle \alpha(s)-a, N(s)\rangle}{|\alpha(s)-a|^2} ds +\int_0^{2\pi \veps} \frac{1}{\veps} = \\
+                &= \int_0^L \frac{\langle \alpha(s)-a, N(s)\rangle}{|\alpha(s)-a|^2} ds + 2 \pi
+            \end{align*}
+            y llegamos a la siguiente expresión
+            \begin{gather*}
+                \int_0^L \frac{\langle \alpha(s)-a, N(s) \rangle}{|\alpha(s)-a|^2} ds = 
+                \left\{
+                    \begin{array}{l c c}
+                        0 & \text{ si } & a\notin \overline{\Omega}\\
+                        -2\pi & \text{ si } & a\in \Omega
+                    \end{array}
+                \right.
+            \end{gather*}
+        \end{enumerate}
     \end{enumerate}
 \end{observacion}
 
