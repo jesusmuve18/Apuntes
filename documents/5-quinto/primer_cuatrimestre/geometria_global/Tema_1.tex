@@ -2718,7 +2718,6 @@ Esto es claramente una generalización del \hyperref[teo:cambio_variable]{Teorem
     \begin{gather*}
         \int_0^{2\pi R} \kappa^+(s)ds = \int_0^{2\pi R} \frac{1}{R} ds = \frac{1}{R}\cdot 2\pi R = 2\pi
     \end{gather*}
-    % TODO: Escribir para una circunferencia
     Intuitivamente esto nos dice que al ``abollar'' la circunferencia conseguiremos puntos con curvatura negativa, pero este resultado nos dice que entonces aparecen puntos con curvatura positiva que de alguna forma ``compensan'' esa curvatura negativa.\\
 
     Este último resultado es una copia en dimensión $1$ de un famoso Teorema de superficies (el Teorema de Chern-Lashoff).\\
@@ -2735,7 +2734,35 @@ Esto es claramente una generalización del \hyperref[teo:cambio_variable]{Teorem
 Para poder seguir aproximándonos al Teorema de la Divergencia necesitaremos un nuevo ingrediente
 \begin{definicion}
     Sea $A\subset \bb{R}^2$ un subconjunto, un \textbf{campo} (diferenciable, de vectores) es una aplicación $X:A \to \bb{R}^2$ diferenciable\footnote{Si $A$ no es abierto decir que $X$ es diferenciable significa que $A$ está contenida en un abierto en la que $X$ es diferenciable. Al considerar su restricción a $A$ lo seguirá siendo.}.
-    % TODO: hacer dibujo de mancha de la que cada punto sale una flecha.  
+    % TODO: hacer dibujo de mancha de la que cada punto sale una flecha. 
+    
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[scale=0.8]
+            \shorthandoff{>}
+
+            % Puntos principales
+            \coordinate (P1) at (0, 1);   
+            \coordinate (P2) at (2, 3);
+            \coordinate (P3) at (5, 2);   
+            \coordinate (P4) at (4, -2);
+            \coordinate (P5) at (2, 0);
+
+            % Dominio A
+            \filldraw[Plum!30] plot [smooth cycle, tension=0.7] coordinates {
+                (P1) (P2) (P3) (P4) (P5)
+            };
+            \node[Plum] at (4,1) {$A$};
+
+            % Puntos con flechas
+            \foreach \p/\ang in {{(2,1)}/30, {(3,-1)}/200, {(4.5,0)}/-20, {(0.5,1)}/160, {(4,2.5)}/80} {
+                \draw[thick, blue, rotate around={\ang:\p}, ->] \p -- ++(1,0);
+                \fill[red!80!black] \p circle (2.5pt);
+            }
+            
+
+        \end{tikzpicture}
+    \end{figure}
 \end{definicion}
 Esto es un concepto elemental en Física (modela campos gravitatorios, dinámica de fluidos, ...).
 
