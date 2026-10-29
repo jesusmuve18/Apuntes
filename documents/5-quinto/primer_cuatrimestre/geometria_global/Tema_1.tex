@@ -64,7 +64,7 @@
     \begin{gather*}
         \alpha_{1|_{W_3}} = (\beta_1\circ \Phi)_{|_{W_3}} = \beta_{1|_{W_2}} \circ \Phi_{|_{W_3}}
     \end{gather*}
-    Además, por ser una parametrización, $\alpha$ es derivable y por tanto su primera componente $\alpha_1$ también lo será (y en particular su restricción también). Del Teorema de la función inversa anterior sabemos que $\beta_{1|_{W_2}}$ es un difeomorfismo. Por tanto podemos pasar $\beta_{1|_{W_2}}$ al otro lado (usando su inversa) y obtener
+    Además, por ser una parametrización, $\alpha$ es derivable y por tanto su primera componente $\alpha_1$ también lo será (y en particular su restricción también). Del Teorema de la Función Inversa anterior sabemos que $\beta_{1|_{W_2}}$ es un difeomorfismo. Por tanto podemos pasar $\beta_{1|_{W_2}}$ al otro lado (usando su inversa) y obtener
     \begin{gather*}
         \Phi_{|_{W_3}} = \beta_{1|_{W_2}}^{-1} \circ \alpha_{1|_{W_3}}
     \end{gather*}
@@ -1749,7 +1749,7 @@ A partir de aquí, para avanzar necesitaremos emplear el siguiente resultado del
     Existe además una versión más general del teorema para dimensiones mayores.
 \end{observacion}
 
-No obstante, de momento no podemos aplicar directamente el teorema al caso que estábamos estudiando debido a que nuestra función es $f:I \to S^1 \subset \bb{R}^2 \cong \bb{C}$ y, por tanto, el teorema de Sard (Teorema~\ref{teo:sard}) no se puede aplicar, pues llega a $\bb{C}$ y no a $\bb{R}$.\\
+No obstante, de momento no podemos aplicar directamente el teorema al caso que estábamos estudiando debido a que nuestra función es $f:I \to S^1 \subset \bb{R}^2 \cong \bb{C}$ y, por tanto, el \hyperref[teo:sard]{Teorema de Sard} no se puede aplicar, pues llega a $\bb{C}$ y no a $\bb{R}$.\\
 
 Para solventar este problema trataremos de parametrizar la circunferencia usando números complejos y la función argumento. Consideramos así $z\in \bb{C}$ con $|z|=1$ y podremos escribir $z = e^{i\theta}$ donde $\theta = arg(z)$. Sin embargo, la función argumento, $arg(\cdot)$ no es continua en toda la circunferencia. Por este motivo vamos a trabajar con dos ``ramas'' del argumento definiendo
 \begin{align*}
@@ -1778,7 +1778,7 @@ y cualquier dirección (vector de $S^1$) en la que ``lancemos'' la semirrecta se
 \begin{gather*}
     v=v_\theta \in f_p(C_{f_p}) \sii \theta \in h_p^1(C_{h_p^1}) \cup h_p^2(C_{h_p^2})
 \end{gather*}
-donde ambos conjuntos de la unión serán de medida nula ya que tanto a $h_p^1$ como a $h_p^2$ sí le podremos aplicar el Teorema de Sard (Teorema~\ref{teo:sard}).\\
+donde ambos conjuntos de la unión serán de medida nula ya que tanto a $h_p^1$ como a $h_p^2$ sí le podremos aplicar el \hyperref[teo:sard]{Teorema de Sard}.\\
 
 Vamos a desglosar este último paso. Recordemos que la notación compleja era para expresar $z(s)=f_p(s)$ y que nos interesaban los valores singulares de $f_p$, es decir, los puntos $s$ que verifican $f_p'(s)=0$. Por tano, lo que queríamos ver era cuándo $z'(s)=0$ y hemos probado que es equivalente a cuándo $\theta'(s)=0$. Además, según el valor de $f_p(s)$ tendremos 
 \begin{gather*}
@@ -1956,7 +1956,7 @@ Por lo que $\Omega_0$ es conexo (y análogamente $\Omega_1$). Tenemos finalmente
 \end{gather*}
 es una partición no trivial en abiertos conexos de $\bb{R}^2 \setminus C$ lo que concluye en el siguiente teorema.
 
-\begin{teo}[Teorema de la Curva (Diferenciable) de Jordan]
+\begin{teo}[Teorema de la Curva (Diferenciable) de Jordan]\label{teo:curva_jordan}
     Si $C\subset \bb{R}^2$ es una curva simple compacta y conexa, entonces $\bb{R}^2 \setminus C$ tiene exactamente 2 componentes conexas cuya frontera común es $C$ (esto es válido imponiendo solo que $C$ es conexa y cerrada). De dichas componentes conexas, solo una es acotada (si $C$ es compacta).
 \end{teo}
 
@@ -1967,7 +1967,7 @@ es una partición no trivial en abiertos conexos de $\bb{R}^2 \setminus C$ lo qu
     \end{gather*} 
 \end{definicion}
 
-\subsection{Más información sobre la forma de estar de $C$ en $\bb{R}^2$}
+\section{Más información sobre la forma de estar de $C$ en $\bb{R}^2$}
 \begin{definicion}
     Vamos a considerar $C\subset \bb{R}^2$ una curva simple compacta y conexa, para un $\delta>0$ podemos definir
     \begin{gather*}
@@ -2469,7 +2469,7 @@ y sabemos que $F$ es sobreyectiva, continua y abierta (por ser difeomorfismo loc
         \begin{gather*}
             \bb{R}^2 \setminus \Omega \subset \bb{R}^2 \setminus C_t
         \end{gather*}
-        Sabemos que $\bb{R}^2 \setminus \Omega = C\cup \Omega^{ext}$ y aplicando de nuevo el Teorema de la Curva de Jordan (\ref{teo:clasif}) tenemos que $\bb{R}^2 \setminus C_t = \Omega_t \cup \Omega_t^{ext}$. Reescribimos la expresión anterior:
+        Sabemos que $\bb{R}^2 \setminus \Omega = C\cup \Omega^{ext}$ y aplicando de nuevo el \hyperref[teo:clasif]{Teorema de la Curva de Jordan} tenemos que $\bb{R}^2 \setminus C_t = \Omega_t \cup \Omega_t^{ext}$. Reescribimos la expresión anterior:
         \begin{gather*}
             C\cup \Omega^{ext} \subset \Omega_t \cup \Omega_t^{ext} \sii \overline{\Omega^{ext}} \subset \Omega_t \dot{\cup} \Omega_t^{ext}
         \end{gather*}
@@ -2497,7 +2497,7 @@ y sabemos que $F$ es sobreyectiva, continua y abierta (por ser difeomorfismo loc
         \begin{gather*}
             A(B_t^+(C)) = A(F((0,L)\times (0,t))) = \int_{F((0,L)\times (0,t))} dsdr
         \end{gather*}
-        Estamos en condiciones de aplicar el Teorema de Cambio de Variable (ya que $F$ es un difeomorfismo en $(0,L)\times (0,t)$) y tenemos
+        Estamos en condiciones de aplicar el \hyperref[teo:cambio_variable]{Teorema de Cambio de Variable} (ya que $F$ es un difeomorfismo en $(0,L)\times (0,t)$) y tenemos
         \begin{gather*}
             A(B_t^+(C)) = \int_{(0,L)\times (0,t)} (1 \circ F)(s,r) |Jac(F(s,r))|drds = \int_{(0,L)\times (0,t)} |Jac(F(s,r))|drds
         \end{gather*}
@@ -2517,7 +2517,7 @@ y sabemos que $F$ es sobreyectiva, continua y abierta (por ser difeomorfismo loc
         \begin{gather*}
             A(B_t^+(C)) = \int_{(0,L)\times (0,t)} |Jac(F(s,r))|drds = \int_{(0,L)\times (0,t)} (1-r\kappa(s)) drds 
         \end{gather*}
-        Por el teorema de Fubini tenemos
+        Por el Teorema de Fubini tenemos
         \begin{gather*}
             A(B_t^+(C)) = \int_0^t \left(L-r \int_0^L \kappa(s) ds\right) dr
         \end{gather*}
@@ -3008,7 +3008,7 @@ lo cual es el Teorema de la Divergencia, que enunciaremos debidamente más adela
                 \Omega \ar[r]^{\phi_t}_{dif.} & \phi_t(\Omega) \ar[r]^1 &\bb{R}^2
             }
         \end{gather*}
-        Lo que nos confirma que podemos aplicar el Teorema de Cambio de Variable. De esta forma
+        Lo que nos confirma que podemos aplicar el \hyperref[teo:cambio_variable]{Teorema de Cambio de Variable}. De esta forma
         \begin{gather*}
             A(t) = \int_\Omega (1\circ \phi_t)|Jac(\phi_t)| = \int_\Omega |Jac(\phi_t)|
         \end{gather*}
@@ -3041,11 +3041,11 @@ lo cual es el Teorema de la Divergencia, que enunciaremos debidamente más adela
 
         \item ¿Qué ocurre si no encuentro una parametrización por el arco de $C$?\\
         
-        Supongamos que $\alpha: \bb{R} \to \bb{R}^2$ es una parametrización regular \underline{no parametrizada por el arco} en general, $A$-periódica, con $\alpha_{|_{[0,A)}}$ inyectiva, $tr(\alpha)=C$ y tal que $\alpha$ orienta positivamente a $C$. El teorema de la divergencia se escirbirá de la siguiente forma:
+        Supongamos que $\alpha: \bb{R} \to \bb{R}^2$ es una parametrización regular \underline{no parametrizada por el arco} en general, $A$-periódica, con $\alpha_{|_{[0,A)}}$ inyectiva, $tr(\alpha)=C$ y tal que $\alpha$ orienta positivamente a $C$. El teorema de la divergencia se escribirá de la siguiente forma:
         \begin{gather*}
             \int_\Omega div(X) = - \int_C \langle X,N \rangle = - \int_0^A \langle X_{\alpha(t)}, J\alpha'(t)\rangle dt
         \end{gather*}
-        Esto se puede ver aplicando el Teorema de Cambio de Variable al Teorema del Área (se deja como ejercicio el cálculo concreto).
+        Esto se puede ver aplicando el \hyperref[teo:cambio_variable]{Teorema de Cambio de Variable} al \hyperref[teo:area]{Teorema del Área} (se deja como ejercicio el cálculo concreto).
 
         \item Supongamos que $A\subset \bb{R}^2$ y que tenemos el campo diferenciable $X: A \to \bb{R}^2$. Sabemos que si $p\in A$, entonces
         \begin{gather*}
