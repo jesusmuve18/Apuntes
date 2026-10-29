@@ -2714,7 +2714,10 @@ Esto es claramente una generalización del \hyperref[teo:cambio_variable]{Teorem
     \begin{gather*}
         \boxed{\int_0^{2\pi} \kappa^+(s) ds \geq 2\pi}
     \end{gather*}
-    En una circunferencia de radio $R$ es fácil ver que vale justo $2\pi$ 
+    En una circunferencia de radio $R$ es fácil ver que vale justo $2\pi$ ya que $\kappa(s)=\frac{1}{R}>0$ para todo $s\in (0,2\pi)$ por lo que
+    \begin{gather*}
+        \int_0^{2\pi R} \kappa^+(s)ds = \int_0^{2\pi R} \frac{1}{R} ds = \frac{1}{R}\cdot 2\pi R = 2\pi
+    \end{gather*}
     % TODO: Escribir para una circunferencia
     Intuitivamente esto nos dice que al ``abollar'' la circunferencia conseguiremos puntos con curvatura negativa, pero este resultado nos dice que entonces aparecen puntos con curvatura positiva que de alguna forma ``compensan'' esa curvatura negativa.\\
 
