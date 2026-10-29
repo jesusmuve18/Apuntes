@@ -2657,7 +2657,7 @@ Buscamos los $s\in I$ tales que $\alpha(s)=(x_1(s), x_2(s)) = (a, x_2(s))$, es d
 \begin{gather*}
     n(\phi, a) = \sum_{(a,y)\in C}(signo(N_2(a,y)))X^2(a,y)
 \end{gather*}
-Buscar $s$ es lo mismo que buscar imágenes en $C$, es decir, buscar $(a,y)\in C$. Esto es, en el dibujo de ejemplo, ver los puntos de corte de $C$ con la recta vertical $x-a$.
+Buscar $s$ es lo mismo que buscar imágenes en $C$, es decir, buscar $(a,y)\in C$. Esto es, en el dibujo de ejemplo, ver los puntos de corte de $C$ con la recta vertical $x=a$.
 
 \begin{figure}[H]
     \centering
@@ -2665,9 +2665,6 @@ Buscar $s$ es lo mismo que buscar imágenes en $C$, es decir, buscar $(a,y)\in C
         % Ejes
         \draw[thick] (-1, 0) -- (5,0);
         \draw[thick] (0,-1) -- (0,5);
-
-        %Línea vertical
-        \draw (2,-1) --(2,5);
 
         % Curva
         % Puntos principales
@@ -2682,9 +2679,12 @@ Buscar $s$ es lo mismo que buscar imágenes en $C$, es decir, buscar $(a,y)\in C
         \coordinate (P8) at (2,3);
 
         % 4. Curva verde principal
-        \draw[very thick, ForestGreen] plot [smooth cycle, tension=0.7] coordinates {
+        \draw[very thick, ForestGreen, fill=ForestGreen!5] plot [smooth cycle, tension=0.7] coordinates {
                 (P1) (P2) (P3) (P35) (P4) (P5) (P6) (P7) (P8)
             };
+
+        %Línea vertical
+        \draw (2,-1) --(2,5);
 
         % 5. Puntos
         % \foreach \p/\label/\pos in {P1/$P_1$/below, P2/$P_2$/above, P3/$P_3$/below, P4/$P_4$/above, P5/$P_5$/right, P6/$P_6$/below, P7/$P_7$/below, P8/$P_8$/below, P35/$P35$/below} {
@@ -2694,7 +2694,7 @@ Buscar $s$ es lo mismo que buscar imágenes en $C$, es decir, buscar $(a,y)\in C
 
         \foreach \p/\label/\pos in {P2/{$(a,y_4)$}/right, P4/{$(a,y_1)$}/right,  P6/{$(a,y_2)$}/right, P8/{$(a,y_3)$}/right} {
             \fill[red!80!black] (\p) circle (2.5pt);
-            \node[\pos, yshift=2pt] at (\p) {\label};
+            \node[\pos, yshift=2pt, red!80!black] at (\p) {\label};
         }
 
         \node[ForestGreen] at (4.75,3) {$C$};
@@ -2728,7 +2728,81 @@ De hecho tendremos
     \langle N(a, y_j) , (0,1) \rangle > 0 &\qquad 1 \leq j < 2k,\ \ j \text{ impar}\\
     \langle N(a, y_j) , (0,1) \rangle < 0 &\qquad 1 < j \leq 2k,\ \ j \text{ par}
 \end{align*}
-Esto se puede demostrar mediante una inducción finita (se deja como ejercicio). Por tanto, se verifica
+Esto se puede demostrar mediante una inducción finita (se deja como ejercicio). Intuitivamente
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[c]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \shorthandoff{>}
+
+            % Curva C
+            \filldraw[thick, ForestGreen, fill=ForestGreen!5] plot[smooth, tension=0.5] coordinates {
+                (-3,1) (-2,0) (0,-1) (1,-1) (2.5,0) (3,1)
+            };
+            \node[ForestGreen] at (-2, 0.5) {$\Omega$};
+            \node[ForestGreen] at (1.8,-1) {$C$};
+
+            % Recta x=a
+            \draw[thick] (0,-3) -- (0,1);
+
+            % Dirección C
+            \draw[->, ForestGreen, thick] (1,-1) ++(-0.1, -0.04) -- ++(0.1,0.04);
+
+            % Ángulo
+            % \draw (centro) + (ángulo_inicio:radio) arc (ángulo_inicio:ángulo_final:radio);
+            \fill[thick, OrangeRed, opacity=0.1] (0,-1) -- ++(70:1) arc (70:90:1) -- cycle;
+            \draw[thick, OrangeRed] (0,-1) -- ++(70:1) arc (70:90:1) -- cycle;
+
+            % Vector (0,1)
+            \draw[very thick, blue, ->] (0,-1) -- (0,0.5) node[left] {$(0,1)$}; 
+
+            % Vector N(a,y_1)
+            \draw[very thick, Plum, -> , rotate around={-20:(0,-1)}] (0,-1) -- (0,0.5) node[right] {$N(a,y_1)$};
+
+            % Punto (a, y_1)
+            \fill[red!80!black] (0,-1) circle (2.5pt) node[below left] {$(a, y_1)$};
+
+        \end{tikzpicture}
+    \end{subfigure}%
+    \hfill
+    \begin{subfigure}[c]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \shorthandoff{>}
+
+            % Curva C
+            \filldraw[thick, ForestGreen, fill=ForestGreen!5] plot[smooth, tension=0.5] coordinates {
+                (-3,-1) (-2,0) (0,1) (1,1) (2.5,0) (3,-1)
+            };
+            \node[ForestGreen] at (-1, -0.5) {$\Omega$};
+            \node[ForestGreen] at (2,0.8) {$C$};
+
+            % Recta x=a
+            \draw[thick] (0,-1) -- (0,3);
+
+            % Dirección C
+            \draw[->, ForestGreen, thick] (-2,0) ++(0.1, 0.06) -- ++(-0.1,-0.04);
+
+            % Ángulo
+            % \draw (centro) + (ángulo_inicio:radio) arc (ángulo_inicio:ángulo_final:radio);
+            \fill[thick, OrangeRed, opacity=0.1] (0,1) -- ++(-70:1) arc (-70:90:1) -- cycle;
+            \draw[thick, OrangeRed] (0,1) -- ++(-70:1) arc (-70:90:1) -- cycle;
+
+            % Vector (0,1)
+            \draw[very thick, blue, ->] (0,1) -- (0,2.5) node[left] {$(0,1)$}; 
+
+            % Vector N(a,y_1)
+            \draw[very thick, Plum, -> , rotate around={-160:(0,1)}] (0,1) -- (0,2.5) node[right] {$N(a,y_2)$};
+
+            % Punto (a, y_1)
+            \fill[red!80!black] (0,1) circle (2.5pt) node[above left] {$(a, y_2)$};
+        \end{tikzpicture}
+    \end{subfigure}
+\end{figure}
+
+Por tanto, se verifica
 \begin{align*}
     n(\phi, h)(a) &= X^2(a,y_1)-X^2(a,y_2) + ... + X^2(a,y_{2k-1}) - X^2(a,y_{2k}) =\\
     &\overset{(\ast)}{=} - \int_{y_1}^{y_2} \frac{\partial X^2}{\partial x_2} (a,y)dy - ... - \int_{y_{2k-1}}^{y_{2k}} \frac{\partial X^2}{\partial x_2} (a,y)dy =\\
