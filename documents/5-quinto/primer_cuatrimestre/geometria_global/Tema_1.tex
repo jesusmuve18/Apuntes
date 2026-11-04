@@ -3475,7 +3475,7 @@ lo cual es el Teorema de la Divergencia, que enunciaremos debidamente más adela
         \begin{gather*}
             u = \alpha(s) - \alpha(r) \qquad v=N(s) \qquad w=N(r)
         \end{gather*}
-        y podemos traducir el lema a la integral anterior y nos queda
+        y podemos aplicar el lema a la integral anterior y nos queda
         \begin{align*}
             2\pi A(\Omega) &\leq
             \frac{1}{4} \int_0^L \int_0^L \frac{\langle \alpha(s) -\alpha(r), N(s) - N(r) \rangle^2}{|\alpha(s)-\alpha(r)|^2} dr\ ds \leq\\
@@ -3484,9 +3484,9 @@ lo cual es el Teorema de la Divergencia, que enunciaremos debidamente más adela
             &= 
             \frac{1}{4} \int_0^L \int_0^L |N(r)-N(s)|^2 dr\ ds =\\
             &= 
-            \frac{1}{4} \int_0^L \int_0^L 1 + 1 -2\langle N(r)-N(s) \rangle dr\ ds =\\
+            \frac{1}{4} \int_0^L \int_0^L 1 + 1 -2\langle N(r),N(s) \rangle dr\ ds =\\
             &= 
-            \frac{1}{2} \int_0^L \int_0^L 2 -\langle N(r)-N(s) \rangle dr\ ds =\\
+            \frac{1}{2} \int_0^L \int_0^L 2 -\langle N(r),N(s) \rangle dr\ ds =\\
             &= \frac{1}{2} L^2 - \cancel{\frac{1}{2} \int_0^L \int_0^L \langle N(r), N(s) \rangle dr\ ds} =\\
             &=
             \frac{1}{2} L^2
@@ -3521,13 +3521,21 @@ lo cual es el Teorema de la Divergencia, que enunciaremos debidamente más adela
         \begin{gather*}
             \kappa'(s) \langle T(s), T(s) \rangle = 0 \Rightarrow \kappa'(s)=0 \qquad \forall s
         \end{gather*}
-        Esto obliga a que $C$ sea una circunferencia\footnote{Este resultado aparece en la Eneida}. Esto significa que el área máxima que se puede obtener con una cuerda de una longitud determinada se alcanza cuando se dibuja una circunferencia con dicha cuerda.\\
+        Esto obliga a que $C$ sea una circunferencia\footnote{Este resultado aparece en la Eneida}. Esto significa que el área máxima que se puede encerrar con una cuerda de una longitud determinada se alcanza cuando se describe una circunferencia con dicha cuerda.\\
 
-        Nos gustaría obtener ahora la otra implicación. Sabemos que en la circunferencia se obtiene
+        Nos gustaría obtener ahora la otra implicación, es decir, que se alcanza la igualdad si y solo si $C$ es una circunferencia. Sabemos que en la circunferencia se obtiene
         \begin{gather*}
             4\pi \cdot \pi R^2 \leq (2\pi R)^2
         \end{gather*}
-        por lo que se alcanza y se obtiene la equivalencia con la igualdad.
+        por lo que se da la igualdad y se obtiene la equivalencia, es decir,
+        \begin{gather*}
+            \boxed{4\pi A(\Omega) = L^2 \sii 
+            \begin{array}{c}
+                \Omega \text{ es el dominio interior}\\
+                \text{de una circunferencia de perímetro $L$}
+            \end{array}
+            }
+        \end{gather*}
     \end{enumerate}
 \end{observacion}
 
