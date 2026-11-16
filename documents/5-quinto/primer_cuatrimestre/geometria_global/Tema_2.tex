@@ -315,11 +315,11 @@ En este punto nos planteamos si existen dicho $O$ y $\phi$ de la definición de 
 \begin{gather*}
     S \times (-\veps, \veps) \xrightarrow[dif.]{F^{exp}} N_\veps(S)
 \end{gather*}
-Elegimos $O=N_\veps(S)$ con $\veps>0$ entorno tubular y definimos
+Elegimos $O=N_\veps(S)$ con $\veps>0$ entorno tubular y consideramos la siguiente situación
 \begin{gather*}
-    \xymatrix{
-        \phi : & N_\veps(S) = O & S\times (-\veps, \veps) \to S\times(a,b)\\
-        (p,t) & (p,h(t))\\
-        h:(-\veps, \veps) \to (a,b) (dif)
+    \xymatrix@R=3mm {
+        \phi : N_\veps(S) = O \ar[r]^{\ \ F^{-1}} & S\times (-\veps, \veps) \ar[r] & S\times(a,b)\\
+        &(p,t) \ar@{|->}[r] & (p,h(t))
     }
 \end{gather*}
+donde $h:(-\veps, \veps) \to (a,b)$ es un difeomorfismo.
