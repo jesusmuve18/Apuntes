@@ -243,7 +243,7 @@ Análogamente a como teníamos en curvas enunciaremos este teorema para Superfic
         donde $S$ y $S'$ son superficies y $O$ abierto en $\bb{R}^n$. Sin embargo, para el caso actual $F: S\times (-\veps, \veps) \to \bb{R}^3$ parece que no tenemos ninguna definición que nos sirva. 
 
         \begin{definicion}
-            Sea $S$ una superficie diremos que $F: S\times (-\veps, \veps) \to \bb{R}^3$ es diferenciable si y solo si 
+            Sea $S$ una superficie diremos que $F: S\times (-\veps, \veps) \to \bb{R}^3$ es \textbf{diferenciable} si y solo si 
             \begin{gather*}
                 (F \circ (X\times 1_{(-\veps, \veps)})) : U \times (-\veps, \veps) \to \bb{R}^3
             \end{gather*}
@@ -275,7 +275,7 @@ Análogamente a como teníamos en curvas enunciaremos este teorema para Superfic
     \end{gather*}
     tales que $(f \circ \phi)|Jac(\phi)|$ es integrable en $O$. En tal caso definimos la \textbf{integral} de $f$ en $S\times(a,b)$ como sigue
     \begin{gather*}
-        \int_{S\times(a,b)} f = \int_{S\times(a,b)} f(p,t) dp\ dt := \int_O (f\circ \phi) |Jac(\phi)|
+        \int_{\mathrlap{S\times(a,b)}} \quad f = \int_{\mathrlap{S\times(a,b)}}\quad f(p,t) dp\ dt := \int_O (f\circ \phi) |Jac(\phi)|
     \end{gather*}
 \end{definicion}
 
@@ -307,7 +307,7 @@ Análogamente a como teníamos en curvas enunciaremos este teorema para Superfic
         \begin{gather*}
             |Jac(F)|(p) = |det((dF)_p)|
         \end{gather*}
-        tomando la matriz de $(dF)_p$ respecto de bases ortonormales.En este sentido lo usamos en la definición de $\displaystyle\int_{S\times(a,b)} f$.
+        tomando la matriz de $(dF)_p$ respecto de bases ortonormales.En este sentido lo usamos en la definición de $\displaystyle\int_{\mathrlap{S\times(a,b)}} \quad f$.
     \end{enumerate}
 \end{observacion}
 
@@ -319,7 +319,7 @@ Elegimos $O=N_\veps(S)$ con $\veps>0$ entorno tubular y consideramos la siguient
 \begin{gather*}
     \xymatrix@R=3mm {
         \phi : N_\veps(S) = O \ar[r]^{\ \ F^{-1}} & S\times (-\veps, \veps) \ar[r] & S\times(a,b)\\
-        &(p,t) \ar@{|->}[r] & (p,h(t))
+        & (p,t) \ar@{|->}[r] & (p,h(t))
     }
 \end{gather*}
 donde $h:(-\veps, \veps) \to (a,b)$ es un difeomorfismo.
