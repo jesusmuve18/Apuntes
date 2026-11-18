@@ -525,12 +525,12 @@ y hemos llegado finalmente a que la integrabilidad y la integral de $f$ no depen
         \end{gather*}
         queremos calcular el valor absoluto del determinante de dicha diferencial. Para ello construimos la siguiente aplicación lineal 
         \begin{align*}
-            L : T_{X(u,v)}\times \bb{R} &\to \bb{R}^3\\
+            L : T_{X(u,v)}S \times \bb{R} &\to \bb{R}^3\\
             L(X_u, 0) &= X_u\\
             L(X_v, 0) &= X_v\\
             L(0, 1) &= N_{X(u,v)}
         \end{align*}
-        que va a ser una isometría, por lo que $|L| = 1$. De esta forma podemos escribir      
+        que va a ser una isometría, por lo que $|det(L)| = 1$. De esta forma podemos escribir      
         \begin{gather*}
             |det(d(X\times 1_{(0,1)})_{(u,v,t)})| = |det( (L \circ d(X\times 1_{(0,1)}))_{(u,v,t)})|
         \end{gather*}
@@ -549,13 +549,16 @@ y hemos llegado finalmente a que la integrabilidad y la integral de $f$ no depen
             &=
             |\langle X_u(u,v)\wedge X_v(u,v), N_{X(u,v)} \rangle | = | X_u \wedge X_v |(u,v)
         \end{align*}
-        y que finalmente sustituyendo en la integral anterior nos queda que 
+        y que finalmente sustituyendo en la integral anterior y aplicando el Teorema de Fubini nos queda que 
         \begin{align*}
-            \int_S f = \int_{X(U)\times (0,1)} f(p) dp\ dt  &= 
+            \int_S f &=
+            \int_{X(U)\times (0,1)} f(p) dp\ dt  =
             \int_{U\times(0,1)} f(X(u,v)) |Jac(X\times 1_{(0,1)})|(u,v,t) du\ dv\ dt = \\
             &=
-            \int_{U\times(0,1)} (f\circ X)(u,v) |X_u\wedge X_v|(u,v) du\ dv =
+            \int_{U} (f\circ X)(u,v) |X_u\wedge X_v|(u,v) du\ dv =\\
+            &= \int_{U} (f\circ X)|X_u\wedge X_v| du\ dv
         \end{align*}
+        tal y como queríamos probar.
     \end{proof}
 \end{prop}
 
