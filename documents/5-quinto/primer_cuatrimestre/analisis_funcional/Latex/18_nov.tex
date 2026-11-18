@@ -1,0 +1,130 @@
+% !TEX root = main.tex
+
+\section*{Apuntes de clase del día 18 de Noviembre}
+
+\begin{prop}
+    Sea $X$ un espacio de Banach se tiene
+    \begin{enumerate}[label=\alph*)]
+        \item $X$ reflexivo, $Y\leq X$ cerrado $\sii Y,\ Y/X$ reflexivos 
+        \item $X$ reflexivo $\sii$ $X^*$ reflexivo
+        \item $X_1, X_2$ espacios de Banach reflexivos $\sii X_1 \times X_2$ reflexivo.
+    \end{enumerate}
+
+    \begin{proof} Vamos a demostrar distintas implicaciones en un orden distinto al que hemos escrito en la proposición.
+        \begin{enumerate}
+            \item Veamos que si $X$ reflexivo $\Rightarrow$ $X^*$ reflexivo. Tomamos $x_0^{***} \in X^{***}$. Definimos $x_0^{*}=x_0^{***}\circ J_X\in X^{\#}$ y por ser composición de continuas es continua luego $x_0^*\in X^*$ y ${x_0=x_{0}^{***}}_{|_{X}}$. Consideramos también $x^{**}\in X^{**}=J_X(x)$ y se tiene que 
+            \begin{gather*}
+                x^{***}(x^{**}) = x_0^{***}(J_X(x))= x_0^*(x) = J_X(x)(x_0^*)=x^{**}(x_0^*) = (J_{X^*}(x_0^*))(x^{**})
+            \end{gather*}
+            Por definición esto nos dice que $x_0^{***} = J_{X^*}(x_0^*)$, es decir que $J_{X^*}$ es sobreyectiva, es decir, que $X^*$ es reflexivo.
+
+            \item Veamos que si $X$ reflexivo y $Y\leq X$ cerrado, entonces $Y$ reflexivo. Veamos primero la parte de que $Y$ sea reflexivo. como 
+            \begin{gather*}
+                x_0^{**}(x^*) := y_0^{**}({x^*}_{|_Y})
+            \end{gather*}
+            esto evidentemente es lineal y será continuo porque 
+            \begin{gather*}
+                |x_0^{**}(x^*)| \leq \| y_0^{**}\| \  \|{x^*}_{|_Y} \| \leq  \| y_0^{**}\| \ \|{x^*}\|
+            \end{gather*}
+            Como $J_X$ es sobreyectivo tendremos que $\exists x_0\in X$ tal que $x_0^{**}=J_X(x_0)$. Tomamos $x^*\in Y^{\perp}$ y calculamos 
+            \begin{gather*}
+                x^*(x_0)=J_X(x_0)(x^*) = x_0^{**}(x^*)=y_0^{**}({x^*}_{|_Y}) = y_0^{**}(0)=0
+            \end{gather*}
+            es decir, que $x_0 \in \overline{lin(Y)} = Y$. Tomamos ahora $y^*\in Y^*$ y queremos calcular $y_0^{**}(y^*)$. Tomamos (Hahn-Banach nos lo garantiza) $x^*\in X^*$ tal que ${x^*}_{|_Y}=y^*$ y tenemos
+            \begin{gather*}
+                y_0^{**}(y^*) = y_0^{**}({x^*}_{|_Y}) = x_0^{**}(x^*) = x^*(x_0) = {x^*}_{|_Y}(x_0) = y^*(x_0) = J_Y(x_0)(y^*)
+            \end{gather*}
+            lo que nos dice que $J_Y$ es sobreyectiva luego $Y$ reflexivo.
+
+            \item Veamos que si $X^*$ reflexivo, entonces $X$ es reflexivo. Como $X^{**}$ es reflexivo y $X\equiv J_X(X)\subseteq X^{**}$ será reflexivo.
+            
+            \item Veamos ahora que si $X$ es reflexivo y $Y\leq X$ cerrado, entonces $Y/X$ es reflexivo. Sabemos que $(X/Y)^*=Y^{\perp}\leq X^*$ reflexivo luego $Y^{\perp} = (X/Y)^*$ es reflexivo por lo que finalmente tenemos que $X/Y$ es reflexivo.
+            
+            \item La demostración de que si $X_1$, $X_2$ Banach reflexivos entonces $X_1\times X_2$ reflexivo es rutinaria. 
+            
+            \item Veamos la implicación que nos queda, es decir que si $Y$ y $X/Y$ son reflexivos, entonces $X$ reflexivo y $Y\leq X$ cerrado. Tenemos que $X\equiv Y \times X/Y$ por lo que esta demostración es evidente. 
+        \end{enumerate}
+    \end{proof}
+\end{prop}
+
+\begin{observacion}\
+    \begin{enumerate}
+        \item Definimos $X^{(n)}=(X^{(n-1)})^*$. Si $X$ es reflexivo, entonces tenemos $X^{2k}\equiv X$. Si $X$ no es reflexivo entonces 
+        \begin{gather*}
+            \xymatrix@R=2mm{
+                X \ar@{^(->}[r]_{\neq} & X^{(2)} \ar@{^(->}[r]_{\neq} & X^{(4)} \ar@{^(->}[r]_{\neq} & ... \\
+                X^* \ar@{^(->}[r]_{\neq} & X^{(3)} \ar@{^(->}[r]_{\neq} & X^{(5)} \ar@{^(->}[r]_{\neq} & ... \\
+            }
+        \end{gather*}
+    \end{enumerate}
+\end{observacion}
+
+\subsection{Aproximación en espacios reflexivos}
+
+Veamos una serie de resultados que nos van a resultar útiles a partir de ahora
+
+\begin{itemize}
+    \item Si $X$ es reflexivo, $f\in X^*$, entonces $f$ alcanza la norma.
+    \begin{proof}
+        Tomamos $f\in X^*$ y el Teorema de Hahn-Banach nos dice que $\exists x^{**}\in S_{X^{**}}$ tal que $|x^{**}(f)| = \|f\|$. Como $X$ es reflexivo, tenemos que $x^**=J_X(x)$ con $x\in S_X$, luego
+        \begin{gather*}
+            |f(x)| = |J_X(x)(f)| = |x^{**}(f)| = \|f\|
+        \end{gather*}
+    \end{proof} 
+
+    \item Si $X$ es reflexivo, $Y\leq X$ cerrado, entonces $Y$ es proximinal.
+    \begin{proof}
+        En la demostración de la proposición anterior hemos visto que $Y$ es reflexivo y más aún, hemos visto que 
+        \begin{gather*}
+            Y= \{x\in X : x^*(x)=0\ \ \forall x^* \in Y^{\perp}\}
+        \end{gather*}
+        por lo que tenemos la identificación $J_Y(Y)\equiv(Y^{\perp})^{\perp}\leq X^{**}=J_X(X)$. $Y$ visto dentro de $X^{**}$ es el anulador de alguien y estudiamos que los anuladores de alguien son proximinales, luego $Y$ es proximinal.
+    \end{proof}
+\end{itemize}
+
+\section{Topologías Débiles}
+
+\begin{definicion}
+    Sea $X$ un espacio normado
+    \begin{itemize}
+        \item La \textbf{topología débil} de $X$, que notaremos como $\sigma(X,X^*)$, será la menor topología en $X$ que hace continuos a los elementos de $X^*$.
+        \item La \textbf{topología débil-$*$} de $X^*$, que notaremos por $\sigma(X^*, X)$ es la menor topología en $X^*$ que hace continuos a los elementos de $J_X(X)$.
+    \end{itemize}
+\end{definicion}
+
+\begin{prop}
+    Sea $X$ un espacio normado, entonces
+    \begin{enumerate}[label=\alph*)]
+        \item Para cualquier $x_0\in X$, los conjuntos de la forma
+        \begin{gather*}
+            \{x\in X : |f_i(x-x_0)| < \veps,\ i=1,...,n\} = x_0 + \{x\in X : |f_i(x)|< \veps \quad \forall i=1,...,n \}
+        \end{gather*}
+        moviendo $\veps\in \bb{R}^+$, $n\in \bb{N}$, $f_1,...,f_n\in X^*$ es una base de entornos de $x_0$ en $\sigma(X,X^*)$.
+
+        \item Para cualquier $x_0^*\in X^*$, los conjuntos de la forma
+        \begin{gather*}
+            \{x^*\in X^* : |(x^*-x_0^*)(x_i)| < \veps,\ i=1,...,n\} = x_0^* + \{x^*\in X^* : |x^*(x_i)|< \veps \quad \forall i=1,...,n \}
+        \end{gather*}
+        moviendo $\veps\in \bb{R}^+$, $n\in \bb{N}$, $x_1, ..., x_n\in X$ es una base de entornos de $x_0^*$ en $\sigma(X^*,X)$.
+
+        \item Las topologías $\sigma(X, X^*)$ y $\sigma(X^*, X)$ son de Haussdorff.
+        
+        \item Las operaciones
+        \begin{gather*}
+            +: (X, \sigma(X, X^*)) \times (X, \sigma(X, X^*)) \to +: (X, \sigma(X, X^*))\\
+            \cdot: \bb{K} \times (X, \sigma(X, X^*)) \to +: (X, \sigma(X, X^*))
+        \end{gather*}
+        son continuas.
+
+        \item Las operaciones
+        \begin{gather*}
+            +: (X^*, \sigma(X^*, X)) \times (X^*, \sigma(X^*, X)) \to +: (X^*, \sigma(X^*, X))\\
+            \cdot: \bb{K} \times (X^*, \sigma(X^*, X)) \to +: (X^*, \sigma(X^*, X))
+        \end{gather*}
+        son continuas.
+    \end{enumerate}
+\end{prop}
+
+
+
+

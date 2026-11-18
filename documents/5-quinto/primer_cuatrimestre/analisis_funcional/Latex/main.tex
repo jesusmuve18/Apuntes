@@ -1,0 +1,37 @@
+\documentclass[12pt]{article}
+
+\input{../../../../_assets/preambulo.tex}
+\input{../../../../_assets/portada.tex}
+
+
+\usepackage[all]{xy}
+\usepackage{ stmaryrd }
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.pathreplacing} % Llaves
+
+
+% Usamos la versión más reciente de pgfplots para evitar problemas de compatibilidad
+\pgfplotsset{compat=newest}
+
+\newcommand{\transv}{\pitchfork}
+\setlist[itemize,1]{label=$\bullet$}
+
+\newenvironment{solucion}
+  {\par\noindent\textit{Solución.}}
+  {\par}
+
+\begin{document}
+    % \portada[%
+    %     titulo=Análisis Funcional,
+    %     subtitulo=,
+    %     autor=Jesús Muñoz Velasco,
+    %     año=Curso 2026-2027]
+        
+    % \thispagestyle{empty}
+    % \tableofcontents
+    % \newpage
+    % \thispagestyle{empty}
+
+    \input{18_nov.tex}
+  
+\end{document}
