@@ -1,0 +1,388 @@
+{
+  "version": 1,
+  "building": {
+    "nameEs": "ETSIIT — Escuela Técnica Superior de Ingenierías Informática y de Telecomunicación",
+    "nameEn": "ETSIIT — School of Computer and Telecommunication Engineering",
+    "addressEs": "C/ Periodista Daniel Saucedo Aranda s/n, 18071 Granada",
+    "addressEn": "Periodista Daniel Saucedo Aranda St. s/n, 18071 Granada, Spain",
+    "entranceLatitude": 37.196689,
+    "entranceLongitude": -3.624534,
+    "arrivalRadiusMeters": 20.0,
+    "entranceNodeId": "entrada",
+    "defaultDestinationNodeId": "aula_2_2",
+    "provisional": false,
+    "mapsQuery": "E.T.S. de Ingenierías Informática y de Telecomunicación, Granada",
+    "mapsPlaceId": "ChIJi5JfAlX8cQ0RCK3c7wnKu00",
+    "planUpBearingDegrees": 290.0,
+    "planDepthFactor": 0.67,
+    "planAspectRatio": 1.3333,
+    "floorHeightMeters": 4.0
+  },
+  "floors": [
+    {
+      "id": "P0",
+      "nameEs": "Planta baja",
+      "nameEn": "Ground floor",
+      "planAsset": "indoor/plans/planta_baja.jpg",
+      "level": 0
+    },
+    {
+      "id": "P2",
+      "nameEs": "Segunda planta",
+      "nameEn": "Second floor",
+      "planAsset": "indoor/plans/planta_segunda.jpg",
+      "level": 2
+    }
+  ],
+  "nodes": [
+    {
+      "id": "entrada",
+      "floorId": "P0",
+      "nameEs": "Entrada principal",
+      "nameEn": "Main entrance",
+      "descriptionEs": "Cancela de acceso al recinto, junto a la calle.",
+      "descriptionEn": "Gate into the grounds, next to the street.",
+      "photoAsset": "indoor/photos/entrada_ida.jpg",
+      "planX": 0.14,
+      "planY": 0.65
+    },
+    {
+      "id": "paseo",
+      "floorId": "P0",
+      "nameEs": "Paseo cubierto",
+      "nameEn": "Covered walkway",
+      "descriptionEs": "Paseo con cubierta de cristal junto al muro azul del edificio A.",
+      "descriptionEn": "Glass-roofed walkway along the blue wall of building A.",
+      "planX": 0.2,
+      "planY": 0.8
+    },
+    {
+      "id": "entrada_b",
+      "floorId": "P0",
+      "nameEs": "Entrada del Edificio B",
+      "nameEn": "Building B entrance",
+      "descriptionEs": "Puertas de cristal con el cartel «Edificio B · Aulas y Laboratorios».",
+      "descriptionEn": "Glass doors with the sign \"Edificio B · Aulas y Laboratorios\".",
+      "photoAsset": "indoor/photos/entrada_b_ida.jpg",
+      "planX": 0.63,
+      "planY": 0.54
+    },
+    {
+      "id": "pasillo_p0",
+      "floorId": "P0",
+      "nameEs": "Pasillo de la planta baja",
+      "nameEn": "Ground-floor corridor",
+      "descriptionEs": "Pasillo del Edificio B que lleva a la escalera y al ascensor.",
+      "descriptionEn": "Building B corridor leading to the stairs and the lift.",
+      "photoAsset": "indoor/photos/pasillo_p0_ida.jpg",
+      "planX": 0.67,
+      "planY": 0.5
+    },
+    {
+      "id": "escalera_p0",
+      "floorId": "P0",
+      "nameEs": "Escalera de caracol (planta baja)",
+      "nameEn": "Spiral staircase (ground floor)",
+      "descriptionEs": "Escalera de caracol de hormigón, en la torre redonda.",
+      "descriptionEn": "Concrete spiral staircase in the round tower.",
+      "photoAsset": "indoor/photos/escalera_p0_ida.jpg",
+      "planX": 0.73,
+      "planY": 0.6
+    },
+    {
+      "id": "ascensor_p0",
+      "floorId": "P0",
+      "nameEs": "Ascensor (planta baja)",
+      "nameEn": "Lift (ground floor)",
+      "descriptionEs": "Ascensor de puertas doradas, junto a la escalera de caracol.",
+      "descriptionEn": "Lift with golden doors, next to the spiral staircase.",
+      "photoAsset": "indoor/photos/ascensor_p0_ida.jpg",
+      "planX": 0.69,
+      "planY": 0.555
+    },
+    {
+      "id": "escalera_p2",
+      "floorId": "P2",
+      "nameEs": "Escalera de caracol (segunda planta)",
+      "nameEn": "Spiral staircase (second floor)",
+      "descriptionEs": "Salida de la escalera de caracol en la segunda planta.",
+      "descriptionEn": "Spiral staircase exit on the second floor.",
+      "photoAsset": "indoor/photos/escalera_p2_ida.jpg",
+      "planX": 0.73,
+      "planY": 0.58
+    },
+    {
+      "id": "ascensor_p2",
+      "floorId": "P2",
+      "nameEs": "Ascensor (segunda planta)",
+      "nameEn": "Lift (second floor)",
+      "descriptionEs": "Salida del ascensor en la segunda planta, junto a la escalera.",
+      "descriptionEn": "Lift exit on the second floor, next to the stairs.",
+      "planX": 0.7,
+      "planY": 0.54
+    },
+    {
+      "id": "pasillo_p2",
+      "floorId": "P2",
+      "nameEs": "Pasillo de aulas (segunda planta)",
+      "nameEn": "Classroom corridor (second floor)",
+      "descriptionEs": "Pasillo largo con las puertas de las aulas.",
+      "descriptionEn": "Long corridor with the classroom doors.",
+      "planX": 0.73,
+      "planY": 0.58
+    },
+    {
+      "id": "aula_2_2",
+      "floorId": "P2",
+      "nameEs": "Aula 2.2",
+      "nameEn": "Classroom 2.2",
+      "descriptionEs": "Aula «Profesor Pedro Cano». Comprueba el número 2.2 en la puerta.",
+      "descriptionEn": "\"Profesor Pedro Cano\" classroom. Check the number 2.2 on the door.",
+      "photoAsset": "indoor/photos/aula_2_2_ida.jpg",
+      "planX": 0.55,
+      "planY": 0.25
+    }
+  ],
+  "edges": [
+    {
+      "from": "entrada",
+      "to": "paseo",
+      "kind": "WALK",
+      "instructionEs": "Cruza la cancela de entrada y sigue recto por el paseo cubierto.",
+      "instructionEn": "Go through the entrance gate and walk straight along the covered walkway.",
+      "reverseInstructionEs": "Sigue el paseo cubierto hasta la cancela de salida.",
+      "reverseInstructionEn": "Follow the covered walkway to the exit gate."
+    },
+    {
+      "from": "paseo",
+      "to": "entrada_b",
+      "kind": "WALK",
+      "instructionEs": "Sigue el paseo junto al muro azul del edificio A hasta las puertas de cristal del Edificio B.",
+      "instructionEn": "Follow the walkway along the blue wall of building A to the glass doors of Building B.",
+      "reverseInstructionEs": "Sal del Edificio B y sigue el paseo cubierto junto al muro azul.",
+      "reverseInstructionEn": "Leave Building B and follow the covered walkway along the blue wall."
+    },
+    {
+      "from": "entrada_b",
+      "to": "pasillo_p0",
+      "kind": "WALK",
+      "instructionEs": "Entra en el Edificio B y sigue por el pasillo.",
+      "instructionEn": "Enter Building B and walk along the corridor.",
+      "reverseInstructionEs": "Sigue el pasillo hasta las puertas de cristal de salida.",
+      "reverseInstructionEn": "Walk along the corridor to the glass exit doors."
+    },
+    {
+      "from": "pasillo_p0",
+      "to": "escalera_p0",
+      "kind": "WALK",
+      "instructionEs": "Sigue el pasillo hasta la escalera de caracol.",
+      "instructionEn": "Walk along the corridor to the spiral staircase.",
+      "reverseInstructionEs": "Desde la escalera, sal al pasillo de la planta baja.",
+      "reverseInstructionEn": "From the staircase, go out into the ground-floor corridor."
+    },
+    {
+      "from": "pasillo_p0",
+      "to": "ascensor_p0",
+      "kind": "WALK",
+      "instructionEs": "Ve al ascensor, junto a la escalera de caracol.",
+      "instructionEn": "Go to the lift, next to the spiral staircase.",
+      "reverseInstructionEs": "Al salir del ascensor, sal al pasillo de la planta baja.",
+      "reverseInstructionEn": "When you leave the lift, go out into the ground-floor corridor."
+    },
+    {
+      "from": "escalera_p0",
+      "to": "escalera_p2",
+      "kind": "STAIRS",
+      "instructionEs": "Sube por la escalera de caracol hasta la segunda planta.",
+      "instructionEn": "Take the spiral staircase up to the second floor.",
+      "reverseInstructionEs": "Baja por la escalera de caracol hasta la planta baja.",
+      "reverseInstructionEn": "Take the spiral staircase down to the ground floor."
+    },
+    {
+      "from": "ascensor_p0",
+      "to": "ascensor_p2",
+      "kind": "ELEVATOR",
+      "instructionEs": "Entra en el ascensor y pulsa el botón de la planta 2.",
+      "instructionEn": "Take the lift and press the button for floor 2.",
+      "reverseInstructionEs": "Entra en el ascensor y pulsa el botón de la planta 0.",
+      "reverseInstructionEn": "Take the lift and press the button for floor 0."
+    },
+    {
+      "from": "escalera_p2",
+      "to": "pasillo_p2",
+      "kind": "WALK",
+      "instructionEs": "Al salir de la escalera, entra en el pasillo de aulas.",
+      "instructionEn": "When you leave the staircase, enter the classroom corridor.",
+      "reverseInstructionEs": "Vuelve a la escalera de caracol.",
+      "reverseInstructionEn": "Go back to the spiral staircase."
+    },
+    {
+      "from": "ascensor_p2",
+      "to": "pasillo_p2",
+      "kind": "WALK",
+      "instructionEs": "Al salir del ascensor, entra en el pasillo de aulas.",
+      "instructionEn": "When you leave the lift, enter the classroom corridor.",
+      "reverseInstructionEs": "Vuelve al ascensor, junto a la escalera.",
+      "reverseInstructionEn": "Go back to the lift, next to the stairs."
+    },
+    {
+      "from": "pasillo_p2",
+      "to": "aula_2_2",
+      "kind": "WALK",
+      "instructionEs": "Recorre el pasillo hasta el aula 2.2, «Aula Profesor Pedro Cano».",
+      "instructionEn": "Walk along the corridor to classroom 2.2, the \"Profesor Pedro Cano\" room.",
+      "reverseInstructionEs": "Sal del aula y vuelve por el pasillo.",
+      "reverseInstructionEn": "Leave the classroom and walk back along the corridor."
+    }
+  ],
+  "routes": [
+    {
+      "id": "ida",
+      "accessible": false,
+      "stops": [
+        {
+          "nodeId": "entrada",
+          "photoAsset": "indoor/photos/exterior.jpg"
+        },
+        {
+          "nodeId": "paseo",
+          "photoAsset": "indoor/photos/entrada_ida.jpg"
+        },
+        {
+          "nodeId": "entrada_b",
+          "photoAsset": "indoor/photos/entrada_b_ida.jpg"
+        },
+        {
+          "nodeId": "pasillo_p0",
+          "photoAsset": "indoor/photos/pasillo_p0_ida.jpg"
+        },
+        {
+          "nodeId": "escalera_p0",
+          "photoAsset": "indoor/photos/escalera_p0_ida.jpg"
+        },
+        {
+          "nodeId": "escalera_p2"
+        },
+        {
+          "nodeId": "pasillo_p2",
+          "photoAsset": "indoor/photos/escalera_p2_ida.jpg"
+        },
+        {
+          "nodeId": "aula_2_2",
+          "photoAsset": "indoor/photos/aula_2_2_ida.jpg"
+        }
+      ]
+    },
+    {
+      "id": "ida_ascensor",
+      "accessible": true,
+      "stops": [
+        {
+          "nodeId": "entrada",
+          "photoAsset": "indoor/photos/exterior.jpg"
+        },
+        {
+          "nodeId": "paseo",
+          "photoAsset": "indoor/photos/entrada_ida.jpg"
+        },
+        {
+          "nodeId": "entrada_b",
+          "photoAsset": "indoor/photos/entrada_b_ida.jpg"
+        },
+        {
+          "nodeId": "pasillo_p0",
+          "photoAsset": "indoor/photos/pasillo_p0_ida.jpg"
+        },
+        {
+          "nodeId": "ascensor_p0",
+          "photoAsset": "indoor/photos/ascensor_p0_ida.jpg"
+        },
+        {
+          "nodeId": "ascensor_p2"
+        },
+        {
+          "nodeId": "pasillo_p2",
+          "photoAsset": "indoor/photos/escalera_p2_ida.jpg"
+        },
+        {
+          "nodeId": "aula_2_2",
+          "photoAsset": "indoor/photos/aula_2_2_ida.jpg"
+        }
+      ]
+    },
+    {
+      "id": "vuelta",
+      "accessible": false,
+      "stops": [
+        {
+          "nodeId": "aula_2_2",
+          "photoAsset": "indoor/photos/aula_2_2_vuelta.jpg"
+        },
+        {
+          "nodeId": "pasillo_p2",
+          "photoAsset": "indoor/photos/escalera_p2_vuelta.jpg"
+        },
+        {
+          "nodeId": "escalera_p2"
+        },
+        {
+          "nodeId": "escalera_p0",
+          "photoAsset": "indoor/photos/escalera_p0_vuelta.jpg"
+        },
+        {
+          "nodeId": "pasillo_p0",
+          "photoAsset": "indoor/photos/pasillo_p0_vuelta.jpg"
+        },
+        {
+          "nodeId": "entrada_b",
+          "photoAsset": "indoor/photos/entrada_b_vuelta.jpg"
+        },
+        {
+          "nodeId": "paseo",
+          "photoAsset": "indoor/photos/entrada_vuelta.jpg"
+        },
+        {
+          "nodeId": "entrada",
+          "photoAsset": "indoor/photos/exterior.jpg"
+        }
+      ]
+    },
+    {
+      "id": "vuelta_ascensor",
+      "accessible": true,
+      "stops": [
+        {
+          "nodeId": "aula_2_2",
+          "photoAsset": "indoor/photos/aula_2_2_vuelta.jpg"
+        },
+        {
+          "nodeId": "pasillo_p2",
+          "photoAsset": "indoor/photos/escalera_p2_vuelta.jpg"
+        },
+        {
+          "nodeId": "ascensor_p2"
+        },
+        {
+          "nodeId": "ascensor_p0",
+          "photoAsset": "indoor/photos/ascensor_p0_ida.jpg"
+        },
+        {
+          "nodeId": "pasillo_p0",
+          "photoAsset": "indoor/photos/pasillo_p0_vuelta.jpg"
+        },
+        {
+          "nodeId": "entrada_b",
+          "photoAsset": "indoor/photos/entrada_b_vuelta.jpg"
+        },
+        {
+          "nodeId": "paseo",
+          "photoAsset": "indoor/photos/entrada_vuelta.jpg"
+        },
+        {
+          "nodeId": "entrada",
+          "photoAsset": "indoor/photos/exterior.jpg"
+        }
+      ]
+    }
+  ]
+}

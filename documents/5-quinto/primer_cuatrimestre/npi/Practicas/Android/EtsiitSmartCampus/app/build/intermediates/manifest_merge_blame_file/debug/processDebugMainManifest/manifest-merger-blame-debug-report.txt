@@ -1,0 +1,349 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.jesusmuve.etsiitsmartcampus"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+9        android:targetSdkVersion="35" />
+10
+11    <!--
+12         Lector QR/NFC (feature.scanner). CAMERA se pide en tiempo de ejecución solo al abrir
+13         el lector. Cámara y NFC son opcionales: sin ellas queda el código manual.
+14    -->
+15    <uses-permission android:name="android.permission.CAMERA" />
+15-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:13:5-65
+15-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:13:22-62
+16    <uses-permission android:name="android.permission.NFC" />
+16-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:14:5-62
+16-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:14:22-59
+17
+18    <uses-feature
+18-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:15:5-89
+19        android:name="android.hardware.camera.any"
+19-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:15:19-61
+20        android:required="false" />
+20-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:15:62-86
+21    <uses-feature
+21-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:16:5-82
+22        android:name="android.hardware.nfc"
+22-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:16:19-54
+23        android:required="false" />
+23-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:16:55-79
+24    <!--
+25         Navegación exterior: el GPS de la app comprueba si el usuario ha llegado a la entrada de
+26         la ETSIIT. Se pide en tiempo de ejecución solo al pulsar «Permitir ubicación» y solo se
+27         usa con la pantalla visible. Android 12+ exige pedir FINE junto a COARSE.
+28    -->
+29    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+29-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:20:5-79
+29-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:20:22-76
+30    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+30-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:21:5-81
+30-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:21:22-78
+31    <!-- La app funciona sin GPS (botón «Ya estoy en la ETSIIT»), así que no es obligatorio. -->
+32    <uses-feature
+32-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:23:5-91
+33        android:name="android.hardware.location.gps"
+33-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:23:19-63
+34        android:required="false" />
+34-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:23:64-88
+35
+36    <!-- Respuesta táctil al reconocer el gesto G1 (permiso normal, sin diálogo). -->
+37    <uses-permission android:name="android.permission.VIBRATE" />
+37-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:26:5-66
+37-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:26:22-63
+38
+39    <!--
+40         Sensores: ninguno es obligatorio. Sin ellos cada función se degrada a su botón
+41         equivalente: G1 → «Escanear», oreja → «Escuchar», ¿Voy bien? → aviso.
+42    -->
+43    <uses-feature
+43-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:30:5-99
+44        android:name="android.hardware.sensor.accelerometer"
+44-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:30:19-71
+45        android:required="false" />
+45-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:30:72-96
+46    <uses-feature
+46-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:31:5-95
+47        android:name="android.hardware.sensor.proximity"
+47-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:31:19-67
+48        android:required="false" />
+48-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:31:68-92
+49    <uses-feature
+49-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:32:5-93
+50        android:name="android.hardware.sensor.compass"
+50-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:32:19-65
+51        android:required="false" />
+51-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:32:66-90
+52    <!-- Barómetro: detecta cambios de planta en escaleras y ascensores. Opcional. -->
+53    <uses-feature
+53-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:34:5-95
+54        android:name="android.hardware.sensor.barometer"
+54-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:34:19-67
+55        android:required="false" />
+55-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:34:68-92
+56    <uses-feature
+56-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:35:5-95
+57        android:name="android.hardware.sensor.gyroscope"
+57-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:35:19-67
+58        android:required="false" />
+58-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:35:68-92
+59    <uses-feature
+59-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:36:5-101
+60        android:name="android.hardware.touchscreen.multitouch"
+60-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:36:19-73
+61        android:required="false" />
+61-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:36:74-98
+62
+63    <permission
+63-->[androidx.core:core:1.15.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/d5ddf76f4fad497e1c5e827442bc7825/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+64        android:name="com.jesusmuve.etsiitsmartcampus.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+64-->[androidx.core:core:1.15.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/d5ddf76f4fad497e1c5e827442bc7825/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
+65        android:protectionLevel="signature" />
+65-->[androidx.core:core:1.15.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/d5ddf76f4fad497e1c5e827442bc7825/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
+66
+67    <uses-permission android:name="com.jesusmuve.etsiitsmartcampus.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+67-->[androidx.core:core:1.15.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/d5ddf76f4fad497e1c5e827442bc7825/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+67-->[androidx.core:core:1.15.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/d5ddf76f4fad497e1c5e827442bc7825/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
+68
+69    <application
+69-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:38:5-70:19
+70        android:name="com.jesusmuve.etsiitsmartcampus.CampusApplication"
+70-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:39:9-42
+71        android:allowBackup="true"
+71-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:40:9-35
+72        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+72-->[androidx.core:core:1.15.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/d5ddf76f4fad497e1c5e827442bc7825/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
+73        android:dataExtractionRules="@xml/data_extraction_rules"
+73-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:41:9-65
+74        android:debuggable="true"
+75        android:extractNativeLibs="false"
+76        android:fullBackupContent="@xml/backup_rules"
+76-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:42:9-54
+77        android:icon="@mipmap/ic_launcher"
+77-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:43:9-43
+78        android:label="@string/app_name"
+78-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:44:9-41
+79        android:localeConfig="@xml/locales_config"
+79-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:45:9-51
+80        android:roundIcon="@mipmap/ic_launcher_round"
+80-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:46:9-54
+81        android:supportsRtl="true"
+81-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:47:9-35
+82        android:theme="@style/Theme.ETSIITSmartCampus" >
+82-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:48:9-55
+83        <activity
+83-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:49:9-59:20
+84            android:name="com.jesusmuve.etsiitsmartcampus.MainActivity"
+84-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:50:13-41
+85            android:exported="true"
+85-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:51:13-36
+86            android:label="@string/app_name"
+86-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:52:13-45
+87            android:theme="@style/Theme.ETSIITSmartCampus" >
+87-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:53:13-59
+88            <intent-filter>
+88-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:54:13-58:29
+89                <action android:name="android.intent.action.MAIN" />
+89-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:55:17-69
+89-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:55:25-66
+90
+91                <category android:name="android.intent.category.LAUNCHER" />
+91-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:57:17-77
+91-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:57:27-74
+92            </intent-filter>
+93        </activity>
+94
+95        <!-- Guarda el idioma elegido en la app (AppCompat). -->
+96        <service
+96-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:62:9-69:19
+97            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+97-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:63:13-82
+98            android:enabled="false"
+98-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:64:13-36
+99            android:exported="false" >
+99-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:65:13-37
+100            <meta-data
+100-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:66:13-68:40
+101                android:name="autoStoreLocales"
+101-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:67:17-48
+102                android:value="true" />
+102-->/home/jesusmuve/Escritorio/NPI-Practicas/Android/EtsiitSmartCampus/app/src/main/AndroidManifest.xml:68:17-37
+103        </service>
+104        <service
+104-->[androidx.camera:camera-camera2:1.4.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/977c815140683aec5fd1d4c84dfa5fc7/transformed/camera-camera2-1.4.1/AndroidManifest.xml:24:9-33:19
+105            android:name="androidx.camera.core.impl.MetadataHolderService"
+105-->[androidx.camera:camera-camera2:1.4.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/977c815140683aec5fd1d4c84dfa5fc7/transformed/camera-camera2-1.4.1/AndroidManifest.xml:25:13-75
+106            android:enabled="false"
+106-->[androidx.camera:camera-camera2:1.4.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/977c815140683aec5fd1d4c84dfa5fc7/transformed/camera-camera2-1.4.1/AndroidManifest.xml:26:13-36
+107            android:exported="false" >
+107-->[androidx.camera:camera-camera2:1.4.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/977c815140683aec5fd1d4c84dfa5fc7/transformed/camera-camera2-1.4.1/AndroidManifest.xml:27:13-37
+108            <meta-data
+108-->[androidx.camera:camera-camera2:1.4.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/977c815140683aec5fd1d4c84dfa5fc7/transformed/camera-camera2-1.4.1/AndroidManifest.xml:30:13-32:89
+109                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+109-->[androidx.camera:camera-camera2:1.4.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/977c815140683aec5fd1d4c84dfa5fc7/transformed/camera-camera2-1.4.1/AndroidManifest.xml:31:17-103
+110                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+110-->[androidx.camera:camera-camera2:1.4.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/977c815140683aec5fd1d4c84dfa5fc7/transformed/camera-camera2-1.4.1/AndroidManifest.xml:32:17-86
+111        </service>
+112        <service
+112-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/1c278f196ad31e6b2b14b05ac058d569/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:9:9-15:19
+113            android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService"
+113-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/1c278f196ad31e6b2b14b05ac058d569/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:10:13-91
+114            android:directBootAware="true"
+114-->[com.google.mlkit:common:18.11.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/da13f53bc76149913856386970714328/transformed/common-18.11.0/AndroidManifest.xml:17:13-43
+115            android:exported="false" >
+115-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/1c278f196ad31e6b2b14b05ac058d569/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:11:13-37
+116            <meta-data
+116-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/1c278f196ad31e6b2b14b05ac058d569/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:12:13-14:85
+117                android:name="com.google.firebase.components:com.google.mlkit.vision.barcode.internal.BarcodeRegistrar"
+117-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/1c278f196ad31e6b2b14b05ac058d569/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:13:17-120
+118                android:value="com.google.firebase.components.ComponentRegistrar" />
+118-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/1c278f196ad31e6b2b14b05ac058d569/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:14:17-82
+119            <meta-data
+119-->[com.google.mlkit:vision-common:17.3.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/ddefe2df15045025796d028454ac3a1a/transformed/vision-common-17.3.0/AndroidManifest.xml:12:13-14:85
+120                android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar"
+120-->[com.google.mlkit:vision-common:17.3.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/ddefe2df15045025796d028454ac3a1a/transformed/vision-common-17.3.0/AndroidManifest.xml:13:17-124
+121                android:value="com.google.firebase.components.ComponentRegistrar" />
+121-->[com.google.mlkit:vision-common:17.3.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/ddefe2df15045025796d028454ac3a1a/transformed/vision-common-17.3.0/AndroidManifest.xml:14:17-82
+122            <meta-data
+122-->[com.google.mlkit:common:18.11.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/da13f53bc76149913856386970714328/transformed/common-18.11.0/AndroidManifest.xml:20:13-22:85
+123                android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar"
+123-->[com.google.mlkit:common:18.11.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/da13f53bc76149913856386970714328/transformed/common-18.11.0/AndroidManifest.xml:21:17-120
+124                android:value="com.google.firebase.components.ComponentRegistrar" />
+124-->[com.google.mlkit:common:18.11.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/da13f53bc76149913856386970714328/transformed/common-18.11.0/AndroidManifest.xml:22:17-82
+125        </service>
+126
+127        <provider
+127-->[com.google.mlkit:common:18.11.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/da13f53bc76149913856386970714328/transformed/common-18.11.0/AndroidManifest.xml:9:9-13:38
+128            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
+128-->[com.google.mlkit:common:18.11.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/da13f53bc76149913856386970714328/transformed/common-18.11.0/AndroidManifest.xml:10:13-78
+129            android:authorities="com.jesusmuve.etsiitsmartcampus.mlkitinitprovider"
+129-->[com.google.mlkit:common:18.11.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/da13f53bc76149913856386970714328/transformed/common-18.11.0/AndroidManifest.xml:11:13-69
+130            android:exported="false"
+130-->[com.google.mlkit:common:18.11.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/da13f53bc76149913856386970714328/transformed/common-18.11.0/AndroidManifest.xml:12:13-37
+131            android:initOrder="99" />
+131-->[com.google.mlkit:common:18.11.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/da13f53bc76149913856386970714328/transformed/common-18.11.0/AndroidManifest.xml:13:13-35
+132
+133        <activity
+133-->[com.google.android.gms:play-services-base:18.5.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/7852e538b89f1d246e620c8619f307e5/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
+134            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+134-->[com.google.android.gms:play-services-base:18.5.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/7852e538b89f1d246e620c8619f307e5/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
+135            android:exported="false"
+135-->[com.google.android.gms:play-services-base:18.5.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/7852e538b89f1d246e620c8619f307e5/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
+136            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+136-->[com.google.android.gms:play-services-base:18.5.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/7852e538b89f1d246e620c8619f307e5/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
+137
+138        <meta-data
+138-->[com.google.android.gms:play-services-basement:18.4.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/97257d569c8845d1ae0e1fe5ae01e85e/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
+139            android:name="com.google.android.gms.version"
+139-->[com.google.android.gms:play-services-basement:18.4.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/97257d569c8845d1ae0e1fe5ae01e85e/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:20-65
+140            android:value="@integer/google_play_services_version" />
+140-->[com.google.android.gms:play-services-basement:18.4.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/97257d569c8845d1ae0e1fe5ae01e85e/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:66-119
+141
+142        <activity
+142-->[androidx.compose.ui:ui-tooling-android:1.7.6] /home/jesusmuve/.gradle/caches/8.11.1/transforms/6444fe312f67d553095c9449f29f1669/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+143            android:name="androidx.compose.ui.tooling.PreviewActivity"
+143-->[androidx.compose.ui:ui-tooling-android:1.7.6] /home/jesusmuve/.gradle/caches/8.11.1/transforms/6444fe312f67d553095c9449f29f1669/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+144            android:exported="true" />
+144-->[androidx.compose.ui:ui-tooling-android:1.7.6] /home/jesusmuve/.gradle/caches/8.11.1/transforms/6444fe312f67d553095c9449f29f1669/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+145
+146        <provider
+146-->[androidx.emoji2:emoji2:1.3.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/822abbb505d5131e92d42d9121ed18c7/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+147            android:name="androidx.startup.InitializationProvider"
+147-->[androidx.emoji2:emoji2:1.3.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/822abbb505d5131e92d42d9121ed18c7/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+148            android:authorities="com.jesusmuve.etsiitsmartcampus.androidx-startup"
+148-->[androidx.emoji2:emoji2:1.3.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/822abbb505d5131e92d42d9121ed18c7/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+149            android:exported="false" >
+149-->[androidx.emoji2:emoji2:1.3.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/822abbb505d5131e92d42d9121ed18c7/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+150            <meta-data
+150-->[androidx.emoji2:emoji2:1.3.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/822abbb505d5131e92d42d9121ed18c7/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+151                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+151-->[androidx.emoji2:emoji2:1.3.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/822abbb505d5131e92d42d9121ed18c7/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+152                android:value="androidx.startup" />
+152-->[androidx.emoji2:emoji2:1.3.0] /home/jesusmuve/.gradle/caches/8.11.1/transforms/822abbb505d5131e92d42d9121ed18c7/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+153            <meta-data
+153-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/jesusmuve/.gradle/caches/8.11.1/transforms/adfb1db0a027d1e9dff4d911ab51c35a/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52
+154                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+154-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/jesusmuve/.gradle/caches/8.11.1/transforms/adfb1db0a027d1e9dff4d911ab51c35a/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78
+155                android:value="androidx.startup" />
+155-->[androidx.lifecycle:lifecycle-process:2.8.7] /home/jesusmuve/.gradle/caches/8.11.1/transforms/adfb1db0a027d1e9dff4d911ab51c35a/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49
+156            <meta-data
+156-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+157                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+157-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+158                android:value="androidx.startup" />
+158-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+159        </provider>
+160
+161        <receiver
+161-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+162            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+162-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+163            android:directBootAware="false"
+163-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+164            android:enabled="true"
+164-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+165            android:exported="true"
+165-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+166            android:permission="android.permission.DUMP" >
+166-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+167            <intent-filter>
+167-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+168                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+168-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+168-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+169            </intent-filter>
+170            <intent-filter>
+170-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+171                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+171-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+171-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+172            </intent-filter>
+173            <intent-filter>
+173-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+174                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+174-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+174-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+175            </intent-filter>
+176            <intent-filter>
+176-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+177                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+177-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+177-->[androidx.profileinstaller:profileinstaller:1.3.1] /home/jesusmuve/.gradle/caches/8.11.1/transforms/796457568aa5533865966b96692210aa/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+178            </intent-filter>
+179        </receiver>
+180
+181        <service
+181-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /home/jesusmuve/.gradle/caches/8.11.1/transforms/3dedc67b33d0f7adb8545d36fc95c20f/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:29:9-35:19
+182            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+182-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /home/jesusmuve/.gradle/caches/8.11.1/transforms/3dedc67b33d0f7adb8545d36fc95c20f/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:30:13-103
+183            android:exported="false" >
+183-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /home/jesusmuve/.gradle/caches/8.11.1/transforms/3dedc67b33d0f7adb8545d36fc95c20f/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:31:13-37
+184            <meta-data
+184-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /home/jesusmuve/.gradle/caches/8.11.1/transforms/3dedc67b33d0f7adb8545d36fc95c20f/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:32:13-34:39
+185                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+185-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /home/jesusmuve/.gradle/caches/8.11.1/transforms/3dedc67b33d0f7adb8545d36fc95c20f/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:33:17-94
+186                android:value="cct" />
+186-->[com.google.android.datatransport:transport-backend-cct:2.3.3] /home/jesusmuve/.gradle/caches/8.11.1/transforms/3dedc67b33d0f7adb8545d36fc95c20f/transformed/transport-backend-cct-2.3.3/AndroidManifest.xml:34:17-36
+187        </service>
+188        <service
+188-->[com.google.android.datatransport:transport-runtime:2.2.6] /home/jesusmuve/.gradle/caches/8.11.1/transforms/472863c2e51763ac9e4c6aec5fdc6bc2/transformed/transport-runtime-2.2.6/AndroidManifest.xml:26:9-30:19
+189            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+189-->[com.google.android.datatransport:transport-runtime:2.2.6] /home/jesusmuve/.gradle/caches/8.11.1/transforms/472863c2e51763ac9e4c6aec5fdc6bc2/transformed/transport-runtime-2.2.6/AndroidManifest.xml:27:13-117
+190            android:exported="false"
+190-->[com.google.android.datatransport:transport-runtime:2.2.6] /home/jesusmuve/.gradle/caches/8.11.1/transforms/472863c2e51763ac9e4c6aec5fdc6bc2/transformed/transport-runtime-2.2.6/AndroidManifest.xml:28:13-37
+191            android:permission="android.permission.BIND_JOB_SERVICE" >
+191-->[com.google.android.datatransport:transport-runtime:2.2.6] /home/jesusmuve/.gradle/caches/8.11.1/transforms/472863c2e51763ac9e4c6aec5fdc6bc2/transformed/transport-runtime-2.2.6/AndroidManifest.xml:29:13-69
+192        </service>
+193
+194        <receiver
+194-->[com.google.android.datatransport:transport-runtime:2.2.6] /home/jesusmuve/.gradle/caches/8.11.1/transforms/472863c2e51763ac9e4c6aec5fdc6bc2/transformed/transport-runtime-2.2.6/AndroidManifest.xml:32:9-34:40
+195            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+195-->[com.google.android.datatransport:transport-runtime:2.2.6] /home/jesusmuve/.gradle/caches/8.11.1/transforms/472863c2e51763ac9e4c6aec5fdc6bc2/transformed/transport-runtime-2.2.6/AndroidManifest.xml:33:13-132
+196            android:exported="false" />
+196-->[com.google.android.datatransport:transport-runtime:2.2.6] /home/jesusmuve/.gradle/caches/8.11.1/transforms/472863c2e51763ac9e4c6aec5fdc6bc2/transformed/transport-runtime-2.2.6/AndroidManifest.xml:34:13-37
+197    </application>
+198
+199</manifest>

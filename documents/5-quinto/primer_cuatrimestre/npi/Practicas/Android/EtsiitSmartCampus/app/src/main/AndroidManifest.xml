@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- La app funciona sin conexión. INTERNET y ACCESS_NETWORK_STATE llegan
+         de forma transitiva (mlkit:common → datatransport:transport-backend-cct);
+         se eliminan del manifiesto fusionado con tools:node="remove". -->
+    <uses-permission android:name="android.permission.INTERNET" tools:node="remove" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" tools:node="remove" />
+
+    <!-- Lector QR/NFC (feature.scanner). CAMERA se pide en tiempo de ejecución solo al abrir
+         el lector. Cámara y NFC son opcionales: sin ellas queda el código manual. -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-feature android:name="android.hardware.camera.any" android:required="false" />
+    <uses-feature android:name="android.hardware.nfc" android:required="false" />
+    <!-- Navegación exterior: el GPS de la app comprueba si el usuario ha llegado a la entrada de
+         la ETSIIT. Se pide en tiempo de ejecución solo al pulsar «Permitir ubicación» y solo se
+         usa con la pantalla visible. Android 12+ exige pedir FINE junto a COARSE. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- La app funciona sin GPS (botón «Ya estoy en la ETSIIT»), así que no es obligatorio. -->
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+
+    <!-- Respuesta táctil al reconocer el gesto G1 (permiso normal, sin diálogo). -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- Sensores: ninguno es obligatorio. Sin ellos cada función se degrada a su botón
+         equivalente: G1 → «Escanear», oreja → «Escuchar», ¿Voy bien? → aviso. -->
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.proximity" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.compass" android:required="false" />
+    <!-- Barómetro: detecta cambios de planta en escaleras y ascensores. Opcional. -->
+    <uses-feature android:name="android.hardware.sensor.barometer" android:required="false" />
+    <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="false" />
+    <uses-feature android:name="android.hardware.touchscreen.multitouch" android:required="false" />
+
+    <application
+        android:name=".CampusApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:localeConfig="@xml/locales_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ETSIITSmartCampus">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.ETSIITSmartCampus">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Guarda el idioma elegido en la app (AppCompat). -->
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
+    </application>
+
+</manifest>

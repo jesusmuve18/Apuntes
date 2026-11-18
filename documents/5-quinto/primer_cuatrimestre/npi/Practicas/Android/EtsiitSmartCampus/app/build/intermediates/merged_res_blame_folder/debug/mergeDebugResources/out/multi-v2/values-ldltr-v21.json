@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.jesusmuve.etsiitsmartcampus.app-mergeDebugResources-67:/values-ldltr-v21/values-ldltr-v21.xml",
+            "map": [
+                {
+                    "source": "/home/jesusmuve/.gradle/caches/8.11.1/transforms/0ce51ea26611f227ac12821432a59550/transformed/appcompat-1.7.0/res/values-ldltr-v21/values-ldltr-v21.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "112",
+                        "endOffsets": "163"
+                    }
+                }
+            ]
+        }
+    ]
+}

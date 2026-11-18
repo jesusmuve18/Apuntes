@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logo para usar dentro de la app (bienvenida, cabeceras): círculo granate con el marcador. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:pathData="M54,0a54,54 0,1 1,0 108a54,54 0,1 1,0 -108z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="0"
+                android:startY="0"
+                android:endX="108"
+                android:endY="108">
+                <item android:offset="0" android:color="#FFC0243B" />
+                <item android:offset="1" android:color="#FF7E1022" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path
+        android:fillColor="#33000000"
+        android:pathData="M54,80m-11,0a11,3 0,1 1,22 0a11,3 0,1 1,-22 0" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M54,24C42.4,24 33,33.4 33,45C33,59.7 54,79 54,79C54,79 75,59.7 75,45C75,33.4 65.6,24 54,24Z" />
+    <path
+        android:fillColor="#FFA6192E"
+        android:pathData="M42,43L54,35L66,43Z" />
+    <path
+        android:fillColor="#FFA6192E"
+        android:pathData="M44.5,45h4v10h-4zM52,45h4v10h-4zM59.5,45h4v10h-4z" />
+    <path
+        android:fillColor="#FFA6192E"
+        android:pathData="M42,56.5h24v3h-24z" />
+</vector>

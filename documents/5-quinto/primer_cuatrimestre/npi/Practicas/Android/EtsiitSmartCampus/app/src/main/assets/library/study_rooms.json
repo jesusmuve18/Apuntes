@@ -1,0 +1,42 @@
+{
+  "note": "Datos de ejemplo para la demostración de reservas.",
+  "openTime": "08:30",
+  "closeTime": "20:30",
+  "slotMinutes": 60,
+  "daysAhead": 7,
+  "maxSlotsPerDay": 2,
+  "rooms": [
+    {
+      "id": "sala_estudio_1",
+      "nameEs": "Sala de estudio 1",
+      "nameEn": "Study room 1",
+      "capacity": 4,
+      "descriptionEs": "Sala pequeña con pizarra.",
+      "descriptionEn": "Small room with a whiteboard."
+    },
+    {
+      "id": "sala_estudio_2",
+      "nameEs": "Sala de estudio 2",
+      "nameEn": "Study room 2",
+      "capacity": 4,
+      "descriptionEs": "Sala pequeña con pizarra.",
+      "descriptionEn": "Small room with a whiteboard."
+    },
+    {
+      "id": "sala_estudio_3",
+      "nameEs": "Sala de estudio 3",
+      "nameEn": "Study room 3",
+      "capacity": 6,
+      "descriptionEs": "Sala mediana con pantalla para conectar el portátil.",
+      "descriptionEn": "Medium room with a screen to connect a laptop."
+    },
+    {
+      "id": "sala_estudio_4",
+      "nameEs": "Sala de estudio 4",
+      "nameEn": "Study room 4",
+      "capacity": 8,
+      "descriptionEs": "Sala grande para trabajos en grupo, con pantalla y pizarra.",
+      "descriptionEn": "Large room for group work, with a screen and a whiteboard."
+    }
+  ]
+}

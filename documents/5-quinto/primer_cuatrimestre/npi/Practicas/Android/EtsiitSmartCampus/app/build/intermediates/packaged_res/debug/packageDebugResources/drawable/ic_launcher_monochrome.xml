@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Versión monocromo del logo para los iconos temáticos (Android 13+): el edificio se recorta
+     del marcador (evenOdd) para que se distinga con un solo color. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M54,24C42.4,24 33,33.4 33,45C33,59.7 54,79 54,79C54,79 75,59.7 75,45C75,33.4 65.6,24 54,24ZM42,43L54,35L66,43ZM44.5,45h4v10h-4zM52,45h4v10h-4zM59.5,45h4v10h-4zM42,56.5h24v3h-24z" />
+</vector>

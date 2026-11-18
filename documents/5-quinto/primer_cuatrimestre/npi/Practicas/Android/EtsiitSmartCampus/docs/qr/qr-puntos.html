@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QR de los puntos de control — ETSIIT Smart Campus</title>
+<!-- Abrir en el navegador e imprimir (Ctrl+P). Necesita Internet solo para cargar la librería de QR. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 16px; color: #111; background: #fff; }
+  h1 { font-size: 20px; }
+  p.note { font-size: 13px; color: #444; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
+  .card { border: 1px dashed #999; padding: 12px; text-align: center; break-inside: avoid; }
+  .card .qr { display: flex; justify-content: center; margin: 8px 0; }
+  .card code { font-size: 15px; font-weight: 600; word-break: break-all; }
+  .card .kind { font-size: 12px; color: #555; }
+  .card.neg { border-color: #c00; }
+  @media print { p.note { display: none; } }
+</style>
+</head>
+<body>
+<h1>QR de los puntos de control (indoor/graph.json)</h1>
+<p class="note">Los IDs son los nodos de <code>app/src/main/assets/indoor/graph.json</code>, que es lo que
+comprueba la ruta interior. El texto bajo cada QR es el código manual
+equivalente; las etiquetas NFC deben llevar ese mismo texto como registro NDEF de tipo Texto.</p>
+<div class="grid" id="grid"></div>
+<script>
+  const points = [
+    { id: "entrada", kind: "Planta baja · Entrada principal (cancela)" },
+    { id: "paseo", kind: "Planta baja · Paseo cubierto" },
+    { id: "entrada_b", kind: "Planta baja · Entrada del Edificio B" },
+    { id: "pasillo_p0", kind: "Planta baja · Pasillo del Edificio B" },
+    { id: "escalera_p0", kind: "Planta baja · Escalera de caracol" },
+    { id: "ascensor_p0", kind: "Planta baja · Ascensor" },
+    { id: "escalera_p2", kind: "Segunda planta · Escalera de caracol" },
+    { id: "ascensor_p2", kind: "Segunda planta · Ascensor" },
+    { id: "pasillo_p2", kind: "Segunda planta · Pasillo de aulas" },
+    { id: "aula_2_2", kind: "Segunda planta · Aula 2.2 (destino)" },
+  ];
+  const grid = document.getElementById("grid");
+  for (const p of points) {
+    const card = document.createElement("div");
+    card.className = "card" + (p.neg ? " neg" : "");
+    const qr = document.createElement("div");
+    qr.className = "qr";
+    card.innerHTML = `<div class="kind"></div>`;
+    card.querySelector(".kind").textContent = p.kind;
+    card.appendChild(qr);
+    const label = document.createElement("code");
+    label.textContent = p.id;
+    card.appendChild(label);
+    grid.appendChild(card);
+    new QRCode(qr, { text: p.id, width: 180, height: 180, correctLevel: QRCode.CorrectLevel.M });
+  }
+</script>
+</body>
+</html>

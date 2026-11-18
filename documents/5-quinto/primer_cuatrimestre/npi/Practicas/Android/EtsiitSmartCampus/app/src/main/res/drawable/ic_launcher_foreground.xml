@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Logo: marcador de ubicación con un edificio de columnas (la escuela) dentro.
+     Dibujado dentro de la zona segura del icono adaptativo (círculo de 66 dp centrado). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Sombra suave del marcador -->
+    <path
+        android:fillColor="#33000000"
+        android:pathData="M54,80m-11,0a11,3 0,1 1,22 0a11,3 0,1 1,-22 0" />
+    <!-- Marcador -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M54,24C42.4,24 33,33.4 33,45C33,59.7 54,79 54,79C54,79 75,59.7 75,45C75,33.4 65.6,24 54,24Z" />
+    <!-- Edificio: frontón, tres columnas y base -->
+    <path
+        android:fillColor="#FFA6192E"
+        android:pathData="M42,43L54,35L66,43Z" />
+    <path
+        android:fillColor="#FFA6192E"
+        android:pathData="M44.5,45h4v10h-4zM52,45h4v10h-4zM59.5,45h4v10h-4z" />
+    <path
+        android:fillColor="#FFA6192E"
+        android:pathData="M42,56.5h24v3h-24z" />
+</vector>

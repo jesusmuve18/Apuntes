@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copia de seguridad en la nube y transferencia entre dispositivos (Android 12+): se usan las
+     reglas por defecto de Android. -->
+<data-extraction-rules>
+    <cloud-backup />
+</data-extraction-rules>

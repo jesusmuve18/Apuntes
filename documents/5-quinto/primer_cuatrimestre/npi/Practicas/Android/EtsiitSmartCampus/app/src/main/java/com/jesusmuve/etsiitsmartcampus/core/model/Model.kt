@@ -1,0 +1,1 @@
+package com.jesusmuve.etsiitsmartcampus.core.model

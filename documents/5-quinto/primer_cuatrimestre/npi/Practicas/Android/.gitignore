@@ -1,0 +1,9 @@
+# Sistema y editores
+.DS_Store
+*.log
+.env
+
+# Seguridad (el proyecto Android tiene además su propio .gitignore)
+EtsiitSmartCampus/local.properties
+*.jks
+*.keystore

@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-debug-69:/drawable_app_logo.xml.flat",
+        "source": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-main-71:/drawable/app_logo.xml"
+    },
+    {
+        "merged": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-debug-69:/drawable_ic_launcher_background.xml.flat",
+        "source": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-main-71:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.jesusmuve.etsiitsmartcampus.app-debug-69:/xml_backup_rules.xml.flat",
+        "source": "com.jesusmuve.etsiitsmartcampus.app-main-71:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-debug-69:/drawable_ic_launcher_monochrome.xml.flat",
+        "source": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-main-71:/drawable/ic_launcher_monochrome.xml"
+    },
+    {
+        "merged": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-debug-69:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-main-71:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-debug-69:/xml_locales_config.xml.flat",
+        "source": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-main-71:/xml/locales_config.xml"
+    },
+    {
+        "merged": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-debug-69:/xml_data_extraction_rules.xml.flat",
+        "source": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-main-71:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-debug-69:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-main-71:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-debug-69:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/home/jesusmuve/.gradle/daemon/8.11.1/com.jesusmuve.etsiitsmartcampus.app-main-71:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    }
+]

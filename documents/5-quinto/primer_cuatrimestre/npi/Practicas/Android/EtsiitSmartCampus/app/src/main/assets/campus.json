@@ -1,0 +1,70 @@
+{
+  "spaces": [
+    {
+      "id": "aula_2_2",
+      "name": { "es": "Aula 2.2", "en": "Room 2.2" },
+      "floor": 2,
+      "description": {
+        "es": "Laboratorio de prácticas de la segunda planta. Es el destino de la ruta guiada de demostración.",
+        "en": "Computer lab on the second floor. It is the destination of the demo guided route."
+      },
+      "type": "laboratory",
+      "hasRoute": true
+    },
+    {
+      "id": "aula_0_5",
+      "name": { "es": "Aula 0.5", "en": "Room 0.5" },
+      "floor": 0,
+      "description": {
+        "es": "Aula de teoría de la planta baja. No forma parte de la ruta guiada de demostración: sigue los carteles del edificio.",
+        "en": "Lecture room on the ground floor. It is not part of the demo guided route: follow the building signs."
+      },
+      "type": "classroom",
+      "hasRoute": false
+    },
+    {
+      "id": "entrada",
+      "name": { "es": "Entrada principal", "en": "Main entrance" },
+      "floor": 0,
+      "description": {
+        "es": "Acceso peatonal al final del paseo lateral del edificio, junto a la calle. Punto de partida de la ruta guiada.",
+        "en": "Pedestrian access at the end of the side walkway of the building, next to the street. Starting point of the guided route."
+      },
+      "type": "entrance",
+      "hasRoute": false
+    },
+    {
+      "id": "escalera_p0",
+      "name": { "es": "Escalera principal (planta baja)", "en": "Main staircase (ground floor)" },
+      "floor": 0,
+      "description": {
+        "es": "Arranque de la escalera principal, junto al vestíbulo. Punto de control de la ruta.",
+        "en": "Foot of the main staircase, next to the lobby. Route checkpoint."
+      },
+      "type": "stairs",
+      "hasRoute": false
+    },
+    {
+      "id": "escalera_p2",
+      "name": { "es": "Escalera principal (segunda planta)", "en": "Main staircase (second floor)" },
+      "floor": 2,
+      "description": {
+        "es": "Rellano de la escalera principal en la segunda planta. Punto de control de la ruta.",
+        "en": "Main staircase landing on the second floor. Route checkpoint."
+      },
+      "type": "stairs",
+      "hasRoute": false
+    },
+    {
+      "id": "pasillo_p2",
+      "name": { "es": "Pasillo de aulas (segunda planta)", "en": "Classroom corridor (second floor)" },
+      "floor": 2,
+      "description": {
+        "es": "Pasillo largo con las puertas de las aulas. Punto de control de la ruta.",
+        "en": "Long corridor with the classroom doors. Route checkpoint."
+      },
+      "type": "hall",
+      "hasRoute": false
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+Fotos de la ruta interior. Cada foto se tomó DESDE un nodo, mirando en el sentido de la marcha:
+<nodo>_ida.jpg (yendo al aula 2.2) y <nodo>_vuelta.jpg (volviendo a la entrada).
+exterior.jpg es la fachada vista desde fuera. Las rutas de graph.json dicen qué foto sale en cada parada.
+Lado mayor 1280 px, JPG calidad 80. Ver EtsiitSmartCampus/docs/ruta-interior.md.
