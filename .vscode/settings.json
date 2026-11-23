@@ -4,4 +4,7 @@
         "iostream": "cpp",
         "ostream": "cpp"
     },
+    "gradle.autoSync": "off",
+    "java.import.gradle.enabled": false,
+    "kotlin.languageServer.enabled": false
 }

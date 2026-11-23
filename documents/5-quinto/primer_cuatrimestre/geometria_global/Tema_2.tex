@@ -688,7 +688,7 @@ y hemos llegado finalmente a que la integrabilidad y la integral de $f$ no depen
 \end{ejemplo}
 
 \subsection{Teorema del Cambio de Variable para la Integral en Superficies}
-\begin{teo}
+\begin{teo}\label{teo:cambio_variable_integral_sup}
     Sea $\phi: S \to S'$ un difeomorfismo entre superficies y $f: S'\to \bb{R}$ una función. Entonces
     \begin{gather*}
         f \text{ integrable en $S'$} \sii (f\circ \phi)|Jac(\phi)|\text{ es integrable en $S$}
@@ -697,7 +697,7 @@ y hemos llegado finalmente a que la integrabilidad y la integral de $f$ no depen
     \begin{gather*}
         \int_{S'}f = \int_S (f\circ \phi) |Jac(\phi)| = \int_S (f\circ \phi)(p)|(d\phi)_p(e_1) \wedge (d\phi)_p(e_2)| dp
     \end{gather*}
-    donde $\forall p \in S$ se tiene que $\{e_1, e_2\}$ es una base ortonormal de $T_pS$.
+    donde $\forall p \in S$ consideramos $\{e_1, e_2\}$, una base ortonormal de $T_pS$.
 
     \begin{proof}
         Vamos a definir la aplicación $\psi : S \times (0,1) \to S'\times (0,1)$ dada por 
@@ -722,10 +722,10 @@ y hemos llegado finalmente a que la integrabilidad y la integral de $f$ no depen
             \end{array}
         \end{gather*}
         Vamos a ver quién es esta última expresión por partes:
-        \begin{gather*}
-            (f\circ \psi)(p,t) = f(\psi(p,t)) = f(\phi(p), t) = f(\phi(p)) = (f\circ \phi)(p)\\[1em]
-            |Jac(\psi)|(p,t) = |det(d\psi)_{(p,t)}| = \det((d\phi)_p \times 1_{\bb{R}}) = |det((d\phi)_p)| = |Jac(\phi)|
-        \end{gather*}
+        \begin{align*}
+            (f\circ \psi)(p,t) &= f(\psi(p,t)) = f(\phi(p), t) = f(\phi(p)) = (f\circ \phi)(p)\\[1em]
+            |Jac(\psi)|(p,t) &= |det(d\psi)_{(p,t)}| = \det((d\phi)_p \times 1_{\bb{R}}) = |det((d\phi)_p)| = |Jac(\phi)|(p)
+        \end{align*}
         por lo que reescribimos
         \begin{gather*}
             \begin{array}{c}
@@ -759,7 +759,7 @@ y hemos llegado finalmente a que la integrabilidad y la integral de $f$ no depen
         \begin{gather*}
             \int_{S'}f = \int_S (f\circ \phi) |Jac(\phi)|
         \end{gather*}
-        y nos queda probar solo que dicha integral es de la forma que nos da el teorema. Nos preguntamos quién es $|Jac(\phi)|(p)$ para un cierto $p\in S$. Vamos a intentar extender la diferencial a una aplicación $L$ que haga conmutar el siguiente diagrama:
+        y nos queda probar solo que dicha integral es de la forma que nos da el teorema. Nos preguntamos quién es $|Jac(\phi)|(p)$ para un cierto $p\in S$. Para ello vamos a intentar extender la diferencial a una aplicación $L$ que haga conmutar el siguiente diagrama:
         \begin{gather*}
             \xymatrix@R=5mm{
                 T_pS \ar[r]^{(d\phi)_p} \ar@{}[d]|-*[@]{\subset} & T_{\phi(p)}S' \ar@{}[d]|-*[@]{\subset}\\
@@ -784,11 +784,11 @@ y hemos llegado finalmente a que la integrabilidad y la integral de $f$ no depen
             |det(L)| &= 
             |det(L(e_1), L(e_2), L(N_p))| = \\
             &=
-            |det((d\phi)_p(e_1), (d\phi)_p(e_2), N'_{\phi(p)}) =\\
+            |det((d\phi)_p(e_1), (d\phi)_p(e_2), N'_{\phi(p)})| =\\
             &=
-            | \langle (d\phi)_p(e_1) \wedge (d\phi)_p(e_2), N'_{\phi(p)} \rangle =\\
+            | \langle (d\phi)_p(e_1) \wedge (d\phi)_p(e_2), N'_{\phi(p)} \rangle |=\\
             &=
-            |(d\phi)_p(e_1) \wedge (d\phi)_p(e_2)
+            |(d\phi)_p(e_1) \wedge (d\phi)_p(e_2)|
         \end{align*}
         donde hemos aplicado que $(d\phi)_p(e_1) \wedge (d\phi)_p(e_2)$ y $N'_{\phi(p)}$ son colineales.
     \end{proof}
