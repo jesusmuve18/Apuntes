@@ -615,32 +615,30 @@ y hemos llegado finalmente a que la integrabilidad y la integral de $f$ no depen
 \end{ejemplo}
 
 \begin{ejemplo}
-    Calcular $\int_{T^2(a,r)} \kappa$, donde $\kappa$ es la curvatura de Gauss.\\
+    Calcular $\displaystyle\int_{T^2(a,r)} \kappa$, donde $\kappa$ es la curvatura de Gauss.\\
 
-    \begin{solucion}\ \\
-        \textit{Indicación.} Usamos la Proposición para la misma parametrización $X$ del ejemplo anterior. \\
+    \textit{Indicación.} Usamos la Proposición para la misma parametrización $X$ del ejemplo anterior. \\
 
-        Tratamos de calcular entonces la siguiente integral
-        \begin{gather*}
-            \int_0^{2\pi} \int_0^{2\pi} \kappa = \int_0^{\pi} \int_0^{2\pi} (\kappa\circ X) |X_u\wedge X_v|
-        \end{gather*}
-        Debemos saber cómo es la curvatura de Gauss en un punto de una parametrización:
-        \begin{gather*}
-            \kappa \circ X = \frac{eg - f^2}{EG - F^2}
-        \end{gather*}
-        donde
-        \begin{gather*}
-            E = |X_u|^2 \qquad G=|X_v|^2 \qquad F = \langle X_u, X_v \rangle\\[1em]
-            e = \frac{det(X_{uu}, X_u, X_v)}{|X_u \wedge X_v|} \qquad 
-            g = \frac{det(X_{vv}, X_u, X_v)}{|X_u \wedge X_v|}
-            %TODO: completar con la definición de f
-        \end{gather*}
-        Por tanto tenemos
-        \begin{gather*}
-            \int_{T^2(a,r)} \kappa = \int_0^{2\pi} \int_0^{2\pi} \frac{eg - f^2}{EG - F^2} \sqrt{EG - F^2} = \int_0^{2\pi}\int_0^{2\pi} \frac{eg - f^2}{\sqrt{EG - F^2}} du\ dv
-        \end{gather*}
-        Solo queda calcular cada uno de los determinantes y resolver la integral trigonométrica que resulta.
-    \end{solucion}
+    Tratamos de calcular entonces la siguiente integral
+    \begin{gather*}
+        \int_0^{2\pi} \int_0^{2\pi} \kappa = \int_0^{\pi} \int_0^{2\pi} (\kappa\circ X) |X_u\wedge X_v|
+    \end{gather*}
+    Debemos saber cómo es la curvatura de Gauss en un punto de una parametrización:
+    \begin{gather*}
+        \kappa \circ X = \frac{eg - f^2}{EG - F^2}
+    \end{gather*}
+    donde
+    \begin{gather*}
+        E = |X_u|^2 \qquad G=|X_v|^2 \qquad F = \langle X_u, X_v \rangle\\[1em]
+        e = \frac{det(X_{uu}, X_u, X_v)}{|X_u \wedge X_v|} \qquad 
+        g = \frac{det(X_{vv}, X_u, X_v)}{|X_u \wedge X_v|} \qquad
+        f = \frac{det(X_{uv}, X_u, X_v)}{|X_u \wedge X_v|}
+    \end{gather*}
+    Por tanto tenemos
+    \begin{gather*}
+        \int_{T^2(a,r)} \kappa = \int_0^{2\pi} \int_0^{2\pi} \frac{eg - f^2}{EG - F^2} \sqrt{EG - F^2} = \int_0^{2\pi}\int_0^{2\pi} \frac{eg - f^2}{\sqrt{EG - F^2}} du\ dv
+    \end{gather*}
+    Solo queda calcular cada uno de los determinantes y resolver la integral trigonométrica que resulta.
 \end{ejemplo}
 
 \begin{ejemplo}
@@ -648,7 +646,7 @@ y hemos llegado finalmente a que la integrabilidad y la integral de $f$ no depen
     \begin{solucion}
         Elegimos la parametrización $X:]0,\pi[\times]0,2\pi[ \to S^2(a,r)$ dada por
         \begin{gather*}
-            X(u,v) = (a_1,a_2,a_3) + r(\sen(u)\cos(u), \sen(u)\sen(v), \cos(u))
+            X(u,v) = (a_1,a_2,a_3) + r(\sen(u)\cos(v), \sen(u)\sen(v), \cos(u))
         \end{gather*}
         Tenemos que 
         \begin{gather*}
@@ -656,16 +654,20 @@ y hemos llegado finalmente a que la integrabilidad y la integral de $f$ no depen
         \end{gather*}
         Por lo que es una única curva la que no está cubierta por la parametrización. Por la proposición tenemos que 
         \begin{gather*}
-            A(S^2(a,r)) = \int_0^{\pi} \int_0^{2\pi} \cancel{(f\circ X)(u,v)} |X_u\wedge X_v|(u,v) du\ dv
+            A(S^2(a,r)) = \int_0^{2\pi} \int_0^{\pi} \cancel{(f\circ X)(u,v)}\ |X_u\wedge X_v|(u,v)\ du\ dv
         \end{gather*}
         Calculamos
-        \begin{align*}
-            X_u = r(\cos(u)\cos(v), \cos(u)\sen(v), -\sen(u)) 
-            \quad &\Rightarrow \quad |X_u|^2 = r^2 = E\\
-            X_v = r(-\sen(u)\sen(v), \sen(u)\cos(v), 0) 
-            \quad &\Rightarrow \quad |X_v|^2 = r^2\sen^2(u) = G\\
-            & \phantom{\Rightarrow} \quad \langle X_u, X_v \rangle = 0 = F
-        \end{align*}
+        \begin{gather*}
+            \begin{array}{l}
+                X_u = r(\cos(u)\cos(v), \cos(u)\sen(v), -\sen(u))\\[0.6em]
+                X_v = r(-\sen(u)\sen(v), \sen(u)\cos(v), 0)
+            \end{array} \Rightarrow 
+            \begin{array}{l}
+                |X_u|^2 = r^2 = E\\[0.6em]
+                |X_v|^2 = r^2\sen^2(u) = G\\[0.6em]
+                \langle X_u, X_v \rangle = 0 = F
+            \end{array}
+        \end{gather*}
         Por lo que podemos ya concluir 
         \begin{gather*}
             |X_u\wedge X_v|^2 = |X_u|^2 \cdot |X_v|^2 - \langle X_u, X_v \rangle^2 = EG - F^2 = r^4\sen^2(u)
@@ -677,10 +679,10 @@ y hemos llegado finalmente a que la integrabilidad y la integral de $f$ no depen
         Sustituyendo en la integral que queremos calcular llegamos a 
         \begin{align*}
             A(S^2(a,r)) &= 
-            \int_0^{\pi} \int_0^{2\pi} r^2 \sen(u) du \ dv = 
+            \int_0^{2\pi} \int_0^{\pi} r^2 \sen(u) du \ dv = 
             2\pi r^2 \int_0^{\pi} \sen(u) du = \\
             &=
-            2\pi r^2 \left[ -\cos(u) \right]_0^{\pi} = 4\pi r^2
+            2\pi r^2 \Bigl[ -\cos(u)\Bigr]_0^{\pi} = 4\pi r^2
         \end{align*}
         Y llegamos finalmente a la bien conocida fórmula
         \begin{gather*}
