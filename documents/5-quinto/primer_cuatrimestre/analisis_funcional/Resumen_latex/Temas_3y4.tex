@@ -1,0 +1,437 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{hyperref}
+
+% ---------- Macros ----------
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\renewcommand{\Re}{\operatorname{Re}}
+\newcommand{\Lin}{\operatorname{Lin}}
+\newcommand{\co}{\operatorname{co}}
+\newcommand{\inter}{\operatorname{int}}
+\newcommand{\dist}{\operatorname{d}}
+\renewcommand{\ker}{\operatorname{ker}}
+\newcommand{\wto}{\xrightarrow{\ \omega\ }}
+\newcommand{\wsto}{\xrightarrow{\ \omega^*\ }}
+\newcommand{\wcl}[1]{\overline{#1}^{\,\omega}}
+\newcommand{\wscl}[1]{\overline{#1}^{\,\omega^*}}
+\newcommand{\BX}{B_X}
+\newcommand{\SX}{S_X}
+
+% ---------- Entornos ----------
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{proposicion}[teorema]{Proposición}
+\newtheorem{corolario}[teorema]{Corolario}
+\theoremstyle{definition}
+\newtheorem{definicion}[teorema]{Definición}
+\newtheorem{ejemplo}[teorema]{Ejemplo}
+\theoremstyle{remark}
+\newtheorem{observacion}[teorema]{Observación}
+
+\title{Tema III: El teorema de Hahn--Banach; dualidad en espacios normados; topologías débiles\\[2mm]\large Resumen de resultados}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+% =====================================================================
+\section{Versión analítica del teorema de Hahn--Banach}
+
+\begin{definicion}
+Un \emph{funcional sublineal} en un espacio vectorial $X$ es una aplicación $\varphi:X\to\R$ tal que
+$\varphi(x+y)\le\varphi(x)+\varphi(y)$ y $\varphi(rx)=r\varphi(x)$ para todos $x,y\in X$, $r\in\R^+$.
+Toda seminorma es sublineal; el recíproco es falso (p.\,ej. $\varphi(x)=\Re f(x)$ con $f\neq0$, o $\varphi(x)=\max\{0,x\}$ en $\R$).
+\end{definicion}
+
+\begin{teorema}[Hahn--Banach, versión analítica]
+Sea $X$ un espacio vectorial, $\varphi$ un funcional sublineal en $X$, $M$ un subespacio de $X$ y $g$ un funcional lineal en $M$ con $\Re g(y)\le\varphi(y)$ para todo $y\in M$. Entonces existe un funcional lineal $f$ en $X$ tal que
+\[
+f|_M=g \qquad\text{y}\qquad \Re f(x)\le\varphi(x)\quad\forall x\in X.
+\]
+Si $\varphi$ es una seminorma, entonces además $\abs{f(x)}\le\varphi(x)$ para todo $x\in X$.
+\end{teorema}
+
+\begin{observacion}[Espacio real subyacente]
+Si $Z$ es un espacio vectorial complejo y $Z_\R$ su espacio real subyacente, los funcionales lineales en $Z_\R$ son exactamente las partes reales de los funcionales lineales en $Z$. Cada $h$ queda determinado por $\Re h$ mediante $h(z)=\Re h(z)-i\,\Re h(iz)$. Esto reduce el caso complejo al real.
+\end{observacion}
+
+\begin{teorema}[Extensión de Hahn--Banach en espacios normados]
+Sea $X$ un espacio normado, $M$ un subespacio y $g\in M^*$. Existe $f\in X^*$ con $f|_M=g$ y $\norm f=\norm g$ (\emph{extensión Hahn--Banach} de $g$).
+\end{teorema}
+
+\begin{corolario}
+Sea $X\neq\{0\}$ un espacio normado.
+\begin{enumerate}[label=(\alph*)]
+\item $X^*\neq\{0\}$.
+\item Si $Y\neq\{0\}$ es normado, $f\in X^*\setminus\{0\}$ e $y\in Y\setminus\{0\}$, entonces $T(x)=f(x)y$ define $T\in L(X,Y)$ con $\norm T=\norm f\norm y$. En particular $L(X,Y)\neq\{0\}$.
+\item Si $L(X,Y)$ es completo, entonces $Y$ es completo (recíproco de la complitud de $L(X,Y)$ cuando $Y$ es Banach).
+\item Todo subespacio de dimensión finita $M$ de un espacio normado $X$ está complementado en $X$. Concretamente, $P(x)=\sum_{k=1}^n f_k(x)u_k$ es una proyección lineal continua de $X$ sobre $M$, donde $\{u_k\}$ es una base de $M$ y $f_k\in X^*$ extiende a la $k$-ésima coordenada $g_k\in M^*$.
+\end{enumerate}
+\end{corolario}
+
+% =====================================================================
+\section{Dualidad en espacios normados}
+
+\subsection{Consecuencias inmediatas}
+
+\begin{proposicion}
+Si $X$ es normado y $x\in X\setminus\{0\}$, existe $h\in X^*$ con $\norm h=1$ y $h(x)=\norm x$. En consecuencia,
+\[
+\norm x=\max\{\abs{x^*(x)}: x^*\in X^*,\ \norm{x^*}=1\},\qquad
+\norm{x^*}=\sup\{\abs{x^*(x)}:x\in X,\ \norm x=1\}.
+\]
+\end{proposicion}
+
+\begin{teorema}[Universalidad de $\ell_\infty(\Gamma)$]
+Todo espacio normado es isométricamente isomorfo a un subespacio de $\ell_\infty(\Gamma)$ para algún conjunto $\Gamma\neq\emptyset$ (se toma $\Gamma$ un subconjunto denso de $X$). Si $X$ es separable, puede tomarse $\Gamma=\N$, es decir, $X$ es isométricamente isomorfo a un subespacio de $\ell_\infty$.
+\end{teorema}
+
+\subsection{Dual de un subespacio y de un cociente}
+
+\begin{definicion}
+Si $A\neq\emptyset$ es un subconjunto de $X$ normado, su \emph{anulador} es $A^\perp=\{x^*\in X^*: x^*(a)=0\ \forall a\in A\}$. Es un subespacio cerrado de $X^*$.
+\end{definicion}
+
+\begin{teorema}[Dual de un subespacio]
+Si $M$ es un subespacio de un espacio normado $X$, la aplicación $\Phi:X^*/M^\perp\to M^*$, $\Phi(q(x^*))=x^*|_M$, es un isomorfismo isométrico.
+\end{teorema}
+
+\begin{proposicion}
+Si $M$ es un subespacio de $X$, entonces $M^\perp$ es proximinal en $X^*$. De hecho, para $x^*\in X^*$, las mejores aproximaciones de $x^*$ en $M^\perp$ son los funcionales $x^*-z^*$, donde $z^*$ es una extensión Hahn--Banach de $x^*|_M$. En particular, $\dist(x^*,M^\perp)=\norm{x^*|_M}$.
+\end{proposicion}
+
+\begin{teorema}[Dual de un cociente]
+Si $M$ es un subespacio cerrado de $X$ y $q:X\to X/M$ es la aplicación cociente, $\Psi:(X/M)^*\to M^\perp$, $\Psi(w^*)=w^*\circ q$, es un isomorfismo isométrico. (No usa Hahn--Banach; el mismo argumento da $L(X/M,Y)\equiv\{T\in L(X,Y):T|_M=0\}$.)
+\end{teorema}
+
+\begin{proposicion}[Funcional que realiza la distancia]
+Si $M$ es un subespacio cerrado de $X$ y $x\in X\setminus M$, existe $x^*\in M^\perp$ con $\norm{x^*}=1$ y $x^*(x)=\dist(x,M)$. Además, $\abs{z^*(x)}\le\dist(x,M)$ para todo $z^*\in M^\perp$ con $\norm{z^*}=1$.
+\end{proposicion}
+
+\begin{proposicion}[Caracterización de subespacios cerrados]
+Si $A\neq\emptyset$ es un subconjunto de un espacio normado $X$,
+\[
+\Lin A=\{x\in X: x^*(x)=0\ \ \forall x^*\in A^\perp\}.
+\]
+En particular, para un subespacio $M$: $\overline M=\{x\in X:x^*(x)=0\ \forall x^*\in M^\perp\}$, y $M$ es denso en $X$ si, y sólo si, $M^\perp=\{0\}$.
+\end{proposicion}
+
+\begin{corolario}
+Si $X^*$ es separable, entonces $X$ es separable.
+\end{corolario}
+
+\subsection{Inyección canónica y completación}
+
+\begin{teorema}[Inyección canónica]
+Para $x\in X$ se define $J(x)\in X^{**}$ por $[J(x)](x^*)=x^*(x)$. La aplicación $J:X\to X^{**}$ es lineal e isométrica.
+\end{teorema}
+
+\begin{teorema}[Completación]
+Si $X$ es un espacio normado no completo, existe un espacio de Banach $X_c$ y un isomorfismo isométrico de $X$ sobre un subespacio denso de $X_c$ (basta tomar $X_c=\overline{J(X)}$). Además $X_c$ es único salvo isomorfismos isométricos.
+\end{teorema}
+
+\subsection{Espacios reflexivos}
+
+\begin{definicion}
+Un espacio de Banach $X$ es \emph{reflexivo} si $J:X\to X^{**}$ es sobreyectiva.
+\end{definicion}
+
+\begin{proposicion}
+\begin{enumerate}[label=(\alph*)]
+\item Todo espacio de Banach de dimensión finita es reflexivo.
+\item $c_0$ y $\ell_1$ no son reflexivos (usan $c_0^*\equiv\ell_1$, $\ell_1^*\equiv\ell_\infty$, y que $\ell_\infty$ y $\ell_\infty^*$ no son separables).
+\item Si $X$ es de Banach separable y $X^*$ no es separable, entonces $X$ no es reflexivo.
+\item Para $1<p<\infty$, $\ell_p$ y $L_p$ son reflexivos.
+\item Existe (James, 1951) un espacio de Banach isométricamente isomorfo a su bidual que no es reflexivo (con $J(X)$ de codimensión $1$ en $X^{**}$). Por tanto, para ser reflexivo no basta que $X\equiv X^{**}$: hay que comprobar que $J$ es sobreyectiva.
+\end{enumerate}
+\end{proposicion}
+
+\subsection{Transposición de operadores}
+
+\begin{definicion}
+Si $T\in L(X,Y)$, el \emph{operador transpuesto} es $T^*:Y^*\to X^*$, $T^*(y^*)=y^*\circ T$. En dimensión finita, $T^*$ se representa en las bases duales por la matriz transpuesta de la de $T$.
+\end{definicion}
+
+\begin{proposicion}[Propiedades de la transposición]
+Sean $X,Y,Z$ espacios normados.
+\begin{enumerate}[label=(\alph*)]
+\item Si $T\in L(X,Y)$, entonces $T^*\in L(Y^*,X^*)$ y $\norm{T^*}=\norm T$. La aplicación $T\mapsto T^*$ es lineal e isométrica.
+\item $T^{**}\circ J_X=J_Y\circ T$ (es decir, $T^{**}$ extiende a $T$).
+\item Si $T\in L(X,Y)$, $S\in L(Y,Z)$, entonces $(S\circ T)^*=T^*\circ S^*$.
+\item Si $T:X\to Y$ es un isomorfismo, $T^*$ es un isomorfismo de $Y^*$ sobre $X^*$ con $(T^*)^{-1}=(T^{-1})^*$; si $T$ es isométrico, $T^*$ también lo es.
+\item La reflexividad se conserva por isomorfismos (en particular, al cambiar la norma por otra equivalente). También se conserva la separabilidad del dual.
+\end{enumerate}
+\end{proposicion}
+
+\begin{observacion}
+Si $\Phi:\ell_1\to c_0^*$ y $\Psi:\ell_\infty\to\ell_1^*$ son los isomorfismos canónicos, entonces $(\Phi^*)^{-1}\circ\Psi:\ell_\infty\to c_0^{**}$ es un isomorfismo isométrico que convierte $J:c_0\to c_0^{**}$ en la inclusión natural $I:c_0\to\ell_\infty$. Como $I$ no es sobreyectiva, $c_0$ no es reflexivo. Además, $c_0$ y $\ell_1$ no son isomorfos a $\ell_p$ con $1<p<\infty$, y $c_0$ no es isomorfo a $\ell_1$ (el dual de $c_0$ es separable y el de $\ell_1$ no).
+\end{observacion}
+
+\subsection{Reflexividad de subespacios y cocientes}
+
+\begin{lema}
+Sea $M$ un subespacio cerrado de $X$, $I:M\to X$ la inclusión y $q:X\to X/M$ el cociente. Entonces:
+\begin{enumerate}[label=(\roman*)]
+\item $I^{**}:M^{**}\to X^{**}$ es inyectivo y su imagen es $M^{\perp\perp}=(M^\perp)^\perp$.
+\item $q^{**}:X^{**}\to(X/M)^{**}$ es sobreyectivo y su núcleo es $M^{\perp\perp}$.
+\end{enumerate}
+\end{lema}
+
+\begin{teorema}[Reflexividad de subespacios y cocientes]
+Sea $X$ un espacio de Banach y $M$ un subespacio cerrado. Entonces $X$ es reflexivo si, y sólo si, $M$ y $X/M$ son reflexivos.
+\end{teorema}
+
+\begin{corolario}
+\begin{enumerate}[label=(\alph*)]
+\item $X\times Y$ es reflexivo si, y sólo si, lo son $X$ e $Y$.
+\item Si $\Gamma$ es infinito, $\ell_\infty(\Gamma)$ no es reflexivo. En particular, $\ell_\infty$ no es reflexivo.
+\item $L_1$ y $L_\infty$ no son reflexivos.
+\item Si $M$ es un subespacio cerrado de $\ell_p$ ($1<p<\infty$), entonces $M$ y $\ell_p/M$ son reflexivos, luego no son isomorfos a $c_0$ ni a $\ell_1$.
+\end{enumerate}
+\end{corolario}
+
+\subsection{Reflexividad del dual}
+
+\begin{proposicion}[Proyección de Dixmier]
+Para todo espacio normado $X$, $J_X^*\circ J_{X^*}=I_{X^*}$ y $P_X=J_{X^*}\circ J_X^*$ es una proyección lineal continua de $X^{***}$ con $\norm{P_X}=1$ (si $X\neq\{0\}$), imagen $J_{X^*}(X^*)$ y núcleo $J_X(X)^\perp$. Es decir,
+\[
+X^{***}=J_{X^*}(X^*)\oplus J_X(X)^\perp \quad(\text{suma topológico-directa}).
+\]
+\end{proposicion}
+
+\begin{teorema}
+Un espacio de Banach $X$ es reflexivo si, y sólo si, $X^*$ es reflexivo.
+\end{teorema}
+
+\begin{observacion}
+Si $X$ es reflexivo, los duales sucesivos $X^{(n)}$ se identifican con $X$ o $X^*$ según la paridad de $n$. Si no es reflexivo, $X\subsetneq X^{(2)}\subsetneq X^{(4)}\subsetneq\cdots$ y $X^*\subsetneq X^{(3)}\subsetneq X^{(5)}\subsetneq\cdots$. Todo espacio dual $Y=X^*$ está complementado en su bidual. En cambio, por el teorema de Phillips, $J(c_0)$ no está complementado en $c_0^{**}\equiv\ell_\infty$, luego \emph{no existe ningún espacio de Banach $X$ con $X^*$ isomorfo a $c_0$}.
+\end{observacion}
+
+\subsection{Mejor aproximación en espacios reflexivos}
+
+\begin{proposicion}
+Sea $X$ un espacio de Banach reflexivo.
+\begin{enumerate}[label=(\alph*)]
+\item Si $x^*\in X^*$, la función $\abs{x^*}$ alcanza su máximo en $B_X$ (equivalentemente, todo hiperplano cerrado es proximinal).
+\item Si $M$ es un subespacio cerrado de $X$, entonces $J(M)=M^{\perp\perp}$.
+\item Todo subespacio cerrado de $X$ es proximinal.
+\end{enumerate}
+\end{proposicion}
+
+% =====================================================================
+\section{Versión geométrica del teorema de Hahn--Banach}
+
+\begin{definicion}[Separación]
+Sean $A,B\neq\emptyset$ convexos en un espacio vectorial $X$. Un funcional lineal $f\neq0$ \emph{separa} $A$ de $B$ si
+$\Re f(a)\le\Re f(b)$ para todos $a\in A$, $b\in B$, es decir, $\sup\Re f(A)\le\inf\Re f(B)$; equivalentemente, existe $\alpha\in\R$ con $\Re f(a)\le\alpha\le\Re f(b)$. Geométricamente, el hiperplano $H=\{\Re f=\alpha\}$ deja $A$ en $H^-$ y $B$ en $H^+$. Si $f$ separa $A$ de $B$, $-f$ separa $B$ de $A$.
+\end{definicion}
+
+\begin{ejemplo}[Convexos disjuntos no separables]
+Sea $X$ el espacio de las sucesiones reales de soporte finito y $A$ el conjunto de las sucesiones cuyo último término no nulo es positivo. $A$ es convexo y $f(A)=\R$ para todo funcional lineal $f\neq0$. Por tanto $A$ y $B=\{0\}$ son convexos, no vacíos y disjuntos, pero no pueden separarse.
+\end{ejemplo}
+
+\begin{definicion}
+$U\subset X$ es \emph{absorbente} si $X=\R^+U$. Si $A$ es convexo y $A-a_0$ es absorbente, $a_0$ es un ``punto interior algebraico'' de $A$.
+\end{definicion}
+
+\begin{teorema}[General de separación]
+Sean $A,B$ subconjuntos no vacíos, convexos y disjuntos de un espacio vectorial $X$. Si existe $a_0\in A$ con $A-a_0$ absorbente, existe un funcional lineal $f\neq0$ en $X$ que separa $A$ de $B$.
+\end{teorema}
+
+\begin{teorema}[Hahn--Banach para funciones convexas]
+Sea $X$ un espacio vectorial, $\varphi:X\to\R$ convexa, $M$ un subespacio y $g$ lineal en $M$ con $\Re g\le\varphi$ en $M$. Existe $f$ lineal en $X$ con $f|_M=g$ y $\Re f\le\varphi$ en $X$.
+\end{teorema}
+
+\begin{observacion}
+Los tres enunciados (versión analítica, versión para funciones convexas y teorema general de separación) son equivalentes. Todo funcional sublineal es convexo.
+\end{observacion}
+
+\begin{lema}
+Si $A$ es un convexo de un espacio normado con $\inter(A)\neq\emptyset$, entonces $\inter(A)$ es convexo y $A\subset\overline{\inter(A)}$.
+\end{lema}
+
+\begin{teorema}[Separación en espacios normados]
+Sean $A,B$ convexos de un espacio normado $X$ con $\inter(A)\neq\emptyset$, $B\neq\emptyset$ e $\inter(A)\cap B=\emptyset$. Existen $f\in X^*$ y $\alpha\in\R$ tales que
+\[
+\Re f(a)\le\alpha\le\Re f(b)\quad\forall a\in A,\ \forall b\in B,
+\]
+y además $\Re f(x)<\alpha$ para todo $x\in\inter(A)$.
+\end{teorema}
+
+\begin{definicion}
+Si $A\subset X$, $x_0\in A$ y $f\in X^*\setminus\{0\}$ cumple $\Re f(a)\le\Re f(x_0)$ para todo $a\in A$, $f$ es un \emph{funcional de soporte} de $A$ en $x_0$ y $x_0$ es un \emph{punto de soporte} de $A$.
+\end{definicion}
+
+\begin{corolario}[Abundancia de puntos de soporte]
+Si $A$ es un convexo cerrado con interior no vacío en un espacio normado, todo punto de la frontera de $A$ es un punto de soporte de $A$. (En particular, todo punto de la esfera unidad lo es de la bola unidad.)
+\end{corolario}
+
+\begin{definicion}[Separación fuerte]
+$f$ \emph{separa fuertemente} $A$ de $B$ si existen $\alpha<\beta$ con $\Re f(a)\le\alpha<\beta\le\Re f(b)$ para todos $a\in A$, $b\in B$.
+\end{definicion}
+
+\begin{teorema}[Separación fuerte en espacios normados]
+Sean $A,B$ convexos no vacíos de un espacio normado $X$ con $\dist(A,B)=\rho>0$. Existen $f\in X^*$ con $\norm f=1$ y $\alpha\in\R$ tales que
+\[
+\Re f(a)\le\alpha<\alpha+\rho\le\Re f(b)\quad\forall a\in A,\ \forall b\in B.
+\]
+La anchura de la banda $\beta-\alpha=\dist(A,B)$ es la máxima posible para $\norm f=1$.
+\end{teorema}
+
+\begin{corolario}
+Si $A,B$ son convexos, no vacíos y disjuntos de un espacio normado, con $A$ compacto y $B$ cerrado, existe $f\in X^*$ que los separa fuertemente.
+\end{corolario}
+
+\begin{lema}
+Si $U\subset\R^N$ es convexo, $0\in U$ y $\Lin U=\R^N$, entonces $\inter(U)\neq\emptyset$.
+\end{lema}
+
+\begin{teorema}[Separación en dimensión finita]
+Si $A,B$ son subconjuntos no vacíos, convexos y disjuntos de $\R^N$, existe $c\in\R^N\setminus\{0\}$ con $\sum_k c(k)a(k)\le\sum_k c(k)b(k)$ para todos $a\in A$, $b\in B$.
+\end{teorema}
+
+% =====================================================================
+\section{Topologías débiles}
+
+\begin{definicion}
+Sea $X$ normado. La \emph{topología débil} $\omega=\sigma(X,X^*)$ es la topología inicial en $X$ para los elementos de $X^*$ (la menor que los hace continuos). La \emph{topología débil-$*$} $\omega^*=\sigma(X^*,X)$ es la topología inicial en $X^*$ para los elementos de $X$ (vistos en $X^{**}$ mediante $J$).
+\end{definicion}
+
+\begin{proposicion}
+Sea $X$ un espacio normado.
+\begin{enumerate}[label=(\alph*)]
+\item Los conjuntos $\{x:\abs{f_i(x-x_0)}<\varepsilon,\ 1\le i\le n\}$, con $\varepsilon>0$, $f_i\in X^*$, forman una base de entornos de $x_0$ para $\omega$.
+\item Los conjuntos $\{x^*:\abs{(x^*-x_0^*)(x_i)}<\varepsilon,\ 1\le i\le n\}$, con $x_i\in X$, forman una base de entornos de $x_0^*$ para $\omega^*$.
+\item Los semiespacios abiertos $\{\Re f<\alpha\}$ ($f\in X^*$) forman una subbase de $\omega$; los $\{\Re x^*(x)<\alpha\}$ ($x\in X$) una subbase de $\omega^*$.
+\item $\omega$ y $\omega^*$ son de Hausdorff y hacen continuas la suma y el producto por escalares. En consecuencia, el cierre débil (o débil-$*$) de un subespacio es un subespacio, y el de un convexo es convexo.
+\end{enumerate}
+\end{proposicion}
+
+\begin{lema}[Álgebra lineal]
+Sean $f,f_1,\dots,f_n$ funcionales lineales en un espacio vectorial $X$. Son equivalentes:
+(i) $f\in\Lin\{f_1,\dots,f_n\}$;
+(ii) existe $C\ge0$ con $\abs{f(x)}\le C\max_i\abs{f_i(x)}$ para todo $x\in X$;
+(iii) $f$ está acotado en $\bigcap_{k}\ker f_k$;
+(iv) $\bigcap_{k}\ker f_k\subset\ker f$.
+\end{lema}
+
+\begin{proposicion}[Relación entre las topologías]
+Sea $X$ un espacio normado.
+\begin{enumerate}[label=(\alph*)]
+\item $\omega\subset$ topología de la norma. En $X^*$: $\omega^*\subset\omega\subset$ norma.
+\item Si $\dim X=\infty$, los abiertos débiles de $X$ y los débiles-$*$ de $X^*$ contienen subespacios no nulos y, por tanto, no están acotados.
+\item Si $x^{**}\in X^{**}$ es $\omega^*$-continuo, existe $x\in X$ con $x^{**}=J_X(x)$.
+\item Si $f$ es un funcional lineal (algebraico) $\omega$-continuo en $X$, entonces $f\in X^*$.
+\item $\omega$ y la topología de la norma coinciden si, y sólo si, $\dim X<\infty$ (igual para $\omega^*$ y la norma en $X^*$).
+\item $\omega^*=\omega$ en $X^*$ si, y sólo si, $X$ es reflexivo.
+\item $\sigma(X^{**},X^*)|_X=\sigma(X,X^*)$ (identificando $X=J_X(X)$).
+\item Si $Y$ es un subespacio de $X$, $\sigma(Y,Y^*)=\sigma(X,X^*)|_Y$.
+\end{enumerate}
+\end{proposicion}
+
+\begin{proposicion}
+Si $\dim X=\infty$, entonces $\wcl{\SX}=\BX$ y $\wscl{S_{X^*}}=B_{X^*}$. En consecuencia, las normas $x\mapsto\norm x$ y $x^*\mapsto\norm{x^*}$ son semicontinuas inferiormente para $\omega$ y $\omega^*$ respectivamente, pero no son continuas.
+\end{proposicion}
+
+\begin{teorema}[Separación de convexos, topología débil]
+Si $A\subset X$ es convexo y $\omega$-cerrado y $x_0\notin A$, existe $f\in X^*$ con $\Re f(x_0)>\sup_{a\in A}\Re f(a)$.
+\end{teorema}
+
+\begin{teorema}[Separación de convexos, topología débil-$*$]
+Sea $X$ de Banach, $A\subset X^*$ convexo y $\omega^*$-cerrado, y $x_0^*\in X^*\setminus A$. Existe $x\in X$ con $\Re x_0^*(x)>\sup_{a^*\in A}\Re a^*(x)$.
+\end{teorema}
+
+\begin{teorema}[Mazur, 1932]
+Un subconjunto convexo de un espacio normado es cerrado en norma si, y sólo si, es $\omega$-cerrado. Así, para convexos coinciden el cierre en norma y el cierre débil.
+\end{teorema}
+
+\subsection{Topologías débiles y sucesiones}
+
+\begin{definicion}
+Una sucesión $(x_n)$ en $X$ es \emph{débil-Cauchy} si para cada $\omega$-entorno de cero $U$ existe $n$ con $x_p-x_q\in U$ para $p,q\ge n$; \emph{converge débilmente} a $x_0$ ($x_n\wto x_0$) si para cada $\omega$-entorno $U$ de $x_0$, $x_m\in U$ para $m$ grande. Análogamente se definen para $(x_n^*)\subset X^*$ \emph{débil-$*$-Cauchy} y \emph{convergencia débil-$*$} ($x_n^*\wsto x_0^*$). Los límites son únicos. Convergencia en norma $\Rightarrow$ débil $\Rightarrow$ (en un dual) débil-$*$.
+\end{definicion}
+
+\begin{proposicion}
+Sea $X$ normado.
+\begin{enumerate}[label=(\alph*)]
+\item $x_n\wto x_0$ si, y sólo si, $f(x_n)\to f(x_0)$ para todo $f\in X^*$. $(x_n)$ es débil-Cauchy si, y sólo si, $(f(x_n))$ es de Cauchy para todo $f\in X^*$.
+\item Toda sucesión débil-Cauchy de $X$ está acotada en norma (Banach--Steinhaus).
+\item $x_n^*\wsto x_0^*$ si, y sólo si, $x_n^*(x)\to x_0^*(x)$ para todo $x\in X$; análogo para débil-$*$-Cauchy.
+\item Si $X$ es completo, toda sucesión débil-$*$-Cauchy de $X^*$ está acotada en norma.
+\end{enumerate}
+\end{proposicion}
+
+\begin{lema}
+Sea $E\subset X$ con $\Lin E$ denso en $X$ y $F\subset X^*$ con $\Lin F$ denso en $X^*$ (o total, es decir, $X^*=\Lin F$ según el texto).
+\begin{enumerate}[label=(\alph*)]
+\item Una sucesión $(x_n^*)\subset X^*$ converge débil-$*$ a $x^*$ (resp. es débil-$*$-Cauchy) si está acotada en norma y $x_n^*(x)\to x^*(x)$ (resp. $(x_n^*(x))$ es de Cauchy) para todo $x\in E$.
+\item Una sucesión $(x_n)\subset X$ converge débilmente a $x$ (resp. es débil-Cauchy) si está acotada en norma y $x^*(x_n)\to x^*(x)$ (resp. $(x^*(x_n))$ es de Cauchy) para todo $x^*\in F$.
+\end{enumerate}
+\end{lema}
+
+\begin{proposicion}[Convergencia en espacios de sucesiones]
+En $c_0$ (topología $\sigma(c_0,\ell_1)$), en $\ell_p$ con $p>1$ (topología $\sigma(\ell_p,\ell_q)$), en $\ell_\infty$ (topología $\sigma(\ell_\infty,\ell_1)$) y en $\ell_1$ (topología $\sigma(\ell_1,c_0)$), una sucesión $(x_n)$ del espacio converge a $x$ (resp. es de Cauchy) si, y sólo si, está acotada en norma y $x_n(k)\to x(k)$ (resp. $(x_n(k))_n$ es de Cauchy) para cada $k\in\N$. Por ejemplo, $e_n\wto 0$ en $c_0$, sin converger en norma.
+\end{proposicion}
+
+\begin{corolario}[de Mazur para sucesiones]
+Si $x_n\wto x$ en un espacio normado, existen combinaciones convexas $y_n=\sum_{i=\tau(n)+1}^{\tau(n+1)}\lambda_i x_i$ ($\tau$ estrictamente creciente, $\lambda_i\ge0$, $\sum_{i=\tau(n)+1}^{\tau(n+1)}\lambda_i=1$) tales que $y_n\to x$ en norma.
+\end{corolario}
+
+\begin{ejemplo}
+El corolario anterior es falso para $\omega^*$: en $\ell_1=c_0^*$, $e_n^*\wsto0$, pero toda combinación convexa de $\{e_n^*\}$ tiene norma $1$.
+\end{ejemplo}
+
+\subsection{Teoremas de Goldstine y Banach--Alaoglu}
+
+\begin{teorema}[Goldstine]
+Si $X$ es normado, $J_X(\BX)$ es $\omega^*$-denso en $B_{X^{**}}$, es decir, $\wscl{\BX}=B_{X^{**}}$.
+\end{teorema}
+
+\begin{teorema}[Banach--Alaoglu]
+La bola unidad cerrada del dual de un espacio normado es $\omega^*$-compacta. En consecuencia, todo subconjunto de $X^*$ $\omega^*$-cerrado y acotado en norma es $\omega^*$-compacto. (Se usa el teorema de Tychonoff.)
+\end{teorema}
+
+\begin{corolario}[Dieudonné]
+Un espacio de Banach es reflexivo si, y sólo si, su bola unidad es débilmente compacta. En consecuencia, en un espacio reflexivo todo conjunto $\omega$-cerrado y acotado es $\omega$-compacto.
+\end{corolario}
+
+\begin{corolario}
+Para todo espacio normado $X$ existe un compacto de Hausdorff $K$ ($=(B_{X^*},\omega^*)$) tal que $X$ es isométricamente isomorfo a un subespacio de $C(K)$.
+\end{corolario}
+
+\subsection{Metrizabilidad de las topologías débiles}
+
+\begin{proposicion}
+Sea $X$ normado.
+\begin{enumerate}[label=(\alph*)]
+\item Si $X$ es separable, $(B_{X^*},\omega^*)$ es metrizable (y lo mismo cualquier subconjunto acotado de $X^*$). Una distancia es $d(x^*,y^*)=\sum_{n}2^{-n}\abs{x^*(x_n)-y^*(x_n)}$ con $\{x_n\}$ denso en $\SX$.
+\item Si $X^*$ es separable, $(\BX,\omega)$ es metrizable (y lo mismo cualquier subconjunto acotado de $X$).
+\end{enumerate}
+\end{proposicion}
+
+\begin{teorema}[Banach--Mazur]
+Todo espacio normado separable es isométricamente isomorfo a un subespacio de $C[0,1]$. (Se dice que $C[0,1]$ es universal para los espacios normados separables.)
+\end{teorema}
+
+\begin{corolario}[Bolzano--Weierstrass débil]
+Toda sucesión acotada en un espacio reflexivo tiene una parcial $\omega$-convergente.
+\end{corolario}
+
+\begin{corolario}
+Si $X$ es un espacio normado separable, toda sucesión acotada de $X^*$ tiene una parcial $\omega^*$-convergente.
+\end{corolario}
+
+\end{document}
