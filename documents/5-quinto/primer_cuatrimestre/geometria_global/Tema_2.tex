@@ -1131,4 +1131,39 @@ y hemos llegado finalmente a que la integrabilidad y la integral de $f$ no depen
     \end{enumerate}
 \end{ejemplo}
 
+\subsection{Teorema de Fubini para la Integral en Superficies}
+Vamos a considerar en esta sección una superficie $S\subset \bb{R}^3$ compacta, $a,b\in \bb{R}$ con $a<b$ y una aplicación $h:S\times(a,b)\to \bb{R}$ integrable en $S\times(a,b)$. Por la compacidad de $S$ tenemos que $\exists V_1,...,V_k$ abiertos parametrizados de $S$ tales que
+\begin{gather*}
+    S = V_1\cup ... \cup V_k
+\end{gather*}
+El hecho de que sean abiertos parametrizados significa que podemos escribir para cada $i=1,...,k$
+\begin{gather*}
+    V_i = X^i(U_i)
+\end{gather*}
+donde $U_i\subset \bb{R}^2$ es un abierto y $X^i:U_i \to S$ es una parametrización. Vamos a definir para cada $i=1,...,k$ una función $\chi_i: S \to \bb{R}$ dada por
+\begin{gather*}
+    \chi_i(p) = \left\{
+        \begin{array}{l c c}
+            0 & \text{ si } & p\notin V_i\\
+            \frac{1}{n(p)} & \text{ si } & p\in V_i
+        \end{array}
+    \right.
+\end{gather*}
+donde $n(p)$ es el número de abiertos $V_i$ tales que $p\in V_i$, en particular, $1 \leq n(p) \leq k$. Esto además nos dice que $0\leq \chi_i(p)\leq 1$ por lo que no nos dará problemas para integrar. Observemos además que $\chi_1, ..., \chi_k:S\to \bb{R}$ y que
+\begin{gather*}
+    \chi_1 + ... + \chi_k=1
+\end{gather*}
+Este hecho da sentido al hecho de que al conjunto $\{\chi_i, ..., \chi_k\}$ se le denomine \textbf{partición de la unidad} (no continua). Tenemos que
+\begin{align*}
+    \int_{S\times(a,b)} h(p,t)\ dpdt &= 
+    \int_{S\times(a,b)} \left(\sum_{i=1}^k \chi_i(p)\right) h(p,t)\ dpdt =
+    \sum_{i=1}^k \int_{S\times(a,b)} \chi_i(p)h(p,t)\ dpdt =\\
+    &\overset{(\ast)}{=}
+    \sum_{i=1}^k \int_{V_i\times(a,b)} \chi_i(p)h(p,t)\ dpdt =
+    \sum_{i=1}^k \int_{X^i(U_i)\times(a,b)} \chi_i(p)h(p,t)\ dpdt = \\
+    &=
+    \sum_{i=1}^k \int_{(X^i\times 1_{(a,b)})(U_i\times(a,b))} \chi_i(p)h(p,t)\ dpdt
+\end{align*}
+donde en $(\ast)$ hemos aplicado que $\chi_i(p)h(p,t)$ se anula fuera de $V_i\times(a,b)$.
+
 
